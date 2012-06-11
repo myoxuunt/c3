@@ -75,6 +75,10 @@ namespace C3.Communi
 
     }
 
+    public class SourceConfigCollection : Collection<SourceConfig>
+    {
+    }
+
     public interface ITask
     {
 
@@ -86,11 +90,13 @@ namespace C3.Communi
 
     public interface IDeviceSource
     {
+         Guid StationGuid { get; set; }
+         Guid Guid { get; set; }
     }
 
     public interface IDeviceSourceProvider
     {
-        SourceConfig SourceConfig { get; set; }
+        SourceConfigCollection SourceConfigs { get; set; }
         IDeviceSource[] GetDeviceSources();
     }
 
@@ -145,6 +151,9 @@ namespace C3.Communi
 
 
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IDPU
     {
         Type DeviceType {get;set;}
