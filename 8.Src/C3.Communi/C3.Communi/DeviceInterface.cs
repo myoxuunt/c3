@@ -14,6 +14,11 @@ namespace C3.Communi
 
     public class SourceConfig
     {
+        public SourceConfig(string key, string value)
+        {
+            this.Key = key;
+            this.Value = value;
+        }
         #region ElementType
         /// <summary>
         /// 

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace C3.Communi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Hardware
     {
         public StationCollection Stations
@@ -23,6 +26,9 @@ namespace C3.Communi
         } private StationCollection _stations;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class HardwareFactory
     {
         /// <summary>
@@ -30,9 +36,58 @@ namespace C3.Communi
         /// </summary>
         public ISPUCollection ISPUs
         {
-            get { return _ispus; }
+            get 
+            {
+                if (_ispus == null)
+                {
+                    _ispus = CreateIspus();
+                }
+                return _ispus; 
+            }
             set { _ispus = value; }
         } private ISPUCollection _ispus;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private ISPUCollection CreateIspus()
+        {
+            ISPUCollection spus = new ISPUCollection();
+            object[] objects = this.SPUAssemblyInfos.CreateInstanceWithInterface(typeof(ISPU));
+            foreach (object obj in objects)
+            {
+                spus.Add((ISPU)obj);
+            }
+            return spus;
+        }
+
+        private AssemblyInfoCollection SPUAssemblyInfos
+        {
+            get 
+            {
+                if (_spuAssemblyInfos == null)
+                {
+                    string path = PathUtils.SPUConfigFileName;
+                    _spuAssemblyInfos = AssemblyInfoFactory.CreateFromXml(path);
+                }
+                return _spuAssemblyInfos;
+            }
+        } private AssemblyInfoCollection _spuAssemblyInfos;
+
+        private AssemblyInfoCollection DPUAssemblyInfos
+        {
+            get 
+            {
+                if (_dpuAssemblyInfos == null)
+                {
+                    string path = PathUtils.DPUConfigFileName;
+                    _dpuAssemblyInfos = AssemblyInfoFactory.CreateFromXml(path);
+                }
+                return _dpuAssemblyInfos;
+            }
+        } private AssemblyInfoCollection _dpuAssemblyInfos;
+
 
         #region DPUs
         /// <summary>
@@ -44,7 +99,7 @@ namespace C3.Communi
             {
                 if (_dPUs == null)
                 {
-                    _dPUs = new DPUCollection();
+                    _dPUs = CreateDpus();
                 }
                 return _dPUs;
             }
@@ -52,8 +107,19 @@ namespace C3.Communi
             {
                 _dPUs = value;
             }
-        } private DPUCollection _dPUs;
+        }private DPUCollection _dPUs;
         #endregion //DPUs
+
+        private DPUCollection CreateDpus()
+        {
+            DPUCollection dpus = new DPUCollection();
+            object[] objects = DPUAssemblyInfos.CreateInstanceWithInterface(typeof(IDPU));
+            foreach (object obj in objects)
+            {
+                dpus.Add((IDPU)obj);
+            }
+            return dpus;
+        } 
 
         #region SourceConfigs
         /// <summary>
@@ -126,8 +192,10 @@ namespace C3.Communi
             // 
             foreach ( ISPU spu in ISPUs )
             {
-                spu.StationSourceProvider.SourceConfigs = this.SourceConfigs;
-                IStationSource[] stationSources = spu.StationSourceProvider.GetStationSources();
+                IStationSourceProvider sourceProvider = spu.StationSourceProvider;
+
+                sourceProvider.SourceConfigs = this.SourceConfigs;
+                IStationSource[] stationSources = sourceProvider.GetStationSources();
 
                 foreach ( IStationSource stationSource in  stationSources )
                 {
