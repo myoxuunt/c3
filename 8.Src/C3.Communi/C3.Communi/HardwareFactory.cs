@@ -197,7 +197,7 @@ namespace C3.Communi
                 sourceProvider.SourceConfigs = this.SourceConfigs;
                 IStationSource[] stationSources = sourceProvider.GetStationSources();
 
-                foreach ( IStationSource stationSource in  stationSources )
+                foreach (IStationSource stationSource in stationSources)
                 {
                     IStationFactory factory = spu.StationFactory;
                     IStation station = factory.Create(stationSource);

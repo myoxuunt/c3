@@ -84,9 +84,17 @@ namespace C3.Communi
     {
     }
 
-    public interface ITask
+    public interface IParseResult
     {
 
+    }
+    public interface ITask
+    {
+        IDevice Device { get; set; }
+        bool IsTimeOut();
+
+        IParseResult Parse(byte[] received);
+        bool NeedExecute(DateTime dt);
     }
 
     public class TaskCollection : Collection<ITask>
@@ -109,13 +117,14 @@ namespace C3.Communi
     {
         string Name { get; set; }
         IStation Station { get; set; }
-        IDeviceData Last{ get; set; }
+        IDeviceData LastData{ get; set; }
         DeviceDataCollection DeviceDatas { get; }
 
         IDeviceSource DeviceSource { get; set; }
 
         TaskCollection Tasks { get; set; }
         ITask CurrentTask { get; set; }
+        IDPU Dpu { get; set; }
     }
 
     public interface IDevicePersister
@@ -130,9 +139,9 @@ namespace C3.Communi
         IDevice Create(IDeviceSource deviceSource);
     }
 
-    public interface TaskProcessor
+    public interface ITaskProcessor
     {
-        void Process(ITask task);
+        void Process(IParseResult pr);
     }
 
     public interface IDeviceData
@@ -145,6 +154,41 @@ namespace C3.Communi
     /// </summary>
     public class DeviceDataCollection : Xdgk.Common.Collection<IDeviceData>
     {
+        static private readonly int DEFAULT_CAPABILITY = 1000;
+        static private readonly int MIN_CAPABILITY = 10;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Capability
+        {
+            get { return _capability; }
+            set 
+            {
+                if (value < MIN_CAPABILITY)
+                {
+                    value = MIN_CAPABILITY;
+                }
+                _capability = value; 
+            }
+        } private int _capability = DEFAULT_CAPABILITY;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="item"></param>
+        protected override void InsertItem(int index, IDeviceData item)
+        {
+            base.InsertItem(index, item);
+            if (this.Count > this.Capability)
+            {
+                // TODO:
+                //
+                this.RemoveAt(0);
+            }
+        }
     }
 
     /// <summary>
@@ -165,6 +209,7 @@ namespace C3.Communi
         IDeviceFactory DeviceFactory { get; set; }
         IDevicePersister DevicePersister { get; set; }
         IDeviceSourceProvider DeviceSourceProvider { get; set; }
+        ITaskProcessor Processor { get; set; }
     }
 
     /// <summary>

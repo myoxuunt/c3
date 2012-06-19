@@ -5,60 +5,72 @@ using C3.Communi;
 
 namespace C3.SPUTest
 {
-    public class TStation : IStation
-    {
-        #region IStation 成员
+    //public class TStation : IStation
+    //{
+    //    #region IStation 成员
 
-        public string Name
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+    //    public string Name
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
 
-        public DeviceCollection Devices
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+    //    public DeviceCollection Devices
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
 
-        public ICommuniPort CommuniPort
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+    //    public ICommuniPort CommuniPort
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
 
-        public IStationSource StationSource
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+    //    public IStationSource StationSource
+    //    {
+    //        get
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //        set
+    //        {
+    //            throw new NotImplementedException();
+    //        }
+    //    }
 
-        #endregion
-    }
+    //    #endregion
+
+    //    #region IStation 成员
+
+
+    //    public StationCollection Stations
+    //    {
+    //        get { throw new NotImplementedException(); }
+    //        set { throw new NotImplementedException(); }
+
+    //    }
+
+    //    #endregion
+    //}
 
     abstract public class StationFactoryBase : IStationFactory
     {
@@ -77,7 +89,8 @@ namespace C3.SPUTest
 
         public IStation Create(IStationSource stationSource)
         {
-            return new TStation();
+            //return new TStation();
+            return null;
         }
 
         #endregion
@@ -220,7 +233,7 @@ namespace C3.SPUTest
             {
                 _stationType = value;
             }
-        } private Type  _stationType;
+        } private Type _stationType;
 
         virtual public IStationFactory StationFactory
         {
