@@ -21,7 +21,7 @@ namespace C3.Communi
         string Name { get; set; }
         DeviceCollection Devices { get; set; }
         ICommuniPort CommuniPort { get; set; }
-        ICommuniPortToken CommuniPortToken { get; set; }
+        ICommuniPortConfig CommuniPortConfig{ get; set; }
         IStationSource StationSource { get; set; }
         StationCollection Stations { get; set; }
     }

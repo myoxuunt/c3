@@ -173,17 +173,17 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public ICommuniPortToken CommuniPortToken
+        public ICommuniPortConfig CommuniPortConfig
         {
             get
             {
-                return _communiPortToken;
+                return _communiPortConfig;
             }
             set
             {
-                _communiPortToken = value;
+                _communiPortConfig = value;
             }
-        } private ICommuniPortToken _communiPortToken;
+        } private ICommuniPortConfig _communiPortConfig;
 
         #endregion
     }

@@ -12,93 +12,54 @@ namespace C3.Communi
         Device,
     }
 
-    public class SourceConfig
-    {
-        public SourceConfig(string key, string value)
-        {
-            this.Key = key;
-            this.Value = value;
-        }
-        #region ElementType
-        /// <summary>
-        /// 
-        /// </summary>
-        public ElementType ElementType
-        {
-            get
-            {
-                return _elementType;
-            }
-            set
-            {
-                _elementType = value;
-            }
-        } private ElementType _elementType;
-        #endregion //ElementType
 
-        #region Key
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Key
-        {
-            get
-            {
-                if (_key == null)
-                {
-                    _key = string.Empty;
-                }
-                return _key;
-            }
-            set
-            {
-                _key = value;
-            }
-        } private string _key;
-        #endregion //Key
-
-        #region Value
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Value
-        {
-            get
-            {
-                if (_value == null)
-                {
-                    _value = string.Empty;
-                }
-                return _value;
-            }
-            set
-            {
-                _value = value;
-            }
-        } private string _value;
-        #endregion //Value
-
-    }
-
-    public class SourceConfigCollection : Collection<SourceConfig>
-    {
-    }
 
     public interface IParseResult
     {
 
     }
+
+
+    public interface IOpera
+    {
+        byte[] CreateSend(IDevice device);
+    }
+
     public interface ITask
     {
         IDevice Device { get; set; }
+
         bool IsTimeOut();
+        TimeSpan TimeOut { get; set; }
 
         IParseResult Parse(byte[] received);
         bool NeedExecute(DateTime dt);
+        DateTime LastExecute { get; set; }
+        bool IsComplete { get; }
+
+        IOpera Opera { get; set; }
     }
 
     public class TaskCollection : Collection<ITask>
     {
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class TaskQueue: Queue <ITask>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tasks"></param>
+        public void Enqueue(TaskCollection tasks)
+        {
+            foreach (ITask item in tasks)
+            {
+                this.Enqueue(item);
+            }
+        }
     }
 
     public interface IDeviceSource
@@ -122,7 +83,7 @@ namespace C3.Communi
 
         IDeviceSource DeviceSource { get; set; }
 
-        TaskCollection Tasks { get; set; }
+        TaskQueue Tasks { get; set; }
         ITask CurrentTask { get; set; }
         IDPU Dpu { get; set; }
     }
