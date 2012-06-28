@@ -46,6 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceCollection.cs" />
+    <Compile Include="DeviceDataCollection.cs" />
+    <Compile Include="DPUCollection.cs" />
     <Compile Include="Exception\AssemblyException.cs" />
     <Compile Include="AssemblyInfo\AssemblyInfo.cs" />
     <Compile Include="AssemblyInfo\AssemblyInfoCollection.cs" />
@@ -56,6 +59,17 @@
     <Compile Include="GroupInterface.cs" />
     <Compile Include="HardwareFactory.cs" />
     <Compile Include="ICommuniPort.cs" />
+    <Compile Include="IDevice.cs" />
+    <Compile Include="IDeviceData.cs" />
+    <Compile Include="IDeviceFactory.cs" />
+    <Compile Include="IDevicePersister.cs" />
+    <Compile Include="IDeviceSource.cs" />
+    <Compile Include="IDeviceSourceProvider.cs" />
+    <Compile Include="IDPU.cs" />
+    <Compile Include="IOpera.cs" />
+    <Compile Include="IParseResult.cs" />
+    <Compile Include="ITask.cs" />
+    <Compile Include="ITaskProcessor.cs" />
     <Compile Include="ObjectFactory.cs" />
     <Compile Include="PathUtils.cs" />
     <Compile Include="SocketListener.cs" />
@@ -68,6 +82,8 @@
     <Compile Include="StationCommuniPortBinder.cs" />
     <Compile Include="StationInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskCollection.cs" />
+    <Compile Include="TaskQueue.cs" />
     <Compile Include="TypeHelper.cs" />
     <Compile Include="Utilities.cs" />
   </ItemGroup>
