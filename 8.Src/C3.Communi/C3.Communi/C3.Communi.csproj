@@ -77,8 +77,17 @@
     <Compile Include="Device\IDPU.cs" />
     <Compile Include="Filter\IFilter.cs" />
     <Compile Include="IdentityParser\IIdentityParser.cs" />
+    <Compile Include="Opera\AddressErrorResult.cs" />
+    <Compile Include="Opera\ConvertErrorResult.cs" />
+    <Compile Include="Opera\CRCErrorResult.cs" />
+    <Compile Include="Opera\DataErrorResult.cs" />
     <Compile Include="Opera\IOpera.cs" />
     <Compile Include="Opera\IParseResult.cs" />
+    <Compile Include="Opera\KeyValue.cs" />
+    <Compile Include="Opera\KeyValueCollection.cs" />
+    <Compile Include="Opera\LengthErrorResult.cs" />
+    <Compile Include="Opera\ParseResultBase.cs" />
+    <Compile Include="Opera\SuccessResult.cs" />
     <Compile Include="Soft\SoftManager.cs" />
     <Compile Include="Station\ISPU.cs" />
     <Compile Include="Station\ISPUCollection.cs" />
@@ -87,6 +96,7 @@
     <Compile Include="Station\IStationPersister.cs" />
     <Compile Include="Station\IStationSource.cs" />
     <Compile Include="Station\IStationSourceProvider.cs" />
+    <Compile Include="strings.Designer.cs" />
     <Compile Include="Task\ITask.cs" />
     <Compile Include="Task\ITaskProcessor.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />
@@ -118,6 +128,11 @@
     <Content Include="Config\dpu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="strings.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

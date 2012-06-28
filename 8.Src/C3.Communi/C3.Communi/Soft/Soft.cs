@@ -136,42 +136,6 @@ namespace C3.Communi
         }
         #endregion //Do
 
-        #region GetTaskProcessor
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="current"></param>
-        /// <returns></returns>
-        private ITaskProcessor GetTaskProcessor(ITask current)
-        {
-            IDevice device = current.Device;
-            IDPU dpu = device.Dpu;
-            ITaskProcessor processor = dpu.Processor;
-            return processor;
-        }
-        #endregion //GetTaskProcessor
-
-        #region GetReceived
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="current"></param>
-        /// <returns></returns>
-        private byte[] GetReceived(ITask current)
-        {
-            IDevice device = current.Device;
-            IStation station = device.Station;
-            ICommuniPort cp = station.CommuniPort;
-
-            byte[] received = new byte[0];
-            if (cp != null)
-            {
-                received = cp.Read();
-            }
-            return received;
-        }
-        #endregion //GetReceived
-
         #region Do
         /// <summary>
         /// 
@@ -227,6 +191,43 @@ namespace C3.Communi
             tasks.Enqueue(tempTasks);
         }
         #endregion //Do
+
+        #region GetTaskProcessor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        private ITaskProcessor GetTaskProcessor(ITask current)
+        {
+            IDevice device = current.Device;
+            IDPU dpu = device.Dpu;
+            ITaskProcessor processor = dpu.Processor;
+            return processor;
+        }
+        #endregion //GetTaskProcessor
+
+        #region GetReceived
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        private byte[] GetReceived(ITask current)
+        {
+            IDevice device = current.Device;
+            IStation station = device.Station;
+            ICommuniPort cp = station.CommuniPort;
+
+            byte[] received = new byte[0];
+            if (cp != null)
+            {
+                received = cp.Read();
+            }
+            return received;
+        }
+        #endregion //GetReceived
+
 
         #region ErrorManager
         public ErrorManager ErrorManager
