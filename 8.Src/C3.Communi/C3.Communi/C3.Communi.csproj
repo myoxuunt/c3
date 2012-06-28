@@ -46,6 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommuniPortBase.cs" />
+    <Compile Include="CommuniPortCollection.cs" />
     <Compile Include="CommuniPortStatus.cs" />
     <Compile Include="DeviceCollection.cs" />
     <Compile Include="DeviceDataCollection.cs" />
@@ -57,11 +59,13 @@
     <Compile Include="CommuniPortManager.cs" />
     <Compile Include="DeviceInterface.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="FilterCollection.cs" />
     <Compile Include="GroupInterface.cs" />
     <Compile Include="Hardware.cs" />
     <Compile Include="HardwareFactory.cs" />
     <Compile Include="ICommuniPort.cs" />
     <Compile Include="ICommuniPortConfig.cs" />
+    <Compile Include="IdentityParserCollection.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="IDeviceData.cs" />
     <Compile Include="IDeviceFactory.cs" />
@@ -69,12 +73,22 @@
     <Compile Include="IDeviceSource.cs" />
     <Compile Include="IDeviceSourceProvider.cs" />
     <Compile Include="IDPU.cs" />
+    <Compile Include="IFilter.cs" />
+    <Compile Include="IIdentityParser.cs" />
     <Compile Include="IOpera.cs" />
     <Compile Include="IParseResult.cs" />
+    <Compile Include="ISPU.cs" />
+    <Compile Include="ISPUCollection.cs" />
+    <Compile Include="IStation.cs" />
+    <Compile Include="IStationFactory.cs" />
+    <Compile Include="IStationPersister.cs" />
+    <Compile Include="IStationSource.cs" />
+    <Compile Include="IStationSourceProvider.cs" />
     <Compile Include="ITask.cs" />
     <Compile Include="ITaskProcessor.cs" />
     <Compile Include="ObjectFactory.cs" />
     <Compile Include="PathUtils.cs" />
+    <Compile Include="SocketCommuniPort.cs" />
     <Compile Include="SocketListener.cs" />
     <Compile Include="SocketListenerCollection.cs" />
     <Compile Include="SocketListenerManager.cs" />
@@ -82,6 +96,7 @@
     <Compile Include="SourceConfig.cs" />
     <Compile Include="SourceConfigCollection.cs" />
     <Compile Include="StationBase.cs" />
+    <Compile Include="StationCollection.cs" />
     <Compile Include="StationCommuniPortBinder.cs" />
     <Compile Include="StationInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
