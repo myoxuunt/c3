@@ -6,6 +6,7 @@ namespace C3.Communi
 {
     public interface IDevice
     {
+        Int64 Address { get; set; }
         string Name { get; set; }
         IStation Station { get; set; }
         IDeviceData LastData{ get; set; }
@@ -16,6 +17,7 @@ namespace C3.Communi
         TaskQueue Tasks { get; set; }
         ITask CurrentTask { get; set; }
         IDPU Dpu { get; set; }
+        
     }
 
 }

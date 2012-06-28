@@ -7,9 +7,9 @@ namespace C3.Communi
     abstract public class ParseResultBase : IParseResult
     {
 
-#region IParseResult 成员
+        #region IParseResult 成员
 
-#region IsSuccess
+        #region IsSuccess
         /// <summary>
         /// 
         /// </summary>
@@ -24,9 +24,9 @@ namespace C3.Communi
                 _isSuccess = value;
             }
         } private bool _isSuccess;
-#endregion //IsSuccess
+        #endregion //IsSuccess
 
-#region Name
+        #region Name
 
         /// <summary>
         /// 
@@ -42,9 +42,9 @@ namespace C3.Communi
                 _name = value;
             }
         } private string _name;
-#endregion //Name
+        #endregion //Name
 
-#region Results
+        #region Results
         /// <summary>
         /// 
         /// </summary>
@@ -63,9 +63,9 @@ namespace C3.Communi
                 _results = value;
             }
         } private KeyValueCollection _results;
-#endregion //Results
+        #endregion //Results
 
-#region ParseBytes
+        #region ParseBytes
         public byte[] ParseBytes
         {
             get
@@ -81,9 +81,9 @@ namespace C3.Communi
                 _parseBytes = value;
             }
         } private byte[] _parseBytes;
-#endregion //ParseBytes
+        #endregion //ParseBytes
 
-#endregion
+        #endregion
     }
 
 }

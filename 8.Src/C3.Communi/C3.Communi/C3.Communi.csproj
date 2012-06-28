@@ -44,12 +44,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\GlobalAssembly\Xdgk.Common\Xdgk.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Xdgk.Communi.Interface, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\GlobalAssembly\Xdgk.Communi.Interface\Xdgk.Communi.Interface.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommuniDetail\CommuniDetail.cs" />
+    <Compile Include="CommuniDetail\CommuniFailDetail.cs" />
+    <Compile Include="CommuniDetail\CommuniFailDetailCollection.cs" />
     <Compile Include="CommuniPort\CommuniPortFactory.cs" />
     <Compile Include="CommuniPort\CommuniPortBase.cs" />
     <Compile Include="CommuniPort\CommuniPortCollection.cs" />
     <Compile Include="CommuniPort\CommuniPortStatus.cs" />
+    <Compile Include="DataField\Datafield.cs" />
+    <Compile Include="DataField\DatafieldCollection.cs" />
+    <Compile Include="DataField\DatafieldManager.cs" />
     <Compile Include="Device\DeviceCollection.cs" />
     <Compile Include="Device\DeviceDataCollection.cs" />
     <Compile Include="Device\DPUCollection.cs" />
@@ -77,17 +87,21 @@
     <Compile Include="Device\IDPU.cs" />
     <Compile Include="Filter\IFilter.cs" />
     <Compile Include="IdentityParser\IIdentityParser.cs" />
-    <Compile Include="Opera\AddressErrorResult.cs" />
-    <Compile Include="Opera\ConvertErrorResult.cs" />
-    <Compile Include="Opera\CRCErrorResult.cs" />
-    <Compile Include="Opera\DataErrorResult.cs" />
+    <Compile Include="Opera\ParseResult\AddressErrorResult.cs" />
+    <Compile Include="Opera\ParseResult\ConvertErrorResult.cs" />
+    <Compile Include="Opera\ParseResult\CRCErrorResult.cs" />
+    <Compile Include="Opera\ParseResult\DataErrorResult.cs" />
     <Compile Include="Opera\IOpera.cs" />
-    <Compile Include="Opera\IParseResult.cs" />
-    <Compile Include="Opera\KeyValue.cs" />
-    <Compile Include="Opera\KeyValueCollection.cs" />
-    <Compile Include="Opera\LengthErrorResult.cs" />
-    <Compile Include="Opera\ParseResultBase.cs" />
-    <Compile Include="Opera\SuccessResult.cs" />
+    <Compile Include="Opera\ParseResult\IParseResult.cs" />
+    <Compile Include="KeyValue.cs" />
+    <Compile Include="KeyValueCollection.cs" />
+    <Compile Include="Opera\ParseResult\LengthErrorResult.cs" />
+    <Compile Include="Opera\Opera.cs" />
+    <Compile Include="Opera\ParseResult\ParseResultBase.cs" />
+    <Compile Include="Opera\ParseResult\SuccessResult.cs" />
+    <Compile Include="ReceivePart.cs" />
+    <Compile Include="ReceivePartCollection.cs" />
+    <Compile Include="SendPart.cs" />
     <Compile Include="Soft\SoftManager.cs" />
     <Compile Include="Station\ISPU.cs" />
     <Compile Include="Station\ISPUCollection.cs" />

@@ -11,8 +11,9 @@ namespace C3.Communi
         /// </summary>
         /// <param name="expected"></param>
         /// <param name="actual"></param>
-        public LengthErrorResult(int expected, int actual)
+        public LengthErrorResult(string name, int expected, int actual)
         {
+            this.Name = name;
             this._expected = expected;
             this._actual = actual;
         }

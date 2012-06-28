@@ -111,7 +111,7 @@ namespace C3.Communi
         }
         #endregion //Do
 
-        #region Do
+        #region Do - task
         private void Do(ITask current)
         {
             if (current.IsTimeOut())
@@ -163,13 +163,13 @@ namespace C3.Communi
                     if ((cp != null) &&
                         (!cp.IsOccupy))
                     {
+                        // TODO: move to task class?
+                        //
 
                         IDevice device =head.Device;
                         IOpera opera = head.Opera;
 
-                        // TODO:
-                        //
-                        byte[] send = opera.CreateSend(device);
+                        byte[] send = opera.CreateSendBytes(device);
 
                         // byte[] send = head.opera
                         cp.Write(send);
