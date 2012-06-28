@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommuniPortStatus.cs" />
     <Compile Include="DeviceCollection.cs" />
     <Compile Include="DeviceDataCollection.cs" />
     <Compile Include="DPUCollection.cs" />
@@ -57,8 +58,10 @@
     <Compile Include="DeviceInterface.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="GroupInterface.cs" />
+    <Compile Include="Hardware.cs" />
     <Compile Include="HardwareFactory.cs" />
     <Compile Include="ICommuniPort.cs" />
+    <Compile Include="ICommuniPortConfig.cs" />
     <Compile Include="IDevice.cs" />
     <Compile Include="IDeviceData.cs" />
     <Compile Include="IDeviceFactory.cs" />
