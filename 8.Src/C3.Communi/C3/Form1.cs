@@ -24,7 +24,7 @@ namespace C3
             //    Console.WriteLine(s);
             //}
 
-            Soft soft = new Soft();
+            Soft soft = SoftManager.GetSoft();
             object o2 = soft.Hardware;
 
         }

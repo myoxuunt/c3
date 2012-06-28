@@ -28,8 +28,6 @@ namespace C3.Communi
             this.Name = name;
         }
 
-        #region IStation 成员
-
         /// <summary>
         /// 
         /// </summary>
@@ -96,6 +94,19 @@ namespace C3.Communi
         {
             get
             {
+                if (_communiPort == null)
+                {
+                    if (this.CommuniPortConfig.CanCreate)
+                    {
+                        Soft soft = SoftManager.GetSoft();
+                        CommuniPortManager cpManager = soft.CommuniPortManager;
+                        ICommuniPort cp = cpManager.CreateCommuniPort(this.CommuniPortConfig);
+                        if (cp != null)
+                        {
+                            this.CommuniPort = cp;
+                        }
+                    }
+                }
                 return _communiPort;
             }
             set
@@ -135,7 +146,6 @@ namespace C3.Communi
             }
         } private IStationSource _stationSource;
 
-        #endregion
 
 
         /// <summary>
@@ -146,28 +156,6 @@ namespace C3.Communi
             get { return _stationCollection; }
             set { _stationCollection = value;}
         } private StationCollection _stationCollection;
-        #region IStation 成员
-
-        #region Tag
-        /// <summary>
-        /// 
-        /// </summary>
-        public object Tag
-        {
-            get
-            {
-                return _tag;
-            }
-            set
-            {
-                _tag = value;
-            }
-        } private object _tag;
-        #endregion //Tag
-
-        #endregion
-
-        #region IStation 成员
 
 
         /// <summary>
@@ -185,6 +173,5 @@ namespace C3.Communi
             }
         } private ICommuniPortConfig _communiPortConfig;
 
-        #endregion
     }
 }

@@ -11,14 +11,18 @@ namespace C3.Communi
 {
     public class Soft
     {
+        #region Members
         private Timer _timer;
+        #endregion //Members
 
-        public Soft()
+        #region Constructor
+        internal Soft()
         {
             _timer = new Timer();
             _timer.Interval = 1000;
             _timer.Tick += new EventHandler(_timer_Tick);
         }
+        #endregion //Constructor
 
         #region SocketListenerManager
         /// <summary>
@@ -37,6 +41,7 @@ namespace C3.Communi
         } private SocketListenerManager _socketListenerManager;
         #endregion //SocketListenerManager
 
+        #region CommuniPortManager
         public CommuniPortManager CommuniPortManager
         {
             get 
@@ -48,7 +53,9 @@ namespace C3.Communi
                 return _communiPortManager;
             }
         } private CommuniPortManager _communiPortManager;
+        #endregion //CommuniPortManager
 
+        #region _timer_Tick
         /// <summary>
         /// 
         /// </summary>
@@ -58,7 +65,9 @@ namespace C3.Communi
         {
             Doit();
         }
+        #endregion //_timer_Tick
 
+        #region Doit
         /// <summary>
         /// 
         /// </summary>
@@ -69,7 +78,9 @@ namespace C3.Communi
                 Do(station);
             }
         }
+        #endregion //Doit
 
+        #region Do
         private void Do(IStation station)
         {
             foreach (IDevice device in station.Devices)
@@ -77,7 +88,9 @@ namespace C3.Communi
                 Do(device);
             }
         }
+        #endregion //Do
 
+        #region Do
         /// <summary>
         /// 
         /// </summary>
@@ -96,7 +109,9 @@ namespace C3.Communi
                 Do(device.Tasks);
             }
         }
+        #endregion //Do
 
+        #region Do
         private void Do(ITask current)
         {
             if (current.IsTimeOut())
@@ -119,7 +134,9 @@ namespace C3.Communi
                 }
             }
         }
+        #endregion //Do
 
+        #region GetTaskProcessor
         /// <summary>
         /// 
         /// </summary>
@@ -132,7 +149,9 @@ namespace C3.Communi
             ITaskProcessor processor = dpu.Processor;
             return processor;
         }
+        #endregion //GetTaskProcessor
 
+        #region GetReceived
         /// <summary>
         /// 
         /// </summary>
@@ -151,7 +170,9 @@ namespace C3.Communi
             }
             return received;
         }
+        #endregion //GetReceived
 
+        #region Do
         /// <summary>
         /// 
         /// </summary>
@@ -205,13 +226,30 @@ namespace C3.Communi
             }
             tasks.Enqueue(tempTasks);
         }
+        #endregion //Do
 
+        #region ErrorManager
+        public ErrorManager ErrorManager
+        {
+            get 
+            {
+                if (_errorManager == null)
+                {
+                    _errorManager = new ErrorManager(this);
+                }
+                return _errorManager;
+            }
+        } private ErrorManager _errorManager;
+        #endregion //
+
+        #region GetCommuniPort
         private ICommuniPort GetCommuniPort(ITask task)
         {
             IDevice device = task.Device;
             IStation station = device.Station;
             return station.CommuniPort;
         }
+        #endregion //GetCommuniPort
 
 
         #region Hardware
@@ -237,7 +275,8 @@ namespace C3.Communi
         } private Hardware _hardware;
         #endregion //Hardware
 
-        
+       
+        #region SourceConfigs 
         private SourceConfigCollection SourceConfigs
         {
             get
@@ -249,7 +288,9 @@ namespace C3.Communi
                 return null;
             }
         } private SourceConfigCollection _sourceConfigs;
+        #endregion //SourceConfigs
 
+        #region ReadSourceConfigs
         /// <summary>
         /// 
         /// </summary>
@@ -273,5 +314,6 @@ namespace C3.Communi
 
             return sourceConfigs;
         }
+        #endregion //ReadSourceConfigs
     }
 }

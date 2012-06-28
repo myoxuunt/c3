@@ -20,7 +20,7 @@ namespace C3.Communi
         {
             if (soft == null)
                 throw new ArgumentNullException("communiSoft");
-            this._communiSoft = soft;
+            this._soft = soft;
         }
         #endregion //SocketListenerManager
 
@@ -28,10 +28,10 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public Soft CommuniSoft
+        public Soft Soft
         {
-            get { return _communiSoft; }
-        } private Soft _communiSoft;
+            get { return _soft; }
+        } private Soft _soft;
 
         ///// <summary>
         ///// 
@@ -66,6 +66,17 @@ namespace C3.Communi
         }
         #endregion //Add
 
+        #region ReginsterEvents
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        private void ReginsterEvents(SocketListener item)
+        {
+            item.ConnectedEvent += new EventHandler(item_ConnectedEvent);
+        }
+        #endregion //ReginsterEvents
+
         #region Remove
         /// <summary>
         /// 
@@ -81,17 +92,6 @@ namespace C3.Communi
             return false;
         }
         #endregion //Remove
-
-        #region ReginsterEvents
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="item"></param>
-        private void ReginsterEvents(SocketListener item)
-        {
-            item.ConnectedEvent += new EventHandler(item_ConnectedEvent);
-        }
-        #endregion //ReginsterEvents
 
         #region UnregisterEvents
         /// <summary>
@@ -126,18 +126,14 @@ namespace C3.Communi
             {
                 scp = new SocketCommuniPort(newsocket);
             }
-            catch
+            catch( Exception ex )
             {
                 CloseSocket(newsocket);
+                this.Soft.ErrorManager.Process(ex);
                 return;
             }
 
-            this.CommuniSoft.CommuniPortManager.Add(scp);
-
-            //scp.ReceivedEvent += new EventHandler(scp_ReceivedEvent);
-            //bool b = StationCommuniPortBinder.Bind(
-            //    this._communiSoft.HardwareManager.Stations, scp);
-
+            this.Soft.CommuniPortManager.Add(scp);
         }
 
         /// <summary>
@@ -155,7 +151,7 @@ namespace C3.Communi
             {
                 // TODO: 
                 // do nothing
-                log.Error("SocketListenerManager.CloseSocket exception", ex); 
+                this.Soft.ErrorManager.Process(ex, "SocketListenerManager.CloseSocket exception"); 
             }
         }
 
