@@ -209,10 +209,18 @@ namespace C3.Communi
             return bytes;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <param name="received"></param>
+        /// <returns></returns>
         public override IParseResult OnParseReceivedBytes(IDevice device, byte[] received)
         {
             IParseResult pr = this.ReceiveParts.ToValues(received);
+            return pr;
 
+            /*
             // add send received log
             //
             AddCommuniDetail(this._lastSendBytes, bytes, pr);
@@ -238,8 +246,8 @@ namespace C3.Communi
                     AddCommuniFailDetail(bytes, pr);
                 }
             }
+            */
 
-            return pr;
         }
     }
 }

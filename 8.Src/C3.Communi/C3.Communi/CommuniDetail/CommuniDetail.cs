@@ -4,6 +4,7 @@ using System.Text;
 
 namespace C3.Communi
 {
+    /*
     /// <summary>
     /// 
     /// </summary>
@@ -19,6 +20,7 @@ namespace C3.Communi
         /// </summary>
         Success,
     }
+     */
 
     /// <summary>
     /// 
@@ -32,36 +34,31 @@ namespace C3.Communi
         /// <param name="parseResult"></param>
         /// <param name="send"></param>
         /// <param name="received"></param>
-        public CommuniDetail(string operaText, string parseResult, byte[] send, byte[] received, ParseResultEnum parseResultEnum)
-            : this(DateTime.Now, operaText, parseResult, send, received, parseResultEnum)
+        public CommuniDetail( string operaText, 
+            byte[] send, DateTime sendDateTime, byte[] received, DateTime receivedDateTime, string parseResult,bool isSuccess)
         {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="opera"></param>
-        /// <param name="parseResult"></param>
-        /// <param name="send"></param>
-        /// <param name="received"></param>
-        public CommuniDetail(DateTime dt, string operaText, string parseResult, byte[] send, byte[] received, ParseResultEnum parseResultEnum)
-        {
-            this._dt = dt;
             this._operaText = operaText;
             this._parseResult = parseResult;
             this._send = send;
             this._received = received;
-            this._parseResultEnum = parseResultEnum;
+            this._isSuccess = isSuccess;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public DateTime DT
+        public DateTime SendDateTime
         {
-            get { return _dt; }
-        } private DateTime _dt = DateTime.Now;
+            get { return _sendDateTime; }
+        } private DateTime _sendDateTime;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime ReceivedDateTime
+        {
+            get { return _receivedDateTime; }
+        } private DateTime _receivedDateTime;
 
         #region OperaText
         /// <summary>
@@ -135,20 +132,9 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public ParseResultEnum ParseResultEnum
-        {
-            get { return _parseResultEnum; }
-        } private ParseResultEnum _parseResultEnum;
-
-        /// <summary>
-        /// 
-        /// </summary>
         public bool IsSuccess
         {
-            get
-            {
-                return this.ParseResultEnum == ParseResultEnum.Success;
-            }
-        }
+            get { return _isSuccess; }
+        } private bool _isSuccess;
     }
 }

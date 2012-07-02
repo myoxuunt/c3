@@ -114,21 +114,33 @@ namespace C3.Communi
         #region Do - task
         private void Do(ITask current)
         {
-            if (current.IsTimeOut())
+            TaskStatus status = current.Check();
+            //if (current.IsTimeOut())
+            if ( status == TaskStatus.Timeout )
             {
+                // TODO: get cp
+                //
+                ICommuniPort cp = null ;
+
                 byte[] received = GetReceived(current);
                 // TOOD: log received
                 //
                 // log(received);
 
-                IParseResult pr = current.Parse(received);
+                //IParseResult pr = current.Parse(received);
+                current.End(cp);
+
+                IParseResult pr = current.LastParseResult;
+
                 ITaskProcessor processor = GetTaskProcessor(current);
                 processor.Process(pr);
 
                 IDevice device = current.Device;
                 device.CurrentTask = null;
 
-                if (!current.IsComplete)
+                //if (!current.IsComplete)
+                TaskStatus status2 = current.Check();
+                if ( status2 == TaskStatus.Wating )
                 {
                     device.Tasks.Enqueue(current);
                 }
@@ -157,7 +169,9 @@ namespace C3.Communi
                 ITask head = tasks.Dequeue();
 
                 DateTime dt = DateTime.Now;
-                if (head.NeedExecute(dt))
+                TaskStatus status = head.Check ();
+                //if (head.NeedExecute(dt))
+                if ( status == TaskStatus.Ready )
                 {
                     ICommuniPort cp = GetCommuniPort(head);
                     if ((cp != null) &&

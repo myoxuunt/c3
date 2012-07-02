@@ -113,6 +113,7 @@
     <Compile Include="strings.Designer.cs" />
     <Compile Include="Task\ITask.cs" />
     <Compile Include="Task\ITaskProcessor.cs" />
+    <Compile Include="Task\Strategy.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />
     <Compile Include="Utils\PathUtils.cs" />
     <Compile Include="CommuniPort\SocketCommuniPort\SocketCommuniPort.cs" />

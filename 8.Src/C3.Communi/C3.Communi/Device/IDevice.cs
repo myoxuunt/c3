@@ -17,6 +17,8 @@ namespace C3.Communi
         TaskQueue Tasks { get; set; }
         ITask CurrentTask { get; set; }
         IDPU Dpu { get; set; }
+
+        CommuniDetailCollection CommuniDetails { get; set; }
         
     }
 

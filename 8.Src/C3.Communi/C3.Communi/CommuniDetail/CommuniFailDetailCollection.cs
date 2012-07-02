@@ -8,10 +8,10 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public class CommuniFailDetailCollection : Xdgk.Common.Collection<CommuniFailDetail>
+    public class CommuniDetailCollection : Xdgk.Common.Collection<CommuniDetail>
     {
-        private static int MAXCOUNT = 100;
-        public CommuniFailDetailCollection()
+        private static int MAXCOUNT = 1000;
+        public CommuniDetailCollection()
         {
         }
 
@@ -20,7 +20,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="index"></param>
         /// <param name="item"></param>
-        protected override void InsertItem(int index, CommuniFailDetail item)
+        protected override void InsertItem(int index, CommuniDetail item)
         {        
             base.InsertItem(index, item);
             if (this.Count >= MAXCOUNT)
