@@ -115,6 +115,7 @@
     <Compile Include="Task\ITaskProcessor.cs" />
     <Compile Include="Task\Strategy.cs" />
     <Compile Include="Task\TaskBase.cs" />
+    <Compile Include="Task\TaskStatus.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />
     <Compile Include="Utils\PathUtils.cs" />
     <Compile Include="CommuniPort\SocketCommuniPort\SocketCommuniPort.cs" />

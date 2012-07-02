@@ -10,6 +10,7 @@ namespace C3.Communi
     public class TaskBase : ITask
     {
 
+        #region TaskBase
         /// <summary>
         /// 
         /// </summary>
@@ -18,7 +19,9 @@ namespace C3.Communi
         {
             this.Stragegy = strategy;
         }
+        #endregion //TaskBase
 
+        #region TimeoutValues
         /// <summary>
         /// 
         /// </summary>
@@ -34,7 +37,9 @@ namespace C3.Communi
         /// </summary>
         static readonly public TimeSpan MinTimeout = TimeSpan.FromMilliseconds(50);
 
+        #endregion //
 
+        #region Stragegy
         /// <summary>
         /// 
         /// </summary>
@@ -50,7 +55,9 @@ namespace C3.Communi
                 _stragegy = value;
             }
         } private Strategy _stragegy;
+        #endregion //Stragegy
 
+        #region Device
         /// <summary>
         /// 
         /// </summary>
@@ -65,7 +72,9 @@ namespace C3.Communi
                 _device = value;
             }
         } private IDevice _device;
+        #endregion //Device
 
+        #region LastParseResult
         /// <summary>
         /// 
         /// </summary>
@@ -80,9 +89,9 @@ namespace C3.Communi
                 _lastParseResult = value;
             }
         } private IParseResult _lastParseResult = null;
+        #endregion //LastParseResult
 
-
-
+        #region Timeout
         /// <summary>
         /// 
         /// </summary>
@@ -109,7 +118,9 @@ namespace C3.Communi
                 }
             }
         } private TimeSpan _timeout = DefaultTimeout;
+        #endregion //Timeout
 
+        #region Opera
         /// <summary>
         /// 
         /// </summary>
@@ -124,8 +135,9 @@ namespace C3.Communi
                 _opera = value;
             }
         } private IOpera _opera;
+        #endregion //Opera
 
-
+        #region Status
         /// <summary>
         /// 
         /// </summary>
@@ -140,7 +152,9 @@ namespace C3.Communi
                 }
             }
         } private TaskStatus _status;
+        #endregion //Status
 
+        #region IsTimeOut
         /// <summary>
         /// 
         /// </summary>
@@ -157,12 +171,16 @@ namespace C3.Communi
                 return false;
             }
         }
+        #endregion //IsTimeOut
 
+        #region NeedExecute
         public bool NeedExecute()
         {
             return NeedExecute(DateTime.Now);
         }
+        #endregion //NeedExecute
 
+        #region NeedExecute
         /// <summary>
         /// 
         /// </summary>
@@ -172,7 +190,9 @@ namespace C3.Communi
         {
             return this.Stragegy.NeedExecute(dt);
         }
+        #endregion //NeedExecute
 
+        #region Check
         /// <summary>
         /// 
         /// </summary>
@@ -209,7 +229,9 @@ namespace C3.Communi
             }
             return Status;
         }
+        #endregion //Check
 
+        #region LastExecute
         /// <summary>
         /// 
         /// </summary>
@@ -218,7 +240,9 @@ namespace C3.Communi
             get { return LastSendDateTime; }
             set { LastSendDateTime = value; }
         }
+        #endregion //LastExecute
 
+        #region LastSendBytes
         /// <summary>
         /// 
         /// </summary>
@@ -227,7 +251,9 @@ namespace C3.Communi
             get { return _lastSendBytes; }
             set { _lastSendBytes = value; }
         } private byte[] _lastSendBytes;
+        #endregion //LastSendBytes
 
+        #region LastSendDateTime
         /// <summary>
         /// 
         /// </summary>
@@ -242,9 +268,9 @@ namespace C3.Communi
                 _lastSendDateTime = value;
             }
         } private DateTime _lastSendDateTime = DateTime.MinValue;
+        #endregion //LastSendDateTime
 
-
-
+        #region LastReceivedDateTime
         /// <summary>
         /// 
         /// </summary>
@@ -253,7 +279,9 @@ namespace C3.Communi
             get { return _lastReceivedDateTime; }
             set { _lastReceivedDateTime = value; }
         } private DateTime _lastReceivedDateTime;
+        #endregion //LastReceivedDateTime
 
+        #region LastReceivedBytes
         /// <summary>
         /// 
         /// </summary>
@@ -262,7 +290,9 @@ namespace C3.Communi
             get { return _lastReceivedBytes; }
             set { _lastReceivedBytes = value; }
         } private byte[] _lastReceivedBytes;
+        #endregion //LastReceivedBytes
 
+        #region Begin
         /// <summary>
         /// 
         /// </summary>
@@ -293,7 +323,9 @@ namespace C3.Communi
                 throw new InvalidOperationException("status must be 'Ready' when call Begin(...)");
             }
         }
+        #endregion //Begin
 
+        #region End
         /// <summary>
         /// 
         /// </summary>
@@ -334,6 +366,7 @@ namespace C3.Communi
                 throw new InvalidOperationException("status must be 'Timeout' when call End(...)");
             }
         }
+        #endregion //End
 
     }
 }
