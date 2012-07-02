@@ -6,7 +6,7 @@ namespace C3.Communi
 {
     public class AddressErrorResult : ParseResultBase
     {
-#region Constructor
+        #region Constructor
         /// <summary>
         /// 
         /// </summary>
@@ -18,10 +18,10 @@ namespace C3.Communi
             this._expected = expected;
             this._actual = actual;
         }
-#endregion //Constructor
+        #endregion //Constructor
 
 
-#region Expected
+        #region Expected
         /// <summary>
         /// 
         /// </summary>
@@ -29,9 +29,9 @@ namespace C3.Communi
         {
             get { return _expected; }
         } private Int64 _expected;
-#endregion //Expected
+        #endregion //Expected
 
-#region Actual
+        #region Actual
         /// <summary>
         /// 
         /// </summary>
@@ -39,22 +39,22 @@ namespace C3.Communi
         {
             get { return _actual; }
         } private Int64 _actual;
-#endregion //Actual
+        #endregion //Actual
 
-#region Actual
+        #region Actual
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            string s = string.Format("{0}, {1} '{2}', {3} '{4}'", 
+            string s = string.Format("{0}, {1} '{2}', {3} '{4}'",
                     strings.AddressErrorResult,
                     strings.Expected, this.Expected,
                     strings.Actual, this.Actual);
             return s;
         }
-#endregion //Actual
+        #endregion //Actual
 
     }
 

@@ -6,7 +6,7 @@ namespace C3.Communi
 {
     public interface ITaskProcessor
     {
-        void Process(IParseResult pr);
+        void Process( ITask task, IParseResult pr);
     }
 
 }

@@ -115,32 +115,25 @@ namespace C3.Communi
         private void Do(ITask current)
         {
             TaskStatus status = current.Check();
-            //if (current.IsTimeOut())
+
             if ( status == TaskStatus.Timeout )
             {
-                // TODO: get cp
-                //
-                ICommuniPort cp = null ;
-
-                byte[] received = GetReceived(current);
-                // TOOD: log received
-                //
-                // log(received);
-
-                //IParseResult pr = current.Parse(received);
+                ICommuniPort cp = GetCommuniPort(current);
                 current.End(cp);
 
                 IParseResult pr = current.LastParseResult;
 
                 ITaskProcessor processor = GetTaskProcessor(current);
-                processor.Process(pr);
+                processor.Process(current, pr);
 
+                // clear current task
+                //
                 IDevice device = current.Device;
                 device.CurrentTask = null;
 
-                //if (!current.IsComplete)
-                TaskStatus status2 = current.Check();
-                if ( status2 == TaskStatus.Wating )
+                //
+                //
+                if (current.Status == TaskStatus.Wating)
                 {
                     device.Tasks.Enqueue(current);
                 }
@@ -165,29 +158,19 @@ namespace C3.Communi
 
             while (tasks.Count > 0)
             {
-
                 ITask head = tasks.Dequeue();
 
-                DateTime dt = DateTime.Now;
                 TaskStatus status = head.Check ();
-                //if (head.NeedExecute(dt))
+
                 if ( status == TaskStatus.Ready )
                 {
                     ICommuniPort cp = GetCommuniPort(head);
                     if ((cp != null) &&
                         (!cp.IsOccupy))
                     {
-                        // TODO: move to task class?
-                        //
 
                         IDevice device =head.Device;
-                        IOpera opera = head.Opera;
-
-                        byte[] send = opera.CreateSendBytes(device);
-
-                        // byte[] send = head.opera
-                        cp.Write(send);
-                        head.LastExecute = DateTime.Now;
+                        head.Begin(cp);
 
                         device.CurrentTask = head;
                         break;

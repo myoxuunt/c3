@@ -72,6 +72,7 @@ namespace C3.Communi
         } private string _name;
         #endregion //
 
+        #region DeviceType
         /// <summary>
         /// 
         /// </summary>
@@ -80,50 +81,9 @@ namespace C3.Communi
             get { return _deviceType; }
             set { _deviceType = value; }
         } private string _deviceType;
+        #endregion //DeviceType
 
-        //#region ReceivePart
-        ///// <summary>
-        ///// 获取或设置第一个ReceivePart
-        ///// </summary>
-        //public ReceivePart ReceivePart
-        //{
-        //    get 
-        //    { 
-        //        //return _receivepart; 
-        //        if (ReceiveParts.Count > 0)
-        //            return _receivePartCollection[0];
-        //        else
-        //            return null;
-        //    }
-        //    set 
-        //    { 
-        //        //_receivepart = value; 
-        //        if (value == null)
-        //        {
-        //            if (ReceiveParts.Count > 0)
-        //            {
-        //                ReceiveParts.RemoveAt(0);
-        //            }
-        //            else
-        //            {
-        //                // ignore
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (ReceiveParts.Count > 0)
-        //            {
-        //                ReceiveParts[0] = value;
-        //            }
-        //            else
-        //            {
-        //                ReceiveParts.Add(value);
-        //            }
-        //        }
-        //    }
-        //}
-        //#endregion //ReceivePart
-
+        #region ReceiveParts
         /// <summary>
         /// 
         /// </summary>
@@ -140,6 +100,7 @@ namespace C3.Communi
                 this._receivePartCollection = value;
             }
         } private ReceivePartCollection _receivePartCollection;
+        #endregion //ReceiveParts
 
         #region SendPart
         /// <summary>
@@ -152,6 +113,7 @@ namespace C3.Communi
         } private SendPart _sendPart;
         #endregion //
 
+        #region ToString
         /// <summary>
         /// 
         /// </summary>
@@ -166,7 +128,9 @@ namespace C3.Communi
             }
             return _text;
         }
+        #endregion //ToString
 
+        #region CreateArgs
         /// <summary>
         /// 
         /// </summary>
@@ -194,7 +158,9 @@ namespace C3.Communi
             }
             return list.ToArray();
         }
+        #endregion //CreateArgs
 
+        #region OnCreateSendBytes
         /// <summary>
         /// 
         /// </summary>
@@ -208,7 +174,9 @@ namespace C3.Communi
             byte[] bytes = this.SendPart.ToBytes();
             return bytes;
         }
+        #endregion //OnCreateSendBytes
 
+        #region OnParseReceivedBytes
         /// <summary>
         /// 
         /// </summary>
@@ -217,37 +185,28 @@ namespace C3.Communi
         /// <returns></returns>
         public override IParseResult OnParseReceivedBytes(IDevice device, byte[] received)
         {
+            string addressFieldName = "Address";
+
             IParseResult pr = this.ReceiveParts.ToValues(received);
-            return pr;
 
-            /*
-            // add send received log
-            //
-            AddCommuniDetail(this._lastSendBytes, bytes, pr);
 
-            if (!pr.Success)
+            if (pr.IsSuccess)
             {
-                AddCommuniFailDetail(bytes, pr);
-            }
-
-            // match address
-            //
-            object addressObject = pr.NameObjects.GetObject("ADDRESS");
-            if (addressObject != null)
-            {
-                
-                //int address = (int)addressObject;
-                //int address = Convert.ToInt32(addressObject);
-                Int64 address = Convert.ToInt64(addressObject);
-                if (address != this.Device.Address)
+                // match address
+                //
+                object addressObject = pr.Results[addressFieldName];
+                if (addressObject != null)
                 {
-                    //return new DataErrorResult( pr.ReceivePartName, pr
-                    pr = new AddressErrorResult(pr.ReceivePartName, this.Device.Address, address);
-                    AddCommuniFailDetail(bytes, pr);
+                    Int64 address = Convert.ToInt64(addressObject);
+                    if (address != device.Address)
+                    {
+                        pr = new AddressErrorResult(device.Address, address);
+                    }
                 }
             }
-            */
 
+            return pr;
         }
+        #endregion //OnParseReceivedBytes
     }
 }
