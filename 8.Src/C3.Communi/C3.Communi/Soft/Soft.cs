@@ -35,6 +35,10 @@ namespace C3.Communi
                 if (_socketListenerManager == null)
                 {
                     _socketListenerManager = new SocketListenerManager(this);
+
+                    string path = PathUtils.SocketListenerConfigFileName;
+                    XmlSocketListenBuilder builder = new XmlSocketListenBuilder(path);
+                    builder.Build(_socketListenerManager);
                 }
                 return _socketListenerManager;
             }

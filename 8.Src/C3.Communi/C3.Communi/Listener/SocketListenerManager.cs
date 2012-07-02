@@ -6,14 +6,12 @@ using NUnit.Core;
 
 namespace C3.Communi
 {
-
-
     /// <summary>
     /// 
     /// </summary>
     public class SocketListenerManager
     {
-        static Logger log = InternalTrace.GetLogger(typeof(SocketListenerManager));
+        //static Logger log = InternalTrace.GetLogger(typeof(SocketListenerManager));
 
         #region SocketListenerManager
         public SocketListenerManager(Soft soft)
@@ -52,7 +50,6 @@ namespace C3.Communi
             }
         } private SocketListenerCollection _socketListenerCollection;
         #endregion //SocketListeners
-
 
         #region Add
         /// <summary>

@@ -10,6 +10,13 @@ namespace C3.Communi
         {
         }
 
+        static public string SocketListenerConfigFileName
+        {
+            get
+            {
+                return System.Windows.Forms.Application.StartupPath + "\\Config\\ListenPort.xml";
+            }
+        }
         static public string DPUConfigFileName
         {
             get

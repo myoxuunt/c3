@@ -19,6 +19,7 @@ namespace C3.Communi
         public event EventHandler CommuniPortChanged;
         #endregion //Events
 
+        #region StationBase
         /// <summary>
         /// 
         /// </summary>
@@ -27,7 +28,9 @@ namespace C3.Communi
         {
             this.Name = name;
         }
+        #endregion //StationBase
 
+        #region Name
         /// <summary>
         /// 
         /// </summary>
@@ -56,7 +59,9 @@ namespace C3.Communi
                 }
             }
         } private string _name;
+        #endregion //Name
 
+        #region OnNameChanged
         /// <summary>
         /// 
         /// </summary>
@@ -67,7 +72,9 @@ namespace C3.Communi
                 this.NameChanged(this, e);
             }
         } 
+        #endregion //OnNameChanged
 
+        #region Devices
         /// <summary>
         /// 
         /// </summary>
@@ -86,7 +93,9 @@ namespace C3.Communi
                 _devices = value;
             }
         } private DeviceCollection _devices;
+        #endregion //Devices
 
+        #region CommuniPort
         /// <summary>
         /// 
         /// </summary>
@@ -118,7 +127,9 @@ namespace C3.Communi
                 }
             }
         } private ICommuniPort _communiPort;
+        #endregion //CommuniPort
 
+        #region OnCommuniPortChanged
         /// <summary>
         /// 
         /// </summary>
@@ -130,7 +141,9 @@ namespace C3.Communi
                 this.CommuniPortChanged ( this,e);
             }
         }
+        #endregion //OnCommuniPortChanged
 
+        #region StationSource
         /// <summary>
         /// 
         /// </summary>
@@ -145,9 +158,9 @@ namespace C3.Communi
                 _stationSource = value;
             }
         } private IStationSource _stationSource;
+        #endregion //StationSource
 
-
-
+        #region Stations
         /// <summary>
         /// 
         /// </summary>
@@ -156,8 +169,9 @@ namespace C3.Communi
             get { return _stationCollection; }
             set { _stationCollection = value;}
         } private StationCollection _stationCollection;
+        #endregion //Stations
 
-
+        #region CommuniPortConfig
         /// <summary>
         /// 
         /// </summary>
@@ -172,6 +186,7 @@ namespace C3.Communi
                 _communiPortConfig = value;
             }
         } private ICommuniPortConfig _communiPortConfig;
+        #endregion //CommuniPortConfig
 
     }
 }

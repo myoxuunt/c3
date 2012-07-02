@@ -5,72 +5,6 @@ using C3.Communi;
 
 namespace C3.SPUTest
 {
-    //public class TStation : IStation
-    //{
-    //    #region IStation 成员
-
-    //    public string Name
-    //    {
-    //        get
-    //        {
-    //            throw new NotImplementedException();
-    //        }
-    //        set
-    //        {
-    //            throw new NotImplementedException();
-    //        }
-    //    }
-
-    //    public DeviceCollection Devices
-    //    {
-    //        get
-    //        {
-    //            throw new NotImplementedException();
-    //        }
-    //        set
-    //        {
-    //            throw new NotImplementedException();
-    //        }
-    //    }
-
-    //    public ICommuniPort CommuniPort
-    //    {
-    //        get
-    //        {
-    //            throw new NotImplementedException();
-    //        }
-    //        set
-    //        {
-    //            throw new NotImplementedException();
-    //        }
-    //    }
-
-    //    public IStationSource StationSource
-    //    {
-    //        get
-    //        {
-    //            throw new NotImplementedException();
-    //        }
-    //        set
-    //        {
-    //            throw new NotImplementedException();
-    //        }
-    //    }
-
-    //    #endregion
-
-    //    #region IStation 成员
-
-
-    //    public StationCollection Stations
-    //    {
-    //        get { throw new NotImplementedException(); }
-    //        set { throw new NotImplementedException(); }
-
-    //    }
-
-    //    #endregion
-    //}
 
     abstract public class StationFactoryBase : IStationFactory
     {
@@ -270,62 +204,6 @@ namespace C3.SPUTest
                 _stationSourceProvider = value;
             }
         } private IStationSourceProvider _stationSourceProvider;
-
-        #endregion
-    }
-    public class Tspu : ISPU 
-    {
-        #region ISPU 成员
-
-        public Type StationType
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        IStationFactory _stationFactory = new TStationFactory();
-        public IStationFactory StationFactory
-        {
-            get
-            {
-                return _stationFactory;
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        IStationPersister _stationPersister = new TStationPersister();
-        public IStationPersister StationPersister
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public IStationSourceProvider StationSourceProvider
-        {
-            get
-            {
-                return new TStationSourceProvider();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
 
         #endregion
     }

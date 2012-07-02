@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TSpu.cs" />
+    <Compile Include="TStation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C3.Communi\C3.Communi.csproj">
