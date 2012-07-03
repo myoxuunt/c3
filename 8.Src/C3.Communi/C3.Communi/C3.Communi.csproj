@@ -104,6 +104,7 @@
     <Compile Include="ReceivePartCollection.cs" />
     <Compile Include="SendPart.cs" />
     <Compile Include="Soft\SoftManager.cs" />
+    <Compile Include="Station\StationFactoryBase.cs" />
     <Compile Include="Station\ISPU.cs" />
     <Compile Include="Station\ISPUCollection.cs" />
     <Compile Include="Station\IStation.cs" />
@@ -138,6 +139,9 @@
     <Compile Include="Utils\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\ListenPort.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\Source.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
