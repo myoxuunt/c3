@@ -6,6 +6,7 @@ namespace C3.Communi
 {
     public interface IStation
     {
+        Guid Guid { get; set; }
         string Name { get; set; }
         DeviceCollection Devices { get; set; }
         ICommuniPort CommuniPort { get; set; }

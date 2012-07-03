@@ -26,7 +26,11 @@ namespace C3
 
             Soft soft = SoftManager.GetSoft();
             object o2 = soft.Hardware;
+            int n = soft.Hardware.Stations.Count;
 
+            n= soft.SocketListenerManager.SocketListeners.Count;
+
+            this.Text = n.ToString();
         }
     }
 }

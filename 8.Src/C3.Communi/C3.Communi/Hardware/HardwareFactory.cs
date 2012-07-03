@@ -9,22 +9,26 @@ namespace C3.Communi
     /// </summary>
     public class HardwareFactory
     {
+
+        #region ISPUs
         /// <summary>
         /// 
         /// </summary>
         public ISPUCollection ISPUs
         {
-            get 
+            get
             {
                 if (_ispus == null)
                 {
                     _ispus = CreateIspus();
                 }
-                return _ispus; 
+                return _ispus;
             }
             set { _ispus = value; }
         } private ISPUCollection _ispus;
+        #endregion //ISPUs
 
+        #region CreateIspus
         /// <summary>
         /// 
         /// </summary>
@@ -39,10 +43,12 @@ namespace C3.Communi
             }
             return spus;
         }
+        #endregion //CreateIspus
 
+        #region SPUAssemblyInfos
         private AssemblyInfoCollection SPUAssemblyInfos
         {
-            get 
+            get
             {
                 if (_spuAssemblyInfos == null)
                 {
@@ -52,10 +58,12 @@ namespace C3.Communi
                 return _spuAssemblyInfos;
             }
         } private AssemblyInfoCollection _spuAssemblyInfos;
+        #endregion //SPUAssemblyInfos
 
+        #region DPUAssemblyInfos
         private AssemblyInfoCollection DPUAssemblyInfos
         {
-            get 
+            get
             {
                 if (_dpuAssemblyInfos == null)
                 {
@@ -65,7 +73,7 @@ namespace C3.Communi
                 return _dpuAssemblyInfos;
             }
         } private AssemblyInfoCollection _dpuAssemblyInfos;
-
+        #endregion //DPUAssemblyInfos
 
         #region DPUs
         /// <summary>
@@ -88,6 +96,7 @@ namespace C3.Communi
         }private DPUCollection _dPUs;
         #endregion //DPUs
 
+        #region CreateDpus
         private DPUCollection CreateDpus()
         {
             DPUCollection dpus = new DPUCollection();
@@ -97,7 +106,8 @@ namespace C3.Communi
                 dpus.Add((IDPU)obj);
             }
             return dpus;
-        } 
+        }
+        #endregion //CreateDpus
 
         #region SourceConfigs
         /// <summary>
@@ -120,18 +130,28 @@ namespace C3.Communi
         } private SourceConfigCollection _sourceConfigs;
         #endregion //SourceConfigs
 
+        #region Create
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public Hardware Create()
         {
+            VerifySPUs();
+            VerifyDPUs();
+
             Hardware hd = new Hardware();
             CreateStations(hd);
             CreateDevices(hd);
             return hd;
         }
+        #endregion //Create
 
+        #region CreateDevices
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hd"></param>
         private void CreateDevices(Hardware hd)
         {
             // device
@@ -164,13 +184,18 @@ namespace C3.Communi
                 }
             }
         }
+        #endregion //CreateDevices
 
+        #region CreateStations
         private void CreateStations(Hardware hd)
         {
             // 
-            foreach ( ISPU spu in ISPUs )
+            foreach (ISPU spu in ISPUs)
             {
                 IStationSourceProvider sourceProvider = spu.StationSourceProvider;
+                if (sourceProvider == null)
+                {
+                }
 
                 sourceProvider.SourceConfigs = this.SourceConfigs;
                 IStationSource[] stationSources = sourceProvider.GetStationSources();
@@ -184,5 +209,74 @@ namespace C3.Communi
                 }
             }
         }
+        #endregion //CreateStations
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void VerifyDPUs()
+        {
+            foreach (IDPU dpu in this.DPUs)
+            {
+                VerifyDPU(dpu);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dpu"></param>
+        private void VerifyDPU(IDPU dpu)
+        {
+            if (dpu == null)
+            {
+                throw new ArgumentNullException("dpu");
+            }
+
+            VerifyNotNull (dpu.DeviceFactory ,"dpu.DeviceFactory");
+            VerifyNotNull(dpu.DevicePersister, "dpu.DevicePersister");
+            VerifyNotNull(dpu.DeviceSourceProvider, "dpu.DeviceSourceProvider");
+            VerifyNotNull(dpu.DeviceType, "dpu.DeviceType");
+            VerifyNotNull(dpu.Processor, "dpu.Processor");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void VerifySPUs()
+        {
+            foreach (ISPU spu in this.ISPUs)
+            {
+                VerifySPU(spu);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spu"></param>
+        private void VerifySPU(ISPU spu)
+        {
+            if (spu == null)
+            {
+                throw new ArgumentNullException("spu");
+            }
+
+            VerifyNotNull(spu.StationFactory, "spu.StationFactory");
+            VerifyNotNull(spu.StationPersister, "spu.StationPersister");
+            VerifyNotNull(spu.StationSourceProvider, "spu.StationSourceProvider");
+            VerifyNotNull(spu.StationType, "spu.StationType");
+        }
+
+        private void VerifyNotNull(object obj, string objName)
+        {
+            if (obj == null)
+            {
+                throw new InvalidOperationException(
+                    string.Format("'{0}' is null", objName)
+                    );
+            }
+        }
+
     }
 }

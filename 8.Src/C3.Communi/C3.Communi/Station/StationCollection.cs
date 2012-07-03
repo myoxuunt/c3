@@ -16,7 +16,7 @@ namespace C3.Communi
         {
             if (this.CheckExist(item.Name))
             {
-                throw new ArgumentException("Exist Station" + item.Name);
+                throw new ArgumentException("Exist Station " + item.Name);
             }
             base.InsertItem(index, item);
             item.Stations = this;

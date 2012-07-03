@@ -6,6 +6,25 @@ namespace C3.Communi
 {
     abstract public class SPUBase : ISPU 
     {
+
+        #region Name
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Name
+        {
+            get 
+            {
+                if (_name == null)
+                {
+                    _name = string.Empty;
+                }
+                return _name; 
+            }
+        } private string _name;
+        #endregion //Name
+
+        #region StationType
         /// <summary>
         /// 
         /// </summary>
@@ -20,7 +39,9 @@ namespace C3.Communi
                 _stationType = value;
             }
         } private Type _stationType;
+        #endregion //StationType
 
+        #region StationFactory
         /// <summary>
         /// 
         /// </summary>
@@ -35,8 +56,10 @@ namespace C3.Communi
                 _stationFactory = value;
             }
         } private IStationFactory _stationFactory;
+        #endregion //StationFactory
 
 
+        #region StationPersister
         /// <summary>
         /// 
         /// </summary>
@@ -51,7 +74,9 @@ namespace C3.Communi
                 _stationPersister = value;
             }
         } private IStationPersister _stationPersister;
+        #endregion //StationPersister
 
+        #region StationSourceProvider
         /// <summary>
         /// 
         /// </summary>
@@ -66,6 +91,7 @@ namespace C3.Communi
                 _stationSourceProvider = value;
             }
         } private IStationSourceProvider _stationSourceProvider;
+        #endregion //StationSourceProvider
 
     }
 }

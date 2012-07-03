@@ -12,85 +12,132 @@ namespace C3.Communi
         public event EventHandler Closed;
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public CommuniPortBase()
+        {
+            _createDateTime = DateTime.Now;
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DateTime CreateDateTime
         {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string ToXml()
-        {
-            throw new NotImplementedException();
-        }
+            get { return _createDateTime; }
+        } private DateTime _createDateTime;
 
         public void Close()
         {
-            throw new NotImplementedException();
+            OnClose();
         }
+
+
+        abstract protected void OnClose();
 
         public bool Write(byte[] bytes)
         {
-            throw new NotImplementedException();
+            return OnWrite(bytes);
         }
+        abstract protected bool OnWrite(byte[] bytes);
+
 
         public byte[] Read()
         {
-            throw new NotImplementedException();
+            return OnRead();
         }
+        abstract protected byte[] OnRead();
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsOccupy
         {
-            get { throw new NotImplementedException(); }
+            get
+            {
+                TimeSpan ts = DateTime.Now - this._occupyDateTime;
+                if (ts < TimeSpan.Zero || ts > _occupyTimeSpan)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
         public void Occupy(TimeSpan ts)
         {
-            throw new NotImplementedException();
+            if (ts < TimeSpan.Zero)
+            {
+                ts = TimeSpan.Zero;
+            }
+
+            this._occupyDateTime = DateTime.Now;
+            this._occupyTimeSpan = ts;
         }
 
-        public FilterCollection Filters
-        {
-            get { throw new NotImplementedException(); }
-        }
+        private DateTime _occupyDateTime;
+        private TimeSpan _occupyTimeSpan;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Identity
         {
             get
             {
-                throw new NotImplementedException();
+                if(_identity == null)
+                {
+                    _identity = string.Empty;
+                }
+                return _identity ;
             }
             set
             {
-                throw new NotImplementedException();
+                _identity = value;
             }
-        }
+        } private string _identity;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IdentityParserCollection IdentityParsers
         {
             get
             {
-                throw new NotImplementedException();
+                if (_identityParsers == null)
+                {
+                    _identityParsers = new IdentityParserCollection();
+                }
+                return _identityParsers;
             }
             set
             {
-                throw new NotImplementedException();
+                _identityParsers = value;
             }
-        }
+        } private IdentityParserCollection _identityParsers;
 
-
-
-
-        FilterCollection ICommuniPort.Filters
+        /// <summary>
+        /// 
+        /// </summary>
+        public FilterCollection Filters
         {
             get
             {
-                throw new NotImplementedException();
+                if (_filters == null)
+                {
+                    _filters = new FilterCollection();
+                }
+                return _filters;
             }
             set
             {
-                throw new NotImplementedException();
+                _filters = value;
             }
-        }
+        } private FilterCollection _filters;
     }
 
 }

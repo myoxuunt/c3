@@ -179,6 +179,10 @@ namespace C3.Communi
         {
             get
             {
+                if (_communiPortConfig == null)
+                {
+                    _communiPortConfig = NullCommuniPortConfig.Default;
+                }
                 return _communiPortConfig;
             }
             set
@@ -187,6 +191,20 @@ namespace C3.Communi
             }
         } private ICommuniPortConfig _communiPortConfig;
         #endregion //CommuniPortConfig
+
+        #region Guid
+        public Guid Guid
+        {
+            get
+            {
+                return _guid;
+            }
+            set
+            {
+                _guid = value;
+            }
+        } private Guid _guid;
+        #endregion //Guid
 
     }
 }

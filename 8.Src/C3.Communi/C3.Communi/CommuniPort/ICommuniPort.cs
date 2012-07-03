@@ -26,7 +26,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <returns></returns>
-        string ToXml();
+        //string ToXml();
 
         // TODO: delete
         //
@@ -64,6 +64,10 @@ namespace C3.Communi
         /// </summary>
         string Identity { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
         IdentityParserCollection IdentityParsers { get; set; }
+
     }
 }
