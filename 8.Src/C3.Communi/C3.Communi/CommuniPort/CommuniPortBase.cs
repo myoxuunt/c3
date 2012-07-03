@@ -59,11 +59,11 @@ namespace C3.Communi
                 TimeSpan ts = DateTime.Now - this._occupyDateTime;
                 if (ts < TimeSpan.Zero || ts > _occupyTimeSpan)
                 {
-                    return true;
+                    return false;
                 }
                 else
                 {
-                    return false;
+                    return true;
                 }
             }
         }
