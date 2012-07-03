@@ -9,6 +9,8 @@ namespace C3.SPUTest
     {
         public Tspu()
         {
+            this.Name = "Tspu";
+            this.Description = "T description";
             this.StationType = typeof(TStation);
             this.StationFactory = new TStationFactory();
             this.StationPersister = new TStationPersister();

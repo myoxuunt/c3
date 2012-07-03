@@ -14,7 +14,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public ISPUCollection ISPUs
+        public SPUCollection SPUs
         {
             get
             {
@@ -25,7 +25,7 @@ namespace C3.Communi
                 return _ispus;
             }
             set { _ispus = value; }
-        } private ISPUCollection _ispus;
+        } private SPUCollection _ispus;
         #endregion //ISPUs
 
         #region CreateIspus
@@ -33,9 +33,9 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <returns></returns>
-        private ISPUCollection CreateIspus()
+        private SPUCollection CreateIspus()
         {
-            ISPUCollection spus = new ISPUCollection();
+            SPUCollection spus = new SPUCollection();
             object[] objects = this.SPUAssemblyInfos.CreateInstanceWithInterface(typeof(ISPU));
             foreach (object obj in objects)
             {
@@ -190,7 +190,7 @@ namespace C3.Communi
         private void CreateStations(Hardware hd)
         {
             // 
-            foreach (ISPU spu in ISPUs)
+            foreach (ISPU spu in SPUs)
             {
                 IStationSourceProvider sourceProvider = spu.StationSourceProvider;
                 if (sourceProvider == null)
@@ -245,7 +245,7 @@ namespace C3.Communi
         /// </summary>
         private void VerifySPUs()
         {
-            foreach (ISPU spu in this.ISPUs)
+            foreach (ISPU spu in this.SPUs)
             {
                 VerifySPU(spu);
             }

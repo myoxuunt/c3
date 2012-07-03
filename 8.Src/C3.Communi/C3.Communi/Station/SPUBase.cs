@@ -21,6 +21,10 @@ namespace C3.Communi
                 }
                 return _name; 
             }
+            set
+            {
+                _name = value;
+            }
         } private string _name;
         #endregion //Name
 
@@ -92,6 +96,24 @@ namespace C3.Communi
             }
         } private IStationSourceProvider _stationSourceProvider;
         #endregion //StationSourceProvider
+
+        #region Description
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Description
+        {
+            get
+            {
+                if (_description == null)
+                {
+                    _description = string.Empty;
+                }
+                return _description; 
+            }
+            set { _description = value; }
+        } private string _description;
+        #endregion //Description
 
     }
 }

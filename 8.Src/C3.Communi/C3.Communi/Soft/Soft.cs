@@ -264,7 +264,8 @@ namespace C3.Communi
             {
                 if (_hardware == null)
                 {
-                    HardwareFactory factory = new HardwareFactory();
+                    //HardwareFactory factory = new HardwareFactory();
+                    HardwareFactory factory = this.HardwareFactory;
                     factory.SourceConfigs = ReadSourceConfigs();
                     _hardware = factory.Create();
                 }
@@ -277,8 +278,47 @@ namespace C3.Communi
         } private Hardware _hardware;
         #endregion //Hardware
 
-       
-        #region SourceConfigs 
+        /// <summary>
+        /// 
+        /// </summary>
+        public SPUCollection SPUs
+        {
+            get
+            {
+                return HardwareFactory.SPUs;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DPUCollection DPUs
+        {
+            get
+            {
+                return HardwareFactory.DPUs;
+            }
+        }
+        
+        #region HardwareFactory
+        /// <summary>
+        /// 
+        /// </summary>
+        private HardwareFactory HardwareFactory
+        {
+            get
+            {
+                if (_hardwareFactory == null)
+                {
+                    _hardwareFactory = new HardwareFactory();
+                }
+                return _hardwareFactory;
+            }
+        } private HardwareFactory _hardwareFactory;
+        #endregion //HardwareFactory
+
+
+        #region SourceConfigs
         private SourceConfigCollection SourceConfigs
         {
             get

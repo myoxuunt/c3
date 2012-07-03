@@ -62,6 +62,7 @@
     <Compile Include="DataField\DatafieldManager.cs" />
     <Compile Include="Device\DeviceCollection.cs" />
     <Compile Include="Device\DeviceDataCollection.cs" />
+    <Compile Include="Device\DPUBase.cs" />
     <Compile Include="Device\DPUCollection.cs" />
     <Compile Include="Error\Error.cs" />
     <Compile Include="Exception\AssemblyException.cs" />

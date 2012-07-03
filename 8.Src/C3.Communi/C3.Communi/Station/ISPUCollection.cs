@@ -4,7 +4,7 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public class ISPUCollection : Collection<ISPU>
+    public class SPUCollection : Collection<ISPU>
     {
     }
 
