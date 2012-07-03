@@ -69,5 +69,13 @@ namespace C3.Communi
         /// </summary>
         IdentityParserCollection IdentityParsers { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        bool IsOpened
+        {
+            get;
+        }
+
     }
 }

@@ -53,6 +53,8 @@
     <Compile Include="CommuniDetail\CommuniDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetailCollection.cs" />
+    <Compile Include="CommuniPort\CommuniPortConfig\RemoteIPAddressConfig.cs" />
+    <Compile Include="CommuniPort\CommuniPortConfig\NullCommuniPortConfig.cs" />
     <Compile Include="CommuniPort\CommuniPortFactory.cs" />
     <Compile Include="CommuniPort\CommuniPortBase.cs" />
     <Compile Include="CommuniPort\CommuniPortCollection.cs" />
@@ -77,7 +79,7 @@
     <Compile Include="Hardware\Hardware.cs" />
     <Compile Include="Hardware\HardwareFactory.cs" />
     <Compile Include="CommuniPort\ICommuniPort.cs" />
-    <Compile Include="CommuniPort\ICommuniPortConfig.cs" />
+    <Compile Include="CommuniPort\CommuniPortConfig\ICommuniPortConfig.cs" />
     <Compile Include="IdentityParser\IdentityParserCollection.cs" />
     <Compile Include="Device\IDevice.cs" />
     <Compile Include="Device\IDeviceData.cs" />

@@ -30,8 +30,8 @@
         {
             this.listView1 = new System.Windows.Forms.ListView();
             this.chName = new System.Windows.Forms.ColumnHeader();
-            this.chPath = new System.Windows.Forms.ColumnHeader();
             this.chDescription = new System.Windows.Forms.ColumnHeader();
+            this.chPath = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // listView1
@@ -53,15 +53,15 @@
             this.chName.Text = "Name";
             this.chName.Width = 135;
             // 
-            // chPath
-            // 
-            this.chPath.Text = "Path";
-            this.chPath.Width = 208;
-            // 
             // chDescription
             // 
             this.chDescription.Text = "Description";
             this.chDescription.Width = 148;
+            // 
+            // chPath
+            // 
+            this.chPath.Text = "Path";
+            this.chPath.Width = 208;
             // 
             // UCSpus
             // 

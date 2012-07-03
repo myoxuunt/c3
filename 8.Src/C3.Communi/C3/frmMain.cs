@@ -55,5 +55,11 @@ namespace C3
             this.Close();
         }
 
+        private void mnuAbout_Click(object sender, EventArgs e)
+        {
+            frmHardware f = new frmHardware(C3App.App.Soft);
+            f.ShowDialog();
+        }
+
     }
 }

@@ -202,6 +202,9 @@ namespace C3.Communi
             cp.Determined -= new EventHandler(cp_Determined);
             cp.Closed -= new EventHandler(cp_Closed);
 
+            Hardware hd = this.Soft.Hardware;
+            StationCommuniPortBinder.Unbind(cp, hd);
+
             return this.CommuniPorts.Remove(cp);
         }
         #endregion //
@@ -215,8 +218,6 @@ namespace C3.Communi
         void cp_Closed(object sender, EventArgs e)
         {
             ICommuniPort cp = sender as ICommuniPort;
-            Hardware hd = this.Soft.Hardware;
-            StationCommuniPortBinder.Unbind(cp, hd);
 
             this.Remove(cp);
         }

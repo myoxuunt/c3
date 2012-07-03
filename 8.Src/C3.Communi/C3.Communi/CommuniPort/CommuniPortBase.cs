@@ -7,11 +7,56 @@ namespace C3.Communi
     abstract public class CommuniPortBase : ICommuniPort
     {
 
+        #region Members
+        private DateTime _occupyDateTime;
+        private TimeSpan _occupyTimeSpan;
+        #endregion //Members
+
+        #region Events
         public event EventHandler Received;
         public event EventHandler Determined;
         public event EventHandler Closed;
+        #endregion //Events
+
+        #region Methods
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected void FireReceivedEvent(EventArgs e)
+        {
+            if (this.Received != null)
+            {
+                this.Received(this, e);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected void FireDetermindEvent(EventArgs e)
+        {
+            if (this.Determined != null)
+            {
+                this.Determined(this, e);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        protected void FireClosedEvent(EventArgs e)
+        {
+            if (this.Closed != null)
+            {
+                this.Closed(this, e);
+            }
+        }
+        #endregion //Methods
 
 
+        #region CommuniPortBase
         /// <summary>
         /// 
         /// </summary>
@@ -19,7 +64,9 @@ namespace C3.Communi
         {
             _createDateTime = DateTime.Now;
         }
+        #endregion //CommuniPortBase
 
+        #region CreateDateTime
         /// <summary>
         /// 
         /// </summary>
@@ -27,28 +74,43 @@ namespace C3.Communi
         {
             get { return _createDateTime; }
         } private DateTime _createDateTime;
+        #endregion //CreateDateTime
 
+        #region Close
+        /// <summary>
+        /// 
+        /// </summary>
         public void Close()
         {
             OnClose();
         }
+        #endregion //Close
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         abstract protected void OnClose();
 
+
+        #region Write
         public bool Write(byte[] bytes)
         {
             return OnWrite(bytes);
         }
+        #endregion //Write
+
         abstract protected bool OnWrite(byte[] bytes);
 
 
+        #region Read
         public byte[] Read()
         {
             return OnRead();
         }
+        #endregion //Read
         abstract protected byte[] OnRead();
 
+        #region IsOccupy
         /// <summary>
         /// 
         /// </summary>
@@ -67,7 +129,9 @@ namespace C3.Communi
                 }
             }
         }
+        #endregion //IsOccupy
 
+        #region Occupy
         public void Occupy(TimeSpan ts)
         {
             if (ts < TimeSpan.Zero)
@@ -78,10 +142,10 @@ namespace C3.Communi
             this._occupyDateTime = DateTime.Now;
             this._occupyTimeSpan = ts;
         }
+        #endregion //Occupy
 
-        private DateTime _occupyDateTime;
-        private TimeSpan _occupyTimeSpan;
 
+        #region Identity
         /// <summary>
         /// 
         /// </summary>
@@ -89,18 +153,20 @@ namespace C3.Communi
         {
             get
             {
-                if(_identity == null)
+                if (_identity == null)
                 {
                     _identity = string.Empty;
                 }
-                return _identity ;
+                return _identity;
             }
             set
             {
                 _identity = value;
             }
         } private string _identity;
+        #endregion //Identity
 
+        #region IdentityParsers
         /// <summary>
         /// 
         /// </summary>
@@ -119,7 +185,9 @@ namespace C3.Communi
                 _identityParsers = value;
             }
         } private IdentityParserCollection _identityParsers;
+        #endregion //IdentityParsers
 
+        #region Filters
         /// <summary>
         /// 
         /// </summary>
@@ -138,6 +206,20 @@ namespace C3.Communi
                 _filters = value;
             }
         } private FilterCollection _filters;
+        #endregion //Filters
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsOpened
+        {
+            get
+            {
+                return OnGetIsOpened();
+            }
+        }
+
+        abstract protected bool OnGetIsOpened();
     }
 
 }

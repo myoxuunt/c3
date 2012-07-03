@@ -12,8 +12,19 @@ namespace C3.SPUTest
         {
             TStation station = new TStation("T" + n++);
             station.Guid = stationSource.Guid;
+            station.CommuniPortConfig = A;
 
             return station;
+        }
+
+        ICommuniPortConfig A
+        {
+            get
+            {
+                RemoteIPAddressConfig a = new RemoteIPAddressConfig();
+                a.RemoteIPAddress = System.Net.IPAddress.Parse("127.0.0.1");
+                return a;
+            }
         }
     }
 }
