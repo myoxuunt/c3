@@ -10,4 +10,5 @@ namespace C3.Communi
         Guid Guid { get; set; }
     }
 
+
 }

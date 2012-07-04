@@ -8,5 +8,4 @@ namespace C3.Communi
     {
         DateTime DT { get; set; }
     }
-
 }

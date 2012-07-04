@@ -11,40 +11,4 @@ namespace C3.Communi
         Station,
         Device,
     }
-
-
-
-
-
-
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-
-
-
-
-
-
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-
-    /// <summary>
-    /// 
-    /// </summary>
-
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-
-    /// <summary>
-    /// 
-    /// </summary>
 }

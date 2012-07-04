@@ -53,8 +53,8 @@
     <Compile Include="CommuniDetail\CommuniDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetailCollection.cs" />
-    <Compile Include="CommuniPort\CommuniPortConfig\RemoteIPAddressConfig.cs" />
-    <Compile Include="CommuniPort\CommuniPortConfig\NullCommuniPortConfig.cs" />
+    <Compile Include="CommuniPortConfig\RemoteIPAddressConfig.cs" />
+    <Compile Include="CommuniPortConfig\NullCommuniPortConfig.cs" />
     <Compile Include="CommuniPort\CommuniPortFactory.cs" />
     <Compile Include="CommuniPort\CommuniPortBase.cs" />
     <Compile Include="CommuniPort\CommuniPortCollection.cs" />
@@ -62,10 +62,16 @@
     <Compile Include="DataField\Datafield.cs" />
     <Compile Include="DataField\DatafieldCollection.cs" />
     <Compile Include="DataField\DatafieldManager.cs" />
+    <Compile Include="Device\DeviceBase.cs" />
     <Compile Include="Device\DeviceCollection.cs" />
+    <Compile Include="Device\DeviceDataBase.cs" />
     <Compile Include="Device\DeviceDataCollection.cs" />
+    <Compile Include="Device\DeviceFactoryBase.cs" />
+    <Compile Include="Device\DevicePersisterBase.cs" />
+    <Compile Include="Device\DeviceSourceProviderBase.cs" />
     <Compile Include="Device\DPUBase.cs" />
     <Compile Include="Device\DPUCollection.cs" />
+    <Compile Include="Device\DeviceSourceBase.cs" />
     <Compile Include="Error\Error.cs" />
     <Compile Include="Exception\AssemblyException.cs" />
     <Compile Include="AssemblyInfo\AssemblyInfo.cs" />
@@ -79,7 +85,7 @@
     <Compile Include="Hardware\Hardware.cs" />
     <Compile Include="Hardware\HardwareFactory.cs" />
     <Compile Include="CommuniPort\ICommuniPort.cs" />
-    <Compile Include="CommuniPort\CommuniPortConfig\ICommuniPortConfig.cs" />
+    <Compile Include="CommuniPortConfig\ICommuniPortConfig.cs" />
     <Compile Include="IdentityParser\IdentityParserCollection.cs" />
     <Compile Include="Device\IDevice.cs" />
     <Compile Include="Device\IDeviceData.cs" />
@@ -116,11 +122,15 @@
     <Compile Include="Station\IStationSource.cs" />
     <Compile Include="Station\IStationSourceProvider.cs" />
     <Compile Include="Station\SPUBase.cs" />
+    <Compile Include="Station\StationPersisterBase.cs" />
+    <Compile Include="Station\StationSourceBase.cs" />
+    <Compile Include="Station\StationSourceProviderBase.cs" />
     <Compile Include="strings.Designer.cs" />
     <Compile Include="Task\ITask.cs" />
     <Compile Include="Task\ITaskProcessor.cs" />
     <Compile Include="Task\Strategy.cs" />
     <Compile Include="Task\TaskBase.cs" />
+    <Compile Include="Task\TaskProcessorBase.cs" />
     <Compile Include="Task\TaskStatus.cs" />
     <Compile Include="Utils\ObjectFactory.cs" />
     <Compile Include="Utils\PathUtils.cs" />
@@ -142,6 +152,9 @@
     <Compile Include="Utils\Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Config\ListenPort.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

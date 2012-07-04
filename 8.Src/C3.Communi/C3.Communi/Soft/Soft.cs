@@ -12,12 +12,15 @@ namespace C3.Communi
     public class Soft
     {
         #region Members
+        static private NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private Timer _timer;
         #endregion //Members
 
         #region Constructor
         internal Soft()
         {
+            log.Info("Soft Constructor");
+
             _timer = new Timer();
             _timer.Interval = 1000;
             _timer.Tick += new EventHandler(_timer_Tick);
@@ -253,7 +256,6 @@ namespace C3.Communi
         }
         #endregion //GetCommuniPort
 
-
         #region Hardware
         /// <summary>
         /// 
@@ -278,6 +280,7 @@ namespace C3.Communi
         } private Hardware _hardware;
         #endregion //Hardware
 
+        #region SPUs
         /// <summary>
         /// 
         /// </summary>
@@ -288,7 +291,9 @@ namespace C3.Communi
                 return HardwareFactory.SPUs;
             }
         }
+        #endregion //SPUs
 
+        #region DPUs
         /// <summary>
         /// 
         /// </summary>
@@ -299,6 +304,7 @@ namespace C3.Communi
                 return HardwareFactory.DPUs;
             }
         }
+        #endregion //DPUs
         
         #region HardwareFactory
         /// <summary>

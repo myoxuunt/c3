@@ -211,6 +211,7 @@ namespace C3.Communi
         }
         #endregion //CreateStations
 
+        #region VerifyDPUs
         /// <summary>
         /// 
         /// </summary>
@@ -221,7 +222,9 @@ namespace C3.Communi
                 VerifyDPU(dpu);
             }
         }
+        #endregion //VerifyDPUs
 
+        #region VerifyDPU
         /// <summary>
         /// 
         /// </summary>
@@ -239,7 +242,9 @@ namespace C3.Communi
             VerifyNotNull(dpu.DeviceType, "dpu.DeviceType");
             VerifyNotNull(dpu.Processor, "dpu.Processor");
         }
+        #endregion //VerifyDPU
 
+        #region VerifySPUs
         /// <summary>
         /// 
         /// </summary>
@@ -250,7 +255,9 @@ namespace C3.Communi
                 VerifySPU(spu);
             }
         }
+        #endregion //VerifySPUs
 
+        #region VerifySPU
         /// <summary>
         /// 
         /// </summary>
@@ -267,7 +274,14 @@ namespace C3.Communi
             VerifyNotNull(spu.StationSourceProvider, "spu.StationSourceProvider");
             VerifyNotNull(spu.StationType, "spu.StationType");
         }
+        #endregion //VerifySPU
 
+        #region VerifyNotNull
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="objName"></param>
         private void VerifyNotNull(object obj, string objName)
         {
             if (obj == null)
@@ -277,6 +291,7 @@ namespace C3.Communi
                     );
             }
         }
+        #endregion //VerifyNotNull
 
     }
 }

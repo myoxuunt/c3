@@ -57,7 +57,7 @@ namespace C3
 
         private void mnuAbout_Click(object sender, EventArgs e)
         {
-            frmHardware f = new frmHardware(C3App.App.Soft);
+            frmHardware f = new frmHardware(C3App.App.Soft.Hardware.Stations[0]);
             f.ShowDialog();
         }
 

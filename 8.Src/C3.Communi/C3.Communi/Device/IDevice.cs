@@ -9,7 +9,7 @@ namespace C3.Communi
         Int64 Address { get; set; }
         string Name { get; set; }
         IStation Station { get; set; }
-        IDeviceData LastData{ get; set; }
+        IDeviceData LastData { get; set; }
         DeviceDataCollection DeviceDatas { get; }
 
         IDeviceSource DeviceSource { get; set; }
@@ -18,8 +18,10 @@ namespace C3.Communi
         ITask CurrentTask { get; set; }
         IDPU Dpu { get; set; }
 
+        Guid Guid { get; set; }
+        Guid StationGuid { get; set; }
         CommuniDetailCollection CommuniDetails { get; set; }
-        
+
     }
 
 }

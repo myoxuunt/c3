@@ -11,4 +11,5 @@ namespace C3.Communi
         void Delete(IDevice device);
     }
 
+
 }

@@ -6,6 +6,11 @@ namespace C3.Communi
 {
     public class Hardware
     {
+
+        #region Stations
+        /// <summary>
+        /// 
+        /// </summary>
         public StationCollection Stations
         {
             get
@@ -21,6 +26,7 @@ namespace C3.Communi
                 _stations = value;
             }
         } private StationCollection _stations;
+        #endregion //Stations
     }
 
 }

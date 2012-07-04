@@ -21,7 +21,21 @@ namespace C3.SPUTest
     class TStationSource : StationSourceBase 
     {
     }
+    public class GuidFactory
+    {
+        public static Guid Create(int n)
+        {
+            byte[] bs = BitConverter.GetBytes(n);
+            byte[] bs16 = new byte[16];
 
+            for (int i = bs.Length - 1; i >= 0; i--)
+            {
+                bs16[16 - bs.Length + i] = bs[i];
+            }
+            Guid id = new Guid(bs16);
+            return id;
+        }
+    }
     /// <summary>
     /// 
     /// </summary>
@@ -29,9 +43,10 @@ namespace C3.SPUTest
     {
         protected override IStationSource[] OnGetStationSources()
         {
+            TStationSource s = new TStationSource();
+            s.Guid = GuidFactory.Create(11);
             TStationSource[] ss = new TStationSource[] {
-                new TStationSource (),
-                new TStationSource ()
+                s
             };
             return ss;
         }

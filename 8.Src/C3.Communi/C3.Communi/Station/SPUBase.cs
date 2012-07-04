@@ -40,6 +40,10 @@ namespace C3.Communi
             }
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("StationType");
+                }
                 _stationType = value;
             }
         } private Type _stationType;

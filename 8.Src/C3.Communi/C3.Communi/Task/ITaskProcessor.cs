@@ -8,5 +8,4 @@ namespace C3.Communi
     {
         void Process( ITask task, IParseResult pr);
     }
-
 }

@@ -9,5 +9,4 @@ namespace C3.Communi
         SourceConfigCollection SourceConfigs { get; set; }
         IDeviceSource[] GetDeviceSources();
     }
-
 }

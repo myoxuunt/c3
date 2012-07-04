@@ -4,82 +4,117 @@ using System.Text;
 
 namespace C3.Communi
 {
-    /*
     public class DPUBase : IDPU 
     {
 
+        #region Name
         public string Name
         {
             get
             {
-                throw new NotImplementedException();
+                if (_name == null)
+                {
+                    _name = string.Empty;
+                }
+                return _name;
             }
             set
             {
-                throw new NotImplementedException();
+                _name = value;
             }
-        }
+        } private string _name;
+        #endregion //Name
 
+        #region DeviceType
         public Type DeviceType
         {
             get
             {
-                throw new NotImplementedException();
+                return _deviceType;
             }
             set
             {
-                throw new NotImplementedException();
+                if (value == null)
+                {
+                    throw new ArgumentNullException("DeviceType");
+                }
+                _deviceType = value;
             }
-        }
+        } private Type _deviceType;
+        #endregion //DeviceType
 
+        #region DeviceFactory
         public IDeviceFactory DeviceFactory
         {
             get
             {
-                throw new NotImplementedException();
+                return _deviceFacory;
             }
             set
             {
-                throw new NotImplementedException();
+                if (value == null)
+                {
+                    throw new ArgumentNullException("DeviceFactory");
+                }
+                _deviceFacory = value;
             }
-        }
+        } private IDeviceFactory _deviceFacory;
+        #endregion //DeviceFactory
 
+        #region DevicePersister
         public IDevicePersister DevicePersister
         {
             get
             {
-                throw new NotImplementedException();
+                return _devicePersister;
             }
             set
             {
-                throw new NotImplementedException();
+                if (value == null)
+                {
+                    throw new ArgumentNullException("DevicePersister");
+                }
+                _devicePersister = value;
             }
-        }
+        } private IDevicePersister _devicePersister;
+        #endregion //DevicePersister
 
+        #region DeviceSourceProvider
         public IDeviceSourceProvider DeviceSourceProvider
         {
             get
             {
-                throw new NotImplementedException();
+                return _deviceSourceProvider;
             }
             set
             {
-                throw new NotImplementedException();
+                if (value == null)
+                {
+                    throw new ArgumentNullException("DeviceSourceProvider");
+                }
+                _deviceSourceProvider = value;
             }
-        }
+        } private IDeviceSourceProvider _deviceSourceProvider;
+        #endregion //DeviceSourceProvider
 
+        #region Processor
         public ITaskProcessor Processor
         {
             get
             {
-                throw new NotImplementedException();
+                return _taskProcessor;
             }
             set
             {
-                throw new NotImplementedException();
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Processor");
+                }
+                _taskProcessor = value;
+
             }
-        }
+        } private ITaskProcessor _taskProcessor;
+        #endregion //Processor
 
     }
-     */
 }
