@@ -20,6 +20,7 @@ namespace C3.DPUTest
             return id;
         }
     }
+
     public class TDpu : DPUBase
     {
         public TDpu()
@@ -50,6 +51,7 @@ namespace C3.DPUTest
             d.Name = "D" + n++;
             d.Guid = deviceSource.Guid;
             d.StationGuid = deviceSource.StationGuid;
+            //d.Tasks = 
             return d;
         }
     }

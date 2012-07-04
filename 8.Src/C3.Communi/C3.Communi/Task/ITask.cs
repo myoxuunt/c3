@@ -5,6 +5,9 @@ using Xdgk.Common;
 namespace C3.Communi
 {
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface ITask
     {
         IDevice Device { get; set; }
@@ -20,5 +23,4 @@ namespace C3.Communi
         void Begin(ICommuniPort cp);
         void End(ICommuniPort cp);
     }
-
 }
