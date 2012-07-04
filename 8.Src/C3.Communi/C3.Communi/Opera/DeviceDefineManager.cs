@@ -1,5 +1,6 @@
-
 using System;
+using System.Xml;
+using System.IO;
 using Xdgk.Common;
 
 namespace C3.Communi
@@ -11,25 +12,25 @@ namespace C3.Communi
         /// </summary>
         NUnit.Core.Logger logger = NUnit.Core.InternalTrace.GetLogger(typeof(DeviceDefineManager));
 
-#region DeviceDefineCollection
+        #region DeviceDefineCollection
         /// <summary>
         /// 
         /// </summary>
         public DeviceDefineCollection DeviceDefineCollection
         {
-            get 
+            get
             {
                 if (_deviceDefineCollection == null)
                 {
                     _deviceDefineCollection = new DeviceDefineCollection();
                 }
-                return _deviceDefineCollection; 
+                return _deviceDefineCollection;
             }
         } private DeviceDefineCollection _deviceDefineCollection;
-#endregion //DeviceDefineCollection
+        #endregion //DeviceDefineCollection
 
 
-#region LoadFromFile
+        #region LoadFromFile
         /// <summary>
         /// 
         /// </summary>
@@ -51,7 +52,7 @@ namespace C3.Communi
                 return;
             }
 
-            foreach( XmlNode deviceDefineNode in deviceDefinesNode.ChildNodes )
+            foreach (XmlNode deviceDefineNode in deviceDefinesNode.ChildNodes)
             {
                 if (deviceDefineNode.Name == DeviceDefineNodeNames.DeviceDefine)
                 {
@@ -82,10 +83,10 @@ namespace C3.Communi
                 }
             }
         }
-#endregion //LoadFromFile
+        #endregion //LoadFromFile
 
 
-#region LoadFromPath
+        #region LoadFromPath
         /// <summary>
         /// 
         /// </summary>
@@ -100,7 +101,7 @@ namespace C3.Communi
                 this.LoadFromFile(file);
             }
         }
-#endregion //LoadFromPath
+        #endregion //LoadFromPath
 
 
     }

@@ -363,5 +363,36 @@ namespace C3.Communi
             return sourceConfigs;
         }
         #endregion //ReadSourceConfigs
+
+
+        #region BytesConverterManager
+        /// <summary>
+        /// 
+        /// </summary>
+        public BytesConverterManager BytesConverterManager
+        {
+            get
+            {
+                if (this._bytesConverterManager == null)
+                    this._bytesConverterManager = new BytesConverterManager();
+                return this._bytesConverterManager;
+            }
+        } private BytesConverterManager _bytesConverterManager;
+        #endregion //BytesConverterManager
+
+        #region CRCerManager
+        /// <summary>
+        /// 
+        /// </summary>
+        public CRCerManager CRCerManager
+        {
+            get
+            {
+                if (_crcerManager == null)
+                    _crcerManager = new CRCerManager();
+                return _crcerManager;
+            }
+        } private CRCerManager _crcerManager;
+        #endregion //CRCerManager
     }
 }

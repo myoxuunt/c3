@@ -1,18 +1,20 @@
-
 using System;
+using System.Xml;
+using Xdgk.Communi.Interface;
 using Xdgk.Common;
+using NLog;
 
 namespace C3.Communi
 {
-    public class MyOperaFactory 
+    public class MyOperaFactory
     {
 
-#region Members
+        #region Members
         /// <summary>
         /// 
         /// </summary>
-        //static private Logger log = InternalTrace.GetLogger(typeof(XmlOperaFactory));
-#endregion //Members
+        static private Logger log = LogManager.GetCurrentClassLogger();
+        #endregion //Members
 
         //#region XmlOperaFactory
         ///// <summary>
@@ -109,7 +111,7 @@ namespace C3.Communi
         //} private XmlNode _deviceDefinesNode;
         //#endregion //DeviceDefinesNode
 
-#region Create
+        #region Create
         /// <summary>
         /// 
         /// </summary>
@@ -149,9 +151,9 @@ namespace C3.Communi
             //}
             return null;
         }
-#endregion //Create
+        #endregion //Create
 
-#region Create
+        #region Create
         /// <summary>
         /// 
         /// </summary>
@@ -192,9 +194,9 @@ namespace C3.Communi
             log.Info("Create opera '{0}', receivepart count '{1}'", name, rps.Count);
             return opera;
         }
-#endregion //Create
+        #endregion //Create
 
-#region CreateReceivePart
+        #region CreateReceivePart
         /// <summary>
         /// 
         /// </summary>
@@ -206,7 +208,7 @@ namespace C3.Communi
             string str = GetAttribute(e, DeviceDefineNodeNames.ReceivePartDataLength);
             int rpLength = int.Parse(str);
 
-            string name = GetAttribute(e, DeviceDefineNodeNames.ReceivePartName,true);
+            string name = GetAttribute(e, DeviceDefineNodeNames.ReceivePartName, true);
 
             ReceivePart rp = new ReceivePart(name, rpLength);
 
@@ -231,9 +233,9 @@ namespace C3.Communi
             }
             return rp;
         }
-#endregion //CreateReceivePart
+        #endregion //CreateReceivePart
 
-#region CreateSendPart
+        #region CreateSendPart
         /// <summary>
         /// 
         /// </summary>
@@ -260,9 +262,9 @@ namespace C3.Communi
             sp.DataFieldManager.CRCer = crcer;
             return sp;
         }
-#endregion //CreateSendPart
+        #endregion //CreateSendPart
 
-#region GetCRCer
+        #region GetCRCer
         /// <summary>
         /// 获取sendpart或receivepart的crcer,如不存在返回null
         /// </summary>
@@ -274,7 +276,8 @@ namespace C3.Communi
             if (crcerNode != null)
             {
                 string name = crcerNode.Attributes["name"].Value;
-                ICRCer crcer = CommuniSoft.Default.CRCerManager.GetCRCer(name);
+                Soft soft = SoftManager.GetSoft();
+                ICRCer crcer = soft.CRCerManager.GetCRCer(name);
                 if (crcer == null)
                     throw new ConfigException("not find CRCer: " + name);
                 return crcer;
@@ -282,9 +285,9 @@ namespace C3.Communi
             return null;
 
         }
-#endregion //GetCRCer
+        #endregion //GetCRCer
 
-#region GetAttribute
+        #region GetAttribute
         /// <summary>
         /// 
         /// </summary>
@@ -296,16 +299,16 @@ namespace C3.Communi
             //return GetAttribute(el, name, false);
             return Xdgk.Common.XmlHelper.GetAttribute(el, name);
         }
-#endregion //GetAttribute
+        #endregion //GetAttribute
 
-#region GetAttribute
+        #region GetAttribute
         /// <summary>
         /// 
         /// </summary>
         /// <param name="el"></param>
         /// <param name="name"></param>
         /// <returns></returns>
-        static private string GetAttribute(XmlElement el, string name, bool canNull )
+        static private string GetAttribute(XmlElement el, string name, bool canNull)
         {
             //string str = el.GetAttribute(name);
             //if (!canNull)
@@ -317,9 +320,9 @@ namespace C3.Communi
             //return str;
             return Xdgk.Common.XmlHelper.GetAttribute(el, name, canNull);
         }
-#endregion //GetAttribute
+        #endregion //GetAttribute
 
-#region CreateDataField
+        #region CreateDataField
         /// <summary>
         /// 
         /// </summary>
@@ -403,7 +406,7 @@ namespace C3.Communi
             if (bytes != null)
                 df.Bytes = bytes;
 
-            if( df.IsMatchCheck &&
+            if (df.IsMatchCheck &&
                     (df.Bytes == null || df.Bytes.Length == 0))
             {
                 throw new Exception("must set bytes while matchCheck == true");
@@ -412,9 +415,9 @@ namespace C3.Communi
 
             return df;
         }
-#endregion //CreateDataField
+        #endregion //CreateDataField
 
-#region GetBytesConvert
+        #region GetBytesConvert
         /// <summary>
         /// 
         /// </summary>
@@ -422,7 +425,8 @@ namespace C3.Communi
         /// <returns></returns>
         static private IBytesConverter GetBytesConvert(string converterName, object[] args)
         {
-            BytesConverterManager bcm = CommuniSoft.Default.BytesConverterManager;
+            Soft soft = SoftManager.GetSoft();
+            BytesConverterManager bcm = soft.BytesConverterManager;
             //IBytesConverter bc = bcm.GetBytesConverter(convertName);
             IBytesConverter bc = bcm.CreateBytesConverter(converterName, args);
             if (bc == null)
@@ -436,7 +440,7 @@ namespace C3.Communi
             }
             return bc;
         }
-#endregion //GetBytesConvert
+        #endregion //GetBytesConvert
     }
 
 }
