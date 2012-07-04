@@ -104,7 +104,13 @@
     <Compile Include="Opera\ParseResult\DataErrorResult.cs" />
     <Compile Include="Opera\IOpera.cs" />
     <Compile Include="Opera\ParseResult\IParseResult.cs" />
+    <Compile Include="Task\CycleStrategyDefine.cs" />
+    <Compile Include="Task\ImmediateStrategyDefine.cs" />
+    <Compile Include="Task\StrategyDefine.cs" />
+    <Compile Include="Task\TaskDefine.cs" />
+    <Compile Include="Task\TaskDefineCollection.cs" />
     <Compile Include="Task\TaskFactory.cs" />
+    <Compile Include="Task\XmlTaskFactory.cs" />
     <Compile Include="Utils\KeyValue.cs" />
     <Compile Include="Utils\KeyValueCollection.cs" />
     <Compile Include="Opera\ParseResult\LengthErrorResult.cs" />

@@ -24,11 +24,11 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public virtual TaskFactory TaskFactory
+        public virtual ITaskFactory TaskFactory
         {
             get { return _taskFactory; }
             set { _taskFactory = value; }
-        } private TaskFactory _taskFactory;
+        } private ITaskFactory _taskFactory;
 
         /// <summary>
         /// 
