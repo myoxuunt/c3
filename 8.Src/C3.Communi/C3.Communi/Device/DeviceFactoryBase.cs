@@ -15,20 +15,24 @@ namespace C3.Communi
         {
             IDevice device = OnCreate(deviceSource);
 
-            TaskCollection tasks = TaskFactory.Create();
+            //TaskCollection tasks = TaskFactory.Create();
 
-            device.Tasks.Enqueue(tasks);
+            //device.Tasks.Enqueue(tasks);
+            TaskFactory.Create(device);
             return device;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public virtual ITaskFactory TaskFactory
+        abstract public ITaskFactory TaskFactory { get; set; }
+
+            /*
         {
             get { return _taskFactory; }
             set { _taskFactory = value; }
         } private ITaskFactory _taskFactory;
+             */
 
         /// <summary>
         /// 

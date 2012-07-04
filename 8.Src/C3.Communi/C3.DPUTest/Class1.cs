@@ -54,6 +54,18 @@ namespace C3.DPUTest
             //d.Tasks = 
             return d;
         }
+
+        public override ITaskFactory TaskFactory
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
 
     public class TDeviceSource : DeviceSourceBase

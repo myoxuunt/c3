@@ -15,9 +15,9 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="strategy"></param>
-        public TaskBase(Strategy strategy)
+        public TaskBase()
         {
-            this.Stragegy = strategy;
+            //this.Stragegy = strategy;
         }
         #endregion //TaskBase
 
@@ -368,5 +368,19 @@ namespace C3.Communi
         }
         #endregion //End
 
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class Task : TaskBase
+    {
+        public Task(IDevice device, IOpera opera, Strategy strategy, TimeSpan timeout)
+        {
+            this.Device = device;
+            this.Opera = opera;
+            this.Stragegy = strategy;
+            this.Timeout = timeout;
+        }
     }
 }

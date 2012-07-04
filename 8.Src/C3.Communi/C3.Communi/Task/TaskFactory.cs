@@ -6,6 +6,6 @@ namespace C3.Communi
 {
     public interface ITaskFactory
     {
-        TaskCollection Create();
+        TaskCollection Create(IDevice device);
     }
 }
