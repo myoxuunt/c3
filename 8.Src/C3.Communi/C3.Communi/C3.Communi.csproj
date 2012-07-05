@@ -101,9 +101,9 @@
     <Compile Include="Filter\IFilter.cs" />
     <Compile Include="IdentityParser\IIdentityParser.cs" />
     <Compile Include="Listener\XmlSocketListenBuilder.cs" />
-    <Compile Include="Opera\DeviceDefine.cs" />
-    <Compile Include="Opera\DeviceDefineCollection.cs" />
-    <Compile Include="Opera\DeviceDefineManager.cs" />
+    <Compile Include="Opera\OperaDefine.cs" />
+    <Compile Include="Opera\OperaDefineCollection.cs" />
+    <Compile Include="Opera\OperaDefineManager.cs" />
     <Compile Include="Opera\DeviceDefineNodeNames.cs" />
     <Compile Include="Opera\IOperaFactory.cs" />
     <Compile Include="Opera\MyOperaFactory.cs" />

@@ -26,7 +26,7 @@ namespace C3.DPUTest
         public TDpu()
         {
             this.DeviceType = typeof(TDevice);
-            this.DeviceFactory = new TDeviceFactory();
+            this.DeviceFactory = new TDeviceFactory(this);
             this.DevicePersister = new TDevicePersister();
             this.DeviceSourceProvider = new TDeviceSourceProvider();
             this.Processor = new Processor();
@@ -40,8 +40,13 @@ namespace C3.DPUTest
     /// <summary>
     /// 
     /// </summary>
-    public class TDeviceFactory : DeviceFactoryBase
+    public class TDeviceFactory : DeviceFactoryBaseXmlTask
     {
+        public TDeviceFactory(IDPU dpu)
+            : base(dpu, PathUtils.GetAssemblyDirectory ( typeof(TDeviceFactory).Assembly))
+        {
+        }
+
         static private int n = 0;
 
         public override IDevice OnCreate(IDeviceSource deviceSource)
@@ -52,19 +57,8 @@ namespace C3.DPUTest
             d.Guid = deviceSource.Guid;
             d.StationGuid = deviceSource.StationGuid;
             //d.Tasks = 
+            d.Dpu = this.Dpu;
             return d;
-        }
-
-        public override ITaskFactory TaskFactory
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 
@@ -112,7 +106,9 @@ namespace C3.DPUTest
 
         public override void OnProcess(ITask task, IParseResult pr)
         {
-            throw new NotImplementedException();
+            string s = string.Format("{0} - {1} - {2}",
+                DateTime.Now , task.Opera.Name , pr.ToString ());
+            Console.WriteLine(s);           
         }
     }
 

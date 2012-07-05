@@ -17,7 +17,7 @@ namespace C3.Communi
         TimeSpan Timeout { get; set; }
         IOpera Opera { get; set; }
 
-        TaskStatus Status { get; set; }
+        TaskStatus Status { get; /*set;*/ }
         TaskStatus Check();
 
         void Begin(ICommuniPort cp);

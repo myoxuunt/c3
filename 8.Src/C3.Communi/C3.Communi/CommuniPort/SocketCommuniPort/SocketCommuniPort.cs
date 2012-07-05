@@ -177,7 +177,10 @@ namespace C3.Communi
             }
             catch (Exception ex)
             {
-                //log.Error("SocketCommuniPort.BeginReceiveHelper exception:", ex);
+                // TODO: 2012-07-05 
+                // socket exception
+                //
+                log.Error("SocketCommuniPort.BeginReceiveHelper exception:", ex);
                 throw ex;
             }
         }

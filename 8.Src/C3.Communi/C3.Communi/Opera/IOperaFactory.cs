@@ -13,6 +13,6 @@ namespace C3.Communi
     /// </summary>
     public interface IOperaFactory
     {
-        IOpera Create(string operaName);
+        IOpera Create(string deviceType, string operaName);
     }
 }

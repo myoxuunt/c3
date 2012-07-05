@@ -6,6 +6,10 @@ namespace C3.Communi
 {
     abstract public class DeviceFactoryBase : IDeviceFactory
     {
+        public DeviceFactoryBase(IDPU dpu)
+        {
+            this.Dpu = dpu;
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -25,14 +29,26 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        abstract public ITaskFactory TaskFactory { get; set; }
-
-            /*
+        public IDPU Dpu
         {
-            get { return _taskFactory; }
-            set { _taskFactory = value; }
-        } private ITaskFactory _taskFactory;
-             */
+            get 
+            { 
+                return _dpu; 
+            }
+            set 
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Dpu");
+                }
+                _dpu = value; 
+            }
+        } private IDPU _dpu;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        abstract public ITaskFactory TaskFactory { get; set; }
 
         /// <summary>
         /// 
@@ -40,6 +56,30 @@ namespace C3.Communi
         /// <param name="deviceSource"></param>
         /// <returns></returns>
         abstract public IDevice OnCreate(IDeviceSource deviceSource);
+    }
+
+    abstract public class DeviceFactoryBaseXmlTask : DeviceFactoryBase
+    {
+        public DeviceFactoryBaseXmlTask(IDPU dpu, string configPath)
+            : base(dpu)
+        {
+            this._configPath = configPath;
+        }
+        string _configPath;
+        public override ITaskFactory TaskFactory
+        {
+            get
+            {
+                if (_taskFactory == null)
+                {
+                    _taskFactory = new XmlTaskFactory(_configPath);
+                }
+                return _taskFactory;
+            }
+            set
+            {
+            }
+        } private ITaskFactory _taskFactory;
     }
 
 }

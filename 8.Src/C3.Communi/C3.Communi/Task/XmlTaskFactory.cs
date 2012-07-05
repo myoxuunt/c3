@@ -32,12 +32,16 @@ namespace C3.Communi
         {
             TaskCollection tasks = new TaskCollection();
 
+            // TODO:
+            // 
+            // not find 
+            //
             foreach (TaskDefine td in TaskDefines)
             {
                 bool b = StringHelper.Equal(td.DeviceType, device.GetType().Name);
                 if (b)
                 {
-                    IOpera opera = this.OperaFactory.Create(td.OperaName);
+                    IOpera opera = this.OperaFactory.Create(td.DeviceType, td.OperaName);
 
                     Strategy strategy = td.StrategyDefine.Create();
                     Task t = new Task(device, opera, strategy, td.TimeOut);
@@ -59,7 +63,8 @@ namespace C3.Communi
                 if (_taskDefines == null)
                 {
                     _taskDefines = new TaskDefineCollection();
-                    _taskDefines.LoadFromFile(this.TaskConfigPath);
+                    string dir = System.IO.Path.Combine(this.TaskConfigPath, "Task\\task.xml");
+                    _taskDefines.LoadFromFile(dir);
                 }
                 return _taskDefines;
             }
@@ -70,7 +75,13 @@ namespace C3.Communi
         /// </summary>
         public IOperaFactory OperaFactory
         {
-            get { return _operaFactory; }
+            get {
+                if (_operaFactory == null)
+                {
+                    string dir = System.IO.Path.Combine(this.TaskConfigPath, "DeviceDefine");
+                    _operaFactory = new XmlOperaFactory(dir);
+                }
+                return _operaFactory; }
             set { _operaFactory = value; }
         } private IOperaFactory _operaFactory;
 

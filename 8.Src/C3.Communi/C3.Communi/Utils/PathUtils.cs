@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection ;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,6 +10,13 @@ namespace C3.Communi
     {
         private PathUtils()
         {
+        }
+
+        static public string GetAssemblyDirectory(Assembly assembly)
+        {
+            string location = assembly.Location;
+            string dir = Path.GetDirectoryName(location);
+            return dir;
         }
 
         static public string SocketListenerConfigFileName

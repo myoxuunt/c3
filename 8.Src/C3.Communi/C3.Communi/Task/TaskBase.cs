@@ -52,7 +52,11 @@ namespace C3.Communi
                 {
                     throw new ArgumentNullException("stragegy can not null");
                 }
-                _stragegy = value;
+                if (_stragegy != value)
+                {
+                    _stragegy = value;
+                    value.Owning = this;
+                }
             }
         } private Strategy _stragegy;
         #endregion //Stragegy
@@ -144,11 +148,22 @@ namespace C3.Communi
         public TaskStatus Status
         {
             get { return _status; }
-            set
+            protected set
             {
                 if (_status != value)
                 {
                     _status = value;
+                    if (_status == TaskStatus.Executed)
+                    {
+                        if (this.Stragegy.CanRemove)
+                        {
+                            _status = TaskStatus.Completed;
+                        }
+                        else
+                        {
+                            _status = TaskStatus.Wating;
+                        }
+                    }
                 }
             }
         } private TaskStatus _status;
@@ -347,8 +362,9 @@ namespace C3.Communi
                 IParseResult pr = this.Opera.ParseReceivedBytes(this.Device, bytes);
                 this.LastParseResult = pr;
 
-                this.Status = TaskStatus.Executed;
 
+                //
+                //
                 CommuniDetail cd = new CommuniDetail(
                     this.Opera.Text,
                     LastSendBytes,
@@ -358,8 +374,11 @@ namespace C3.Communi
                     pr.ToString(),
                     pr.IsSuccess
                 );
-
                 this.Device.CommuniDetails.Add(cd);
+
+                // 
+                //
+                this.Status = TaskStatus.Executed;
             }
             else
             {

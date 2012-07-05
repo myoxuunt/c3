@@ -181,6 +181,7 @@ namespace C3.Communi
                     //device.Station = st;
                     //st.Devices.Add(device);
                     station.Devices.Add(device);
+                    device.Station = station;
                 }
             }
         }
