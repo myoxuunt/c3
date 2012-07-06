@@ -17,6 +17,9 @@ namespace C3.Communi
         #endregion //Members
 
         #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
         internal Soft()
         {
             log.Info("Soft Constructor");

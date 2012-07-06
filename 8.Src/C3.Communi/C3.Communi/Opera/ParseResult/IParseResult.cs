@@ -20,8 +20,4 @@ namespace C3.Communi
 
         byte[] ParseBytes { get; set; }
     }
-
-    public class ParseResultCollection : Collection<IParseResult>
-    {
-    }
 }

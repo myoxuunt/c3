@@ -114,7 +114,14 @@
     <Compile Include="Opera\ParseResult\DataErrorResult.cs" />
     <Compile Include="Opera\IOpera.cs" />
     <Compile Include="Opera\ParseResult\IParseResult.cs" />
+    <Compile Include="Opera\ParseResult\MultiErrorResult.cs" />
+    <Compile Include="Opera\ParseResult\ParseResultCollection.cs" />
     <Compile Include="Opera\XmlOperaFactory.cs" />
+    <Compile Include="strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>strings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Task\CycleStrategyDefine.cs" />
     <Compile Include="Task\ImmediateStrategyDefine.cs" />
     <Compile Include="Task\StrategyDefine.cs" />
@@ -144,7 +151,6 @@
     <Compile Include="Station\StationPersisterBase.cs" />
     <Compile Include="Station\StationSourceBase.cs" />
     <Compile Include="Station\StationSourceProviderBase.cs" />
-    <Compile Include="strings.Designer.cs" />
     <Compile Include="Task\ITask.cs" />
     <Compile Include="Task\ITaskProcessor.cs" />
     <Compile Include="Task\Strategy.cs" />
@@ -189,6 +195,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

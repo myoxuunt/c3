@@ -120,74 +120,8 @@
   <data name="Actual" xml:space="preserve">
     <value>实际</value>
   </data>
-  <data name="Expected" xml:space="preserve">
-    <value>期望</value>
-  </data>
-  <data name="LengthErrorResult" xml:space="preserve">
-    <value>长度错误</value>
-  </data>
-  <data name="CRCErrorResult" xml:space="preserve">
-    <value>校验错误</value>
-  </data>
-  <data name="SuccessResult" xml:space="preserve">
-    <value>成功</value>
-  </data>
-  <data name="Converter" xml:space="preserve">
-    <value>转换器</value>
-  </data>
-  <data name="ConvertErrorResult" xml:space="preserve">
-    <value>转换错误</value>
-  </data>
-  <data name="DataErrorResult" xml:space="preserve">
-    <value>数据错误</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>名称</value>
-  </data>
-  <data name="Value" xml:space="preserve">
-    <value>数值</value>
-  </data>
-  <data name="SelectADevice" xml:space="preserve">
-    <value>请选中一个设备！</value>
-  </data>
   <data name="AddressErrorResult" xml:space="preserve">
     <value>地址错误</value>
-  </data>
-  <data name="Cycle" xml:space="preserve">
-    <value>循环</value>
-  </data>
-  <data name="Immediate" xml:space="preserve">
-    <value>立即</value>
-  </data>
-  <data name="CommuniLogTitle" xml:space="preserve">
-    <value>通讯记录 - {0}({1})</value>
-  </data>
-  <data name="Opera" xml:space="preserve">
-    <value>操作</value>
-  </data>
-  <data name="Received" xml:space="preserve">
-    <value>接收</value>
-  </data>
-  <data name="Result" xml:space="preserve">
-    <value>结果</value>
-  </data>
-  <data name="Send" xml:space="preserve">
-    <value>发送</value>
-  </data>
-  <data name="Time" xml:space="preserve">
-    <value>时间</value>
-  </data>
-  <data name="CommuniDetailAll" xml:space="preserve">
-    <value>全部记录</value>
-  </data>
-  <data name="CommuniDetailFail" xml:space="preserve">
-    <value>仅失败记录</value>
-  </data>
-  <data name="CommuniDetailSuccess" xml:space="preserve">
-    <value>仅成功记录</value>
-  </data>
-  <data name="ExistAddress" xml:space="preserve">
-    <value>已经存在 '{0}' 地址 '{1}'</value>
   </data>
   <data name="ByIP" xml:space="preserve">
     <value>通过IP地址</value>
@@ -198,22 +132,88 @@
   <data name="ByRemotePort" xml:space="preserve">
     <value>通过远程端口</value>
   </data>
+  <data name="CommuniDetailAll" xml:space="preserve">
+    <value>全部记录</value>
+  </data>
+  <data name="CommuniDetailFail" xml:space="preserve">
+    <value>仅失败记录</value>
+  </data>
+  <data name="CommuniDetailSuccess" xml:space="preserve">
+    <value>仅成功记录</value>
+  </data>
+  <data name="CommuniLogTitle" xml:space="preserve">
+    <value>通讯记录 - {0}({1})</value>
+  </data>
+  <data name="Converter" xml:space="preserve">
+    <value>转换器</value>
+  </data>
+  <data name="ConvertErrorResult" xml:space="preserve">
+    <value>转换错误</value>
+  </data>
+  <data name="CRCErrorResult" xml:space="preserve">
+    <value>校验错误</value>
+  </data>
+  <data name="Cycle" xml:space="preserve">
+    <value>循环</value>
+  </data>
+  <data name="DataErrorResult" xml:space="preserve">
+    <value>数据错误</value>
+  </data>
   <data name="Device" xml:space="preserve">
     <value>设备</value>
+  </data>
+  <data name="ExistAddress" xml:space="preserve">
+    <value>已经存在 '{0}' 地址 '{1}'</value>
   </data>
   <data name="ExistStationName" xml:space="preserve">
     <value>站名已经存在 '{0}'</value>
   </data>
+  <data name="Expected" xml:space="preserve">
+    <value>期望</value>
+  </data>
+  <data name="Immediate" xml:space="preserve">
+    <value>立即</value>
+  </data>
   <data name="InvalidIPAddress" xml:space="preserve">
     <value>无效的IP地址</value>
   </data>
+  <data name="LengthErrorResult" xml:space="preserve">
+    <value>长度错误</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="Opera" xml:space="preserve">
+    <value>操作</value>
+  </data>
   <data name="PleaseSelectDeviceType" xml:space="preserve">
     <value>请选择设备类型</value>
+  </data>
+  <data name="Received" xml:space="preserve">
+    <value>接收</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>结果</value>
+  </data>
+  <data name="SelectADevice" xml:space="preserve">
+    <value>请选中一个设备！</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>发送</value>
   </data>
   <data name="Station" xml:space="preserve">
     <value>站点</value>
   </data>
   <data name="StationNameCanNotEmpty" xml:space="preserve">
     <value>站名不能为空</value>
+  </data>
+  <data name="SuccessResult" xml:space="preserve">
+    <value>成功</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>时间</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>数值</value>
   </data>
 </root>

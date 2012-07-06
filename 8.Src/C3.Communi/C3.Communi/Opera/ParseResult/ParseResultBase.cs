@@ -6,9 +6,6 @@ namespace C3.Communi
 {
     abstract public class ParseResultBase : IParseResult
     {
-
-        #region IParseResult ≥…‘±
-
         #region IsSuccess
         /// <summary>
         /// 
@@ -27,7 +24,6 @@ namespace C3.Communi
         #endregion //IsSuccess
 
         #region Name
-
         /// <summary>
         /// 
         /// </summary>
@@ -35,6 +31,10 @@ namespace C3.Communi
         {
             get
             {
+                if (_name == null)
+                {
+                    _name = string.Empty;
+                }
                 return _name;
             }
             set
@@ -83,7 +83,14 @@ namespace C3.Communi
         } private byte[] _parseBytes;
         #endregion //ParseBytes
 
-        #endregion
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class HasNotReceivedPartError : ParseResultBase 
+    {
+
     }
 
 }

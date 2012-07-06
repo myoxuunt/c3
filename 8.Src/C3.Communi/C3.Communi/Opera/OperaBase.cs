@@ -47,7 +47,7 @@ namespace C3.Communi
         /// <returns></returns>
         abstract public IParseResult OnParseReceivedBytes(IDevice device, byte[] received);
 
-#region IOpera 成员
+        #region IOpera 成员
 
         /// <summary>
         /// 
@@ -82,9 +82,9 @@ namespace C3.Communi
             {
                 _text = value;
             }
-        } private string _text; 
+        } private string _text;
 
-#endregion
+        #endregion
     }
 
 }
