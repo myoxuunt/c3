@@ -84,13 +84,4 @@ namespace C3.Communi
         #endregion //ParseBytes
 
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class HasNotReceivedPartError : ParseResultBase 
-    {
-
-    }
-
 }
