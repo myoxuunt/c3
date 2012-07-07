@@ -206,5 +206,19 @@ namespace C3.Communi
         } private Guid _guid;
         #endregion //Guid
 
+
+
+        public object Tag
+        {
+            get
+            {
+                return _tag;
+            }
+            set
+            {
+                _tag = value;
+            }
+        } private object _tag;
+
     }
 }

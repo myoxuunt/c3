@@ -14,6 +14,13 @@ namespace C3
         public frmMain()
         {
             InitializeComponent();
+
+            HardwareTreeView t = new HardwareTreeView();
+            t.Hardware = App.Soft.Hardware;
+            t.Bind();
+            t.Location = new Point(0, 40);
+            this.Controls.Add(t);
+
         }
 
         private C3App App
@@ -35,7 +42,7 @@ namespace C3
             object o2 = soft.Hardware;
             int n = soft.Hardware.Stations.Count;
 
-            n= soft.SocketListenerManager.SocketListeners.Count;
+            n = soft.SocketListenerManager.SocketListeners.Count;
 
             this.Text = n.ToString();
 
@@ -59,7 +66,10 @@ namespace C3
         {
             frmHardware f = new frmHardware(C3App.App.Soft.Hardware.Stations[0]);
             f.ShowDialog();
+            //this.treeView1 
         }
+
+
 
     }
 }

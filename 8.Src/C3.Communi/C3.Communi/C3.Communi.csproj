@@ -113,6 +113,7 @@
     <Compile Include="Opera\ParseResult\CRCErrorResult.cs" />
     <Compile Include="Opera\ParseResult\DataErrorResult.cs" />
     <Compile Include="Opera\IOpera.cs" />
+    <Compile Include="Opera\ParseResult\HasNotReceivedPartError.cs" />
     <Compile Include="Opera\ParseResult\IParseResult.cs" />
     <Compile Include="Opera\ParseResult\MultiErrorResult.cs" />
     <Compile Include="Opera\ParseResult\ParseResultCollection.cs" />

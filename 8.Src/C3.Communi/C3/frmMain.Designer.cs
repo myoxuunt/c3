@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("iuiuiuiui");
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -49,6 +50,7 @@
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tssListenPort = new System.Windows.Forms.ToolStripStatusLabel();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.ucSpus1 = new C3.UCSpus();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -83,25 +85,25 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
             // 
             // mnuExit
             // 
             this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(152, 22);
+            this.mnuExit.Size = new System.Drawing.Size(136, 22);
             this.mnuExit.Text = "退出";
             this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
             // 
             // mnuAddinManager
             // 
             this.mnuAddinManager.Name = "mnuAddinManager";
-            this.mnuAddinManager.Size = new System.Drawing.Size(152, 22);
+            this.mnuAddinManager.Size = new System.Drawing.Size(136, 22);
             this.mnuAddinManager.Text = "插件管理(P)";
             // 
             // mnuTaskManage
             // 
             this.mnuTaskManage.Name = "mnuTaskManage";
-            this.mnuTaskManage.Size = new System.Drawing.Size(152, 22);
+            this.mnuTaskManage.Size = new System.Drawing.Size(136, 22);
             this.mnuTaskManage.Text = "任务管理(&T)";
             // 
             // mnuView
@@ -192,7 +194,7 @@
             // mnuAbout
             // 
             this.mnuAbout.Name = "mnuAbout";
-            this.mnuAbout.Size = new System.Drawing.Size(152, 22);
+            this.mnuAbout.Size = new System.Drawing.Size(113, 22);
             this.mnuAbout.Text = "关于(&A)";
             this.mnuAbout.Click += new System.EventHandler(this.mnuAbout_Click);
             // 
@@ -214,11 +216,22 @@
             this.tssListenPort.Size = new System.Drawing.Size(109, 17);
             this.tssListenPort.Text = "toolStripStatusLabel1";
             // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(622, 62);
+            this.treeView1.Name = "treeView1";
+            treeNode1.Name = "节点0";
+            treeNode1.Text = "iuiuiuiui";
+            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            this.treeView1.Size = new System.Drawing.Size(121, 97);
+            this.treeView1.TabIndex = 9;
+            // 
             // ucSpus1
             // 
-            this.ucSpus1.Location = new System.Drawing.Point(27, 38);
+            this.ucSpus1.Location = new System.Drawing.Point(176, 196);
             this.ucSpus1.Name = "ucSpus1";
-            this.ucSpus1.Size = new System.Drawing.Size(604, 389);
+            this.ucSpus1.Size = new System.Drawing.Size(589, 291);
             this.ucSpus1.SPUs = null;
             this.ucSpus1.TabIndex = 8;
             // 
@@ -227,6 +240,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(777, 534);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.ucSpus1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -266,6 +280,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tssListenPort;
         private UCSpus ucSpus1;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 

@@ -10,13 +10,15 @@ namespace C3.Communi
     /// </summary>
     public class SocketListener : TcpListener
     {
+        #region Members
+
         static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// 
         /// </summary>
         public event EventHandler ConnectedEvent;
-
+        #endregion //
 
         #region NewSocket
         /// <summary>
@@ -28,11 +30,7 @@ namespace C3.Communi
         } private Socket _newSocket;
         #endregion //NewSocket
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //private TcpListener _tcpListener;
-
+        #region IsListening
         /// <summary>
         /// 
         /// </summary>
@@ -40,6 +38,7 @@ namespace C3.Communi
         {
             get { return this.Active; }
         }
+        #endregion //IsListening
 
         #region SocketListener
         /// <summary>
@@ -54,15 +53,31 @@ namespace C3.Communi
         }
         #endregion //SocketListener
 
+        #region Start
         /// <summary>
         /// 
         /// </summary>
         public new void Start()
         {
-            base.Start();
+            try
+            {
+                base.Start();
+            }
+            catch (SocketException socketEx)
+            { 
+                string msg = string.Format (
+                    "listen port '{0}' fail", 
+                    this.LocalEndpoint
+                    );
+
+                C3Exception c3ex = new C3Exception(msg, socketEx);
+                throw c3ex;
+            }
             this.BeginAcceptSocketHelper();
         }
+        #endregion //Start
 
+        #region BeginAcceptSocketHelper
         /// <summary>
         /// 
         /// </summary>
@@ -79,6 +94,7 @@ namespace C3.Communi
             //}
             
         }
+        #endregion //BeginAcceptSocketHelper
 
         #region BeginAcceptSocketCallback
         /// <summary>

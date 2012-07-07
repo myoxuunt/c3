@@ -4,7 +4,7 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public interface IDevice
+    public interface IDevice : ITag 
     {
         Int64 Address { get; set; }
         string Name { get; set; }
@@ -21,6 +21,8 @@ namespace C3.Communi
         Guid Guid { get; set; }
         Guid StationGuid { get; set; }
         CommuniDetailCollection CommuniDetails { get; set; }
+
+        string Text { get; set; }
 
     }
 

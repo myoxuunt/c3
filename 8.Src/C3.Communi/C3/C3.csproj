@@ -57,6 +57,16 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="HardwareTreeView\DeviceTreeNode.cs" />
+    <Compile Include="HardwareTreeView\HardwareTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HardwareTreeView\StationTreeNode.cs" />
+    <Compile Include="Icons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Icons.resx</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmHardware.resx">
@@ -65,6 +75,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Icons.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -102,6 +117,12 @@
       <Project>{C66E606F-39F5-4B29-8187-0C6C454EA245}</Project>
       <Name>C3.Communi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Res\Connect.ico" />
+    <Content Include="Res\Device.ico" />
+    <Content Include="Res\Disconnect.ico" />
+    <Content Include="Res\Empty.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Forms\" />

@@ -38,7 +38,13 @@ namespace C3.Communi
             }
             set
             {
-                _name = value;
+                if (_name != value)
+                {
+                    _name = value;
+                    // for reset text
+                    //
+                    _text = null;
+                }
             }
         } private string _name;
         #endregion //Name
@@ -187,7 +193,6 @@ namespace C3.Communi
         } private CommuniDetailCollection _communiDetails;
         #endregion //CommuniDetails
 
-
         #region Guid
         /// <summary>
         /// 
@@ -230,5 +235,48 @@ namespace C3.Communi
         } private Guid _stationGuid;
         #endregion //StationGuid
 
+        #region Text
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Text
+        {
+            get
+            {
+                if (_text == null)
+                {
+                    if (this.Name.Length > 0)
+                    {
+                        _text = string.Format("{0}({1})", this.Name, this.GetType().Name);
+                    }
+                    else
+                    {
+                        _text = string.Format("({0})", this.GetType().Name);
+                    }
+                }
+                return _text;
+            }
+            set
+            {
+                _text = value;
+            }
+        } private string _text;
+        #endregion //Text
+
+        #region Tag 
+
+        public object Tag
+        {
+            get
+            {
+                return _tag;
+            }
+            set
+            {
+                _tag = value;
+            }
+        } private object _tag;
+
+        #endregion //
     }
 }

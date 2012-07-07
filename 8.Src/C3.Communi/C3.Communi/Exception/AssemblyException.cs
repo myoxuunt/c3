@@ -42,4 +42,24 @@ namespace C3.Communi
         {
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class C3Exception : Exception
+    {
+        public C3Exception(string message)
+            : base(message)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public C3Exception(string message, Exception innerException)
+            : base(message, innerException)
+        { }
+    }
 }
