@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Text;
 
@@ -123,7 +124,15 @@ namespace C3.Communi
                 if (_communiPort != value)
                 {
                     _communiPort = value;
-                    OnCommuniPortChanged(EventArgs.Empty);
+                    if (Soft.IsUseUISynchronizationContext)
+                    {
+                        SendOrPostCallback d = new SendOrPostCallback(OnCommuniPortChanged);
+                        Soft.UISynchronizationContext.Post( d, EventArgs.Empty );
+                    }
+                    else
+                    {
+                        OnCommuniPortChanged(EventArgs.Empty);
+                    }
                 }
             }
         } private ICommuniPort _communiPort;
@@ -134,11 +143,12 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="e"></param>
-        private void OnCommuniPortChanged(EventArgs e)
+        private void OnCommuniPortChanged(object e)
         {
+            EventArgs args = e as EventArgs;
             if (this.CommuniPortChanged != null)
             {
-                this.CommuniPortChanged ( this,e);
+                this.CommuniPortChanged(this, args);
             }
         }
         #endregion //OnCommuniPortChanged

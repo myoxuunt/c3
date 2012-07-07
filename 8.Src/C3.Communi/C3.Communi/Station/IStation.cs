@@ -18,6 +18,7 @@ namespace C3.Communi
         ICommuniPortConfig CommuniPortConfig{ get; set; }
         IStationSource StationSource { get; set; }
         StationCollection Stations { get; set; }
+        event EventHandler CommuniPortChanged;
     }
 
 }

@@ -1,16 +1,14 @@
 ﻿using System;
+using System.Threading;
 using System.Xml;
-using System.Collections.Specialized;
-using System.Collections.ObjectModel;
-using System.Collections;
-using System.Text;
-using System.Configuration;
-using System.Windows.Forms;
 
 namespace C3.Communi
 {
+    using Timer = System.Windows.Forms.Timer;
+
     public class Soft
     {
+
         #region Members
         static private NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
         private Timer _timer;
@@ -55,7 +53,7 @@ namespace C3.Communi
         #region CommuniPortManager
         public CommuniPortManager CommuniPortManager
         {
-            get 
+            get
             {
                 if (_communiPortManager == null)
                 {
@@ -127,7 +125,7 @@ namespace C3.Communi
         {
             TaskStatus status = current.Check();
 
-            if ( status == TaskStatus.Timeout )
+            if (status == TaskStatus.Timeout)
             {
                 ICommuniPort cp = GetCommuniPort(current);
                 current.End(cp);
@@ -171,16 +169,16 @@ namespace C3.Communi
             {
                 ITask head = tasks.Dequeue();
 
-                TaskStatus status = head.Check ();
+                TaskStatus status = head.Check();
 
-                if ( status == TaskStatus.Ready )
+                if (status == TaskStatus.Ready)
                 {
                     ICommuniPort cp = GetCommuniPort(head);
                     if ((cp != null) &&
                         (!cp.IsOccupy))
                     {
 
-                        IDevice device =head.Device;
+                        IDevice device = head.Device;
                         head.Begin(cp);
 
                         device.CurrentTask = head;
@@ -240,7 +238,7 @@ namespace C3.Communi
         #region ErrorManager
         public ErrorManager ErrorManager
         {
-            get 
+            get
             {
                 if (_errorManager == null)
                 {
@@ -309,7 +307,7 @@ namespace C3.Communi
             }
         }
         #endregion //DPUs
-        
+
         #region HardwareFactory
         /// <summary>
         /// 
@@ -398,5 +396,39 @@ namespace C3.Communi
             }
         } private CRCerManager _crcerManager;
         #endregion //CRCerManager
+
+        #region IsUseUISynchronizationContext
+        /// <summary>
+        /// 
+        /// </summary>
+        static public bool IsUseUISynchronizationContext
+        {
+            get 
+            { 
+                return _isUseUISynchronizationContext; 
+            }
+            set
+            {
+                _isUseUISynchronizationContext = value;
+            }
+        } static private bool _isUseUISynchronizationContext;
+        #endregion //IsUseUISynchronizationContext
+
+        #region UISynchronizationContext
+        /// <summary>
+        /// 获取或设置UI线程上下文
+        /// </summary>
+        static public SynchronizationContext UISynchronizationContext
+        {
+            get
+            {
+                return _uiSynchronizationContext;
+            }
+            set
+            {
+                _uiSynchronizationContext = value;
+            }
+        } static private SynchronizationContext _uiSynchronizationContext;
+        #endregion //UISynchronizationContext
     }
 }

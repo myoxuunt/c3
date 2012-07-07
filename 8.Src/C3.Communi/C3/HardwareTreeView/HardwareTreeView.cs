@@ -55,6 +55,11 @@ namespace C3
                 this.Nodes.Add(stationNode);
             }
         }
+
+        void a()
+        {
+            //this.Invoke (
+        }
         #endregion //Bind
     }
 }

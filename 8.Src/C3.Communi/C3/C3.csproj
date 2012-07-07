@@ -61,6 +61,7 @@
     <Compile Include="HardwareTreeView\HardwareTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="HardwareTreeView\IconNames.cs" />
     <Compile Include="HardwareTreeView\StationTreeNode.cs" />
     <Compile Include="Icons.Designer.cs">
       <AutoGen>True</AutoGen>
