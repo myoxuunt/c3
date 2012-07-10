@@ -125,27 +125,51 @@ namespace C3.Communi
         {
             TaskStatus status = current.Check();
 
-            if (status == TaskStatus.Timeout)
+            if (!(current.Status == TaskStatus.Executing ||
+                current.Status == TaskStatus.Timeout ))
             {
-                ICommuniPort cp = GetCommuniPort(current);
-                current.End(cp);
+                string s = string.Format("status must be Executing, current is '{0}'", status);
+                throw new InvalidOperationException(s);
+            }
 
-                IParseResult pr = current.LastParseResult;
+            //if (status == TaskStatus.Timeout)
+            switch ( status )
+            {
+                case TaskStatus.Timeout:
+                    {
+                        ICommuniPort cp = GetCommuniPort(current);
+                        current.End(cp);
 
-                ITaskProcessor processor = GetTaskProcessor(current);
-                processor.Process(current, pr);
+                        IParseResult pr = current.LastParseResult;
 
-                // clear current task
-                //
-                IDevice device = current.Device;
-                device.CurrentTask = null;
+                        ITaskProcessor processor = GetTaskProcessor(current);
+                        processor.Process(current, pr);
 
-                //
-                //
-                if (current.Status == TaskStatus.Wating)
-                {
-                    device.Tasks.Enqueue(current);
-                }
+                        // clear current task
+                        //
+                        IDevice device = current.Device;
+                        device.CurrentTask = null;
+
+                        //
+                        //
+                        if (current.Status == TaskStatus.Wating)
+                        {
+                            device.Tasks.Enqueue(current);
+                        }
+                    }
+                    break;
+
+                case TaskStatus.Executing :
+                    break;
+
+                default:
+                    {
+                        // TODO:
+                        //
+                        // clear
+                        //
+                    }
+                    break;
             }
         }
         #endregion //Do
@@ -411,7 +435,7 @@ namespace C3.Communi
             {
                 _isUseUISynchronizationContext = value;
             }
-        } static private bool _isUseUISynchronizationContext;
+        } static private bool _isUseUISynchronizationContext=true;
         #endregion //IsUseUISynchronizationContext
 
         #region UISynchronizationContext
@@ -422,6 +446,10 @@ namespace C3.Communi
         {
             get
             {
+                if (_uiSynchronizationContext == null)
+                {
+                    _uiSynchronizationContext = SynchronizationContext.Current;
+                }
                 return _uiSynchronizationContext;
             }
             set
@@ -430,5 +458,28 @@ namespace C3.Communi
             }
         } static private SynchronizationContext _uiSynchronizationContext;
         #endregion //UISynchronizationContext
+
+        #region Post
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sendOrPostCallback"></param>
+        /// <param name="eventArgs"></param>
+        internal static void Post(SendOrPostCallback sendOrPostCallback, object state)
+        {
+            if (UISynchronizationContext == null)
+            {
+                string s = "Soft.UISynchronizationContext is null";
+                throw new InvalidOperationException(s);
+            }
+
+            if (sendOrPostCallback == null)
+            {
+                throw new ArgumentNullException("sendOrPostCallback");
+            }
+
+            UISynchronizationContext.Post(sendOrPostCallback, state);
+        }
+        #endregion //Post
     }
 }

@@ -63,18 +63,21 @@ namespace C3.Communi
         /// <param name="key"></param>
         private void SetImageKey(string key)
         {
-            if (this.TreeView != null)
-            {
-                Console.WriteLine(this.TreeView.InvokeRequired);
-                if (this.TreeView.InvokeRequired)
-                {
-                }
-                else
-                {
-                    this.ImageKey = key;
-                    this.SelectedImageKey = key;
-                }
-            }
+            //if (this.TreeView != null)
+            //{
+            //    Console.WriteLine(this.TreeView.InvokeRequired);
+            //    if (this.TreeView.InvokeRequired)
+            //    {
+            //    }
+            //    else
+            //    {
+            //        this.ImageKey = key;
+            //        this.SelectedImageKey = key;
+            //    }
+            //}
+
+            this.ImageKey = key;
+            this.SelectedImageKey = key;
         }
 
         #region Station

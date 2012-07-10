@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NLog;
 
 namespace C3.Communi
 {
@@ -9,6 +10,11 @@ namespace C3.Communi
     /// </summary>
     public class TaskBase : ITask
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static private Logger log = LogManager.GetCurrentClassLogger();
 
         #region TaskBase
         /// <summary>
@@ -152,7 +158,10 @@ namespace C3.Communi
             {
                 if (_status != value)
                 {
+                    TaskStatus old = this._status;
+
                     _status = value;
+
                     if (_status == TaskStatus.Executed)
                     {
                         if (this.Stragegy.CanRemove)
@@ -164,6 +173,10 @@ namespace C3.Communi
                             _status = TaskStatus.Wating;
                         }
                     }
+
+                    string msg = string.Format("task changed: from '{0}' -> '{1}'", old, _status);
+                    log.Debug(msg);                   
+
                 }
             }
         } private TaskStatus _status;

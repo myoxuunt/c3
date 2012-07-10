@@ -126,8 +126,7 @@ namespace C3.Communi
                     _communiPort = value;
                     if (Soft.IsUseUISynchronizationContext)
                     {
-                        SendOrPostCallback d = new SendOrPostCallback(OnCommuniPortChanged);
-                        Soft.UISynchronizationContext.Post( d, EventArgs.Empty );
+                        Soft.Post(this.OnCommuniPortChangedCallBack, EventArgs.Empty);
                     }
                     else
                     {
@@ -138,6 +137,21 @@ namespace C3.Communi
         } private ICommuniPort _communiPort;
         #endregion //CommuniPort
 
+        #region
+        private SendOrPostCallback OnCommuniPortChangedCallBack
+        {
+            get
+            {
+                if (_onCommuniPortChangedCallBack == null)
+                {
+                    _onCommuniPortChangedCallBack = new SendOrPostCallback(this.OnCommuniPortChanged);
+                }
+                return _onCommuniPortChangedCallBack;
+            }
+        } private SendOrPostCallback _onCommuniPortChangedCallBack;
+        #endregion //
+
+
         #region OnCommuniPortChanged
         /// <summary>
         /// 
@@ -145,10 +159,19 @@ namespace C3.Communi
         /// <param name="e"></param>
         private void OnCommuniPortChanged(object e)
         {
-            EventArgs args = e as EventArgs;
+            EventArgs e2 = e as EventArgs;
+            this.OnCommuniPortChanged(e2);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="e"></param>
+        private void OnCommuniPortChanged(EventArgs e)
+        {
             if (this.CommuniPortChanged != null)
             {
-                this.CommuniPortChanged(this, args);
+                this.CommuniPortChanged(this, e);
             }
         }
         #endregion //OnCommuniPortChanged
