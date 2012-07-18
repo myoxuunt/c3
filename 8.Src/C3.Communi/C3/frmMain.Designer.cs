@@ -78,7 +78,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(777, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // mnuFile
             // 
@@ -278,7 +277,6 @@
             this.sc2.Size = new System.Drawing.Size(514, 463);
             this.sc2.SplitterDistance = 234;
             this.sc2.TabIndex = 0;
-            this.sc2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
             // toolStrip1
             // 

@@ -164,15 +164,5 @@ namespace C3
                 //f.ShowDialog(this);
             }
         }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
-        }
     }
 }
