@@ -12,20 +12,69 @@ namespace C3
     public partial class frmMain : Form
     {
 
-        private HardwareTreeView _hardwareTreeView;
+        private HardwareTreeView HardwareTreeView
+        {
+            get
+            {
+                if (_hardwareTreeView == null)
+                {
+                    _hardwareTreeView = new HardwareTreeView();
+                    _hardwareTreeView.Hardware = App.Soft.Hardware;
+                    _hardwareTreeView.Dock = DockStyle.Fill;
+                    _hardwareTreeView.AfterSelect += new TreeViewEventHandler(t_AfterSelect);
+                }
+                return _hardwareTreeView;
+            }
+        } private HardwareTreeView _hardwareTreeView;
+
+
+        #region UCTaskViewer
+        /// <summary>
+        /// 
+        /// </summary>
+        public UCTaskViewer UCTaskViewer
+        {
+            get
+            {
+                if (_uCTaskViewer == null)
+                {
+                    _uCTaskViewer = new UCTaskViewer();
+                    _uCTaskViewer.Dock = DockStyle.Fill;
+                }
+                return _uCTaskViewer;
+            }
+        } private UCTaskViewer _uCTaskViewer;
+        #endregion //UCTaskViewer
+
+
         public frmMain()
         {
             InitializeComponent();
+            Init();
+        }
+            
+        /// <summary>
+        /// 
+        /// </summary>
+        private void Init()
+        {
+            this.sc1.Panel1.Controls.Add(this.HardwareTreeView);
+            this.sc2.Panel2.Controls.Add(this.UCTaskViewer);
 
-            HardwareTreeView t = new HardwareTreeView();
-            t.Hardware = App.Soft.Hardware;
-            t.Bind();
-            t.Dock = DockStyle.Fill;
+        }
 
-            this.splitContainer1.Panel1.Controls.Add(t);
-
-            _hardwareTreeView = t;
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void t_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            DeviceTreeNode deviceNode = e.Node as DeviceTreeNode;
+            if (deviceNode != null)
+            {
+                this.UCTaskViewer.Device = deviceNode.Device;
+            }
         }
 
         private C3App App
@@ -111,12 +160,17 @@ namespace C3
             DeviceTreeNode deviceNode = this._hardwareTreeView.SelectedNode as DeviceTreeNode;
             if (deviceNode != null)
             {
-                UCTaskViewer f = new UCTaskViewer(deviceNode.Device);
+                //UCTaskViewer f = new UCTaskViewer(deviceNode.Device);
                 //f.ShowDialog(this);
             }
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
 
         }

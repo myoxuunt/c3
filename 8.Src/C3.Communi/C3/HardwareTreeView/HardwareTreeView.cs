@@ -38,7 +38,14 @@ namespace C3
             }
             set
             {
-                _hardware = value;
+                if (_hardware != value)
+                {
+                    _hardware = value;
+                    if (_hardware != null)
+                    {
+                        Bind();
+                    }
+                }
             }
         } private Hardware _hardware;
         #endregion //Hardware
@@ -47,7 +54,7 @@ namespace C3
         /// <summary>
         /// 
         /// </summary>
-        public void Bind()
+        private void Bind()
         {
             foreach (IStation station in Hardware.Stations)
             {

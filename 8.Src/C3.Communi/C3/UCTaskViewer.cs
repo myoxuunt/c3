@@ -11,12 +11,23 @@ namespace C3
 {
     public partial class UCTaskViewer : UserControl 
     {
-        public UCTaskViewer(IDevice device)
+        public UCTaskViewer()
         {
             InitializeComponent();
-            this._device = device;
         }
 
+        public IDevice Device
+        {
+            get { return _device; }
+            set 
+            {
+                if (_device != value)
+                {
+                    _device = value;
+                    FillTaskListView();
+                }
+            }
+        }
         private IDevice _device;
 
         private void frmTask_Load(object sender, EventArgs e)
@@ -29,20 +40,30 @@ namespace C3
         /// </summary>
         private void FillTaskListView()
         {
-            ITask current = _device.CurrentTask ;
-            if (current!= null)
-            {
-                ListViewItem taskLvi = CreateTaskListViewItem( current );
-                this.listView1.Items.Add(taskLvi);
-            }
+            this.listView1.Items.Clear();
 
-            foreach (ITask task in _device.Tasks.ToArray())
+            if (_device != null)
             {
-                ListViewItem lvi = CreateTaskListViewItem(task);
-                this.listView1.Items.Add(lvi);
+                ITask current = _device.CurrentTask;
+                if (current != null)
+                {
+                    ListViewItem taskLvi = CreateTaskListViewItem(current);
+                    this.listView1.Items.Add(taskLvi);
+                }
+
+                foreach (ITask task in _device.Tasks.ToArray())
+                {
+                    ListViewItem lvi = CreateTaskListViewItem(task);
+                    this.listView1.Items.Add(lvi);
+                }
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
         private ListViewItem CreateTaskListViewItem(ITask task)
         {
             string[] items = new string[] { task.Opera.Name, task.LastExecute.ToString (), 
