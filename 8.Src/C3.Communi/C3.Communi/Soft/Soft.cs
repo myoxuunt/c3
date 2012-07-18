@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace C3.Communi
 {
@@ -72,170 +73,26 @@ namespace C3.Communi
         /// <param name="e"></param>
         void _timer_Tick(object sender, EventArgs e)
         {
-            Doit();
+            this.TaskScheduler.Doit();
         }
         #endregion //_timer_Tick
 
-        #region Doit
+        #region TaskScheduler
         /// <summary>
         /// 
         /// </summary>
-        private void Doit()
+        public TaskScheduler TaskScheduler
         {
-            foreach (IStation station in Hardware.Stations)
+            get
             {
-                Do(station);
-            }
-        }
-        #endregion //Doit
-
-        #region Do
-        private void Do(IStation station)
-        {
-            foreach (IDevice device in station.Devices)
-            {
-                Do(device);
-            }
-        }
-        #endregion //Do
-
-        #region Do
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="device"></param>
-        private void Do(IDevice device)
-        {
-            // 1. current task
-            //
-            ITask current = device.CurrentTask;
-            if (current != null)
-            {
-                Do(current);
-            }
-            else
-            {
-                Do(device.Tasks);
-            }
-        }
-        #endregion //Do
-
-        #region Do - task
-        private void Do(ITask current)
-        {
-            TaskStatus status = current.Check();
-
-            if (!(current.Status == TaskStatus.Executing ||
-                current.Status == TaskStatus.Timeout ))
-            {
-                string s = string.Format("status must be Executing, current is '{0}'", status);
-                throw new InvalidOperationException(s);
-            }
-
-            //if (status == TaskStatus.Timeout)
-            switch ( status )
-            {
-                case TaskStatus.Timeout:
-                    {
-                        ICommuniPort cp = GetCommuniPort(current);
-                        current.End(cp);
-
-                        IParseResult pr = current.LastParseResult;
-
-                        ITaskProcessor processor = GetTaskProcessor(current);
-                        processor.Process(current, pr);
-
-                        // clear current task
-                        //
-                        IDevice device = current.Device;
-                        device.CurrentTask = null;
-
-                        //
-                        //
-                        if (current.Status == TaskStatus.Wating)
-                        {
-                            device.Tasks.Enqueue(current);
-                        }
-                    }
-                    break;
-
-                case TaskStatus.Executing :
-                    break;
-
-                default:
-                    {
-                        // TODO:
-                        //
-                        // clear
-                        //
-                    }
-                    break;
-            }
-        }
-        #endregion //Do
-
-        #region Do
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="taskCollection"></param>
-        private void Do(TaskQueue tasks)
-        {
-            if (tasks.Count == 0)
-            {
-                return;
-            }
-
-            TaskCollection tempTasks = new TaskCollection();
-            //IDevice device = tasks;
-
-            while (tasks.Count > 0)
-            {
-                ITask head = tasks.Dequeue();
-
-                TaskStatus status = head.Check();
-
-                if (status == TaskStatus.Ready)
+                if (_taskScheduler == null)
                 {
-                    ICommuniPort cp = GetCommuniPort(head);
-                    if ((cp != null) &&
-                        (!cp.IsOccupy))
-                    {
-
-                        IDevice device = head.Device;
-                        head.Begin(cp);
-
-                        device.CurrentTask = head;
-                        break;
-                    }
-                    else
-                    {
-                        tempTasks.Add(head);
-                    }
+                    _taskScheduler = new TaskScheduler(this);
                 }
-                else
-                {
-                    tempTasks.Add(head);
-                }
+                return _taskScheduler;
             }
-            tasks.Enqueue(tempTasks);
-        }
-        #endregion //Do
-
-        #region GetTaskProcessor
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="current"></param>
-        /// <returns></returns>
-        private ITaskProcessor GetTaskProcessor(ITask current)
-        {
-            IDevice device = current.Device;
-            IDPU dpu = device.Dpu;
-            ITaskProcessor processor = dpu.Processor;
-            return processor;
-        }
-        #endregion //GetTaskProcessor
+        } private TaskScheduler _taskScheduler;
+        #endregion //TaskScheduler
 
         #region GetReceived
         /// <summary>
@@ -258,7 +115,6 @@ namespace C3.Communi
         }
         #endregion //GetReceived
 
-
         #region ErrorManager
         public ErrorManager ErrorManager
         {
@@ -272,15 +128,6 @@ namespace C3.Communi
             }
         } private ErrorManager _errorManager;
         #endregion //
-
-        #region GetCommuniPort
-        private ICommuniPort GetCommuniPort(ITask task)
-        {
-            IDevice device = task.Device;
-            IStation station = device.Station;
-            return station.CommuniPort;
-        }
-        #endregion //GetCommuniPort
 
         #region Hardware
         /// <summary>
@@ -448,7 +295,15 @@ namespace C3.Communi
             {
                 if (_uiSynchronizationContext == null)
                 {
-                    _uiSynchronizationContext = SynchronizationContext.Current;
+                    //_uiSynchronizationContext = SynchronizationContext.Current;
+                    if (WindowsFormsSynchronizationContext.Current != null)
+                    {
+                        _uiSynchronizationContext = WindowsFormsSynchronizationContext.Current;
+                    }
+                    else
+                    {
+                        _uiSynchronizationContext = new WindowsFormsSynchronizationContext();
+                    }
                 }
                 return _uiSynchronizationContext;
             }
@@ -481,5 +336,18 @@ namespace C3.Communi
             UISynchronizationContext.Post(sendOrPostCallback, state);
         }
         #endregion //Post
+
+        #region Send
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sendOrPostCallback"></param>
+        /// <param name="state"></param>
+        internal static void Send(SendOrPostCallback sendOrPostCallback, object state)
+        {
+            UISynchronizationContext.Send(sendOrPostCallback, state);
+        }
+        #endregion //
+
     }
 }

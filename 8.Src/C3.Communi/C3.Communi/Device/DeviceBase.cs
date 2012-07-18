@@ -1,5 +1,6 @@
 using System;
 using Xdgk.Common;
+using System.Diagnostics;
 
 namespace C3.Communi
 {
@@ -150,7 +151,26 @@ namespace C3.Communi
             }
             set
             {
-                _currentTask = value;
+                if (_currentTask != value)
+                {
+                    if (value != null)
+                    {
+                        // check task status
+                        //
+                        if (value.Status != TaskStatus.Executing)
+                        {
+
+                            string msg = string.Format(
+                                "task status must is Executing, but is '{0}'", 
+                                value.Status);
+
+                            throw new ArgumentException(msg);
+                        }
+                        // Debug.Assert(value.Status == TaskStatus.Executing);
+                    }
+
+                    _currentTask = value;
+                }
             }
         } private ITask _currentTask;
         #endregion //CurrentTask
@@ -263,7 +283,7 @@ namespace C3.Communi
         } private string _text;
         #endregion //Text
 
-        #region Tag 
+        #region Tag
 
         public object Tag
         {

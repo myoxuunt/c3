@@ -154,32 +154,39 @@ namespace C3.Communi
         public TaskStatus Status
         {
             get { return _status; }
-            protected set
-            {
-                if (_status != value)
-                {
-                    TaskStatus old = this._status;
-
-                    _status = value;
-
-                    if (_status == TaskStatus.Executed)
-                    {
-                        if (this.Stragegy.CanRemove)
-                        {
-                            _status = TaskStatus.Completed;
-                        }
-                        else
-                        {
-                            _status = TaskStatus.Wating;
-                        }
-                    }
-
-                    string msg = string.Format("task changed: from '{0}' -> '{1}'", old, _status);
-                    log.Debug(msg);                   
-
-                }
-            }
         } private TaskStatus _status;
+        #endregion //
+
+        #region SetStatus
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        protected void SetStatus( TaskStatus value )
+        {
+            if (_status != value)
+            {
+                TaskStatus old = this._status;
+
+                _status = value;
+
+                if (_status == TaskStatus.Executed)
+                {
+                    if (this.Stragegy.CanRemove)
+                    {
+                        _status = TaskStatus.Completed;
+                    }
+                    else
+                    {
+                        _status = TaskStatus.Wating;
+                    }
+                }
+
+                string msg = string.Format("task changed: from '{0}' -> '{1}'", old, _status);
+                log.Debug(msg);
+
+            }
+        } 
         #endregion //Status
 
         #region IsTimeOut
@@ -232,7 +239,7 @@ namespace C3.Communi
                 case TaskStatus.Wating:
                     if (NeedExecute())
                     {
-                        this.Status = TaskStatus.Ready;
+                        this.SetStatus(TaskStatus.Ready);
                     }
                     break;
 
@@ -242,7 +249,7 @@ namespace C3.Communi
                 case TaskStatus.Executing:
                     if (IsTimeOut())
                     {
-                        Status = TaskStatus.Timeout;
+                        this.SetStatus(TaskStatus.Timeout);
                     }
                     break;
 
@@ -329,6 +336,8 @@ namespace C3.Communi
         {
             if (this.Status == TaskStatus.Ready)
             {
+                OnBegining(EventArgs.Empty);
+
                 byte[] bytes = this.Opera.CreateSendBytes(this.Device);
 
                 this.LastSendBytes = bytes;
@@ -339,12 +348,14 @@ namespace C3.Communi
                 bool success = cp.Write(bytes);
                 if (success)
                 {
-                    this.Status = TaskStatus.Executing;
+                    this.SetStatus(TaskStatus.Executing);
                 }
                 else
                 {
-                    this.Status = TaskStatus.Executed;
+                    this.SetStatus(TaskStatus.Executed);
                 }
+
+                OnBegined(EventArgs.Empty);
             }
             else
             {
@@ -352,6 +363,26 @@ namespace C3.Communi
             }
         }
         #endregion //Begin
+
+        #region OnBegining
+        virtual protected void OnBegining(EventArgs eventArgs)
+        {
+            if (this.Begining != null)
+            {
+                this.Begining(this, eventArgs);
+            }
+        }
+        #endregion //OnBegining
+
+        #region OnBegined
+        virtual protected void OnBegined(EventArgs eventArgs)
+        {
+            if (this.Begined != null)
+            {
+                this.Begined(this, eventArgs);
+            }
+        }
+        #endregion //OnBegined
 
         #region End
         /// <summary>
@@ -362,6 +393,7 @@ namespace C3.Communi
         {
             if (this.Status == TaskStatus.Timeout)
             {
+                OnEnding(EventArgs.Empty);
                 byte[] bytes = new byte[0];
 
                 if (cp != null)
@@ -391,7 +423,9 @@ namespace C3.Communi
 
                 // 
                 //
-                this.Status = TaskStatus.Executed;
+                this.SetStatus(TaskStatus.Executed);
+
+                OnEnded(EventArgs.Empty);
             }
             else
             {
@@ -400,19 +434,44 @@ namespace C3.Communi
         }
         #endregion //End
 
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Task : TaskBase
-    {
-        public Task(IDevice device, IOpera opera, Strategy strategy, TimeSpan timeout)
+        #region OnEnding
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventArgs"></param>
+        private void OnEnding(EventArgs eventArgs)
         {
-            this.Device = device;
-            this.Opera = opera;
-            this.Stragegy = strategy;
-            this.Timeout = timeout;
+            if (Ending != null)
+            {
+                Ending(this, eventArgs);
+            }
         }
+        #endregion //OnEnding
+
+        #region OnEnded
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventArgs"></param>
+        private void OnEnded(EventArgs eventArgs)
+        {
+            if (Ended != null)
+            {
+                Ended(this, eventArgs);
+            }
+        }
+        #endregion //OnEnded
+
+        #region Events
+
+        public event EventHandler Begining;
+
+        public event EventHandler Begined;
+
+        public event EventHandler Ending;
+
+        public event EventHandler Ended;
+
+        #endregion //Events
     }
 }

@@ -16,6 +16,7 @@ namespace C3
         /// </summary>
         private C3App()
         {
+            Soft.UISynchronizationContext = new System.Windows.Forms.WindowsFormsSynchronizationContext();
         }
 
         /// <summary>

@@ -19,8 +19,14 @@ namespace C3.Communi
 
         TaskStatus Status { get; /*set;*/ }
         TaskStatus Check();
-
         void Begin(ICommuniPort cp);
         void End(ICommuniPort cp);
+
+
+        event EventHandler Begining;
+        event EventHandler Begined;
+
+        event EventHandler Ending;
+        event EventHandler Ended;
     }
 }

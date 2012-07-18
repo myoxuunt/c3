@@ -14,7 +14,7 @@ namespace C3.Communi
         public Opera(string deviceType, string name)
         {
             this._deviceType = deviceType;
-            this._name = name;
+            this.Name = name;
         }
 
         /// <summary>
@@ -27,14 +27,14 @@ namespace C3.Communi
         public Opera(string deviceType, string name, string text, string args)
         {
             this._deviceType = deviceType;
-            this._name = name;
+            this.Name = name;
             if (text == null || text.Length == 0)
             {
-                this._text = name;
+                this.Text = name;
             }
             else
             {
-                this._text = text;
+                this.Text = text;
             }
             _args = args;
         }
@@ -49,28 +49,6 @@ namespace C3.Communi
             get { return _args; }
         }  private string _args;
         #endregion //Args
-
-        #region Text
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Text
-        {
-            get { return _text; }
-            set { _text = value; }
-        } private string _text;
-        #endregion //Text
-
-        #region Name
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        } private string _name;
-        #endregion //
 
         #region DeviceType
         /// <summary>
@@ -123,10 +101,10 @@ namespace C3.Communi
             //return this.Name;
             if (Args != null)
             {
-                string s = string.Format(this._text, CreateArgs(Args));
+                string s = string.Format(this.Text, CreateArgs(Args));
                 return s;
             }
-            return _text;
+            return Text;
         }
         #endregion //ToString
 

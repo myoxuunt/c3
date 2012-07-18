@@ -68,6 +68,9 @@ namespace C3.Communi
             }
         } private string _name;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Text
         {
             get
