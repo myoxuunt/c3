@@ -42,14 +42,43 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\GlobalAssembly\Xdgk.Common\Xdgk.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Xdgk.Communi.Interface, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\GlobalAssembly\Xdgk.Communi.Interface\Xdgk.Communi.Interface.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="UCTaskViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCTaskViewer.Designer.cs">
+      <DependentUpon>UCTaskViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCBytesConverterViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCBytesConverterViewer.Designer.cs">
+      <DependentUpon>UCBytesConverterViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CRCerOptionTreeNode.cs" />
+    <Compile Include="frmCommuniDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCommuniDetails.Designer.cs">
+      <DependentUpon>frmCommuniDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmHardware.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHardware.Designer.cs">
       <DependentUpon>frmHardware.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmM.Designer.cs">
+      <DependentUpon>frmM.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
@@ -68,10 +97,29 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
+    <Compile Include="OptionTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="UCTaskViewer.resx">
+      <DependentUpon>UCTaskViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCBytesConverterViewer.resx">
+      <DependentUpon>UCBytesConverterViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCommuniDetails.resx">
+      <DependentUpon>frmCommuniDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmHardware.resx">
       <DependentUpon>frmHardware.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmM.resx">
+      <DependentUpon>frmM.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
@@ -86,6 +134,15 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCCrcViewer.resx">
+      <DependentUpon>UCCrcViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UCSpus.resx">
@@ -105,6 +162,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="UCCrcViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCCrcViewer.Designer.cs">
+      <DependentUpon>UCCrcViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="UCSpus.cs">
       <SubType>UserControl</SubType>
@@ -126,6 +194,7 @@
     <Content Include="Res\Empty.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BytesConverterView\" />
     <Folder Include="Forms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

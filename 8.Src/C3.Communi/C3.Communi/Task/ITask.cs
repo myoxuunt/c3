@@ -28,5 +28,7 @@ namespace C3.Communi
 
         event EventHandler Ending;
         event EventHandler Ended;
+
+        event EventHandler StatusChanged;
     }
 }

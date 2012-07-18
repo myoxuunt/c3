@@ -11,6 +11,8 @@ namespace C3
 {
     public partial class frmMain : Form
     {
+
+        private HardwareTreeView _hardwareTreeView;
         public frmMain()
         {
             InitializeComponent();
@@ -18,8 +20,11 @@ namespace C3
             HardwareTreeView t = new HardwareTreeView();
             t.Hardware = App.Soft.Hardware;
             t.Bind();
-            t.Location = new Point(0, 40);
-            this.Controls.Add(t);
+            t.Dock = DockStyle.Fill;
+
+            this.splitContainer1.Panel1.Controls.Add(t);
+
+            _hardwareTreeView = t;
 
         }
 
@@ -48,8 +53,8 @@ namespace C3
 
             // spu
             //
-            this.ucSpus1.SPUs = App.Soft.SPUs;
-            this.ucSpus1.RefreshSPUs();
+            //this.ucSpus1.SPUs = App.Soft.SPUs;
+            //this.ucSpus1.RefreshSPUs();
         }
 
         /// <summary>
@@ -69,7 +74,51 @@ namespace C3
             //this.treeView1 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuCommuniDetail_Click(object sender, EventArgs e)
+        {
+            DeviceTreeNode deviceNode = this._hardwareTreeView.SelectedNode as DeviceTreeNode;
+            if (deviceNode != null)
+            {
+                CommuniDetailCollection communiDetails = deviceNode.Device.CommuniDetails;
+                frmCommuniDetails f = new frmCommuniDetails(deviceNode.Device, communiDetails);
+                f.ShowDialog(this);
 
+            }
+            else
+            {
+                NUnit.UiKit.UserMessage.DisplayInfo("select device node");
+            }
+        }
 
+        private void mnuM_Click(object sender, EventArgs e)
+        {
+            frmM f = new frmM();
+            DialogResult dr = f.ShowDialog(this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuTaskView_Click(object sender, EventArgs e)
+        {
+            DeviceTreeNode deviceNode = this._hardwareTreeView.SelectedNode as DeviceTreeNode;
+            if (deviceNode != null)
+            {
+                UCTaskViewer f = new UCTaskViewer(deviceNode.Device);
+                //f.ShowDialog(this);
+            }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

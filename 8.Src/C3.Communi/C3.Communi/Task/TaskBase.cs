@@ -185,6 +185,7 @@ namespace C3.Communi
                 string msg = string.Format("task changed: from '{0}' -> '{1}'", old, _status);
                 log.Debug(msg);
 
+                OnStatusChanged(EventArgs.Empty);
             }
         } 
         #endregion //Status
@@ -462,6 +463,20 @@ namespace C3.Communi
         }
         #endregion //OnEnded
 
+        #region OnStatusChanged
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventArgs"></param>
+        private void OnStatusChanged(EventArgs eventArgs)
+        {
+            if (StatusChanged != null)
+            {
+                StatusChanged(this, eventArgs);
+            }
+        }
+        #endregion // OnStatusChanged
+
         #region Events
 
         public event EventHandler Begining;
@@ -471,6 +486,8 @@ namespace C3.Communi
         public event EventHandler Ending;
 
         public event EventHandler Ended;
+
+        public event EventHandler StatusChanged;
 
         #endregion //Events
     }
