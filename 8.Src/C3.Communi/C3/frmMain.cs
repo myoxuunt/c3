@@ -70,13 +70,38 @@ namespace C3
         /// <param name="e"></param>
         void t_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            DeviceTreeNode deviceNode = e.Node as DeviceTreeNode;
-            if (deviceNode != null)
+            TreeNode node = e.Node;
+            if (node is DeviceTreeNode)
             {
-                this.UCTaskViewer.Device = deviceNode.Device;
+                DeviceTreeNode deviceNode = node as DeviceTreeNode;
+                IDevice device = deviceNode.Device;
+                //this.UCTaskViewer.Device = deviceNode.Device;
+                this.ViewerWrapper.View(device);
+            }
+            else if (node is StationTreeNode)
+            {
+                StationTreeNode stationNode = node as StationTreeNode;
+                IStation station = stationNode.Station;
+                this.ViewerWrapper.View(station);
             }
         }
 
+        public ViewerWrapper ViewerWrapper
+        {
+            get 
+            {
+                if (_viewerWrapper == null)
+                {
+                    _viewerWrapper = new ViewerWrapper();
+                    this.sc1.Panel2.Controls.Add(_viewerWrapper.UCViewerWrapper);
+                }
+                return _viewerWrapper;
+            }
+        } private ViewerWrapper _viewerWrapper;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private C3App App
         {
             get

@@ -6,52 +6,18 @@ using C3.Communi;
 
 namespace C3
 {
+    public interface IView
+    {
+    }
+
     /// <summary>
     /// 
     /// </summary>
     public class ViewerWrapper
     {
-        public ViewerWrapper(Label titleLabel, Panel container)
+        public ViewerWrapper()
         {
-            this.Title = titleLabel;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Label Title
-        {
-            get { return _title; }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Title");
-                }
-                _title = value;
-            }
-        } private Label _title;
-
-        #region Container
-        /// <summary>
-        /// 
-        /// </summary>
-        public Panel Container
-        {
-            get
-            {
-                return _container;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Container");
-                }
-                _container = value;
-            }
-        } private Panel _container;
-        #endregion //Container
 
         #region UCViewerWrapper
         /// <summary>
@@ -64,6 +30,7 @@ namespace C3
                 if (_ucViewerWrapper == null)
                 {
                     _ucViewerWrapper = new UCViewerWrapper();
+                    _ucViewerWrapper.Dock = DockStyle.Fill;
                 }
                 return _ucViewerWrapper;
             }
@@ -95,7 +62,11 @@ namespace C3
         } private ViewerManager _viewerManager;
         #endregion //ViewerManager
 
-        #region
+        #region View
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="station"></param>
         public void View(IStation station)
         {
             if (station == null)
@@ -104,11 +75,15 @@ namespace C3
             }
             // 
             //
-            this.Title.Text = station.Name;
+            this.UCViewerWrapper.Title = station.Name;
 
             this.ViewerManager.View( station );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
         public void View(IDevice device)
         {
             if (device == null)
@@ -116,11 +91,11 @@ namespace C3
                 throw new ArgumentNullException("device");
             }
 
-            this.Title.Text = device.GetType().Name;
+            this.UCViewerWrapper.Title = device.GetType().Name;
 
             this.ViewerManager.View(device);
         }
-        #endregion //
+        #endregion //View
 
     }
 
@@ -129,15 +104,51 @@ namespace C3
     /// </summary>
     public class ViewerBase
     {
+        #region View
+        /// <summary>
+        /// 
+        /// </summary>
+        public IView View
+        {
+            get
+            {
+                return _view;
+            }
+            set
+            {
+                _view = value;
+            }
+        } private IView _view;
+        #endregion //View
+
+        protected Control _ctrl;
         protected Panel _panel;
         protected ViewerBase(Panel panel)
         {
             _panel = panel;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ctrl"></param>
         protected void AddUCViewerToPanel(Control ctrl)
         {
+            Console.WriteLine("add ucview: " + ctrl.GetType ().Name );
+            ctrl.Dock = DockStyle.Fill;
             this._panel.Controls.Add(ctrl);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ShowMeOnly()
+        {
+            foreach (Control item in this._panel.Controls)
+            {
+                item.Visible = false;
+            }
+            _ctrl.Visible = true;
         }
     }
 
@@ -159,7 +170,11 @@ namespace C3
             }
             set
             {
-                _station = value;
+                if (_station != value)
+                {
+                    _station = value;
+                    this.UCStationViewer.Station = _station;
+                }
             }
         } private IStation _station;
         #endregion //Station
@@ -168,14 +183,15 @@ namespace C3
         {
             get
             {
-                if (_ucStationViewer == null)
+                if (_ctrl == null)
                 {
-                    _ucStationViewer = new UCStationViewer();
-                    this.AddUCViewerToPanel(_ucStationViewer);
+                    _ctrl = new UCStationViewer();
+                    this.AddUCViewerToPanel(_ctrl);
                 }
-                return _ucStationViewer;
+                return _ctrl as UCStationViewer;
             }
-        } private UCStationViewer _ucStationViewer;
+        } 
+        //private UCStationViewer _ucStationViewer;
     }
 
     /// <summary>
@@ -201,11 +217,34 @@ namespace C3
             }
             set
             {
-                _device = value;
+                if (_device != value)
+                {
+                    _device = value;
+                    this.UCDeviceViewer.Device = _device;
+                }
             }
         } private IDevice _device;
         #endregion //Device
 
+
+        #region UCDeviceViewer
+        /// <summary>
+        /// 
+        /// </summary>
+        public UCDeviceViewer UCDeviceViewer
+        {
+            get
+            {
+                if (_ctrl == null)
+                {
+                    _ctrl = new UCDeviceViewer();
+                    this.AddUCViewerToPanel(_ctrl);
+                }
+                return _ctrl as UCDeviceViewer;
+            }
+        }
+        // private UCDeviceViewer _uCDeviceViewer;
+        #endregion //UCDeviceViewer
         // properties
         //
         // 1. device
@@ -247,7 +286,7 @@ namespace C3
             return result;
         }
 
-        private ViewerBase CreateViewer(Type type,Panel panel)
+        private ViewerBase CreateViewer(Type type, Panel panel)
         {
             ViewerBase v = null;
             if (type == typeof(StationViewer))
@@ -311,6 +350,7 @@ namespace C3
                 throw new InvalidOperationException("not find StationViewer");
             }
             v.Station = station;
+            v.ShowMeOnly();
         }
 
         /// <summary>
@@ -326,6 +366,7 @@ namespace C3
             }
 
             v.Device = device;
+            v.ShowMeOnly();
         }
     }
 }
