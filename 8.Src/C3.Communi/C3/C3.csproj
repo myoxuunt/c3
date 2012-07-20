@@ -36,6 +36,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Xdgk.Common, Version=0.8.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -49,6 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="UCStationViewer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCStationViewer.Designer.cs">
+      <DependentUpon>UCStationViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCTaskViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -102,6 +109,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="UCStationViewer.resx">
+      <DependentUpon>UCStationViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCTaskViewer.resx">
       <DependentUpon>UCTaskViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -149,6 +160,10 @@
       <DependentUpon>UCSpus.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UCViewerWrapper.resx">
+      <DependentUpon>UCViewerWrapper.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -180,6 +195,13 @@
     <Compile Include="UCSpus.Designer.cs">
       <DependentUpon>UCSpus.cs</DependentUpon>
     </Compile>
+    <Compile Include="UCViewerWrapper.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCViewerWrapper.Designer.cs">
+      <DependentUpon>UCViewerWrapper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="v.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C3.Communi\C3.Communi.csproj">

@@ -52,14 +52,14 @@ namespace C3
             InitializeComponent();
             Init();
         }
-            
+
         /// <summary>
         /// 
         /// </summary>
         private void Init()
         {
             this.sc1.Panel1.Controls.Add(this.HardwareTreeView);
-            this.sc2.Panel2.Controls.Add(this.UCTaskViewer);
+            //this.sc2.Panel2.Controls.Add(this.UCTaskViewer);
 
         }
 
@@ -165,4 +165,6 @@ namespace C3
             }
         }
     }
+
+
 }

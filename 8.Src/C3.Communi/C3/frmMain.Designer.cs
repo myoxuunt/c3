@@ -53,15 +53,10 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tssListenPort = new System.Windows.Forms.ToolStripStatusLabel();
             this.sc1 = new System.Windows.Forms.SplitContainer();
-            this.sc2 = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.sc1.Panel2.SuspendLayout();
             this.sc1.SuspendLayout();
-            this.sc2.Panel1.SuspendLayout();
-            this.sc2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -255,28 +250,9 @@
             this.sc1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.sc1.Location = new System.Drawing.Point(0, 49);
             this.sc1.Name = "sc1";
-            // 
-            // sc1.Panel2
-            // 
-            this.sc1.Panel2.Controls.Add(this.sc2);
             this.sc1.Size = new System.Drawing.Size(777, 463);
             this.sc1.SplitterDistance = 259;
             this.sc1.TabIndex = 9;
-            // 
-            // sc2
-            // 
-            this.sc2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sc2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.sc2.Location = new System.Drawing.Point(0, 0);
-            this.sc2.Name = "sc2";
-            this.sc2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // sc2.Panel1
-            // 
-            this.sc2.Panel1.Controls.Add(this.richTextBox1);
-            this.sc2.Size = new System.Drawing.Size(514, 463);
-            this.sc2.SplitterDistance = 234;
-            this.sc2.TabIndex = 0;
             // 
             // toolStrip1
             // 
@@ -288,15 +264,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(777, 25);
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(514, 234);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
             // 
             // frmMain
             // 
@@ -314,10 +281,7 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.sc1.Panel2.ResumeLayout(false);
             this.sc1.ResumeLayout(false);
-            this.sc2.Panel1.ResumeLayout(false);
-            this.sc2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,8 +315,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuCommuniDetail;
         private System.Windows.Forms.ToolStripMenuItem mnuM;
         private System.Windows.Forms.ToolStripMenuItem mnuTaskView;
-        private System.Windows.Forms.SplitContainer sc2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
