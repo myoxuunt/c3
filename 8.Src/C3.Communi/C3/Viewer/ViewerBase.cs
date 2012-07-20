@@ -7,7 +7,7 @@ namespace C3
 {
     public class ViewerBase
     {
-#region View
+        #region View
         /// <summary>
         /// 
         /// </summary>
@@ -22,26 +22,37 @@ namespace C3
                 _view = value;
             }
         } private IView _view;
-#endregion //View
+        #endregion //View
 
         protected Control _ctrl;
         protected Panel _panel;
+
+
+        #region ViewerBase
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
         protected ViewerBase(Panel panel)
         {
             _panel = panel;
         }
+        #endregion //ViewerBase
 
+        #region AddUCViewerToPanel
         /// <summary>
         /// 
         /// </summary>
         /// <param name="ctrl"></param>
         protected void AddUCViewerToPanel(Control ctrl)
         {
-            Console.WriteLine("add ucview: " + ctrl.GetType ().Name );
+            Console.WriteLine("add ucview: " + ctrl.GetType().Name);
             ctrl.Dock = DockStyle.Fill;
             this._panel.Controls.Add(ctrl);
         }
+        #endregion //AddUCViewerToPanel
 
+        #region ShowMeOnly
         /// <summary>
         /// 
         /// </summary>
@@ -53,6 +64,7 @@ namespace C3
             }
             _ctrl.Visible = true;
         }
+        #endregion //ShowMeOnly
     }
 
 }

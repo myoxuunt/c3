@@ -213,7 +213,7 @@
     </Compile>
     <Compile Include="Viewer\DeviceViewer.cs" />
     <Compile Include="Viewer\StationViewer.cs" />
-    <Compile Include="Viewer\v.cs" />
+    <Compile Include="Viewer\IView.cs" />
     <Compile Include="Viewer\ViewerBase.cs" />
     <Compile Include="Viewer\ViewerCollection.cs" />
     <Compile Include="Viewer\ViewerManager.cs" />

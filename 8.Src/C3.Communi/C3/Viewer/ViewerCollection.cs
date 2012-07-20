@@ -4,8 +4,17 @@ using C3.Communi;
 
 namespace C3
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ViewerCollection : Xdgk.Common.Collection<ViewerBase>
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="panel"></param>
+        /// <returns></returns>
         public ViewerBase Find(Type type, Panel panel)
         {
             ViewerBase result = null;
@@ -17,6 +26,7 @@ namespace C3
                     break;
                 }
             }
+
             if (result == null)
             {
                 result = CreateViewer(type, panel);
@@ -25,6 +35,12 @@ namespace C3
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="panel"></param>
+        /// <returns></returns>
         private ViewerBase CreateViewer(Type type, Panel panel)
         {
             ViewerBase v = null;

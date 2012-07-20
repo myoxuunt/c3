@@ -1,4 +1,3 @@
-
 using System;
 using System.Windows.Forms;
 using C3.Communi;
@@ -7,11 +6,18 @@ namespace C3
 {
     public class StationViewer : ViewerBase
     {
+        #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
         public StationViewer(Panel panel)
             : base(panel)
         {
         }
-#region Station
+        #endregion //Constructor
+
+        #region Station
         /// <summary>
         /// 
         /// </summary>
@@ -30,8 +36,12 @@ namespace C3
                 }
             }
         } private IStation _station;
-#endregion //Station
+        #endregion //Station
 
+        #region UCStationViewer
+        /// <summary>
+        /// 
+        /// </summary>
         public UCStationViewer UCStationViewer
         {
             get
@@ -43,8 +53,8 @@ namespace C3
                 }
                 return _ctrl as UCStationViewer;
             }
-        } 
-        //private UCStationViewer _ucStationViewer;
+        }
+        #endregion //UCStationViewer
     }
 
 }

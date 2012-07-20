@@ -1,4 +1,3 @@
-
 using System;
 using System.Windows.Forms;
 using C3.Communi;
@@ -7,11 +6,13 @@ namespace C3
 {
     public class ViewerWrapper
     {
+        #region Constructor
         public ViewerWrapper()
         {
         }
+        #endregion //Constructor
 
-#region UCViewerWrapper
+        #region UCViewerWrapper
         /// <summary>
         /// 
         /// </summary>
@@ -31,9 +32,9 @@ namespace C3
                 _ucViewerWrapper = value;
             }
         } private UCViewerWrapper _ucViewerWrapper;
-#endregion //UCViewerWrapper
+        #endregion //UCViewerWrapper
 
-#region ViewerManager
+        #region ViewerManager
         /// <summary>
         /// 
         /// </summary>
@@ -43,7 +44,7 @@ namespace C3
             {
                 if (_viewerManager == null)
                 {
-                    _viewerManager = new ViewerManager(this.UCViewerWrapper.ViewContainer );
+                    _viewerManager = new ViewerManager(this.UCViewerWrapper.ViewContainer);
                 }
                 return _viewerManager;
             }
@@ -52,9 +53,9 @@ namespace C3
                 _viewerManager = value;
             }
         } private ViewerManager _viewerManager;
-#endregion //ViewerManager
+        #endregion //ViewerManager
 
-#region View
+        #region View
         /// <summary>
         /// 
         /// </summary>
@@ -69,7 +70,7 @@ namespace C3
             //
             this.UCViewerWrapper.Title = station.Name;
 
-            this.ViewerManager.View( station );
+            this.ViewerManager.View(station);
         }
 
         /// <summary>
@@ -87,7 +88,7 @@ namespace C3
 
             this.ViewerManager.View(device);
         }
-#endregion //View
+        #endregion //View
 
     }
 

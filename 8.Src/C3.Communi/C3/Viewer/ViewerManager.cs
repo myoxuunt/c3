@@ -10,12 +10,16 @@ namespace C3
     {
         private Panel _panel;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="panel"></param>
         public ViewerManager(Panel panel)
         {
             _panel = panel;
         }
 
-#region Viewers
+        #region Viewers
         /// <summary>
         /// 
         /// </summary>
@@ -34,7 +38,7 @@ namespace C3
                 _viewers = value;
             }
         } private ViewerCollection _viewers;
-#endregion //Viewers
+        #endregion //Viewers
 
         /// <summary>
         /// 
@@ -57,7 +61,7 @@ namespace C3
         /// <param name="device"></param>
         internal void View(IDevice device)
         {
-            DeviceViewer v = Viewers.Find(typeof(DeviceViewer),_panel) as DeviceViewer;
+            DeviceViewer v = Viewers.Find(typeof(DeviceViewer), _panel) as DeviceViewer;
             if (v == null)
             {
                 throw new InvalidOperationException("not fine DeviceViewer");
