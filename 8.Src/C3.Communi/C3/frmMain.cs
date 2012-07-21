@@ -71,33 +71,63 @@ namespace C3
         void t_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = e.Node;
+            Model model = null;
+
             if (node is DeviceTreeNode)
             {
                 DeviceTreeNode deviceNode = node as DeviceTreeNode;
                 IDevice device = deviceNode.Device;
                 //this.UCTaskViewer.Device = deviceNode.Device;
-                this.ViewerWrapper.View(device);
+                //this.ViewerWrapper.View(device);
+                model = new DeviceMode(device);
             }
             else if (node is StationTreeNode)
             {
                 StationTreeNode stationNode = node as StationTreeNode;
                 IStation station = stationNode.Station;
-                this.ViewerWrapper.View(station);
+                //this.ViewerWrapper.View(station);
+                model = new StationModel(station);
             }
+
+            this.ControllerManager.Act(model);
         }
 
-        public ViewerWrapper ViewerWrapper
+        #region ControllerManager
+        /// <summary>
+        /// 
+        /// </summary>
+        public ControllerManager ControllerManager
         {
-            get 
+            get
             {
-                if (_viewerWrapper == null)
+                if (_controllerManager == null)
                 {
-                    _viewerWrapper = new ViewerWrapper();
-                    this.sc1.Panel2.Controls.Add(_viewerWrapper.UCViewerWrapper);
+                    _controllerManager = new ControllerManager();
+                    this.sc1.Panel2.Controls.Add(_controllerManager.UcViewerWrapper);
                 }
-                return _viewerWrapper;
+                return _controllerManager;
             }
-        } private ViewerWrapper _viewerWrapper;
+            set
+            {
+                _controllerManager = value;
+            }
+        } private ControllerManager _controllerManager;
+        #endregion //ControllerManager
+
+
+
+        //public ViewerWrapper ViewerWrapper
+        //{
+        //    get
+        //    {
+        //        if (_viewerWrapper == null)
+        //        {
+        //            _viewerWrapper = new ViewerWrapper();
+        //            this.sc1.Panel2.Controls.Add(_viewerWrapper.UCViewerWrapper);
+        //        }
+        //        return _viewerWrapper;
+        //    }
+        //} private ViewerWrapper _viewerWrapper;
 
         /// <summary>
         /// 

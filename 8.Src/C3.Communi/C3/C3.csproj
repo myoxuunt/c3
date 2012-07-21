@@ -211,12 +211,13 @@
     <Compile Include="UCViewerWrapper.Designer.cs">
       <DependentUpon>UCViewerWrapper.cs</DependentUpon>
     </Compile>
-    <Compile Include="Viewer\DeviceViewer.cs" />
-    <Compile Include="Viewer\StationViewer.cs" />
+    <Compile Include="Viewer\DeviceController.cs" />
+    <Compile Include="Viewer\Model.cs" />
+    <Compile Include="Viewer\StationController.cs" />
     <Compile Include="Viewer\IView.cs" />
-    <Compile Include="Viewer\ViewerBase.cs" />
-    <Compile Include="Viewer\ViewerCollection.cs" />
-    <Compile Include="Viewer\ViewerManager.cs" />
+    <Compile Include="Viewer\Controller.cs" />
+    <Compile Include="Viewer\ControllerCollection.cs" />
+    <Compile Include="Viewer\ControllerManager.cs" />
     <Compile Include="Viewer\ViewerWrapper.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,92 +4,90 @@ using C3.Communi;
 
 namespace C3
 {
-    public class ViewerWrapper
-    {
-        #region Constructor
-        public ViewerWrapper()
-        {
-        }
-        #endregion //Constructor
+    //public class ViewerWrapper
+    //{
+    //    #region Constructor
+    //    public ViewerWrapper()
+    //    {
+    //    }
+    //    #endregion //Constructor
 
-        #region UCViewerWrapper
-        /// <summary>
-        /// 
-        /// </summary>
-        public UCViewerWrapper UCViewerWrapper
-        {
-            get
-            {
-                if (_ucViewerWrapper == null)
-                {
-                    _ucViewerWrapper = new UCViewerWrapper();
-                    _ucViewerWrapper.Dock = DockStyle.Fill;
-                }
-                return _ucViewerWrapper;
-            }
-            set
-            {
-                _ucViewerWrapper = value;
-            }
-        } private UCViewerWrapper _ucViewerWrapper;
-        #endregion //UCViewerWrapper
+    //    #region UCViewerWrapper
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    public UCViewerWrapper UCViewerWrapper
+    //    {
+    //        get
+    //        {
+    //            if (_ucViewerWrapper == null)
+    //            {
+    //                _ucViewerWrapper = new UCViewerWrapper();
+    //                _ucViewerWrapper.Dock = DockStyle.Fill;
+    //            }
+    //            return _ucViewerWrapper;
+    //        }
+    //        set
+    //        {
+    //            _ucViewerWrapper = value;
+    //        }
+    //    } private UCViewerWrapper _ucViewerWrapper;
+    //    #endregion //UCViewerWrapper
 
-        #region ViewerManager
-        /// <summary>
-        /// 
-        /// </summary>
-        public ViewerManager ViewerManager
-        {
-            get
-            {
-                if (_viewerManager == null)
-                {
-                    _viewerManager = new ViewerManager(this.UCViewerWrapper.ViewContainer);
-                }
-                return _viewerManager;
-            }
-            set
-            {
-                _viewerManager = value;
-            }
-        } private ViewerManager _viewerManager;
-        #endregion //ViewerManager
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    public ControllerManager ControllerManager
+    //    {
+    //        get
+    //        {
+    //            if (_controllerManager == null)
+    //            {
+    //                //_viewerManager = new ControllerManager(this.UCViewerWrapper.ViewContainer);
+    //            }
+    //            return _controllerManager;
+    //        }
+    //        set
+    //        {
+    //            _controllerManager = value;
+    //        }
+    //    } private ControllerManager _controllerManager;
 
-        #region View
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="station"></param>
-        public void View(IStation station)
-        {
-            if (station == null)
-            {
-                throw new ArgumentNullException("station");
-            }
-            // 
-            //
-            this.UCViewerWrapper.Title = station.Name;
+    //    #region View
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    /// <param name="station"></param>
+    //    public void View(IStation station)
+    //    {
+    //        if (station == null)
+    //        {
+    //            throw new ArgumentNullException("station");
+    //        }
+    //        // 
+    //        //
+    //        this.UCViewerWrapper.Title = station.Name;
 
-            this.ViewerManager.View(station);
-        }
+    //        this.ControllerManager.Act(station);
+    //    }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="device"></param>
-        public void View(IDevice device)
-        {
-            if (device == null)
-            {
-                throw new ArgumentNullException("device");
-            }
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    /// <param name="device"></param>
+    //    public void View(IDevice device)
+    //    {
+    //        if (device == null)
+    //        {
+    //            throw new ArgumentNullException("device");
+    //        }
 
-            this.UCViewerWrapper.Title = device.GetType().Name;
+    //        this.UCViewerWrapper.Title = device.GetType().Name;
 
-            this.ViewerManager.View(device);
-        }
-        #endregion //View
+    //        this.ControllerManager.View(device);
+    //    }
+    //    #endregion //View
 
-    }
+    //}
 
 }

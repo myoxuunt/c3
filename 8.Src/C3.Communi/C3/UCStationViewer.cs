@@ -9,7 +9,7 @@ using C3.Communi ;
 
 namespace C3
 {
-    public partial class UCStationViewer : UserControl, IView
+    public partial class UCStationViewer : UserControl
     {
         public UCStationViewer()
         {
