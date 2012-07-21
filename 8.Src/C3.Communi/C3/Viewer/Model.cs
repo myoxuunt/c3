@@ -5,13 +5,25 @@ using C3.Communi;
 
 namespace C3
 {
-    public class Model
+    /// <summary>
+    /// 
+    /// </summary>
+    abstract public class Model
     {
         public Type ControllerType
         {
             get { return _controllerType; }
             set { _controllerType = value; }
         } private Type _controllerType;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        abstract public string Title
+        {
+            get;
+        }
+
     }
 
     /// <summary>
@@ -38,6 +50,11 @@ namespace C3
         } private IStation _station;
         #endregion //Station
 
+
+        public override string Title
+        {
+            get { return this.Station.Name; }
+        }
     }
 
     public class DeviceMode : Model
@@ -56,5 +73,13 @@ namespace C3
             get { return _device; }
         } private IDevice _device;
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override string Title
+        {
+            get { return this.Device.Name + ":" + this.Device.Text; }
+        }
     }
 }

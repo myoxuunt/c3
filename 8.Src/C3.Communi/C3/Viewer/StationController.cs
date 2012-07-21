@@ -17,51 +17,35 @@ namespace C3
         }
         #endregion //Constructor
 
-        #region Station
+        //#region Station
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public IStation Station
+        //{
+        //    get
+        //    {
+        //        return _station;
+        //    }
+        //    set
+        //    {
+        //        if (_station != value)
+        //        {
+        //            _station = value;
+        //            this.UCStationViewer.Station = _station;
+        //        }
+        //    }
+        //} private IStation _station;
+        //#endregion //Station
+
         /// <summary>
         /// 
         /// </summary>
-        public IStation Station
-        {
-            get
-            {
-                return _station;
-            }
-            set
-            {
-                if (_station != value)
-                {
-                    _station = value;
-                    this.UCStationViewer.Station = _station;
-                }
-            }
-        } private IStation _station;
-        #endregion //Station
-
-        #region UCStationViewer
-        /// <summary>
-        /// 
-        /// </summary>
-        public UCStationViewer UCStationViewer
-        {
-            get
-            {
-                //if (_ctrl == null)
-                //{
-                //    _ctrl = new UCStationViewer();
-                //    this.AddUCViewerToPanel(_ctrl);
-                //}
-                //return _ctrl as UCStationViewer;
-                return null;
-            }
-        }
-        #endregion //UCStationViewer
-
         protected override void OnSetModel()
         {
             StationView sv = this.View as StationView;
             StationModel sm = this.Model as StationModel;
-            sv.UCStationViewer.Station = sm.Station;
+            sv.UcStationViewer.Station = sm.Station;
         }
     }
 

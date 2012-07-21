@@ -21,6 +21,7 @@ namespace C3
 
             throw new ArgumentException("not find controller by type: " + controllerType.Name);
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -69,6 +70,20 @@ namespace C3
                 throw new ArgumentException(string.Format("cannot create view by '{0}'", type.Name));
             }
             return v;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="controller"></param>
+        public void OnlyShow(Controller controller)
+        {
+            foreach (Controller item in this)
+            {
+                item.View.ViewControl.Visible = false;
+            }
+
+            controller.View.ViewControl.Visible = true;
         }
     }
 

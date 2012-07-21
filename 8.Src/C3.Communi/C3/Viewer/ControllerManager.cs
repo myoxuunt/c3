@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using C3.Communi;
 
@@ -28,7 +29,7 @@ namespace C3
         } private UCViewerWrapper _ucViewerWrapper;
         #endregion //UCViewerWrapper
 
-        private Panel _panel;
+        //private Panel _panel;
 
         /// <summary>
         /// 
@@ -37,8 +38,18 @@ namespace C3
         public void Act(Model model)
         {
             Controller c = Controllers.Find(model.ControllerType);
-            c.Model = model;
 
+            Debug.Assert(c != null);
+
+            c.Model = model;
+            this.UcViewerWrapper.Title = model.Title;
+            Controllers.OnlyShow(c);
+
+            //foreach(Controller item in this.Controllers)
+            //{
+            //    item.View.ViewControl.Visible = false;
+            //}
+            //c.View.ViewControl.Visible = true;
         }
 
         ///// <summary>
@@ -61,7 +72,7 @@ namespace C3
                 {
                     _controllers = new ControllerCollection();
 
-                    StationView sv = new StationView(this.UcViewerWrapper.ViewContainer);
+                    StationView sv = new StationView( this.UcViewerWrapper.ViewContainer);
                     StationController sc = new StationController(sv);
                     _controllers.Add(sc);
 

@@ -45,7 +45,7 @@ namespace C3
             {
                 if (_mainForm == null)
                 {
-                    _mainForm = new frmMain();
+                    _mainForm = new FrmMain();
                 }
                 return _mainForm;
             }

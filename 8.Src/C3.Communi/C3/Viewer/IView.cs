@@ -6,24 +6,28 @@ using C3.Communi;
 
 namespace C3
 {
-    public class View
+    abstract  public class View
     {
-        public View(Control parentControl)
+        protected View(Control parentControl)
         {
-            this._ctrl = parentControl;
+            this._parentControl = parentControl;
         }
 
-        protected Control _ctrl;
-        public void AddUCViewerToPanel(Control c)
-        { 
+        public Control ParentControl
+        {
+            get { return _parentControl; }
         }
+
+        private Control _parentControl;
+
+
+        abstract public Control ViewControl { get; set; } 
     }
 
     public class StationView : View
     {
 
-        public StationView(Control parentControl)
-            : base(parentControl)
+        public StationView(Control parentControl): base(parentControl)
         {
         }
 
@@ -31,26 +35,38 @@ namespace C3
         /// <summary>
         /// 
         /// </summary>
-        public UCStationViewer UCStationViewer
+        public UCStationViewer UcStationViewer
         {
             get
             {
-                if (_ctrl == null)
-                {
-                    _ctrl = new UCStationViewer();
-                    this.AddUCViewerToPanel(_ctrl);
-                }
-                return _ctrl as UCStationViewer;
+                return ViewControl as UCStationViewer;
             }
         }
         #endregion //UCStationViewer
+
+        public override Control ViewControl
+        {
+            get
+            {
+                if (_viewControl == null)
+                {
+                    _viewControl = new UCStationViewer();
+                    _viewControl.Dock = DockStyle.Fill;
+                    this.ParentControl.Controls.Add(_viewControl);
+                }
+                return _viewControl;
+            }
+            set { _viewControl = value; }
+        }
+
+        private Control _viewControl;
     }
 
     public class DeviceView : View
     {
 
         public DeviceView(Control parentControl)
-            : base(parentControl)
+            :base(parentControl)
         {
         }
         #region UCDeviceViewer
@@ -61,16 +77,29 @@ namespace C3
         {
             get
             {
-                if (_ctrl == null)
-                {
-                    _ctrl = new UCDeviceViewer();
-                    this.AddUCViewerToPanel(_ctrl);
-                }
-                return _ctrl as UCDeviceViewer;
+                return this.ViewControl as UCDeviceViewer;
             }
         }
         // private UCDeviceViewer _uCDeviceViewer;
         #endregion //UCDeviceViewer
+
+
+        public override Control ViewControl
+        {
+            get
+            {
+                if (_ucDeviceViewer==null   )
+                {
+                    _ucDeviceViewer = new UCDeviceViewer();
+                    _ucDeviceViewer.Dock = DockStyle.Fill;
+                    this.ParentControl.Controls.Add((_ucDeviceViewer));
+                }
+                return _ucDeviceViewer;
+            }
+            set { _ucDeviceViewer = (UCDeviceViewer)value; }
+        }
+
+        private UCDeviceViewer _ucDeviceViewer;
     }
     //public class DeviceDataDisplayer
     //{

@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using C3.Communi;
 
 namespace C3
 {
-    public partial class frmMain : Form
+    public partial class FrmMain : Form
     {
 
         private HardwareTreeView HardwareTreeView
@@ -47,7 +42,7 @@ namespace C3
         #endregion //UCTaskViewer
 
 
-        public frmMain()
+        public FrmMain()
         {
             InitializeComponent();
             Init();
