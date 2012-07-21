@@ -42,10 +42,9 @@
             this.chLastExecute,
             this.chStrategy,
             this.chStatus});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Location = new System.Drawing.Point(61, 29);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(512, 251);
+            this.listView1.Size = new System.Drawing.Size(397, 126);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -69,14 +68,13 @@
             // 
             this.chStatus.Text = "Status";
             // 
-            // frmTask
+            // UCTaskViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(512, 251);
             this.Controls.Add(this.listView1);
-            this.Name = "frmTask";
-            this.Text = "frmTask";
+            this.Name = "UCTaskViewer";
+            this.Size = new System.Drawing.Size(512, 251);
             this.Load += new System.EventHandler(this.frmTask_Load);
             this.ResumeLayout(false);
 

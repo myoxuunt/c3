@@ -41,6 +41,7 @@
             this.chDescription,
             this.chAssemblyInfo});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(347, 185);
@@ -60,12 +61,12 @@
             // 
             this.chAssemblyInfo.Text = "AssemblyInfo";
             // 
-            // UCBCViewer
+            // UCBytesConverterViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.listView1);
-            this.Name = "UCBCViewer";
+            this.Name = "UCBytesConverterViewer";
             this.Size = new System.Drawing.Size(347, 185);
             this.ResumeLayout(false);
 
