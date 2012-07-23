@@ -12,7 +12,10 @@ namespace C3
         [STAThread]
         static void Main()
         {
+            C3.Communi.TestDeviceData.T();
+            return;
             C3App.App.Run();
+
         }
     }
 }

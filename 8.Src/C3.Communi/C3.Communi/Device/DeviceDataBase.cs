@@ -12,7 +12,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        DeviceDataBase()
+        protected DeviceDataBase()
         {
             this.DT = DateTime.Now;
         }
