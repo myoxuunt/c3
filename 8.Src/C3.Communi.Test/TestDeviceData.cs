@@ -74,7 +74,7 @@ namespace C3.Communi.Test
         /// 
         /// </summary>
 
-        [DeviceDataItem("DV", 0, Unit.Cm)]
+        [DeviceDataItem("DV", 0, Unit.Cm, "f4")]
         public double DoubleValue
         {
             get
@@ -93,7 +93,7 @@ namespace C3.Communi.Test
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("floatvalue", 4, Unit.M3PerHour)]
+        [DeviceDataItem("floatvalue", 4, Unit.M3PerHour, "f1")]
         public float FloatValue
         {
             get

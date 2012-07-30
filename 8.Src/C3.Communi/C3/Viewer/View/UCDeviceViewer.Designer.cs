@@ -35,6 +35,11 @@
             this.chStrategy = new System.Windows.Forms.ColumnHeader();
             this.chStatus = new System.Windows.Forms.ColumnHeader();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lvDeviceDataLast = new System.Windows.Forms.ListView();
+            this.chNO = new System.Windows.Forms.ColumnHeader();
+            this.chName = new System.Windows.Forms.ColumnHeader();
+            this.chValue = new System.Windows.Forms.ColumnHeader();
+            this.chUnit = new System.Windows.Forms.ColumnHeader();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -42,15 +47,15 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox1.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox1.Location = new System.Drawing.Point(283, 3);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(387, 173);
+            this.richTextBox1.Size = new System.Drawing.Size(101, 30);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "device viewer";
             // 
             // listView1
             // 
+            this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chOperaName,
             this.chLastExecute,
@@ -58,6 +63,7 @@
             this.chStatus});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
+            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(387, 199);
@@ -94,6 +100,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.lvDeviceDataLast);
             this.splitContainer1.Panel1.Controls.Add(this.richTextBox1);
             // 
             // splitContainer1.Panel2
@@ -102,6 +109,38 @@
             this.splitContainer1.Size = new System.Drawing.Size(387, 376);
             this.splitContainer1.SplitterDistance = 173;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // lvDeviceDataLast
+            // 
+            this.lvDeviceDataLast.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chNO,
+            this.chName,
+            this.chValue,
+            this.chUnit});
+            this.lvDeviceDataLast.FullRowSelect = true;
+            this.lvDeviceDataLast.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvDeviceDataLast.Location = new System.Drawing.Point(3, 44);
+            this.lvDeviceDataLast.Name = "lvDeviceDataLast";
+            this.lvDeviceDataLast.Size = new System.Drawing.Size(381, 126);
+            this.lvDeviceDataLast.TabIndex = 1;
+            this.lvDeviceDataLast.UseCompatibleStateImageBehavior = false;
+            this.lvDeviceDataLast.View = System.Windows.Forms.View.Details;
+            // 
+            // chNO
+            // 
+            this.chNO.Text = "NO";
+            // 
+            // chName
+            // 
+            this.chName.Text = "Name";
+            // 
+            // chValue
+            // 
+            this.chValue.Text = "Value";
+            // 
+            // chUnit
+            // 
+            this.chUnit.Text = "Unit";
             // 
             // UCDeviceViewer
             // 
@@ -126,5 +165,10 @@
         private System.Windows.Forms.ColumnHeader chStrategy;
         private System.Windows.Forms.ColumnHeader chStatus;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ListView lvDeviceDataLast;
+        private System.Windows.Forms.ColumnHeader chNO;
+        private System.Windows.Forms.ColumnHeader chName;
+        private System.Windows.Forms.ColumnHeader chValue;
+        private System.Windows.Forms.ColumnHeader chUnit;
     }
 }

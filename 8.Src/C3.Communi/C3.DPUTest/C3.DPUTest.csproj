@@ -40,6 +40,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\C3.Communi.Test\C3.Communi.Test.csproj">
+      <Project>{7E97D588-6159-4165-93B9-4CD90D22BB09}</Project>
+      <Name>C3.Communi.Test</Name>
+    </ProjectReference>
     <ProjectReference Include="..\C3.Communi\C3.Communi.csproj">
       <Project>{C66E606F-39F5-4B29-8187-0C6C454EA245}</Project>
       <Name>C3.Communi</Name>

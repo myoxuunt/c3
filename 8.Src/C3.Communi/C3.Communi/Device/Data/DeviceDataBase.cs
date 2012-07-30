@@ -30,7 +30,7 @@ namespace C3.Communi
         // TODO: 2012-07-30 
         // replace string
         //
-        [DeviceDataItem("时间", -1, Unit.None)]
+        [DeviceDataItem("时间", -1, Unit.None, "G")]
         public DateTime DT
         {
             get
@@ -90,7 +90,7 @@ namespace C3.Communi
                 DeviceDataItemAttribute att = item.Attribute;
                 PropertyInfo pi = item.PropertyInfo;
                 object value = pi.GetValue(this, null);
-                ReportItem reportItem = new ReportItem(att.Name, value, att.Unit);
+                ReportItem reportItem = new ReportItem(att.Name, value, att.Unit, att.Format);
                 reportItems.Add(reportItem);
             }
 

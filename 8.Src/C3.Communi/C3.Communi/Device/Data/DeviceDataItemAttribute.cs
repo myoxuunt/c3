@@ -13,14 +13,21 @@ namespace C3.Communi
     {
 
         #region Constructor
+
+        public DeviceDataItemAttribute(string name, int orderNumber, string unit)
+            : this(name, orderNumber, unit, null)
+        {
+            
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name"></param>
         /// <param name="orderNumber"></param>
         /// <param name="unit"></param>
-        public DeviceDataItemAttribute(string name, int orderNumber, string unit)
-            : this(name, orderNumber, Unit.FindByName(unit))
+        public DeviceDataItemAttribute(string name, int orderNumber, string unit, string format)
+            : this(name, orderNumber, Unit.FindByName(unit), format)
         {
 
         }
@@ -31,7 +38,7 @@ namespace C3.Communi
         /// <param name="name"></param>
         /// <param name="orderNumber"></param>
         /// <param name="unit"></param>
-        public DeviceDataItemAttribute(string name, int orderNumber, Unit unit)
+        public DeviceDataItemAttribute(string name, int orderNumber, Unit unit, string format)
         {
             this._name = name;
             this._orderNumber = orderNumber;
@@ -41,6 +48,8 @@ namespace C3.Communi
                 throw new ArgumentNullException("unit");
             }
             this._unit = unit;
+            this._format = format;
+            Console.WriteLine(this._format);
         }
         #endregion //Constructor
 

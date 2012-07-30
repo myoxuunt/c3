@@ -1,5 +1,5 @@
-
 using System;
+using System.Text;
 using Xdgk.Common;
 
 
@@ -117,18 +117,33 @@ namespace C3.Communi
         } private string _format;
         #endregion //Format
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string FormatedValue
+        {
+            get 
+            {
+                string format = string.Format("{{0:{0}}}", this.Format);
+                string s = string.Format(format, this.Value);
+                return s;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         public override string ToString()
         {
-            string s = string.Format(
-                    "Name: '{0}', Value: '{1}', Unit: '{2}'",
-                    this.Name, this.Value, this.Unit
-                    );
+            StringBuilder sb = new StringBuilder();
 
-            return s;
+            sb.AppendFormat("Name: '{0}', ", this.Name);
+            sb.AppendFormat("Value: '{0}', ", this.FormatedValue);
+            sb.AppendFormat("Unit: '{0}'", this.Unit.Text);
+
+            return sb.ToString();
         }
     }
 

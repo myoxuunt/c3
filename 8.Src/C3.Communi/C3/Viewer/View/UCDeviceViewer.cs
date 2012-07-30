@@ -11,10 +11,13 @@ namespace C3
 {
     public partial class UCDeviceViewer : UserControl
     {
+
+        #region UCDeviceViewer
         public UCDeviceViewer()
         {
             InitializeComponent();
         }
+        #endregion //UCDeviceViewer
 
         #region Device
         /// <summary>
@@ -33,16 +36,54 @@ namespace C3
                     _device = value;
                     this.richTextBox1.Text = DateTime.Now.ToString() + _device.ToString();
                     FillTaskListView();
+                    FillDeviceLastData();
                 }
             }
         } private IDevice _device;
         #endregion //Device
 
-        //private void frmTask_Load(object sender, EventArgs e)
-        //{
-        //    FillTaskListView();
-        //}
+        #region FillDeviceLastData
+        /// <summary>
+        /// 
+        /// </summary>
+        private void FillDeviceLastData()
+        {
+            if (this.Device != null)
+            {
+                this.lvDeviceDataLast.Items.Clear();
 
+                IDeviceData lastData = Device.LastData;
+                if (lastData != null)
+                {
+                    ReportItemCollection reportItems = lastData.GetReportItems();
+                    for (int i = 0; i < reportItems.Count; i++)
+                    {
+                        ReportItem item = reportItems[i];
+                        ListViewItem lvi = CreateListViewItem(i + 1,item);
+                        this.lvDeviceDataLast.Items.Add(lvi);
+                    }
+                }
+            }
+        }
+        #endregion //FillDeviceLastData
+
+        #region CreateListViewItem
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private ListViewItem CreateListViewItem(int no, ReportItem item)
+        {
+            string[] items = new string[] { no.ToString(), item.Name, item.FormatedValue, item.Unit.Text };
+
+            ListViewItem lvi = new ListViewItem(items);
+            lvi.Tag = item;
+            return lvi;
+        }
+        #endregion //CreateListViewItem
+
+        #region FillTaskListView
         /// <summary>
         /// 
         /// </summary>
@@ -66,7 +107,9 @@ namespace C3
                 }
             }
         }
+        #endregion //FillTaskListView
 
+        #region CreateTaskListViewItem
         /// <summary>
         /// 
         /// </summary>
@@ -80,5 +123,6 @@ namespace C3
             ListViewItem lvi = new ListViewItem(items);
             return lvi;
         }
+        #endregion //CreateTaskListViewItem
     }
 }

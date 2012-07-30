@@ -58,6 +58,7 @@ namespace C3.DPUTest
             d.StationGuid = deviceSource.StationGuid;
             //d.Tasks = 
             d.Dpu = this.Dpu;
+            d.LastData = new C3.Communi.Test.TestDeviceData();
             return d;
         }
     }
