@@ -161,6 +161,17 @@ namespace C3.Communi
         } private UnitType _unitType;
         #endregion //UnitType
 
+        #region ToString
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return this.Text;
+        }
+        #endregion //ToString
+
     }
 
 }

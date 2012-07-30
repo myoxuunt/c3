@@ -15,5 +15,8 @@ namespace C3.Communi
         // report item data struct
         // name value unit
         // 
+
+        ReportItemCollection GetReportItems();
+
     }
 }

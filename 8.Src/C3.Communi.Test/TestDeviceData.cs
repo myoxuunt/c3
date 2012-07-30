@@ -10,9 +10,32 @@ namespace C3.Communi.Test
     [TestFixture]
     public class TestDeviceData : DeviceDataBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return base.ToString();
+        }
+
+        [Test]
+        public void AttributePropertyInfoTest()
+        {
+            TestDeviceData dat = new TestDeviceData();
+            AttributePropertyInfoPairCollection aps = dat.GetDeviceDataItemAttributes();
+            Assert.AreEqual(5, aps.Count);
+
+            
+            Assert.AreEqual(aps[0].Attribute.Name, "Ê±¼ä");
+            Assert.AreEqual(aps[3].Attribute.Name, "floatvalue");
+
+            foreach (AttributePropertyInfoPair item in aps)
+            {
+                string s = string.Format("{0}, {1}", item.Attribute.OrderNumber ,item.Attribute.Name );
+                Console.WriteLine(s);
+            }
+
         }
 
         [Test]
@@ -32,6 +55,17 @@ namespace C3.Communi.Test
                     Console.WriteLine("{0} {1} {2} {3}", att.Name, att.OrderNumber, value, att.Unit.Text);
 
                 }
+            }
+        }
+
+        [Test]
+        public void GetReportItemsTest()
+        {
+            TestDeviceData dat = new TestDeviceData();
+            ReportItemCollection ris = dat.GetReportItems();
+            foreach (ReportItem r in ris)
+            {
+                Console.WriteLine(r);
             }
         }
 
@@ -59,7 +93,7 @@ namespace C3.Communi.Test
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("intvalue", 4, Unit.M3PerHour)]
+        [DeviceDataItem("floatvalue", 4, Unit.M3PerHour)]
         public float FloatValue
         {
             get
