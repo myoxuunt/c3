@@ -66,7 +66,9 @@
     <Compile Include="DataField\Datafield.cs" />
     <Compile Include="DataField\DatafieldCollection.cs" />
     <Compile Include="DataField\DatafieldManager.cs" />
-    <Compile Include="Device\Data\_.cs" />
+    <Compile Include="Device\Data\DeviceDataItemAttribute.cs" />
+    <Compile Include="Device\Data\Unit.cs" />
+    <Compile Include="Device\Data\UnitType.cs" />
     <Compile Include="Device\DeviceBase.cs" />
     <Compile Include="Device\DeviceCollection.cs" />
     <Compile Include="Device\DeviceDataBase.cs" />
