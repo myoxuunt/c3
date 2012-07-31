@@ -83,6 +83,7 @@
     <Compile Include="Device\DeviceSourceBase.cs" />
     <Compile Include="Device\ReportItem.cs" />
     <Compile Include="Device\ReportItemCollection.cs" />
+    <Compile Include="Task\TaskManager.cs" />
     <Compile Include="Error\Error.cs" />
     <Compile Include="Exception\AssemblyException.cs" />
     <Compile Include="AssemblyInfo\AssemblyInfo.cs" />

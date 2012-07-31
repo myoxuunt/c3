@@ -22,7 +22,7 @@ namespace C3.Communi
         IDeviceSource DeviceSource { get; set; }
 
         //TaskQueue Tasks { get; set; }
-        //ITask CurrentTask { get; set; }
+        //ITask Current { get; set; }
         TaskManager TaskManager { get; }
 
         IDPU Dpu { get; set; }

@@ -44,7 +44,7 @@ namespace C3
 
             if (_device != null)
             {
-                ITask current = _device.TaskManager.CurrentTask;
+                ITask current = _device.TaskManager.Current;
                 if (current != null)
                 {
                     ListViewItem taskLvi = CreateTaskListViewItem(current);

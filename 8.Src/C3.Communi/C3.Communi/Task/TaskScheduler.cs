@@ -70,7 +70,7 @@ namespace C3.Communi
         {
             // 1. current task
             //
-            ITask current = device.TaskManager.CurrentTask;
+            ITask current = device.TaskManager.Current;
             if (current != null)
             {
                 DoTask(current);
@@ -112,7 +112,7 @@ namespace C3.Communi
                         // clear current task
                         //
                         IDevice device = current.Device;
-                        device.TaskManager.CurrentTask = null;
+                        device.TaskManager.Current = null;
 
                         //
                         //
@@ -167,7 +167,7 @@ namespace C3.Communi
                         IDevice device = head.Device;
                         head.Begin(cp);
 
-                        device.TaskManager.CurrentTask = head;
+                        device.TaskManager.Current = head;
                         break;
                     }
                     else

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -6,11 +7,17 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using C3.Communi;
+using NLog;
 
 namespace C3
 {
     public partial class UCDeviceViewer : UserControl
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static private Logger _log = LogManager.GetCurrentClassLogger();
 
         #region UCDeviceViewer
         public UCDeviceViewer()
@@ -65,11 +72,72 @@ namespace C3
         /// </summary>
         private void RegisterEvents(IDevice device)
         {
-            DeviceDataManager man = device.DeviceDataManager;
-            man.LastDataChanged += new EventHandler(device_LastDataChanged);
+            DeviceDataManager dataMan = device.DeviceDataManager;
+            dataMan.LastDataChanged += new EventHandler(device_LastDataChanged);
 
+            //
+            //
+            TaskManager taskMan = device.TaskManager;
+            taskMan.CurrentChanged += new EventHandler(taskMan_CurrentChanged);
+            taskMan.CurrentStatusChanged += new EventHandler(taskMan_CurrentStatusChanged);
         }
         #endregion //RegisterEvents
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void taskMan_CurrentStatusChanged(object sender, EventArgs e)
+        {
+            TaskManager taskMan = sender as TaskManager;
+            ITask current = taskMan.Current;
+
+            UpdateTaskListViewItem(current);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        private void UpdateTaskListViewItem(ITask current)
+        {
+            ListViewItem lvi = FindTaskListViewItem(current);
+            Debug.Assert(lvi != null);
+
+            lvi.SubItems[lvTask.Columns.Count - 1].Text = current.Status.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        private ListViewItem FindTaskListViewItem(ITask current)
+        {
+            ListViewItem lvi = null;
+            foreach (ListViewItem item in this.lvTask.Items)
+            {
+                if (item.Tag == current)
+                {
+                    lvi = item;
+                    break;
+                }
+            }
+            return lvi;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void taskMan_CurrentChanged(object sender, EventArgs e)
+        {
+            TaskManager taskMan = sender as TaskManager;
+            ITask current = taskMan.Current;
+            FillTaskListView();
+        }
 
         #region UnregisterEvents
         /// <summary>
@@ -80,6 +148,12 @@ namespace C3
         {
             DeviceDataManager man = device.DeviceDataManager;
             man.LastDataChanged -= new EventHandler(device_LastDataChanged);
+
+            //
+            //
+            TaskManager taskMan = device.TaskManager;
+            taskMan.CurrentChanged -= new EventHandler(taskMan_CurrentChanged);
+            taskMan.CurrentStatusChanged -= new EventHandler(taskMan_CurrentStatusChanged);
         }
         #endregion //UnregisterEvents
 
@@ -151,10 +225,11 @@ namespace C3
 
             if (_device != null)
             {
-                ITask current = _device.TaskManager .CurrentTask;
+                ITask current = _device.TaskManager.Current;
                 if (current != null)
                 {
                     ListViewItem taskLvi = CreateTaskListViewItem(current);
+                    taskLvi.Text += "(c)";
                     this.lvTask.Items.Add(taskLvi);
                 }
 
@@ -179,6 +254,7 @@ namespace C3
                 "-",
                 task.Status.ToString() };
             ListViewItem lvi = new ListViewItem(items);
+            lvi.Tag = task;
             return lvi;
         }
         #endregion //CreateTaskListViewItem

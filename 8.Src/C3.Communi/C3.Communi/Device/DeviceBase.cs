@@ -228,9 +228,7 @@ namespace C3.Communi
 
         #endregion //DeviceDataManager
 
-        #region IDevice ≥…‘±
-
-
+        #region TaskManager
         /// <summary>
         /// 
         /// </summary>
@@ -246,71 +244,6 @@ namespace C3.Communi
             }
         } private TaskManager _taskManager;
 
-        #endregion
-    }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class TaskManager
-    {
-
-        #region Tasks
-        /// <summary>
-        /// 
-        /// </summary>
-        public TaskQueue Tasks
-        {
-            get
-            {
-                if (_tasks == null)
-                {
-                    _tasks = new TaskQueue();
-                }
-                return _tasks;
-            }
-            set
-            {
-                _tasks = value;
-            }
-        } private TaskQueue _tasks;
-        #endregion //Tasks
-
-        #region CurrentTask
-        /// <summary>
-        /// 
-        /// </summary>
-        public ITask CurrentTask
-        {
-            get
-            {
-                return _currentTask;
-            }
-            set
-            {
-                if (_currentTask != value)
-                {
-                    if (value != null)
-                    {
-                        // check task status
-                        //
-                        if (value.Status != TaskStatus.Executing)
-                        {
-
-                            string msg = string.Format(
-                                "task status must is Executing, but is '{0}'",
-                                value.Status);
-
-                            throw new ArgumentException(msg);
-                        }
-                        // Debug.Assert(value.Status == TaskStatus.Executing);
-                    }
-
-                    _currentTask = value;
-                }
-            }
-        } private ITask _currentTask;
-        #endregion //CurrentTask
+        #endregion //TaskManager
     }
 }
