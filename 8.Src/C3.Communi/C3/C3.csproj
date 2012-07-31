@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\App.cs" />
+    <Compile Include="Utils\ListViewHelper.cs" />
     <Compile Include="Viewer\View\UCDeviceViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -236,7 +237,7 @@
     <Content Include="Res\Empty.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BytesConverterView\" />
+    <Folder Include="Forms\BytesConverterView\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

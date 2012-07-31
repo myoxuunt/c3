@@ -31,16 +31,66 @@ namespace C3
             }
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Device");
+                }
+
                 if (_device != value)
                 {
+                    if (_device != null)
+                    {
+                        UnregisterEvents(_device);
+                    }
+
                     _device = value;
+
+
                     this.richTextBox1.Text = DateTime.Now.ToString() + _device.ToString();
+
                     FillTaskListView();
                     FillDeviceLastData();
+
+                    //
+                    //
+                    RegisterEvents(_device);
                 }
             }
         } private IDevice _device;
         #endregion //Device
+
+        #region UnregisterEvents
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
+        private void UnregisterEvents(IDevice device)
+        {
+            device.LastDataChanged -= new EventHandler(device_LastDataChanged);
+        }
+        #endregion //UnregisterEvents
+
+        #region RegisterEvents
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RegisterEvents(IDevice device)
+        {
+            device.LastDataChanged += new EventHandler(device_LastDataChanged);
+        }
+        #endregion //RegisterEvents
+
+        #region device_LastDataChanged
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void device_LastDataChanged(object sender, EventArgs e)
+        {
+            this.FillDeviceLastData();
+        }
+        #endregion //device_LastDataChanged
 
         #region FillDeviceLastData
         /// <summary>
@@ -50,6 +100,8 @@ namespace C3
         {
             if (this.Device != null)
             {
+                int selectedIdx = ListViewHelper.GetSelectedIndex(this.lvDeviceDataLast);
+
                 this.lvDeviceDataLast.Items.Clear();
 
                 IDeviceData lastData = Device.LastData;
@@ -59,9 +111,12 @@ namespace C3
                     for (int i = 0; i < reportItems.Count; i++)
                     {
                         ReportItem item = reportItems[i];
-                        ListViewItem lvi = CreateListViewItem(i + 1,item);
+                        int no = i + 1;
+                        ListViewItem lvi = CreateListViewItem(no, item);
                         this.lvDeviceDataLast.Items.Add(lvi);
                     }
+
+                    ListViewHelper.SetSelectedIndex(this.lvDeviceDataLast, selectedIdx);
                 }
             }
         }
@@ -125,4 +180,5 @@ namespace C3
         }
         #endregion //CreateTaskListViewItem
     }
+
 }

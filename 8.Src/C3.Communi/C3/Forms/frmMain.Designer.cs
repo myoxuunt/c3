@@ -54,6 +54,7 @@
             this.tssListenPort = new System.Windows.Forms.ToolStripStatusLabel();
             this.sc1 = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.mnuTest = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sc1.SuspendLayout();
@@ -213,7 +214,8 @@
             // mnuHelp
             // 
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuAbout});
+            this.mnuAbout,
+            this.mnuTest});
             this.mnuHelp.Name = "mnuHelp";
             this.mnuHelp.Size = new System.Drawing.Size(58, 20);
             this.mnuHelp.Text = "帮助(&H)";
@@ -221,7 +223,7 @@
             // mnuAbout
             // 
             this.mnuAbout.Name = "mnuAbout";
-            this.mnuAbout.Size = new System.Drawing.Size(113, 22);
+            this.mnuAbout.Size = new System.Drawing.Size(152, 22);
             this.mnuAbout.Text = "关于(&A)";
             this.mnuAbout.Click += new System.EventHandler(this.mnuAbout_Click);
             // 
@@ -265,7 +267,14 @@
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // frmMain
+            // mnuTest
+            // 
+            this.mnuTest.Name = "mnuTest";
+            this.mnuTest.Size = new System.Drawing.Size(152, 22);
+            this.mnuTest.Text = "Test";
+            this.mnuTest.Click += new System.EventHandler(this.mnuTest_Click);
+            // 
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -315,6 +324,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuCommuniDetail;
         private System.Windows.Forms.ToolStripMenuItem mnuM;
         private System.Windows.Forms.ToolStripMenuItem mnuTaskView;
+        private System.Windows.Forms.ToolStripMenuItem mnuTest;
     }
 }
 

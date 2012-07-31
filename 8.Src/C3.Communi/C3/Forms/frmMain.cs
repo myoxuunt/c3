@@ -214,6 +214,24 @@ namespace C3
                 //f.ShowDialog(this);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuTest_Click(object sender, EventArgs e)
+        {
+            Test();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void Test()
+        {
+            string s = Soft.Hardware.Stations[0].Devices[0].ToString ();
+        }
     }
 
 

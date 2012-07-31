@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Xdgk.Common;
 using System.Diagnostics;
 
@@ -79,10 +80,64 @@ namespace C3.Communi
             }
             set
             {
-                _lastData = value;
+                if (value != null && _lastData != value)
+                {
+                    _lastData = value;
+                    this.DeviceDatas.Add(_lastData);
+
+                    if (Soft.IsUseUISynchronizationContext)
+                    {
+                        Soft.Post(this.OnLastDataChangedCallback, EventArgs.Empty);
+                    }
+                    else
+                    {
+                        OnLastDataChanged(EventArgs.Empty);
+                    }
+                }
             }
         } private IDeviceData _lastData;
         #endregion //LastData
+
+        #region OnLastDataChanged
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        private void OnLastDataChanged(object obj)
+        {
+            EventArgs e = (EventArgs)obj;
+            this.OnLastDataChanged(e);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eventArgs"></param>
+        private void OnLastDataChanged(EventArgs e)
+        {
+            if (this.LastDataChanged != null)
+            {
+                this.LastDataChanged(this, e);
+            }
+        }
+        #endregion //OnLastDataChanged
+
+        #region OnLastDataChangedCallback
+        // <summary>
+        /// 
+        /// </summary>
+        private SendOrPostCallback OnLastDataChangedCallback
+        {
+            get
+            {
+                if (_onLastDataChangedCallback == null)
+                {
+                    _onLastDataChangedCallback = new SendOrPostCallback(OnLastDataChanged);
+                }
+                return _onLastDataChangedCallback;
+            }
+        } private SendOrPostCallback _onLastDataChangedCallback;
+        #endregion //OnLastDataChangedCallback
 
         #region DeviceDatas
         /// <summary>
@@ -298,5 +353,12 @@ namespace C3.Communi
         } private object _tag;
 
         #endregion //
+
+        #region Events
+        /// <summary>
+        /// 
+        /// </summary>
+        public event EventHandler LastDataChanged;
+        #endregion //Events
     }
 }

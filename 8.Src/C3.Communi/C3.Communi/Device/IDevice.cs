@@ -7,8 +7,12 @@ namespace C3.Communi
     public interface IDevice : ITag 
     {
         Int64 Address { get; set; }
+
         string Name { get; set; }
+        string Text { get; set; }
+
         IStation Station { get; set; }
+
         IDeviceData LastData { get; set; }
         DeviceDataCollection DeviceDatas { get; }
 
@@ -22,7 +26,7 @@ namespace C3.Communi
         Guid StationGuid { get; set; }
         CommuniDetailCollection CommuniDetails { get; set; }
 
-        string Text { get; set; }
+        event EventHandler LastDataChanged;
 
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using C3.Communi;
+using System.Windows.Forms;
 
 namespace C3.DPUTest
 {
@@ -35,6 +36,26 @@ namespace C3.DPUTest
 
     public class TDevice : DeviceBase
     {
+            System.Windows.Forms.Timer _t = new Timer();
+        public TDevice()
+        {
+            _t.Interval = 1000;
+            _t.Tick += new EventHandler(_t_Tick);
+            _t.Start();
+        }
+
+        void _t_Tick(object sender, EventArgs e)
+        {
+            Console.WriteLine("Test");
+            this.LastData = new C3.Communi.Test.TestDeviceData();
+
+        }
+
+        public override string ToString()
+        {
+            //this.LastData = new C3.Communi.Test.TestDeviceData();
+            return base.ToString();
+        }
     }
 
     /// <summary>
