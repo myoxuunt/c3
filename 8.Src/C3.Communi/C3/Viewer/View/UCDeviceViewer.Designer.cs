@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvTask = new System.Windows.Forms.ListView();
             this.chOperaName = new System.Windows.Forms.ColumnHeader();
             this.chLastExecute = new System.Windows.Forms.ColumnHeader();
             this.chStrategy = new System.Windows.Forms.ColumnHeader();
@@ -53,23 +53,22 @@
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "device viewer";
             // 
-            // listView1
+            // lvTask
             // 
-            this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvTask.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chOperaName,
             this.chLastExecute,
             this.chStrategy,
             this.chStatus});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.FullRowSelect = true;
-            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(387, 199);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lvTask.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvTask.FullRowSelect = true;
+            this.lvTask.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.lvTask.Location = new System.Drawing.Point(0, 0);
+            this.lvTask.Name = "lvTask";
+            this.lvTask.Size = new System.Drawing.Size(387, 199);
+            this.lvTask.TabIndex = 1;
+            this.lvTask.UseCompatibleStateImageBehavior = false;
+            this.lvTask.View = System.Windows.Forms.View.Details;
             // 
             // chOperaName
             // 
@@ -105,7 +104,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.listView1);
+            this.splitContainer1.Panel2.Controls.Add(this.lvTask);
             this.splitContainer1.Size = new System.Drawing.Size(387, 376);
             this.splitContainer1.SplitterDistance = 173;
             this.splitContainer1.TabIndex = 2;
@@ -159,7 +158,7 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lvTask;
         private System.Windows.Forms.ColumnHeader chOperaName;
         private System.Windows.Forms.ColumnHeader chLastExecute;
         private System.Windows.Forms.ColumnHeader chStrategy;

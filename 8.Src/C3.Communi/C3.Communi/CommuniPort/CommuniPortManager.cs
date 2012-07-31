@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using NLog;
 
 namespace C3.Communi
 {
@@ -8,6 +9,10 @@ namespace C3.Communi
     /// </summary>
     public class CommuniPortManager
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        static private Logger _log = LogManager.GetCurrentClassLogger();
 
         #region Events
         public event CommuniPortEventHandler AddedCommuniPort;
@@ -147,6 +152,7 @@ namespace C3.Communi
             {
                 // TODO: log ERROR
                 //
+                _log.Fatal(ex);
             }
 
             if (cp != null)

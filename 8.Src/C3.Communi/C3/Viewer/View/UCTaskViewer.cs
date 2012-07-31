@@ -44,14 +44,14 @@ namespace C3
 
             if (_device != null)
             {
-                ITask current = _device.CurrentTask;
+                ITask current = _device.TaskManager.CurrentTask;
                 if (current != null)
                 {
                     ListViewItem taskLvi = CreateTaskListViewItem(current);
                     this.listView1.Items.Add(taskLvi);
                 }
 
-                foreach (ITask task in _device.Tasks.ToArray())
+                foreach (ITask task in _device.TaskManager.Tasks.ToArray())
                 {
                     ListViewItem lvi = CreateTaskListViewItem(task);
                     this.listView1.Items.Add(lvi);

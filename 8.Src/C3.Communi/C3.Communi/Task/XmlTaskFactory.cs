@@ -45,7 +45,7 @@ namespace C3.Communi
 
                     Strategy strategy = td.StrategyDefine.Create();
                     Task t = new Task(device, opera, strategy, td.TimeOut);
-                    device.Tasks.Enqueue(t);
+                    device.TaskManager.Tasks.Enqueue(t);
 
                     tasks.Add(t);
                 }

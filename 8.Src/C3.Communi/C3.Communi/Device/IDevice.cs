@@ -21,8 +21,10 @@ namespace C3.Communi
 
         IDeviceSource DeviceSource { get; set; }
 
-        TaskQueue Tasks { get; set; }
-        ITask CurrentTask { get; set; }
+        //TaskQueue Tasks { get; set; }
+        //ITask CurrentTask { get; set; }
+        TaskManager TaskManager { get; }
+
         IDPU Dpu { get; set; }
 
         Guid Guid { get; set; }

@@ -70,14 +70,14 @@ namespace C3.Communi
         {
             // 1. current task
             //
-            ITask current = device.CurrentTask;
+            ITask current = device.TaskManager.CurrentTask;
             if (current != null)
             {
                 DoTask(current);
             }
             else
             {
-                DoTasks(device.Tasks);
+                DoTasks(device.TaskManager.Tasks);
             }
         }
 
@@ -112,13 +112,13 @@ namespace C3.Communi
                         // clear current task
                         //
                         IDevice device = current.Device;
-                        device.CurrentTask = null;
+                        device.TaskManager.CurrentTask = null;
 
                         //
                         //
                         if (current.Status == TaskStatus.Wating)
                         {
-                            device.Tasks.Enqueue(current);
+                            device.TaskManager.Tasks.Enqueue(current);
                         }
                     }
                     break;
@@ -167,7 +167,7 @@ namespace C3.Communi
                         IDevice device = head.Device;
                         head.Begin(cp);
 
-                        device.CurrentTask = head;
+                        device.TaskManager.CurrentTask = head;
                         break;
                     }
                     else

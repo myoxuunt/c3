@@ -59,6 +59,18 @@ namespace C3
         } private IDevice _device;
         #endregion //Device
 
+        #region RegisterEvents
+        /// <summary>
+        /// 
+        /// </summary>
+        private void RegisterEvents(IDevice device)
+        {
+            DeviceDataManager man = device.DeviceDataManager;
+            man.LastDataChanged += new EventHandler(device_LastDataChanged);
+
+        }
+        #endregion //RegisterEvents
+
         #region UnregisterEvents
         /// <summary>
         /// 
@@ -70,17 +82,6 @@ namespace C3
             man.LastDataChanged -= new EventHandler(device_LastDataChanged);
         }
         #endregion //UnregisterEvents
-
-        #region RegisterEvents
-        /// <summary>
-        /// 
-        /// </summary>
-        private void RegisterEvents(IDevice device)
-        {
-            DeviceDataManager man = device.DeviceDataManager;
-            man.LastDataChanged += new EventHandler(device_LastDataChanged);
-        }
-        #endregion //RegisterEvents
 
         #region device_LastDataChanged
         /// <summary>
@@ -146,21 +147,21 @@ namespace C3
         /// </summary>
         private void FillTaskListView()
         {
-            this.listView1.Items.Clear();
+            this.lvTask.Items.Clear();
 
             if (_device != null)
             {
-                ITask current = _device.CurrentTask;
+                ITask current = _device.TaskManager .CurrentTask;
                 if (current != null)
                 {
                     ListViewItem taskLvi = CreateTaskListViewItem(current);
-                    this.listView1.Items.Add(taskLvi);
+                    this.lvTask.Items.Add(taskLvi);
                 }
 
-                foreach (ITask task in _device.Tasks.ToArray())
+                foreach (ITask task in _device.TaskManager.Tasks.ToArray())
                 {
                     ListViewItem lvi = CreateTaskListViewItem(task);
-                    this.listView1.Items.Add(lvi);
+                    this.lvTask.Items.Add(lvi);
                 }
             }
         }

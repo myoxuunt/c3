@@ -130,7 +130,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="TaskScheduler.cs" />
+    <Compile Include="Task\TaskScheduler.cs" />
     <Compile Include="Task\CycleStrategyDefine.cs" />
     <Compile Include="Task\ImmediateStrategyDefine.cs" />
     <Compile Include="Task\StrategyDefine.cs" />
