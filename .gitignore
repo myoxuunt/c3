@@ -5,3 +5,5 @@ debug
 *.dll
 # mstest test results
 TestResults
+
+/8.Src/_ReSharper.C3.Communi
