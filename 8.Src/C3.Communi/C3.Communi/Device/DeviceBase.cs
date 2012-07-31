@@ -68,94 +68,6 @@ namespace C3.Communi
         } private IStation _station;
         #endregion //Station
 
-        #region LastData
-        /// <summary>
-        /// 
-        /// </summary>
-        public IDeviceData LastData
-        {
-            get
-            {
-                return _lastData;
-            }
-            set
-            {
-                if (value != null && _lastData != value)
-                {
-                    _lastData = value;
-                    this.DeviceDatas.Add(_lastData);
-
-                    if (Soft.IsUseUISynchronizationContext)
-                    {
-                        Soft.Post(this.OnLastDataChangedCallback, EventArgs.Empty);
-                    }
-                    else
-                    {
-                        OnLastDataChanged(EventArgs.Empty);
-                    }
-                }
-            }
-        } private IDeviceData _lastData;
-        #endregion //LastData
-
-        #region OnLastDataChanged
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        private void OnLastDataChanged(object obj)
-        {
-            EventArgs e = (EventArgs)obj;
-            this.OnLastDataChanged(e);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="eventArgs"></param>
-        private void OnLastDataChanged(EventArgs e)
-        {
-            if (this.LastDataChanged != null)
-            {
-                this.LastDataChanged(this, e);
-            }
-        }
-        #endregion //OnLastDataChanged
-
-        #region OnLastDataChangedCallback
-        // <summary>
-        /// 
-        /// </summary>
-        private SendOrPostCallback OnLastDataChangedCallback
-        {
-            get
-            {
-                if (_onLastDataChangedCallback == null)
-                {
-                    _onLastDataChangedCallback = new SendOrPostCallback(OnLastDataChanged);
-                }
-                return _onLastDataChangedCallback;
-            }
-        } private SendOrPostCallback _onLastDataChangedCallback;
-        #endregion //OnLastDataChangedCallback
-
-        #region DeviceDatas
-        /// <summary>
-        /// 
-        /// </summary>
-        public DeviceDataCollection DeviceDatas
-        {
-            get
-            {
-                if (_deviceDatas == null)
-                {
-                    _deviceDatas = new DeviceDataCollection();
-                }
-                return _deviceDatas;
-            }
-        } private DeviceDataCollection _deviceDatas;
-        #endregion //DeviceDatas
-
         #region DeviceSource
         /// <summary>
         /// 
@@ -354,11 +266,22 @@ namespace C3.Communi
 
         #endregion //
 
-        #region Events
+        #region DeviceDataManager
         /// <summary>
         /// 
         /// </summary>
-        public event EventHandler LastDataChanged;
-        #endregion //Events
+        public DeviceDataManager DeviceDataManager
+        {
+            get 
+            {
+                if (_deviceDataManager==null)
+                {
+                    _deviceDataManager = new DeviceDataManager();
+                }
+                return _deviceDataManager;
+            }
+        } private DeviceDataManager _deviceDataManager;
+
+        #endregion //DeviceDataManager
     }
 }

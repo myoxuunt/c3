@@ -47,7 +47,7 @@ namespace C3.DPUTest
         void _t_Tick(object sender, EventArgs e)
         {
             Console.WriteLine("Test");
-            this.LastData = new C3.Communi.Test.TestDeviceData();
+            this.DeviceDataManager.Last = new C3.Communi.Test.TestDeviceData();
 
         }
 
@@ -79,7 +79,7 @@ namespace C3.DPUTest
             d.StationGuid = deviceSource.StationGuid;
             //d.Tasks = 
             d.Dpu = this.Dpu;
-            d.LastData = new C3.Communi.Test.TestDeviceData();
+            d.DeviceDataManager.Last = new C3.Communi.Test.TestDeviceData();
             return d;
         }
     }

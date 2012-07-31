@@ -196,7 +196,6 @@ namespace C3.Communi
         } private HardwareFactory _hardwareFactory;
         #endregion //HardwareFactory
 
-
         #region SourceConfigs
         private SourceConfigCollection SourceConfigs
         {
@@ -236,7 +235,6 @@ namespace C3.Communi
             return sourceConfigs;
         }
         #endregion //ReadSourceConfigs
-
 
         #region BytesConverterManager
         /// <summary>

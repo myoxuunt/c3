@@ -230,7 +230,7 @@ namespace C3
         /// </summary>
         private void Test()
         {
-            string s = Soft.Hardware.Stations[0].Devices[0].ToString ();
+            //string s = Soft.Hardware.Stations[0].Devices[0].ToString();
         }
     }
 

@@ -66,7 +66,8 @@ namespace C3
         /// <param name="device"></param>
         private void UnregisterEvents(IDevice device)
         {
-            device.LastDataChanged -= new EventHandler(device_LastDataChanged);
+            DeviceDataManager man = device.DeviceDataManager;
+            man.LastDataChanged -= new EventHandler(device_LastDataChanged);
         }
         #endregion //UnregisterEvents
 
@@ -76,7 +77,8 @@ namespace C3
         /// </summary>
         private void RegisterEvents(IDevice device)
         {
-            device.LastDataChanged += new EventHandler(device_LastDataChanged);
+            DeviceDataManager man = device.DeviceDataManager;
+            man.LastDataChanged += new EventHandler(device_LastDataChanged);
         }
         #endregion //RegisterEvents
 
@@ -104,7 +106,7 @@ namespace C3
 
                 this.lvDeviceDataLast.Items.Clear();
 
-                IDeviceData lastData = Device.LastData;
+                IDeviceData lastData = Device.DeviceDataManager.Last;
                 if (lastData != null)
                 {
                     ReportItemCollection reportItems = lastData.GetReportItems();

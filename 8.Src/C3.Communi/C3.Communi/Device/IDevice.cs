@@ -13,8 +13,11 @@ namespace C3.Communi
 
         IStation Station { get; set; }
 
-        IDeviceData LastData { get; set; }
-        DeviceDataCollection DeviceDatas { get; }
+        //IDeviceData LastData { get; set; }
+        //DeviceDataCollection DeviceDatas { get; }
+        //event EventHandler LastDataChanged;
+
+        DeviceDataManager DeviceDataManager { get; }
 
         IDeviceSource DeviceSource { get; set; }
 
@@ -26,7 +29,6 @@ namespace C3.Communi
         Guid StationGuid { get; set; }
         CommuniDetailCollection CommuniDetails { get; set; }
 
-        event EventHandler LastDataChanged;
 
     }
 
