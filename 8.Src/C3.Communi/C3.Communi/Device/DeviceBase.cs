@@ -6,7 +6,7 @@ using System.Diagnostics;
 namespace C3.Communi
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     abstract public class DeviceBase : IDevice
     {
