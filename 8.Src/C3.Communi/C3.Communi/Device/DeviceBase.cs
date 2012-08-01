@@ -10,21 +10,24 @@ namespace C3.Communi
     /// </summary>
     abstract public class DeviceBase : IDevice
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deviceType"></param>
-        protected DeviceBase(string name, DeviceType deviceType, Int64 address)
-        {
-            this.Name = name;
-            this.DeviceType = deviceType;
-            this.Address = address;
-        }
+        //#region DeviceBase
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="deviceType"></param>
+        //protected DeviceBase(string name, DeviceType deviceType, Int64 address)
+        //{
+        //    this.Name = name;
+        //    this.DeviceType = deviceType;
+        //    this.Address = address;
+        //}
+        //#endregion //DeviceBase
 
         #region Address
         /// <summary>
         /// 
         /// </summary>
+        [DeviceInfo("Address",-1)]
         public Int64 Address
         {
             get
@@ -42,6 +45,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
+        [DeviceInfo ("Name",-2)]
         public string Name
         {
             get
@@ -141,6 +145,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
+        [DeviceInfo("guid",1)]
         public Guid Guid
         {
             get
@@ -268,6 +273,12 @@ namespace C3.Communi
         {
             get
             {
+                if (_deviceType == null)
+                {
+                    // TODO: 2012-08-01
+                    //
+                    _deviceType = DeviceTypeManager.GetDeviceType(this.GetType().Name);
+                }
                 return _deviceType;
             }
             set

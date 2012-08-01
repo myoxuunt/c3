@@ -11,6 +11,7 @@ namespace C3.Communi
     public class AttributePropertyInfoPair
     {
 
+        
         #region AttributePropertyInfoPair
         /// <summary>
         /// 

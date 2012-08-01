@@ -12,25 +12,40 @@ namespace C3
 {
     public partial class frmCommuniDetails : Form
     {
+
+        #region ViewOption class
         /// <summary>
         /// 
         /// </summary>
         private class ViewOption
         {
+            #region Members
             private bool _enabled;
             private bool _passValue;
 
             /// <summary>
             /// 
             /// </summary>
+            static public ViewOption
+                All = new ViewOption(false, false),
+                OnlySuccess = new ViewOption(true, true),
+                OnlyFail = new ViewOption(true, false);
+            #endregion //Members
+
+            #region ViewOption
+            /// <summary>
+            /// 
+            /// </summary>
             /// <param name="enabled"></param>
             /// <param name="passValue"></param>
-            private ViewOption ( bool enabled, bool passValue )
+            private ViewOption(bool enabled, bool passValue)
             {
                 _enabled = enabled;
                 _passValue = passValue;
             }
+            #endregion //ViewOption
 
+            #region IsPass
             /// <summary>
             /// 
             /// </summary>
@@ -47,16 +62,11 @@ namespace C3
                     return true;
                 }
             }
-
-            /// <summary>
-            /// 
-            /// </summary>
-            static public ViewOption 
-                All = new ViewOption(false, false),
-                OnlySuccess = new ViewOption(true, true),
-                OnlyFail = new ViewOption(true, false);
+            #endregion //IsPass
         }
+        #endregion //ViewOption class
 
+        #region Members
         /// <summary>
         /// 
         /// </summary>
@@ -66,18 +76,21 @@ namespace C3
         /// 
         /// </summary>
         private IDevice _device;
+
         /// <summary>
         /// 
         /// </summary>
-        private CommuniDetailCollection  _communiDetailQueue;
+        private CommuniDetailCollection _communiDetailQueue;
+        #endregion //Members
 
+        #region frmCommuniDetails
         /// <summary>
         /// 
         /// </summary>
         /// <param name="device"></param>
         /// <param name="communiDetailQueue"></param>
         public frmCommuniDetails(IDevice device,
-            CommuniDetailCollection  communiDetailQueue)
+            CommuniDetailCollection communiDetailQueue)
         {
             InitializeComponent();
 
@@ -97,7 +110,9 @@ namespace C3
             FillComboBox();
             Fill();
         }
+        #endregion //frmCommuniDetails
 
+        #region SetFormText
         /// <summary>
         /// 
         /// </summary>
@@ -110,7 +125,9 @@ namespace C3
                 device.Text
                 );
         }
+        #endregion //SetFormText
 
+        #region SelectedViewOption
         /// <summary>
         /// 
         /// </summary>
@@ -121,7 +138,9 @@ namespace C3
                 return (ViewOption)this.cmbView.SelectedValue;
             }
         }
+        #endregion //SelectedViewOption
 
+        #region ViewSource
         /// <summary>
         /// 
         /// </summary>
@@ -139,7 +158,9 @@ namespace C3
                 return _viewSource;
             }
         } private KeyValueCollection _viewSource;
+        #endregion //ViewSource
 
+        #region FillComboBox
         /// <summary>
         /// 
         /// </summary>
@@ -152,7 +173,9 @@ namespace C3
 
             this.cmbView.SelectedValue = ViewOption.All;
         }
+        #endregion //FillComboBox
 
+        #region Fill
         /// <summary>
         /// 
         /// </summary>
@@ -175,7 +198,9 @@ namespace C3
             }
             this.richTextBox1.AppendText(sb.ToString());
         }
+        #endregion //Fill
 
+        #region GetBytesString
         /// <summary>
         /// 
         /// </summary>
@@ -191,7 +216,9 @@ namespace C3
             string s = string.Format("[{0:000}] ", bs.Length) + BitConverter.ToString(bs);
             return s;
         }
+        #endregion //GetBytesString
 
+        #region btnCopyContext_Click
         /// <summary>
         /// 
         /// </summary>
@@ -204,7 +231,9 @@ namespace C3
                 Clipboard.SetText(this.richTextBox1.Text);
             }
         }
+        #endregion //btnCopyContext_Click
 
+        #region cmbView_SelectedIndexChanged
         /// <summary>
         /// 
         /// </summary>
@@ -214,10 +243,6 @@ namespace C3
         {
             Fill();
         }
-
-        private void frmCommuniDetails_Load(object sender, EventArgs e)
-        {
-
-        }
+        #endregion //cmbView_SelectedIndexChanged
     }
 }

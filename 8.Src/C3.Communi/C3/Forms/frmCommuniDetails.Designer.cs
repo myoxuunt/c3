@@ -88,9 +88,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmCommuniDetails";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "communiDetail";
-            this.Load += new System.EventHandler(this.frmCommuniDetails_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

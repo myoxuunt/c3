@@ -11,6 +11,7 @@ namespace C3.Communi
         IDevicePersister DevicePersister { get; set; }
         IDeviceSourceProvider DeviceSourceProvider { get; set; }
         ITaskProcessor Processor { get; set; }
+        IDeviceUI DeviceUI { get; set; }
     }
 
 }

@@ -116,5 +116,29 @@ namespace C3.Communi
         } private ITaskProcessor _taskProcessor;
         #endregion //Processor
 
+
+        #region DeviceUI
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IDeviceUI DeviceUI
+        {
+            get
+            {
+                if (_deviceUI ==null)
+                {
+                    _deviceUI = new DeviceUI();
+                }
+                return _deviceUI;
+            }
+            set
+            {
+                _deviceUI = value;
+            }
+        } private IDeviceUI _deviceUI;
+
+        #endregion //DeviceUI
     }
 }

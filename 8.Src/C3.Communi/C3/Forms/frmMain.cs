@@ -232,6 +232,17 @@ namespace C3
         {
             //string s = Soft.Hardware.Stations[0].Devices[0].ToString();
         }
+
+        private void mnuDeviceEdit_Click(object sender, EventArgs e)
+        {
+            DeviceTreeNode deviceNode = this._hardwareTreeView.SelectedNode as DeviceTreeNode;
+            if (deviceNode != null)
+            {
+                IDevice d = deviceNode.Device;
+                IDeviceUI ui = d.Dpu.DeviceUI;
+                DialogResult dr = ui.Edit(d);
+            }
+        }
     }
 
 
