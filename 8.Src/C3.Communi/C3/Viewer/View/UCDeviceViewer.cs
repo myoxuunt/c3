@@ -29,6 +29,7 @@ namespace C3
         }
         #endregion //UCDeviceViewer
 
+        #region InitListView
         /// <summary>
         /// 
         /// </summary>
@@ -54,12 +55,13 @@ namespace C3
             this.chStrategy.Text = TaskResource.Strategy;
             this.chStatus.Text = TaskResource.Status;
 
-            this.chOperaName.Width =int.Parse( TaskResource.NameWidth);
-            this.chLastExecute.Width =int.Parse( TaskResource.LastExecuteWidth);
-            this.chStrategy.Width =int.Parse( TaskResource.StrategyWidth);
-            this.chStatus.Width =int.Parse( TaskResource.StatusWidth);
+            this.chOperaName.Width = int.Parse(TaskResource.NameWidth);
+            this.chLastExecute.Width = int.Parse(TaskResource.LastExecuteWidth);
+            this.chStrategy.Width = int.Parse(TaskResource.StrategyWidth);
+            this.chStatus.Width = int.Parse(TaskResource.StatusWidth);
 
         }
+        #endregion //InitListView
 
         #region Device
         /// <summary>
@@ -118,19 +120,22 @@ namespace C3
         }
         #endregion //RegisterEvents
 
+        #region taskMan_CurrentStatusChanged
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void taskMan_CurrentStatusChanged(object sender, EventArgs e)
+        private void taskMan_CurrentStatusChanged(object sender, EventArgs e)
         {
             TaskManager taskMan = sender as TaskManager;
             ITask current = taskMan.Current;
 
             UpdateTaskListViewItem(current);
         }
+        #endregion //taskMan_CurrentStatusChanged
 
+        #region UpdateTaskListViewItem
         /// <summary>
         /// 
         /// </summary>
@@ -142,7 +147,9 @@ namespace C3
 
             lvi.SubItems[lvTask.Columns.Count - 1].Text = current.Status.ToString();
         }
+        #endregion //UpdateTaskListViewItem
 
+        #region ListViewItem
         /// <summary>
         /// 
         /// </summary>
@@ -161,18 +168,21 @@ namespace C3
             }
             return lvi;
         }
+        #endregion //ListViewItem
 
+        #region taskMan_CurrentChanged
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void taskMan_CurrentChanged(object sender, EventArgs e)
+        private void taskMan_CurrentChanged(object sender, EventArgs e)
         {
             TaskManager taskMan = sender as TaskManager;
             ITask current = taskMan.Current;
             FillTaskListView();
         }
+        #endregion //taskMan_CurrentChanged
 
         #region UnregisterEvents
         /// <summary>
