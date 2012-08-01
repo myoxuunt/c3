@@ -78,6 +78,7 @@
     <Compile Include="Device\DeviceFactoryBase.cs" />
     <Compile Include="Device\DevicePersisterBase.cs" />
     <Compile Include="Device\DeviceSourceProviderBase.cs" />
+    <Compile Include="Device\DeviceType.cs" />
     <Compile Include="Device\DPUBase.cs" />
     <Compile Include="Device\DPUCollection.cs" />
     <Compile Include="Device\DeviceSourceBase.cs" />

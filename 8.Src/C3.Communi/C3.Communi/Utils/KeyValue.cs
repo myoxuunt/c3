@@ -6,13 +6,18 @@ namespace C3.Communi
 {
     public class KeyValue
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
         public KeyValue(string key, object value)
         {
             this.Key = key;
             this.Value = value;
         }
 
-#region Key
+        #region Key
         /// <summary>
         /// 
         /// </summary>
@@ -35,9 +40,9 @@ namespace C3.Communi
                 _key = value;
             }
         } private string _key;
-#endregion //Key
+        #endregion //Key
 
-#region Value
+        #region Value
         /// <summary>
         /// 
         /// </summary>
@@ -56,7 +61,7 @@ namespace C3.Communi
                 _value = value;
             }
         } private object _value;
-#endregion //Value
+        #endregion //Value
 
     }
 

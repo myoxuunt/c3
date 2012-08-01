@@ -7,6 +7,17 @@ namespace C3.Communi
 {
     abstract public class DeviceBase : IDevice
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceType"></param>
+        protected DeviceBase(string name, DeviceType deviceType, Int64 address)
+        {
+            this.Name = name;
+            this.DeviceType = deviceType;
+            this.Address = address;
+        }
+
         #region Address
         /// <summary>
         /// 
@@ -84,7 +95,6 @@ namespace C3.Communi
             }
         } private IDeviceSource _deviceSource;
         #endregion //DeviceSource
-
 
         #region Dpu
         /// <summary>
@@ -176,14 +186,15 @@ namespace C3.Communi
             {
                 if (_text == null)
                 {
-                    if (this.Name.Length > 0)
-                    {
-                        _text = string.Format("{0}({1})", this.Name, this.GetType().Name);
-                    }
-                    else
-                    {
-                        _text = string.Format("({0})", this.GetType().Name);
-                    }
+                    //if (this.Name.Length > 0)
+                    //{
+                    //    _text = string.Format("{0}({1})", this.Name, this.GetType().Name);
+                    //}
+                    //else
+                    //{
+                    //    _text = string.Format("({0})", this.GetType().Name);
+                    //}
+                    _text = string.Format("{0}({1})", this.Name, this.DeviceType.Name);
                 }
                 return _text;
             }
@@ -245,5 +256,26 @@ namespace C3.Communi
         } private TaskManager _taskManager;
 
         #endregion //TaskManager
+
+        #region DeviceType
+        /// <summary>
+        /// 
+        /// </summary>
+        public DeviceType DeviceType
+        {
+            get
+            {
+                return _deviceType;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("DeviceType");
+                }
+                _deviceType = value;
+            }
+        } private DeviceType _deviceType;
+        #endregion //DeviceType
     }
 }

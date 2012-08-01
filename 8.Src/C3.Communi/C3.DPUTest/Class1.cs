@@ -37,7 +37,7 @@ namespace C3.DPUTest
     public class TDevice : DeviceBase
     {
             System.Windows.Forms.Timer _t = new Timer();
-        public TDevice()
+        public TDevice() : base ("noname",  DeviceTypeManager.GetDeviceType ("TDeviceTypeString") ,123)
         {
             _t.Interval = 1000;
             _t.Tick += new EventHandler(_t_Tick);

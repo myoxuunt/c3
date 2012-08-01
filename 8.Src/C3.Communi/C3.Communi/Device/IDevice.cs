@@ -4,11 +4,16 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IDevice : ITag 
     {
         Int64 Address { get; set; }
 
         string Name { get; set; }
+        DeviceType DeviceType { get; set; }
         string Text { get; set; }
 
         IStation Station { get; set; }
