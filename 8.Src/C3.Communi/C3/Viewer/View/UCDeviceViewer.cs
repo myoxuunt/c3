@@ -7,6 +7,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using C3.Communi;
+using C3.Resources;
 using NLog;
 
 namespace C3
@@ -23,8 +24,42 @@ namespace C3
         public UCDeviceViewer()
         {
             InitializeComponent();
+
+            InitListView();
         }
         #endregion //UCDeviceViewer
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void InitListView()
+        {
+            // device data
+            //
+            this.chNO.Text = Resources.DeviceDataResource.NO;
+            this.chName.Text = DeviceDataResource.Name;
+            this.chValue.Text = DeviceDataResource.Value;
+            this.chUnit.Text = DeviceDataResource.Unit;
+
+            this.chNO.Width = int.Parse(Resources.DeviceDataResource.NOWidth);
+            this.chName.Width = int.Parse(DeviceDataResource.NameWidth);
+            this.chValue.Width = int.Parse(DeviceDataResource.ValueWidth);
+            this.chUnit.Width = int.Parse(DeviceDataResource.UnitWidth);
+
+
+            // task
+            //
+            this.chOperaName.Text = TaskResource.Name;
+            this.chLastExecute.Text = TaskResource.LastExecute;
+            this.chStrategy.Text = TaskResource.Strategy;
+            this.chStatus.Text = TaskResource.Status;
+
+            this.chOperaName.Width =int.Parse( TaskResource.NameWidth);
+            this.chLastExecute.Width =int.Parse( TaskResource.LastExecuteWidth);
+            this.chStrategy.Width =int.Parse( TaskResource.StrategyWidth);
+            this.chStatus.Width =int.Parse( TaskResource.StatusWidth);
+
+        }
 
         #region Device
         /// <summary>

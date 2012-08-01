@@ -54,6 +54,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\App.cs" />
+    <Compile Include="Resources\DeviceDataResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeviceDataResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\TaskResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaskResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ListViewHelper.cs" />
     <Compile Include="Viewer\View\UCDeviceViewer.cs">
       <SubType>UserControl</SubType>
@@ -120,6 +130,16 @@
     </Compile>
     <Compile Include="App\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Resources\DeviceDataResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeviceDataResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\TaskResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TaskResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Viewer\View\UCDeviceViewer.resx">
       <DependentUpon>UCDeviceViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
