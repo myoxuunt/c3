@@ -214,5 +214,10 @@ namespace C3
         {
             Fill();
         }
+
+        private void frmCommuniDetails_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

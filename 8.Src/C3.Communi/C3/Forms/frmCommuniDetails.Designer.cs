@@ -89,7 +89,8 @@
             this.MinimizeBox = false;
             this.Name = "frmCommuniDetails";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "通讯失败";
+            this.Text = "communiDetail";
+            this.Load += new System.EventHandler(this.frmCommuniDetails_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

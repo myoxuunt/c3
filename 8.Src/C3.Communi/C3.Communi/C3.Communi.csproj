@@ -76,9 +76,12 @@
     <Compile Include="Device\Data\DeviceDataBase.cs" />
     <Compile Include="Device\Data\DeviceDataCollection.cs" />
     <Compile Include="Device\DeviceFactoryBase.cs" />
+    <Compile Include="Device\Type\DeviceKind.cs" />
     <Compile Include="Device\DevicePersisterBase.cs" />
     <Compile Include="Device\DeviceSourceProviderBase.cs" />
-    <Compile Include="Device\DeviceType.cs" />
+    <Compile Include="Device\Type\DeviceType.cs" />
+    <Compile Include="Device\Type\DeviceTypeCollection.cs" />
+    <Compile Include="Device\Type\DeviceTypeManager.cs" />
     <Compile Include="Device\DPUBase.cs" />
     <Compile Include="Device\DPUCollection.cs" />
     <Compile Include="Device\DeviceSourceBase.cs" />
@@ -101,7 +104,7 @@
     <Compile Include="CommuniPortConfig\ICommuniPortConfig.cs" />
     <Compile Include="IdentityParser\IdentityParserCollection.cs" />
     <Compile Include="Device\IDevice.cs" />
-    <Compile Include="Device\IDeviceData.cs" />
+    <Compile Include="Device\Data\IDeviceData.cs" />
     <Compile Include="Device\IDeviceFactory.cs" />
     <Compile Include="Device\IDevicePersister.cs" />
     <Compile Include="Device\IDeviceSource.cs" />
