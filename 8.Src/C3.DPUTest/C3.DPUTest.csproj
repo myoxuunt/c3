@@ -41,7 +41,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\C3.Communi.Test\C3.Communi.Test.csproj">
+    <ProjectReference Include="..\C3.Communi.Test\C3.Communi.Test.csproj">
       <Project>{7E97D588-6159-4165-93B9-4CD90D22BB09}</Project>
       <Name>C3.Communi.Test</Name>
     </ProjectReference>

@@ -72,7 +72,7 @@
     <Compile Include="TestDeviceData.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\C3.Communi\C3.Communi\C3.Communi.csproj">
+    <ProjectReference Include="..\C3.Communi\C3.Communi.csproj">
       <Project>{C66E606F-39F5-4B29-8187-0C6C454EA245}</Project>
       <Name>C3.Communi</Name>
     </ProjectReference>
