@@ -1,7 +1,5 @@
 using System;
-using System.Threading;
-using Xdgk.Common;
-using System.Diagnostics;
+using System.Reflection;
 
 namespace C3.Communi
 {
@@ -291,5 +289,79 @@ namespace C3.Communi
             }
         } private DeviceType _deviceType;
         #endregion //DeviceType
+
+        #region 
+        /// <summary>
+        /// 
+        /// </summary>
+        public ReportItemCollection GetDeviceInfos()
+        {
+            ReportItemCollection reportItems = new ReportItemCollection();
+            foreach (DeviceInfoAttribute item in this.DeviceInfoAttributes)
+            {
+                PropertyInfo pi = item.PropertyInfo;
+                object value = pi.GetValue(this, null);
+                ReportItem ri = new ReportItem(item.Name, value, Unit.FindByName(Unit.None));
+                reportItems.Add(ri);
+            }
+            return reportItems;
+        }
+        #endregion
+
+        #region DeviceInfoAttributes
+        /// <summary>
+        /// 
+        /// </summary>
+        private DeviceInfoAttributeCollection DeviceInfoAttributes
+        {
+            get
+            {
+                if (_deviceInfoAttributes == null)
+                {
+                    _deviceInfoAttributes = new DeviceInfoAttributeCollection();
+
+                    PropertyInfo[] propertyInfos = this.GetType().GetProperties();
+                    foreach (PropertyInfo pi in propertyInfos)
+                    {
+                        object[] atts = pi.GetCustomAttributes(typeof(DeviceInfoAttribute), false);
+                        if (atts.Length > 0)
+                        {
+                            DeviceInfoAttribute att = (DeviceInfoAttribute)atts[0];
+                            att.PropertyInfo = pi;
+
+                            _deviceInfoAttributes.Add(att);
+                        }
+                    }
+
+                    // sort
+                    //
+                    _deviceInfoAttributes.Sort();
+                }
+                return _deviceInfoAttributes;
+            }
+        } private DeviceInfoAttributeCollection _deviceInfoAttributes;
+        #endregion //DeviceInfoAttributes
+
+        #region 
+        /// <summary>
+        /// 
+        /// </summary>
+        public DeviceParameterCollection DeviceParameters
+        {
+            get
+            {
+                if (_deviceParameters == null)
+                {
+                    _deviceParameters = new DeviceParameterCollection();
+                }
+                return _deviceParameters;
+            }
+            set
+            {
+                _deviceParameters = value;
+            }
+        } private DeviceParameterCollection _deviceParameters;
+
+        #endregion
     }
 }

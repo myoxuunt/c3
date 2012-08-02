@@ -2,18 +2,10 @@
 using System.Reflection ;
 using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Text;
 
 namespace C3.Communi
 {
-    public enum ADEStatus
-    {
-        Add,
-        Edit,
-        Delete,
-    }
-
-    #region 9
+    #region 
     public class DeviceInfoAttribute : Attribute
     {
         /// <summary>
@@ -143,7 +135,7 @@ namespace C3.Communi
         #endregion //Format
         
     }
-    #endregion //9
+    #endregion //
     /// <summary>
     /// 
     /// </summary>

@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Xdgk.Common;
 
 namespace C3.Communi
 {
@@ -84,6 +85,8 @@ namespace C3.Communi
         /// <param name="e"></param>
         private void FrmDeviceUI_Load(object sender, EventArgs e)
         {
+            //this.gvDevice.AutoGenerateColumns = false;
+            this.Text = this._adeStatus.ToString();
             FillDeviceInfo();
         }
 
@@ -93,50 +96,62 @@ namespace C3.Communi
         private void FillDeviceInfo()
         {
             string s = string.Empty;
-            foreach (DeviceInfoAttribute item in this.DeviceInfoAttributes)
+            ReportItemCollection reportItems = this._device.GetDeviceInfos ();
+            foreach (ReportItem item in this._device.GetDeviceInfos())
             {
-                PropertyInfo pi = item.PropertyInfo;
-                object value = pi.GetValue(this._device, null);
-                s += string.Format("{0}:{1}\r\n", item.Name, value);
+                s += string.Format("{0}:{1}\r\n", item.Name, item.Value);
             }
             this.richTextBox1.Text = s;
+
+            this.gvDevice.DataSource = this._device.DeviceParameters;
+            //this.propertyGrid1.BrowsableAttributes = new AttributeCollection(new DeviceInfoAttribute("1",1));
+            //this.propertyGrid1.SelectedObject = this._device;
+            this.ucDeviceParameters1.DeviceParameters = this._device.DeviceParameters;
         }
-
-
-        #region DeviceInfoAttributes
-
 
         /// <summary>
         /// 
         /// </summary>
-        private DeviceInfoAttributeCollection DeviceInfoAttributes
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void okButton_Click(object sender, EventArgs e)
         {
-            get
-            {
-                if (_deviceInfoAttributes == null)
-                {
-                    _deviceInfoAttributes = new DeviceInfoAttributeCollection();
+            this.ucDeviceParameters1.ApplyNewValue();
+        }
 
-                    PropertyInfo[] propertyInfos = this._device.GetType().GetProperties();
-                    foreach (PropertyInfo pi in propertyInfos)
-                    {
-                        object[] atts = pi.GetCustomAttributes(typeof(DeviceInfoAttribute), false);
-                        if (atts.Length > 0)
-                        {
-                            DeviceInfoAttribute att = (DeviceInfoAttribute)atts[0];
-                            att.PropertyInfo = pi;
 
-                            _deviceInfoAttributes.Add(att);
-                        }
-                    }
+        //#region DeviceInfoAttributes
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //private DeviceInfoAttributeCollection DeviceInfoAttributes
+        //{
+        //    get
+        //    {
+        //        if (_deviceInfoAttributes == null)
+        //        {
+        //            _deviceInfoAttributes = new DeviceInfoAttributeCollection();
 
-                    // sort
-                    //
-                    _deviceInfoAttributes.Sort();
-                }
-                return _deviceInfoAttributes;
-            }
-        } private DeviceInfoAttributeCollection _deviceInfoAttributes;
-        #endregion //DeviceInfoAttributes
+        //            PropertyInfo[] propertyInfos = this._device.GetType().GetProperties();
+        //            foreach (PropertyInfo pi in propertyInfos)
+        //            {
+        //                object[] atts = pi.GetCustomAttributes(typeof(DeviceInfoAttribute), false);
+        //                if (atts.Length > 0)
+        //                {
+        //                    DeviceInfoAttribute att = (DeviceInfoAttribute)atts[0];
+        //                    att.PropertyInfo = pi;
+
+        //                    _deviceInfoAttributes.Add(att);
+        //                }
+        //            }
+
+        //            // sort
+        //            //
+        //            _deviceInfoAttributes.Sort();
+        //        }
+        //        return _deviceInfoAttributes;
+        //    }
+        //} private DeviceInfoAttributeCollection _deviceInfoAttributes;
+        //#endregion //DeviceInfoAttributes
     }
 }

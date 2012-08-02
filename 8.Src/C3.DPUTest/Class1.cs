@@ -42,6 +42,60 @@ namespace C3.DPUTest
             _t.Interval = 1000;
             _t.Tick += new EventHandler(_t_Tick);
             _t.Start();
+            this.DeviceParameters = CreateDeviceParameterCollection();
+        }
+
+        private DeviceParameterCollection CreateDeviceParameterCollection()
+        {
+            DeviceParameterCollection p = new DeviceParameterCollection();
+            IDeviceParameter i = new DeviceParameter();
+            i.Name = "ppp";
+            i.Value = 123;
+            i.Description = "deeded";
+            i.OrderNumber = 1;
+            i.Unit = Unit.FindByName(Unit.M3PerHour);
+            i.ValueType = typeof(int);
+            p.Add(i);
+
+            i = new DeviceParameter();
+            i.Name = "ppp2";
+            i.Value = 123.345;
+            i.Description = "deeded";
+            i.OrderNumber = 2;
+            i.Unit = Unit.FindByName(Unit.M3PerHour);
+            i.ValueType = typeof(float);
+            p.Add(i);
+
+            i = new DeviceParameter();
+            i.Name = "ppp3";
+            i.Value = Xdgk.Common.ADEStatus.Add;
+            i.Description = "deeded";
+            i.OrderNumber = 3;
+            i.Unit = Unit.FindByName(Unit.M3PerHour);
+            i.ValueType = typeof(Xdgk.Common.ADEStatus);
+            p.Add(i);
+
+            i = new DeviceParameter();
+            i.Name = "ppp3";
+            i.Value = Xdgk.Common.ADEStatus.Edit;
+            i.Description = "deeded";
+            i.OrderNumber = 3;
+            i.Unit = Unit.FindByName(Unit.M3PerHour);
+            i.ValueType = typeof(Xdgk.Common.ADEStatus);
+            p.Add(i);
+
+            i = new DeviceParameter();
+            i.Name = "ppp3";
+            i.Value = Xdgk.Common.ADEStatus.Add;
+            i.Description = "deeded";
+            i.OrderNumber = 3;
+            i.Unit = Unit.FindByName(Unit.M3PerHour);
+            i.ValueType = typeof(Xdgk.Common.ADEStatus);
+            p.Add(i);
+            
+
+            return p;
+            
         }
 
         void _t_Tick(object sender, EventArgs e)
@@ -56,6 +110,7 @@ namespace C3.DPUTest
             //this.LastData = new C3.Communi.Test.TestDeviceData();
             return base.ToString();
         }
+
     }
 
     /// <summary>

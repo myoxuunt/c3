@@ -1,24 +1,21 @@
-
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using C3.Communi;
-
 
 namespace C3
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ListViewHelper
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private ListViewHelper()
         {
 
         }
 
-#region GetSelectedIndex
+        #region GetSelectedIndex
         /// <summary>
         /// 
         /// </summary>
@@ -33,9 +30,9 @@ namespace C3
             }
             return r;
         }
-#endregion //GetSelectedIndex
+        #endregion //GetSelectedIndex
 
-#region SetSelectedIndex
+        #region SetSelectedIndex
         /// <summary>
         /// 
         /// </summary>
@@ -52,7 +49,7 @@ namespace C3
             }
             return r;
         }
-#endregion //SetSelectedIndex
+        #endregion //SetSelectedIndex
 
     }
 

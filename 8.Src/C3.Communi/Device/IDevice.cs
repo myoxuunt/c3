@@ -36,6 +36,8 @@ namespace C3.Communi
         Guid StationGuid { get; set; }
         CommuniDetailCollection CommuniDetails { get; set; }
 
+        ReportItemCollection GetDeviceInfos();
+        DeviceParameterCollection DeviceParameters { get; set; }
 
     }
 
