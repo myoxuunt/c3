@@ -46,7 +46,6 @@
     <Compile Include="DisplayValue.cs" />
     <Compile Include="DisplayValueCollection.cs" />
     <Compile Include="ExceptionLogger.cs" />
-    <Compile Include="Export\Class1.cs" />
     <Compile Include="FixedDialogBase.cs">
       <SubType>Form</SubType>
     </Compile>
