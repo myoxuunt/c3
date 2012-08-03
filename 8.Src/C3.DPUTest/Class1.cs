@@ -42,13 +42,15 @@ namespace C3.DPUTest
             _t.Interval = 1000;
             _t.Tick += new EventHandler(_t_Tick);
             _t.Start();
-            this.DeviceParameters = CreateDeviceParameterCollection();
+            //this.Parameters = 
+            CreateDeviceParameterCollection();
         }
 
-        private DeviceParameterCollection CreateDeviceParameterCollection()
+        private ParameterCollection CreateDeviceParameterCollection()
         {
-            DeviceParameterCollection p = new DeviceParameterCollection();
-            IDeviceParameter i = new DeviceParameter();
+            ParameterCollection p = this.Parameters;//new ParameterCollection();
+            IParameter i = new Parameter("name", "value", Unit.FindByName(Unit.Cm), -999, "descrip");
+            /*
             i.Name = "ppp";
             i.Value = 123;
             i.Description = "deeded";
@@ -57,7 +59,7 @@ namespace C3.DPUTest
             i.ValueType = typeof(int);
             p.Add(i);
 
-            i = new DeviceParameter();
+            i = new Parameter();
             i.Name = "ppp2";
             i.Value = 123.345;
             i.Description = "deeded";
@@ -66,7 +68,7 @@ namespace C3.DPUTest
             i.ValueType = typeof(float);
             p.Add(i);
 
-            i = new DeviceParameter();
+            i = new Parameter();
             i.Name = "ppp3";
             i.Value = Xdgk.Common.ADEStatus.Add;
             i.Description = "deeded";
@@ -75,7 +77,7 @@ namespace C3.DPUTest
             i.ValueType = typeof(Xdgk.Common.ADEStatus);
             p.Add(i);
 
-            i = new DeviceParameter();
+            i = new Parameter();
             i.Name = "ppp3";
             i.Value = Xdgk.Common.ADEStatus.Edit;
             i.Description = "deeded";
@@ -84,14 +86,15 @@ namespace C3.DPUTest
             i.ValueType = typeof(Xdgk.Common.ADEStatus);
             p.Add(i);
 
-            i = new DeviceParameter();
+            i = new Parameter();
             i.Name = "ppp3";
             i.Value = Xdgk.Common.ADEStatus.Add;
             i.Description = "deeded";
             i.OrderNumber = 3;
-            i.Unit = Unit.FindByName(Unit.M3PerHour);
+            i.Unit = Unit.FindByName(Unit.Hour);
             i.ValueType = typeof(Xdgk.Common.ADEStatus);
-            p.Add(i);
+            p.Add(i); 
+            */
             
 
             return p;

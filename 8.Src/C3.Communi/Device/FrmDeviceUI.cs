@@ -95,18 +95,18 @@ namespace C3.Communi
         /// </summary>
         private void FillDeviceInfo()
         {
-            string s = string.Empty;
-            ReportItemCollection reportItems = this._device.GetDeviceInfos ();
-            foreach (ReportItem item in this._device.GetDeviceInfos())
-            {
-                s += string.Format("{0}:{1}\r\n", item.Name, item.Value);
-            }
-            this.richTextBox1.Text = s;
+            //string s = string.Empty;
+            ////ReportItemCollection reportItems = this._device.GetDeviceInfos ();
+            //foreach (ReportItem item in this._device.GetDeviceInfos())
+            //{
+            //    s += string.Format("{0}:{1}\r\n", item.Name, item.Value);
+            //}
+            //this.richTextBox1.Text = s;
 
-            this.gvDevice.DataSource = this._device.DeviceParameters;
+            this.gvDevice.DataSource = this._device.Parameters;
             //this.propertyGrid1.BrowsableAttributes = new AttributeCollection(new DeviceInfoAttribute("1",1));
             //this.propertyGrid1.SelectedObject = this._device;
-            this.ucDeviceParameters1.DeviceParameters = this._device.DeviceParameters;
+            this.ucDeviceParameters1.DeviceParameters = this._device.Parameters;
         }
 
         /// <summary>

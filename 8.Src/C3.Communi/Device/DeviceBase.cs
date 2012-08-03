@@ -8,6 +8,14 @@ namespace C3.Communi
     /// </summary>
     abstract public class DeviceBase : IDevice
     {
+        private const string
+            PN_ADDRESS = "address",
+            PN_NAME = "name";
+
+        private const int
+            PO_ADDRESS = -90,
+            PO_NAME = -80;
+
         //#region DeviceBase
         ///// <summary>
         ///// 
@@ -21,51 +29,80 @@ namespace C3.Communi
         //}
         //#endregion //DeviceBase
 
+        /// <summary>
+        /// 
+        /// </summary>
+        protected DeviceBase()
+        {
+            // init parameters
+            //
+            object obj = this.GetAddressParameter();
+            obj = this.GetNameParameter();
+        }
+
         #region Address
         /// <summary>
         /// 
         /// </summary>
-        [DeviceInfo("Address",-1)]
-        public Int64 Address
+        public UInt64 Address
         {
             get
             {
-                return _address;
+                IParameter p = GetAddressParameter();
+                return (UInt64)p.Value;
             }
             set
             {
-                _address = value;
+                IParameter p = GetAddressParameter();
+                p.Value = value;
             }
-        } private Int64 _address;
+        }
         #endregion //Address
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IParameter GetAddressParameter()
+        {
+            IParameter p = this.Parameters[PN_ADDRESS];
+            if (p == null)
+            {
+                p = new Parameter(PN_ADDRESS, (UInt64)0, PO_ADDRESS);
+                this.Parameters.Add(p);
+            }
+            return p;
+        }
 
         #region Name
         /// <summary>
         /// 
         /// </summary>
-        [DeviceInfo ("Name",-2)]
         public string Name
         {
             get
             {
-                if (_name == null)
-                {
-                    _name = string.Empty;
-                }
-                return _name;
+                IParameter p = GetNameParameter();
+                return (string)p.Value;
             }
             set
             {
-                if (_name != value)
-                {
-                    _name = value;
-                    // for reset text
-                    //
-                    _text = null;
-                }
+                IParameter p = GetNameParameter();
+                p.Value = value;
+                _text = null;
             }
-        } private string _name;
+        }
         #endregion //Name
+        private IParameter GetNameParameter()
+        {
+            IParameter p = this.Parameters[PN_NAME];
+            if (p == null)
+            {
+                p = new Parameter(PN_NAME, string.Empty, PO_NAME);
+                this.Parameters.Add(p);
+            }
+            return p;
+        }
 
         #region Station
         /// <summary>
@@ -143,7 +180,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        [DeviceInfo("guid",1)]
+        [DeviceInfo("guid", 1)]
         public Guid Guid
         {
             get
@@ -233,9 +270,9 @@ namespace C3.Communi
         /// </summary>
         public DeviceDataManager DeviceDataManager
         {
-            get 
+            get
             {
-                if (_deviceDataManager==null)
+                if (_deviceDataManager == null)
                 {
                     _deviceDataManager = new DeviceDataManager();
                 }
@@ -253,7 +290,7 @@ namespace C3.Communi
         {
             get
             {
-                if (_taskManager ==null)
+                if (_taskManager == null)
                 {
                     _taskManager = new TaskManager();
                 }
@@ -290,78 +327,78 @@ namespace C3.Communi
         } private DeviceType _deviceType;
         #endregion //DeviceType
 
-        #region 
+        //#region
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public ReportItemCollection GetDeviceInfos()
+        //{
+        //    ReportItemCollection reportItems = new ReportItemCollection();
+        //    foreach (DeviceInfoAttribute item in this.DeviceInfoAttributes)
+        //    {
+        //        PropertyInfo pi = item.PropertyInfo;
+        //        object value = pi.GetValue(this, null);
+        //        ReportItem ri = new ReportItem(item.Name, value, Unit.FindByName(Unit.None));
+        //        reportItems.Add(ri);
+        //    }
+        //    return reportItems;
+        //}
+        //#endregion
+
+        //#region DeviceInfoAttributes
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //private DeviceInfoAttributeCollection DeviceInfoAttributes
+        //{
+        //    get
+        //    {
+        //        if (_deviceInfoAttributes == null)
+        //        {
+        //            _deviceInfoAttributes = new DeviceInfoAttributeCollection();
+
+        //            PropertyInfo[] propertyInfos = this.GetType().GetProperties();
+        //            foreach (PropertyInfo pi in propertyInfos)
+        //            {
+        //                object[] atts = pi.GetCustomAttributes(typeof(DeviceInfoAttribute), false);
+        //                if (atts.Length > 0)
+        //                {
+        //                    DeviceInfoAttribute att = (DeviceInfoAttribute)atts[0];
+        //                    att.PropertyInfo = pi;
+
+        //                    _deviceInfoAttributes.Add(att);
+        //                }
+        //            }
+
+        //            // sort
+        //            //
+        //            _deviceInfoAttributes.Sort();
+        //        }
+        //        return _deviceInfoAttributes;
+        //    }
+        //} private DeviceInfoAttributeCollection _deviceInfoAttributes;
+        //#endregion //DeviceInfoAttributes
+
+        #region Parameters
         /// <summary>
         /// 
         /// </summary>
-        public ReportItemCollection GetDeviceInfos()
-        {
-            ReportItemCollection reportItems = new ReportItemCollection();
-            foreach (DeviceInfoAttribute item in this.DeviceInfoAttributes)
-            {
-                PropertyInfo pi = item.PropertyInfo;
-                object value = pi.GetValue(this, null);
-                ReportItem ri = new ReportItem(item.Name, value, Unit.FindByName(Unit.None));
-                reportItems.Add(ri);
-            }
-            return reportItems;
-        }
-        #endregion
-
-        #region DeviceInfoAttributes
-        /// <summary>
-        /// 
-        /// </summary>
-        private DeviceInfoAttributeCollection DeviceInfoAttributes
-        {
-            get
-            {
-                if (_deviceInfoAttributes == null)
-                {
-                    _deviceInfoAttributes = new DeviceInfoAttributeCollection();
-
-                    PropertyInfo[] propertyInfos = this.GetType().GetProperties();
-                    foreach (PropertyInfo pi in propertyInfos)
-                    {
-                        object[] atts = pi.GetCustomAttributes(typeof(DeviceInfoAttribute), false);
-                        if (atts.Length > 0)
-                        {
-                            DeviceInfoAttribute att = (DeviceInfoAttribute)atts[0];
-                            att.PropertyInfo = pi;
-
-                            _deviceInfoAttributes.Add(att);
-                        }
-                    }
-
-                    // sort
-                    //
-                    _deviceInfoAttributes.Sort();
-                }
-                return _deviceInfoAttributes;
-            }
-        } private DeviceInfoAttributeCollection _deviceInfoAttributes;
-        #endregion //DeviceInfoAttributes
-
-        #region 
-        /// <summary>
-        /// 
-        /// </summary>
-        public DeviceParameterCollection DeviceParameters
+        public ParameterCollection Parameters
         {
             get
             {
                 if (_deviceParameters == null)
                 {
-                    _deviceParameters = new DeviceParameterCollection();
+                    _deviceParameters = new ParameterCollection();
                 }
                 return _deviceParameters;
             }
-            set
-            {
-                _deviceParameters = value;
-            }
-        } private DeviceParameterCollection _deviceParameters;
-
-        #endregion
+            //set
+            //{
+            //    throw new NotImplementedException("Parameters");
+            //    _deviceParameters = value;
+            //}
+        } private ParameterCollection _deviceParameters;
+        #endregion //Parameters
     }
 }

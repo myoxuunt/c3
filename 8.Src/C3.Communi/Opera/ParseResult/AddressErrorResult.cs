@@ -12,7 +12,7 @@ namespace C3.Communi
         /// <param name="receivePartName"></param>
         /// <param name="expected"></param>
         /// <param name="actual"></param>
-        public AddressErrorResult(Int64 expected, Int64 actual)
+        public AddressErrorResult(UInt64 expected, UInt64 actual)
         {
             this._expected = expected;
             this._actual = actual;
@@ -24,20 +24,20 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public Int64 Expected
+        public UInt64 Expected
         {
             get { return _expected; }
-        } private Int64 _expected;
+        } private UInt64 _expected;
         #endregion //Expected
 
         #region Actual
         /// <summary>
         /// 
         /// </summary>
-        public Int64 Actual
+        public UInt64 Actual
         {
             get { return _actual; }
-        } private Int64 _actual;
+        } private UInt64 _actual;
         #endregion //Actual
 
         #region Actual

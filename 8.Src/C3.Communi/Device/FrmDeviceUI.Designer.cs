@@ -38,12 +38,12 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(120, 242);
+            this.okButton.Location = new System.Drawing.Point(344, 375);
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(208, 242);
+            this.cancelButton.Location = new System.Drawing.Point(422, 375);
             // 
             // richTextBox1
             // 
@@ -81,7 +81,7 @@
             // ucDeviceParameters1
             // 
             this.ucDeviceParameters1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ucDeviceParameters1.Location = new System.Drawing.Point(301, 12);
+            this.ucDeviceParameters1.Location = new System.Drawing.Point(344, 69);
             this.ucDeviceParameters1.Name = "ucDeviceParameters1";
             this.ucDeviceParameters1.Size = new System.Drawing.Size(537, 300);
             this.ucDeviceParameters1.TabIndex = 20;

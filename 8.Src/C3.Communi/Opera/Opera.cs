@@ -175,7 +175,7 @@ namespace C3.Communi
                 object addressObject = pr.Results[addressFieldName];
                 if (addressObject != null)
                 {
-                    Int64 address = Convert.ToInt64(addressObject);
+                    UInt64 address = Convert.ToUInt64(addressObject);
                     if (address != device.Address)
                     {
                         pr = new AddressErrorResult(device.Address, address);

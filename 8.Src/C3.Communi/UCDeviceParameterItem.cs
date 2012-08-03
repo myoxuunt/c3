@@ -15,18 +15,18 @@ namespace C3.Communi
             InitializeComponent();
         }
 
-        #region DeviceParameter
+        #region Parameter
         /// <summary>
         /// 
         /// </summary>
-        public DeviceParameter DeviceParameter
+        public Parameter Parameter
         {
             get
             {
-                if (_deviceParameter == null)
-                {
-                    _deviceParameter = new DeviceParameter();
-                }
+                //if (_deviceParameter == null)
+                //{
+                //_deviceParameter = new Parameter();
+                //}
                 return _deviceParameter;
             }
             set
@@ -39,23 +39,25 @@ namespace C3.Communi
                     this.textBox1.Text = _deviceParameter.Value.ToString();
                 }
             }
-        } private DeviceParameter _deviceParameter;
-        #endregion //DeviceParameter
+        } private Parameter _deviceParameter;
+        #endregion //Parameter
 
         /// <summary>
         /// 
         /// </summary>
         internal void ApplyNewValue()
         {
-            if (this.DeviceParameter.ValueType.IsEnum)
-            {
-                object obj = Enum.Parse(this.DeviceParameter.ValueType, this.textBox1.Text);
-                this.DeviceParameter.Value = obj;
-            }
-            else
-            {
-                this.DeviceParameter.Value = Convert.ChangeType(this.textBox1.Text, this.DeviceParameter.ValueType);
-            }
+            //if (this.Parameter.ValueType.IsEnum)
+            //{
+            //    object obj = Enum.Parse(this.Parameter.ValueType, this.textBox1.Text);
+            //    this.Parameter.Value = obj;
+            //}
+            //else
+            //{
+            //    this.Parameter.Value = Convert.ChangeType(this.textBox1.Text, this.Parameter.ValueType);
+            //}
+
+            this.Parameter.SetValue(this.textBox1.Text);
         }
     }
 }

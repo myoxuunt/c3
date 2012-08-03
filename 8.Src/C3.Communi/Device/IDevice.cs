@@ -10,7 +10,7 @@ namespace C3.Communi
     /// </summary>
     public interface IDevice : ITag 
     {
-        Int64 Address { get; set; }
+        UInt64 Address { get; set; }
 
         string Name { get; set; }
         DeviceType DeviceType { get; set; }
@@ -36,8 +36,8 @@ namespace C3.Communi
         Guid StationGuid { get; set; }
         CommuniDetailCollection CommuniDetails { get; set; }
 
-        ReportItemCollection GetDeviceInfos();
-        DeviceParameterCollection DeviceParameters { get; set; }
+        //ReportItemCollection GetDeviceInfos();
+        ParameterCollection Parameters { get; /*set;*/ }
 
     }
 

@@ -15,17 +15,17 @@ namespace C3.Communi
             InitializeComponent();
         }
 
-        #region DeviceParameters
+        #region Parameters
         /// <summary>
         /// 
         /// </summary>
-        public DeviceParameterCollection DeviceParameters
+        public ParameterCollection DeviceParameters
         {
             get
             {
                 if (_deviceParameters == null)
                 {
-                    _deviceParameters = new DeviceParameterCollection();
+                    _deviceParameters = new ParameterCollection();
                 }
                 return _deviceParameters;
             }
@@ -34,18 +34,18 @@ namespace C3.Communi
                 _deviceParameters = value;
                 if (_deviceParameters != null)
                 {
-                    foreach (DeviceParameter p in _deviceParameters)
+                    foreach (Parameter p in _deviceParameters)
                     {
                         UCDeviceParameterItem uc = new UCDeviceParameterItem();
-                        uc.DeviceParameter = p;
+                        uc.Parameter = p;
 
                         this.tableLayoutPanel1.RowCount += 1;
                         this.tableLayoutPanel1.Controls.Add(uc, 0, this.tableLayoutPanel1.RowCount - 1);
                     }
                 }
             }
-        } private DeviceParameterCollection _deviceParameters;
-        #endregion //DeviceParameters
+        } private ParameterCollection _deviceParameters;
+        #endregion //Parameters
 
         public void ApplyNewValue()
         {
