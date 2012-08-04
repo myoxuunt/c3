@@ -66,6 +66,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TestDeviceData.cs" />
+    <Compile Include="TestSortCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C3.Communi\C3.Communi.csproj">

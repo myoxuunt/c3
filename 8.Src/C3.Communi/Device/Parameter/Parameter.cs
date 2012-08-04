@@ -1,135 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xdgk.Common;
 using System.Diagnostics;
 
+
 namespace C3.Communi
 {
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class ParameterGroup
-    {
-        #region Name
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name
-        {
-            get
-            {
-                if (_name == null)
-                {
-                    _name = string.Empty;
-                }
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
-        } private string _name;
-        #endregion //Name
-
-        #region OrderNumber
-        /// <summary>
-        /// 
-        /// </summary>
-        public int OrderNumber
-        {
-            get
-            {
-                return _orderNumber;
-            }
-            set
-            {
-                _orderNumber = value;
-            }
-        } private int _orderNumber;
-        #endregion //OrderNumber
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class ParameterGroupCollection : Collection<ParameterGroup>
-    {
-
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class ParameterGroupManager
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        private ParameterGroupManager()
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        static public ParameterGroupCollection Groups
-        {
-            get
-            {
-                if (_groups == null)
-                {
-                    _groups = new ParameterGroupCollection();
-                }
-                return _groups;
-            }
-        } static private ParameterGroupCollection _groups;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        static ParameterGroup GetGroup(string name)
-        {
-            ParameterGroup r = null;
-            foreach (ParameterGroup item in Groups)
-            {
-                if (StringHelper.Equal(item.Name, name))
-                {
-                    r = item;
-                    break;
-                }
-            }
-            return r;
-        }
-    }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface IParameter
-    {
-        ParameterGroup Group { get; set; }
-        int OrderNumber { get; set; }
-        string Name { get; set; }
-        string Text { get; set; }
-        object Value { get; set; }
-        void SetValue(string stringValue);
-        Type ValueType { get; set; }
-        string Description { get; set; }
-        Unit Unit { get; set; }
-        // TODO: 2012-08-03
-        //
-        // ParameterOption Option{get;set;}
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     public class Parameter : IParameter
     {
         /// <summary>
@@ -192,7 +69,6 @@ namespace C3.Communi
             this.OrderNumber = orderNumber;
             this.Description = description;
         }
-        #region IParameter 成员
         #region OrderNumber
         /// <summary>
         /// 
@@ -298,8 +174,8 @@ namespace C3.Communi
             if (value.GetType() != this.ValueType)
             {
                 string s = string.Format("value type is '{0}', but expect is '{1}'",
-                    value.GetType().Name,
-                    this.ValueType.GetType().Name);
+                        value.GetType().Name,
+                        this.ValueType.GetType().Name);
                 throw new InvalidOperationException(s);
             }
         }
@@ -383,7 +259,6 @@ namespace C3.Communi
         } private Type _valueType;
         #endregion //ValueType
 
-        #endregion
 
         #region Text
         /// <summary>
@@ -428,88 +303,24 @@ namespace C3.Communi
         } private ParameterGroup _group;
 
 
-        #endregion
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class ParameterCollection : Collection<IParameter>
-    {
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="parameterName"></param>
-        /// <returns></returns>
-        public IParameter this[string parameterName]
+        public IParameterUI ParameterUI
         {
             get
             {
-                VerifyParameterName(parameterName);
-
-                int index = this.Find(parameterName);
-                if (index != -1)
-                {
-                    return this[index];
-                }
-                else
-                {
-                    return null;
-                }
+                // TODO: 2012-08-04
+                //
+                return _parameterUI;
             }
             set
             {
-                VerifyParameterName(parameterName);
-
-                int index = this.Find(parameterName);
-                if (index != -1)
-                {
-                    this.SetItem(index, value);
-                }
-                else
-                {
-                    this.Add(value);
-                }
+                _parameterUI = value;
             }
-        }
+        } private IParameterUI _parameterUI;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parameterName"></param>
-        private void VerifyParameterName(string parameterName)
-        {
-            if (parameterName == null || parameterName.Trim().Length == 0)
-            {
-                throw new ArgumentException("parameterName is null or empty");
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parameterName"></param>
-        /// <returns></returns>
-        private int Find(string parameterName)
-        {
-            int index = -1;
-            for (int i = 0; i < this.Count; i++)
-            {
-                IParameter item = this[i];
-                if (StringHelper.Equal(item.Name, parameterName))
-                {
-                    index = i;
-                    break;
-                }
-            }
-            return index;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Sort()
-        {
-        }
+        #endregion
     }
+
 }

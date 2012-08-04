@@ -9,9 +9,10 @@ using Xdgk.Common;
 namespace C3.Communi
 {
     public class AttributePropertyInfoPairCollection
-        : Collection<AttributePropertyInfoPair>
+        //: Collection<AttributePropertyInfoPair>
+        : OrderNumberCollection < AttributePropertyInfoPair>
     {
-
+        /*
         #region Sort
         /// <summary>
         /// 
@@ -38,9 +39,7 @@ namespace C3.Communi
         /// </summary>
         private class Comparer : IComparer
         {
-
             #region IComparer ≥…‘±
-
             public int Compare(object x, object y)
             {
                 AttributePropertyInfoPair
@@ -64,7 +63,7 @@ namespace C3.Communi
             #endregion
         }
         #endregion //Comparer
-
+*/
     }
 
 }

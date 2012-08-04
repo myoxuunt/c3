@@ -147,5 +147,4 @@ namespace C3.Communi.Test
         #endregion //S
         #endregion //IntValue
     }
-
 }
