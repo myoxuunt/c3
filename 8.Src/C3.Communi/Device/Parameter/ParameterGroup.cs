@@ -5,20 +5,8 @@ using System.Text;
 using Xdgk.Common;
 using System.Diagnostics;
 
-
 namespace C3.Communi
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface IGroup : IOrderNumber
-    {
-        string Name { get; set; }
-        string Text { get; set; }
-        IGroupUI GroupUI { get; set; }
-        ParameterCollection Parameters { get; }
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -121,117 +109,4 @@ namespace C3.Communi
         } private ParameterCollection _parameters;
         #endregion //Parameters
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface IGroupUI
-    {
-        Control Control { get; set; }
-        IGroup Group{ get; set; }
-        ParameterUICollection ParameterUIs { get; set; }
-        void ApplyNewValue();
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    abstract public class GroupUIBase : IGroupUI
-    {
-        public Control Control
-        {
-            get
-            {
-                return _control;
-            }
-            set
-            {
-                _control = value;
-            }
-        }private Control _control;
-
-        public IGroup Group
-        {
-            get
-            {
-                return _group;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Group");
-                }
-
-                if (_group != value)
-                {
-                    _group = value;
-                    OnGroupChanged();
-                }
-            }
-        } private IGroup _group;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        abstract protected void OnGroupChanged();
-
-        public void ApplyNewValue()
-        {
-            OnApplyNewValue();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        abstract protected void OnApplyNewValue();
-
-
-
-        #region IGroupUI ≥…‘±
-
-
-        public ParameterUICollection ParameterUIs
-        {
-            get
-            {
-                return _parameterUIs;
-            }
-            set
-            {
-                _parameterUIs = value;
-            }
-        } private ParameterUICollection _parameterUIs; 
-
-        #endregion
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class GroupUI : GroupUIBase
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        protected override void OnApplyNewValue()
-        {
-            IGroup group = this.Group;
-            foreach (IParameter item in this.Group.Parameters)
-            {
-                item.ParameterUI.ApplyNewValue();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        protected override void OnGroupChanged()
-        {
-            UCGroupUI ui = new UCGroupUI();
-            ui.Group = this.Group;
-            this.Control = ui;
-        }
-    }
-
 }
