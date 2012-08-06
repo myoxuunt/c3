@@ -33,7 +33,8 @@ namespace C3.Communi
             }
             set
             {
-                Debug.Assert(value != null && value.ValueType == typeof(string));
+                Debug.Assert(value != null ,"value == null");
+                Debug.Assert(value.ValueType == typeof(string), "value.valuetype not is string");
 
                 _deviceParameter = value;
                 if (_deviceParameter != null)

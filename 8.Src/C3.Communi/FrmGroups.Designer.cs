@@ -36,12 +36,12 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(377, 392);
+            this.okButton.Location = new System.Drawing.Point(381, 568);
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(465, 392);
+            this.cancelButton.Location = new System.Drawing.Point(469, 568);
             // 
             // tabControl1
             // 
@@ -50,7 +50,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(529, 368);
+            this.tabControl1.Size = new System.Drawing.Size(529, 550);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -58,7 +58,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 21);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(521, 343);
+            this.tabPage1.Size = new System.Drawing.Size(521, 525);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -77,7 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(630, 428);
+            this.ClientSize = new System.Drawing.Size(646, 617);
             this.Controls.Add(this.tabControl1);
             this.Name = "FrmGroups";
             this.Text = "FrmParameterGroups";

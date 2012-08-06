@@ -70,6 +70,7 @@ namespace C3.Communi
             if (p == null)
             {
                 p = new Parameter(PN_ADDRESS, (UInt64)0, PO_ADDRESS);
+                p.ParameterUI = new NumberParameterUI();
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;

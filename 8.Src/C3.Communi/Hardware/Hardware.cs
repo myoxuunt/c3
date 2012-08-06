@@ -6,7 +6,6 @@ namespace C3.Communi
 {
     public class Hardware
     {
-
         #region Stations
         /// <summary>
         /// 
