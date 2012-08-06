@@ -59,20 +59,22 @@ namespace C3.Communi
         }
         #endregion //Address
 
+        #region GetAddressParameter
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
         private IParameter GetAddressParameter()
         {
-            IParameter p = this.Parameters[PN_ADDRESS];
+            IParameter p = this.GeneralGroup.Parameters[PN_ADDRESS];
             if (p == null)
             {
                 p = new Parameter(PN_ADDRESS, (UInt64)0, PO_ADDRESS);
-                this.Parameters.Add(p);
+                this.GeneralGroup.Parameters.Add(p);
             }
             return p;
         }
+        #endregion //GetAddressParameter
 
         #region Name
         /// <summary>
@@ -93,16 +95,23 @@ namespace C3.Communi
             }
         }
         #endregion //Name
+
+        #region GetNameParameter
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private IParameter GetNameParameter()
         {
-            IParameter p = this.Parameters[PN_NAME];
+            IParameter p = this.GeneralGroup.Parameters[PN_NAME];
             if (p == null)
             {
                 p = new Parameter(PN_NAME, string.Empty, PO_NAME);
-                this.Parameters.Add(p);
+                this.GeneralGroup.Parameters.Add(p);
             }
             return p;
         }
+        #endregion //GetNameParameter
 
         #region Station
         /// <summary>
@@ -379,43 +388,57 @@ namespace C3.Communi
         //} private DeviceInfoAttributeCollection _deviceInfoAttributes;
         //#endregion //DeviceInfoAttributes
 
-        #region Parameters
-        /// <summary>
-        /// 
-        /// </summary>
-        public ParameterCollection Parameters
+        //#region Parameters
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public ParameterCollection Parameters
+        //{
+        //    get
+        //    {
+        //        if (_deviceParameters == null)
+        //        {
+        //            _deviceParameters = new ParameterCollection();
+        //        }
+        //        return _deviceParameters;
+        //    }
+        //    //set
+        //    //{
+        //    //    throw new NotImplementedException("Parameters");
+        //    //    _deviceParameters = value;
+        //    //}
+        //} private ParameterCollection _deviceParameters;
+        //#endregion //Parameters
+
+
+        protected IGroup GeneralGroup
         {
             get
             {
-                if (_deviceParameters == null)
+                IGroup g = this.ParameterGroups.GetGroup("General");
+                if (g == null)
                 {
-                    _deviceParameters = new ParameterCollection();
+                    g = new Group();
+                    g.Name = "General";
+                    this.ParameterGroups.Add (g);
                 }
-                return _deviceParameters;
+                return g;
             }
-            //set
-            //{
-            //    throw new NotImplementedException("Parameters");
-            //    _deviceParameters = value;
-            //}
-        } private ParameterCollection _deviceParameters;
-        #endregion //Parameters
-
-
+        }
         /// <summary>
         /// 
         /// </summary>
-        public ParameterGroupCollection ParameterGroups
+        public GroupCollection ParameterGroups
         {
             get
             {
                 if (_parameterGroups == null)
                 {
-                    _parameterGroups = new ParameterGroupCollection();
+                    _parameterGroups = new GroupCollection();
                 }
                 return _parameterGroups ;
             }
-        } private ParameterGroupCollection _parameterGroups;
+        } private GroupCollection _parameterGroups;
 
     }
 }

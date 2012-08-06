@@ -77,9 +77,9 @@
     <Compile Include="Parameter\IParameterUI.cs" />
     <Compile Include="Parameter\Parameter.cs" />
     <Compile Include="Parameter\ParameterCollection.cs" />
-    <Compile Include="Parameter\Group\ParameterGroup.cs" />
-    <Compile Include="Parameter\Group\ParameterGroupCollection.cs" />
-    <Compile Include="Parameter\Group\ParameterGroupManager.cs" />
+    <Compile Include="Parameter\Group\Group.cs" />
+    <Compile Include="Parameter\Group\GroupCollection.cs" />
+    <Compile Include="Parameter\Group\GroupManager.cs" />
     <Compile Include="Parameter\ParameterUI.cs" />
     <Compile Include="Parameter\ParameterUIBase.cs" />
     <Compile Include="Parameter\ParameterUICollection.cs" />

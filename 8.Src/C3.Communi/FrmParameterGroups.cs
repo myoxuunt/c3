@@ -20,7 +20,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public ParameterGroupCollection ParameterGroups
+        public GroupCollection ParameterGroups
         {
             get
             {
@@ -39,7 +39,7 @@ namespace C3.Communi
                     Fill();
                 }
             }
-        } private ParameterGroupCollection _parameterGroups;
+        } private GroupCollection _parameterGroups;
         #endregion //ParameterGroups
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace C3.Communi
         /// </summary>
         private void Fill()
         {
-            foreach ( ParameterGroup item in this.ParameterGroups )
+            foreach ( Group item in this.ParameterGroups )
             {
                 TabPage tp = new TabPage(item.Text);
                 tp.Controls.Add(item.GroupUI.Control);

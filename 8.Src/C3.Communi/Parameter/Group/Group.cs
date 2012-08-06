@@ -10,7 +10,7 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public class ParameterGroup : IGroup 
+    public class Group : IGroup 
     {
         #region Name
         /// <summary>

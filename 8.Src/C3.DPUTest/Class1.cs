@@ -51,15 +51,17 @@ namespace C3.DPUTest
             //ParameterCollection p = this.Parameters;//new ParameterCollection();
             //p.Add(i);
 
-            ParameterGroup g = new ParameterGroup();
+            Group g = new Group();
             g.Name = "Name";
             g.Text = "Text";
 
-            IParameter i = new Parameter("name", "value", Unit.FindByName(Unit.Cm), -999, "descrip");
+            IParameter i = new Parameter("name", "value", Unit.FindByName(Unit.Cm), 0, "descrip");
             g.Parameters.Add ( i );
 
-            i = new Parameter("ADE", Xdgk.Common.ADEStatus.Delete, -1);
+            i = new Parameter("ADE", Xdgk.Common.ADEStatus.Add, -1);
             g.Parameters.Add(i);
+
+            g.Parameters.Sort();
 
             this.ParameterGroups.Add(g);
             /*

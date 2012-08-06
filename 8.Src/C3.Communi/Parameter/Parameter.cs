@@ -298,26 +298,26 @@ namespace C3.Communi
 
         #endregion
 
-        #region Group
-        /// <summary>
-        /// 
-        /// </summary>
-        public ParameterGroup Group
-        {
-            get
-            {
-                return _group;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Group");
-                }
-                _group = value;
-            }
-        } private ParameterGroup _group;
-        #endregion
+        //#region Group
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public Group Group
+        //{
+        //    get
+        //    {
+        //        return _group;
+        //    }
+        //    set
+        //    {
+        //        if (value == null)
+        //        {
+        //            throw new ArgumentNullException("Group");
+        //        }
+        //        _group = value;
+        //    }
+        //} private Group _group;
+        //#endregion
 
         /// <summary>
         /// 

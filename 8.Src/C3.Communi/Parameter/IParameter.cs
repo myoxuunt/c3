@@ -11,7 +11,7 @@ namespace C3.Communi
 
     public interface IParameter : IOrderNumber 
     {
-        ParameterGroup Group { get; set; }
+        //Group Group { get; set; }
         //int OrderNumber { get; set; }
         string Name { get; set; }
         string Text { get; set; }
