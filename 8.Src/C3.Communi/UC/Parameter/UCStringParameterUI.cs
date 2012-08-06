@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -8,9 +9,9 @@ using System.Windows.Forms;
 
 namespace C3.Communi
 {
-    public partial class UCParameterUI : UserControl
+    public partial class UCStringParameterUI : UserControl
     {
-        public UCParameterUI()
+        public UCStringParameterUI()
         {
             InitializeComponent();
         }
@@ -32,6 +33,8 @@ namespace C3.Communi
             }
             set
             {
+                Debug.Assert(value != null && value.ValueType == typeof(string));
+
                 _deviceParameter = value;
                 if (_deviceParameter != null)
                 {

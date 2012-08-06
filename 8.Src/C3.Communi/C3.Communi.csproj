@@ -158,6 +158,12 @@
     <Compile Include="Task\TaskDefineCollection.cs" />
     <Compile Include="Task\TaskFactory.cs" />
     <Compile Include="Task\XmlTaskFactory.cs" />
+    <Compile Include="UC\Parameter\UCNumberParameterUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Parameter\UCNumberParameterUI.Designer.cs">
+      <DependentUpon>UCNumberParameterUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC\Parameter\UCComboBoxParameterUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -170,11 +176,11 @@
     <Compile Include="UC\UCGroupUI.Designer.cs">
       <DependentUpon>UCGroupUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC\Parameter\UCParameterUI.cs">
+    <Compile Include="UC\Parameter\UCStringParameterUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC\Parameter\UCParameterUI.Designer.cs">
-      <DependentUpon>UCParameterUI.cs</DependentUpon>
+    <Compile Include="UC\Parameter\UCStringParameterUI.Designer.cs">
+      <DependentUpon>UCStringParameterUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\KeyValue.cs" />
     <Compile Include="Utils\KeyValueCollection.cs" />
@@ -250,6 +256,10 @@
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC\Parameter\UCNumberParameterUI.resx">
+      <DependentUpon>UCNumberParameterUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC\Parameter\UCComboBoxParameterUI.resx">
       <DependentUpon>UCComboBoxParameterUI.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -258,8 +268,8 @@
       <DependentUpon>UCGroupUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC\Parameter\UCParameterUI.resx">
-      <DependentUpon>UCParameterUI.cs</DependentUpon>
+    <EmbeddedResource Include="UC\Parameter\UCStringParameterUI.resx">
+      <DependentUpon>UCStringParameterUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

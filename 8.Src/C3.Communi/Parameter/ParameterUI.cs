@@ -15,7 +15,7 @@ namespace C3.Communi
         /// <param name="parameter"></param>
         protected override void OnSetParameter(IParameter parameter)
         {
-            UCParameterUI paramCtrl = new UCParameterUI();
+            UCStringParameterUI paramCtrl = new UCStringParameterUI();
             paramCtrl.Parameter = parameter;
             this.Control = paramCtrl;
         }
@@ -25,7 +25,7 @@ namespace C3.Communi
         /// </summary>
         protected override void OnApplyNewValue()
         {
-            UCParameterUI paramCtrl = this.Control as UCParameterUI;
+            UCStringParameterUI paramCtrl = this.Control as UCStringParameterUI;
             paramCtrl.ApplyNewValue();
         }
     }
@@ -55,6 +55,29 @@ namespace C3.Communi
         protected override void OnApplyNewValue()
         {
             this.ComboxParameterUI.ApplyNewValue();
+        }
+    }
+
+    public class NumberParameterUI : ParameterUIBase
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        private UCNumberParameterUI UC 
+        {
+            get { return (UCNumberParameterUI)this.Control; }
+        }
+
+        protected override void OnSetParameter(IParameter parameter)
+        {
+            UCNumberParameterUI c = new UCNumberParameterUI();
+            c.Parameter = parameter;
+            this.Control = c;
+        }
+
+        protected override void OnApplyNewValue()
+        {
+            this.UC.ApplyNewValue();
         }
     }
 

@@ -67,6 +67,14 @@ namespace C3.Communi
         /// 
         /// </summary>
         abstract protected void OnApplyNewValue();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public System.Drawing.Size Size
+        {
+            get { return this.Control.Size; }
+        }
     }
 
 }
