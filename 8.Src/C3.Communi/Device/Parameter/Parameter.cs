@@ -306,12 +306,17 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public IParameterUI ParameterUI
+        virtual public IParameterUI ParameterUI
         {
             get
             {
                 // TODO: 2012-08-04
                 //
+                if (_parameterUI == null)
+                {
+                    _parameterUI = new ParameterUI();
+                    _parameterUI.Parameter = this;
+                }
                 return _parameterUI;
             }
             set

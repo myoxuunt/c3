@@ -400,5 +400,22 @@ namespace C3.Communi
             //}
         } private ParameterCollection _deviceParameters;
         #endregion //Parameters
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ParameterGroupCollection ParameterGroups
+        {
+            get
+            {
+                if (_parameterGroups == null)
+                {
+                    _parameterGroups = new ParameterGroupCollection();
+                }
+                return _parameterGroups ;
+            }
+        } private ParameterGroupCollection _parameterGroups;
+
     }
 }

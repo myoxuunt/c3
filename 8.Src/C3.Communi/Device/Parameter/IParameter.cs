@@ -46,12 +46,12 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    abstract public class ParameterUI : IParameterUI
+    abstract public class ParameterUIBase : IParameterUI
     {
         /// <summary>
         /// 
         /// </summary>
-        public Control Control
+        virtual public Control Control
         {
             get
             {
@@ -66,7 +66,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public IParameter Parameter
+        virtual public IParameter Parameter
         {
             get
             {
@@ -74,9 +74,23 @@ namespace C3.Communi
             }
             set
             {
-                _parameter = value;
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Parameter");
+                }
+                if (_parameter != value)
+                {
+                    _parameter = value;
+                    OnSetParameter(_parameter);
+                }
             }
         } private IParameter _parameter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        abstract protected void OnSetParameter(IParameter parameter);
 
         /// <summary>
         /// 
@@ -90,5 +104,31 @@ namespace C3.Communi
         /// 
         /// </summary>
         abstract protected void OnApplyNewValue();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class ParameterUI : ParameterUIBase
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        protected override void OnSetParameter(IParameter parameter)
+        {
+            UCParameterUI paramCtrl = new UCParameterUI();
+            paramCtrl.Parameter = parameter;
+            this.Control = paramCtrl;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override void OnApplyNewValue()
+        {
+            UCParameterUI paramCtrl = this.Control as UCParameterUI;
+            paramCtrl.ApplyNewValue();
+        }
     }
 }

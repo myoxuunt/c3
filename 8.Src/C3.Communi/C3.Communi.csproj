@@ -93,6 +93,12 @@
     <Compile Include="Device\FrmDeviceUI.Designer.cs">
       <DependentUpon>FrmDeviceUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmParameterGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmParameterGroups.Designer.cs">
+      <DependentUpon>FrmParameterGroups.cs</DependentUpon>
+    </Compile>
     <Compile Include="Task\TaskManager.cs" />
     <Compile Include="Error\Error.cs" />
     <Compile Include="Exception\AssemblyException.cs" />
@@ -161,6 +167,18 @@
     </Compile>
     <Compile Include="UCDeviceParameters.Designer.cs">
       <DependentUpon>UCDeviceParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCGroupUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCGroupUI.Designer.cs">
+      <DependentUpon>UCGroupUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UCParameterUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UCParameterUI.Designer.cs">
+      <DependentUpon>UCParameterUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\KeyValue.cs" />
     <Compile Include="Utils\KeyValueCollection.cs" />
@@ -231,6 +249,10 @@
       <DependentUpon>FrmDeviceUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmParameterGroups.resx">
+      <DependentUpon>FrmParameterGroups.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
@@ -242,6 +264,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UCDeviceParameters.resx">
       <DependentUpon>UCDeviceParameters.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCGroupUI.resx">
+      <DependentUpon>UCGroupUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCParameterUI.resx">
+      <DependentUpon>UCParameterUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

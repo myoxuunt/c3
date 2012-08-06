@@ -38,6 +38,7 @@ namespace C3.Communi
 
         //ReportItemCollection GetDeviceInfos();
         ParameterCollection Parameters { get; /*set;*/ }
+        ParameterGroupCollection ParameterGroups { get; }
 
     }
 

@@ -8,12 +8,17 @@ using System.Diagnostics;
 
 namespace C3.Communi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IGroup : IOrderNumber
     {
         string Name { get; set; }
+        string Text { get; set; }
         IGroupUI GroupUI { get; set; }
         ParameterCollection Parameters { get; }
     }
+
     /// <summary>
     /// 
     /// </summary>
@@ -65,10 +70,10 @@ namespace C3.Communi
         {
             get
             {
-                //if (_groupUI == null)
-                //{
-                //    _groupUI = new IGroupUI();
-                //}
+                if (_groupUI == null)
+                {
+                    _groupUI = new GroupUI();
+                }
                 return _groupUI;
             }
             set
@@ -78,9 +83,28 @@ namespace C3.Communi
         } private IGroupUI _groupUI;
         #endregion //GroupUI
 
+        #region Text
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Text
+        {
+            get
+            {
+                if (_text == null)
+                {
+                    _text = this.Name;
+                }
+                return _text;
+            }
+            set
+            {
+                _text = value;
+            }
+        } private string _text;
+        #endregion //Text
 
-
-
+        #region Parameters
         /// <summary>
         /// 
         /// </summary>
@@ -95,8 +119,12 @@ namespace C3.Communi
                 return _parameters;
             }
         } private ParameterCollection _parameters;
+        #endregion //Parameters
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IGroupUI
     {
         Control Control { get; set; }
@@ -105,6 +133,9 @@ namespace C3.Communi
         void ApplyNewValue();
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     abstract public class GroupUIBase : IGroupUI
     {
         public Control Control
@@ -127,9 +158,23 @@ namespace C3.Communi
             }
             set
             {
-                _group = value;
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Group");
+                }
+
+                if (_group != value)
+                {
+                    _group = value;
+                    OnGroupChanged();
+                }
             }
         } private IGroup _group;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        abstract protected void OnGroupChanged();
 
         public void ApplyNewValue()
         {
@@ -176,6 +221,16 @@ namespace C3.Communi
             {
                 item.ParameterUI.ApplyNewValue();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override void OnGroupChanged()
+        {
+            UCGroupUI ui = new UCGroupUI();
+            ui.Group = this.Group;
+            this.Control = ui;
         }
     }
 
