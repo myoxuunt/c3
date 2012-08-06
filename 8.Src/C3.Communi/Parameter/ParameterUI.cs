@@ -1,11 +1,9 @@
-
 using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text;
 using Xdgk.Common;
 using System.Diagnostics;
-
 
 namespace C3.Communi
 {
@@ -17,9 +15,18 @@ namespace C3.Communi
         /// <param name="parameter"></param>
         protected override void OnSetParameter(IParameter parameter)
         {
-            UCParameterUI paramCtrl = new UCParameterUI();
-            paramCtrl.Parameter = parameter;
-            this.Control = paramCtrl;
+            if (parameter.ValueType.IsEnum)
+            {
+                UCComboBoxParameterUI c = new UCComboBoxParameterUI();
+                c.Parameter = parameter;
+                this.Control = c;
+            }
+            else
+            {
+                UCParameterUI paramCtrl = new UCParameterUI();
+                paramCtrl.Parameter = parameter;
+                this.Control = paramCtrl;
+            }
         }
 
         /// <summary>

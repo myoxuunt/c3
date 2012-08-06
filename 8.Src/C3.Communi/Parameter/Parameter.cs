@@ -4,11 +4,12 @@ using System.Text;
 using Xdgk.Common;
 using System.Diagnostics;
 
-
 namespace C3.Communi
 {
     public class Parameter : IParameter
     {
+        #region Constructor
+        #region Parameter
         /// <summary>
         /// 
         /// </summary>
@@ -19,7 +20,9 @@ namespace C3.Communi
             : this(name, value, null, orderNumber, null)
         {
         }
+        #endregion //Parameter
 
+        #region Parameter
         /// <summary>
         /// 
         /// </summary>
@@ -32,7 +35,9 @@ namespace C3.Communi
         {
 
         }
+        #endregion //Parameter
 
+        #region Parameter
         /// <summary>
         /// 
         /// </summary>
@@ -45,7 +50,9 @@ namespace C3.Communi
         {
 
         }
+        #endregion //Parameter
 
+        #region Parameter
         /// <summary>
         /// 
         /// </summary>
@@ -69,6 +76,9 @@ namespace C3.Communi
             this.OrderNumber = orderNumber;
             this.Description = description;
         }
+        #endregion //Parameter
+        #endregion //Constructor
+
         #region OrderNumber
         /// <summary>
         /// 
@@ -128,6 +138,7 @@ namespace C3.Communi
         } private object _value;
         #endregion //Value
 
+        #region SetValue
         /// <summary>
         /// 
         /// </summary>
@@ -146,7 +157,9 @@ namespace C3.Communi
 
             SetValue(r);
         }
+        #endregion //SetValue
 
+        #region SetValue
         /// <summary>
         /// 
         /// </summary>
@@ -164,7 +177,9 @@ namespace C3.Communi
                 this._value = value;
             }
         }
+        #endregion //SetValue
 
+        #region VerifyValue
         /// <summary>
         /// 
         /// </summary>
@@ -179,8 +194,9 @@ namespace C3.Communi
                 throw new InvalidOperationException(s);
             }
         }
+        #endregion //VerifyValue
 
-
+        #region ChangeValueType
         /// <summary>
         /// 
         /// </summary>
@@ -199,6 +215,7 @@ namespace C3.Communi
             //
             return result;
         }
+        #endregion //ChangeValueType
 
         #region Description
         /// <summary>
@@ -259,7 +276,6 @@ namespace C3.Communi
         } private Type _valueType;
         #endregion //ValueType
 
-
         #region Text
         /// <summary>
         /// 
@@ -301,7 +317,7 @@ namespace C3.Communi
                 _group = value;
             }
         } private ParameterGroup _group;
-
+        #endregion
 
         /// <summary>
         /// 
@@ -315,8 +331,8 @@ namespace C3.Communi
                 if (_parameterUI == null)
                 {
                     _parameterUI = new ParameterUI();
-                    _parameterUI.Parameter = this;
                 }
+                _parameterUI.Parameter = this;
                 return _parameterUI;
             }
             set
@@ -325,7 +341,6 @@ namespace C3.Communi
             }
         } private IParameterUI _parameterUI;
 
-        #endregion
     }
 
 }

@@ -7,7 +7,7 @@ namespace C3.Communi
 {
     public class DeviceKind
     {
-#region Name
+        #region Name
         /// <summary>
         /// 
         /// </summary>
@@ -26,9 +26,9 @@ namespace C3.Communi
                 _name = value;
             }
         } private string _name;
-#endregion //Name
+        #endregion //Name
 
-#region Description
+        #region Description
         /// <summary>
         /// 
         /// </summary>
@@ -47,7 +47,7 @@ namespace C3.Communi
                 _description = value;
             }
         } private string _description;
-#endregion //Description
+        #endregion //Description
     }
 
 }

@@ -69,26 +69,26 @@
     <Compile Include="Device\Data\DeviceDataBase.cs" />
     <Compile Include="Device\Data\DeviceDataCollection.cs" />
     <Compile Include="Device\DeviceFactoryBase.cs" />
-    <Compile Include="Device\Parameter\GroupUI.cs" />
-    <Compile Include="Device\Parameter\GroupUIBase.cs" />
-    <Compile Include="Device\Parameter\IGroup.cs" />
-    <Compile Include="Device\Parameter\IGroupUI.cs" />
-    <Compile Include="Device\Parameter\IParameter.cs" />
-    <Compile Include="Device\Parameter\IParameterUI.cs" />
-    <Compile Include="Device\Parameter\Parameter.cs" />
-    <Compile Include="Device\Parameter\ParameterCollection.cs" />
-    <Compile Include="Device\Parameter\ParameterGroup.cs" />
-    <Compile Include="Device\Parameter\ParameterGroupCollection.cs" />
-    <Compile Include="Device\Parameter\ParameterGroupManager.cs" />
-    <Compile Include="Device\Parameter\ParameterUI.cs" />
-    <Compile Include="Device\Parameter\ParameterUIBase.cs" />
-    <Compile Include="Device\Parameter\ParameterUICollection.cs" />
-    <Compile Include="Device\Type\DeviceKind.cs" />
+    <Compile Include="Parameter\Group\GroupUI.cs" />
+    <Compile Include="Parameter\Group\GroupUIBase.cs" />
+    <Compile Include="Parameter\Group\IGroup.cs" />
+    <Compile Include="Parameter\Group\IGroupUI.cs" />
+    <Compile Include="Parameter\IParameter.cs" />
+    <Compile Include="Parameter\IParameterUI.cs" />
+    <Compile Include="Parameter\Parameter.cs" />
+    <Compile Include="Parameter\ParameterCollection.cs" />
+    <Compile Include="Parameter\Group\ParameterGroup.cs" />
+    <Compile Include="Parameter\Group\ParameterGroupCollection.cs" />
+    <Compile Include="Parameter\Group\ParameterGroupManager.cs" />
+    <Compile Include="Parameter\ParameterUI.cs" />
+    <Compile Include="Parameter\ParameterUIBase.cs" />
+    <Compile Include="Parameter\ParameterUICollection.cs" />
+    <Compile Include="DeviceType\DeviceKind.cs" />
     <Compile Include="Device\DevicePersisterBase.cs" />
     <Compile Include="Device\DeviceSourceProviderBase.cs" />
-    <Compile Include="Device\Type\DeviceType.cs" />
-    <Compile Include="Device\Type\DeviceTypeCollection.cs" />
-    <Compile Include="Device\Type\DeviceTypeManager.cs" />
+    <Compile Include="DeviceType\DeviceType.cs" />
+    <Compile Include="DeviceType\DeviceTypeCollection.cs" />
+    <Compile Include="DeviceType\DeviceTypeManager.cs" />
     <Compile Include="Device\DPUBase.cs" />
     <Compile Include="Device\DPUCollection.cs" />
     <Compile Include="Device\DeviceSourceBase.cs" />
@@ -164,6 +164,12 @@
     <Compile Include="Task\TaskDefineCollection.cs" />
     <Compile Include="Task\TaskFactory.cs" />
     <Compile Include="Task\XmlTaskFactory.cs" />
+    <Compile Include="UC\Parameter\UCComboBoxParameterUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Parameter\UCComboBoxParameterUI.Designer.cs">
+      <DependentUpon>UCComboBoxParameterUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="UCDeviceParameterItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -176,16 +182,16 @@
     <Compile Include="UCDeviceParameters.Designer.cs">
       <DependentUpon>UCDeviceParameters.cs</DependentUpon>
     </Compile>
-    <Compile Include="UCGroupUI.cs">
+    <Compile Include="UC\UCGroupUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UCGroupUI.Designer.cs">
+    <Compile Include="UC\UCGroupUI.Designer.cs">
       <DependentUpon>UCGroupUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UCParameterUI.cs">
+    <Compile Include="UC\Parameter\UCParameterUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UCParameterUI.Designer.cs">
+    <Compile Include="UC\Parameter\UCParameterUI.Designer.cs">
       <DependentUpon>UCParameterUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\KeyValue.cs" />
@@ -266,6 +272,10 @@
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UC\Parameter\UCComboBoxParameterUI.resx">
+      <DependentUpon>UCComboBoxParameterUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UCDeviceParameterItem.resx">
       <DependentUpon>UCDeviceParameterItem.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -274,11 +284,11 @@
       <DependentUpon>UCDeviceParameters.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UCGroupUI.resx">
+    <EmbeddedResource Include="UC\UCGroupUI.resx">
       <DependentUpon>UCGroupUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UCParameterUI.resx">
+    <EmbeddedResource Include="UC\Parameter\UCParameterUI.resx">
       <DependentUpon>UCParameterUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

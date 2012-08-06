@@ -46,10 +46,22 @@ namespace C3.DPUTest
             CreateDeviceParameterCollection();
         }
 
-        private ParameterCollection CreateDeviceParameterCollection()
+        private void CreateDeviceParameterCollection()
         {
-            ParameterCollection p = this.Parameters;//new ParameterCollection();
+            //ParameterCollection p = this.Parameters;//new ParameterCollection();
+            //p.Add(i);
+
+            ParameterGroup g = new ParameterGroup();
+            g.Name = "Name";
+            g.Text = "Text";
+
             IParameter i = new Parameter("name", "value", Unit.FindByName(Unit.Cm), -999, "descrip");
+            g.Parameters.Add ( i );
+
+            i = new Parameter("ADE", Xdgk.Common.ADEStatus.Delete, -1);
+            g.Parameters.Add(i);
+
+            this.ParameterGroups.Add(g);
             /*
             i.Name = "ppp";
             i.Value = 123;
@@ -97,7 +109,7 @@ namespace C3.DPUTest
             */
             
 
-            return p;
+            //return p;
             
         }
 

@@ -67,12 +67,14 @@ namespace C3.Communi
         /// <returns></returns>
         static public DialogResult Edit(IDevice device)
         {
-            FrmDeviceUI f = new FrmDeviceUI();
+            //FrmDeviceUI f = new FrmDeviceUI();
 
-            f._device = device;
-            f._station = device.Station;
-            f._deviceType = device.GetType();
-            f._adeStatus = ADEStatus.Edit;
+            //f._device = device;
+            //f._station = device.Station;
+            //f._deviceType = device.GetType();
+            //f._adeStatus = ADEStatus.Edit;
+            FrmParameterGroups f = new FrmParameterGroups();
+            f.ParameterGroups = device.ParameterGroups;
 
             DialogResult dr = f.ShowDialog();
             return dr;
@@ -103,10 +105,10 @@ namespace C3.Communi
             //}
             //this.richTextBox1.Text = s;
 
-            this.gvDevice.DataSource = this._device.Parameters;
+            //this.gvDevice.DataSource = this._devic
             //this.propertyGrid1.BrowsableAttributes = new AttributeCollection(new DeviceInfoAttribute("1",1));
             //this.propertyGrid1.SelectedObject = this._device;
-            this.ucDeviceParameters1.DeviceParameters = this._device.Parameters;
+            //this.ucDeviceParameters1.DeviceParameters = this._device.Parameters;
         }
 
         /// <summary>

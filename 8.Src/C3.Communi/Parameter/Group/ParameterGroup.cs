@@ -60,8 +60,9 @@ namespace C3.Communi
             {
                 if (_groupUI == null)
                 {
-                    _groupUI = new GroupUI();
+                    _groupUI = new GroupUI(this);
                 }
+                _groupUI.Group = this;
                 return _groupUI;
             }
             set

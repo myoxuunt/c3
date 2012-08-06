@@ -28,7 +28,7 @@ namespace C3.Communi
             }
             set
             {
-                if (_parameterGroups == null)
+                if (value == null)
                 {
                     throw new ArgumentNullException("ParameterGroups");
                 }

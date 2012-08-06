@@ -37,7 +37,7 @@ namespace C3.Communi
         CommuniDetailCollection CommuniDetails { get; set; }
 
         //ReportItemCollection GetDeviceInfos();
-        ParameterCollection Parameters { get; /*set;*/ }
+        //ParameterCollection Parameters { get; /*set;*/ }
         ParameterGroupCollection ParameterGroups { get; }
 
     }

@@ -1,14 +1,14 @@
-
 using System;
 using Xdgk.Common;
 
-
 namespace C3.Communi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DeviceTypeManager
     {
-
-#region DeviceTypeManager
+        #region DeviceTypeManager
         /// <summary>
         /// 
         /// </summary>
@@ -16,9 +16,9 @@ namespace C3.Communi
         {
 
         }
-#endregion //DeviceTypeManager
+        #endregion //DeviceTypeManager
 
-#region DeviceTypes
+        #region DeviceTypes
         /// <summary>
         /// 
         /// </summary>
@@ -33,9 +33,9 @@ namespace C3.Communi
                 return _deviceTypes;
             }
         } static private DeviceTypeCollection _deviceTypes;
-#endregion //DeviceTypes
+        #endregion //DeviceTypes
 
-#region GetDeviceType
+        #region GetDeviceType
         /// <summary>
         /// 
         /// </summary>
@@ -58,9 +58,9 @@ namespace C3.Communi
                 r = new DeviceType(typeName);
                 DeviceTypes.Add(r);
             }
-            return r; 
+            return r;
         }
-#endregion //GetDeviceType
+        #endregion //GetDeviceType
     }
 
 }
