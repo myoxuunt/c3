@@ -9,10 +9,11 @@ using System.Diagnostics;
 namespace C3.Communi
 {
 
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IParameter : IOrderNumber 
     {
-        //Group Group { get; set; }
-        //int OrderNumber { get; set; }
         string Name { get; set; }
         string Text { get; set; }
         object Value { get; set; }

@@ -154,7 +154,10 @@ namespace C3.Communi
             {
                 r = Convert.ChangeType(stringValue, this.ValueType);
             }
-
+            else if (this.ValueType == typeof(string))
+            {
+                r = stringValue; 
+            }
             SetValue(r);
         }
         #endregion //SetValue
@@ -298,27 +301,7 @@ namespace C3.Communi
 
         #endregion
 
-        //#region Group
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public Group Group
-        //{
-        //    get
-        //    {
-        //        return _group;
-        //    }
-        //    set
-        //    {
-        //        if (value == null)
-        //        {
-        //            throw new ArgumentNullException("Group");
-        //        }
-        //        _group = value;
-        //    }
-        //} private Group _group;
-        //#endregion
-
+        #region StringParameterUI
         /// <summary>
         /// 
         /// </summary>
@@ -330,7 +313,7 @@ namespace C3.Communi
                 //
                 if (_parameterUI == null)
                 {
-                    _parameterUI = new ParameterUI();
+                    _parameterUI = new StringParameterUI();
                 }
                 _parameterUI.Parameter = this;
                 return _parameterUI;
@@ -340,7 +323,7 @@ namespace C3.Communi
                 _parameterUI = value;
             }
         } private IParameterUI _parameterUI;
-
+        #endregion //StringParameterUI
     }
 
 }

@@ -243,6 +243,11 @@ namespace C3
                 DialogResult dr = ui.Edit(d);
             }
         }
+
+        private void mnuDeviceAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

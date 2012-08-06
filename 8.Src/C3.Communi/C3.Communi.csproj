@@ -95,17 +95,11 @@
     <Compile Include="Device\ReportItem.cs" />
     <Compile Include="Device\ReportItemCollection.cs" />
     <Compile Include="Device\_.cs" />
-    <Compile Include="Device\FrmDeviceUI.cs">
+    <Compile Include="FrmGroups.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Device\FrmDeviceUI.Designer.cs">
-      <DependentUpon>FrmDeviceUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmParameterGroups.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmParameterGroups.Designer.cs">
-      <DependentUpon>FrmParameterGroups.cs</DependentUpon>
+    <Compile Include="FrmGroups.Designer.cs">
+      <DependentUpon>FrmGroups.cs</DependentUpon>
     </Compile>
     <Compile Include="Task\TaskManager.cs" />
     <Compile Include="Error\Error.cs" />
@@ -169,18 +163,6 @@
     </Compile>
     <Compile Include="UC\Parameter\UCComboBoxParameterUI.Designer.cs">
       <DependentUpon>UCComboBoxParameterUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCDeviceParameterItem.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCDeviceParameterItem.Designer.cs">
-      <DependentUpon>UCDeviceParameterItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UCDeviceParameters.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UCDeviceParameters.Designer.cs">
-      <DependentUpon>UCDeviceParameters.cs</DependentUpon>
     </Compile>
     <Compile Include="UC\UCGroupUI.cs">
       <SubType>UserControl</SubType>
@@ -259,12 +241,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Device\FrmDeviceUI.resx">
-      <DependentUpon>FrmDeviceUI.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmParameterGroups.resx">
-      <DependentUpon>FrmParameterGroups.cs</DependentUpon>
+    <EmbeddedResource Include="FrmGroups.resx">
+      <DependentUpon>FrmGroups.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="strings.resx">
@@ -274,14 +252,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC\Parameter\UCComboBoxParameterUI.resx">
       <DependentUpon>UCComboBoxParameterUI.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCDeviceParameterItem.resx">
-      <DependentUpon>UCDeviceParameterItem.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UCDeviceParameters.resx">
-      <DependentUpon>UCDeviceParameters.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\UCGroupUI.resx">

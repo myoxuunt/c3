@@ -1,6 +1,6 @@
 ﻿namespace C3.Communi
 {
-    partial class FrmParameterGroups
+    partial class FrmGroups
     {
         /// <summary>
         /// Required designer variable.
@@ -34,6 +34,15 @@
             this.tabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
+            // okButton
+            // 
+            this.okButton.Location = new System.Drawing.Point(377, 392);
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(465, 392);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -64,14 +73,18 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // FrmParameterGroups
+            // FrmGroups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(630, 428);
             this.Controls.Add(this.tabControl1);
-            this.Name = "FrmParameterGroups";
+            this.Name = "FrmGroups";
             this.Text = "FrmParameterGroups";
+            this.Load += new System.EventHandler(this.FrmParameterGroups_Load);
+            this.Controls.SetChildIndex(this.okButton, 0);
+            this.Controls.SetChildIndex(this.cancelButton, 0);
+            this.Controls.SetChildIndex(this.tabControl1, 0);
             this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 

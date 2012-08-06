@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace C3.Communi
 {
-    public class ParameterUI : ParameterUIBase
+    public class StringParameterUI : ParameterUIBase
     {
         /// <summary>
         /// 
@@ -15,18 +15,9 @@ namespace C3.Communi
         /// <param name="parameter"></param>
         protected override void OnSetParameter(IParameter parameter)
         {
-            if (parameter.ValueType.IsEnum)
-            {
-                UCComboBoxParameterUI c = new UCComboBoxParameterUI();
-                c.Parameter = parameter;
-                this.Control = c;
-            }
-            else
-            {
-                UCParameterUI paramCtrl = new UCParameterUI();
-                paramCtrl.Parameter = parameter;
-                this.Control = paramCtrl;
-            }
+            UCParameterUI paramCtrl = new UCParameterUI();
+            paramCtrl.Parameter = parameter;
+            this.Control = paramCtrl;
         }
 
         /// <summary>
@@ -36,6 +27,34 @@ namespace C3.Communi
         {
             UCParameterUI paramCtrl = this.Control as UCParameterUI;
             paramCtrl.ApplyNewValue();
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EnumParameterUI : ParameterUIBase
+    {
+        private UCComboBoxParameterUI ComboxParameterUI
+        {
+            get { return (UCComboBoxParameterUI)this.Control; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        protected override void OnSetParameter(IParameter parameter)
+        {
+            UCComboBoxParameterUI c = new UCComboBoxParameterUI();
+            c.Parameter = parameter;
+
+            this.Control = c;
+        }
+
+        protected override void OnApplyNewValue()
+        {
+            this.ComboxParameterUI.ApplyNewValue();
         }
     }
 

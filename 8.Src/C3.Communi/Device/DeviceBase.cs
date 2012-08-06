@@ -415,12 +415,12 @@ namespace C3.Communi
         {
             get
             {
-                IGroup g = this.ParameterGroups.GetGroup("General");
+                IGroup g = this.Groups.GetGroup("General");
                 if (g == null)
                 {
                     g = new Group();
                     g.Name = "General";
-                    this.ParameterGroups.Add (g);
+                    this.Groups.Add (g);
                 }
                 return g;
             }
@@ -428,7 +428,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public GroupCollection ParameterGroups
+        public GroupCollection Groups
         {
             get
             {

@@ -184,6 +184,7 @@
             this.mnuDeviceAdd.Name = "mnuDeviceAdd";
             this.mnuDeviceAdd.Size = new System.Drawing.Size(164, 22);
             this.mnuDeviceAdd.Text = "添加(&A)";
+            this.mnuDeviceAdd.Click += new System.EventHandler(this.mnuDeviceAdd_Click);
             // 
             // mnuDeviceEdit
             // 

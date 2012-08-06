@@ -328,6 +328,9 @@ namespace C3.Communi
         #endregion
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class DeviceUI : DeviceUIBase 
     {
         /// <summary>
@@ -339,7 +342,7 @@ namespace C3.Communi
         /// <returns></returns>
         protected override DialogResult OnAdd(Type deviceType, IStation station, out IDevice newDevice)
         {
-            return FrmDeviceUI.Add(deviceType, station, out newDevice);
+            return FrmGroups.Add (deviceType, station, out newDevice);
         }
 
         /// <summary>
@@ -349,7 +352,7 @@ namespace C3.Communi
         /// <returns></returns>
         protected override DialogResult OnEdit(IDevice device)
         {
-            return FrmDeviceUI.Edit(device);
+            return FrmGroups.Edit(device);
         }
     }
 }
