@@ -34,7 +34,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        protected override void OnGroupChanged()
+        protected override void OnSetGroup()
         {
             UCGroupUI ui = new UCGroupUI();
             ui.Group = this.Group;

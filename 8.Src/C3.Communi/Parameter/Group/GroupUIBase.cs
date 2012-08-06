@@ -53,7 +53,7 @@ namespace C3.Communi
                 if (_group != value)
                 {
                     _group = value;
-                    OnGroupChanged();
+                    OnSetGroup();
                 }
             }
         } private IGroup _group;
@@ -63,7 +63,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        abstract protected void OnGroupChanged();
+        abstract protected void OnSetGroup();
         #endregion //OnGroupChanged
 
         #region ApplyNewValue
