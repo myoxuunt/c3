@@ -11,7 +11,7 @@ namespace C3.Communi
     {
         //IStation Station { get; }
         //IDevice Device { get; }
-        DialogResult Add(Type deviceType, IStation station, out IDevice newDevice);
+        DialogResult Add(DeviceType deviceType, IStation station, out IDevice newDevice);
         DialogResult Edit(IDevice device);
 
         // TODO: need delete(...)?

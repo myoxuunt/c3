@@ -2,6 +2,7 @@ using System;
 using System.Reflection ;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using Xdgk.Common;
 
 
 namespace C3.Communi
@@ -15,9 +16,23 @@ namespace C3.Communi
         /// <param name="station"></param>
         /// <param name="newDevice"></param>
         /// <returns></returns>
-        protected override DialogResult OnAdd(Type deviceType, IStation station, out IDevice newDevice)
+        protected override DialogResult OnAdd(DeviceType deviceType, IStation station, out IDevice newDevice)
         {
-            return FrmGroups.Add (deviceType, station, out newDevice);
+            newDevice = null;
+            FrmDeviceGroups f = new FrmDeviceGroups();
+
+            f.DeviceType = deviceType; 
+            f.Device = (IDevice)Activator.CreateInstance(f.DeviceType.Type);
+            f.Station = station;
+            f.AdeStatus = ADEStatus .Add;
+            f.Groups = f.Device.Groups;
+
+            DialogResult dr = f.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                newDevice = f.Device;
+            }
+            return dr;
         }
 
         /// <summary>
@@ -27,8 +42,17 @@ namespace C3.Communi
         /// <returns></returns>
         protected override DialogResult OnEdit(IDevice device)
         {
-            return FrmGroups.Edit(device);
+            FrmDeviceGroups f = new FrmDeviceGroups();
+
+            f.Device = device;
+            f.Station = device.Station;
+            f.DeviceType = device.DeviceType;
+            f.AdeStatus = ADEStatus.Edit;
+
+            f.Groups = device.Groups;
+
+            DialogResult dr = f.ShowDialog();
+            return dr;
         }
     }
-
 }

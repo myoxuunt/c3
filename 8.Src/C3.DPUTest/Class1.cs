@@ -24,9 +24,25 @@ namespace C3.DPUTest
 
     public class TDpu : DPUBase
     {
+        public DeviceType GetDeviceType()
+        {
+            DeviceType r = DeviceTypeManager.GetDeviceType("TDevice");
+            if (r == null)
+            {
+                //r = new DeviceType();
+                //r.Name = "TDevice";
+                //r.Type = typeof(TDevice);
+                DeviceType t= DeviceTypeManager.AddDeviceType("TDevice", null, typeof(TDevice));
+                //DeviceTypeManager.Add(t);
+                r = t;
+            }
+            return r;
+
+        }
         public TDpu()
         {
-            this.DeviceType = typeof(TDevice);
+            this.DeviceType = //typeof(TDevice);
+                GetDeviceType();
             this.DeviceFactory = new TDeviceFactory(this);
             this.DevicePersister = new TDevicePersister();
             this.DeviceSourceProvider = new TDeviceSourceProvider();
@@ -39,6 +55,7 @@ namespace C3.DPUTest
             System.Windows.Forms.Timer _t = new Timer();
         public TDevice() //: base ("noname",  DeviceTypeManager.GetDeviceType ("TDeviceTypeString") ,123)
         {
+            //this.DeviceType = 
             _t.Interval = 1000;
             _t.Tick += new EventHandler(_t_Tick);
             _t.Start();
@@ -147,6 +164,7 @@ namespace C3.DPUTest
         public override IDevice OnCreate(IDeviceSource deviceSource)
         {
             TDevice d = new TDevice();
+            d.DeviceType = this.Dpu.DeviceType;
             d.Address = 1;
             d.Name = "D" + n++;
             d.Guid = deviceSource.Guid;

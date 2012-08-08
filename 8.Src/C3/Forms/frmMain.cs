@@ -244,9 +244,69 @@ namespace C3
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IStation GetSelectedStation(bool showNotSelectedMsg)
+        {
+            IStation r = null;
+            TreeNode node = this._hardwareTreeView.SelectedNode;
+            if (node is StationTreeNode)
+            {
+                StationTreeNode stationNode = (StationTreeNode)node;
+                r = stationNode.Station;
+            }
+            if (r == null && showNotSelectedMsg)
+            {
+                NUnit.UiKit.UserMessage.DisplayFailure("selected station first");
+            }
+            return r;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuDeviceAdd_Click(object sender, EventArgs e)
         {
+            IStation selectedStation = this.GetSelectedStation(true);
+            if (selectedStation != null)
+            {
+                frmDeviceType f = new frmDeviceType();
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    DeviceType deviceType = f.SelectedDeviceType;
+                    IDeviceUI deviceUI = GetDeviceUI(deviceType);
+                    IDevice newDevice;
+                    DialogResult dr = deviceUI.Add(deviceType, selectedStation, out newDevice);
+                    if (dr == DialogResult.OK)
+                    {
+                        selectedStation.Devices.Add(newDevice);
+                    }
+                    // persister device
+                    //
+                    // task device
+                    //
+                }
+            }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IDeviceUI GetDeviceUI(DeviceType deviceType)
+        {
+            IDPU dpu = this.Soft.DPUs[deviceType];
+            if (dpu == null)
+            {
+                throw new InvalidOperationException(
+                    string.Format ("not find dpu by device type '{0}'", deviceType ));
+            }
+            return dpu.DeviceUI;
         }
     }
 

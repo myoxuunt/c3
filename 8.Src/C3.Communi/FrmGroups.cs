@@ -11,23 +11,24 @@ namespace C3.Communi
 {
     public partial class FrmGroups :NUnit.UiKit.SettingsDialogBase 
     {
+
+        #region FrmGroups
         public FrmGroups()
         {
             InitializeComponent();
         }
+        #endregion //FrmGroups
 
+        #region AdeStatus
         /// <summary>
         /// 
         /// </summary>
-        public IDevice Device
+        public ADEStatus AdeStatus
         {
-            get { return _device; }
-            set { _device = value; }
-        } private IDevice _device;
-
-        private Type _deviceType;
-        private IStation _station;
-        private ADEStatus _adeStatus;
+            get { return _adeStatus; }
+            set { _adeStatus = value; }
+        } private ADEStatus _adeStatus;
+        #endregion //AdeStatus
 
         #region Groups
         /// <summary>
@@ -55,19 +56,25 @@ namespace C3.Communi
         } private GroupCollection _groups;
         #endregion //Groups
 
+        #region Fill
         /// <summary>
         /// 
         /// </summary>
-        private void Fill()
+        protected virtual void Fill()
         {
-            foreach ( Group item in this.Groups )
+            if ( this.Groups != null )
             {
-                TabPage tp = new TabPage(item.Text);
-                tp.Controls.Add(item.GroupUI.Control);
-                tabControl1.TabPages.Add(tp);
+                foreach (Group item in this.Groups)
+                {
+                    TabPage tp = new TabPage(item.Text);
+                    tp.Controls.Add(item.GroupUI.Control);
+                    tabControl1.TabPages.Add(tp);
+                }
             }
         }
+        #endregion //Fill
 
+        #region FrmParameterGroups_Load
         /// <summary>
         /// 
         /// </summary>
@@ -77,51 +84,10 @@ namespace C3.Communi
         {
             Fill();
         }
+        #endregion //FrmParameterGroups_Load
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deviceType"></param>
-        /// <param name="station"></param>
-        /// <param name="device"></param>
-        /// <returns></returns>
-        static public DialogResult Add(Type deviceType, IStation station, out IDevice newDevice)
-        {
-            newDevice = null;
-            FrmGroups f = new FrmGroups();
 
-            f._deviceType = deviceType;
-            f._device = (IDevice)Activator.CreateInstance(f._deviceType);
-            f._station = station;
-            f._adeStatus = ADEStatus.Add;
-
-            DialogResult dr = f.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-                newDevice = f.Device;
-            }
-            return dr;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="device"></param>
-        /// <returns></returns>
-        static public DialogResult Edit(IDevice device)
-        {
-            FrmGroups f = new FrmGroups();
-
-            f._device = device;
-            f._station = device.Station;
-            f._deviceType = device.GetType();
-            f._adeStatus = ADEStatus.Edit;
-
-            f.Groups = device.Groups;
-
-            DialogResult dr = f.ShowDialog();
-            return dr;
-        }
-
+        #region okButton_Click
         /// <summary>
         /// 
         /// </summary>
@@ -133,6 +99,36 @@ namespace C3.Communi
             {
                 item.GroupUI.ApplyNewValue();
             }
+
+            if (this.Verify())
+            {
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
+        #endregion //okButton_Click
+
+        /// <summary>
+        /// verify input new parameter and display error msg
+        /// </summary>
+        /// <returns></returns>
+        virtual protected bool Verify()
+        {
+            throw new NotImplementedException("Verify");
+        }
+
+        #region cancelButton_Click
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
+        #endregion //cancelButton_Click
     }
+
 }

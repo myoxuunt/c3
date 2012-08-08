@@ -1,6 +1,6 @@
-﻿namespace C3.Communi
+﻿namespace C3
 {
-    partial class FrmGroups
+    partial class frmDeviceType
     {
         /// <summary>
         /// Required designer variable.
@@ -28,45 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.lstDeviceType = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(190, 414);
+            this.okButton.Location = new System.Drawing.Point(52, 214);
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(278, 414);
+            this.cancelButton.Location = new System.Drawing.Point(140, 214);
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // tabControl1
+            // lstDeviceType
             // 
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(338, 396);
-            this.tabControl1.TabIndex = 0;
+            this.lstDeviceType.FormattingEnabled = true;
+            this.lstDeviceType.ItemHeight = 12;
+            this.lstDeviceType.Location = new System.Drawing.Point(12, 12);
+            this.lstDeviceType.Name = "lstDeviceType";
+            this.lstDeviceType.Size = new System.Drawing.Size(200, 196);
+            this.lstDeviceType.TabIndex = 19;
             // 
-            // FrmGroups
+            // frmDeviceType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(362, 447);
-            this.Controls.Add(this.tabControl1);
-            this.Name = "FrmGroups";
-            this.Text = "FrmParameterGroups";
-            this.Load += new System.EventHandler(this.FrmParameterGroups_Load);
+            this.ClientSize = new System.Drawing.Size(222, 251);
+            this.Controls.Add(this.lstDeviceType);
+            this.Name = "frmDeviceType";
+            this.Text = "frmDeviceType";
+            this.Load += new System.EventHandler(this.frmDeviceType_Load);
             this.Controls.SetChildIndex(this.okButton, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);
-            this.Controls.SetChildIndex(this.tabControl1, 0);
+            this.Controls.SetChildIndex(this.lstDeviceType, 0);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.ListBox lstDeviceType;
     }
 }

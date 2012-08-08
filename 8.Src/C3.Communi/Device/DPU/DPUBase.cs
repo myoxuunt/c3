@@ -26,7 +26,7 @@ namespace C3.Communi
         #endregion //Name
 
         #region DeviceType
-        public Type DeviceType
+        public DeviceType DeviceType
         {
             get
             {
@@ -40,7 +40,7 @@ namespace C3.Communi
                 }
                 _deviceType = value;
             }
-        } private Type _deviceType;
+        } private DeviceType _deviceType;
         #endregion //DeviceType
 
         #region DeviceFactory

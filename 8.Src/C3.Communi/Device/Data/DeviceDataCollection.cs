@@ -126,7 +126,7 @@ namespace C3.Communi
             /// 
             /// </summary>
             /// <param name="d"></param>
-            internal void Add(IDeviceData deviceData)
+            internal new void Add(IDeviceData deviceData)
             {
                 base.Add(deviceData);
             }
@@ -138,7 +138,7 @@ namespace C3.Communi
             /// </summary>
             /// <param name="index"></param>
             /// <param name="item"></param>
-            internal void Insert(int index, IDeviceData item)
+            internal new void Insert(int index, IDeviceData item)
             {
                 base.Insert(index, item);
             }

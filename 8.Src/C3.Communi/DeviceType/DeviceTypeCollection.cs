@@ -18,6 +18,11 @@ namespace C3.Communi
             base.Insert(index, value);
         }
         #endregion //Insert
+
+        protected override void RemoveItem(int index)
+        {
+            base.RemoveItem(index);
+        }
     }
 
 }

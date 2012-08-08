@@ -18,6 +18,36 @@ namespace C3.Communi
         }
         #endregion //DeviceTypeManager
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="text"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        static public DeviceType AddDeviceType(string name, string text, Type type)
+        {
+            return new DeviceType(name, text, type);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceType"></param>
+        //static public void Add(DeviceType deviceType)
+        //{
+            //DeviceTypes.Add(deviceType);
+        //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceType"></param>
+        static public void Remove(DeviceType deviceType)
+        {
+            DeviceTypes.Remove(deviceType);
+        }
+
         #region DeviceTypes
         /// <summary>
         /// 
@@ -53,11 +83,11 @@ namespace C3.Communi
                 }
             }
 
-            if (r == null)
-            {
-                r = new DeviceType(typeName);
-                DeviceTypes.Add(r);
-            }
+            //if (r == null)
+            //{
+            //    r = new DeviceType(typeName);
+            //    DeviceTypes.Add(r);
+            //}
             return r;
         }
         #endregion //GetDeviceType

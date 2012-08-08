@@ -74,6 +74,9 @@
     <Compile Include="Device\DeviceUI\DeviceUI.cs" />
     <Compile Include="Device\DeviceUI\DeviceUIBase.cs" />
     <Compile Include="Device\DeviceUI\IDeviceUI.cs" />
+    <Compile Include="FrmDeviceGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="IOrderNumber.cs" />
     <Compile Include="OrderNumberCollection.cs" />
     <Compile Include="Parameter\Group\GroupUI.cs" />

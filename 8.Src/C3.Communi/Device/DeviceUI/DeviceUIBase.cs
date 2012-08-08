@@ -18,10 +18,9 @@ namespace C3.Communi
             protected set { _device = value; }
         } private IDevice _device;
 
-        #region
 
 
-        public DialogResult Add(Type deviceType, IStation station, out IDevice newDevice)
+        public DialogResult Add(DeviceType deviceType, IStation station, out IDevice newDevice)
         {
             if (deviceType == null)
             {
@@ -43,7 +42,7 @@ namespace C3.Communi
         /// <param name="station"></param>
         /// <param name="newDevice"></param>
         /// <returns></returns>
-        abstract protected DialogResult OnAdd(Type deviceType, IStation station, out IDevice newDevice);
+        abstract protected DialogResult OnAdd(DeviceType deviceType, IStation station, out IDevice newDevice);
 
         /// <summary>
         /// 
@@ -66,7 +65,6 @@ namespace C3.Communi
         /// <returns></returns>
         abstract protected DialogResult OnEdit(IDevice device);
 
-        #endregion
     }
 
 }
