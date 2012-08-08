@@ -248,6 +248,21 @@ namespace C3
         /// 
         /// </summary>
         /// <returns></returns>
+        private StationTreeNode GetSelectedStationTreeNode()
+        {
+            StationTreeNode stationTreeNode = null;
+            TreeNode node = this._hardwareTreeView.SelectedNode;
+            if (node is StationTreeNode)
+            {
+                stationTreeNode = (StationTreeNode)node;
+            }
+            return stationTreeNode;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private IStation GetSelectedStation(bool showNotSelectedMsg)
         {
             IStation r = null;
@@ -279,17 +294,34 @@ namespace C3
                 if (f.ShowDialog() == DialogResult.OK)
                 {
                     DeviceType deviceType = f.SelectedDeviceType;
+
+                    IDPU dpu = Soft.DPUs[deviceType];
+
                     IDeviceUI deviceUI = GetDeviceUI(deviceType);
                     IDevice newDevice;
                     DialogResult dr = deviceUI.Add(deviceType, selectedStation, out newDevice);
                     if (dr == DialogResult.OK)
                     {
                         selectedStation.Devices.Add(newDevice);
+                        newDevice.Station = selectedStation;
+
+                        // 
+                        //
+                        newDevice.Dpu = Soft.DPUs[deviceType];
+
+                        // persister device
+                        //
+                        dpu.DevicePersister.Add(newDevice);
+
+                        // task device
+                        //
+
+                        // add device tree node
+                        //
+                        DeviceTreeNode deviceTreeNode = new DeviceTreeNode(newDevice);
+                        this.GetSelectedStationTreeNode().Nodes.Add(deviceTreeNode);
+
                     }
-                    // persister device
-                    //
-                    // task device
-                    //
                 }
             }
         }

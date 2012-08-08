@@ -10,6 +10,7 @@ namespace C3.Communi
         IDeviceFactory DeviceFactory { get; set; }
         IDevicePersister DevicePersister { get; set; }
         IDeviceSourceProvider DeviceSourceProvider { get; set; }
+        ITaskFactory TaskFactory { get; set; }
         ITaskProcessor Processor { get; set; }
         IDeviceUI DeviceUI { get; set; }
     }

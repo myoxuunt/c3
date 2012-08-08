@@ -9,6 +9,11 @@ namespace C3.Communi
 {
     public class DeviceUI : DeviceUIBase 
     {
+        public DeviceUI(IDPU dpu)
+        {
+            this.Dpu = dpu;
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -22,7 +27,8 @@ namespace C3.Communi
             FrmDeviceGroups f = new FrmDeviceGroups();
 
             f.DeviceType = deviceType; 
-            f.Device = (IDevice)Activator.CreateInstance(f.DeviceType.Type);
+            //f.Device = (IDevice)Activator.CreateInstance(f.DeviceType.Type);
+            f.Device = f.DeviceType.Create();
             f.Station = station;
             f.AdeStatus = ADEStatus .Add;
             f.Groups = f.Device.Groups;

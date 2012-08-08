@@ -116,10 +116,7 @@ namespace C3.Communi
         } private ITaskProcessor _taskProcessor;
         #endregion //Processor
 
-
         #region DeviceUI
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -129,7 +126,7 @@ namespace C3.Communi
             {
                 if (_deviceUI ==null)
                 {
-                    _deviceUI = new DeviceUI();
+                    _deviceUI = new DeviceUI(this);
                 }
                 return _deviceUI;
             }
@@ -140,5 +137,22 @@ namespace C3.Communi
         } private IDeviceUI _deviceUI;
 
         #endregion //DeviceUI
+
+        #region TaskFactory
+        /// <summary>
+        /// 
+        /// </summary>
+        public ITaskFactory TaskFactory
+        {
+            get
+            {
+                return _taskFactory;
+            }
+            set
+            {
+                _taskFactory = value;
+            }
+        } private ITaskFactory _taskFactory;
+        #endregion
     }
 }

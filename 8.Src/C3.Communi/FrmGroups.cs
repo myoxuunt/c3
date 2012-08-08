@@ -9,10 +9,12 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public partial class FrmGroups :NUnit.UiKit.SettingsDialogBase 
+    public partial class FrmGroups : NUnit.UiKit.SettingsDialogBase 
     {
-
         #region FrmGroups
+        /// <summary>
+        /// 
+        /// </summary>
         public FrmGroups()
         {
             InitializeComponent();
@@ -50,7 +52,6 @@ namespace C3.Communi
                 if (_groups != value)
                 {
                     _groups = value;
-                    //Fill();
                 }
             }
         } private GroupCollection _groups;
@@ -74,18 +75,12 @@ namespace C3.Communi
         }
         #endregion //Fill
 
-        #region FrmParameterGroups_Load
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FrmParameterGroups_Load(object sender, EventArgs e)
+        #region FrmGroups_Load
+        private void FrmGroups_Load(object sender, EventArgs e)
         {
             Fill();
         }
-        #endregion //FrmParameterGroups_Load
-
+        #endregion //FrmGroups_Load
 
         #region okButton_Click
         /// <summary>
@@ -94,6 +89,14 @@ namespace C3.Communi
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void okButton_Click(object sender, EventArgs e)
+        {
+            OnOK();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        virtual protected void OnOK()
         {
             foreach (IGroup item in this.Groups)
             {
@@ -108,14 +111,17 @@ namespace C3.Communi
         }
         #endregion //okButton_Click
 
+        #region Verify
         /// <summary>
         /// verify input new parameter and display error msg
         /// </summary>
         /// <returns></returns>
         virtual protected bool Verify()
         {
-            throw new NotImplementedException("Verify");
+            //throw new NotImplementedException("Verify");
+            return true;
         }
+        #endregion //Verify
 
         #region cancelButton_Click
         /// <summary>
@@ -129,6 +135,7 @@ namespace C3.Communi
             this.Close();
         }
         #endregion //cancelButton_Click
+
     }
 
 }

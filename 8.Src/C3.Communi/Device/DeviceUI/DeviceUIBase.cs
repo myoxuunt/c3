@@ -65,6 +65,23 @@ namespace C3.Communi
         /// <returns></returns>
         abstract protected DialogResult OnEdit(IDevice device);
 
+
+        #region Dpu
+        /// <summary>
+        /// 
+        /// </summary>
+        public IDPU Dpu
+        {
+            get
+            {
+                return _dpu;
+            }
+            set
+            {
+                _dpu = value;
+            }
+        } private IDPU _dpu;
+        #endregion //Dpu
     }
 
 }

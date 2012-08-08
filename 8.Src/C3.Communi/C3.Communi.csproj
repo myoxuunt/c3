@@ -256,6 +256,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmDeviceGroups.resx">
+      <DependentUpon>FrmDeviceGroups.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmGroups.resx">
       <DependentUpon>FrmGroups.cs</DependentUpon>
       <SubType>Designer</SubType>

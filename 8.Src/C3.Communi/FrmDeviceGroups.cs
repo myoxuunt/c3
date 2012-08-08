@@ -84,6 +84,24 @@ namespace C3.Communi
             return !exist;
         }
         #endregion //Verify
+
+        #region Fill
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override void Fill()
+        {
+            // set form text
+            //
+            this.Text = string.Format(
+                "{0} - {1} : {2}", 
+                ADEStatusText.GetText(this.AdeStatus),
+                this.Station.Name,
+                this.DeviceType.Text);
+
+            base.Fill();
+        }
+        #endregion //Fill
     }
 
 }

@@ -9,6 +9,7 @@ namespace C3.Communi
 {
     public interface IDeviceUI
     {
+        IDPU Dpu { get; set; }
         //IStation Station { get; }
         //IDevice Device { get; }
         DialogResult Add(DeviceType deviceType, IStation station, out IDevice newDevice);

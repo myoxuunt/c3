@@ -38,6 +38,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADEStatusStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ADEStatusStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="App.cs" />
     <Compile Include="AppFactory.cs" />
     <Compile Include="cccc.cs" />
@@ -94,6 +99,11 @@
     <Compile Include="XmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ADEStatusStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ADEStatusStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="FixedDialogBase.resx">
       <DependentUpon>FixedDialogBase.cs</DependentUpon>
       <SubType>Designer</SubType>

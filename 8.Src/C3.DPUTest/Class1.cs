@@ -201,7 +201,7 @@ namespace C3.DPUTest
 
         public override void OnAdd(IDevice device)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public override void OnUpdate(IDevice device)

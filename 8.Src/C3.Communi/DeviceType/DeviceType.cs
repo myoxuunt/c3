@@ -157,6 +157,16 @@ namespace C3.Communi
         } private Type _type;
         #endregion //Type
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IDevice Create()
+        {
+            IDevice d = (IDevice)Activator.CreateInstance(this.Type);
+            d.DeviceType = this;
 
+            return d;
+        }
     }
 }

@@ -57,8 +57,7 @@ namespace C3
         /// </summary>
         private void SetFormText()
         {
-            // TODO:
-            //
+            this.Text = Strings.DeviceType;
         }
 
         /// <summary>
