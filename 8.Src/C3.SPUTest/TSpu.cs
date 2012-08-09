@@ -46,8 +46,10 @@ namespace C3.SPUTest
         {
             TStationSource s = new TStationSource();
             s.Guid = GuidFactory.Create(11);
+            TStationSource s2 = new TStationSource();
+            s2.Guid = GuidFactory.Create(12);
             TStationSource[] ss = new TStationSource[] {
-                s
+                s,s2
             };
             return ss;
         }

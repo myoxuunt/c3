@@ -11,11 +11,12 @@ namespace C3.SPUTest
             : base(spu)
         {
         }
-        private int n = 0;
+
+            int n = 0;
         protected override IStation OnCreate(IStationSource stationSource)
         {
             TStation station = new TStation();
-            station.Name = "name from station factory";
+            station.Name = "name from station factory:" + n++;
             station.Guid = stationSource.Guid;
             station.CommuniPortConfig = A;
             station.Spu = this.Spu;

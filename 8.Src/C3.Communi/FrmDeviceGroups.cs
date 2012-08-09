@@ -7,7 +7,6 @@ using System.Text;
 using System.Windows.Forms;
 using Xdgk.Common;
 
-
 namespace C3.Communi
 {
     public class FrmDeviceGroups : FrmGroups
@@ -101,29 +100,5 @@ namespace C3.Communi
             base.Fill();
         }
         #endregion //Fill
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // FrmDeviceGroups
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.ClientSize = new System.Drawing.Size(362, 447);
-            this.Name = "FrmDeviceGroups";
-            this.Load += new System.EventHandler(this.FrmDeviceGroups_Load);
-            this.ResumeLayout(false);
-
-        }
-
-        private void FrmDeviceGroups_Load(object sender, EventArgs e)
-        {
-
-        }
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-
 }
