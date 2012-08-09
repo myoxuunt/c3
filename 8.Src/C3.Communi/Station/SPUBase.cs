@@ -32,7 +32,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public Type StationType
+        public StationType StationType
         {
             get
             {
@@ -46,7 +46,7 @@ namespace C3.Communi
                 }
                 _stationType = value;
             }
-        } private Type _stationType;
+        } private StationType _stationType;
         #endregion //StationType
 
         #region StationFactory
@@ -119,5 +119,23 @@ namespace C3.Communi
         } private string _description;
         #endregion //Description
 
+
+        #region StationUI
+        /// <summary>
+        /// 
+        /// </summary>
+        public IStationUI StationUI
+        {
+            get
+            {
+                return _stationUI;
+            }
+            set
+            {
+                _stationUI = value;
+            }
+        } private IStationUI _stationUI;
+
+        #endregion //StationUI
     }
 }

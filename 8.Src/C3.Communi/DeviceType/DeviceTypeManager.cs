@@ -93,4 +93,95 @@ namespace C3.Communi
         #endregion //GetDeviceType
     }
 
+    public class StationTypeManager
+    {
+        #region 
+        /// <summary>
+        /// 
+        /// </summary>
+        private StationTypeManager()
+        {
+
+        }
+        #endregion //
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="text"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        static public  StationType AddStationType (string name, string text, Type type)
+        {
+            StationType t = new StationType(name, text, type);
+            StationTypes.Add(t);
+            return t;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceType"></param>
+        //static public void Add(DeviceType deviceType)
+        //{
+            //DeviceTypes.Add(deviceType);
+        //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceType"></param>
+        static public void Remove(StationType stationType)
+        {
+            StationTypes.Remove(stationType);
+        }
+
+        #region DeviceTypes
+        /// <summary>
+        /// 
+        /// </summary>
+        static public StationTypeCollection StationTypes
+        {
+            get
+            {
+                if (_stationTypes == null)
+                {
+                    _stationTypes = new StationTypeCollection();
+                }
+                return _stationTypes;
+            }
+        } static private StationTypeCollection _stationTypes;
+        #endregion //DeviceTypes
+
+        #region GetDeviceType
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="typeName"></param>
+        /// <returns></returns>
+        static public StationType GetStationType(string typeName)
+        {
+            StationType r = null;
+            foreach (StationType item in StationTypes)
+            {
+                if (StringHelper.Equal(item.Name, typeName))
+                {
+                    r = item;
+                    break;
+                }
+            }
+
+            //if (r == null)
+            //{
+            //    r = new DeviceType(typeName);
+            //    DeviceTypes.Add(r);
+            //}
+            return r;
+        }
+        #endregion //
+    }
+
+
+
 }

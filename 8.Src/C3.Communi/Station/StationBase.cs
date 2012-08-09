@@ -7,6 +7,9 @@ namespace C3.Communi
 {
     abstract public class StationBase : IStation
     {
+        private const string PN_NAME = "Name";
+        private const int PO_NAME = -90;
+
         #region Events
 
         /// <summary>
@@ -20,12 +23,18 @@ namespace C3.Communi
         public event EventHandler CommuniPortChanged;
         #endregion //Events
 
+
         #region StationBase
+        protected StationBase()
+            : this("unknown")
+        {
+
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name"></param>
-        public StationBase(string name)
+        protected StationBase(string name)
         {
             this.Name = name;
         }
@@ -39,7 +48,8 @@ namespace C3.Communi
         {
             get
             {
-                return _name;
+                IParameter p = this.GetNameParameter();
+                return (string)p.Value;
             }
             set
             {
@@ -53,13 +63,11 @@ namespace C3.Communi
                 {
                     throw new ArgumentException("Name cannot be empty");
                 }
-                if (_name != value)
-                {
-                    _name = value;
-                    OnNameChanged(EventArgs.Empty);
-                }
+                IParameter p = GetNameParameter();
+                p.Name = value;
+                OnNameChanged(EventArgs.Empty);
             }
-        } private string _name;
+        }
         #endregion //Name
 
         #region OnNameChanged
@@ -72,8 +80,23 @@ namespace C3.Communi
             {
                 this.NameChanged(this, e);
             }
-        } 
+        }
         #endregion //OnNameChanged
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IParameter GetNameParameter()
+        {
+            IParameter p = this.GeneralGroup.Parameters[PN_NAME];
+            if (p == null)
+            {
+                p = new Parameter(PN_NAME, "noname", PO_NAME);
+                this.GeneralGroup.Parameters.Add(p);
+            }
+            return p;
+        }
 
         #region Devices
         /// <summary>
@@ -137,7 +160,10 @@ namespace C3.Communi
         } private ICommuniPort _communiPort;
         #endregion //CommuniPort
 
-        #region
+        #region OnCommuniPortChangedCallBack
+        /// <summary>
+        /// 
+        /// </summary>
         private SendOrPostCallback OnCommuniPortChangedCallBack
         {
             get
@@ -149,8 +175,7 @@ namespace C3.Communi
                 return _onCommuniPortChangedCallBack;
             }
         } private SendOrPostCallback _onCommuniPortChangedCallBack;
-        #endregion //
-
+        #endregion //OnCommuniPortChangedCallBack
 
         #region OnCommuniPortChanged
         /// <summary>
@@ -200,7 +225,7 @@ namespace C3.Communi
         public StationCollection Stations
         {
             get { return _stationCollection; }
-            set { _stationCollection = value;}
+            set { _stationCollection = value; }
         } private StationCollection _stationCollection;
         #endregion //Stations
 
@@ -239,8 +264,7 @@ namespace C3.Communi
         } private Guid _guid;
         #endregion //Guid
 
-
-
+        #region Tag
         public object Tag
         {
             get
@@ -252,6 +276,103 @@ namespace C3.Communi
                 _tag = value;
             }
         } private object _tag;
+        #endregion //Tag
 
+        #region IStation 成员
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Text
+        {
+            get
+            {
+                return this.Name;
+            }
+            set
+            {
+                this.Name = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public StationType StationType
+        {
+            get
+            {
+                return _stationType;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("StationType");
+                }
+                _stationType = value;
+            }
+        } private StationType _stationType;
+
+        #endregion
+
+        #region GeneralGroup
+        /// <summary>
+        /// 
+        /// </summary>
+        protected IGroup GeneralGroup
+        {
+            get
+            {
+                IGroup g = this.Groups.GetGroup("General");
+                if (g == null)
+                {
+                    g = new Group();
+                    g.Name = "General";
+                    this.Groups.Add(g);
+                }
+                return g;
+            }
+        }
+        #endregion //GeneralGroup
+
+        #region Groups
+        /// <summary>
+        /// 
+        /// </summary>
+        public GroupCollection Groups
+        {
+            get
+            {
+                if (_parameterGroups == null)
+                {
+                    _parameterGroups = new GroupCollection();
+                }
+                return _parameterGroups;
+            }
+        } private GroupCollection _parameterGroups;
+        #endregion //Groups
+
+        #region Spu
+        /// <summary>
+        /// 
+        /// </summary>
+        public ISPU Spu
+        {
+            get
+            {
+                return _spu;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Spu");
+                }
+                _spu = value;
+            }
+        } private ISPU _spu;
+        #endregion //Spu
     }
 }

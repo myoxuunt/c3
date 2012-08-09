@@ -68,5 +68,14 @@ namespace C3 {
                 return ResourceManager.GetString("DeviceType", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 站点类型 的本地化字符串。
+        /// </summary>
+        internal static string StationType {
+            get {
+                return ResourceManager.GetString("StationType", resourceCulture);
+            }
+        }
     }
 }

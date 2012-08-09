@@ -152,19 +152,21 @@
             // mnuStationAdd
             // 
             this.mnuStationAdd.Name = "mnuStationAdd";
-            this.mnuStationAdd.Size = new System.Drawing.Size(113, 22);
+            this.mnuStationAdd.Size = new System.Drawing.Size(152, 22);
             this.mnuStationAdd.Text = "添加(&A)";
+            this.mnuStationAdd.Click += new System.EventHandler(this.mnuStationAdd_Click);
             // 
             // mnuStationEdit
             // 
             this.mnuStationEdit.Name = "mnuStationEdit";
-            this.mnuStationEdit.Size = new System.Drawing.Size(113, 22);
+            this.mnuStationEdit.Size = new System.Drawing.Size(152, 22);
             this.mnuStationEdit.Text = "修改(&E)";
+            this.mnuStationEdit.Click += new System.EventHandler(this.mnuStationEdit_Click);
             // 
             // mnuStationDelete
             // 
             this.mnuStationDelete.Name = "mnuStationDelete";
-            this.mnuStationDelete.Size = new System.Drawing.Size(113, 22);
+            this.mnuStationDelete.Size = new System.Drawing.Size(152, 22);
             this.mnuStationDelete.Text = "删除(&D)";
             // 
             // mnuDevice
@@ -198,6 +200,7 @@
             this.mnuDeviceDelete.Name = "mnuDeviceDelete";
             this.mnuDeviceDelete.Size = new System.Drawing.Size(164, 22);
             this.mnuDeviceDelete.Text = "删除(&D)";
+            this.mnuDeviceDelete.Click += new System.EventHandler(this.mnuDeviceDelete_Click);
             // 
             // mnuCommuniDetail
             // 

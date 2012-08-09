@@ -14,8 +14,7 @@ namespace C3.Communi
         public StationTreeNode(IStation station)
         {
             this.Station = station;
-            this.Name = station.Name;
-            this.Text = station.Name;
+            RefreshStationTreeNode(station);
 
             //
             //
@@ -36,6 +35,24 @@ namespace C3.Communi
             }
         }
         #endregion //Constructor
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void RefreshStationTreeNode()
+        {
+            RefreshStationTreeNode(this.Station);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="station"></param>
+        private void RefreshStationTreeNode(IStation station)
+        {
+            this.Name = station.Name;
+            this.Text = station.Name;
+        }
 
         /// <summary>
         /// 

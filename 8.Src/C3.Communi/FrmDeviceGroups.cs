@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -102,6 +101,105 @@ namespace C3.Communi
             base.Fill();
         }
         #endregion //Fill
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FrmDeviceGroups
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.ClientSize = new System.Drawing.Size(362, 447);
+            this.Name = "FrmDeviceGroups";
+            this.Load += new System.EventHandler(this.FrmDeviceGroups_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void FrmDeviceGroups_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FrmStationGroups : FrmGroups
+    {
+        #region StationType
+        /// <summary>
+        /// 
+        /// </summary>
+        public StationType StationType
+        {
+            get
+            {
+                return _stationType;
+            }
+            set
+            {
+                _stationType = value;
+            }
+        } private StationType _stationType;
+        #endregion //StationType
+
+        #region Stations
+        /// <summary>
+        /// 
+        /// </summary>
+        public StationCollection Stations
+        {
+            get
+            {
+                return _stations;
+            }
+            set
+            {
+                _stations = value;
+            }
+        } private StationCollection _stations;
+        #endregion //Stations
+
+        #region Station
+        /// <summary>
+        /// 
+        /// </summary>
+        public IStation Station
+        {
+            get
+            {
+                return _station;
+            }
+            set
+            {
+                _station = value;
+            }
+        } private IStation _station;
+        #endregion //Station
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override void Fill()
+        {
+            this.Text = string.Format("{0} - {1}",
+                ADEStatusText.GetText(this.AdeStatus),
+                this.StationType.Text);
+
+            base.Fill();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        protected override bool Verify()
+        {
+            bool exist = this.Stations.ExistName ( this.Station.Name ,this.Station );
+            NUnit.UiKit.UserMessage.DisplayFailure("Exist name");
+            return !exist;
+        }
     }
 
 }
