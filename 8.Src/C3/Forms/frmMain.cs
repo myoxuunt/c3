@@ -241,6 +241,10 @@ namespace C3
                 IDevice d = deviceNode.Device;
                 IDeviceUI ui = d.Dpu.DeviceUI;
                 DialogResult dr = ui.Edit(d);
+                if (dr == DialogResult.OK)
+                {
+                    deviceNode.RefreshDeviceTreeNode();
+                }
             }
         }
 
@@ -315,6 +319,7 @@ namespace C3
 
                         // task device
                         //
+                        dpu.TaskFactory.Create(newDevice);
 
                         // add device tree node
                         //

@@ -26,11 +26,11 @@ namespace C3.Communi
             newDevice = null;
             FrmDeviceGroups f = new FrmDeviceGroups();
 
-            f.DeviceType = deviceType; 
+            f.DeviceType = deviceType;
             //f.Device = (IDevice)Activator.CreateInstance(f.DeviceType.Type);
             f.Device = f.DeviceType.Create();
             f.Station = station;
-            f.AdeStatus = ADEStatus .Add;
+            f.AdeStatus = ADEStatus.Add;
             f.Groups = f.Device.Groups;
 
             DialogResult dr = f.ShowDialog();

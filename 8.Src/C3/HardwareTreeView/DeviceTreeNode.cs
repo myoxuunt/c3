@@ -31,6 +31,15 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
+        public void RefreshDeviceTreeNode()
+        {
+            this.Name = this.Device.Name;
+            this.Text = this.Device.Text;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="device"></param>
         public DeviceTreeNode(IDevice device)
         {
@@ -40,8 +49,7 @@ namespace C3.Communi
             this.ImageKey = IconNames.Device;
             this.SelectedImageKey = IconNames.Device;
 
-            this.Name = device.Name;
-            this.Text = device.Text;
+            RefreshDeviceTreeNode();
         }
 
     }

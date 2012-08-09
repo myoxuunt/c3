@@ -14,7 +14,7 @@ namespace C3.Communi
 
         string Name { get; set; }
         DeviceType DeviceType { get; set; }
-        string Text { get; set; }
+        string Text { get; }
 
         IStation Station { get; set; }
 

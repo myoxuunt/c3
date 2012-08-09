@@ -1,9 +1,7 @@
-
 using System;
 using System.Reflection ;
 using System.Windows.Forms;
 using System.Collections.Generic;
-
 
 namespace C3.Communi
 {
@@ -11,5 +9,4 @@ namespace C3.Communi
     {
         int OrderNumber {get;set;}
     }
-
 }

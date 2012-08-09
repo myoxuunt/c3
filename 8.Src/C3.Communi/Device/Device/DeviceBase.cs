@@ -92,7 +92,6 @@ namespace C3.Communi
             {
                 IParameter p = GetNameParameter();
                 p.Value = value;
-                _text = null;
             }
         }
         #endregion //Name
@@ -237,25 +236,10 @@ namespace C3.Communi
         {
             get
             {
-                if (_text == null)
-                {
-                    //if (this.Name.Length > 0)
-                    //{
-                    //    _text = string.Format("{0}({1})", this.Name, this.GetType().Name);
-                    //}
-                    //else
-                    //{
-                    //    _text = string.Format("({0})", this.GetType().Name);
-                    //}
-                    _text = string.Format("{0}({1})", this.Name, this.DeviceType.Name);
-                }
-                return _text;
+                string text = string.Format("{0}({1})", this.Name, this.DeviceType.Text);
+                return text;
             }
-            set
-            {
-                _text = value;
-            }
-        } private string _text;
+        } 
         #endregion //Text
 
         #region Tag
