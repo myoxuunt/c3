@@ -55,7 +55,7 @@ namespace C3
         {
             get
             {
-                StationType r = (StationType)this.lstStationType.SelectedItem;
+                StationType r = (StationType)this.lstStationType.SelectedValue;
                 return r;
             }
         }

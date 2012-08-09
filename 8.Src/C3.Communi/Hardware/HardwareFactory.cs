@@ -242,6 +242,7 @@ namespace C3.Communi
             VerifyNotNull(dpu.DeviceSourceProvider, "dpu.DeviceSourceProvider");
             VerifyNotNull(dpu.DeviceType, "dpu.DeviceType");
             VerifyNotNull(dpu.Processor, "dpu.Processor");
+            VerifyNotNull(dpu.DeviceUI, "dpu.DeviceUI");
         }
         #endregion //VerifyDPU
 
@@ -274,6 +275,7 @@ namespace C3.Communi
             VerifyNotNull(spu.StationPersister, "spu.StationPersister");
             VerifyNotNull(spu.StationSourceProvider, "spu.StationSourceProvider");
             VerifyNotNull(spu.StationType, "spu.StationType");
+            VerifyNotNull(spu.StationUI, "spu.StationUI");
         }
         #endregion //VerifySPU
 

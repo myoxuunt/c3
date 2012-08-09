@@ -7,8 +7,7 @@ namespace C3.SPUTest
 {
     public class TStation : StationBase
     {
-        public TStation(string name)
-            : base(name)
+        public TStation()
         {
         }
     }

@@ -7,12 +7,19 @@ namespace C3.SPUTest
 {
     class TStationFactory: StationFactoryBase 
     {
+        public TStationFactory(ISPU spu)
+            : base(spu)
+        {
+        }
         private int n = 0;
         protected override IStation OnCreate(IStationSource stationSource)
         {
-            TStation station = new TStation("T" + n++);
+            TStation station = new TStation();
+            station.Name = "name from station factory";
             station.Guid = stationSource.Guid;
             station.CommuniPortConfig = A;
+            station.Spu = this.Spu;
+            station.StationType = this.Spu.StationType;
 
             return station;
         }

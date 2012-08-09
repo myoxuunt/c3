@@ -26,17 +26,10 @@ namespace C3.Communi
 
         #region StationBase
         protected StationBase()
-            : this("unknown")
         {
-
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        protected StationBase(string name)
-        {
-            this.Name = name;
+            // init
+            //
+            this.GetNameParameter();
         }
         #endregion //StationBase
 
@@ -64,7 +57,7 @@ namespace C3.Communi
                     throw new ArgumentException("Name cannot be empty");
                 }
                 IParameter p = GetNameParameter();
-                p.Name = value;
+                p.Value = value;
                 OnNameChanged(EventArgs.Empty);
             }
         }
@@ -92,7 +85,7 @@ namespace C3.Communi
             IParameter p = this.GeneralGroup.Parameters[PN_NAME];
             if (p == null)
             {
-                p = new Parameter(PN_NAME, "noname", PO_NAME);
+                p = new Parameter(PN_NAME, "unknown", PO_NAME);
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;

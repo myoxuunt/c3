@@ -442,7 +442,7 @@ namespace C3
                 ISPU spu = Soft.SPUs[stationType];
                 IStationUI stationUI = spu.StationUI;
 
-                StationCollection stations = null;
+                StationCollection stations = this.Soft.Hardware.Stations;
                 IStation newStation;
                 DialogResult dr2 = stationUI.Add(stationType, stations, out newStation);
                 if (dr2 == DialogResult.OK)

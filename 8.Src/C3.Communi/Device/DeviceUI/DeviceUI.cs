@@ -28,7 +28,7 @@ namespace C3.Communi
 
             f.DeviceType = deviceType;
             //f.Device = (IDevice)Activator.CreateInstance(f.DeviceType.Type);
-            f.Device = f.DeviceType.Create();
+            f.Device = f.DeviceType.Create(this.Dpu);
             f.Station = station;
             f.AdeStatus = ADEStatus.Add;
             f.Groups = f.Device.Groups;
