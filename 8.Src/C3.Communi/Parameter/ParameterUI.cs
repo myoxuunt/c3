@@ -81,4 +81,23 @@ namespace C3.Communi
         }
     }
 
+    public class CommuniPortConfigUI : ParameterUIBase
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parameter"></param>
+        protected override void OnSetParameter(IParameter parameter)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override void OnApplyNewValue()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
