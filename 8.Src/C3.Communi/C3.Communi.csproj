@@ -180,6 +180,12 @@
     <Compile Include="UC\Parameter\UCCommuniPortConfigUI.Designer.cs">
       <DependentUpon>UCCommuniPortConfigUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC\Parameter\UCNetSetting.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\Parameter\UCNetSetting.Designer.cs">
+      <DependentUpon>UCNetSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC\Parameter\UCNumberParameterUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -256,6 +262,7 @@
     <Compile Include="Task\TaskQueue.cs" />
     <Compile Include="Utils\TypeHelper.cs" />
     <Compile Include="Utils\Utilities.cs" />
+    <Compile Include="_.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NLog.config">
@@ -290,6 +297,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC\Parameter\UCCommuniPortConfigUI.resx">
       <DependentUpon>UCCommuniPortConfigUI.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\Parameter\UCNetSetting.resx">
+      <DependentUpon>UCNetSetting.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\Parameter\UCNumberParameterUI.resx">

@@ -5,8 +5,22 @@ using System.Net;
 
 namespace C3.Communi
 {
-    public class RemoteIPAddressConfig : ICommuniPortConfig
+    public interface INetCommuniPortConfig : ICommuniPortConfig
     {
+
+    }
+
+    public class RemoteIPAddressConfig : INetCommuniPortConfig 
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ipaddress"></param>
+        public RemoteIPAddressConfig(IPAddress ipAddress)
+        {
+            this.RemoteIPAddress = ipAddress;
+        }
+
         /// <summary>
         /// 
         /// </summary>

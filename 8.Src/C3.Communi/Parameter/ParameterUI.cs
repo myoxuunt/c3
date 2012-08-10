@@ -89,6 +89,9 @@ namespace C3.Communi
         /// <param name="parameter"></param>
         protected override void OnSetParameter(IParameter parameter)
         {
+            UCCommuniPortConfigUI c = new UCCommuniPortConfigUI();
+            c.CommuniPortConfig = (ICommuniPortConfig)parameter.Value;
+            this.Control = c;
         }
 
         /// <summary>

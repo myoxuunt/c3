@@ -32,6 +32,7 @@
             this.rbSerialPort = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.ucSerialPortSetting1 = new CommuniServer.UCSerialPortSetting();
+            this.ucNetSetting1 = new C3.Communi.UC.Parameter.UCNetSetting();
             this.SuspendLayout();
             // 
             // rbSocket
@@ -68,16 +69,25 @@
             this.ucSerialPortSetting1.Size = new System.Drawing.Size(368, 139);
             this.ucSerialPortSetting1.TabIndex = 34;
             // 
+            // ucNetSetting1
+            // 
+            this.ucNetSetting1.CommuniPortConfig = null;
+            this.ucNetSetting1.Location = new System.Drawing.Point(0, 225);
+            this.ucNetSetting1.Name = "ucNetSetting1";
+            this.ucNetSetting1.Size = new System.Drawing.Size(405, 154);
+            this.ucNetSetting1.TabIndex = 35;
+            // 
             // UCCommuniPortConfigUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ucNetSetting1);
             this.Controls.Add(this.ucSerialPortSetting1);
             this.Controls.Add(this.rbSocket);
             this.Controls.Add(this.rbSerialPort);
             this.Controls.Add(this.label5);
             this.Name = "UCCommuniPortConfigUI";
-            this.Size = new System.Drawing.Size(364, 226);
+            this.Size = new System.Drawing.Size(517, 505);
             this.Load += new System.EventHandler(this.UCCommuniPortConfig_Load);
             this.ResumeLayout(false);
 
@@ -89,5 +99,6 @@
         private System.Windows.Forms.RadioButton rbSerialPort;
         private System.Windows.Forms.Label label5;
         private CommuniServer.UCSerialPortSetting ucSerialPortSetting1;
+        private C3.Communi.UC.Parameter.UCNetSetting ucNetSetting1;
     }
 }

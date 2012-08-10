@@ -7,8 +7,11 @@ namespace C3.Communi
 {
     abstract public class StationBase : IStation
     {
-        private const string PN_NAME = "Name";
-        private const int PO_NAME = -90;
+        private const string PN_NAME = "Name",
+            PN_COMMUNIPORTCONFIG = "CommuniPortConfig";
+
+        private const int PO_NAME = -90,
+            PO_COMMUNIPORTCONFIG = -80;
 
         #region Events
 
@@ -30,6 +33,7 @@ namespace C3.Communi
             // init
             //
             this.GetNameParameter();
+            this.GetCommuniPortConfig();
         }
         #endregion //StationBase
 
@@ -239,9 +243,24 @@ namespace C3.Communi
             set
             {
                 _communiPortConfig = value;
+                // TODO: 2012-08-10 clear communiPort
+                //
             }
         } private ICommuniPortConfig _communiPortConfig;
         #endregion //CommuniPortConfig
+
+        private IParameter GetCommuniPortConfig()
+        {
+            IParameter p = this.CommuniPortConfigGroup.Parameters[PN_COMMUNIPORTCONFIG];
+            if (p == null)
+            {
+                p = new Parameter(PN_COMMUNIPORTCONFIG, typeof(ICommuniPortConfig), 
+                    this.CommuniPortConfig, PO_COMMUNIPORTCONFIG);
+                p.ParameterUI = new CommuniPortConfigUI();
+                this.CommuniPortConfigGroup.Parameters.Add(p);
+            }
+            return p;
+        }
 
         #region Guid
         public Guid Guid
@@ -318,6 +337,8 @@ namespace C3.Communi
         {
             get
             {
+                // TODO: string
+                //
                 IGroup g = this.Groups.GetGroup("General");
                 if (g == null)
                 {
@@ -329,6 +350,24 @@ namespace C3.Communi
             }
         }
         #endregion //GeneralGroup
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private IGroup CommuniPortConfigGroup
+        {
+            get
+            {
+                IGroup g = this.Groups.GetGroup("CommuniPortConfig");
+                if (g == null)
+                {
+                    g = new Group();
+                    g.Name = PN_COMMUNIPORTCONFIG;
+                    this.Groups.Add(g);
+                }
+                return g;
+            }
+        }
 
         #region Groups
         /// <summary>

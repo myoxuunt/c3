@@ -9,6 +9,12 @@ namespace C3.Communi
     /// </summary>
     public class NullCommuniPortConfig : ICommuniPortConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        private NullCommuniPortConfig()
+        {
+        }
 
         /// <summary>
         /// 

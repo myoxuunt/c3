@@ -29,8 +29,9 @@ namespace C3.SPUTest
         {
             get
             {
-                RemoteIPAddressConfig a = new RemoteIPAddressConfig();
-                a.RemoteIPAddress = System.Net.IPAddress.Parse("127.0.0.1");
+                RemoteIPAddressConfig a = new RemoteIPAddressConfig( 
+                    System.Net.IPAddress.Parse("127.0.0.1"));
+                //a.RemoteIPAddress = System.Net.IPAddress.Parse("127.0.0.1");
                 return a;
             }
         }
