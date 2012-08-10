@@ -81,6 +81,9 @@ namespace C3.Communi
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class CommuniPortConfigUI : ParameterUIBase
     {
         /// <summary>
@@ -89,9 +92,30 @@ namespace C3.Communi
         /// <param name="parameter"></param>
         protected override void OnSetParameter(IParameter parameter)
         {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("Parameter");
+            }
+
+            Debug.Assert(parameter.Value != null);
+
+            Debug.Assert(parameter.Value is ICommuniPortConfig);
+
             UCCommuniPortConfigUI c = new UCCommuniPortConfigUI();
-            c.CommuniPortConfig = (ICommuniPortConfig)parameter.Value;
+            //c.CommuniPortConfig = (ICommuniPortConfig)parameter.Value;
+            c.Parameter = parameter;
             this.Control = c;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private UCCommuniPortConfigUI UIControl
+        {
+            get
+            {
+                return (UCCommuniPortConfigUI)this.Control;
+            }
         }
 
         /// <summary>
@@ -99,7 +123,8 @@ namespace C3.Communi
         /// </summary>
         protected override void OnApplyNewValue()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            this.UIControl.ApplyNewValue();
         }
     }
 

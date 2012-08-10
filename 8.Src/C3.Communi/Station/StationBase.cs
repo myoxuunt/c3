@@ -89,7 +89,7 @@ namespace C3.Communi
             IParameter p = this.GeneralGroup.Parameters[PN_NAME];
             if (p == null)
             {
-                p = new Parameter(PN_NAME, "unknown", PO_NAME);
+                p = new Parameter(PN_NAME, typeof(string), "unknown", PO_NAME);
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;

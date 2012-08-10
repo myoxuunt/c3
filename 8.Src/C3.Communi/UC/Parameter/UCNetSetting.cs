@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace C3.Communi.UC.Parameter
 {
-    public partial class UCNetSetting : UserControl
+    public partial class UCNetSetting : UserControl, IParameterUIControl 
     {
         public UCNetSetting()
         {
@@ -172,5 +172,44 @@ namespace C3.Communi.UC.Parameter
             DiscriminateMode dm = item.DiscriminateMode;
             VisiblePanel(dm);
         }
+
+        #region IParameterUIControl 成员
+
+        public bool Verify()
+        {
+            // TODO:
+            //
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IParameter Parameter
+        {
+            get
+            {
+                return _parameter;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Parameter");
+                }
+                _parameter = value;
+                Fill();
+            }
+        } private IParameter _parameter;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void Fill()
+        {
+            this.CommuniPortConfig = (ICommuniPortConfig)_parameter.Value;
+        }
+
+        #endregion
     }
 }

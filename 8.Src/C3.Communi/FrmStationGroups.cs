@@ -89,6 +89,16 @@ namespace C3.Communi
             }
             return !exist;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmStationGroups_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

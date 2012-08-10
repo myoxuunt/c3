@@ -74,11 +74,11 @@ namespace C3.DPUTest
             g.Name = "Name";
             g.Text = "Text";
 
-            IParameter i = new Parameter("name", "value", Unit.FindByName(Unit.Cm), 0, "descrip");
+            IParameter i = new Parameter("name", typeof(string),"value", Unit.FindByName(Unit.Cm), 0, "descrip");
             i.ParameterUI = new StringParameterUI();
             g.Parameters.Add ( i );
 
-            i = new Parameter("ADE", Xdgk.Common.ADEStatus.Add, -1);
+            i = new Parameter("ADE", typeof(Xdgk.Common.ADEStatus),Xdgk.Common.ADEStatus.Add, -1);
             i.ParameterUI = new EnumParameterUI();
             g.Parameters.Add(i);
 

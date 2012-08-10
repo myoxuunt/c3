@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -6,7 +7,8 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
-using Xdgk.Communi;
+//using Xdgk.Communi;
+using C3.Communi;
 
 namespace CommuniServer
 {
@@ -16,7 +18,7 @@ namespace CommuniServer
     /// <summary>
     /// 
     /// </summary>
-    public partial class UCSerialPortSetting : UserControl
+    public partial class UCSerialPortSetting : UserControl , IParameterUIControl 
     {
         public UCSerialPortSetting()
         {
@@ -176,7 +178,19 @@ namespace CommuniServer
         }
         #endregion //BindBaudRateDataSource
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void Fill()
+        {
+            SerialCommuniPortConfig t = (SerialCommuniPortConfig)this.Parameter.Value ;
+            SerialPortSetting value = t.SerialPortSetting;
 
+            this.cbBaudRate.SelectedValue = value.BaudRate;
+            this.cbParity.SelectedValue = value.Parity;
+            this.cbDataBits.SelectedValue = value.DataBits;
+            this.cbStopBits.SelectedValue = value.StopBits;
+        }
 
         //#region SerialCommuniType
         ///// <summary>
@@ -212,33 +226,26 @@ namespace CommuniServer
         //#endregion //SerialCommuniType
 
         #region SerialPortSetting
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public SerialPortSetting SerialPortSetting
-        //{
-        //    get
-        //    {
-        //        int baudRate = (int)this.cbBaudRate.SelectedValue;
-        //        Parity p = (Parity)this.cbParity.SelectedValue;
-        //        int databits = (int)this.cbDataBits.SelectedValue;
-        //        StopBits stopbits = (StopBits)this.cbStopBits.SelectedValue;
+        /// <summary>
+        /// 
+        /// </summary>
+        public SerialPortSetting CreateSerialPortSetting()
+        {
+                string portName = this.txtSerialPortName.Text;
+                int baudRate = (int)this.cbBaudRate.SelectedValue;
+                Parity p = (Parity)this.cbParity.SelectedValue;
+                int databits = (int)this.cbDataBits.SelectedValue;
+                StopBits stopbits = (StopBits)this.cbStopBits.SelectedValue;
 
-        //        SerialPortSetting t = new SerialPortSetting(baudRate,
-        //            p,
-        //            databits,
-        //            stopbits);
+                SerialPortSetting t = new SerialPortSetting(
+                    portName,
+                    baudRate,
+                    p,
+                    databits,
+                    stopbits);
 
-        //        return t;
-        //    }
-        //    set
-        //    {
-        //        this.cbBaudRate.SelectedValue = value.BaudRate;
-        //        this.cbParity.SelectedValue = value.Parity;
-        //        this.cbDataBits.SelectedValue = value.DataBits;
-        //        this.cbStopBits.SelectedValue = value.StopBits;
-        //    }
-        //}
+                return t;
+        }
         #endregion //SerialPortSetting
 
         #region UCSerialPortSetting_Load
@@ -267,5 +274,45 @@ namespace CommuniServer
         }
         #endregion //VerifyPortName
 
+
+        public void ApplyNewValue()
+        {
+            SerialPortSetting setting = this.CreateSerialPortSetting();
+            SerialCommuniPortConfig cfg = new SerialCommuniPortConfig(setting);
+
+            this.Parameter.Value = cfg;
+        }
+
+        #region IParameterUIControl 成员
+
+        public bool Verify()
+        {
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IParameter Parameter
+        {
+            get
+            {
+                return _parameter;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Parameter");
+                }
+
+
+                Debug.Assert(value.Value is SerialCommuniPortConfig);
+
+                _parameter = value;
+                Fill();
+            }
+        }private IParameter _parameter;
+        #endregion
     }
 }

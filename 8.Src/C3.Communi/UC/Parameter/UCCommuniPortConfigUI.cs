@@ -8,13 +8,17 @@ using System.Windows.Forms;
 
 namespace C3.Communi
 {
-    public partial class UCCommuniPortConfigUI : UserControl
+    public partial class UCCommuniPortConfigUI : UserControl, IParameterUIControl 
     {
+
+        #region UCCommuniPortConfigUI
         public UCCommuniPortConfigUI()
         {
             InitializeComponent();
         }
+        #endregion //UCCommuniPortConfigUI
 
+        #region UCCommuniPortConfig_Load
         /// <summary>
         /// 
         /// </summary>
@@ -24,62 +28,53 @@ namespace C3.Communi
         {
             this.ucNetSetting1.Location = SettingControlLocal;
         }
+        #endregion //UCCommuniPortConfig_Load
 
-        public ICommuniPortConfig CommuniPortConfig
-        {
-            get { return _communiPortConfig; }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("CommuniPortConfig");
-                }
+        //#region CommuniPortConfig
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //private ICommuniPortConfig CommuniPortConfig
+        //{
+        //    get { return (ICommuniPortConfig)this.Parameter.Value; }
+        //    set
+        //    {
+        //        if (value == null)
+        //        {
+        //            throw new ArgumentNullException("CommuniPortConfig");
+        //        }
 
-                _communiPortConfig = value;
-                if (_communiPortConfig is INetCommuniPortConfig)
-                {
-                    this.ucNetSetting1.CommuniPortConfig = _communiPortConfig;
+        //        ICommuniPortConfig communiPortConfig = value;
+        //        if (communiPortConfig is INetCommuniPortConfig)
+        //        {
+        //            this.ucNetSetting1.CommuniPortConfig = communiPortConfig;
 
-                    CheckRadio ( this.rbSocket );
-                    VisibleSetting(this.ucNetSetting1);
-                }
-                else if (_communiPortConfig is NullCommuniPortConfig)
-                {
-                }
-                //else if _communiPortConfig is Serialprotconfig
-                else
-                {
-                }
-            }
-        } private ICommuniPortConfig _communiPortConfig;
+        //            //CheckRadio ( this.rbSocket );
+        //            CheckRadio(this.rbSocket);
+        //            VisibleSetting(this.ucNetSetting1);
+        //        }
+        //        else if (communiPortConfig is NullCommuniPortConfig)
+        //        {
+        //            CheckRadio(this.rbNull);
+        //            VisibleSetting(null);
+        //        }
+        //        else if( communiPortConfig  is SerialCommuniPortConfig )
+        //        {
+        //            CheckRadio(this.rbSerialPort);
+        //            VisibleSetting(this.ucSerialPortSetting1);
+        //        }
+        //    }
+        //} //private ICommuniPortConfig communiPortConfig;
+        //#endregion //CommuniPortConfig
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ApplyNewValue()
-        {
-            if (rbSocket.Checked )
-            {
-                this.ucNetSetting1.ApplyNewValue();
-                this._communiPortConfig = this.ucNetSetting1.CommuniPortConfig;
-            }
-            else if (rbSerialPort.Checked)
-            {
-                // TODO:
-                //
-                //this.ucSerialPortSetting1.ApplyNewValue();
-                //this._communiPortConfig = this.ucSerialPortSetting1 .communi
-
-            }
-
-
-        }
-
+        #region CheckRadio
         private void CheckRadio(RadioButton rdo)
         {
             rdo.Checked = true;
         }
+        #endregion //CheckRadio
 
+        #region VisibleSetting
         /// <summary>
         /// 
         /// </summary>
@@ -92,7 +87,9 @@ namespace C3.Communi
                 item.Visible = c == item;
             }
         }
+        #endregion //VisibleSetting
 
+        #region SettingControlLocal
         /// <summary>
         /// 
         /// </summary>
@@ -100,5 +97,134 @@ namespace C3.Communi
         {
             get { return this.ucSerialPortSetting1.Location; }
         }
+        #endregion //SettingControlLocal
+
+        #region rbNull_CheckedChanged
+        private void rbNull_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+        #endregion //rbNull_CheckedChanged
+
+        #region rbNull_Click
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rbNull_Click(object sender, EventArgs e)
+        {
+            VisibleSetting(null);
+        }
+        #endregion //rbNull_Click
+
+        #region rbSerialPort_Click
+        private void rbSerialPort_Click(object sender, EventArgs e)
+        {
+            VisibleSetting(this.ucSerialPortSetting1);
+        }
+        #endregion //rbSerialPort_Click
+
+        #region rbSocket_Click
+        private void rbSocket_Click(object sender, EventArgs e)
+        {
+            VisibleSetting(this.ucNetSetting1);
+        }
+        #endregion //rbSocket_Click
+
+        #region IParameterUIControl 成员
+
+        #region Parameter
+        /// <summary>
+        /// 
+        /// </summary>
+        public IParameter Parameter
+        {
+            get 
+            {
+                return _parameter;
+            }
+            set 
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Parameter");
+                }
+                _parameter = value;
+
+                ICommuniPortConfig communiPortConfig = (ICommuniPortConfig)value.Value;
+                if (communiPortConfig is INetCommuniPortConfig)
+                {
+                    this.ucNetSetting1.CommuniPortConfig = communiPortConfig;
+
+                    //CheckRadio ( this.rbSocket );
+                    CheckRadio(this.rbSocket);
+                    VisibleSetting(this.ucNetSetting1);
+                    this._currentUIControl = this.ucNetSetting1;
+                }
+                else if (communiPortConfig is NullCommuniPortConfig)
+                {
+                    CheckRadio(this.rbNull);
+                    VisibleSetting(null);
+                    this._currentUIControl = null;
+                }
+                else if( communiPortConfig  is SerialCommuniPortConfig )
+                {
+                    CheckRadio(this.rbSerialPort);
+                    VisibleSetting(this.ucSerialPortSetting1);
+                    this._currentUIControl = this.ucSerialPortSetting1;
+                }
+                //this.CommuniPortConfig = (ICommuniPortConfig)_parameter.Value;
+            }
+        } private IParameter _parameter;
+        #endregion //Parameter
+
+        #region Verify
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool Verify()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Verify
+
+        #region ApplyNewValue
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ApplyNewValue()
+        {
+            if (rbSocket.Checked )
+            {
+                // TODO:
+                //
+                // check input 
+                //
+                this.ucNetSetting1.ApplyNewValue();
+                this.Parameter.Value = this.ucNetSetting1.CommuniPortConfig;
+            }
+            else if (rbSerialPort.Checked)
+            {
+                // TODO:
+                //
+                //this.ucSerialPortSetting1.ApplyNewValue();
+                //this.communiPortConfig = this.ucSerialPortSetting1 .communi
+            }
+            else if (rbNull.Checked)
+            {
+this.Parameter .Value = NullCommuniPortConfig.Default ;
+            }
+
+
+        }
+        #endregion //ApplyNewValue
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private IParameterUIControl _currentUIControl;
     }
 }

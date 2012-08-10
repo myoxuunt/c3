@@ -16,41 +16,41 @@ namespace C3.Communi
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <param name="orderNumber"></param>
-        public Parameter(string name, object value, int orderNumber)
-            : this(name, value, null, orderNumber, null)
-        {
-        }
-        #endregion //Parameter
-
-        #region Parameter
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <param name="unit"></param>
-        /// <param name="orderNumber"></param>
-        public Parameter(string name, object value, Unit unit, int orderNumber)
-            : this(name, value, unit, orderNumber, null)
-        {
-
-        }
-        #endregion //Parameter
-
-        #region Parameter
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="valueType"></param>
-        /// <param name="value"></param>
-        /// <param name="orderNumber"></param>
         public Parameter(string name, Type valueType, object value, int orderNumber)
-            : this(name, value, null, orderNumber, null)
+            : this(name, valueType, value, null, orderNumber, null)
         {
-
         }
         #endregion //Parameter
+
+        //#region Parameter
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="name"></param>
+        ///// <param name="value"></param>
+        ///// <param name="unit"></param>
+        ///// <param name="orderNumber"></param>
+        //public Parameter(string name, object value, Unit unit, int orderNumber)
+        //    : this(name, value, unit, orderNumber, null)
+        //{
+
+        //}
+        //#endregion //Parameter
+
+        //#region Parameter
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="name"></param>
+        ///// <param name="valueType"></param>
+        ///// <param name="value"></param>
+        ///// <param name="orderNumber"></param>
+        //public Parameter(string name, Type valueType, object value, int orderNumber)
+        //    : this(name, value, null, orderNumber, null)
+        //{
+
+        //}
+        //#endregion //Parameter
 
         #region Parameter
         /// <summary>
@@ -62,15 +62,19 @@ namespace C3.Communi
         /// <param name="unit"></param>
         /// <param name="orderNumber"></param>
         /// <param name="description"></param>
-        public Parameter(string name, object value, Unit unit, int orderNumber, string description)
+        public Parameter(string name, Type valueType, object value, Unit unit, int orderNumber, string description)
         {
             if (value == null)
             {
                 throw new ArgumentNullException("value");
             }
+            if (valueType == null)
+            {
+                throw new ArgumentNullException("valueType");
+            }
 
             this.Name = name;
-            this.ValueType = value.GetType();
+            this.ValueType = valueType;
             this.Value = value;
             this.Unit = unit;
             this.OrderNumber = orderNumber;
@@ -189,6 +193,8 @@ namespace C3.Communi
         /// <param name="value"></param>
         virtual protected void VerifyValue(object value)
         {
+            // TODO: 2012-08-10 value is valuetype
+            //
             if (value.GetType() != this.ValueType)
             {
                 string s = string.Format("value type is '{0}', but expect is '{1}'",
@@ -275,6 +281,10 @@ namespace C3.Communi
             set
             {
                 _valueType = value;
+                if (_valueType == typeof (NullCommuniPortConfig ))
+                {
+                    int b = 0;
+                }
             }
         } private Type _valueType;
         #endregion //ValueType
