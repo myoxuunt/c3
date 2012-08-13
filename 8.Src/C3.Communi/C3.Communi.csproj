@@ -263,6 +263,7 @@
     <Compile Include="Utils\TypeHelper.cs" />
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="_.cs" />
+    <Compile Include="_mvc\parameter_mvc\Class1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NLog.config">

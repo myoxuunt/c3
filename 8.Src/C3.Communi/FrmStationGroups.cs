@@ -13,7 +13,7 @@ namespace C3.Communi
 {
     public class FrmStationGroups : FrmGroups
     {
-#region StationType
+        #region StationType
         /// <summary>
         /// 
         /// </summary>
@@ -28,9 +28,9 @@ namespace C3.Communi
                 _stationType = value;
             }
         } private StationType _stationType;
-#endregion //StationType
+        #endregion //StationType
 
-#region Stations
+        #region Stations
         /// <summary>
         /// 
         /// </summary>
@@ -45,9 +45,9 @@ namespace C3.Communi
                 _stations = value;
             }
         } private StationCollection _stations;
-#endregion //Stations
+        #endregion //Stations
 
-#region Station
+        #region Station
         /// <summary>
         /// 
         /// </summary>
@@ -62,7 +62,7 @@ namespace C3.Communi
                 _station = value;
             }
         } private IStation _station;
-#endregion //Station
+        #endregion //Station
 
         /// <summary>
         /// 
@@ -82,7 +82,7 @@ namespace C3.Communi
         /// <returns></returns>
         protected override bool Verify()
         {
-            bool exist = this.Stations.ExistName ( this.Station.Name ,this.Station );
+            bool exist = this.Stations.ExistName(this.Station.Name, this.Station);
             if (exist)
             {
                 NUnit.UiKit.UserMessage.DisplayFailure("Exist name");
@@ -96,6 +96,25 @@ namespace C3.Communi
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FrmStationGroups_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FrmStationGroups
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.ClientSize = new System.Drawing.Size(394, 475);
+            this.Name = "FrmStationGroups";
+            this.Load += new System.EventHandler(this.FrmStationGroups_Load_1);
+            this.ResumeLayout(false);
+
+        }
+
+        private void FrmStationGroups_Load_1(object sender, EventArgs e)
         {
 
         }

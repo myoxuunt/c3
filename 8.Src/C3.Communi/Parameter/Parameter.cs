@@ -195,7 +195,8 @@ namespace C3.Communi
         {
             // TODO: 2012-08-10 value is valuetype
             //
-            if (value.GetType() != this.ValueType)
+            //if (value.GetType() != this.ValueType)
+            if (!this.ValueType.IsInstanceOfType(value))
             {
                 string s = string.Format("value type is '{0}', but expect is '{1}'",
                         value.GetType().Name,

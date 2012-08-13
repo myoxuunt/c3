@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -8,8 +9,13 @@ using System.Windows.Forms;
 
 namespace C3.Communi
 {
-    public partial class UCCommuniPortConfigUI : UserControl, IParameterUIControl 
+    public partial class UCCommuniPortConfigUI : UserControl, IParameterUIControl
     {
+        private void Assert()
+        {
+            Debug.Assert(this.Parameter != null);
+            Debug.Assert(this._currentUIControl != null);
+        }
 
         #region UCCommuniPortConfigUI
         public UCCommuniPortConfigUI()
@@ -27,6 +33,8 @@ namespace C3.Communi
         private void UCCommuniPortConfig_Load(object sender, EventArgs e)
         {
             this.ucNetSetting1.Location = SettingControlLocal;
+            //this._currentUIControl
+            Assert();
         }
         #endregion //UCCommuniPortConfig_Load
 
@@ -140,11 +148,11 @@ namespace C3.Communi
         /// </summary>
         public IParameter Parameter
         {
-            get 
+            get
             {
                 return _parameter;
             }
-            set 
+            set
             {
                 if (value == null)
                 {
@@ -168,7 +176,7 @@ namespace C3.Communi
                     VisibleSetting(null);
                     this._currentUIControl = null;
                 }
-                else if( communiPortConfig  is SerialCommuniPortConfig )
+                else if (communiPortConfig is SerialCommuniPortConfig)
                 {
                     CheckRadio(this.rbSerialPort);
                     VisibleSetting(this.ucSerialPortSetting1);
@@ -196,7 +204,7 @@ namespace C3.Communi
         /// </summary>
         public void ApplyNewValue()
         {
-            if (rbSocket.Checked )
+            if (rbSocket.Checked)
             {
                 // TODO:
                 //
@@ -214,7 +222,7 @@ namespace C3.Communi
             }
             else if (rbNull.Checked)
             {
-this.Parameter .Value = NullCommuniPortConfig.Default ;
+                this.Parameter.Value = NullCommuniPortConfig.Default;
             }
 
 
