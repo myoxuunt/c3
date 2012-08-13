@@ -56,6 +56,18 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="c"></param>
+        public void AddControl(Control c)
+        {
+            this.tableLayoutPanel1.RowCount += 1;
+            this.tableLayoutPanel1.Controls.Add(c, 0, this.tableLayoutPanel1.RowCount - 1);
+            RowStyle style = new RowStyle(SizeType.Absolute, c.Height);
+            this.tableLayoutPanel1.RowStyles.Add(style);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void UCGroupUI_Load(object sender, EventArgs e)

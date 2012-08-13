@@ -15,7 +15,23 @@ namespace C3.Communi
         {
             InitializeComponent();
         }
+        public string ParameterName
+        {
+            get { return this.lblName.Text; }
+            set { this.lblName.Text = value; }
+        }
 
+        public string Value
+        {
+            get { return this.txtValue.Text; }
+            set { this.txtValue.Text = value; }
+        }
+
+        public string Unit
+        {
+            get { return this.lblUnit.Text; }
+            set { this.lblUnit.Text = value; }
+        }
 
         #region Parameter
         /// <summary>

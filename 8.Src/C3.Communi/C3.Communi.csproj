@@ -79,6 +79,12 @@
     <Compile Include="FrmDeviceGroups.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmGroup2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGroup2.Designer.cs">
+      <DependentUpon>frmGroup2.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmStationGroups.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -285,6 +291,10 @@
   <ItemGroup>
     <EmbeddedResource Include="FrmDeviceGroups.resx">
       <DependentUpon>FrmDeviceGroups.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGroup2.resx">
+      <DependentUpon>frmGroup2.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmGroups.resx">
