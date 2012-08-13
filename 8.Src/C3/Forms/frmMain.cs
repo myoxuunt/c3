@@ -463,6 +463,18 @@ namespace C3
         /// <param name="e"></param>
         private void mnuStationEdit_Click(object sender, EventArgs e)
         {
+            C3.Communi.P.frmGroup2 f2 = new C3.Communi.P.frmGroup2();
+            C3.Communi.P.Group g = new C3.Communi.P.Group();
+            g.Parameters.Add ( new C3.Communi.P.StringParameter ("aaa","vvvv",12));
+            g.Parameters.Add ( new C3.Communi.P.StringParameter ("a","12vvvv",12));
+            g.Parameters.Add ( new C3.Communi.P.StringParameter ("ba","vaaavvv",12));
+
+            C3.Communi.P.GroupCollection gs = new C3.Communi.P.GroupCollection();
+            gs.Add (g);
+
+            f2.Groups = gs;
+            f2.ShowDialog();
+            return;
             IStation station = GetSelectedStation(true);
             if (station != null)
             {

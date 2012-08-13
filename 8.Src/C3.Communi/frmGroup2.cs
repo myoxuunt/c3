@@ -56,6 +56,7 @@ namespace C3.Communi.P
                     foreach (IController c in this.Controllers)
                     {
                         this.Controls.Add(c.Viewer.UC);
+                        c.UpdateViewer();
                     }
                 }
             }

@@ -489,16 +489,19 @@ namespace C3.Communi.P
         {
             get
             {
-                StringParameterViewer v = new StringParameterViewer();
-                v.Controller = this;
+                if (_stringParameterViewer == null)
+                {
+                    _stringParameterViewer = new StringParameterViewer();
+                    _stringParameterViewer.Controller = this;
+                }
 
-                return v;
+                return _stringParameterViewer;
             }
             set
             {
                 throw new NotImplementedException();
             }
-        }
+        } private StringParameterViewer _stringParameterViewer;
 
         /// <summary>
         /// 
@@ -510,19 +513,19 @@ namespace C3.Communi.P
         }
 
         public void UpdateModel()
-        {
-            StringParameter p = (StringParameter)this.Model;
+        {         StringParameter p = (StringParameter)this.Model;
             StringParameterViewer v = this.GetStringParameterViewer();
-            v.ParameterName = p.Name;
-            v.Value = p.Value.ToString();
-            v.Unit = p.Unit.ToString();
+            p.Value = v.Value;
+           
         }
 
         public void UpdateViewer()
         {
-            StringParameter p = (StringParameter)this.Model;
+    StringParameter p = (StringParameter)this.Model;
             StringParameterViewer v = this.GetStringParameterViewer();
-            p.Value = v.Value;
+            v.ParameterName = p.Name;
+            v.Value = p.Value.ToString();
+            v.Unit = p.Unit.ToString();
         }
 
         public bool Verify()
@@ -698,9 +701,9 @@ namespace C3.Communi.P
             set
             {
                 _group = (IGroup)value;
-                foreach (IController ctrl in this._controllers)
+                foreach (IController ctrl in this.Controllers)
                 {
-                    this._groupViewer.AddViewer(ctrl.Viewer);
+                    ((GroupViewer)this.Viewer).AddViewer(ctrl.Viewer);
                 }
                 UpdateViewer();
             }
@@ -750,7 +753,7 @@ namespace C3.Communi.P
         public void UpdateModel()
         {
             //throw new NotImplementedException();
-            foreach (IController item in this._controllers)
+            foreach (IController item in this.Controllers)
             {
                 item.UpdateModel();
             }
@@ -758,7 +761,7 @@ namespace C3.Communi.P
 
         public void UpdateViewer()
         {
-            foreach (IController item in this._controllers)
+            foreach (IController item in this.Controllers)
             {
                 item.UpdateViewer();
             }
@@ -767,7 +770,7 @@ namespace C3.Communi.P
         public bool Verify()
         {
             bool r = true;
-            foreach (IController item in this._controllers)
+            foreach (IController item in this.Controllers)
             {
                 if (!item.Verify())
                 {
