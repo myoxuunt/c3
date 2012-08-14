@@ -1,4 +1,4 @@
-﻿namespace C3.Communi.P
+﻿namespace C3.Communi
 {
     partial class frmGroup2
     {

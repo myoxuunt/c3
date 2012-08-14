@@ -63,13 +63,13 @@ namespace C3.Communi
         } private IParameter _deviceParameter;
         #endregion //Parameter
 
-        /// <summary>
-        /// 
-        /// </summary>
-        internal void ApplyNewValue()
-        {
-            this.Parameter.SetValue(this.txtValue.Text);
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //internal void ApplyNewValue()
+        //{
+        //    this.Parameter.SetValue(this.txtValue.Text);
+        //}
 
         private void UCParameterUI_Load(object sender, EventArgs e)
         {

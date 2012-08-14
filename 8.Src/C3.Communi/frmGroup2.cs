@@ -6,9 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Xdgk.Common;
-using C3.Communi.P;
 
-namespace C3.Communi.P
+namespace C3.Communi
 {
     public partial class frmGroup2 : NUnit.UiKit.SettingsDialogBase 
     {

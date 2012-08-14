@@ -463,13 +463,13 @@ namespace C3
         /// <param name="e"></param>
         private void mnuStationEdit_Click(object sender, EventArgs e)
         {
-            C3.Communi.P.frmGroup2 f2 = new C3.Communi.P.frmGroup2();
-            C3.Communi.P.Group g = new C3.Communi.P.Group();
-            g.Parameters.Add ( new C3.Communi.P.StringParameter ("aaa","vvvv",12));
-            g.Parameters.Add ( new C3.Communi.P.StringParameter ("a","12vvvv",12));
-            g.Parameters.Add ( new C3.Communi.P.StringParameter ("ba","vaaavvv",12));
+            C3.Communi.frmGroup2 f2 = new C3.Communi.frmGroup2();
+            C3.Communi.Group g = new C3.Communi.Group();
+            g.Parameters.Add ( new C3.Communi.StringParameter ("aaa","vvvv",12));
+            g.Parameters.Add ( new C3.Communi.StringParameter ("a","12vvvv",12));
+            g.Parameters.Add ( new C3.Communi.StringParameter ("ba","vaaavvv",12));
 
-            C3.Communi.P.GroupCollection gs = new C3.Communi.P.GroupCollection();
+            C3.Communi.GroupCollection gs = new C3.Communi.GroupCollection();
             gs.Add (g);
 
             f2.Groups = gs;
