@@ -216,4 +216,7 @@
   <data name="Value" xml:space="preserve">
     <value>数值</value>
   </data>
+  <data name="InvalidSerialPortName" xml:space="preserve">
+    <value>无效的端口名称</value>
+  </data>
 </root>

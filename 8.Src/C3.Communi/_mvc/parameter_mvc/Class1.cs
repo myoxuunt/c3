@@ -481,7 +481,7 @@ namespace C3.Communi
             set
             {
                 _model = value;
-                UpdateViewer();
+                //UpdateViewer();
             }
         } private IModel _model;
 
@@ -706,7 +706,7 @@ namespace C3.Communi
                 {
                     ((GroupViewer)this.Viewer).AddViewer(ctrl.Viewer);
                 }
-                UpdateViewer();
+                //UpdateViewer();
             }
         } private IGroup _group;
 

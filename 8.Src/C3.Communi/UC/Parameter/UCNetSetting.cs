@@ -15,6 +15,16 @@ namespace C3.Communi.UC.Parameter
         public UCNetSetting()
         {
             InitializeComponent();
+
+            // 
+            //
+            this.panelByIPAddress.Location = PanelLocal;
+            this.panelByLocalPort.Location = PanelLocal;
+            this.panelBylRemotePort.Location = PanelLocal;
+
+            //
+            //
+            FillDiscriminateMode();
         }
 
         private Point PanelLocal
@@ -33,15 +43,7 @@ namespace C3.Communi.UC.Parameter
         /// <param name="e"></param>
         private void UCNetSetting_Load(object sender, EventArgs e)
         {
-            // 
-            //
-            this.panelByIPAddress.Location = PanelLocal;
-            this.panelByLocalPort.Location = PanelLocal;
-            this.panelBylRemotePort.Location = PanelLocal;
 
-            //
-            //
-            FillDiscriminateMode();
         }
 
         public ICommuniPortConfig CommuniPortConfig
@@ -61,7 +63,7 @@ namespace C3.Communi.UC.Parameter
                         break;
 
                     case DiscriminateMode.ByLocalPort:
-                        r = new RemotePortConfig((int)this.numLocalPort.Value);
+                        r = new LocalPortConfig((int)this.numLocalPort.Value);
                         break;
 
                     case DiscriminateMode.ByPhoneNumber:
@@ -106,15 +108,22 @@ namespace C3.Communi.UC.Parameter
         {
             if (cfg is RemoteIPAddressConfig)
             {
-                RemoteIPAddressConfig remoteCfg = cfg as RemoteIPAddressConfig;
-                this.txtStationIP.Text = remoteCfg.RemoteIPAddress.ToString();
+                RemoteIPAddressConfig ipCfg = cfg as RemoteIPAddressConfig;
+                this.txtStationIP.Text = ipCfg.RemoteIPAddress.ToString();
             }
-            //else if(localport)
+            else if (cfg is RemotePortConfig )
             {
-
+                RemotePortConfig rpCfg = cfg as RemotePortConfig;
+                this.numRemotePort.Value = rpCfg.RemotePort;
             }
-            //else if(remoteport)
+            else if (cfg is LocalPortConfig)
             {
+                LocalPortConfig lpCfg = cfg as LocalPortConfig;
+                this.numLocalPort.Value = lpCfg.LocalPort;
+            }
+            else
+            {
+                throw new NotImplementedException(cfg.ToString ());
             }
         }
 
@@ -208,7 +217,14 @@ namespace C3.Communi.UC.Parameter
         {
             // TODO:
             //
-            return true;
+            IPAddress ip;
+            bool r = IPAddress.TryParse(this.txtStationIP.Text, out ip);
+            if (!r)
+            {
+                NUnit.UiKit.UserMessage.DisplayFailure(strings.InvalidIPAddress);
+            }
+
+            return r;
         }
 
         #endregion

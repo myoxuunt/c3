@@ -241,6 +241,15 @@ namespace C3.Communi {
         }
         
         /// <summary>
+        ///   查找类似 无效的端口名称 的本地化字符串。
+        /// </summary>
+        internal static string InvalidSerialPortName {
+            get {
+                return ResourceManager.GetString("InvalidSerialPortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 长度错误 的本地化字符串。
         /// </summary>
         internal static string LengthErrorResult {

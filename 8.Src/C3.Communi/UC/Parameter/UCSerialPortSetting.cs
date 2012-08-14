@@ -285,6 +285,7 @@ namespace CommuniServer
             }
             else
             {
+                NUnit.UiKit.UserMessage.DisplayFailure(strings.InvalidSerialPortName);
                 return false;
             }
         }
