@@ -841,18 +841,26 @@ namespace C3.Communi
         {
             get
             {
-                throw new NotImplementedException();
+                return _c;
             }
             set
             {
-                throw new NotImplementedException();
+                _c = (CommuniPortConfigController)value;
             }
-        }
+        } private CommuniPortConfigController _c;
         #endregion
     }
 
     public class CommuniPortConfigController : IController
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        public CommuniPortConfigController(CommuniPortConfigParameter p)
+        {
+            this.Model = p;
+        }
 
         #region IController 成员
 
@@ -891,6 +899,9 @@ namespace C3.Communi
         {
             //throw new NotImplementedException();
             //this.CommuniPortConfigParameter .CommuniPortConfig = this.CommuniPortConfigUI .
+            UCCommuniPortConfigUI ui = (UCCommuniPortConfigUI )_v.UC;
+            CommuniPortConfigParameter p = (CommuniPortConfigParameter)this.Model;
+            p.CommuniPortConfig = ui.CommuniPortConfig;
         }
 
         private CommuniPortConfigParameter CommuniPortConfigParameter
@@ -910,7 +921,9 @@ namespace C3.Communi
 
         public void UpdateViewer()
         {
-            throw new NotImplementedException();
+            UCCommuniPortConfigUI ui = (UCCommuniPortConfigUI )_v.UC;
+            CommuniPortConfigParameter p = (CommuniPortConfigParameter)this.Model;
+            ui.CommuniPortConfig = p.CommuniPortConfig;
         }
 
         public bool Verify()
@@ -954,12 +967,23 @@ namespace C3.Communi
         /// <returns></returns>
         static public IController Create(IParameter p)
         {
+            IController c = null;
+
             if (p is StringParameter)
             {
-                StringParameterController c = new StringParameterController((StringParameter)p);
-                return c;
+                c = new StringParameterController((StringParameter)p);
             }
-            throw new ArgumentException(p.ToString());
+            else if (p is CommuniPortConfigParameter)
+            {
+                CommuniPortConfigParameter p2 = (CommuniPortConfigParameter)p;
+                c = new CommuniPortConfigController(p2);
+            }
+
+            if (c == null)
+            {
+                throw new ArgumentException(p.ToString());
+            }
+            return c;
         }
 
         static public IController Create(IGroup g)

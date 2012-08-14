@@ -13,8 +13,8 @@ namespace C3.Communi
     {
         private void Assert()
         {
-            Debug.Assert(this.Parameter != null);
-            Debug.Assert(this._currentUIControl != null);
+            //Debug.Assert(this.Parameter != null);
+            //Debug.Assert(this._currentUIControl != null);
         }
 
         #region UCCommuniPortConfigUI
@@ -189,50 +189,50 @@ namespace C3.Communi
                 }
             }
         }
-        #region Parameter
-        /// <summary>
-        /// 
-        /// </summary>
-        public IParameter Parameter
-        {
-            get
-            {
-                return _parameter;
-            }
-            set
-            {
-                //if (value == null)
-                //{
-                //    throw new ArgumentNullException("Parameter");
-                //}
-                //_parameter = value;
+        //#region Parameter
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public IParameter Parameter
+        //{
+        //    get
+        //    {
+        //        return _parameter;
+        //    }
+        //    set
+        //    {
+        //        //if (value == null)
+        //        //{
+        //        //    throw new ArgumentNullException("Parameter");
+        //        //}
+        //        //_parameter = value;
 
-                //ICommuniPortConfig communiPortConfig = (ICommuniPortConfig)value.Value;
-                //if (communiPortConfig is INetCommuniPortConfig)
-                //{
-                //    this.ucNetSetting1.CommuniPortConfig = communiPortConfig;
+        //        //ICommuniPortConfig communiPortConfig = (ICommuniPortConfig)value.Value;
+        //        //if (communiPortConfig is INetCommuniPortConfig)
+        //        //{
+        //        //    this.ucNetSetting1.CommuniPortConfig = communiPortConfig;
 
-                //    //CheckRadio ( this.rbSocket );
-                //    CheckRadio(this.rbSocket);
-                //    VisibleSetting(this.ucNetSetting1);
-                //    this._currentUIControl = this.ucNetSetting1;
-                //}
-                //else if (communiPortConfig is NullCommuniPortConfig)
-                //{
-                //    CheckRadio(this.rbNull);
-                //    VisibleSetting(null);
-                //    this._currentUIControl = null;
-                //}
-                //else if (communiPortConfig is SerialCommuniPortConfig)
-                //{
-                //    CheckRadio(this.rbSerialPort);
-                //    VisibleSetting(this.ucSerialPortSetting1);
-                //    //this._currentUIControl = this.ucSerialPortSetting1;
-                //}
-                //this.CommuniPortConfig = (ICommuniPortConfig)_parameter.Value;
-            }
-        } private IParameter _parameter;
-        #endregion //Parameter
+        //        //    //CheckRadio ( this.rbSocket );
+        //        //    CheckRadio(this.rbSocket);
+        //        //    VisibleSetting(this.ucNetSetting1);
+        //        //    this._currentUIControl = this.ucNetSetting1;
+        //        //}
+        //        //else if (communiPortConfig is NullCommuniPortConfig)
+        //        //{
+        //        //    CheckRadio(this.rbNull);
+        //        //    VisibleSetting(null);
+        //        //    this._currentUIControl = null;
+        //        //}
+        //        //else if (communiPortConfig is SerialCommuniPortConfig)
+        //        //{
+        //        //    CheckRadio(this.rbSerialPort);
+        //        //    VisibleSetting(this.ucSerialPortSetting1);
+        //        //    //this._currentUIControl = this.ucSerialPortSetting1;
+        //        //}
+        //        //this.CommuniPortConfig = (ICommuniPortConfig)_parameter.Value;
+        //    }
+        //} private IParameter _parameter;
+        //#endregion //Parameter
 
         #region Verify
         /// <summary>
@@ -278,6 +278,6 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        private IParameterUIControl _currentUIControl;
+        //private IParameterUIControl _currentUIControl;
     }
 }
