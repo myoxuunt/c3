@@ -800,7 +800,7 @@ namespace C3.Communi
 
     #endregion //
 
-#region #
+    #region #
     public class CommuniPortConfigParameter : ParameterBase
     {
         /// <summary>
@@ -808,8 +808,8 @@ namespace C3.Communi
         /// </summary>
         /// <param name="value"></param>
         /// <param name="orderNumber"></param>
-        public CommuniPortConfigParameter(ICommuniPortConfig value, int orderNumber)
-            : base("communiPortConfigParameter", typeof(ICommuniPortConfig), value, orderNumber)
+        public CommuniPortConfigParameter(string name, ICommuniPortConfig value, int orderNumber)
+            : base(name, typeof(ICommuniPortConfig), value, orderNumber)
         {
         }
 
@@ -849,6 +849,15 @@ namespace C3.Communi
             }
         } private CommuniPortConfigController _c;
         #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        internal bool Verify()
+        {
+            return ((UCCommuniPortConfigUI)_uc).Verify();
+        }
     }
 
     public class CommuniPortConfigController : IController
@@ -899,7 +908,7 @@ namespace C3.Communi
         {
             //throw new NotImplementedException();
             //this.CommuniPortConfigParameter .CommuniPortConfig = this.CommuniPortConfigUI .
-            UCCommuniPortConfigUI ui = (UCCommuniPortConfigUI )_v.UC;
+            UCCommuniPortConfigUI ui = (UCCommuniPortConfigUI)_v.UC;
             CommuniPortConfigParameter p = (CommuniPortConfigParameter)this.Model;
             p.CommuniPortConfig = ui.CommuniPortConfig;
         }
@@ -921,19 +930,20 @@ namespace C3.Communi
 
         public void UpdateViewer()
         {
-            UCCommuniPortConfigUI ui = (UCCommuniPortConfigUI )_v.UC;
+            UCCommuniPortConfigUI ui = (UCCommuniPortConfigUI)_v.UC;
             CommuniPortConfigParameter p = (CommuniPortConfigParameter)this.Model;
             ui.CommuniPortConfig = p.CommuniPortConfig;
         }
 
         public bool Verify()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return this._v.Verify();
         }
 
         #endregion
     }
-#endregion //#
+    #endregion //#
 
 
     #region NumberParameter
@@ -959,6 +969,10 @@ namespace C3.Communi
     }
     #endregion //IParameterViewer
 
+    #region ControllerFactory
+    /// <summary>
+    /// 
+    /// </summary>
     public class ControllerFactory
     {
         /// <summary>
@@ -993,4 +1007,5 @@ namespace C3.Communi
             return c;
         }
     }
+    #endregion //ControllerFactory
 }

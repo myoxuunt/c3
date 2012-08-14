@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,7 +46,33 @@ namespace C3.Communi.UC.Parameter
 
         public ICommuniPortConfig CommuniPortConfig
         {
-            get { return _communiPortConfig; }
+            get
+            {
+                ICommuniPortConfig r = null;
+                DiscriminateMode dm = (DiscriminateMode)this.cmbDiscriminateMode.SelectedValue;
+                switch (dm)
+                {
+                    case DiscriminateMode.ByIPAddress:
+                        r = new RemoteIPAddressConfig(this.IPAddress);
+                        break;
+
+                    case DiscriminateMode.ByRemotePort:
+                        r = new RemotePortConfig((int)this.numRemotePort.Value);
+                        break;
+
+                    case DiscriminateMode.ByLocalPort:
+                        r = new RemotePortConfig((int)this.numLocalPort.Value);
+                        break;
+
+                    case DiscriminateMode.ByPhoneNumber:
+                        break;
+
+                    default:
+                        break;
+                }
+                Debug.Assert(r != null);
+                return r;
+            }
             set
             {
 
@@ -59,8 +86,8 @@ namespace C3.Communi.UC.Parameter
                     throw new ArgumentException("CommuniPortConfig is not INetCommuniPortConfig");
                 }
 
-                _communiPortConfig = value;
-                DiscriminateMode dm = StationDiscriminateMode.Find(_communiPortConfig.GetType());
+                //_communiPortConfig = value;
+                DiscriminateMode dm = StationDiscriminateMode.Find(value.GetType());
                 this.cmbDiscriminateMode.SelectedValue = dm;
 
                 // set value
@@ -68,7 +95,8 @@ namespace C3.Communi.UC.Parameter
                 SetValue((INetCommuniPortConfig)value);
 
             }
-        } private ICommuniPortConfig _communiPortConfig;
+        } 
+        //private ICommuniPortConfig _communiPortConfig;
 
         /// <summary>
         /// 
@@ -182,34 +210,6 @@ namespace C3.Communi.UC.Parameter
             //
             return true;
         }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public IParameter Parameter
-        //{
-        //    get
-        //    {
-        //        return _parameter;
-        //    }
-        //    set
-        //    {
-        //        if (value == null)
-        //        {
-        //            throw new ArgumentNullException("Parameter");
-        //        }
-        //        _parameter = value;
-        //        Fill();
-        //    }
-        //} private IParameter _parameter;
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //private void Fill()
-        //{
-        //    this.CommuniPortConfig = (ICommuniPortConfig)_parameter.Value;
-        //}
 
         #endregion
     }

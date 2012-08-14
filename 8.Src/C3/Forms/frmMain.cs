@@ -257,6 +257,7 @@ namespace C3
             frmGroup2 f = new frmGroup2();
             GroupCollection gs = new GroupCollection();
             CommuniPortConfigParameter p = new CommuniPortConfigParameter(
+                "nonennnnn",
                 new SerialCommuniPortConfig (
                 new SerialPortSetting("com1",
                     9600, System.IO.Ports.Parity.Even,
@@ -477,15 +478,16 @@ namespace C3
         private void mnuStationEdit_Click(object sender, EventArgs e)
         {
             C3.Communi.frmGroup2 f2 = new C3.Communi.frmGroup2();
-            C3.Communi.Group g = new C3.Communi.Group();
-            g.Parameters.Add ( new C3.Communi.StringParameter ("aaa","vvvv",12));
-            g.Parameters.Add ( new C3.Communi.StringParameter ("a","12vvvv",12));
-            g.Parameters.Add ( new C3.Communi.StringParameter ("ba","vaaavvv",12));
+            //C3.Communi.Group g = new C3.Communi.Group();
+            //g.Parameters.Add ( new C3.Communi.StringParameter ("aaa","vvvv",12));
+            //g.Parameters.Add ( new C3.Communi.StringParameter ("a","12vvvv",12));
+            //g.Parameters.Add ( new C3.Communi.StringParameter ("ba","vaaavvv",12));
 
-            C3.Communi.GroupCollection gs = new C3.Communi.GroupCollection();
-            gs.Add (g);
+            //C3.Communi.GroupCollection gs = new C3.Communi.GroupCollection();
+            //gs.Add (g);
 
-            f2.Groups = gs;
+            IStation stationttt = GetSelectedStation(true);
+            f2.Groups = stationttt.Groups;
             f2.ShowDialog();
             return;
             IStation station = GetSelectedStation(true);

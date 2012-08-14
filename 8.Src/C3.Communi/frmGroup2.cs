@@ -89,5 +89,33 @@ namespace C3.Communi
                 return _controllers;
             }
         } private ControllerCollection _controllers;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            bool b = true;
+            foreach (IController c in this.Controllers)
+            {
+                if (!c.Verify())
+                {
+                    b = false;
+                    break;
+                }
+            }
+
+            if (b)
+            {
+                foreach (IController c in this.Controllers)
+                {
+                    c.UpdateModel();
+                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+        }
     }
 }

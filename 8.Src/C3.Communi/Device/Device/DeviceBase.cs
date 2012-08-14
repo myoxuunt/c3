@@ -72,7 +72,7 @@ namespace C3.Communi
                 // TODO:
                 // number parameter
                 //
-                p = new Parameter(PN_ADDRESS, typeof(UInt64), (UInt64)0, PO_ADDRESS);
+                p = new NumberParameter(PN_ADDRESS, typeof(UInt64), (UInt64)0, PO_ADDRESS);
                 //p.ParameterUI = new NumberParameterUI();
                 this.GeneralGroup.Parameters.Add(p);
             }
@@ -109,7 +109,7 @@ namespace C3.Communi
             IParameter p = this.GeneralGroup.Parameters[PN_NAME];
             if (p == null)
             {
-                p = new Parameter(PN_NAME, typeof(string), string.Empty, PO_NAME);
+                p = new StringParameter(PN_NAME, string.Empty, PO_NAME);
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;

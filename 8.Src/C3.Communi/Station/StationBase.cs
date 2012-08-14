@@ -89,7 +89,7 @@ namespace C3.Communi
             IParameter p = this.GeneralGroup.Parameters[PN_NAME];
             if (p == null)
             {
-                p = new Parameter(PN_NAME, typeof(string), "unknown", PO_NAME);
+                p = new StringParameter(PN_NAME, "unknown", PO_NAME);
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;
@@ -234,19 +234,23 @@ namespace C3.Communi
         {
             get
             {
-                if (_communiPortConfig == null)
-                {
-                    _communiPortConfig = NullCommuniPortConfig.Default;
-                }
-                return _communiPortConfig;
+                IParameter p = GetCommuniPortConfig();
+                return (ICommuniPortConfig)p.Value;
             }
             set
             {
-                _communiPortConfig = value;
                 // TODO: 2012-08-10 clear communiPort
                 //
+                if (value == null)
+                {
+                    throw new ArgumentNullException("CommuniPortConfig");
+                }
+
+                IParameter p = GetCommuniPortConfig();
+                p.Value = value;
             }
-        } private ICommuniPortConfig _communiPortConfig;
+        } 
+        //private ICommuniPortConfig _communiPortConfig;
         #endregion //CommuniPortConfig
 
         private IParameter GetCommuniPortConfig()
@@ -257,8 +261,8 @@ namespace C3.Communi
                 // TODO:
                 //
                 // new C3.Communi.P.CommuniPortConfigParameter 
-                p = new Parameter(PN_COMMUNIPORTCONFIG, typeof(ICommuniPortConfig), 
-                    this.CommuniPortConfig, PO_COMMUNIPORTCONFIG);
+                p = new CommuniPortConfigParameter(PN_COMMUNIPORTCONFIG,
+                    NullCommuniPortConfig.Default, PO_COMMUNIPORTCONFIG);
                 //p.ParameterUI = new CommuniPortConfigUI();
                 this.CommuniPortConfigGroup.Parameters.Add(p);
             }

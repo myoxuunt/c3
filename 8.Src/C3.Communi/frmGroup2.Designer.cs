@@ -34,6 +34,7 @@
             // okButton
             // 
             this.okButton.Location = new System.Drawing.Point(477, 468);
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 

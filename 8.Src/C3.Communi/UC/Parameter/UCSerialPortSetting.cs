@@ -289,46 +289,5 @@ namespace CommuniServer
             }
         }
         #endregion //VerifyPortName
-
-
-        //public void ApplyNewValue()
-        //{
-        //    SerialPortSetting setting = this.CreateSerialPortSetting();
-        //    SerialCommuniPortConfig cfg = new SerialCommuniPortConfig(setting);
-
-        //    this.Parameter.Value = cfg;
-        //}
-
-        //#region IParameterUIControl 成员
-
-        //public bool Verify()
-        //{
-        //    return true;
-        //}
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public IParameter Parameter
-        //{
-        //    get
-        //    {
-        //        return _parameter;
-        //    }
-        //    set
-        //    {
-        //        if (value == null)
-        //        {
-        //            throw new ArgumentNullException("Parameter");
-        //        }
-
-
-        //        Debug.Assert(value.Value is SerialCommuniPortConfig);
-
-        //        _parameter = value;
-        //        Fill();
-        //    }
-        //}private IParameter _parameter;
-        //#endregion
     }
 }

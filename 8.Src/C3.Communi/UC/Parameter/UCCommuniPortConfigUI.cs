@@ -158,7 +158,7 @@ namespace C3.Communi
                 {
                     r = this.ucNetSetting1.CommuniPortConfig;
                 }
-
+                Debug.Assert(r != null,"r == null");
                 return r;
             }
             set
@@ -177,7 +177,7 @@ namespace C3.Communi
                 {
                     CheckRadio(this.rbNull);
                     VisibleSetting(null);
-                    this.ucNetSetting1.CommuniPortConfig = communiPortConfig;
+                    //this.ucNetSetting1.CommuniPortConfig = communiPortConfig;
                     //this._currentUIControl = null;
                 }
                 else if (communiPortConfig is SerialCommuniPortConfig)
@@ -189,50 +189,6 @@ namespace C3.Communi
                 }
             }
         }
-        //#region Parameter
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public IParameter Parameter
-        //{
-        //    get
-        //    {
-        //        return _parameter;
-        //    }
-        //    set
-        //    {
-        //        //if (value == null)
-        //        //{
-        //        //    throw new ArgumentNullException("Parameter");
-        //        //}
-        //        //_parameter = value;
-
-        //        //ICommuniPortConfig communiPortConfig = (ICommuniPortConfig)value.Value;
-        //        //if (communiPortConfig is INetCommuniPortConfig)
-        //        //{
-        //        //    this.ucNetSetting1.CommuniPortConfig = communiPortConfig;
-
-        //        //    //CheckRadio ( this.rbSocket );
-        //        //    CheckRadio(this.rbSocket);
-        //        //    VisibleSetting(this.ucNetSetting1);
-        //        //    this._currentUIControl = this.ucNetSetting1;
-        //        //}
-        //        //else if (communiPortConfig is NullCommuniPortConfig)
-        //        //{
-        //        //    CheckRadio(this.rbNull);
-        //        //    VisibleSetting(null);
-        //        //    this._currentUIControl = null;
-        //        //}
-        //        //else if (communiPortConfig is SerialCommuniPortConfig)
-        //        //{
-        //        //    CheckRadio(this.rbSerialPort);
-        //        //    VisibleSetting(this.ucSerialPortSetting1);
-        //        //    //this._currentUIControl = this.ucSerialPortSetting1;
-        //        //}
-        //        //this.CommuniPortConfig = (ICommuniPortConfig)_parameter.Value;
-        //    }
-        //} private IParameter _parameter;
-        //#endregion //Parameter
 
         #region Verify
         /// <summary>
@@ -241,43 +197,24 @@ namespace C3.Communi
         /// <returns></returns>
         public bool Verify()
         {
-            throw new NotImplementedException();
+            bool r = false;
+
+            if (this.rbSerialPort.Checked)
+            {
+                r = (this.ucSerialPortSetting1.VerifyPortName());
+            }
+            else if (this.rbSocket.Checked)
+            {
+                r = this.ucNetSetting1.Verify();
+            }
+            else if (this.rbNull.Checked)
+            {
+                r = true;
+            }
+            return r;
         }
         #endregion //Verify
 
-        #region ApplyNewValue
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public void ApplyNewValue()
-        //{
-        //    if (rbSocket.Checked)
-        //    {
-        //        // TODO:
-        //        //
-        //        // check input 
-        //        //
-        //        this.ucNetSetting1.ApplyNewValue();
-        //        this.Parameter.Value = this.ucNetSetting1.CommuniPortConfig;
-        //    }
-        //    else if (rbSerialPort.Checked)
-        //    {
-        //        // TODO:
-        //        //
-        //        //this.ucSerialPortSetting1.ApplyNewValue();
-        //        //this.communiPortConfig = this.ucSerialPortSetting1 .communi
-        //    }
-        //    else if (rbNull.Checked)
-        //    {
-        //        this.Parameter.Value = NullCommuniPortConfig.Default;
-        //    }
-        //}
-        #endregion //ApplyNewValue
         #endregion
-
-        /// <summary>
-        /// 
-        /// </summary>
-        //private IParameterUIControl _currentUIControl;
     }
 }

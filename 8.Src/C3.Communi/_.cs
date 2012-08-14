@@ -100,9 +100,9 @@ namespace C3.Communi
         {
             // TODO: replace null
             // 
-            new Item(DiscriminateMode.ByIPAddress, strings.ByIP, null ),
-            new Item(DiscriminateMode.ByLocalPort, strings.ByLocalPort,null ),
-            new Item (DiscriminateMode.ByRemotePort, strings.ByRemotePort,null )
+            new Item(DiscriminateMode.ByIPAddress, strings.ByIP, typeof(RemoteIPAddressConfig ) ),
+            new Item(DiscriminateMode.ByLocalPort, strings.ByLocalPort,typeof (LocalPortConfig ) ),
+            new Item (DiscriminateMode.ByRemotePort, strings.ByRemotePort,typeof(RemotePortConfig ))
         };
     }
 
