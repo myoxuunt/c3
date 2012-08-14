@@ -63,15 +63,15 @@ namespace C3.Communi
         /// </summary>
         protected virtual void Fill()
         {
-            if ( this.Groups != null )
-            {
-                foreach (Group item in this.Groups)
-                {
-                    TabPage tp = new TabPage(item.Text);
-                    tp.Controls.Add(item.GroupUI.Control);
-                    tabControl1.TabPages.Add(tp);
-                }
-            }
+            //if ( this.Groups != null )
+            //{
+            //    foreach (Group item in this.Groups)
+            //    {
+            //        TabPage tp = new TabPage(item.Text);
+            //        tp.Controls.Add(item.GroupUI.Control);
+            //        tabControl1.TabPages.Add(tp);
+            //    }
+            //}
         }
         #endregion //Fill
 
@@ -100,7 +100,7 @@ namespace C3.Communi
         {
             foreach (IGroup item in this.Groups)
             {
-                item.GroupUI.ApplyNewValue();
+                //item.GroupUI.ApplyNewValue();
             }
 
             if (this.Verify())

@@ -30,7 +30,7 @@ namespace C3.Communi.P
         bool Verify();
     }
 
-    public class ControllerCollection: Collection<IController>
+    public class ControllerCollection : Collection<IController>
     {
     }
     #endregion //IController
@@ -39,7 +39,7 @@ namespace C3.Communi.P
     /// <summary>
     /// 
     /// </summary>
-    public interface IParameter : IOrderNumber, IModel 
+    public interface IParameter : IOrderNumber, IModel
     {
         string Name { get; set; }
         string Text { get; set; }
@@ -360,10 +360,10 @@ namespace C3.Communi.P
             set
             {
                 _valueType = value;
-                if (_valueType == typeof (NullCommuniPortConfig ))
-                {
-                    int b = 0;
-                }
+                //if (_valueType == typeof(NullCommuniPortConfig))
+                //{
+                //    int b = 0;
+                //}
             }
         } private Type _valueType;
         #endregion //ValueType
@@ -445,7 +445,7 @@ namespace C3.Communi.P
             get { return this._uc.Unit; }
             set { this._uc.Unit = value; }
         }
-        
+
         #endregion
 
         #region IViewer 成员
@@ -513,15 +513,16 @@ namespace C3.Communi.P
         }
 
         public void UpdateModel()
-        {         StringParameter p = (StringParameter)this.Model;
+        {
+            StringParameter p = (StringParameter)this.Model;
             StringParameterViewer v = this.GetStringParameterViewer();
             p.Value = v.Value;
-           
+
         }
 
         public void UpdateViewer()
         {
-    StringParameter p = (StringParameter)this.Model;
+            StringParameter p = (StringParameter)this.Model;
             StringParameterViewer v = this.GetStringParameterViewer();
             v.ParameterName = p.Name;
             v.Value = p.Value.ToString();
@@ -539,7 +540,7 @@ namespace C3.Communi.P
     #endregion //string...
 
 
-#region group...
+    #region group...
     public interface IGroup : IOrderNumber, IModel
     {
         string Name { get; set; }
@@ -547,7 +548,7 @@ namespace C3.Communi.P
         ParameterCollection Parameters { get; }
     }
 
-    public class Group : IGroup 
+    public class Group : IGroup
     {
         #region Name
         /// <summary>
@@ -637,9 +638,9 @@ namespace C3.Communi.P
         /// <param name="name"></param>
         /// <param name="create"></param>
         /// <returns></returns>
-        public IGroup GetGroup( string name)
+        public IGroup GetGroup(string name)
         {
-            IGroup  r = null;
+            IGroup r = null;
             foreach (IGroup item in this)
             {
                 if (StringHelper.Equal(item.Name, name))
@@ -709,13 +710,19 @@ namespace C3.Communi.P
             }
         } private IGroup _group;
 
+        public IGroup Group
+        {
+            get { return this.Model as IGroup; }
+            set { this.Model = value; }
+        }
+
 
         /// <summary>
         /// 
         /// </summary>
         public ControllerCollection Controllers
         {
-            get 
+            get
             {
                 if (_controllers == null)
                 {
@@ -726,7 +733,7 @@ namespace C3.Communi.P
                         _controllers.Add(c);
                     }
                 }
-                return _controllers; 
+                return _controllers;
             }
         } private ControllerCollection _controllers;
 
@@ -791,14 +798,136 @@ namespace C3.Communi.P
     {
     }
 
-#endregion //    
+    #endregion //
+
+#region #
+    public class CommuniPortConfigParameter : ParameterBase
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="orderNumber"></param>
+        public CommuniPortConfigParameter(ICommuniPortConfig value, int orderNumber)
+            : base("communiPortConfigParameter", typeof(ICommuniPortConfig), value, orderNumber)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommuniPortConfig CommuniPortConfig
+        {
+            get { return (ICommuniPortConfig)this.Value; }
+            set { this.Value = value; }
+        }
+    }
+
+
+    public class CommuniPortConfigViewer : IViewer
+    {
+
+        #region IViewer 成员
+
+        public Control UC
+        {
+            get { return _uc; }
+        } private Control _uc = new UCCommuniPortConfigUI();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IController Controller
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+        #endregion
+    }
+
+    public class CommuniPortConfigController : IController
+    {
+
+        #region IController 成员
+
+        public IModel Model
+        {
+            get
+            {
+                return this._communiPortConfigParameter;
+            }
+            set
+            {
+                this._communiPortConfigParameter = (CommuniPortConfigParameter)value;
+            }
+        }
+        private CommuniPortConfigParameter _communiPortConfigParameter;
+
+        public IViewer Viewer
+        {
+            get
+            {
+                if (_v == null)
+                {
+                    _v = new CommuniPortConfigViewer();
+                    _v.Controller = this;
+                }
+                return _v;
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+        private CommuniPortConfigViewer _v;
+
+        public void UpdateModel()
+        {
+            //throw new NotImplementedException();
+            //this.CommuniPortConfigParameter .CommuniPortConfig = this.CommuniPortConfigUI .
+        }
+
+        private CommuniPortConfigParameter CommuniPortConfigParameter
+        {
+            get { return (CommuniPortConfigParameter)this.Model; }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private UCCommuniPortConfigUI CommuniPortConfigUI
+        {
+            get
+            {
+                return (UCCommuniPortConfigUI)this._v.UC;
+            }
+        }
+
+        public void UpdateViewer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Verify()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+#endregion //#
 
 
     #region NumberParameter
     public class NumberParameter : ParameterBase
     {
         public NumberParameter(string name, Type valueType, object value, int orderNumber)
-            : base (name,valueType , value, orderNumber )
+            : base(name, valueType, value, orderNumber)
         {
             //TODO: check value type
             // 
@@ -811,7 +940,7 @@ namespace C3.Communi.P
     /// <summary>
     /// 
     /// </summary>
-    public interface IParameterViewer : IViewer 
+    public interface IParameterViewer : IViewer
     {
         Control Control { get; set; }
     }
@@ -830,7 +959,7 @@ namespace C3.Communi.P
                 StringParameterController c = new StringParameterController((StringParameter)p);
                 return c;
             }
-            throw new ArgumentException(p.ToString ());
+            throw new ArgumentException(p.ToString());
         }
 
         static public IController Create(IGroup g)

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace C3.Communi.UC.Parameter
 {
-    public partial class UCNetSetting : UserControl, IParameterUIControl 
+    public partial class UCNetSetting : UserControl
     {
         public UCNetSetting()
         {
@@ -65,6 +65,7 @@ namespace C3.Communi.UC.Parameter
 
                 // set value
                 //
+                SetValue((INetCommuniPortConfig)value);
 
             }
         } private ICommuniPortConfig _communiPortConfig;
@@ -98,31 +99,31 @@ namespace C3.Communi.UC.Parameter
         }
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public void ApplyNewValue()
-        {
-            DiscriminateMode dm = (DiscriminateMode)this.cmbDiscriminateMode.SelectedValue;
-            switch (dm)
-            {
-                case DiscriminateMode.ByIPAddress:
-                    this._communiPortConfig = new RemoteIPAddressConfig(this.IPAddress);
-                    break;
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public void ApplyNewValue()
+        //{
+        //    DiscriminateMode dm = (DiscriminateMode)this.cmbDiscriminateMode.SelectedValue;
+        //    switch (dm)
+        //    {
+        //        case DiscriminateMode.ByIPAddress:
+        //            this._communiPortConfig = new RemoteIPAddressConfig(this.IPAddress);
+        //            break;
 
-                case DiscriminateMode.ByRemotePort:
-                    break;
+        //        case DiscriminateMode.ByRemotePort:
+        //            break;
 
-                case DiscriminateMode.ByLocalPort:
-                    break;
+        //        case DiscriminateMode.ByLocalPort:
+        //            break;
 
-                case DiscriminateMode.ByPhoneNumber:
-                    break;
+        //        case DiscriminateMode.ByPhoneNumber:
+        //            break;
 
-                default:
-                    break;
-            }
-        }
+        //        default:
+        //            break;
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -182,33 +183,33 @@ namespace C3.Communi.UC.Parameter
             return true;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public IParameter Parameter
-        {
-            get
-            {
-                return _parameter;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Parameter");
-                }
-                _parameter = value;
-                Fill();
-            }
-        } private IParameter _parameter;
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public IParameter Parameter
+        //{
+        //    get
+        //    {
+        //        return _parameter;
+        //    }
+        //    set
+        //    {
+        //        if (value == null)
+        //        {
+        //            throw new ArgumentNullException("Parameter");
+        //        }
+        //        _parameter = value;
+        //        Fill();
+        //    }
+        //} private IParameter _parameter;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void Fill()
-        {
-            this.CommuniPortConfig = (ICommuniPortConfig)_parameter.Value;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //private void Fill()
+        //{
+        //    this.CommuniPortConfig = (ICommuniPortConfig)_parameter.Value;
+        //}
 
         #endregion
     }

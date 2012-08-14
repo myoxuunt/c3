@@ -25,6 +25,6 @@ namespace C3.Communi
         //
         // ParameterOption Option{get;set;}
 
-        IParameterUI ParameterUI { get; set; }
+        //IParameterUI ParameterUI { get; set; }
     }
 }

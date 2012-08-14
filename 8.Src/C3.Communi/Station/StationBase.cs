@@ -254,9 +254,12 @@ namespace C3.Communi
             IParameter p = this.CommuniPortConfigGroup.Parameters[PN_COMMUNIPORTCONFIG];
             if (p == null)
             {
+                // TODO:
+                //
+                // new C3.Communi.P.CommuniPortConfigParameter 
                 p = new Parameter(PN_COMMUNIPORTCONFIG, typeof(ICommuniPortConfig), 
                     this.CommuniPortConfig, PO_COMMUNIPORTCONFIG);
-                p.ParameterUI = new CommuniPortConfigUI();
+                //p.ParameterUI = new CommuniPortConfigUI();
                 this.CommuniPortConfigGroup.Parameters.Add(p);
             }
             return p;

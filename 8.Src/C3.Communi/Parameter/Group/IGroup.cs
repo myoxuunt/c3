@@ -13,7 +13,7 @@ namespace C3.Communi
     {
         string Name { get; set; }
         string Text { get; set; }
-        IGroupUI GroupUI { get; set; }
+        //IGroupUI GroupUI { get; set; }
         ParameterCollection Parameters { get; }
     }
 

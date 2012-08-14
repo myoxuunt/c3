@@ -282,10 +282,10 @@ namespace C3.Communi
             set
             {
                 _valueType = value;
-                if (_valueType == typeof (NullCommuniPortConfig ))
-                {
-                    int b = 0;
-                }
+                //if (_valueType == typeof (NullCommuniPortConfig ))
+                //{
+                //    //int b = 0;
+                //}
             }
         } private Type _valueType;
         #endregion //ValueType
@@ -313,27 +313,27 @@ namespace C3.Communi
         #endregion
 
         #region StringParameterUI
-        /// <summary>
-        /// 
-        /// </summary>
-        virtual public IParameterUI ParameterUI
-        {
-            get
-            {
-                // TODO: 2012-08-04
-                //
-                if (_parameterUI == null)
-                {
-                    _parameterUI = new StringParameterUI();
-                }
-                _parameterUI.Parameter = this;
-                return _parameterUI;
-            }
-            set
-            {
-                _parameterUI = value;
-            }
-        } private IParameterUI _parameterUI;
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //virtual public IParameterUI ParameterUI
+        //{
+        //    get
+        //    {
+        //        // TODO: 2012-08-04
+        //        //
+        //        if (_parameterUI == null)
+        //        {
+        //            //_parameterUI = new StringParameterUI();
+        //        }
+        //        _parameterUI.Parameter = this;
+        //        return _parameterUI;
+        //    }
+        //    set
+        //    {
+        //        _parameterUI = value;
+        //    }
+        //} private IParameterUI _parameterUI;
         #endregion //StringParameterUI
     }
 

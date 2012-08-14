@@ -50,27 +50,27 @@ namespace C3.Communi
         } private int _orderNumber;
         #endregion //OrderNumber
 
-        #region GroupUI
-        /// <summary>
-        /// 
-        /// </summary>
-        public IGroupUI GroupUI
-        {
-            get
-            {
-                if (_groupUI == null)
-                {
-                    _groupUI = new GroupUI(this);
-                }
-                _groupUI.Group = this;
-                return _groupUI;
-            }
-            set
-            {
-                _groupUI = value;
-            }
-        } private IGroupUI _groupUI;
-        #endregion //GroupUI
+        //#region GroupUI
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public IGroupUI GroupUI
+        //{
+        //    get
+        //    {
+        //        if (_groupUI == null)
+        //        {
+        //            _groupUI = new GroupUI(this);
+        //        }
+        //        _groupUI.Group = this;
+        //        return _groupUI;
+        //    }
+        //    set
+        //    {
+        //        _groupUI = value;
+        //    }
+        //} private IGroupUI _groupUI;
+        //#endregion //GroupUI
 
         #region Text
         /// <summary>

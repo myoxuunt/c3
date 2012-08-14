@@ -13,6 +13,10 @@ namespace C3.Communi
         public UCGroupUI()
         {
             InitializeComponent();
+
+            this.tableLayoutPanel1.RowCount = 0;
+            this.tableLayoutPanel1.Controls.Clear();
+            this.tableLayoutPanel1.RowStyles.Clear();
         }
 
         #region Group
@@ -28,30 +32,30 @@ namespace C3.Communi
             set
             {
                 _group = value;
-                Fill();
+                //Fill();
             }
         } private IGroup _group;
         #endregion //Group
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void Fill()
-        {
-            this.tableLayoutPanel1.RowCount = 0;
-            this.tableLayoutPanel1.Controls.Clear();
-            this.tableLayoutPanel1.RowStyles.Clear();
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //private void Fill()
+        //{
+        //    this.tableLayoutPanel1.RowCount = 0;
+        //    this.tableLayoutPanel1.Controls.Clear();
+        //    this.tableLayoutPanel1.RowStyles.Clear();
 
-            foreach (IParameter item in this.Group.Parameters)
-            {
-                Control paramCtrl = (item.ParameterUI.Control);
-                this.tableLayoutPanel1.RowCount += 1;
+        //    foreach (IParameter item in this.Group.Parameters)
+        //    {
+        //        Control paramCtrl = (item.ParameterUI.Control);
+        //        this.tableLayoutPanel1.RowCount += 1;
 
-                this.tableLayoutPanel1.Controls.Add(paramCtrl, 0, this.tableLayoutPanel1.RowCount - 1);
-                RowStyle style = new RowStyle(SizeType.Absolute, paramCtrl.Height);
-                this.tableLayoutPanel1.RowStyles.Add(style);
-            }
-        }
+        //        this.tableLayoutPanel1.Controls.Add(paramCtrl, 0, this.tableLayoutPanel1.RowCount - 1);
+        //        RowStyle style = new RowStyle(SizeType.Absolute, paramCtrl.Height);
+        //        this.tableLayoutPanel1.RowStyles.Add(style);
+        //    }
+        //}
 
         /// <summary>
         /// 

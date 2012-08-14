@@ -69,8 +69,11 @@ namespace C3.Communi
             IParameter p = this.GeneralGroup.Parameters[PN_ADDRESS];
             if (p == null)
             {
+                // TODO:
+                // number parameter
+                //
                 p = new Parameter(PN_ADDRESS, typeof(UInt64), (UInt64)0, PO_ADDRESS);
-                p.ParameterUI = new NumberParameterUI();
+                //p.ParameterUI = new NumberParameterUI();
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;

@@ -55,13 +55,24 @@ namespace C3.Communi.P
                     _groups = value;
                     foreach (IController c in this.Controllers)
                     {
-                        this.Controls.Add(c.Viewer.UC);
+                        TabPage page = Create((GroupController)c);
+                        this.tabControl1.TabPages.Add(page);
+                        //this.Controls.Add(c.Viewer.UC);
                         c.UpdateViewer();
                     }
                 }
             }
         } private GroupCollection _groups;
         #endregion //Groups
+
+        private TabPage Create(GroupController gc)
+        {
+            TabPage page = new TabPage();
+            page.Text = gc.Group.Text;
+            page.Controls.Add(gc.Viewer.UC);
+
+            return page;
+        }
 
         private ControllerCollection Controllers
         {
