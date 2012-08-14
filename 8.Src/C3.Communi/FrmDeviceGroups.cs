@@ -9,7 +9,7 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public class FrmDeviceGroups : FrmGroups
+    public class FrmDeviceGroups : frmGroup2
     {
         #region DeviceType
         /// <summary>
@@ -70,7 +70,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        protected override bool Verify()
+        protected override bool  Verify2()
         {
             bool exist = this.Station.Devices.ExistAddress(this.Device.Address, this.Device);
             if (exist)
@@ -83,11 +83,10 @@ namespace C3.Communi
         }
         #endregion //Verify
 
-        #region Fill
         /// <summary>
         /// 
         /// </summary>
-        protected override void Fill()
+        protected override void  SetFormText()
         {
             // set form text
             //
@@ -97,8 +96,6 @@ namespace C3.Communi
                 this.Station.Name,
                 this.DeviceType.Text);
 
-            base.Fill();
         }
-        #endregion //Fill
     }
 }

@@ -68,7 +68,6 @@
             this.Controls.Add(this.lblName);
             this.Name = "UCNumberParameterUI";
             this.Size = new System.Drawing.Size(480, 27);
-            this.Load += new System.EventHandler(this.UCNumberParameterUI_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

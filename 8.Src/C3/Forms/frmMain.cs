@@ -477,19 +477,25 @@ namespace C3
         /// <param name="e"></param>
         private void mnuStationEdit_Click(object sender, EventArgs e)
         {
-            C3.Communi.frmGroup2 f2 = new C3.Communi.frmGroup2();
-            //C3.Communi.Group g = new C3.Communi.Group();
-            //g.Parameters.Add ( new C3.Communi.StringParameter ("aaa","vvvv",12));
-            //g.Parameters.Add ( new C3.Communi.StringParameter ("a","12vvvv",12));
-            //g.Parameters.Add ( new C3.Communi.StringParameter ("ba","vaaavvv",12));
+            //C3.Communi.frmGroup2 f2 = new C3.Communi.frmGroup2();
+            ////C3.Communi.Group g = new C3.Communi.Group();
+            ////g.Parameters.Add ( new C3.Communi.StringParameter ("aaa","vvvv",12));
+            ////g.Parameters.Add ( new C3.Communi.StringParameter ("a","12vvvv",12));
+            ////g.Parameters.Add ( new C3.Communi.StringParameter ("ba","vaaavvv",12));
 
-            //C3.Communi.GroupCollection gs = new C3.Communi.GroupCollection();
-            //gs.Add (g);
+            ////C3.Communi.GroupCollection gs = new C3.Communi.GroupCollection();
+            ////gs.Add (g);
 
-            IStation stationttt = GetSelectedStation(true);
-            f2.Groups = stationttt.Groups;
-            f2.ShowDialog();
-            return;
+            //IStation stationttt = GetSelectedStation(true);
+            //f2.Groups = stationttt.Groups;
+            //DialogResult dr = f2.ShowDialog();
+            //if (dr == DialogResult.OK)
+            //    {
+            //        StationTreeNode stationNode = (StationTreeNode)stationttt.Tag;
+            //        stationNode.RefreshStationTreeNode();
+            //    }
+            //return;
+
             IStation station = GetSelectedStation(true);
             if (station != null)
             {

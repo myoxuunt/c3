@@ -18,7 +18,14 @@ namespace C3.Communi
 
         private void frmGroup2_Load(object sender, EventArgs e)
         {
+            SetFormText();
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        virtual protected void SetFormText()
+        {
         }
 
         #region AdeStatus
@@ -107,6 +114,8 @@ namespace C3.Communi
                 }
             }
 
+            b = Verify2();
+
             if (b)
             {
                 foreach (IController c in this.Controllers)
@@ -116,6 +125,15 @@ namespace C3.Communi
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        virtual protected bool Verify2()
+        {
+            return true;
         }
     }
 }

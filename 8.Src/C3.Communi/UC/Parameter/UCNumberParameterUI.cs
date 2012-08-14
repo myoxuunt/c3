@@ -15,44 +15,32 @@ namespace C3.Communi
             InitializeComponent();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public IParameter Parameter
+
+        public string ParameterName
         {
-            get { return _parameter; }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("Parameter");
-                }
-                if (_parameter != value)
-                {
-                    _parameter = value;
-                }
-            }
-        } private IParameter _parameter;
+            get { return this.lblName.Text; }
+            set { this.lblName.Text = value; }
+        }
+
+        public object Value
+        {
+            get { return this.txtValue.Text; }
+            set { this.txtValue.Text = value.ToString (); }
+        }
 
         /// <summary>
         /// 
         /// </summary>
-        private void Fill()
+        public Type ValueType
         {
-            this.lblName.Text = this.Parameter.Text + ":";
-            this.lblUnit.Text = this.Parameter.Unit.Text;
-            this.txtValue.Text = this.Parameter.Value.ToString();
-        }
+            get { return _valueType; }
+            set { _valueType = value; }
+        } private Type _valueType;
 
-        internal void ApplyNewValue()
+        public string Unit
         {
-            object val = Convert.ChangeType(this.txtValue.Text, this.Parameter.ValueType);
-            this.Parameter.Value = val;
-        }
-
-        private void UCNumberParameterUI_Load(object sender, EventArgs e)
-        {
-            Fill();
+            get { return this.lblUnit.Text; }
+            set { this.lblUnit.Text = value; }
         }
     }
 }

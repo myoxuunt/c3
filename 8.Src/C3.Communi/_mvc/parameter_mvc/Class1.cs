@@ -957,6 +957,130 @@ namespace C3.Communi
             // is byte int32 short long float double ...
         }
     }
+
+    public class NumberParameterController : IController
+    {
+        public NumberParameterController(NumberParameter p)
+        {
+            this.Model = p;
+        }
+
+        #region IController 成员
+
+        public IModel Model
+        {
+            get
+            {
+                return _n;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Model");
+                }
+                _n = (NumberParameter)value;
+            }
+        }
+        private NumberParameter _n;
+
+        public IViewer Viewer
+        {
+            get
+            {
+                if (_v==null)
+                {
+                    _v = new NumberParameterViewer(this);
+                }
+                return _v;
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        } private NumberParameterViewer _v;
+
+        public void UpdateModel()
+        {
+            this._n.Value = this._v.Value;
+        }
+
+        public void UpdateViewer()
+        {
+            //throw new NotImplementedException();
+            this._v.ParameterName = _n.Name;
+            this._v.ValueType = _n.ValueType;
+            this._v.Value = _n.Value;
+            this._v.Unit = _n.Unit.Text;
+        }
+
+        public bool Verify()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    public class NumberParameterViewer : IViewer
+    {
+        public NumberParameterViewer(NumberParameterController c)
+        {
+            this.Controller = c;
+        }
+
+        #region IViewer 成员
+
+        public Control UC
+        {
+            get { return _uc; }
+        } private UCNumberParameterUI _uc = new UCNumberParameterUI();
+
+        public IController Controller
+        {
+            get
+            {
+                return _c;
+            }
+            set
+            {
+                _c = (NumberParameterController)value;
+            }
+        }
+        private NumberParameterController _c;
+
+        #endregion
+
+       /// <summary>
+        /// 
+        /// </summary>
+        public string ParameterName
+        {
+            get { return this._uc.ParameterName; }
+            set { this._uc.ParameterName = value; }
+        }
+
+        public Type ValueType
+        {
+            get { return this._uc.ValueType; }
+            set { this._uc.ValueType = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Value
+        {
+            get { return this._uc.Value; }
+            set { this._uc.Value = value; }
+        }
+
+        public string Unit
+        {
+            get { return this._uc.Unit; }
+            set { this._uc.Unit = value; }
+        }
+    }
     #endregion //NumberParameter
 
     #region IParameterViewer
@@ -992,7 +1116,11 @@ namespace C3.Communi
                 CommuniPortConfigParameter p2 = (CommuniPortConfigParameter)p;
                 c = new CommuniPortConfigController(p2);
             }
-
+            else if (p is NumberParameter)
+            {
+                NumberParameter numP = (NumberParameter)p;
+                c = new NumberParameterController(numP);
+            }
             if (c == null)
             {
                 throw new ArgumentException(p.ToString());

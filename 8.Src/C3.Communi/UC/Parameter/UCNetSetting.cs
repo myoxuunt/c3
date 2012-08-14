@@ -97,8 +97,7 @@ namespace C3.Communi.UC.Parameter
                 SetValue((INetCommuniPortConfig)value);
 
             }
-        } 
-        //private ICommuniPortConfig _communiPortConfig;
+        }
 
         /// <summary>
         /// 
@@ -111,7 +110,7 @@ namespace C3.Communi.UC.Parameter
                 RemoteIPAddressConfig ipCfg = cfg as RemoteIPAddressConfig;
                 this.txtStationIP.Text = ipCfg.RemoteIPAddress.ToString();
             }
-            else if (cfg is RemotePortConfig )
+            else if (cfg is RemotePortConfig)
             {
                 RemotePortConfig rpCfg = cfg as RemotePortConfig;
                 this.numRemotePort.Value = rpCfg.RemotePort;
@@ -123,7 +122,7 @@ namespace C3.Communi.UC.Parameter
             }
             else
             {
-                throw new NotImplementedException(cfg.ToString ());
+                throw new NotImplementedException(cfg.ToString());
             }
         }
 
@@ -135,32 +134,6 @@ namespace C3.Communi.UC.Parameter
             get { return IPAddress.Parse(this.txtStationIP.Text); }
         }
 
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public void ApplyNewValue()
-        //{
-        //    DiscriminateMode dm = (DiscriminateMode)this.cmbDiscriminateMode.SelectedValue;
-        //    switch (dm)
-        //    {
-        //        case DiscriminateMode.ByIPAddress:
-        //            this._communiPortConfig = new RemoteIPAddressConfig(this.IPAddress);
-        //            break;
-
-        //        case DiscriminateMode.ByRemotePort:
-        //            break;
-
-        //        case DiscriminateMode.ByLocalPort:
-        //            break;
-
-        //        case DiscriminateMode.ByPhoneNumber:
-        //            break;
-
-        //        default:
-        //            break;
-        //    }
-        //}
 
         /// <summary>
         /// 
@@ -184,7 +157,7 @@ namespace C3.Communi.UC.Parameter
         {
             this.cmbDiscriminateMode.DataSource = StationDiscriminateMode.Items;
             this.cmbDiscriminateMode.DisplayMember = "Text";
-            this.cmbDiscriminateMode.ValueMember = "DiscriminateMode";    
+            this.cmbDiscriminateMode.ValueMember = "DiscriminateMode";
         }
 
         /// <summary>
@@ -215,16 +188,22 @@ namespace C3.Communi.UC.Parameter
 
         public bool Verify()
         {
-            // TODO:
-            //
-            IPAddress ip;
-            bool r = IPAddress.TryParse(this.txtStationIP.Text, out ip);
-            if (!r)
+            DiscriminateMode dm = (DiscriminateMode)this.cmbDiscriminateMode.SelectedValue;
+            if (dm == DiscriminateMode.ByIPAddress)
             {
-                NUnit.UiKit.UserMessage.DisplayFailure(strings.InvalidIPAddress);
-            }
+                IPAddress ip;
+                bool r = IPAddress.TryParse(this.txtStationIP.Text, out ip);
+                if (!r)
+                {
+                    NUnit.UiKit.UserMessage.DisplayFailure(strings.InvalidIPAddress);
+                }
 
-            return r;
+                return r;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         #endregion

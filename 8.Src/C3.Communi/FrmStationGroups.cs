@@ -11,7 +11,7 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public class FrmStationGroups : FrmGroups
+    public class FrmStationGroups : frmGroup2
     {
         #region StationType
         /// <summary>
@@ -67,57 +67,27 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        protected override void Fill()
+        protected override void SetFormText()
         {
             this.Text = string.Format("{0} - {1}",
                     ADEStatusText.GetText(this.AdeStatus),
                     this.StationType.Text);
-
-            base.Fill();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        protected override bool Verify()
-        {
-            bool exist = this.Stations.ExistName(this.Station.Name, this.Station);
-            if (exist)
-            {
-                NUnit.UiKit.UserMessage.DisplayFailure("Exist name");
-            }
-            return !exist;
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //protected override bool Verify()
+        //{
+        //    bool exist = this.Stations.ExistName(this.Station.Name, this.Station);
+        //    if (exist)
+        //    {
+        //        NUnit.UiKit.UserMessage.DisplayFailure("Exist name");
+        //    }
+        //    return !exist;
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FrmStationGroups_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // FrmStationGroups
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.ClientSize = new System.Drawing.Size(394, 475);
-            this.Name = "FrmStationGroups";
-            this.Load += new System.EventHandler(this.FrmStationGroups_Load_1);
-            this.ResumeLayout(false);
-
-        }
-
-        private void FrmStationGroups_Load_1(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }
