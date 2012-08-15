@@ -10,18 +10,29 @@ namespace C3.Communi
 {
     public partial class UCNumberParameterUI : UserControl
     {
+
+        #region UCNumberParameterUI
+        /// <summary>
+        /// 
+        /// </summary>
         public UCNumberParameterUI()
         {
             InitializeComponent();
         }
+        #endregion //UCNumberParameterUI
 
-
+        #region ParameterName
+        /// <summary>
+        /// 
+        /// </summary>
         public string ParameterName
         {
             get { return this.lblName.Text; }
             set { this.lblName.Text = value; }
         }
+        #endregion //ParameterName
 
+        #region Value
         /// <summary>
         /// 
         /// </summary>
@@ -34,7 +45,9 @@ namespace C3.Communi
             }
             set { this.txtValue.Text = value.ToString(); }
         }
+        #endregion //Value
 
+        #region ValueType
         /// <summary>
         /// 
         /// </summary>
@@ -50,7 +63,9 @@ namespace C3.Communi
                 _valueType = value; 
             }
         } private Type _valueType;
+        #endregion //ValueType
 
+        #region Unit
         /// <summary>
         /// 
         /// </summary>
@@ -59,7 +74,9 @@ namespace C3.Communi
             get { return this.lblUnit.Text; }
             set { this.lblUnit.Text = value; }
         }
+        #endregion //Unit
 
+        #region Verify
         /// <summary>
         /// 
         /// </summary>
@@ -82,5 +99,6 @@ namespace C3.Communi
             }
             return r;
         }
+        #endregion //Verify
     }
 }
