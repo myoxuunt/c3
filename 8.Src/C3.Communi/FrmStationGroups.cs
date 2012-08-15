@@ -74,6 +74,25 @@ namespace C3.Communi
                     this.StationType.Text);
         }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FrmStationGroups
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.ClientSize = new System.Drawing.Size(665, 513);
+            this.Name = "FrmStationGroups";
+            this.Load += new System.EventHandler(this.FrmStationGroups_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void FrmStationGroups_Load(object sender, EventArgs e)
+        {
+
+        }
+
         ///// <summary>
         ///// 
         ///// </summary>

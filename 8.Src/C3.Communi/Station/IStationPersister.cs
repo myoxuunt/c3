@@ -13,9 +13,4 @@ namespace C3.Communi
         void Update(IStation station);
         void Delete(IStation station);
     }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
 }

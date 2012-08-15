@@ -53,27 +53,27 @@
             this.panelByLocalPort.Location = new System.Drawing.Point(0, 24);
             this.panelByLocalPort.Name = "panelByLocalPort";
             this.panelByLocalPort.Size = new System.Drawing.Size(390, 30);
-            this.panelByLocalPort.TabIndex = 27;
+            this.panelByLocalPort.TabIndex = 2;
             // 
             // numLocalPort
             // 
-            this.numLocalPort.Location = new System.Drawing.Point(153, 3);
+            this.numLocalPort.Location = new System.Drawing.Point(103, 3);
             this.numLocalPort.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.numLocalPort.Name = "numLocalPort";
-            this.numLocalPort.Size = new System.Drawing.Size(200, 21);
-            this.numLocalPort.TabIndex = 5;
+            this.numLocalPort.Size = new System.Drawing.Size(150, 21);
+            this.numLocalPort.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.Location = new System.Drawing.Point(3, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(150, 21);
+            this.label3.Size = new System.Drawing.Size(100, 21);
             this.label3.TabIndex = 0;
-            this.label3.Text = "本地端口：";
+            this.label3.Text = "本地端口:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panelBylRemotePort
@@ -83,27 +83,27 @@
             this.panelBylRemotePort.Location = new System.Drawing.Point(0, 60);
             this.panelBylRemotePort.Name = "panelBylRemotePort";
             this.panelBylRemotePort.Size = new System.Drawing.Size(390, 30);
-            this.panelBylRemotePort.TabIndex = 26;
+            this.panelBylRemotePort.TabIndex = 3;
             // 
             // numRemotePort
             // 
-            this.numRemotePort.Location = new System.Drawing.Point(153, 3);
+            this.numRemotePort.Location = new System.Drawing.Point(103, 3);
             this.numRemotePort.Maximum = new decimal(new int[] {
             65535,
             0,
             0,
             0});
             this.numRemotePort.Name = "numRemotePort";
-            this.numRemotePort.Size = new System.Drawing.Size(200, 21);
-            this.numRemotePort.TabIndex = 0;
+            this.numRemotePort.Size = new System.Drawing.Size(150, 21);
+            this.numRemotePort.TabIndex = 1;
             // 
             // label4
             // 
             this.label4.Location = new System.Drawing.Point(3, 3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(150, 21);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "远程端口：";
+            this.label4.Size = new System.Drawing.Size(100, 21);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "远程端口:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panelByIPAddress
@@ -113,41 +113,42 @@
             this.panelByIPAddress.Location = new System.Drawing.Point(0, 96);
             this.panelByIPAddress.Name = "panelByIPAddress";
             this.panelByIPAddress.Size = new System.Drawing.Size(390, 30);
-            this.panelByIPAddress.TabIndex = 25;
+            this.panelByIPAddress.TabIndex = 4;
             // 
             // txtStationIP
             // 
-            this.txtStationIP.Location = new System.Drawing.Point(153, 3);
+            this.txtStationIP.Location = new System.Drawing.Point(103, 3);
             this.txtStationIP.Name = "txtStationIP";
-            this.txtStationIP.Size = new System.Drawing.Size(200, 21);
+            this.txtStationIP.Size = new System.Drawing.Size(150, 21);
             this.txtStationIP.TabIndex = 1;
+            this.txtStationIP.Text = "0.0.0.0";
             // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 21);
+            this.label1.Size = new System.Drawing.Size(100, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "站点IP：";
+            this.label1.Text = "站点IP:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
             // 
             this.label2.Location = new System.Drawing.Point(3, 3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(150, 21);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "标识方式：";
+            this.label2.Size = new System.Drawing.Size(100, 21);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "标识方式:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbDiscriminateMode
             // 
             this.cmbDiscriminateMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDiscriminateMode.FormattingEnabled = true;
-            this.cmbDiscriminateMode.Location = new System.Drawing.Point(153, 3);
+            this.cmbDiscriminateMode.Location = new System.Drawing.Point(103, 3);
             this.cmbDiscriminateMode.Name = "cmbDiscriminateMode";
-            this.cmbDiscriminateMode.Size = new System.Drawing.Size(200, 20);
-            this.cmbDiscriminateMode.TabIndex = 22;
+            this.cmbDiscriminateMode.Size = new System.Drawing.Size(150, 20);
+            this.cmbDiscriminateMode.TabIndex = 1;
             this.cmbDiscriminateMode.SelectedIndexChanged += new System.EventHandler(this.cmbDiscriminateMode_SelectedIndexChanged);
             // 
             // UCNetSetting

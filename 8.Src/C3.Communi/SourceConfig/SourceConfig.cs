@@ -11,6 +11,7 @@ namespace C3.Communi
             this.Key = key;
             this.Value = value;
         }
+
         #region ElementType
         /// <summary>
         /// 

@@ -90,20 +90,6 @@
     </Compile>
     <Compile Include="IOrderNumber.cs" />
     <Compile Include="OrderNumberCollection.cs" />
-    <Compile Include="Parameter\Group\GroupUI.cs" />
-    <Compile Include="Parameter\Group\GroupUIBase.cs" />
-    <Compile Include="Parameter\Group\IGroup.cs" />
-    <Compile Include="Parameter\Group\IGroupUI.cs" />
-    <Compile Include="Parameter\IParameter.cs" />
-    <Compile Include="Parameter\IParameterUI.cs" />
-    <Compile Include="Parameter\Parameter.cs" />
-    <Compile Include="Parameter\ParameterCollection.cs" />
-    <Compile Include="Parameter\Group\Group.cs" />
-    <Compile Include="Parameter\Group\GroupCollection.cs" />
-    <Compile Include="Parameter\Group\GroupManager.cs" />
-    <Compile Include="Parameter\ParameterUI.cs" />
-    <Compile Include="Parameter\ParameterUIBase.cs" />
-    <Compile Include="Parameter\ParameterUICollection.cs" />
     <Compile Include="DeviceType\DeviceKind.cs" />
     <Compile Include="Device\Persister\DevicePersisterBase.cs" />
     <Compile Include="Device\DeviceSource\DeviceSourceProviderBase.cs" />
@@ -115,12 +101,6 @@
     <Compile Include="Device\DeviceSource\DeviceSourceBase.cs" />
     <Compile Include="Device\Report\ReportItem.cs" />
     <Compile Include="Device\Report\ReportItemCollection.cs" />
-    <Compile Include="FrmGroups.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmGroups.Designer.cs">
-      <DependentUpon>FrmGroups.cs</DependentUpon>
-    </Compile>
     <Compile Include="Station\IStationUI.cs" />
     <Compile Include="Station\StationUI.cs" />
     <Compile Include="Task\TaskManager.cs" />
@@ -297,10 +277,6 @@
       <DependentUpon>frmGroup2.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmGroups.resx">
-      <DependentUpon>FrmGroups.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="FrmStationGroups.resx">
       <DependentUpon>FrmStationGroups.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -348,6 +324,9 @@
       <Project>{65166530-2CBD-4210-8BBB-76A00509D2D4}</Project>
       <Name>Xdgk.Communi.Interface</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Parameter\Group\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

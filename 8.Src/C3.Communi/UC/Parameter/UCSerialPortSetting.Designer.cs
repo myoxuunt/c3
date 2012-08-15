@@ -43,90 +43,91 @@
             // txtSerialPortName
             // 
             this.txtSerialPortName.BackColor = System.Drawing.Color.White;
-            this.txtSerialPortName.Location = new System.Drawing.Point(153, 3);
+            this.txtSerialPortName.Location = new System.Drawing.Point(103, 3);
             this.txtSerialPortName.Name = "txtSerialPortName";
-            this.txtSerialPortName.Size = new System.Drawing.Size(200, 21);
+            this.txtSerialPortName.Size = new System.Drawing.Size(150, 21);
             this.txtSerialPortName.TabIndex = 1;
+            this.txtSerialPortName.Text = "Com1";
             // 
             // label8
             // 
             this.label8.Location = new System.Drawing.Point(3, 3);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(150, 21);
+            this.label8.Size = new System.Drawing.Size(100, 21);
             this.label8.TabIndex = 0;
-            this.label8.Text = "串口名称：";
+            this.label8.Text = "串口名称:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label1
             // 
             this.label1.Location = new System.Drawing.Point(3, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 21);
+            this.label1.Size = new System.Drawing.Size(100, 21);
             this.label1.TabIndex = 2;
-            this.label1.Text = "波特率：";
+            this.label1.Text = "波特率:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbBaudRate
             // 
             this.cbBaudRate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBaudRate.FormattingEnabled = true;
-            this.cbBaudRate.Location = new System.Drawing.Point(153, 30);
+            this.cbBaudRate.Location = new System.Drawing.Point(103, 30);
             this.cbBaudRate.Name = "cbBaudRate";
-            this.cbBaudRate.Size = new System.Drawing.Size(200, 20);
+            this.cbBaudRate.Size = new System.Drawing.Size(150, 20);
             this.cbBaudRate.TabIndex = 3;
             // 
             // cbParity
             // 
             this.cbParity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbParity.FormattingEnabled = true;
-            this.cbParity.Location = new System.Drawing.Point(153, 82);
+            this.cbParity.Location = new System.Drawing.Point(103, 82);
             this.cbParity.Name = "cbParity";
-            this.cbParity.Size = new System.Drawing.Size(200, 20);
+            this.cbParity.Size = new System.Drawing.Size(150, 20);
             this.cbParity.TabIndex = 7;
             // 
             // label2
             // 
             this.label2.Location = new System.Drawing.Point(3, 79);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(150, 21);
+            this.label2.Size = new System.Drawing.Size(100, 21);
             this.label2.TabIndex = 6;
-            this.label2.Text = "校验位：";
+            this.label2.Text = "校验位:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbDataBits
             // 
             this.cbDataBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDataBits.FormattingEnabled = true;
-            this.cbDataBits.Location = new System.Drawing.Point(153, 56);
+            this.cbDataBits.Location = new System.Drawing.Point(103, 56);
             this.cbDataBits.Name = "cbDataBits";
-            this.cbDataBits.Size = new System.Drawing.Size(200, 20);
+            this.cbDataBits.Size = new System.Drawing.Size(150, 20);
             this.cbDataBits.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.Location = new System.Drawing.Point(3, 55);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(150, 21);
+            this.label3.Size = new System.Drawing.Size(100, 21);
             this.label3.TabIndex = 4;
-            this.label3.Text = "数据位：";
+            this.label3.Text = "数据位:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cbStopBits
             // 
             this.cbStopBits.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbStopBits.FormattingEnabled = true;
-            this.cbStopBits.Location = new System.Drawing.Point(153, 108);
+            this.cbStopBits.Location = new System.Drawing.Point(103, 108);
             this.cbStopBits.Name = "cbStopBits";
-            this.cbStopBits.Size = new System.Drawing.Size(200, 20);
+            this.cbStopBits.Size = new System.Drawing.Size(150, 20);
             this.cbStopBits.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.Location = new System.Drawing.Point(3, 107);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(150, 21);
+            this.label4.Size = new System.Drawing.Size(100, 21);
             this.label4.TabIndex = 8;
-            this.label4.Text = "停止位：";
+            this.label4.Text = "停止位:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // UCSerialPortSetting

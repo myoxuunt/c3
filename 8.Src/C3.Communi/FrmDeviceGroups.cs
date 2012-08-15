@@ -97,5 +97,24 @@ namespace C3.Communi
                 this.DeviceType.Text);
 
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // FrmDeviceGroups
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.ClientSize = new System.Drawing.Size(665, 513);
+            this.Name = "FrmDeviceGroups";
+            this.Load += new System.EventHandler(this.FrmDeviceGroups_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void FrmDeviceGroups_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -33,12 +33,12 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(477, 468);
+            this.okButton.Location = new System.Drawing.Point(252, 418);
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(565, 468);
+            this.cancelButton.Location = new System.Drawing.Point(340, 418);
             // 
             // tabControl1
             // 
@@ -48,14 +48,14 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(572, 450);
+            this.tabControl1.Size = new System.Drawing.Size(400, 400);
             this.tabControl1.TabIndex = 19;
             // 
             // frmGroup2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 513);
+            this.ClientSize = new System.Drawing.Size(426, 453);
             this.Controls.Add(this.tabControl1);
             this.Name = "frmGroup2";
             this.Text = "frmGroup2";

@@ -39,7 +39,7 @@
             // rbSocket
             // 
             this.rbSocket.Checked = true;
-            this.rbSocket.Location = new System.Drawing.Point(153, 57);
+            this.rbSocket.Location = new System.Drawing.Point(103, 57);
             this.rbSocket.Name = "rbSocket";
             this.rbSocket.Size = new System.Drawing.Size(200, 21);
             this.rbSocket.TabIndex = 33;
@@ -49,7 +49,7 @@
             // 
             // rbSerialPort
             // 
-            this.rbSerialPort.Location = new System.Drawing.Point(153, 30);
+            this.rbSerialPort.Location = new System.Drawing.Point(103, 30);
             this.rbSerialPort.Name = "rbSerialPort";
             this.rbSerialPort.Size = new System.Drawing.Size(200, 21);
             this.rbSerialPort.TabIndex = 32;
@@ -60,14 +60,14 @@
             // 
             this.label5.Location = new System.Drawing.Point(3, 3);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(150, 21);
+            this.label5.Size = new System.Drawing.Size(100, 21);
             this.label5.TabIndex = 31;
-            this.label5.Text = "通讯方式：";
+            this.label5.Text = "通讯方式:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // rbNull
             // 
-            this.rbNull.Location = new System.Drawing.Point(153, 3);
+            this.rbNull.Location = new System.Drawing.Point(103, 3);
             this.rbNull.Name = "rbNull";
             this.rbNull.Size = new System.Drawing.Size(200, 21);
             this.rbNull.TabIndex = 36;
@@ -77,7 +77,6 @@
             // 
             // ucNetSetting1
             // 
-            this.ucNetSetting1.CommuniPortConfig = null;
             this.ucNetSetting1.Location = new System.Drawing.Point(0, 243);
             this.ucNetSetting1.Name = "ucNetSetting1";
             this.ucNetSetting1.Size = new System.Drawing.Size(405, 154);
