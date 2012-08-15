@@ -1,5 +1,6 @@
 ﻿using System;
 using C3.Communi;
+using Xdgk.Common;
 
 namespace C3.SPUTest
 {
@@ -22,21 +23,7 @@ namespace C3.SPUTest
     class TStationSource : StationSourceBase 
     {
     }
-    public class GuidFactory
-    {
-        public static Guid Create(int n)
-        {
-            byte[] bs = BitConverter.GetBytes(n);
-            byte[] bs16 = new byte[16];
-
-            for (int i = bs.Length - 1; i >= 0; i--)
-            {
-                bs16[16 - bs.Length + i] = bs[i];
-            }
-            Guid id = new Guid(bs16);
-            return id;
-        }
-    }
+  
     /// <summary>
     /// 
     /// </summary>
@@ -45,9 +32,9 @@ namespace C3.SPUTest
         protected override IStationSource[] OnGetStationSources()
         {
             TStationSource s = new TStationSource();
-            s.Guid = GuidFactory.Create(11);
+            s.Guid = GuidHelper.Create(11);
             TStationSource s2 = new TStationSource();
-            s2.Guid = GuidFactory.Create(12);
+            s2.Guid = GuidHelper.Create(12);
             TStationSource[] ss = new TStationSource[] {
                 s,s2
             };

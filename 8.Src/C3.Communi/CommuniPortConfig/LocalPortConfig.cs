@@ -9,12 +9,17 @@ namespace C3.Communi
 {
     public class LocalPortConfig : INetCommuniPortConfig
     {
+        public LocalPortConfig()
+            : this(0)
+        {
+        }
+
         public LocalPortConfig(int localPort)
         {
             this.LocalPort = localPort;
         }
 
-#region LocalPort
+        #region LocalPort
         /// <summary>
         /// 
         /// </summary>
@@ -29,9 +34,9 @@ namespace C3.Communi
                 _localPort = value;
             }
         } private int _localPort;
-#endregion //LocalPort
+        #endregion //LocalPort
 
-#region ICommuniPortConfig 成员
+        #region ICommuniPortConfig 成员
 
         public bool CanCreate
         {
@@ -54,7 +59,7 @@ namespace C3.Communi
             return r;
         }
 
-#endregion
+        #endregion
     }
 
 }

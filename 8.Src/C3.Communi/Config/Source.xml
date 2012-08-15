@@ -15,8 +15,8 @@
 
 <sources>
   <source>
-    <key>source1</key>
-    <value>value1</value>
+    <key>connection</key>
+    <value>server=(local);uid=sa;pwd=sa;database=yehesldbv2-3;</value>
   </source>
   
   <source>

@@ -503,6 +503,8 @@ namespace C3
                 DialogResult dr = stationUI.Edit(station);
                 if (dr == DialogResult.OK)
                 {
+                    station.Spu.StationPersister.Update(station);
+
                     StationTreeNode stationNode = (StationTreeNode)station.Tag;
                     stationNode.RefreshStationTreeNode();
                 }

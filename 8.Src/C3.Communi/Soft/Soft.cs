@@ -197,7 +197,7 @@ namespace C3.Communi
         #endregion //HardwareFactory
 
         #region SourceConfigs
-        private SourceConfigCollection SourceConfigs
+        public SourceConfigCollection SourceConfigs
         {
             get
             {
@@ -205,7 +205,7 @@ namespace C3.Communi
                 {
                     _sourceConfigs = ReadSourceConfigs();
                 }
-                return null;
+                return _sourceConfigs;
             }
         } private SourceConfigCollection _sourceConfigs;
         #endregion //SourceConfigs

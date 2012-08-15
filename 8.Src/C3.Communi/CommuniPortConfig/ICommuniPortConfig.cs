@@ -17,9 +17,4 @@ namespace C3.Communi
         bool IsMatch(ICommuniPort cp);
     }
 
-
-    /// <summary>
-    /// 
-    /// </summary>
-
 }

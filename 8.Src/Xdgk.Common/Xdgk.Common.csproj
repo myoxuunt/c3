@@ -57,6 +57,7 @@
     <Compile Include="FixedDialogBase.Designer.cs">
       <DependentUpon>FixedDialogBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuidFactory.cs" />
     <Compile Include="Path.cs" />
     <Compile Include="RangeConstraint.cs" />
     <Compile Include="Constraint.cs" />

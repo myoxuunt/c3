@@ -279,6 +279,7 @@
     <Compile Include="Parameter\String\StringParameter.cs" />
     <Compile Include="Parameter\String\StringParameterController.cs" />
     <Compile Include="Parameter\String\StringParameterViewer.cs" />
+    <Compile Include="CommuniPortConfigSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NLog.config">

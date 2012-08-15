@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Text;
 using System.Net;
@@ -8,6 +9,14 @@ namespace C3.Communi
 
     public class RemoteIPAddressConfig : INetCommuniPortConfig
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public RemoteIPAddressConfig()
+            : this(IPAddress.None)
+        {
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -67,11 +76,26 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
+        [System.Xml.Serialization.XmlIgnore]
         public IPAddress RemoteIPAddress
         {
-            get { return _remoteIPAddress; }
-            set { _remoteIPAddress = value; }
-        } private IPAddress _remoteIPAddress;
+            get 
+            {
+                IPAddress remoteIPAddress = IPAddress.Parse(this.RemoteIPAddressString);
+                return remoteIPAddress; 
+            }
+            set { this._remoteIPAddressString = value.ToString(); }
+        } //private IPAddress _remoteIPAddress;
+
+        /// <summary>
+        /// for serialize
+        /// </summary>
+        //[XmlAttribute("RemoteIPAddress",Da)]
+        public string RemoteIPAddressString
+        {
+            get { return _remoteIPAddressString; }
+            set { _remoteIPAddressString = value; }
+        } private string _remoteIPAddressString;
 
     }
 

@@ -9,6 +9,23 @@ namespace C3.Communi
 {
     public class SerialPortSetting
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        public SerialPortSetting()
+            : this("Com1", 9600, Parity.None, 8, StopBits.One)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="portName"></param>
+        /// <param name="baudRate"></param>
+        /// <param name="parity"></param>
+        /// <param name="dataBits"></param>
+        /// <param name="stopBits"></param>
         public SerialPortSetting(string portName, int baudRate, Parity parity,
                 int dataBits, StopBits stopBits)
         {
@@ -17,10 +34,9 @@ namespace C3.Communi
             this.Parity = parity;
             this.DataBits = dataBits;
             this.StopBits = stopBits;
-
         }
 
-#region PortName
+        #region PortName
         /// <summary>
         /// 
         /// </summary>
@@ -39,9 +55,9 @@ namespace C3.Communi
                 _portName = value;
             }
         } private string _portName;
-#endregion //PortName
+        #endregion //PortName
 
-#region BaudRate
+        #region BaudRate
         /// <summary>
         /// 
         /// </summary>
@@ -56,9 +72,9 @@ namespace C3.Communi
                 _baudRate = value;
             }
         } private int _baudRate;
-#endregion //BaudRate
+        #endregion //BaudRate
 
-#region Parity
+        #region Parity
         /// <summary>
         /// 
         /// </summary>
@@ -73,9 +89,9 @@ namespace C3.Communi
                 _parity = value;
             }
         } private Parity _parity;
-#endregion //Parity
+        #endregion //Parity
 
-#region DataBits
+        #region DataBits
         /// <summary>
         /// 
         /// </summary>
@@ -90,9 +106,9 @@ namespace C3.Communi
                 _dataBits = value;
             }
         } private int _dataBits;
-#endregion //DataBits
+        #endregion //DataBits
 
-#region StopBits
+        #region StopBits
         /// <summary>
         /// 
         /// </summary>
@@ -107,9 +123,9 @@ namespace C3.Communi
                 _stopBits = value;
             }
         } private StopBits _stopBits = StopBits.One;
-#endregion //StopBits
+        #endregion //StopBits
 
-#region Default
+        #region Default
         /// <summary>
         /// 
         /// </summary>
@@ -127,7 +143,7 @@ namespace C3.Communi
                 return d;
             }
         }
-#endregion //Default
+        #endregion //Default
 
         /// <summary>
         /// 

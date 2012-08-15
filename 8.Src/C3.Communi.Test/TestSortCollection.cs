@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using NUnit.Framework;
+using Xdgk.Common;
 
 
 namespace C3.Communi.Test
 {
     [TestFixture]
+
     public class TestSortCollection
     {
         public class OrderClass : IOrderNumber
@@ -54,6 +56,23 @@ namespace C3.Communi.Test
                     Assert.IsTrue(s[i].OrderNumber <= s[i+1].OrderNumber );
                 }
             }
+    }
+
+    [TestFixture]
+    public class GuidFactoryTest
+    {
+        [Test]
+        public void t()
+        {
+            UInt32 min = 0,
+                max = UInt32.MaxValue;
+            max = 1;
+
+            Guid id = GuidHelper.Create(max);
+            //Console.WriteLine();
+            Assert.AreEqual(GuidHelper.ConvertToUInt32(id), max);
+            
+        }
     }
 
 }

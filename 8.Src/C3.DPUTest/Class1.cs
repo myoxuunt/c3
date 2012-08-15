@@ -3,25 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using C3.Communi;
 using System.Windows.Forms;
+using Xdgk.Common;
 
 namespace C3.DPUTest
 {
-    public class GuidFactory
-    {
-        public static Guid Create(int n)
-        {
-            byte[] bs = BitConverter.GetBytes(n);
-            byte[] bs16 = new byte[16];
-
-            for (int i = bs.Length - 1; i >= 0; i--)
-            {
-                bs16[16 - bs.Length + i] = bs[i];
-            }
-            Guid id = new Guid(bs16);
-            return id;
-        }
-    }
-
     public class TDpu : DPUBase
     {
         public DeviceType GetDeviceType()
@@ -190,8 +175,8 @@ namespace C3.DPUTest
             TDeviceSource s = new TDeviceSource();
             s.Address = 123;
             s.DevcieTypeName = "Tdevice";
-            s.Guid = GuidFactory.Create(01);
-            s.StationGuid = GuidFactory.Create(11);
+            s.Guid = GuidHelper .Create(01);
+            s.StationGuid = GuidHelper.Create(11);
 
             return new IDeviceSource[] { s };
 

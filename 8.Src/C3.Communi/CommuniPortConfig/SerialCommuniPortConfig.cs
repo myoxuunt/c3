@@ -8,11 +8,15 @@ namespace C3.Communi
 {
     public class SerialCommuniPortConfig : ICommuniPortConfig
     {
+
+        public SerialCommuniPortConfig()
+        {
+        }
+
         public SerialCommuniPortConfig(SerialPortSetting setting)
         {
             this.SerialPortSetting = setting;
         }
-#region 
         /// <summary>
         /// 
         /// </summary>
@@ -40,22 +44,38 @@ namespace C3.Communi
 
         public bool IsMatch(ICommuniPort cp)
         {
+            // TODO:
+            //
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public SerialPortSetting SerialPortSetting
         {
-            get { return _serialPortSetting; }
-            set 
+            get
+            {
+                if (_serialPortSetting == null)
+                {
+                    _serialPortSetting = new SerialPortSetting(
+                        "Com1",
+                        9600,
+                        Parity.None,
+                        8,
+                        StopBits.One);
+                }
+                return _serialPortSetting; 
+            }
+            set
             {
                 if (value == null)
                 {
                     throw new ArgumentNullException("SerialPortSetting");
                 }
-                _serialPortSetting = value; 
+                _serialPortSetting = value;
             }
         } private SerialPortSetting _serialPortSetting;
-#endregion
     }
 
 }
