@@ -5,10 +5,6 @@ using System.Net;
 
 namespace C3.Communi
 {
-    public interface INetCommuniPortConfig : ICommuniPortConfig
-    {
-
-    }
 
     public class RemoteIPAddressConfig : INetCommuniPortConfig
     {
@@ -79,107 +75,5 @@ namespace C3.Communi
 
     }
 
-    public class RemotePortConfig : INetCommuniPortConfig
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="remotePort"></param>
-        public RemotePortConfig(int remotePort)
-        {
-            this.RemotePort = remotePort;
-        }
 
-        #region RemotePort
-        /// <summary>
-        /// 
-        /// </summary>
-        public int RemotePort
-        {
-            get
-            {
-                return _remotePort;
-            }
-            set
-            {
-                _remotePort = value;
-            }
-        } private int _remotePort;
-        #endregion //RemotePort
-
-        #region ICommuniPortConfig 成员
-
-        public bool CanCreate
-        {
-            get { return false; }
-        }
-
-        public ICommuniPort Create()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsMatch(ICommuniPort cp)
-        {
-            bool r = false;
-            SocketCommuniPort scp = cp as SocketCommuniPort;
-            if (scp != null)
-            {
-                r = this.RemotePort == ((IPEndPoint)scp.RemoteEndPoint).Port;
-            }
-            return r;
-        }
-
-        #endregion
-    }
-
-    public class LocalPortConfig : INetCommuniPortConfig
-    {
-        public LocalPortConfig(int localPort)
-        {
-            this.LocalPort = localPort;
-        }
-
-        #region LocalPort
-        /// <summary>
-        /// 
-        /// </summary>
-        public int LocalPort
-        {
-            get
-            {
-                return _localPort;
-            }
-            set
-            {
-                _localPort = value;
-            }
-        } private int _localPort;
-        #endregion //LocalPort
-
-        #region ICommuniPortConfig 成员
-
-        public bool CanCreate
-        {
-            get { return false; }
-        }
-
-        public ICommuniPort Create()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsMatch(ICommuniPort cp)
-        {
-            bool r = false;
-            SocketCommuniPort scp = cp as SocketCommuniPort;
-            if (scp != null)
-            {
-                r = this.LocalPort == ((IPEndPoint)scp.LocalEndPoint).Port;
-            }
-            return r;
-        }
-
-        #endregion
-    }
 }

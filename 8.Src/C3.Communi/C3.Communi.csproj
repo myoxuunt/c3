@@ -48,8 +48,12 @@
     <Compile Include="CommuniDetail\CommuniDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetailCollection.cs" />
+    <Compile Include="CommuniPortConfig\INetCommuniPortConfig.cs" />
+    <Compile Include="CommuniPortConfig\LocalPortConfig.cs" />
     <Compile Include="CommuniPortConfig\RemoteIPAddressConfig.cs" />
     <Compile Include="CommuniPortConfig\NullCommuniPortConfig.cs" />
+    <Compile Include="CommuniPortConfig\RemotePortConfig.cs" />
+    <Compile Include="CommuniPortConfig\SerialCommuniPortConfig.cs" />
     <Compile Include="CommuniPort\CommuniPortFactory.cs" />
     <Compile Include="CommuniPort\CommuniPortBase.cs" />
     <Compile Include="CommuniPort\CommuniPortCollection.cs" />
