@@ -254,7 +254,7 @@ namespace C3
         private void Test()
         {
             //string s = Soft.Hardware.Stations[0].Devices[0].ToString();
-            frmGroup2 f = new frmGroup2();
+            frmGroups f = new frmGroups();
             GroupCollection gs = new GroupCollection();
             CommuniPortConfigParameter p = new CommuniPortConfigParameter(
                 "nonennnnn",

@@ -9,7 +9,7 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public class FrmDeviceGroups : frmGroup2
+    public class FrmDeviceGroups : frmGroups
     {
         #region DeviceType
         /// <summary>
@@ -105,7 +105,7 @@ namespace C3.Communi
             // FrmDeviceGroups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.ClientSize = new System.Drawing.Size(665, 513);
+            this.ClientSize = new System.Drawing.Size(426, 453);
             this.Name = "FrmDeviceGroups";
             this.Load += new System.EventHandler(this.FrmDeviceGroups_Load);
             this.ResumeLayout(false);

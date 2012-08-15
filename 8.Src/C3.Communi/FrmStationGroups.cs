@@ -11,7 +11,7 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public class FrmStationGroups : frmGroup2
+    public class FrmStationGroups : frmGroups
     {
         #region StationType
         /// <summary>
@@ -81,7 +81,7 @@ namespace C3.Communi
             // FrmStationGroups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.ClientSize = new System.Drawing.Size(665, 513);
+            this.ClientSize = new System.Drawing.Size(426, 453);
             this.Name = "FrmStationGroups";
             this.Load += new System.EventHandler(this.FrmStationGroups_Load);
             this.ResumeLayout(false);

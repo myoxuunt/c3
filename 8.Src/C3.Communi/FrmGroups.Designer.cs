@@ -1,6 +1,6 @@
 ﻿namespace C3.Communi
 {
-    partial class FrmGroups
+    partial class frmGroups
     {
         /// <summary>
         /// Required designer variable.
@@ -33,15 +33,12 @@
             // 
             // okButton
             // 
-            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.Location = new System.Drawing.Point(222, 442);
+            this.okButton.Location = new System.Drawing.Point(252, 418);
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.Location = new System.Drawing.Point(310, 442);
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.cancelButton.Location = new System.Drawing.Point(340, 418);
             // 
             // tabControl1
             // 
@@ -51,18 +48,18 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(370, 424);
-            this.tabControl1.TabIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(400, 400);
+            this.tabControl1.TabIndex = 19;
             // 
-            // FrmGroups
+            // frmGroups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 475);
+            this.ClientSize = new System.Drawing.Size(426, 453);
             this.Controls.Add(this.tabControl1);
-            this.Name = "FrmGroups";
-            this.Text = "FrmParameterGroups";
-            this.Load += new System.EventHandler(this.FrmGroups_Load);
+            this.Name = "frmGroups";
+            this.Text = "frmGroups";
+            this.Load += new System.EventHandler(this.frmGroup2_Load);
             this.Controls.SetChildIndex(this.okButton, 0);
             this.Controls.SetChildIndex(this.cancelButton, 0);
             this.Controls.SetChildIndex(this.tabControl1, 0);

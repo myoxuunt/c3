@@ -79,17 +79,17 @@
     <Compile Include="FrmDeviceGroups.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGroup2.cs">
+    <Compile Include="frmGroups.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmGroup2.Designer.cs">
-      <DependentUpon>frmGroup2.cs</DependentUpon>
+    <Compile Include="frmGroups.Designer.cs">
+      <DependentUpon>frmGroups.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmStationGroups.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="IOrderNumber.cs" />
-    <Compile Include="OrderNumberCollection.cs" />
+    <Compile Include="OrderNumber\IOrderNumber.cs" />
+    <Compile Include="OrderNumber\OrderNumberCollection.cs" />
     <Compile Include="DeviceType\DeviceKind.cs" />
     <Compile Include="Device\Persister\DevicePersisterBase.cs" />
     <Compile Include="Device\DeviceSource\DeviceSourceProviderBase.cs" />
@@ -101,6 +101,8 @@
     <Compile Include="Device\DeviceSource\DeviceSourceBase.cs" />
     <Compile Include="Device\Report\ReportItem.cs" />
     <Compile Include="Device\Report\ReportItemCollection.cs" />
+    <Compile Include="Utils\SerialPortSetting.cs" />
+    <Compile Include="Utils\StationDiscriminateMode.cs" />
     <Compile Include="Station\IStationUI.cs" />
     <Compile Include="Station\StationUI.cs" />
     <Compile Include="Task\TaskManager.cs" />
@@ -248,7 +250,7 @@
     <Compile Include="Task\TaskQueue.cs" />
     <Compile Include="Utils\TypeHelper.cs" />
     <Compile Include="Utils\Utilities.cs" />
-    <Compile Include="_.cs" />
+    <Compile Include="Utils\DiscriminateMode.cs" />
     <Compile Include="_mvc\parameter_mvc\Class1.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -273,8 +275,8 @@
       <DependentUpon>FrmDeviceGroups.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGroup2.resx">
-      <DependentUpon>frmGroup2.cs</DependentUpon>
+    <EmbeddedResource Include="frmGroups.resx">
+      <DependentUpon>frmGroups.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmStationGroups.resx">

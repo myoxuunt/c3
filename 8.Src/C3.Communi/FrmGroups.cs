@@ -9,17 +9,31 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public partial class FrmGroups : NUnit.UiKit.SettingsDialogBase 
+    public partial class frmGroups : NUnit.UiKit.SettingsDialogBase
     {
-        #region FrmGroups
-        /// <summary>
-        /// 
-        /// </summary>
-        public FrmGroups()
+
+        #region frmGroups
+        public frmGroups()
         {
             InitializeComponent();
         }
-        #endregion //FrmGroups
+        #endregion //frmGroups
+
+        #region frmGroup2_Load
+        private void frmGroup2_Load(object sender, EventArgs e)
+        {
+            SetFormText();
+        }
+        #endregion //frmGroup2_Load
+
+        #region SetFormText
+        /// <summary>
+        /// 
+        /// </summary>
+        virtual protected void SetFormText()
+        {
+        }
+        #endregion //SetFormText
 
         #region AdeStatus
         /// <summary>
@@ -52,35 +66,47 @@ namespace C3.Communi
                 if (_groups != value)
                 {
                     _groups = value;
+                    foreach (IController c in this.Controllers)
+                    {
+                        TabPage page = Create((GroupController)c);
+                        this.tabControl1.TabPages.Add(page);
+                        //this.Controls.Add(c.Viewer.UC);
+                        c.UpdateViewer();
+                    }
                 }
             }
         } private GroupCollection _groups;
         #endregion //Groups
 
-        #region Fill
-        /// <summary>
-        /// 
-        /// </summary>
-        protected virtual void Fill()
+        #region Create
+        private TabPage Create(GroupController gc)
         {
-            //if ( this.Groups != null )
-            //{
-            //    foreach (Group item in this.Groups)
-            //    {
-            //        TabPage tp = new TabPage(item.Text);
-            //        tp.Controls.Add(item.GroupUI.Control);
-            //        tabControl1.TabPages.Add(tp);
-            //    }
-            //}
-        }
-        #endregion //Fill
+            TabPage page = new TabPage();
+            page.Text = gc.Group.Text;
+            page.Controls.Add(gc.Viewer.UC);
 
-        #region FrmGroups_Load
-        private void FrmGroups_Load(object sender, EventArgs e)
-        {
-            Fill();
+            return page;
         }
-        #endregion //FrmGroups_Load
+        #endregion //Create
+
+        #region Controllers
+        private ControllerCollection Controllers
+        {
+            get
+            {
+                if (_controllers == null)
+                {
+                    _controllers = new ControllerCollection();
+                    foreach (IGroup g in this.Groups)
+                    {
+                        IController c = ControllerFactory.Create(g);
+                        _controllers.Add(c);
+                    }
+                }
+                return _controllers;
+            }
+        } private ControllerCollection _controllers;
+        #endregion //Controllers
 
         #region okButton_Click
         /// <summary>
@@ -90,52 +116,45 @@ namespace C3.Communi
         /// <param name="e"></param>
         private void okButton_Click(object sender, EventArgs e)
         {
-            OnOK();
-        }
+            bool b = true;
+            bool b2 = true;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        virtual protected void OnOK()
-        {
-            foreach (IGroup item in this.Groups)
+            foreach (IController c in this.Controllers)
             {
-                //item.GroupUI.ApplyNewValue();
+                if (!c.Verify())
+                {
+                    b = false;
+                    break;
+                }
             }
 
-            if (this.Verify())
+            if (b)
             {
+                b2 = Verify2();
+            }
+
+            if (b && b2)
+            {
+                foreach (IController c in this.Controllers)
+                {
+                    c.UpdateModel();
+                }
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
         }
         #endregion //okButton_Click
 
-        #region Verify
-        /// <summary>
-        /// verify input new parameter and display error msg
-        /// </summary>
-        /// <returns></returns>
-        virtual protected bool Verify()
-        {
-            //throw new NotImplementedException("Verify");
-            return true;
-        }
-        #endregion //Verify
-
-        #region cancelButton_Click
+        #region Verify2
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void cancelButton_Click(object sender, EventArgs e)
+        /// <returns></returns>
+        virtual protected bool Verify2()
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            return true;
         }
-        #endregion //cancelButton_Click
-
+        #endregion //Verify2
     }
-
 }
