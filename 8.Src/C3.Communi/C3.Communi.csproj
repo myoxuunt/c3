@@ -162,46 +162,46 @@
     <Compile Include="Task\TaskDefineCollection.cs" />
     <Compile Include="Task\TaskFactory.cs" />
     <Compile Include="Task\XmlTaskFactory.cs" />
-    <Compile Include="UC\Parameter\UCCommuniPortConfigUI.cs">
+    <Compile Include="UC\ParameterUC\UCCommuniPortConfigUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC\Parameter\UCCommuniPortConfigUI.Designer.cs">
+    <Compile Include="UC\ParameterUC\UCCommuniPortConfigUI.Designer.cs">
       <DependentUpon>UCCommuniPortConfigUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC\Parameter\UCNetSetting.cs">
+    <Compile Include="UC\ParameterUC\UCNetSetting.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC\Parameter\UCNetSetting.Designer.cs">
+    <Compile Include="UC\ParameterUC\UCNetSetting.Designer.cs">
       <DependentUpon>UCNetSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC\Parameter\UCNumberParameterUI.cs">
+    <Compile Include="UC\ParameterUC\UCNumberParameterUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC\Parameter\UCNumberParameterUI.Designer.cs">
+    <Compile Include="UC\ParameterUC\UCNumberParameterUI.Designer.cs">
       <DependentUpon>UCNumberParameterUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC\Parameter\UCComboBoxParameterUI.cs">
+    <Compile Include="UC\ParameterUC\UCComboBoxParameterUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC\Parameter\UCComboBoxParameterUI.Designer.cs">
+    <Compile Include="UC\ParameterUC\UCComboBoxParameterUI.Designer.cs">
       <DependentUpon>UCComboBoxParameterUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC\Parameter\UCSerialPortSetting.cs">
+    <Compile Include="UC\ParameterUC\UCSerialPortSetting.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC\Parameter\UCSerialPortSetting.Designer.cs">
+    <Compile Include="UC\ParameterUC\UCSerialPortSetting.Designer.cs">
       <DependentUpon>UCSerialPortSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC\UCGroupUI.cs">
+    <Compile Include="UC\GroupUC\UCGroupUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC\UCGroupUI.Designer.cs">
+    <Compile Include="UC\GroupUC\UCGroupUI.Designer.cs">
       <DependentUpon>UCGroupUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC\Parameter\UCStringParameterUI.cs">
+    <Compile Include="UC\ParameterUC\UCStringParameterUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC\Parameter\UCStringParameterUI.Designer.cs">
+    <Compile Include="UC\ParameterUC\UCStringParameterUI.Designer.cs">
       <DependentUpon>UCStringParameterUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\KeyValue.cs" />
@@ -251,7 +251,30 @@
     <Compile Include="Utils\TypeHelper.cs" />
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="Utils\DiscriminateMode.cs" />
-    <Compile Include="_mvc\parameter_mvc\Class1.cs" />
+    <Compile Include="Parameter\CommuniPortConfig\CommuniPortConfigController.cs" />
+    <Compile Include="Parameter\CommuniPortConfig\CommuniPortConfigParameter.cs" />
+    <Compile Include="Parameter\CommuniPortConfig\CommuniPortConfigViewer.cs" />
+    <Compile Include="mvc\ControllerCollection.cs" />
+    <Compile Include="mvc\ControllerFactory.cs" />
+    <Compile Include="Parameter\Group\Group.cs" />
+    <Compile Include="Parameter\Group\GroupCollection.cs" />
+    <Compile Include="Parameter\Group\GroupController.cs" />
+    <Compile Include="Parameter\Group\GroupControllerCollection.cs" />
+    <Compile Include="Parameter\Group\GroupViewer.cs" />
+    <Compile Include="mvc\IController.cs" />
+    <Compile Include="Parameter\Group\IGroup.cs" />
+    <Compile Include="mvc\IModel.cs" />
+    <Compile Include="Parameter\Base\IParameter.cs" />
+    <Compile Include="Parameter\Base\IParameterViewer.cs" />
+    <Compile Include="mvc\IViewer.cs" />
+    <Compile Include="Parameter\Number\NumberParameter.cs" />
+    <Compile Include="Parameter\Number\NumberParameterController.cs" />
+    <Compile Include="Parameter\Number\NumberParameterViewer.cs" />
+    <Compile Include="Parameter\Base\ParameterBase.cs" />
+    <Compile Include="Parameter\Base\ParameterCollection.cs" />
+    <Compile Include="Parameter\String\StringParameter.cs" />
+    <Compile Include="Parameter\String\StringParameterController.cs" />
+    <Compile Include="Parameter\String\StringParameterViewer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NLog.config">
@@ -288,31 +311,31 @@
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC\Parameter\UCCommuniPortConfigUI.resx">
+    <EmbeddedResource Include="UC\ParameterUC\UCCommuniPortConfigUI.resx">
       <DependentUpon>UCCommuniPortConfigUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC\Parameter\UCNetSetting.resx">
+    <EmbeddedResource Include="UC\ParameterUC\UCNetSetting.resx">
       <DependentUpon>UCNetSetting.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC\Parameter\UCNumberParameterUI.resx">
+    <EmbeddedResource Include="UC\ParameterUC\UCNumberParameterUI.resx">
       <DependentUpon>UCNumberParameterUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC\Parameter\UCComboBoxParameterUI.resx">
+    <EmbeddedResource Include="UC\ParameterUC\UCComboBoxParameterUI.resx">
       <DependentUpon>UCComboBoxParameterUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC\Parameter\UCSerialPortSetting.resx">
+    <EmbeddedResource Include="UC\ParameterUC\UCSerialPortSetting.resx">
       <DependentUpon>UCSerialPortSetting.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC\UCGroupUI.resx">
+    <EmbeddedResource Include="UC\GroupUC\UCGroupUI.resx">
       <DependentUpon>UCGroupUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC\Parameter\UCStringParameterUI.resx">
+    <EmbeddedResource Include="UC\ParameterUC\UCStringParameterUI.resx">
       <DependentUpon>UCStringParameterUI.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -326,9 +349,6 @@
       <Project>{65166530-2CBD-4210-8BBB-76A00509D2D4}</Project>
       <Name>Xdgk.Communi.Interface</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Parameter\Group\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

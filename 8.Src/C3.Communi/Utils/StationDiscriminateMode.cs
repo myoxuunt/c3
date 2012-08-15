@@ -1,9 +1,7 @@
-
 using System;
 using System.IO.Ports;
 using System.Collections.Generic;
 using System.Text;
-
 
 namespace C3.Communi
 {
@@ -26,7 +24,7 @@ namespace C3.Communi
                 this._type = type;
             }
 
-#region Type
+            #region Type
             /// <summary>
             /// 
             /// </summary>
@@ -37,7 +35,7 @@ namespace C3.Communi
                     return _type;
                 }
             } private Type _type;
-#endregion //Type
+            #endregion //Type
 
 
             /// <summary>
@@ -89,8 +87,6 @@ namespace C3.Communi
         /// </summary>
         static private Item[] s_items = new Item[] 
         {
-            // TODO: replace null
-            // 
             new Item(DiscriminateMode.ByIPAddress, strings.ByIP, typeof(RemoteIPAddressConfig ) ),
                 new Item(DiscriminateMode.ByLocalPort, strings.ByLocalPort,typeof (LocalPortConfig ) ),
                 new Item (DiscriminateMode.ByRemotePort, strings.ByRemotePort,typeof(RemotePortConfig ))
