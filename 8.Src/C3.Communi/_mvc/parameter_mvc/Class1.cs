@@ -1016,7 +1016,8 @@ namespace C3.Communi
 
         public bool Verify()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return this._v.Verify();
         }
 
         #endregion
@@ -1079,6 +1080,15 @@ namespace C3.Communi
         {
             get { return this._uc.Unit; }
             set { this._uc.Unit = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        internal bool Verify()
+        {
+            return this._uc.Verify();
         }
     }
     #endregion //NumberParameter

@@ -22,10 +22,17 @@ namespace C3.Communi
             set { this.lblName.Text = value; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public object Value
         {
-            get { return this.txtValue.Text; }
-            set { this.txtValue.Text = value.ToString (); }
+            get
+            {
+                object obj = Convert.ChangeType(this.txtValue.Text.Trim(), this.ValueType);
+                return obj;
+            }
+            set { this.txtValue.Text = value.ToString(); }
         }
 
         /// <summary>
@@ -34,13 +41,46 @@ namespace C3.Communi
         public Type ValueType
         {
             get { return _valueType; }
-            set { _valueType = value; }
+            set 
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("ValueType");
+                }
+                _valueType = value; 
+            }
         } private Type _valueType;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Unit
         {
             get { return this.lblUnit.Text; }
             set { this.lblUnit.Text = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool Verify()
+        {
+            bool r = false;
+            string txt = this.txtValue.Text.Trim();
+            if (txt.Length > 0)
+            {
+                try
+                {
+                    object obj = Convert.ChangeType(txt, this.ValueType);
+                    r = true;
+                }
+                catch (Exception ex)
+                {
+                    NUnit.UiKit.UserMessage.DisplayFailure(ex.Message);
+                }
+            }
+            return r;
         }
     }
 }

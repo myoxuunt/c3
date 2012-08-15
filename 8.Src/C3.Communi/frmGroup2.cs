@@ -9,7 +9,7 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public partial class frmGroup2 : NUnit.UiKit.SettingsDialogBase 
+    public partial class frmGroup2 : NUnit.UiKit.SettingsDialogBase
     {
         public frmGroup2()
         {
@@ -105,6 +105,8 @@ namespace C3.Communi
         private void okButton_Click(object sender, EventArgs e)
         {
             bool b = true;
+            bool b2 = true;
+
             foreach (IController c in this.Controllers)
             {
                 if (!c.Verify())
@@ -114,14 +116,18 @@ namespace C3.Communi
                 }
             }
 
-            b = Verify2();
-
             if (b)
+            {
+                b2 = Verify2();
+            }
+
+            if (b && b2)
             {
                 foreach (IController c in this.Controllers)
                 {
                     c.UpdateModel();
                 }
+
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
