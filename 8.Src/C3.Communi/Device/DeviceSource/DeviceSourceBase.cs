@@ -41,7 +41,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public Int64 Address
+        public UInt64 Address
         {
             get
             {
@@ -51,7 +51,7 @@ namespace C3.Communi
             {
                 _address = value;
             }
-        } private Int64 _address;
+        } private UInt64 _address;
         #endregion //Address
 
         #region DevcieTypeName

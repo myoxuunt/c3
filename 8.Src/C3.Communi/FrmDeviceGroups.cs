@@ -72,6 +72,9 @@ namespace C3.Communi
         /// </summary>
         protected override bool  Verify2()
         {
+            // TODO: verify device address
+            //
+            return true;
             bool exist = this.Station.Devices.ExistAddress(this.Device.Address, this.Device);
             if (exist)
             {

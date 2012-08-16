@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xdgk.Communi.Interface", "X
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBSPU", "DBSPU\DBSPU.csproj", "{904B5D20-1465-478C-BC03-27822526C68F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XGDPU", "XGDPU\XGDPU.csproj", "{26F86801-ABBE-42E0-B494-2225CC1C46F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{904B5D20-1465-478C-BC03-27822526C68F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{904B5D20-1465-478C-BC03-27822526C68F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{904B5D20-1465-478C-BC03-27822526C68F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26F86801-ABBE-42E0-B494-2225CC1C46F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26F86801-ABBE-42E0-B494-2225CC1C46F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26F86801-ABBE-42E0-B494-2225CC1C46F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26F86801-ABBE-42E0-B494-2225CC1C46F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -22,7 +22,7 @@ namespace C3.Communi
             //TaskCollection tasks = TaskFactory.Create();
 
             //device.Tasks.Enqueue(tasks);
-            TaskFactory.Create(device);
+            //TaskFactory.Create(device);
             return device;
         }
 
@@ -48,7 +48,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        abstract public ITaskFactory TaskFactory { get; set; }
+        //abstract public ITaskFactory TaskFactory { get; set; }
 
         /// <summary>
         /// 
@@ -66,20 +66,20 @@ namespace C3.Communi
             this._configPath = configPath;
         }
         string _configPath;
-        public override ITaskFactory TaskFactory
-        {
-            get
-            {
-                if (_taskFactory == null)
-                {
-                    _taskFactory = new XmlTaskFactory(_configPath);
-                }
-                return _taskFactory;
-            }
-            set
-            {
-            }
-        } private ITaskFactory _taskFactory;
+        //public override ITaskFactory TaskFactory
+        //{
+        //    get
+        //    {
+        //        if (_taskFactory == null)
+        //        {
+        //            _taskFactory = new XmlTaskFactory(_configPath);
+        //        }
+        //        return _taskFactory;
+        //    }
+        //    set
+        //    {
+        //    }
+        //} private ITaskFactory _taskFactory;
     }
 
 }

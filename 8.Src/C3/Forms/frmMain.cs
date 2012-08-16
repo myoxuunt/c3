@@ -270,6 +270,8 @@ namespace C3
                 DialogResult dr = ui.Edit(d);
                 if (dr == DialogResult.OK)
                 {
+                    d.Dpu.DevicePersister.Update(d);
+
                     deviceNode.RefreshDeviceTreeNode();
                 }
             }
@@ -418,6 +420,8 @@ namespace C3
                 IStation station = selected.Station;
                 station.Devices.Remove(selected);
 
+
+                selected.Dpu.DevicePersister.Delete(selected);
 
                 DeviceTreeNode deviceNode = (DeviceTreeNode)selected.Tag;
                 deviceNode.Remove();
