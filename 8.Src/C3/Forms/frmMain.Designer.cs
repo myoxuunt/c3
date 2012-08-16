@@ -168,6 +168,7 @@
             this.mnuStationDelete.Name = "mnuStationDelete";
             this.mnuStationDelete.Size = new System.Drawing.Size(152, 22);
             this.mnuStationDelete.Text = "删除(&D)";
+            this.mnuStationDelete.Click += new System.EventHandler(this.mnuStationDelete_Click);
             // 
             // mnuDevice
             // 

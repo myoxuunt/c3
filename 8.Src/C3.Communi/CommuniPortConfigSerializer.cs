@@ -6,6 +6,9 @@ using System.Xml.Serialization;
 
 namespace C3.Communi
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CommuniPortConfigSerializer
     {
         [XmlInclude(typeof(NullCommuniPortConfig))]
@@ -52,6 +55,7 @@ namespace C3.Communi
         static public ICommuniPortConfig Deserialize(string s)
         {
             XmlSerializer er = new XmlSerializer(typeof(Wrapper));
+            
             StringReader sr = new StringReader(s);
             object obj = null;
             try

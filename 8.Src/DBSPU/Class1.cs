@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
 using C3.Communi;
@@ -93,7 +94,11 @@ namespace DBSPU
 
         public override void OnAdd(IStation station)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            Station st = (Station)station;
+            string xml = CommuniPortConfigSerializer.Serialize(st.CommuniPortConfig);
+            int id = DBI.Instance.InsertStation(st.Name, xml);
+            st.Guid = GuidHelper.Create((uint)id);
         }
 
         public override void OnUpdate(IStation station)
@@ -108,7 +113,11 @@ namespace DBSPU
 
         public override void OnDelete(IStation station)
         {
-            throw new NotImplementedException();
+            Station st = (Station)station;
+            int id = GuidHelper.ConvertToInt32(st.Guid);
+            Debug.Assert(id != 0);
+
+            DBI.Instance.DeleteStation(id);
         }
     }
 
@@ -182,6 +191,37 @@ namespace DBSPU
                 id, name, xml);
             Instance.ExecuteScalar(s);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="xml"></param>
+        /// <returns></returns>
+        internal int InsertStation(string name, string xml)
+        {
+            string s = string.Format (
+            "insert into tblStation(name, CommuniTypeContent) values('{0}','{1}');select @@identity;",
+
+            name, xml);
+
+            object obj = ExecuteScalar(s);
+            return Convert.ToInt32(obj);
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        internal void DeleteStation(int id)
+        {
+            string s = string.Format(
+                "delete from tblStation where StationID = {0}",
+                id);
+
+            ExecuteScalar(s);
+        }
     }
 
     /// <summary>
@@ -197,7 +237,7 @@ namespace DBSPU
             this.StationPersister = new StationPersister();
             this.StationSourceProvider = new StationSourceProvider();
             this.StationUI = new StationUI(this);
-            this.StationType = StationTypeManager.AddStationType("stationname", "stationtext", typeof(Station));
+            this.StationType = StationTypeManager.AddStationType("stationname", "DBStation", typeof(Station));
         }
     }
 }

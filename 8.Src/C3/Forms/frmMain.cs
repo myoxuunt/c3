@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using C3.Communi;
 
@@ -117,20 +118,6 @@ namespace C3
         } private ControllerManager _controllerManager;
         #endregion //ControllerManager
 
-
-        //public ViewerWrapper ViewerWrapper
-        //{
-        //    get
-        //    {
-        //        if (_viewerWrapper == null)
-        //        {
-        //            _viewerWrapper = new ViewerWrapper();
-        //            this.sc1.Panel2.Controls.Add(_viewerWrapper.UCViewerWrapper);
-        //        }
-        //        return _viewerWrapper;
-        //    }
-        //} private ViewerWrapper _viewerWrapper;
-
         #region App
         /// <summary>
         /// 
@@ -144,10 +131,12 @@ namespace C3
         }
         #endregion //App
 
+        #region Soft
         private Soft Soft
         {
             get { return this.App.Soft; }
         }
+        #endregion //Soft
 
         #region frmMain_Load
         private void frmMain_Load(object sender, EventArgs e)
@@ -258,7 +247,7 @@ namespace C3
             GroupCollection gs = new GroupCollection();
             CommuniPortConfigParameter p = new CommuniPortConfigParameter(
                 "nonennnnn",
-                new SerialCommuniPortConfig (
+                new SerialCommuniPortConfig(
                 new SerialPortSetting("com1",
                     9600, System.IO.Ports.Parity.Even,
                     8, System.IO.Ports.StopBits.None)),
@@ -409,7 +398,7 @@ namespace C3
             if (dpu == null)
             {
                 throw new InvalidOperationException(
-                    string.Format ("not find dpu by device type '{0}'", deviceType ));
+                    string.Format("not find dpu by device type '{0}'", deviceType));
             }
             return dpu.DeviceUI;
         }
@@ -461,7 +450,12 @@ namespace C3
                 DialogResult dr2 = stationUI.Add(stationType, stations, out newStation);
                 if (dr2 == DialogResult.OK)
                 {
+                    Debug.Assert(newStation.StationType != null);
+                    Debug.Assert(newStation.Spu != null);
+                    Debug.Assert(newStation.Guid != null);
+
                     stations.Add(newStation);
+                    spu.StationPersister.Add(newStation);
 
                     StationTreeNode stationNode = new StationTreeNode(newStation);
                     this.HardwareTreeView.Nodes.Add(stationNode);
@@ -470,6 +464,7 @@ namespace C3
         }
         #endregion //mnuStationAdd_Click
 
+        #region mnuStationEdit_Click
         /// <summary>
         /// 
         /// </summary>
@@ -477,25 +472,6 @@ namespace C3
         /// <param name="e"></param>
         private void mnuStationEdit_Click(object sender, EventArgs e)
         {
-            //C3.Communi.frmGroup2 f2 = new C3.Communi.frmGroup2();
-            ////C3.Communi.Group g = new C3.Communi.Group();
-            ////g.Parameters.Add ( new C3.Communi.StringParameter ("aaa","vvvv",12));
-            ////g.Parameters.Add ( new C3.Communi.StringParameter ("a","12vvvv",12));
-            ////g.Parameters.Add ( new C3.Communi.StringParameter ("ba","vaaavvv",12));
-
-            ////C3.Communi.GroupCollection gs = new C3.Communi.GroupCollection();
-            ////gs.Add (g);
-
-            //IStation stationttt = GetSelectedStation(true);
-            //f2.Groups = stationttt.Groups;
-            //DialogResult dr = f2.ShowDialog();
-            //if (dr == DialogResult.OK)
-            //    {
-            //        StationTreeNode stationNode = (StationTreeNode)stationttt.Tag;
-            //        stationNode.RefreshStationTreeNode();
-            //    }
-            //return;
-
             IStation station = GetSelectedStation(true);
             if (station != null)
             {
@@ -510,5 +486,28 @@ namespace C3
                 }
             }
         }
+        #endregion //mnuStationEdit_Click
+
+        #region mnuStationDelete_Click
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuStationDelete_Click(object sender, EventArgs e)
+        {
+            IStation station = GetSelectedStation(true);
+            if (station != null)
+            {
+                DialogResult dr = NUnit.UiKit.UserMessage.Ask("delete?");
+                if (dr == DialogResult.Yes)
+                {
+                    station.Spu.StationPersister.Delete(station);
+                    StationTreeNode stationNode = station.Tag as StationTreeNode;
+                    stationNode.Remove();
+                }
+            }
+        }
+        #endregion //mnuStationDelete_Click
     }
 }
