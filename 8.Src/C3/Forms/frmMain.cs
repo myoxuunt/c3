@@ -25,7 +25,6 @@ namespace C3
         } private HardwareTreeView _hardwareTreeView;
         #endregion //HardwareTreeView
 
-
         #region UCTaskViewer
         /// <summary>
         /// 
@@ -43,7 +42,6 @@ namespace C3
             }
         } private UCTaskViewer _uCTaskViewer;
         #endregion //UCTaskViewer
-
 
         #region FrmMain
         public FrmMain()
@@ -417,18 +415,22 @@ namespace C3
             IDevice selected = GetSelectedDevice(true);
             if (selected != null)
             {
-                IStation station = selected.Station;
-                station.Devices.Remove(selected);
+                DialogResult dr = NUnit.UiKit.UserMessage.Ask("delete ?");
+                if (dr == DialogResult.Yes)
+                {
+                    IStation station = selected.Station;
+                    station.Devices.Remove(selected);
 
 
-                selected.Dpu.DevicePersister.Delete(selected);
+                    selected.Dpu.DevicePersister.Delete(selected);
 
-                DeviceTreeNode deviceNode = (DeviceTreeNode)selected.Tag;
-                deviceNode.Remove();
+                    DeviceTreeNode deviceNode = (DeviceTreeNode)selected.Tag;
+                    deviceNode.Remove();
 
-                //
-                //
-                this.HardwareTreeView.SelectedNode = (StationTreeNode)station.Tag;
+                    //
+                    //
+                    this.HardwareTreeView.SelectedNode = (StationTreeNode)station.Tag;
+                }
             }
         }
         #endregion //mnuDeviceDelete_Click
