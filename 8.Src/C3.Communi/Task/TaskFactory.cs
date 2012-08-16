@@ -6,6 +6,7 @@ namespace C3.Communi
 {
     public interface ITaskFactory
     {
+        IDPU Dpu { get; set; }
         TaskCollection Create(IDevice device);
     }
 }

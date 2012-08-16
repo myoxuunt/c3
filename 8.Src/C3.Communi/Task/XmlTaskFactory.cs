@@ -12,8 +12,9 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="taskConfigPath"></param>
-        public XmlTaskFactory(string taskConfigPath)
+        public XmlTaskFactory(IDPU dpu, string taskConfigPath)
         {
+            this.Dpu = dpu;
             this.TaskConfigPath = taskConfigPath;
         }
 
@@ -83,20 +84,27 @@ namespace C3.Communi
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public IOperaFactory OperaFactory
+        private IOperaFactory OperaFactory
         {
-            get {
-                if (_operaFactory == null)
-                {
-                    string dir = DeviceDefineFileName;
-                    _operaFactory = new XmlOperaFactory(dir);
-                }
-                return _operaFactory; }
-            set { _operaFactory = value; }
-        } private IOperaFactory _operaFactory;
+            get
+            {
+                return this.Dpu.OperaFactory;
+            }
+        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public IOperaFactory OperaFactory
+        //{
+        //    get {
+        //        if (_operaFactory == null)
+        //        {
+        //            string dir = DeviceDefineFileName;
+        //            _operaFactory = new XmlOperaFactory(dir);
+        //        }
+        //        return _operaFactory; }
+        //    set { _operaFactory = value; }
+        //} private IOperaFactory _operaFactory;
 
         /// <summary>
         /// 
@@ -109,6 +117,26 @@ namespace C3.Communi
             }
         }
 
+        #region Dpu
+        /// <summary>
+        /// 
+        /// </summary>
+        public IDPU Dpu
+        {
+            get
+            {
+                return _dpu;
+            }
+            set
+            {
+                if (value==null)
+                {
+                    throw new ArgumentNullException("Dpu");
+                }
+                _dpu = value;
+            }
+        } private IDPU _dpu;
+        #endregion //Dpu
     }
 
 }

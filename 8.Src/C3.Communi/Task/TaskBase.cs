@@ -339,6 +339,7 @@ namespace C3.Communi
             {
                 OnBegining(EventArgs.Empty);
 
+                
                 byte[] bytes = this.Opera.CreateSendBytes(this.Device);
 
                 this.LastSendBytes = bytes;
@@ -349,6 +350,7 @@ namespace C3.Communi
                 bool success = cp.Write(bytes);
                 if (success)
                 {
+                    cp.Occupy(this.Timeout);
                     this.SetStatus(TaskStatus.Executing);
                 }
                 else

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace C3.Communi
 {
-    public class DPUBase : IDPU 
+    public class DPUBase : IDPU
     {
 
         #region Name
@@ -124,7 +124,7 @@ namespace C3.Communi
         {
             get
             {
-                if (_deviceUI ==null)
+                if (_deviceUI == null)
                 {
                     _deviceUI = new DeviceUI(this);
                 }
@@ -150,9 +150,34 @@ namespace C3.Communi
             }
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("TaskFactory");
+                }
                 _taskFactory = value;
             }
         } private ITaskFactory _taskFactory;
-        #endregion
+        #endregion //TaskFactory
+
+        #region OperaFactory
+        /// <summary>
+        /// 
+        /// </summary>
+        public IOperaFactory OperaFactory
+        {
+            get
+            {
+                return _operaFactory;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("OperaFactory");
+                }
+                _operaFactory = value;
+            }
+        } private IOperaFactory _operaFactory;
+        #endregion //OperaFactory
     }
 }

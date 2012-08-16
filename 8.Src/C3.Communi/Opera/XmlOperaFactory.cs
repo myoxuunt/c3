@@ -12,7 +12,8 @@ namespace C3.Communi
         /// <param name="defineDirectory"></param>
         public XmlOperaFactory(string defineDirectory)
         {
-            this.DefineDirectory = defineDirectory;
+            string path = System.IO.Path.Combine(defineDirectory, "DeviceDefine");
+            this.DefineDirectory = path;
         }
 
         /// <summary>

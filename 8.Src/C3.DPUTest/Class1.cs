@@ -32,7 +32,9 @@ namespace C3.DPUTest
             this.DevicePersister = new TDevicePersister();
             this.DeviceSourceProvider = new TDeviceSourceProvider();
             this.Processor = new Processor();
-            this.TaskFactory = new XmlTaskFactory(
+            this.TaskFactory = new XmlTaskFactory(this,
+                PathUtils.GetAssemblyDirectory (typeof(TDevice).Assembly));
+            this.OperaFactory = new XmlOperaFactory (
                 PathUtils.GetAssemblyDirectory (typeof(TDevice).Assembly));
         }
     }

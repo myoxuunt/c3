@@ -165,6 +165,10 @@ namespace C3.Communi
                 {
                     IDeviceFactory factory = dpu.DeviceFactory;
                     IDevice device = factory.Create(deviceSource);
+
+                    ITaskFactory taskFactory = dpu.TaskFactory;
+                    taskFactory.Create(device);
+
                     device.DeviceSource = deviceSource;
 
                     // TODO: find station by device
@@ -243,6 +247,8 @@ namespace C3.Communi
             VerifyNotNull(dpu.DeviceType, "dpu.DeviceType");
             VerifyNotNull(dpu.Processor, "dpu.Processor");
             VerifyNotNull(dpu.DeviceUI, "dpu.DeviceUI");
+            VerifyNotNull(dpu.OperaFactory, "dpu.OperaFactory");
+            VerifyNotNull(dpu.TaskFactory, "dpu.TaskFactory");
         }
         #endregion //VerifyDPU
 
