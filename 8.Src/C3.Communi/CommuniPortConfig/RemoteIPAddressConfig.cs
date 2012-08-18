@@ -97,7 +97,23 @@ namespace C3.Communi
             set { _remoteIPAddressString = value; }
         } private string _remoteIPAddressString;
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public uint TimeoutMilliSecond
+        {
+            get
+            {
+                return _timeoutMillsSecond;
+            }
+            set
+            {
+                TimeoutDefauleValues.Verify(value);
+                this._timeoutMillsSecond = value;
+            }
+        } private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
+
+
     }
-
-
 }

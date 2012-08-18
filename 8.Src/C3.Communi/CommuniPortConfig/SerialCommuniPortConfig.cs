@@ -6,13 +6,44 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
+    internal class TimeoutDefauleValues
+    {
+        private TimeoutDefauleValues()
+        {
+        }
+
+        public const uint
+            MinTimeoutMillsSencond = 100,
+            MaxTimeoutMillsSecond = 60 * 1000,
+            DefaultTimeoutMillsSecond = 10 * 1000;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="timeoutValue"></param>
+        static public void Verify(uint timeoutValue)
+        {
+            if( timeoutValue < MinTimeoutMillsSencond || timeoutValue > MaxTimeoutMillsSecond )
+            {
+                throw new ArgumentOutOfRangeException("Timeout value out of range");
+            }
+        }
+    }
+
     public class SerialCommuniPortConfig : ICommuniPortConfig
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
         public SerialCommuniPortConfig()
         {
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="setting"></param>
         public SerialCommuniPortConfig(SerialPortSetting setting)
         {
             this.SerialPortSetting = setting;
@@ -76,6 +107,25 @@ namespace C3.Communi
                 _serialPortSetting = value;
             }
         } private SerialPortSetting _serialPortSetting;
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public uint TimeoutMilliSecond
+        {
+            get
+            {
+                return _timeoutMillsSecond;
+            }
+            set
+            {
+                TimeoutDefauleValues.Verify(value);
+                this._timeoutMillsSecond = value;
+            }
+        } private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
+
     }
 
 }

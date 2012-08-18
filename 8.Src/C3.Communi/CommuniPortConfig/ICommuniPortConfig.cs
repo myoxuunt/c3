@@ -15,6 +15,11 @@ namespace C3.Communi
         /// <param name="cp"></param>
         /// <returns></returns>
         bool IsMatch(ICommuniPort cp);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        UInt32 TimeoutMilliSecond { get; set; }
     }
 
 }

@@ -53,5 +53,21 @@ namespace C3.Communi
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public uint TimeoutMilliSecond
+        {
+            get
+            {
+                return _timeoutMillsSecond;
+            }
+            set
+            {
+                TimeoutDefauleValues.Verify(value);
+                this._timeoutMillsSecond = value;
+            }
+        } private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
+
     }
 }

@@ -123,13 +123,26 @@ namespace C3.Communi
         private void rbNull_Click(object sender, EventArgs e)
         {
             VisibleSetting(null);
+            VisibleTimeout(false);
         }
         #endregion //rbNull_Click
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b"></param>
+        private void VisibleTimeout(bool b)
+        {
+            this.lblTimeout.Visible = b;
+            this.numTimeout.Visible = b;
+            this.lblTimeoutUnit.Visible = b;
+        }
 
         #region rbSerialPort_Click
         private void rbSerialPort_Click(object sender, EventArgs e)
         {
             VisibleSetting(this.ucSerialPortSetting1);
+            VisibleTimeout(true);
         }
         #endregion //rbSerialPort_Click
 
@@ -137,8 +150,14 @@ namespace C3.Communi
         private void rbSocket_Click(object sender, EventArgs e)
         {
             VisibleSetting(this.ucNetSetting1);
+            VisibleTimeout(true);
         }
         #endregion //rbSocket_Click
+
+        private uint GetTimeoutValue()
+        {
+            return (uint)(this.numTimeout.Value * 1000);
+        }
 
         #region IParameterUIControl 成员
         public ICommuniPortConfig CommuniPortConfig
@@ -149,14 +168,17 @@ namespace C3.Communi
                 if (this.rbNull.Checked)
                 {
                     r = NullCommuniPortConfig.Default;
+                    r.TimeoutMilliSecond = GetTimeoutValue();
                 }
                 if (this.rbSerialPort.Checked)
                 {
                     r = new SerialCommuniPortConfig(this.ucSerialPortSetting1.SerialPortSetting);
+                    r.TimeoutMilliSecond = GetTimeoutValue();
                 }
                 if (this.rbSocket.Checked)
                 {
                     r = this.ucNetSetting1.CommuniPortConfig;
+                    r.TimeoutMilliSecond = GetTimeoutValue();
                 }
                 Debug.Assert(r != null,"r == null");
                 return r;
@@ -164,6 +186,8 @@ namespace C3.Communi
             set
             {
                 ICommuniPortConfig communiPortConfig = value;
+                this.numTimeout.Value = communiPortConfig.TimeoutMilliSecond / 1000;
+
                 if (communiPortConfig is INetCommuniPortConfig)
                 {
                     this.ucNetSetting1.CommuniPortConfig = communiPortConfig;
@@ -171,12 +195,14 @@ namespace C3.Communi
                     //CheckRadio ( this.rbSocket );
                     CheckRadio(this.rbSocket);
                     VisibleSetting(this.ucNetSetting1);
+                    VisibleTimeout(true);
                     //this._currentUIControl = this.ucNetSetting1;
                 }
                 else if (communiPortConfig is NullCommuniPortConfig)
                 {
                     CheckRadio(this.rbNull);
                     VisibleSetting(null);
+                    VisibleTimeout(false);
                     //this.ucNetSetting1.CommuniPortConfig = communiPortConfig;
                     //this._currentUIControl = null;
                 }
@@ -184,6 +210,7 @@ namespace C3.Communi
                 {
                     CheckRadio(this.rbSerialPort);
                     VisibleSetting(this.ucSerialPortSetting1);
+                    VisibleTimeout(true);
                     //this._currentUIControl = this.ucSerialPortSetting1;
                     this.ucSerialPortSetting1.SerialPortSetting = ((SerialCommuniPortConfig)communiPortConfig).SerialPortSetting;
                 }
