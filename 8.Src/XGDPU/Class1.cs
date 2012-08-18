@@ -332,23 +332,14 @@ namespace XGDPU
         /// <param name="parseResult"></param>
         private void ProcessXGUploadRecordResult(XGDevice xgdevice, IParseResult pr)
         {
-            //xgdevice.Dpu.TaskFactory
             ProcessXGDeviceRecordHelp(xgdevice, pr, false);
 
-            //CommuniSoft soft = CZGRApp.Default.Soft;
-            //Opera op = soft.OperaFactory.Create(
-            //    DeviceTypes.XGDevice, XGOperaNames.RemoveUpload);
             IOperaFactory operaFactory = xgdevice.Dpu.OperaFactory;
-            ITaskFactory taskFactory = xgdevice.Dpu.TaskFactory;
-            //Opera op = xgdevice.DeviceDefine.CreateOpera(XGOperaNames.RemoveUpload);
-
             IOpera op = operaFactory.Create(xgdevice.GetType().Name, XGOperaNames.RemoveUpload);
-            //taskFactory.Create (
+            //ITaskFactory taskFactory = xgdevice.Dpu.TaskFactory;
 
-            // TODO: 
-            // timeout value
-            //
-            Task task = new Task(xgdevice, op, new ImmediateStrategy(), TimeSpan.FromSeconds (10));
+            TimeSpan tsTimeout = TimeSpan.FromMilliseconds(xgdevice.Station.CommuniPortConfig.TimeoutMilliSecond);
+            Task task = new Task(xgdevice, op, new ImmediateStrategy(), tsTimeout);
 
             xgdevice.TaskManager.Tasks.Enqueue(task);
 
