@@ -54,6 +54,22 @@ namespace C3.Communi
             }
             set { _operaDefines = value; }
         } private OperaDefineCollection _operaDefines;
+
+        #region IOperaFactory ≥…‘±
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public UploadParserCollection CreateUploadParsers()
+        {
+            UploadParserCollection uploadParsers = new UploadParserCollection();
+
+            return uploadParsers;
+        }
+
+        #endregion
     }
 
 }

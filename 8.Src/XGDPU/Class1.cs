@@ -253,6 +253,28 @@ namespace XGDPU
 
     internal class XGDeviceProcessor : TaskProcessorBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <param name="bs"></param>
+        /// <returns></returns>
+        public override IUploadParseResult OnProcessUpload(IDevice device, byte[] bs)
+        {
+            XmlOperaFactory f = device.Dpu.OperaFactory as XmlOperaFactory;
+            //OperaDefineCollection operaDefines = f.OperaDefines;
+            //foreach (OperaDefine od in operaDefines)
+            //{
+            //    od.CreateOpera
+            //}
+            //device.UploadParserCollection.Parse(bs);
+
+
+            //XGDevice d;
+            //return UploadParseResult.CreateFailUploadParseResult(bs);
+            return null;
+        }
+
         public override void OnProcess(ITask task, IParseResult pr)
         {
             if (pr.IsSuccess)

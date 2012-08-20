@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IO.Ports ;
+using System.IO.Ports;
 using System.Collections.Generic;
 using System.Text;
 using Xdgk.Common;
@@ -92,26 +92,26 @@ namespace C3.Communi
 
         }
 
-#region SerialPort
-/// <summary>
-/// 
-/// </summary>
-public SerialPort SerialPort
-{
-	get
-	{
-		return _serialPort;
-	}
-	set
-	{
-        if (value == null)
-		{
-            throw new ArgumentNullException("SerialPort");
-		}
-		_serialPort = value;
-	}
-} private SerialPort _serialPort;
-#endregion //SerialPort
+        #region SerialPort
+        /// <summary>
+        /// 
+        /// </summary>
+        public SerialPort SerialPort
+        {
+            get
+            {
+                return _serialPort;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("SerialPort");
+                }
+                _serialPort = value;
+            }
+        } private SerialPort _serialPort;
+        #endregion //SerialPort
 
         #region ICommuniPort 成员
 

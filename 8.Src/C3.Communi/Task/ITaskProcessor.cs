@@ -7,5 +7,6 @@ namespace C3.Communi
     public interface ITaskProcessor
     {
         void Process( ITask task, IParseResult pr);
+        IUploadParseResult ProcessUpload(IDevice device, byte[] bs); 
     }
 }

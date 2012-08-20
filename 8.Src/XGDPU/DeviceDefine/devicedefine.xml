@@ -489,5 +489,37 @@
 
       <receivepart length="0"/>
     </operadefine>
+
+    <uploaddefine name="recordupload">
+      <receivepart length="25">
+        <datafield name="df1"
+            begin="0"
+            length="3"
+            bytes="21 58 44"
+            matchcheck="true" />
+
+        <datafield name="df2"
+            begin="4"
+            length="3"
+            bytes="B0 0A 10"
+            matchcheck="true"/>
+
+        <datafield name="DT"
+            begin="7"
+            length="8"
+            converter="Xdgk.Communi.XGDateTimeConverter"/>
+
+        <datafield name="cardsn"
+            begin="15"
+            length="8"
+            converter="Xdgk.Communi.CardSNConverter" />
+
+        <datafield name="crc"
+            begin="23"
+            length="2"
+            crc="true"/>
+        <crcer name="Xdgk.Communi.CRC16"/>
+      </receivepart>
+    </uploaddefine>
   </devicedefine>
 </devicedefines>

@@ -213,6 +213,11 @@ namespace C3.DPUTest
                 DateTime.Now , task.Opera.Name , pr.ToString ());
             Console.WriteLine(s);           
         }
+
+        public override IUploadParseResult OnProcessUpload(IDevice device, byte[] bs)
+        {
+            return UploadParseResult.CreateFailUploadParseResult(bs);
+        }
     }
 
 

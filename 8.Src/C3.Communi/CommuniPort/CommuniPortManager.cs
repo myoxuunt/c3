@@ -182,13 +182,49 @@ namespace C3.Communi
 
             // register cp event
             //
-            //cp.Received += new EventHandler(cp_Received);
+            cp.Received += new EventHandler(cp_Received);
             cp.Determined += new EventHandler(cp_Determined);
             cp.Closed += new EventHandler(cp_Closed);
 
             StationCommuniPortBinder.Bind(cp, this.Soft.Hardware);
         }
         #endregion //Add
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cp_Received(object sender, EventArgs e)
+        {
+            ICommuniPort cp = (ICommuniPort)sender;
+            byte[] bs = cp.Read();
+
+            // TODO: cp.stations
+            //
+            StationCollection stations = new StationCollection();
+            foreach (IStation st in this.Soft.Hardware.Stations)
+            {
+                if (st.CommuniPortConfig.IsMatch(cp))
+                {
+                    stations.Add(st);
+                }
+            }
+
+            foreach (IStation st in stations)
+            {
+                foreach (IDevice d in st.Devices)
+                {
+                    if (bs.Length > 0)
+                    {
+                        ITaskProcessor processor = d.Dpu.Processor;
+                        IUploadParseResult pr = processor.ProcessUpload(d, bs);
+                        bs = pr.Remain;
+                    }
+                }
+            }
+
+        }
 
         #region Remove
         /// <summary>
