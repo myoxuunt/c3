@@ -204,6 +204,7 @@
         <datafield name="date"
             begin="7"
             length="3"
+            lazy="true"
             converter="Xdgk.Communi.XGDateConverter"/>
 
         <datafield name="crc"
@@ -260,6 +261,7 @@
         <datafield name="time"
             begin="7"
             length="3"
+            lazy="true"
             converter="Xdgk.Communi.XGTimeConverter"/>
 
         <datafield name="crc"

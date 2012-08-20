@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic ;
 using System.Diagnostics;
 using Xdgk.Communi.Interface;
 
@@ -40,6 +42,11 @@ namespace C3.Communi
         /// 
         /// </summary>
         Ignore = 0x20,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Lazy = 0x40,
     }
     #endregion //
 
@@ -322,6 +329,26 @@ namespace C3.Communi
         }
         #endregion //IsAddress
 
+        #region IsLazy
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsLazy
+        {
+            get { return (this.DataFieldOption & DataFieldOption.Lazy) > 0; }
+            set
+            {
+                if (value)
+                {
+                    this.DataFieldOption |= DataFieldOption.Lazy;
+                }
+                else
+                {
+                    this.DataFieldOption &= (~DataFieldOption.Lazy);
+                }
+            }
+        }
+        #endregion //IsLazy
 
         #region IsIgnore
         /// <summary>
@@ -342,8 +369,6 @@ namespace C3.Communi
             }
         }
         #endregion //IsIgnore
-
-
 
         #region IsMatch
         /// <summary>
@@ -453,4 +478,128 @@ namespace C3.Communi
         }
     }
     #endregion //
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IDataFieldValueProvider
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        object GetValue(string name);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DataFieldValueProviderCollection : Xdgk.Common.Collection<IDataFieldValueProvider>
+    {
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DataFieldValueProvider : IDataFieldValueProvider 
+    {
+        public DataFieldValueProvider(IDevice device)
+        {
+            if (device==null)
+            {
+                throw new ArgumentNullException("device");
+            }
+            _device = device;
+        }
+
+        //public KeyValueCollection KeyValues
+        //{
+        //    get
+        //    {
+        //        return _keyValues;
+        //    }
+        //} private KeyValueCollection _keyValues = new KeyValueCollection();
+        private IDevice _device;
+
+        #region GetValue
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public object GetValue(string name)
+        {
+            object obj = _device.GetLazyDataFieldValue(name);
+            if (obj == null)
+            {
+                throw new ArgumentException(string.Format("not find value by name '{0}'", name));
+            }
+            return obj;
+            //object value = kv.Value;
+            //if (value is GetValueDelegate)
+            //{
+            //    GetValueDelegate d = (GetValueDelegate)value;
+            //    return d();
+            //}
+            //else
+            //{
+            //    return value;
+            //}
+        }
+        #endregion //GetValue
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public delegate object GetValueDelegate();
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class DelegateDataFieldValueProvider : IDataFieldValueProvider
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        private KeyValueCollection _keyValues = new KeyValueCollection();
+
+        public void AddDelegate(string name, GetValueDelegate d)
+        {
+            if (d == null)
+            {
+                throw new ArgumentNullException("d");
+            }
+
+            KeyValue kv = _keyValues.Find(name);
+            if (kv != null)
+            {
+                throw new ArgumentException(string.Format("exist name '{0}'", name));
+            }
+
+            _keyValues.Add(new KeyValue(name, d));
+        }
+
+        #region GetValue
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public object GetValue(string name)
+        {
+            KeyValue kv = this._keyValues.Find(name);
+            if (kv == null)
+            {
+                throw new ArgumentException(string.Format("not find value by key '{0}'", name));
+            }
+
+            GetValueDelegate d = (GetValueDelegate)kv.Value;
+            return d();
+        }
+
+        #endregion //GetValue
+    }
 }

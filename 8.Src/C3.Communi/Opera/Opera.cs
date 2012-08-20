@@ -149,7 +149,10 @@ namespace C3.Communi
             //TODO: address string 
             //
             this.SendPart["Address"] = device.Address;
-            byte[] bytes = this.SendPart.ToBytes();
+
+            DataFieldValueProvider valueProvider = new DataFieldValueProvider(device);
+            byte[] bytes = this.SendPart.ToBytes(valueProvider);
+
             return bytes;
         }
         #endregion //OnCreateSendBytes
@@ -186,5 +189,20 @@ namespace C3.Communi
             return pr;
         }
         #endregion //OnParseReceivedBytes
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public DataFieldValueProvider DataFieldValueProvider
+        //{
+        //    get 
+        //    {
+        //        if (_dataFieldValueProvider == null)
+        //        {
+        //            _dataFieldValueProvider = new DataFieldValueProvider();
+        //        }
+        //        return _dataFieldValueProvider;
+        //    }
+        //} private DataFieldValueProvider _dataFieldValueProvider;
     }
 }

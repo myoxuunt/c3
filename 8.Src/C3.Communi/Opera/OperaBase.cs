@@ -1,4 +1,3 @@
-
 using System;
 using Xdgk.Common;
 
@@ -7,7 +6,7 @@ namespace C3.Communi
     abstract public class OperaBase : IOpera
     {
 
-
+        #region CreateSendBytes
         /// <summary>
         /// 
         /// </summary>
@@ -19,14 +18,18 @@ namespace C3.Communi
 
             return bytes;
         }
+        #endregion //CreateSendBytes
 
+        #region OnCreateSendBytes
         /// <summary>
         /// 
         /// </summary>
         /// <param name="device"></param>
         /// <returns></returns>
         abstract public byte[] OnCreateSendBytes(IDevice device);
+        #endregion //OnCreateSendBytes
 
+        #region ParseReceivedBytes
         /// <summary>
         /// 
         /// </summary>
@@ -38,7 +41,9 @@ namespace C3.Communi
             IParseResult pr = OnParseReceivedBytes(device, received);
             return pr;
         }
+        #endregion //ParseReceivedBytes
 
+        #region OnParseReceivedBytes
         /// <summary>
         /// 
         /// </summary>
@@ -46,9 +51,9 @@ namespace C3.Communi
         /// <param name="received"></param>
         /// <returns></returns>
         abstract public IParseResult OnParseReceivedBytes(IDevice device, byte[] received);
+        #endregion //OnParseReceivedBytes
 
-        #region IOpera ≥…‘±
-
+        #region Name
         /// <summary>
         /// 
         /// </summary>
@@ -67,7 +72,9 @@ namespace C3.Communi
                 _name = value;
             }
         } private string _name;
+        #endregion //Name
 
+        #region Text
         /// <summary>
         /// 
         /// </summary>
@@ -86,8 +93,8 @@ namespace C3.Communi
                 _text = value;
             }
         } private string _text;
+        #endregion //Text
 
-        #endregion
     }
 
 }

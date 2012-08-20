@@ -35,7 +35,8 @@ namespace C3.Communi
             MatchCheck = "matchcheck",
             ReceivePartDataLength = "length",
             ReceivePartName = "name",
-            CRCBegin = "CRCBegin";
+            CRCBegin = "CRCBegin",
+            Lazy = "lazy";
     }
 
 }

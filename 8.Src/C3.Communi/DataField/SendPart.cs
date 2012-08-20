@@ -89,9 +89,14 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <returns></returns>
-        public byte[] ToBytes()
+        public byte[] ToBytes(DataFieldValueProvider valueProvider)
         {
-            return this.DataFieldManager.ToBytes();
+            if (valueProvider == null)
+            {
+                throw new ArgumentNullException("valueProvider");
+            }
+
+            return this.DataFieldManager.ToBytes(valueProvider);
         }
         #endregion //ToBytes
 

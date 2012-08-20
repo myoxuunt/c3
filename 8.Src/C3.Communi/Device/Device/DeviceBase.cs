@@ -428,5 +428,20 @@ namespace C3.Communi
             }
         } private GroupCollection _parameterGroups;
 
+
+        #region IDevice ≥…‘±
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        virtual public object GetLazyDataFieldValue(string name)
+        {
+            return null;
+        }
+
+        #endregion
     }
 }

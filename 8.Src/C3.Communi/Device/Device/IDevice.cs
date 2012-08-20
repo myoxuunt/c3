@@ -40,6 +40,8 @@ namespace C3.Communi
         //ParameterCollection Parameters { get; /*set;*/ }
         GroupCollection Groups { get; }
 
+
+        object GetLazyDataFieldValue(string name);
     }
 
 }

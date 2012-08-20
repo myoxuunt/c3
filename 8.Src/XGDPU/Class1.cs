@@ -236,6 +236,19 @@ namespace XGDPU
 
     internal class XGDevice : DeviceBase
     {
+        public override object GetLazyDataFieldValue(string name)
+        {
+            if (StringHelper.Equal(name, "date"))
+            {
+                return DateTime.Now.Date;
+            }
+            else if (StringHelper.Equal(name, "time"))
+            {
+                return DateTime.Now.TimeOfDay;
+            }
+
+            return base.GetLazyDataFieldValue(name);
+        }
     }
 
     internal class XGDeviceProcessor : TaskProcessorBase

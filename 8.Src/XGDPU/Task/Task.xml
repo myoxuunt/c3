@@ -8,4 +8,22 @@
       <value>00:10:30</value>
     </cyclestrategy>
   </task>
+  
+  <task>
+    <devicetype>xgdevice</devicetype>
+    <operaname>writedate</operaname>
+    <strategytype>cyclestrategy</strategytype>
+    <cyclestrategy>
+      <value>00:00:10</value>
+    </cyclestrategy>
+  </task>
+  
+  <task>
+    <devicetype>xgdevice</devicetype>
+    <operaname>writetime</operaname>
+    <strategytype>cyclestrategy</strategytype>
+    <cyclestrategy>
+      <value>00:00:10</value>
+    </cyclestrategy>
+  </task>
 </tasks>

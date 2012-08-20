@@ -281,8 +281,13 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <returns></returns>
-        public byte[] ToBytes()
+        public byte[] ToBytes(DataFieldValueProvider valueProvider)
         {
+            if (valueProvider==null)
+            {
+                throw new ArgumentNullException("valueProvider");
+            }
+
             MemoryStream ms = new MemoryStream();
             foreach (DataField df in this.DataFields)
             {
@@ -299,6 +304,11 @@ namespace C3.Communi
 
                 if (!df.IsCRC)
                 {
+                    if (df.IsLazy)
+                    {
+                        df.Value = valueProvider.GetValue(df.Name);
+                    }
+
                     byte[] bs = df.Bytes;
                     if (bs == null)
                     {

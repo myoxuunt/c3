@@ -37,6 +37,8 @@ namespace C3.Communi
         public CommuniDetail( string operaText, 
             byte[] send, DateTime sendDateTime, byte[] received, DateTime receivedDateTime, string parseResult,bool isSuccess)
         {
+            this._sendDateTime = sendDateTime;
+            this._receivedDateTime = receivedDateTime;
             this._operaText = operaText;
             this._parseResult = parseResult;
             this._send = send;

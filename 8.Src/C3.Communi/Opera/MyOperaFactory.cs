@@ -340,6 +340,7 @@ namespace C3.Communi
             bool isMatchCheck = false;
             byte[] bytes = null;
             bool littleEndian = true;
+            bool isLazy = false;
 
             string str = string.Empty;
 
@@ -401,6 +402,12 @@ namespace C3.Communi
                 isMatchCheck = bool.Parse(str);
             }
 
+            str = GetAttribute(el, DeviceDefineNodeNames.Lazy, true);
+            if (str != null && str.Length > 0)
+            {
+                isLazy = bool.Parse(str);
+            }
+
             DataField df = new DataField(name, begin, length, (IBytesConverter)ibc);
             df.IsMatchCheck = isMatchCheck;
             if (bytes != null)
@@ -412,6 +419,7 @@ namespace C3.Communi
                 throw new Exception("must set bytes while matchCheck == true");
             }
             df.IsCRC = iscrc;
+            df.IsLazy = isLazy;
 
             return df;
         }
