@@ -214,9 +214,14 @@ namespace C3.DPUTest
             Console.WriteLine(s);           
         }
 
-        public override IUploadParseResult OnProcessUpload(IDevice device, byte[] bs)
+        //public override IUploadParseResult OnProcessUpload(IDevice device, byte[] bs)
+        //{
+        //    return UploadParseResult.CreateFailUploadParseResult(bs);
+        //}
+
+        public override void OnProcessUpload(IDevice device, IParseResult pr)
         {
-            return UploadParseResult.CreateFailUploadParseResult(bs);
+            throw new NotImplementedException();
         }
     }
 

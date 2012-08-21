@@ -9,30 +9,52 @@ using Xdgk.Communi.Interface;
 
 namespace C3.Communi
 {
-    public interface IUploadParser
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="device"></param>
-        /// <param name="bs"></param>
-        /// <returns></returns>
-         UploadParseResult Parse(IDevice device, byte[] bs);
-    }
+    //public interface IUploadParser
+    //{
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    /// <param name="device"></param>
+    //    /// <param name="bs"></param>
+    //    /// <returns></returns>
+    //     UploadParseResult Parse(IDevice device, byte[] bs);
+    //}
 
     /// <summary>
     /// 
     /// </summary>
-    public class DataFieldUploadParser : IUploadParser
+    public class DataFieldPicker : IPicker
     {
-        public DataFieldUploadParser(ReceivePart rp)
+        public DataFieldPicker(string name, ReceivePart rp)
         {
             if (rp == null)
             {
                 throw new ArgumentNullException("rp");
             }
+            this.Name = name;
             this._receivePard = rp;
         }
+
+        #region Name
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                if (_name == null)
+                {
+                    _name = string.Empty;
+                }
+                return _name;
+            }
+            set
+            {
+                _name = value;
+            }
+        } private string _name;
+        #endregion //Name
 
         private ReceivePart _receivePard;
 
@@ -42,7 +64,7 @@ namespace C3.Communi
         /// <param name="device"></param>
         /// <param name="bs"></param>
         /// <returns></returns>
-        public UploadParseResult Parse(IDevice device, byte[] bs)
+        public PickResult Pick(IDevice device, byte[] bs)
         {
             int length = 0;
             if (bs != null)
@@ -52,10 +74,10 @@ namespace C3.Communi
 
             if (length < _receivePard.DataFieldManager.Length)
             {
-                return UploadParseResult.CreateFailUploadParseResult(bs);
+                return PickResult.CreateFailPickResult(bs);
             }
 
-            for (int i = 0; i < bs.Length - _receivePard.DataFieldManager.Length; i++)
+            for (int i = 0; i <= bs.Length - _receivePard.DataFieldManager.Length; i++)
             {
                 byte[] bsForParse = new byte[_receivePard.DataFieldManager.Length];
                 Array.Copy(bs, i, bsForParse, 0, _receivePard.DataFieldManager.Length);
@@ -64,12 +86,13 @@ namespace C3.Communi
                 if (pr.IsSuccess)
                 {
                     byte[] remain = Remove(bs, i, _receivePard.DataFieldManager.Length);
-                    UploadParseResult success = UploadParseResult.CreateSuccessUploadParseResult(
-                        _receivePard.Name, pr.Results, remain);
+                    PickResult success = PickResult.CreateSuccessPickResult (
+                        this.Name, pr, remain);
+                    return success;
                 }
             }
 
-            return UploadParseResult.CreateFailUploadParseResult(bs);
+            return PickResult.CreateFailPickResult(bs);
         }
 
         /// <summary>
@@ -85,21 +108,15 @@ namespace C3.Communi
 
             byte[] r = new byte[source.Length - length];
             Array.Copy(source, 0, r, 0, begin);
-            Array.Copy(source, begin + length, r, begin, length);
+            Array.Copy(source, begin + length, r, begin, source.Length - begin - length);
             return r;
         }
     }
 
-    public class UploadParserCollection : Collection<IUploadParser>
-    {
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     public interface IOperaFactory
     {
         IOpera Create(string deviceType, string operaName);
-        UploadParserCollection CreateUploadParsers();
+        //UploadParserCollection CreateUploadParsers();
+        PickerCollection CreatePickers(string deviceType);
     }
 }

@@ -9,6 +9,7 @@ namespace C3.Communi
         public const string
             DeviceDefineCollection = "devicedefines",
             DeviceDefine = "devicedefine",
+            UploadDefine = "uploaddefine",
             DeviceType = "devicetype",
             DeviceText = "devicetext",
 

@@ -50,7 +50,16 @@ namespace C3.Communi
         {
             get
             {
-                return Find(key);
+                KeyValue kv = Find(key);
+                if (kv != null)
+                {
+                    return kv.Value;
+                }
+                else
+                {
+                    throw new ArgumentException(string.Format("not find value by key '{0}'", key));
+                }
+
             }
             set
             {

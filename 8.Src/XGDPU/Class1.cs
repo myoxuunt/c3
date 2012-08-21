@@ -73,6 +73,7 @@ namespace XGDPU
             d.Dpu = this.Dpu;
             d.Guid = source.Guid;
             d.StationGuid = source.StationGuid;
+            d.Pickers = Dpu.OperaFactory.CreatePickers(this.Dpu.DeviceType.Name);
             return d;
         }
     }
@@ -259,20 +260,14 @@ namespace XGDPU
         /// <param name="device"></param>
         /// <param name="bs"></param>
         /// <returns></returns>
-        public override IUploadParseResult OnProcessUpload(IDevice device, byte[] bs)
+        //public override IUploadParseResult OnProcessUpload(IDevice device, byte[] bs)
+        public override void  OnProcessUpload(IDevice device, IParseResult pr)
         {
-            XmlOperaFactory f = device.Dpu.OperaFactory as XmlOperaFactory;
-            //OperaDefineCollection operaDefines = f.OperaDefines;
-            //foreach (OperaDefine od in operaDefines)
-            //{
-            //    od.CreateOpera
-            //}
-            //device.UploadParserCollection.Parse(bs);
+            XGDevice xg = (XGDevice)device;
+            DateTime dt = (DateTime)pr.Results["DT"];
+            string cardSN = pr.Results["cardSN"].ToString();
 
-
-            //XGDevice d;
-            //return UploadParseResult.CreateFailUploadParseResult(bs);
-            return null;
+            xg.DeviceDataManager.Last = new XGData(dt, cardSN);
         }
 
         public override void OnProcess(ITask task, IParseResult pr)

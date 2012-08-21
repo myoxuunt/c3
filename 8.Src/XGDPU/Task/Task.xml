@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <tasks>
-  <task>
+  <!--<task>
     <devicetype>xgdevice</devicetype>
     <operaname>readcount</operaname>
     <strategytype>cyclestrategy</strategytype>
@@ -25,5 +25,5 @@
     <cyclestrategy>
       <value>00:00:10</value>
     </cyclestrategy>
-  </task>
+  </task>-->
 </tasks>

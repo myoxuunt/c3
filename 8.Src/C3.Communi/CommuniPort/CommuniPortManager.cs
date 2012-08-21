@@ -217,9 +217,10 @@ namespace C3.Communi
                 {
                     if (bs.Length > 0)
                     {
-                        ITaskProcessor processor = d.Dpu.Processor;
-                        IUploadParseResult pr = processor.ProcessUpload(d, bs);
-                        bs = pr.Remain;
+                        //ITaskProcessor processor = d.Dpu.Processor;
+                        //IUploadParseResult pr = processor.ProcessUpload(d, bs);
+                        //bs = pr.Remain;
+                        d.ProcessUpload(bs);
                     }
                 }
             }

@@ -31,6 +31,17 @@ namespace C3.Communi
         #endregion //DeviceDefineCollection
 
 
+        public UploadDefineCollection UploadDefines
+        {
+            get
+            {
+                if (_uploadDefines == null)
+                {
+                    _uploadDefines = new UploadDefineCollection();
+                }
+                return _uploadDefines;
+            }
+        } private UploadDefineCollection _uploadDefines;
         #region LoadFromFile
         /// <summary>
         /// 
@@ -81,6 +92,17 @@ namespace C3.Communi
                     this.DeviceDefineCollection.Add(dd);
 
                     //this.CommuniSoft.DeviceDefineCollection.Add(dd);
+
+                    foreach (XmlNode operaOrUploadNode in deviceDefineNode.ChildNodes)
+                    {
+                        if (operaOrUploadNode.Name == DeviceDefineNodeNames.UploadDefine)
+                        {
+                            string uploadName = XmlHelper.GetAttribute ( operaOrUploadNode ,"name", false );
+                            UploadDefine ud = new UploadDefine(deviceType, deviceText, uploadName);
+                            ud.Node = operaOrUploadNode;
+                            this.UploadDefines.Add(ud);
+                        }
+                    }
                 }
             }
         }

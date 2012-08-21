@@ -42,6 +42,9 @@ namespace C3.Communi
 
 
         object GetLazyDataFieldValue(string name);
+        byte[] ProcessUpload(byte[] bs);
+
+        PickerCollection Pickers { get; set; }
     }
 
 }

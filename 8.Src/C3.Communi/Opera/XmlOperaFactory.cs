@@ -41,7 +41,6 @@ namespace C3.Communi
         /// </summary>
         public OperaDefineCollection OperaDefines
         {
-
             get 
             {
                 if (_operaDefines == null)
@@ -49,27 +48,31 @@ namespace C3.Communi
                     OperaDefineFactory f = new OperaDefineFactory();
                     f.LoadFromPath(DefineDirectory);
                     _operaDefines = f.DeviceDefineCollection;
+                    
                 }
                 return _operaDefines; 
             }
             set { _operaDefines = value; }
         } private OperaDefineCollection _operaDefines;
 
-        #region IOperaFactory ≥…‘±
-
 
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="deviceType"></param>
         /// <returns></returns>
-        public UploadParserCollection CreateUploadParsers()
-        {
-            UploadParserCollection uploadParsers = new UploadParserCollection();
-
+        public PickerCollection CreatePickers(string deviceType)
+        {       
+            PickerCollection uploadParsers = new PickerCollection();
+            OperaDefineFactory f = new OperaDefineFactory();
+            f.LoadFromPath(DefineDirectory);
+            foreach ( UploadDefine ud in f.UploadDefines )
+            {
+                IPicker p = ud.Create("aaa");
+                uploadParsers.Add(p);
+            }
             return uploadParsers;
         }
-
-        #endregion
     }
 
 }

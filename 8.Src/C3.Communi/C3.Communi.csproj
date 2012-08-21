@@ -80,6 +80,7 @@
     <Compile Include="Device\DeviceUI\DeviceUI.cs" />
     <Compile Include="Device\DeviceUI\DeviceUIBase.cs" />
     <Compile Include="Device\DeviceUI\IDeviceUI.cs" />
+    <Compile Include="Device\Picker.cs" />
     <Compile Include="FrmDeviceGroups.cs">
       <SubType>Form</SubType>
     </Compile>

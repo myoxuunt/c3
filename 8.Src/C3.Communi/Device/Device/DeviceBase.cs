@@ -443,5 +443,44 @@ namespace C3.Communi
         }
 
         #endregion
+
+        #region IDevice ≥…‘±
+
+
+        public byte[] ProcessUpload(byte[] bs)
+        {
+            byte[] bsWork = bs;
+            foreach (IPicker item in this.Pickers)
+            {
+                PickResult result = item.Pick(this, bsWork);
+                if (result.IsSuccess)
+                {
+                    this.Dpu.Processor.ProcessUpload(this, result.ParseResult);
+                }
+                bsWork = result.Remain;
+            }
+            return bsWork;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public PickerCollection Pickers
+        {
+            get
+            {
+                if (_pickers==null)
+                {
+                    _pickers = new PickerCollection();
+                }
+                return _pickers;
+            }
+            set
+            {
+                _pickers = value;
+            }
+        } private PickerCollection _pickers;
+
+        #endregion
     }
 }
