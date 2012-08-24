@@ -35,23 +35,23 @@ namespace C3.Communi
         {
             TaskCollection tasks = new TaskCollection();
 
-            // TODO:
+            // TODO: not find
             // 
-            // not find 
-            //
             foreach (TaskDefine td in TaskDefines)
             {
                 bool b = StringHelper.Equal(td.DeviceType, device.GetType().Name);
-                if (b)
+                if (!b)
                 {
-                    IOpera opera = this.OperaFactory.Create(td.DeviceType, td.OperaName);
-
-                    Strategy strategy = td.StrategyDefine.Create();
-                    Task t = new Task(device, opera, strategy, td.TimeOut);
-                    device.TaskManager.Tasks.Enqueue(t);
-
-                    tasks.Add(t);
+                    continue;
                 }
+
+                IOpera opera = this.OperaFactory.Create(td.DeviceType, td.OperaName);
+
+                Strategy strategy = td.StrategyDefine.Create();
+                Task t = new Task(device, opera, strategy, td.TimeOut);
+                device.TaskManager.Tasks.Enqueue(t);
+
+                tasks.Add(t);
             }
             return tasks;
         }

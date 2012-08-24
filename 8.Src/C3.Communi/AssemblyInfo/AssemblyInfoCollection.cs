@@ -19,15 +19,7 @@ namespace C3.Communi
             foreach (AssemblyInfo ai in this)
             {
                 object obj = ai.CreateInstanceWithInterface(type);
-                if (obj != null)
-                {
-                    list.Add(obj);
-                }
-                else
-                {
-                    // TODO:
-                    //
-                }
+                list.Add(obj);
             }
             return list.ToArray();
         }

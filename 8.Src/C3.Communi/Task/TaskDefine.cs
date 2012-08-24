@@ -1,6 +1,4 @@
-
 using System;
-using Xdgk.Common;
 
 namespace C3.Communi
 {
@@ -13,8 +11,6 @@ namespace C3.Communi
         /// </summary>
         static public TimeSpan DefaultTaskTimeout
         {
-            // TODO: 2010-11-24 range 
-            //
             get { return _defaultTaskTimeout; }
             set { _defaultTaskTimeout = value; }
         } static private TimeSpan _defaultTaskTimeout = TimeSpan.FromSeconds(10);

@@ -1,36 +1,34 @@
-
 using System;
-using System.Reflection ;
-using System.Windows.Forms;
 using System.Collections.Generic;
-
+using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public class DeviceInfoAttributeCollection : Xdgk.Common.Collection<DeviceInfoAttribute>
+    public class DeviceInfoAttributeCollection : Collection<DeviceInfoAttribute>
     {
         public void Sort()
-        { 
-            DeviceInfoAttribute[] array = new DeviceInfoAttribute[this.Count];
-            this.CopyTo(array, 0);
+        {
+            var array = new DeviceInfoAttribute[Count];
+            CopyTo(array, 0);
 
             Array.Sort(array, new Comparer());
 
-            this.Clear();
+            Clear();
 
             foreach (DeviceInfoAttribute item in array)
             {
-                this.Add(item);
+                Add(item);
             }
         }
 
-#region Comparer
+        #region Comparer
+
         /// <summary>
         /// 
         /// </summary>
-        private class Comparer : IComparer<DeviceInfoAttribute >
+        private class Comparer : IComparer<DeviceInfoAttribute>
         {
-
+            #region IComparer<DeviceInfoAttribute> Members
 
             public int Compare(DeviceInfoAttribute x, DeviceInfoAttribute y)
             {
@@ -45,8 +43,10 @@ namespace C3.Communi
                 }
                 return r;
             }
-        }
-#endregion //Comparer
-    }
 
+            #endregion
+        }
+
+        #endregion //Comparer
+    }
 }

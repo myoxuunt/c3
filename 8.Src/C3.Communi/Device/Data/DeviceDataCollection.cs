@@ -118,14 +118,14 @@ namespace C3.Communi
         /// </summary>
         public class DeviceDataCollection : Xdgk.Common.Collection<IDeviceData>
         {
-            static private readonly int DEFAULT_CAPABILITY = 1000;
-            static private readonly int MIN_CAPABILITY = 10;
+            private const int DEFAULT_CAPABILITY = 1000;
+            private const int MIN_CAPABILITY = 10;
 
             #region Add
             /// <summary>
             /// 
             /// </summary>
-            /// <param name="d"></param>
+            /// <param name="deviceData"></param>
             internal new void Add(IDeviceData deviceData)
             {
                 base.Add(deviceData);
@@ -170,13 +170,14 @@ namespace C3.Communi
             /// <param name="item"></param>
             protected override void InsertItem(int index, IDeviceData item)
             {
-                base.InsertItem(index, item);
-                if (this.Count > this.Capability)
+                if (this.Count >= this.Capability)
                 {
-                    // TODO:
-                    //
-                    this.RemoveAt(0);
+                    if (this.Count >0)
+                    {
+                        this.RemoveAt(0);
+                    }
                 }
+                base.InsertItem(index, item);
             }
             #endregion //InsertItem
         }

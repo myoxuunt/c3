@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
-using System.Text;
 using C3.Communi;
 using Xdgk.Common;
 
@@ -28,9 +27,11 @@ namespace XGDPU
                 }
                 return _instance;
             }
-        } static private DBI _instance;
+        }
 
-        internal DBI(string s)
+        static private DBI _instance;
+
+        private DBI(string s)
             : base(s)
         {
         }
@@ -47,41 +48,9 @@ namespace XGDPU
 
     }
 
-    public class XGDeviceFactory : DeviceFactoryBase
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dpu"></param>
-        public XGDeviceFactory(IDPU dpu)
-            : base(dpu)
-        {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deviceSource"></param>
-        /// <returns></returns>
-        public override IDevice OnCreate(IDeviceSource deviceSource)
-        {
-            XGDeviceSource source = (XGDeviceSource)deviceSource;
-            XGDevice d = new XGDevice();
-            d.Address = source.Address;
-            d.DeviceSource = source;
-            d.DeviceType = this.Dpu.DeviceType;
-            d.Dpu = this.Dpu;
-            d.Guid = source.Guid;
-            d.StationGuid = source.StationGuid;
-            d.Pickers = Dpu.OperaFactory.CreatePickers(this.Dpu.DeviceType.Name);
-            return d;
-        }
-    }
-
     public class XGDevicePersister : DevicePersisterBase
     {
-
-        public override void OnAdd(IDevice device)
+        protected override void OnAdd(IDevice device)
         {
             XGDevice d = (XGDevice)device;
 
@@ -96,7 +65,7 @@ namespace XGDPU
             d.Guid = GuidHelper.Create(Convert.ToInt32(obj));
         }
 
-        public override void OnUpdate(IDevice device)
+        protected override void OnUpdate(IDevice device)
         {
             string s = string.Format(
                 "update tblDevice set address = {0} where DeviceID = {1}",
@@ -105,7 +74,7 @@ namespace XGDPU
             DBI.Instance.ExecuteScalar(s);
         }
 
-        public override void OnDelete(IDevice device)
+        protected override void OnDelete(IDevice device)
         {
             string s = string.Format(
                 "delete from tblDevice where DeviceID = {0}",
@@ -156,7 +125,7 @@ namespace XGDPU
     {
         public override IDeviceSource[] OnGetDeviceSources()
         {
-            List<XGDeviceSource> list = new List<XGDeviceSource>();
+            List<IDeviceSource> list = new List<IDeviceSource>();
 
             DataTable tbl = DBI.Instance.ExecuteXGDeviceDataTable();
             foreach (DataRow row in tbl.Rows)
@@ -174,11 +143,16 @@ namespace XGDPU
         /// 
         /// </summary>
         /// <param name="dt"></param>
-        /// <param name="cardSN"></param>
-        public XGData(DateTime dt, string cardSN)
+        /// <param name="cardSn"></param>
+        public XGData(DateTime dt, string cardSn)
         {
+            if (cardSn == null) throw new ArgumentNullException("cardSn");
+            if( cardSn.Trim( ).Length == 0 )
+            {
+                throw new ArgumentException("cardSn exception");
+            }
             this.DT = dt;
-            this.CardSN = cardSN;
+            this.CardSN = cardSn;
         }
 
         #region IDeviceData 成员
@@ -303,7 +277,7 @@ namespace XGDPU
                         ProcessXGReadDateResult(xgdevice, pr);
                         break;
 
-                    case XGOperaNames.ReadXGTime :
+                    case XGOperaNames.ReadXGTime:
                         ProcessXGReadTimeResult(xgdevice, pr);
                         break;
 
@@ -314,10 +288,12 @@ namespace XGDPU
                         break;
 
                     default:
-                        string errmsg = string.Format("{0} {1}",
-                            xgdevice.DeviceType.Text,
-                            opera);
-                        throw new NotImplementedException(errmsg);
+                        {
+                            string errmsg = string.Format("{0} {1}",
+                                                          xgdevice.DeviceType.Text,
+                                                          opera);
+                            throw new NotSupportedException(errmsg);
+                        }
                 }
             }
         }

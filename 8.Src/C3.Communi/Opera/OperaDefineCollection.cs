@@ -36,7 +36,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="deviceType"></param>
         /// <returns></returns>
-        public bool Exist(string deviceType)
+        private bool Exist(string deviceType)
         {
             foreach (OperaDefine item in this)
             {
@@ -71,7 +71,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="deviceType"></param>
         /// <returns></returns>
-        public OperaDefine FindDeviceDefine(string deviceType)
+        private OperaDefine FindDeviceDefine(string deviceType)
         {
             foreach (OperaDefine dd in this)
             {

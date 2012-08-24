@@ -6,12 +6,8 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    internal class TimeoutDefauleValues
+    internal static class TimeoutDefauleValues
     {
-        private TimeoutDefauleValues()
-        {
-        }
-
         public const uint
             MinTimeoutMillsSencond = 100,
             MaxTimeoutMillsSecond = 60 * 1000,
@@ -25,7 +21,12 @@ namespace C3.Communi
         {
             if( timeoutValue < MinTimeoutMillsSencond || timeoutValue > MaxTimeoutMillsSecond )
             {
-                throw new ArgumentOutOfRangeException("Timeout value out of range");
+                string s = string.Format(
+                    "Timeout value out of range, timeout value must between [{0}, {1}] millsSencond, current is {2}", 
+                    MinTimeoutMillsSencond,
+                    MaxTimeoutMillsSecond,
+                    timeoutValue);
+                throw new ArgumentOutOfRangeException(s);
             }
         }
     }
@@ -73,11 +74,23 @@ namespace C3.Communi
             return cp;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cp"></param>
+        /// <returns></returns>
         public bool IsMatch(ICommuniPort cp)
         {
-            // TODO:
-            //
-            throw new NotImplementedException();
+            bool r = false;
+            SerialCommuniPort scp = cp as SerialCommuniPort;
+            if (scp != null)
+            {
+                bool isSameName = StringHelper.Equal(
+                    scp.SerialPort.PortName, 
+                    this.SerialPortSetting.PortName);
+                r = isSameName;
+            }
+            return r;
         }
 
         /// <summary>

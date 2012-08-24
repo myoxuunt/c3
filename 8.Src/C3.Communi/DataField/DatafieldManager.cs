@@ -147,7 +147,7 @@ namespace C3.Communi
 
             // 1. check length
             //
-            // TODO: 2010-06-08 return CheckLength max length while fail
+            // 2010-06-08 return CheckLength max length while fail
             //
             //if (!this.DataFields.CheckLength(bytes))
             //    return new LengthErrorResult(receivePartName, this.DataFields.BytesLength, bytes.Length);
@@ -191,7 +191,7 @@ namespace C3.Communi
                 // byte[] crcbs = this.CRCer.Calc(bytes, 0, this.DataFields.Length - crcdf.DataLength);
                 int bsLengthForCRC = crcdf.BeginPosition;
 
-                // TODO: 2011-12-30 crc calc begin position
+                // 2011-12-30 crc calc begin position
                 //
                 //byte[] crcbs = this.CRCer.Calc(bytes, 0, bsLengthForCRC);
                 int calcLen = crcdf.BeginPosition - this.CRCBegin;
@@ -321,7 +321,7 @@ namespace C3.Communi
                 else
                 {
                     byte[] bs = ms.ToArray();
-                    // TODO: 2011-12-30 crc begin position
+                    // 2011-12-30 crc begin position
                     //
                     //byte[] crcbs = this.CRCer.Calc(bs, 0, bs.Length);
                     int calcLen = bs.Length - this.CRCBegin;

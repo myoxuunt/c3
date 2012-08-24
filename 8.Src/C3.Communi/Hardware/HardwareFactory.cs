@@ -171,19 +171,15 @@ namespace C3.Communi
 
                     device.DeviceSource = deviceSource;
 
-                    // TODO: find station by device
+                    // find station by device
                     //
                     Guid stationGuid = deviceSource.StationGuid;
                     IStation station = hd.Stations.Find(stationGuid);
                     if (station == null)
                     {
-                        throw new Exception(
-                            string.Format("not find station by guid '{0}'", stationGuid)
-                        );
+                        string s = string.Format("not find station by guid '{0}'", stationGuid);
+                        throw new Exception(s);
                     }
-                    //IStation st = null ;
-                    //device.Station = st;
-                    //st.Devices.Add(device);
                     station.Devices.Add(device);
                     device.Station = station;
                 }

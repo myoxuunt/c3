@@ -163,21 +163,16 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public void BeginReceiveHelper()
+        private void BeginReceiveHelper()
         {
             try
             {
-                // start apm receive
-                // 
-                // TODO: exception handler
-                //
                 AsyncCallback cb = this.ReceiveCallback;
                 IAsyncResult ia = _socket.BeginReceive(_receBuffer, 0, BUFFER_SIZE,
                         SocketFlags.None, cb, _socket);
             }
             catch (Exception ex)
             {
-                // TODO: 2012-07-05 
                 // socket exception
                 //
                 log.Error("SocketCommuniPort.BeginReceiveHelper exception:", ex);

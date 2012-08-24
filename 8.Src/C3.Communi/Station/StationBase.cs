@@ -239,8 +239,6 @@ namespace C3.Communi
             }
             set
             {
-                // TODO: 2012-08-10 clear communiPort
-                //
                 if (value == null)
                 {
                     throw new ArgumentNullException("CommuniPortConfig");
@@ -248,6 +246,10 @@ namespace C3.Communi
 
                 IParameter p = GetCommuniPortConfig();
                 p.Value = value;
+
+                // clear communiPort when change communiport config
+                //
+                this.CommuniPort = null;
             }
         } 
         //private ICommuniPortConfig _communiPortConfig;
@@ -258,12 +260,8 @@ namespace C3.Communi
             IParameter p = this.CommuniPortConfigGroup.Parameters[PN_COMMUNIPORTCONFIG];
             if (p == null)
             {
-                // TODO:
-                //
-                // new C3.Communi.P.CommuniPortConfigParameter 
                 p = new CommuniPortConfigParameter(PN_COMMUNIPORTCONFIG,
                     NullCommuniPortConfig.Default, PO_COMMUNIPORTCONFIG);
-                //p.ParameterUI = new CommuniPortConfigUI();
                 this.CommuniPortConfigGroup.Parameters.Add(p);
             }
             return p;
@@ -344,13 +342,12 @@ namespace C3.Communi
         {
             get
             {
-                // TODO: string
-                //
-                IGroup g = this.Groups.GetGroup("General");
+                const string name = "常规";
+                IGroup g = this.Groups.GetGroup(name);
                 if (g == null)
                 {
                     g = new Group();
-                    g.Name = "General";
+                    g.Name = name;
                     this.Groups.Add(g);
                 }
                 return g;

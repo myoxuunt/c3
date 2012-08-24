@@ -138,6 +138,8 @@ namespace C3.Communi
         }
         #endregion //CreateArgs
 
+        private const string ADDRESS = "Address";
+
         #region OnCreateSendBytes
         /// <summary>
         /// 
@@ -148,7 +150,7 @@ namespace C3.Communi
         {
             //TODO: address string 
             //
-            this.SendPart["Address"] = device.Address;
+            this.SendPart[ADDRESS] = device.Address;
 
             DataFieldValueProvider valueProvider = new DataFieldValueProvider(device);
             byte[] bytes = this.SendPart.ToBytes(valueProvider);
@@ -166,8 +168,6 @@ namespace C3.Communi
         /// <returns></returns>
         public override IParseResult OnParseReceivedBytes(IDevice device, byte[] received)
         {
-            string addressFieldName = "Address";
-
             IParseResult pr = this.ReceiveParts.ToValues(received);
 
 
@@ -175,7 +175,7 @@ namespace C3.Communi
             {
                 // match address
                 //
-                object addressObject = pr.Results[addressFieldName];
+                object addressObject = pr.Results[ADDRESS];
                 if (addressObject != null)
                 {
                     UInt64 address = Convert.ToUInt64(addressObject);

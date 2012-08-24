@@ -122,7 +122,7 @@ namespace C3.Communi.UC.Parameter
             }
             else
             {
-                throw new NotImplementedException(cfg.ToString());
+                throw new NotSupportedException(cfg.ToString());
             }
         }
 

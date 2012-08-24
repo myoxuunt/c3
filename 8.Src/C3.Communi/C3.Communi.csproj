@@ -58,6 +58,7 @@
     <Compile Include="CommuniPort\CommuniPortBase.cs" />
     <Compile Include="CommuniPort\CommuniPortCollection.cs" />
     <Compile Include="CommuniPort\CommuniPortStatus.cs" />
+    <Compile Include="CommuniPort\SerialCommuniPort.cs" />
     <Compile Include="CRC\CRCerCollection.cs" />
     <Compile Include="CRC\CRCerManager.cs" />
     <Compile Include="DataField\Datafield.cs" />

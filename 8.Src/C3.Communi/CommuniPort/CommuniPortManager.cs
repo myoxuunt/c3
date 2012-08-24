@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using NLog;
 
 namespace C3.Communi
@@ -146,11 +145,11 @@ namespace C3.Communi
             ICommuniPort cp =null;
             try
             {
-                cp = this.CommuniPortFactory.Create(cpConfig);
+                cp = CommuniPortFactory.Create(cpConfig);
             }
             catch (Exception ex)
             {
-                // TODO: log ERROR
+                // log ERROR
                 //
                 _log.Fatal(ex);
             }

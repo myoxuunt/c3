@@ -1,14 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using C3.Communi;
 using System.Windows.Forms;
+using C3.Communi;
+using C3.Communi.Test;
 using Xdgk.Common;
 
 namespace C3.DPUTest
 {
     public class TDpu : DPUBase
     {
+        public TDpu()
+        {
+            DeviceType = //typeof(TDevice);
+                GetDeviceType();
+            DeviceFactory = new TDeviceFactory(this);
+            DevicePersister = new TDevicePersister();
+            DeviceSourceProvider = new TDeviceSourceProvider();
+            Processor = new Processor();
+            TaskFactory = new XmlTaskFactory(this,
+                                             PathUtils.GetAssemblyDirectory(typeof (TDevice).Assembly));
+            OperaFactory = new XmlOperaFactory(
+                PathUtils.GetAssemblyDirectory(typeof (TDevice).Assembly));
+        }
+
         public DeviceType GetDeviceType()
         {
             DeviceType r = DeviceTypeManager.GetDeviceType("TDevice");
@@ -17,36 +30,23 @@ namespace C3.DPUTest
                 //r = new DeviceType();
                 //r.Name = "TDevice";
                 //r.Type = typeof(TDevice);
-                DeviceType t= DeviceTypeManager.AddDeviceType("TDevice", null, typeof(TDevice));
+                DeviceType t = DeviceTypeManager.AddDeviceType("TDevice", null, typeof (TDevice));
                 //DeviceTypeManager.Add(t);
                 r = t;
             }
             return r;
-
-        }
-        public TDpu()
-        {
-            this.DeviceType = //typeof(TDevice);
-                GetDeviceType();
-            this.DeviceFactory = new TDeviceFactory(this);
-            this.DevicePersister = new TDevicePersister();
-            this.DeviceSourceProvider = new TDeviceSourceProvider();
-            this.Processor = new Processor();
-            this.TaskFactory = new XmlTaskFactory(this,
-                PathUtils.GetAssemblyDirectory (typeof(TDevice).Assembly));
-            this.OperaFactory = new XmlOperaFactory (
-                PathUtils.GetAssemblyDirectory (typeof(TDevice).Assembly));
         }
     }
 
     public class TDevice : DeviceBase
     {
-            System.Windows.Forms.Timer _t = new Timer();
+        private readonly Timer _t = new Timer();
+
         public TDevice() //: base ("noname",  DeviceTypeManager.GetDeviceType ("TDeviceTypeString") ,123)
         {
             //this.DeviceType = 
             _t.Interval = 1000;
-            _t.Tick += new EventHandler(_t_Tick);
+            _t.Tick += _t_Tick;
             _t.Start();
             //this.Parameters = 
             CreateDeviceParameterCollection();
@@ -57,13 +57,13 @@ namespace C3.DPUTest
             //ParameterCollection p = this.Parameters;//new ParameterCollection();
             //p.Add(i);
 
-            Group g = new Group();
+            var g = new Group();
             g.Name = "Name";
             g.Text = "Text";
 
-            IParameter i = new StringParameter("name", "value",  0);
+            IParameter i = new StringParameter("name", "value", 0);
             //i.ParameterUI = new StringParameterUI();
-            g.Parameters.Add ( i );
+            g.Parameters.Add(i);
 
             //i = new StringParameter ("ADE", ypeof(Xdgk.Common.ADEStatus),Xdgk.Common.ADEStatus.Add, -1);
             //i.ParameterUI = new EnumParameterUI();
@@ -71,7 +71,7 @@ namespace C3.DPUTest
 
             g.Parameters.Sort();
 
-            this.Groups.Add(g);
+            Groups.Add(g);
             /*
             i.Name = "ppp";
             i.Value = 123;
@@ -117,17 +117,15 @@ namespace C3.DPUTest
             i.ValueType = typeof(Xdgk.Common.ADEStatus);
             p.Add(i); 
             */
-            
+
 
             //return p;
-            
         }
 
-        void _t_Tick(object sender, EventArgs e)
+        private void _t_Tick(object sender, EventArgs e)
         {
             Console.WriteLine("Test");
-            this.DeviceDataManager.Last = new C3.Communi.Test.TestDeviceData();
-
+            DeviceDataManager.Last = new TestDeviceData();
         }
 
         public override string ToString()
@@ -135,7 +133,6 @@ namespace C3.DPUTest
             //this.LastData = new C3.Communi.Test.TestDeviceData();
             return base.ToString();
         }
-
     }
 
     /// <summary>
@@ -143,24 +140,24 @@ namespace C3.DPUTest
     /// </summary>
     public class TDeviceFactory : DeviceFactoryBaseXmlTask
     {
+        private static int n;
+
         public TDeviceFactory(IDPU dpu)
-            : base(dpu, PathUtils.GetAssemblyDirectory ( typeof(TDeviceFactory).Assembly))
+            : base(dpu, PathUtils.GetAssemblyDirectory(typeof (TDeviceFactory).Assembly))
         {
         }
 
-        static private int n = 0;
-
         public override IDevice OnCreate(IDeviceSource deviceSource)
         {
-            TDevice d = new TDevice();
-            d.DeviceType = this.Dpu.DeviceType;
+            var d = new TDevice();
+            d.DeviceType = Dpu.DeviceType;
             d.Address = 1;
             d.Name = "D" + n++;
             d.Guid = deviceSource.Guid;
             d.StationGuid = deviceSource.StationGuid;
             //d.Tasks = 
-            d.Dpu = this.Dpu;
-            d.DeviceDataManager.Last = new C3.Communi.Test.TestDeviceData();
+            d.Dpu = Dpu;
+            d.DeviceDataManager.Last = new TestDeviceData();
             return d;
         }
     }
@@ -171,34 +168,31 @@ namespace C3.DPUTest
 
     public class TDeviceSourceProvider : DeviceSourceProviderBase
     {
-
         public override IDeviceSource[] OnGetDeviceSources()
         {
-            TDeviceSource s = new TDeviceSource();
+            var s = new TDeviceSource();
             s.Address = 123;
             s.DevcieTypeName = "Tdevice";
-            s.Guid = GuidHelper .Create(01);
+            s.Guid = GuidHelper.Create(01);
             s.StationGuid = GuidHelper.Create(11);
 
-            return new IDeviceSource[] { s };
-
+            return new IDeviceSource[] {s};
         }
     }
 
     public class TDevicePersister : DevicePersisterBase
     {
-
-        public override void OnAdd(IDevice device)
+        protected override void OnAdd(IDevice device)
         {
             //throw new NotImplementedException();
         }
 
-        public override void OnUpdate(IDevice device)
+        protected override void OnUpdate(IDevice device)
         {
             throw new NotImplementedException();
         }
 
-        public override void OnDelete(IDevice device)
+        protected override void OnDelete(IDevice device)
         {
             throw new NotImplementedException();
         }
@@ -206,12 +200,11 @@ namespace C3.DPUTest
 
     public class Processor : TaskProcessorBase
     {
-
         public override void OnProcess(ITask task, IParseResult pr)
         {
             string s = string.Format("{0} - {1} - {2}",
-                DateTime.Now , task.Opera.Name , pr.ToString ());
-            Console.WriteLine(s);           
+                                     DateTime.Now, task.Opera.Name, pr);
+            Console.WriteLine(s);
         }
 
         //public override IUploadParseResult OnProcessUpload(IDevice device, byte[] bs)
@@ -224,6 +217,4 @@ namespace C3.DPUTest
             throw new NotImplementedException();
         }
     }
-
-
 }

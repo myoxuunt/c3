@@ -3,8 +3,14 @@ using System.Reflection;
 
 namespace C3.Communi
 {
-    public class ObjectFactory
+    public static class ObjectFactory
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="interfaceType"></param>
+        /// <returns>return object or throw exception</returns>
         static public object CreateWithInterface (string path ,Type interfaceType)
         {
             Assembly assembly = null;
@@ -24,8 +30,6 @@ namespace C3.Communi
                 if (TypeHelper.IsImplementInterface(tp, interfaceType))
                 {
                     object obj = Activator.CreateInstance(tp);
-                    // TODO: change type
-                    //
                     return obj;
                 }
             }

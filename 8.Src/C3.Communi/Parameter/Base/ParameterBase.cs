@@ -1,10 +1,4 @@
-
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using Xdgk.Common;
-
 
 namespace C3.Communi
 {
@@ -143,6 +137,7 @@ namespace C3.Communi
             }
         } private object _value;
         #endregion //Value
+
         #region SetValue
         /// <summary>
         /// 
@@ -170,7 +165,7 @@ namespace C3.Communi
         /// <param name="value"></param>
         virtual protected void VerifyValue(object value)
         {
-            // TODO: 2012-08-10 value is valuetype
+            // value is valuetype
             //
             //if (value.GetType() != this.ValueType)
             if (!this.ValueType.IsInstanceOfType(value))

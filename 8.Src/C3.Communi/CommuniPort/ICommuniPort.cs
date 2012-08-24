@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO.Ports;
 using System.Collections.Generic;
 using System.Text;
 using Xdgk.Common;
@@ -29,9 +28,6 @@ namespace C3.Communi
         /// <returns></returns>
         //string ToXml();
 
-        // TODO: delete
-        //
-        //bool Match(ICommuniPortToken token);
         //CommuniPortStatus Status { get; }
 
         void Close();
@@ -78,120 +74,5 @@ namespace C3.Communi
             get;
         }
 
-    }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class SerialCommuniPort : ICommuniPort
-    {
-
-        public SerialCommuniPort(SerialPort sp)
-        {
-
-        }
-
-        #region SerialPort
-        /// <summary>
-        /// 
-        /// </summary>
-        public SerialPort SerialPort
-        {
-            get
-            {
-                return _serialPort;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("SerialPort");
-                }
-                _serialPort = value;
-            }
-        } private SerialPort _serialPort;
-        #endregion //SerialPort
-
-        #region ICommuniPort 成员
-
-        public event EventHandler Received;
-
-        public event EventHandler Determined;
-
-        public event EventHandler Closed;
-
-        public DateTime CreateDateTime
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public void Close()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Write(byte[] bytes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public byte[] Read()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsOccupy
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public void Occupy(TimeSpan ts)
-        {
-            throw new NotImplementedException();
-        }
-
-        public FilterCollection Filters
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string Identity
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public IdentityParserCollection IdentityParsers
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public bool IsOpened
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        #endregion
     }
 }

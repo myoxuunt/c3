@@ -1,9 +1,4 @@
-
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using Xdgk.Common;
 
 
 namespace C3.Communi
@@ -13,9 +8,18 @@ namespace C3.Communi
         public NumberParameter(string name, Type valueType, object value, int orderNumber)
             : base(name, valueType, value, orderNumber)
         {
-            //TODO: check value type
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        protected override void VerifyValue(object value)
+        {
+            // check value type
             // 
             // is byte int32 short long float double ...
+            object r = Convert.ChangeType(value, this.ValueType);
         }
     }
 

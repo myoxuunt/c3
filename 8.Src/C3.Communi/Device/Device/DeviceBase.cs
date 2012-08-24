@@ -1,5 +1,5 @@
 using System;
-using System.Reflection;
+using System.Diagnostics;
 
 namespace C3.Communi
 {
@@ -69,11 +69,7 @@ namespace C3.Communi
             IParameter p = this.GeneralGroup.Parameters[PN_ADDRESS];
             if (p == null)
             {
-                // TODO:
-                // number parameter
-                //
                 p = new NumberParameter(PN_ADDRESS, typeof(UInt64), (UInt64)0, PO_ADDRESS);
-                //p.ParameterUI = new NumberParameterUI();
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;
@@ -307,9 +303,8 @@ namespace C3.Communi
             {
                 if (_deviceType == null)
                 {
-                    // TODO: 2012-08-01
-                    //
                     _deviceType = DeviceTypeManager.GetDeviceType(this.GetType().Name);
+                    Debug.Assert(_deviceType != null);
                 }
                 return _deviceType;
             }

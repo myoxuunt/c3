@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using NLog;
 
 namespace C3.Communi
@@ -345,8 +343,6 @@ namespace C3.Communi
                 this.LastSendBytes = bytes;
                 this.LastExecute = DateTime.Now;
 
-                // TODO:
-                //
                 bool success = cp.Write(bytes);
                 if (success)
                 {

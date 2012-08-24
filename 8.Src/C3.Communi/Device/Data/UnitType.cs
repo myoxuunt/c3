@@ -1,26 +1,44 @@
-
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
-
 
 namespace C3.Communi
 {
     public class UnitType
     {
-        private UnitType(string text)
+        private UnitType(string name)
+            : this(name, name)
         {
-            if (text == null)
-            {
-                _text = string.Empty;
-            }
-
-            this._text = text;
+        }
+        private UnitType(string name, string text)
+        {
+            this.Name = name;
+            this.Text = text;
         }
 
-#region Text
+        #region Name
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                if (_name == null)
+                {
+                    _name = string.Empty;
+                }
+                return _name;
+            }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("name");
+
+                _name = value;
+            }
+        } private string _name;
+        #endregion //Name
+
+        #region Text
         /// <summary>
         /// 
         /// </summary>
@@ -34,20 +52,21 @@ namespace C3.Communi
                 }
                 return _text;
             }
+            set { _text = value; }
         } private string _text;
-#endregion //Text
+        #endregion //Text
 
 
-        // TODO: 2012-07-23 unit type text
+        // 2012-07-23 unit type text
         //
         static public readonly UnitType
             None = new UnitType(""),
-                 Length = new UnitType("Length"),
-                 Press = new UnitType("Press"),
-                 Temperature = new UnitType("Temperature"),
-                 Flow = new UnitType("Flow"),
-                 Volume = new UnitType("Volume"),
-                 Time = new UnitType("Time");
+                 Length = new UnitType("Length", "长度"),
+                 Press = new UnitType("Press", "压力"),
+                 Temperature = new UnitType("Temperature", "温度"),
+                 Flow = new UnitType("Flow", "流量"),
+                 Volume = new UnitType("Volume", "体积"),
+                 Time = new UnitType("Time", "时间");
     }
 
 }

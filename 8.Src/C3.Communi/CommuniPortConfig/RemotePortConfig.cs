@@ -1,7 +1,4 @@
-
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Net;
 
 
@@ -49,7 +46,8 @@ namespace C3.Communi
 
         public ICommuniPort Create()
         {
-            throw new NotImplementedException();
+            const string s = "Cannot create from RemotePortConfig";
+            throw new NotSupportedException(s);
         }
 
         public bool IsMatch(ICommuniPort cp)

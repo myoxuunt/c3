@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
-using Xdgk.Common;
 
 namespace C3.Communi
 {
@@ -27,9 +24,6 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// 
-        // TODO: 2012-07-30 
-        // replace string
-        //
         [DeviceDataItem("Ê±¼ä", -1, Unit.None, "G")]
         public DateTime DT
         {

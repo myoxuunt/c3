@@ -1,7 +1,3 @@
-
-using System;
-using Xdgk.Common;
-
 namespace C3.Communi
 {
     abstract public class DevicePersisterBase : IDevicePersister
@@ -24,9 +20,9 @@ namespace C3.Communi
             OnDelete(device);
         }
 
-        abstract public void OnAdd(IDevice device);
-        abstract public void OnUpdate(IDevice device);
-        abstract public void OnDelete(IDevice device);
+        protected abstract void OnAdd(IDevice device);
+        protected abstract void OnUpdate(IDevice device);
+        protected abstract void OnDelete(IDevice device);
     }
 
 }

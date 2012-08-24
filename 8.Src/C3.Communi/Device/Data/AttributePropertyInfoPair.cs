@@ -69,8 +69,7 @@ namespace C3.Communi
             }
             set
             {
-                throw new NotImplementedException();
-                //this.Attribute.OrderNumber = value;
+                this.Attribute.OrderNumber = value;
             }
         }
 

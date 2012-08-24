@@ -128,10 +128,10 @@ namespace C3.Communi
 
                 default:
                     {
-                        // TODO:
                         //
                         // clear
                         //
+                        throw new NotSupportedException(status.ToString());
                     }
                     break;
             }

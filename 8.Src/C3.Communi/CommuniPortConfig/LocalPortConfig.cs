@@ -1,7 +1,4 @@
-
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Net;
 
 
@@ -45,7 +42,8 @@ namespace C3.Communi
 
         public ICommuniPort Create()
         {
-            throw new NotImplementedException();
+            string s = "Cannot create from LocalPortConfig";
+            throw new NotSupportedException(s);
         }
 
         public bool IsMatch(ICommuniPort cp)

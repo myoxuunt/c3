@@ -80,6 +80,10 @@ namespace C3.Communi
             {
                 return _orderNumber;
             }
+            set 
+            {
+                _orderNumber = value; 
+            }
         } private int _orderNumber;
         #endregion //OrderNumber
 

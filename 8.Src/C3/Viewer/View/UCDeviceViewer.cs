@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 using C3.Communi;
 using C3.Resources;
@@ -192,7 +187,7 @@ namespace C3
         private void UnregisterEvents(IDevice device)
         {
             DeviceDataManager man = device.DeviceDataManager;
-            man.LastDataChanged -= new EventHandler(device_LastDataChanged);
+            man.LastDataChanged -= device_LastDataChanged;
 
             //
             //

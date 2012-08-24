@@ -46,7 +46,7 @@ namespace C3.Communi
             }
             set
             {
-                throw new NotImplementedException();
+                throw new NotSupportedException();
             }
         } private NumberParameterViewer _v;
 

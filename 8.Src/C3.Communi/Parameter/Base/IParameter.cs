@@ -1,10 +1,4 @@
-
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using Xdgk.Common;
-
 
 namespace C3.Communi
 {
@@ -17,7 +11,7 @@ namespace C3.Communi
         Type ValueType { get; set; }
         string Description { get; set; }
         Unit Unit { get; set; }
-        // TODO: 2012-08-03
+        // TODO: 2012-08-03 parameter option
         //
         // ParameterOption Option{get;set;}
 

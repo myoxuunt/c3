@@ -146,23 +146,10 @@ namespace C3.Communi
             }
             catch(Exception ex)
             {
-                // TODO: 
-                // do nothing
                 this.Soft.ErrorManager.Process(ex, "SocketListenerManager.CloseSocket exception"); 
             }
         }
 
-        /// <summary>
-        /// FD event
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void scp_ReceivedEvent(object sender, EventArgs e)
-        //{
-        //    SocketCommuniPort sckcp = sender as SocketCommuniPort;
-        //    byte[] bs = sckcp.Read();
-        //    this.CommuniSoft.FDManager.Process(sckcp, bs);
-        //}
         #endregion //item_ConnectedEvent
     }
 }

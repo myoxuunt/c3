@@ -39,9 +39,5 @@ namespace C3.Communi
             object obj = ObjectFactory.CreateWithInterface(this.Path, type);
             return obj;
         }
-
     }
-
-
-
 }

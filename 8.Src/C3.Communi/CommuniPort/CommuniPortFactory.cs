@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace C3.Communi
 {
@@ -12,9 +10,9 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="config"></param>
+        /// <param name="cpConfig"></param>
         /// <returns></returns>
-        public ICommuniPort Create(ICommuniPortConfig cpConfig)
+        public static ICommuniPort Create(ICommuniPortConfig cpConfig)
         {
             if (cpConfig == null)
             {
@@ -23,12 +21,13 @@ namespace C3.Communi
 
             if (!cpConfig.CanCreate)
             {
-                throw new InvalidOperationException("cannot create form communiPortConfig");
+                string s = string.Format(
+                    "cannot create form communiPortConfig: '{0}'",
+                    cpConfig.ToString());
+                throw new InvalidOperationException(s);
             }
 
-            // TODO: create
-            //
-            ICommuniPort cp = null;
+            ICommuniPort cp = cpConfig.Create();
             return cp;
 
         }

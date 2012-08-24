@@ -1,5 +1,3 @@
-
-using System;
 using Xdgk.Common;
 
 namespace C3.Communi
@@ -13,19 +11,17 @@ namespace C3.Communi
         /// <returns></returns>
         public byte[] Filt(byte[] source)
         {
-            //if (this.Count == 0)
-            //{
-            //    return source;
-            //}
+            if (this.Count == 0)
+            {
+                return source;
+            }
 
-            //string temp = (string)HexStringConverter.Default.ConvertToObject(source);
-            //foreach (IFilter f in this)
-            //{
-            //    temp = f.Filt(temp);
-            //}
-            //byte[] bs = (byte[])HexStringConverter.Default.ConvertToBytes(temp);
-            //return bs;
-            throw new NotImplementedException();
+            byte[] bs = source;
+            foreach (IFilter f in this)
+            {
+                bs = f.Filt(bs);
+            }
+            return bs;
         }
     }
 
