@@ -30,11 +30,11 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAddinManager = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskManage = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuM = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuView = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStatusbar = new System.Windows.Forms.ToolStripMenuItem();
@@ -86,18 +86,6 @@
             this.mnuFile.Size = new System.Drawing.Size(57, 20);
             this.mnuFile.Text = "文件(&F)";
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
-            // 
-            // mnuExit
-            // 
-            this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(152, 22);
-            this.mnuExit.Text = "退出(&X)";
-            this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
-            // 
             // mnuAddinManager
             // 
             this.mnuAddinManager.Name = "mnuAddinManager";
@@ -116,6 +104,18 @@
             this.mnuM.Size = new System.Drawing.Size(136, 22);
             this.mnuM.Text = "M";
             this.mnuM.Click += new System.EventHandler(this.mnuM_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(133, 6);
+            // 
+            // mnuExit
+            // 
+            this.mnuExit.Name = "mnuExit";
+            this.mnuExit.Size = new System.Drawing.Size(136, 22);
+            this.mnuExit.Text = "退出(&X)";
+            this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
             // 
             // mnuView
             // 
@@ -248,8 +248,8 @@
             // 
             this.tssListenPort.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.tssListenPort.Name = "tssListenPort";
-            this.tssListenPort.Size = new System.Drawing.Size(109, 17);
-            this.tssListenPort.Text = "toolStripStatusLabel1";
+            this.tssListenPort.Size = new System.Drawing.Size(63, 17);
+            this.tssListenPort.Text = "[ListenPort]";
             // 
             // sc1
             // 

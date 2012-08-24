@@ -10,6 +10,27 @@ namespace C3.Communi
 {
     public class Group : IGroup
     {
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="name"></param>
+        //public Group(string name)
+        //    : this(name)
+        //{
+
+        //}
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="text"></param>
+        public Group(string name, string text)
+        {
+            this.Name = name;
+            this.Text = text;
+        }
+
         #region Name
         /// <summary>
         /// 
@@ -27,6 +48,7 @@ namespace C3.Communi
             set
             {
                 _name = value;
+                _text = null;
             }
         } private string _name;
         #endregion //Name

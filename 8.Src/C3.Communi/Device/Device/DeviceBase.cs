@@ -70,6 +70,7 @@ namespace C3.Communi
             if (p == null)
             {
                 p = new NumberParameter(PN_ADDRESS, typeof(UInt64), (UInt64)0, PO_ADDRESS);
+                p.Text = strings.Address;
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;
@@ -106,6 +107,7 @@ namespace C3.Communi
             if (p == null)
             {
                 p = new StringParameter(PN_NAME, string.Empty, PO_NAME);
+                p.Text = strings.DeviceName;
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;
@@ -398,11 +400,11 @@ namespace C3.Communi
         {
             get
             {
-                IGroup g = this.Groups.GetGroup("General");
+                string name = "General";
+                IGroup g = this.Groups.GetGroup(name );
                 if (g == null)
                 {
-                    g = new Group();
-                    g.Name = "General";
+                    g = new Group(name, strings.General);
                     this.Groups.Add (g);
                 }
                 return g;

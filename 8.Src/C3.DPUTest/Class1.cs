@@ -57,9 +57,7 @@ namespace C3.DPUTest
             //ParameterCollection p = this.Parameters;//new ParameterCollection();
             //p.Add(i);
 
-            var g = new Group();
-            g.Name = "Name";
-            g.Text = "Text";
+            var g = new Group("name", "Text");
 
             IParameter i = new StringParameter("name", "value", 0);
             //i.ParameterUI = new StringParameterUI();

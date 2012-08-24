@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xdgk.Common;
-using C3.Communi ;
+﻿using C3.Communi;
 
 namespace C3
 {
@@ -41,7 +37,6 @@ namespace C3
         /// </summary>
         public override System.Windows.Forms.Form MainForm
         {
-
             get
             {
                 if (_mainForm == null)
@@ -62,5 +57,21 @@ namespace C3
                 return SoftManager.GetSoft();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Config Config
+        {
+            get
+            {
+                if (_config == null)
+                {
+                    _config = new Config();
+                    _config.AppName = System.Configuration.ConfigurationManager.AppSettings["AppName"];
+                }
+                return _config;
+            }
+        } private Config _config;
     }
 }

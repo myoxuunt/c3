@@ -70,6 +70,15 @@ namespace C3.Communi {
         }
         
         /// <summary>
+        ///   查找类似 地址 的本地化字符串。
+        /// </summary>
+        internal static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 地址错误 的本地化字符串。
         /// </summary>
         internal static string AddressErrorResult {
@@ -142,6 +151,15 @@ namespace C3.Communi {
         }
         
         /// <summary>
+        ///   查找类似 通讯 的本地化字符串。
+        /// </summary>
+        internal static string CommuniPortConfig {
+            get {
+                return ResourceManager.GetString("CommuniPortConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 转换器 的本地化字符串。
         /// </summary>
         internal static string Converter {
@@ -196,6 +214,15 @@ namespace C3.Communi {
         }
         
         /// <summary>
+        ///   查找类似 名称 的本地化字符串。
+        /// </summary>
+        internal static string DeviceName {
+            get {
+                return ResourceManager.GetString("DeviceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 已经存在 &apos;{0}&apos; 地址 &apos;{1}&apos; 的本地化字符串。
         /// </summary>
         internal static string ExistAddress {
@@ -219,6 +246,15 @@ namespace C3.Communi {
         internal static string Expected {
             get {
                 return ResourceManager.GetString("Expected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 常规 的本地化字符串。
+        /// </summary>
+        internal static string General {
+            get {
+                return ResourceManager.GetString("General", resourceCulture);
             }
         }
         
@@ -327,6 +363,15 @@ namespace C3.Communi {
         internal static string Station {
             get {
                 return ResourceManager.GetString("Station", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 名称 的本地化字符串。
+        /// </summary>
+        internal static string StationName {
+            get {
+                return ResourceManager.GetString("StationName", resourceCulture);
             }
         }
         

@@ -126,7 +126,22 @@
   <data name="DeviceType" xml:space="preserve">
     <value>设备类型</value>
   </data>
+  <data name="Listening" xml:space="preserve">
+    <value>监听</value>
+  </data>
+  <data name="SelectDeviceFirst" xml:space="preserve">
+    <value>请先选择设备</value>
+  </data>
+  <data name="SelectStationFirst" xml:space="preserve">
+    <value>请先选择站点</value>
+  </data>
   <data name="StationType" xml:space="preserve">
     <value>站点类型</value>
+  </data>
+  <data name="SureToDelete" xml:space="preserve">
+    <value>确定删除吗?</value>
+  </data>
+  <data name="SureToQuit" xml:space="preserve">
+    <value>确定退出吗?</value>
   </data>
 </root>

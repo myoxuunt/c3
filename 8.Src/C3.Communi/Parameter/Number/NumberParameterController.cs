@@ -57,8 +57,7 @@ namespace C3.Communi
 
         public void UpdateViewer()
         {
-            //throw new NotImplementedException();
-            this._v.ParameterName = _n.Name;
+            this._v.ParameterName = _n.Text + ":";
             this._v.ValueType = _n.ValueType;
             this._v.Value = _n.Value;
             this._v.Unit = _n.Unit.Text;
@@ -66,7 +65,6 @@ namespace C3.Communi
 
         public bool Verify()
         {
-            //throw new NotImplementedException();
             return this._v.Verify();
         }
 

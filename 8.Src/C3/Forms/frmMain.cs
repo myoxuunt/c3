@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using C3.Communi;
+using System.Net;
 
 namespace C3
 {
@@ -57,9 +58,24 @@ namespace C3
         /// </summary>
         private void Init()
         {
+            this.Text = C3App.App.Config.AppName;
+
             this.sc1.Panel1.Controls.Add(this.HardwareTreeView);
             //this.sc2.Panel2.Controls.Add(this.UCTaskViewer);
 
+            //
+            //
+            string s = string.Empty;
+            foreach (SocketListener item in this.Soft.SocketListenerManager.SocketListeners)
+            {
+                s += item.LocalEndpoint.ToString() + ", ";
+            }
+            if (s.Length > 2)
+            {
+                s = s.Remove(s.Length - 2);
+            }
+
+            this.tssListenPort.Text = string.Format("{0}: {1}", Strings.Listening, s);
         }
         #endregion //Init
 
@@ -137,6 +153,11 @@ namespace C3
         #endregion //Soft
 
         #region frmMain_Load
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmMain_Load(object sender, EventArgs e)
         {
             Soft soft = SoftManager.GetSoft();
@@ -145,7 +166,7 @@ namespace C3
 
             n = soft.SocketListenerManager.SocketListeners.Count;
 
-            this.Text = n.ToString();
+            //this.Text = n.ToString();
 
             // spu
             //
@@ -165,7 +186,7 @@ namespace C3
         /// <param name="e"></param>
         private void mnuExit_Click(object sender, EventArgs e)
         {
-            DialogResult dr = NUnit.UiKit.UserMessage.Ask  ("quit?");
+            DialogResult dr = NUnit.UiKit.UserMessage.Ask(Strings.SureToQuit);
             if (dr == DialogResult.Yes)
             {
                 this.Close();
@@ -174,11 +195,19 @@ namespace C3
         #endregion //mnuExit_Click
 
         #region mnuAbout_Click
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuAbout_Click(object sender, EventArgs e)
         {
-            frmHardware f = new frmHardware(C3App.App.Soft.Hardware.Stations[0]);
-            f.ShowDialog();
-            //this.treeView1 
+            string s = string.Format(
+                "{0} v{1}",
+                C3App.App.Config.AppName,
+                ProductVersion);
+
+            NUnit.UiKit.UserMessage.DisplayInfo(s);
         }
         #endregion //mnuAbout_Click
 
@@ -190,17 +219,12 @@ namespace C3
         /// <param name="e"></param>
         private void mnuCommuniDetail_Click(object sender, EventArgs e)
         {
-            DeviceTreeNode deviceNode = this._hardwareTreeView.SelectedNode as DeviceTreeNode;
-            if (deviceNode != null)
+            IDevice device = this.GetSelectedDevice(true);
+            if (device != null)
             {
-                CommuniDetailCollection communiDetails = deviceNode.Device.CommuniDetails;
-                frmCommuniDetails f = new frmCommuniDetails(deviceNode.Device, communiDetails);
+                CommuniDetailCollection communiDetails = device.CommuniDetails;
+                frmCommuniDetails f = new frmCommuniDetails(device, communiDetails);
                 f.ShowDialog(this);
-
-            }
-            else
-            {
-                NUnit.UiKit.UserMessage.DisplayInfo("select device node");
             }
         }
         #endregion //mnuCommuniDetail_Click
@@ -232,34 +256,34 @@ namespace C3
         {
             //string s = Soft.Hardware.Stations[0].Devices[0].ToString();
             frmGroups f = new frmGroups();
-            GroupCollection gs = new GroupCollection();
-            CommuniPortConfigParameter p = new CommuniPortConfigParameter(
-                "nonennnnn",
-                new SerialCommuniPortConfig(
-                new SerialPortSetting("com1",
-                    9600, System.IO.Ports.Parity.Even,
-                    8, System.IO.Ports.StopBits.None)),
-                    0);
-            Group g = new Group();
-            g.Parameters.Add(p);
-            gs.Add(g);
-            f.Groups = gs;
-            f.ShowDialog();
+            //GroupCollection gs = new GroupCollection();
+            //CommuniPortConfigParameter p = new CommuniPortConfigParameter(
+            //    "nonennnnn",
+            //    new SerialCommuniPortConfig(
+            //    new SerialPortSetting("com1",
+            //        9600, System.IO.Ports.Parity.Even,
+            //        8, System.IO.Ports.StopBits.None)),
+            //        0);
+            //Group g = new Group();
+            //g.Parameters.Add(p);
+            //gs.Add(g);
+            //f.Groups = gs;
+            //f.ShowDialog();
         }
 
         #region mnuDeviceEdit_Click
         private void mnuDeviceEdit_Click(object sender, EventArgs e)
         {
-            DeviceTreeNode deviceNode = this._hardwareTreeView.SelectedNode as DeviceTreeNode;
-            if (deviceNode != null)
+            IDevice device = GetSelectedDevice(true);
+            if (device!= null)
             {
-                IDevice d = deviceNode.Device;
-                IDeviceUI ui = d.Dpu.DeviceUI;
-                DialogResult dr = ui.Edit(d);
+                IDeviceUI ui = device.Dpu.DeviceUI;
+                DialogResult dr = ui.Edit(device);
                 if (dr == DialogResult.OK)
                 {
-                    d.Dpu.DevicePersister.Update(d);
+                    device.Dpu.DevicePersister.Update(device);
 
+                    DeviceTreeNode deviceNode = (DeviceTreeNode)this.HardwareTreeView.SelectedNode;
                     deviceNode.RefreshDeviceTreeNode();
                 }
             }
@@ -299,7 +323,7 @@ namespace C3
             }
             if (r == null && showNotSelectedMsg)
             {
-                NUnit.UiKit.UserMessage.DisplayFailure("selected station first");
+                NUnit.UiKit.UserMessage.DisplayFailure(Strings.SelectStationFirst);
             }
             return r;
 
@@ -322,7 +346,7 @@ namespace C3
             }
             if (r == null && showNotSelectedMsg)
             {
-                NUnit.UiKit.UserMessage.DisplayFailure("selected device first");
+                NUnit.UiKit.UserMessage.DisplayFailure(Strings.SelectDeviceFirst);
             }
             return r;
         }
@@ -405,7 +429,7 @@ namespace C3
             IDevice selected = GetSelectedDevice(true);
             if (selected != null)
             {
-                DialogResult dr = NUnit.UiKit.UserMessage.Ask("delete ?");
+                DialogResult dr = NUnit.UiKit.UserMessage.Ask(Strings.SureToDelete);
                 if (dr == DialogResult.Yes)
                 {
                     IStation station = selected.Station;
@@ -495,7 +519,7 @@ namespace C3
             IStation station = GetSelectedStation(true);
             if (station != null)
             {
-                DialogResult dr = NUnit.UiKit.UserMessage.Ask("delete?");
+                DialogResult dr = NUnit.UiKit.UserMessage.Ask(Strings.SureToDelete);
                 if (dr == DialogResult.Yes)
                 {
                     station.Spu.StationPersister.Delete(station);
@@ -506,6 +530,7 @@ namespace C3
         }
         #endregion //mnuStationDelete_Click
 
+        #region mnuToolbar_Click
         /// <summary>
         /// 
         /// </summary>
@@ -516,7 +541,9 @@ namespace C3
             this.mnuToolbar.Checked = !this.mnuToolbar.Checked;
             this.toolStrip1.Visible = this.mnuToolbar.Checked;
         }
+        #endregion //mnuToolbar_Click
 
+        #region mnuStatusbar_Click
         /// <summary>
         /// 
         /// </summary>
@@ -529,5 +556,6 @@ namespace C3
 
             this.statusStrip1.Visible = item.Checked;
         }
+        #endregion //mnuStatusbar_Click
     }
 }

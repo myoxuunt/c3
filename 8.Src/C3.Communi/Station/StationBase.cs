@@ -10,6 +10,9 @@ namespace C3.Communi
         private const string PN_NAME = "Name",
             PN_COMMUNIPORTCONFIG = "CommuniPortConfig";
 
+        private const string GN_GENERAL = "General",
+            GN_COMMUNIPORTCONFIG = "CommuniPortConfig";
+
         private const int PO_NAME = -90,
             PO_COMMUNIPORTCONFIG = -80;
 
@@ -89,7 +92,8 @@ namespace C3.Communi
             IParameter p = this.GeneralGroup.Parameters[PN_NAME];
             if (p == null)
             {
-                p = new StringParameter(PN_NAME, "unknown", PO_NAME);
+                p = new StringParameter(PN_NAME, "unknown name", PO_NAME);
+                p.Text = strings.StationName;
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;
@@ -262,6 +266,9 @@ namespace C3.Communi
             {
                 p = new CommuniPortConfigParameter(PN_COMMUNIPORTCONFIG,
                     NullCommuniPortConfig.Default, PO_COMMUNIPORTCONFIG);
+                // not need
+                //
+                //p.Text = "";
                 this.CommuniPortConfigGroup.Parameters.Add(p);
             }
             return p;
@@ -342,12 +349,10 @@ namespace C3.Communi
         {
             get
             {
-                const string name = "常规";
-                IGroup g = this.Groups.GetGroup(name);
+                IGroup g = this.Groups.GetGroup(GN_GENERAL);
                 if (g == null)
                 {
-                    g = new Group();
-                    g.Name = name;
+                    g = new Group(GN_GENERAL, strings.General);
                     this.Groups.Add(g);
                 }
                 return g;
@@ -362,11 +367,10 @@ namespace C3.Communi
         {
             get
             {
-                IGroup g = this.Groups.GetGroup("CommuniPortConfig");
+                IGroup g = this.Groups.GetGroup(GN_COMMUNIPORTCONFIG);
                 if (g == null)
                 {
-                    g = new Group();
-                    g.Name = PN_COMMUNIPORTCONFIG;
+                    g = new Group(GN_COMMUNIPORTCONFIG, strings.CommuniPortConfig);
                     this.Groups.Add(g);
                 }
                 return g;

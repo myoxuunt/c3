@@ -88,11 +88,56 @@ namespace C3 {
         }
         
         /// <summary>
+        ///   查找类似 监听 的本地化字符串。
+        /// </summary>
+        internal static string Listening {
+            get {
+                return ResourceManager.GetString("Listening", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请先选择设备 的本地化字符串。
+        /// </summary>
+        internal static string SelectDeviceFirst {
+            get {
+                return ResourceManager.GetString("SelectDeviceFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请先选择站点 的本地化字符串。
+        /// </summary>
+        internal static string SelectStationFirst {
+            get {
+                return ResourceManager.GetString("SelectStationFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 站点类型 的本地化字符串。
         /// </summary>
         internal static string StationType {
             get {
                 return ResourceManager.GetString("StationType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确定删除吗? 的本地化字符串。
+        /// </summary>
+        internal static string SureToDelete {
+            get {
+                return ResourceManager.GetString("SureToDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 确定退出吗? 的本地化字符串。
+        /// </summary>
+        internal static string SureToQuit {
+            get {
+                return ResourceManager.GetString("SureToQuit", resourceCulture);
             }
         }
     }

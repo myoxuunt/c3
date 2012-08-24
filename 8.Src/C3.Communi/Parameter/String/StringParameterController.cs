@@ -1,10 +1,4 @@
-
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
-using Xdgk.Common;
-
 
 namespace C3.Communi
 {
@@ -69,7 +63,7 @@ namespace C3.Communi
         {
             StringParameter p = (StringParameter)this.Model;
             StringParameterViewer v = this.GetStringParameterViewer();
-            v.ParameterName = p.Name;
+            v.ParameterName = p.Text + ":";
             v.Value = p.Value.ToString();
             v.Unit = p.Unit.ToString();
         }
