@@ -21,15 +21,15 @@ namespace C3.Communi
         static private string BytesConverterAddinDir = "bc";
         private List<Assembly> _assemblyList= new List<Assembly>();
 
-        #region BytesConverterCollection
+        #region BytesConverters
         /// <summary>
         /// 
         /// </summary>
-        public BytesConverterCollection BytesConverterCollection
+        public BytesConverterCollection BytesConverters
         {
             get { return _bytesConverterCollection; }
         } private BytesConverterCollection _bytesConverterCollection = new BytesConverterCollection();
-        #endregion //BytesConverterCollection
+        #endregion //BytesConverters
 
         #region BytesConverterManager
         /// <summary>

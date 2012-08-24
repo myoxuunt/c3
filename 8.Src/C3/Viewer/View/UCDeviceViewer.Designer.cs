@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.lvTask = new System.Windows.Forms.ListView();
             this.chOperaName = new System.Windows.Forms.ColumnHeader();
             this.chLastExecute = new System.Windows.Forms.ColumnHeader();
@@ -44,14 +43,6 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(283, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(101, 30);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "device viewer";
             // 
             // lvTask
             // 
@@ -100,7 +91,6 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.lvDeviceDataLast);
-            this.splitContainer1.Panel1.Controls.Add(this.richTextBox1);
             // 
             // splitContainer1.Panel2
             // 
@@ -116,11 +106,12 @@
             this.chName,
             this.chValue,
             this.chUnit});
+            this.lvDeviceDataLast.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvDeviceDataLast.FullRowSelect = true;
             this.lvDeviceDataLast.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.lvDeviceDataLast.Location = new System.Drawing.Point(3, 44);
+            this.lvDeviceDataLast.Location = new System.Drawing.Point(0, 0);
             this.lvDeviceDataLast.Name = "lvDeviceDataLast";
-            this.lvDeviceDataLast.Size = new System.Drawing.Size(381, 126);
+            this.lvDeviceDataLast.Size = new System.Drawing.Size(387, 173);
             this.lvDeviceDataLast.TabIndex = 1;
             this.lvDeviceDataLast.UseCompatibleStateImageBehavior = false;
             this.lvDeviceDataLast.View = System.Windows.Forms.View.Details;
@@ -157,7 +148,6 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ListView lvTask;
         private System.Windows.Forms.ColumnHeader chOperaName;
         private System.Windows.Forms.ColumnHeader chLastExecute;

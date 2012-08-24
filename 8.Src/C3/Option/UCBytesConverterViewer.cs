@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using C3.Communi;
 using Xdgk.Communi.Interface;
 
@@ -15,11 +9,11 @@ namespace C3
         /// <summary>
         /// 
         /// </summary>
-        public UCBytesConverterViewer()
+        public UCBytesConverterViewer(BytesConverterCollection bcs)
         {
             InitializeComponent();
 
-            this.BytesConverters = C3App.App.Soft.BytesConverterManager.BytesConverterCollection;
+            this.BytesConverters = bcs;
         }
 
         /// <summary>
@@ -62,7 +56,8 @@ namespace C3
         private ListViewItem CreateListViewItem(IBytesConverter bc)
         {
             string assemblyInfo = GetAssemblyInfo(bc);
-            string[] items = new string[] {bc.GetType().FullName , "-", assemblyInfo };
+            //string[] items = new string[] {bc.GetType().FullName , "-", assemblyInfo };
+            string[] items = new string[] { bc.GetType().FullName };
             ListViewItem lvi = new ListViewItem(items);
             return lvi;
         }

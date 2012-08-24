@@ -151,6 +151,9 @@ namespace C3
             //
             //this.ucSpus1.SPUs = App.Soft.SPUs;
             //this.ucSpus1.RefreshSPUs();
+
+            this.mnuToolbar.Checked = this.toolStrip1.Visible;
+            this.mnuStatusbar.Checked = this.statusStrip1.Visible;
         }
         #endregion //frmMain_Load
 
@@ -162,7 +165,11 @@ namespace C3
         /// <param name="e"></param>
         private void mnuExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult dr = NUnit.UiKit.UserMessage.Ask  ("quit?");
+            if (dr == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
         #endregion //mnuExit_Click
 
@@ -205,23 +212,6 @@ namespace C3
             DialogResult dr = f.ShowDialog(this);
         }
         #endregion //mnuM_Click
-
-        #region mnuTaskView_Click
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void mnuTaskView_Click(object sender, EventArgs e)
-        {
-            DeviceTreeNode deviceNode = this._hardwareTreeView.SelectedNode as DeviceTreeNode;
-            if (deviceNode != null)
-            {
-                //UCTaskViewer f = new UCTaskViewer(deviceNode.Device);
-                //f.ShowDialog(this);
-            }
-        }
-        #endregion //mnuTaskView_Click
 
         #region mnuTest_Click
         /// <summary>
@@ -515,5 +505,29 @@ namespace C3
             }
         }
         #endregion //mnuStationDelete_Click
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuToolbar_Click(object sender, EventArgs e)
+        {
+            this.mnuToolbar.Checked = !this.mnuToolbar.Checked;
+            this.toolStrip1.Visible = this.mnuToolbar.Checked;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuStatusbar_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            item.Checked = !item.Checked;
+
+            this.statusStrip1.Visible = item.Checked;
+        }
     }
 }

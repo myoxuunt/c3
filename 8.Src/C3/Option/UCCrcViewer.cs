@@ -45,7 +45,8 @@ namespace C3
         private ListViewItem CreateListViewItem(ICRCer item)
         {
             string assemblyInfo = GetAssemblyInfo(item);
-            string[] items = new string[] { item.GetType ().Name , "-", assemblyInfo };
+            //string[] items = new string[] { item.GetType ().Name , "-", assemblyInfo };
+            string[] items = new string[] { item.GetType().FullName };
             ListViewItem lvi = new ListViewItem(items );
             return lvi;
         }

@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using C3.Communi ;
 
 namespace C3
 {
     public partial class UCStationViewer : UserControl
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public UCStationViewer()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public IStation Station
         {
             get { return _station; }
@@ -29,9 +29,11 @@ namespace C3
             }
         }private IStation _station;
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RefreshStation()
         {
-            this.richTextBox1.Text += Station.Name;
         } 
     }
 }

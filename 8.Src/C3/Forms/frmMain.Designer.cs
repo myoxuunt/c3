@@ -47,7 +47,6 @@
             this.mnuDeviceEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDeviceDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuCommuniDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuTaskView = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTest = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,11 +77,11 @@
             // mnuFile
             // 
             this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
-            this.mnuExit,
             this.mnuAddinManager,
             this.mnuTaskManage,
-            this.mnuM});
+            this.mnuM,
+            this.toolStripSeparator1,
+            this.mnuExit});
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(57, 20);
             this.mnuFile.Text = "文件(&F)";
@@ -95,8 +94,8 @@
             // mnuExit
             // 
             this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(136, 22);
-            this.mnuExit.Text = "退出";
+            this.mnuExit.Size = new System.Drawing.Size(152, 22);
+            this.mnuExit.Text = "退出(&X)";
             this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
             // 
             // mnuAddinManager
@@ -132,12 +131,14 @@
             this.mnuToolbar.Name = "mnuToolbar";
             this.mnuToolbar.Size = new System.Drawing.Size(124, 22);
             this.mnuToolbar.Text = "工具栏(&T)";
+            this.mnuToolbar.Click += new System.EventHandler(this.mnuToolbar_Click);
             // 
             // mnuStatusbar
             // 
             this.mnuStatusbar.Name = "mnuStatusbar";
             this.mnuStatusbar.Size = new System.Drawing.Size(124, 22);
             this.mnuStatusbar.Text = "状态栏(&S)";
+            this.mnuStatusbar.Click += new System.EventHandler(this.mnuStatusbar_Click);
             // 
             // mnuStation
             // 
@@ -152,22 +153,22 @@
             // mnuStationAdd
             // 
             this.mnuStationAdd.Name = "mnuStationAdd";
-            this.mnuStationAdd.Size = new System.Drawing.Size(152, 22);
-            this.mnuStationAdd.Text = "添加(&A)";
+            this.mnuStationAdd.Size = new System.Drawing.Size(125, 22);
+            this.mnuStationAdd.Text = "添加(&A)...";
             this.mnuStationAdd.Click += new System.EventHandler(this.mnuStationAdd_Click);
             // 
             // mnuStationEdit
             // 
             this.mnuStationEdit.Name = "mnuStationEdit";
-            this.mnuStationEdit.Size = new System.Drawing.Size(152, 22);
-            this.mnuStationEdit.Text = "修改(&E)";
+            this.mnuStationEdit.Size = new System.Drawing.Size(125, 22);
+            this.mnuStationEdit.Text = "修改(&E)...";
             this.mnuStationEdit.Click += new System.EventHandler(this.mnuStationEdit_Click);
             // 
             // mnuStationDelete
             // 
             this.mnuStationDelete.Name = "mnuStationDelete";
-            this.mnuStationDelete.Size = new System.Drawing.Size(152, 22);
-            this.mnuStationDelete.Text = "删除(&D)";
+            this.mnuStationDelete.Size = new System.Drawing.Size(125, 22);
+            this.mnuStationDelete.Text = "删除(&D)...";
             this.mnuStationDelete.Click += new System.EventHandler(this.mnuStationDelete_Click);
             // 
             // mnuDevice
@@ -176,8 +177,7 @@
             this.mnuDeviceAdd,
             this.mnuDeviceEdit,
             this.mnuDeviceDelete,
-            this.mnuCommuniDetail,
-            this.mnuTaskView});
+            this.mnuCommuniDetail});
             this.mnuDevice.Name = "mnuDevice";
             this.mnuDevice.Size = new System.Drawing.Size(58, 20);
             this.mnuDevice.Text = "设备(&D)";
@@ -185,37 +185,30 @@
             // mnuDeviceAdd
             // 
             this.mnuDeviceAdd.Name = "mnuDeviceAdd";
-            this.mnuDeviceAdd.Size = new System.Drawing.Size(164, 22);
-            this.mnuDeviceAdd.Text = "添加(&A)";
+            this.mnuDeviceAdd.Size = new System.Drawing.Size(147, 22);
+            this.mnuDeviceAdd.Text = "添加(&A)...";
             this.mnuDeviceAdd.Click += new System.EventHandler(this.mnuDeviceAdd_Click);
             // 
             // mnuDeviceEdit
             // 
             this.mnuDeviceEdit.Name = "mnuDeviceEdit";
-            this.mnuDeviceEdit.Size = new System.Drawing.Size(164, 22);
-            this.mnuDeviceEdit.Text = "修改(&E)";
+            this.mnuDeviceEdit.Size = new System.Drawing.Size(147, 22);
+            this.mnuDeviceEdit.Text = "修改(&E)...";
             this.mnuDeviceEdit.Click += new System.EventHandler(this.mnuDeviceEdit_Click);
             // 
             // mnuDeviceDelete
             // 
             this.mnuDeviceDelete.Name = "mnuDeviceDelete";
-            this.mnuDeviceDelete.Size = new System.Drawing.Size(164, 22);
-            this.mnuDeviceDelete.Text = "删除(&D)";
+            this.mnuDeviceDelete.Size = new System.Drawing.Size(147, 22);
+            this.mnuDeviceDelete.Text = "删除(&D)...";
             this.mnuDeviceDelete.Click += new System.EventHandler(this.mnuDeviceDelete_Click);
             // 
             // mnuCommuniDetail
             // 
             this.mnuCommuniDetail.Name = "mnuCommuniDetail";
-            this.mnuCommuniDetail.Size = new System.Drawing.Size(164, 22);
-            this.mnuCommuniDetail.Text = "mnuCommuniDetail";
+            this.mnuCommuniDetail.Size = new System.Drawing.Size(147, 22);
+            this.mnuCommuniDetail.Text = "通讯记录(&L)...";
             this.mnuCommuniDetail.Click += new System.EventHandler(this.mnuCommuniDetail_Click);
-            // 
-            // mnuTaskView
-            // 
-            this.mnuTaskView.Name = "mnuTaskView";
-            this.mnuTaskView.Size = new System.Drawing.Size(164, 22);
-            this.mnuTaskView.Text = "TaskView";
-            this.mnuTaskView.Click += new System.EventHandler(this.mnuTaskView_Click);
             // 
             // mnuHelp
             // 
@@ -260,7 +253,6 @@
             // 
             // sc1
             // 
-            this.sc1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.sc1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sc1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.sc1.Location = new System.Drawing.Point(0, 49);
@@ -271,7 +263,6 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
@@ -329,7 +320,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuCommuniDetail;
         private System.Windows.Forms.ToolStripMenuItem mnuM;
-        private System.Windows.Forms.ToolStripMenuItem mnuTaskView;
         private System.Windows.Forms.ToolStripMenuItem mnuTest;
     }
 }

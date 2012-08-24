@@ -30,36 +30,25 @@
         {
             this.listView1 = new System.Windows.Forms.ListView();
             this.chTypeName = new System.Windows.Forms.ColumnHeader();
-            this.chDescription = new System.Windows.Forms.ColumnHeader();
-            this.chAssemblyInfo = new System.Windows.Forms.ColumnHeader();
             this.SuspendLayout();
             // 
             // listView1
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.chTypeName,
-            this.chDescription,
-            this.chAssemblyInfo});
+            this.chTypeName});
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(347, 185);
+            this.listView1.Size = new System.Drawing.Size(405, 185);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // chTypeName
             // 
-            this.chTypeName.Text = "TypeName";
-            // 
-            // chDescription
-            // 
-            this.chDescription.Text = "Description";
-            // 
-            // chAssemblyInfo
-            // 
-            this.chAssemblyInfo.Text = "AssemblyInfo";
+            this.chTypeName.Text = "名称";
+            this.chTypeName.Width = 400;
             // 
             // UCBytesConverterViewer
             // 
@@ -67,7 +56,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.listView1);
             this.Name = "UCBytesConverterViewer";
-            this.Size = new System.Drawing.Size(347, 185);
+            this.Size = new System.Drawing.Size(405, 185);
             this.ResumeLayout(false);
 
         }
@@ -76,7 +65,5 @@
 
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ColumnHeader chTypeName;
-        private System.Windows.Forms.ColumnHeader chDescription;
-        private System.Windows.Forms.ColumnHeader chAssemblyInfo;
     }
 }

@@ -61,6 +61,24 @@ namespace C3 {
         }
         
         /// <summary>
+        ///   查找类似 转换 的本地化字符串。
+        /// </summary>
+        internal static string BytesConverter {
+            get {
+                return ResourceManager.GetString("BytesConverter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 校验 的本地化字符串。
+        /// </summary>
+        internal static string Crcer {
+            get {
+                return ResourceManager.GetString("Crcer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 设备类型 的本地化字符串。
         /// </summary>
         internal static string DeviceType {

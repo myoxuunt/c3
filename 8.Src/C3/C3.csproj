@@ -58,6 +58,8 @@
     <Compile Include="frmStationType.Designer.cs">
       <DependentUpon>frmStationType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Option\DisplayArea.cs" />
+    <Compile Include="Option\OptionTreeNode.cs" />
     <Compile Include="Resources\CommuniDetailResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

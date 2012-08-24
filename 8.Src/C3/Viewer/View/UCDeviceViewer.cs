@@ -9,7 +9,6 @@ namespace C3
 {
     public partial class UCDeviceViewer : UserControl
     {
-
         /// <summary>
         /// 
         /// </summary>
@@ -83,9 +82,6 @@ namespace C3
                     }
 
                     _device = value;
-
-
-                    this.richTextBox1.Text = DateTime.Now.ToString() + _device.ToString();
 
                     FillTaskListView();
                     FillDeviceLastData();

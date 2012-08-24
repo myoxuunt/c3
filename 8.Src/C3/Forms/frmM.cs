@@ -10,7 +10,7 @@ using C3.Communi ;
 
 namespace C3
 {
-    public partial class frmM : Form
+    public partial class frmM : NUnit.UiKit.FixedDialogBase
     {
         public frmM()
         {

@@ -14,6 +14,8 @@ namespace C3
 
         private Soft _soft;
         private DisplayArea _displayArea;
+        private OptionTreeNode _bcNode, _crcNode;
+
         /// <summary>
         /// 
         /// </summary>
@@ -29,20 +31,51 @@ namespace C3
         /// </summary>
         private void Init()
         {
+            this.ShowLines = false;
             this.Click += new EventHandler(OptionTreeView_Click);
             this.AfterSelect += new TreeViewEventHandler(OptionTreeView_AfterSelect);
 
-            BytesConverterCollection bytesConverters = this._soft.BytesConverterManager.BytesConverterCollection;
-            //BytesConverterView.UCBytesConverterViewer  c1 = new C3.BytesConverterView.UCBytesConverterViewer(
-            //this.Nodes.Add(new BytesConverterOptionTreeNode(bytesConverters));
-            //this.Nodes.Add(new OptionTreeNode ());
-
-            CRCerCollection crcers = this._soft.CRCerManager.CRCers;
-            Control c = new UCCrcViewer(crcers);
-            OptionTreeNode op = new OptionTreeNode("ooo", c);
-            this.Nodes.Add(op);
+            this.Nodes.Add(GetBytesConverterNode());
+            this.Nodes.Add(GetCrcNode());
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private OptionTreeNode GetCrcNode()
+        {
+            if (_crcNode == null)
+            {
+                CRCerCollection crcers = C3App.App.Soft.CRCerManager.CRCers;
+                Control c = new UCCrcViewer(crcers);
+                _crcNode  = new OptionTreeNode(Strings.Crcer , c);
+            }
+            return _crcNode;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private OptionTreeNode GetBytesConverterNode()
+        {
+
+            if (_bcNode == null)
+            {
+                BytesConverterCollection bcs = C3App.App.Soft.BytesConverterManager.BytesConverters;
+                UCBytesConverterViewer c1 = new UCBytesConverterViewer(bcs);
+                _bcNode = new OptionTreeNode(Strings.BytesConverter, c1);
+            }
+            return _bcNode;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void OptionTreeView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             this.OptionTreeView_Click(null, null);
@@ -86,97 +119,9 @@ namespace C3
                 item.Visible = false;
             }
 
-            _displayArea.Label.Text = optionNode.GetType().Name;
+            _displayArea.Label.Text = optionNode.Text;
             c.Visible = true;
         }
-
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class OptionTreeNode : TreeNode
-    {
-        public OptionTreeNode( string text , Control control)
-        {
-            this.Text = text;
-            this.Control = control;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        virtual public Control Control 
-        {
-            get
-            {
-                return _control;
-            }
-            set
-            {
-                _control = value;
-            }
-        } private Control _control;
-    }
-
-    /*
-    /// <summary>
-    /// 
-    /// </summary>
-    public class BytesConverterOptionTreeNode : OptionTreeNode
-    {
-        private BytesConverterCollection _bytesConverters;
-
-        public BytesConverterOptionTreeNode(BytesConverterCollection bytesConverters)
-        {
-            this.Text = "BCOption";
-            this._bytesConverters = bytesConverters;
-        }
-
-        public override Control Control
-        {
-            get
-            {
-                if (_control == null)
-                {
-                    _control = new C3.BytesConverterView.UCBytesConverterViewer();
-                    _control.BytesConverters = _bytesConverters;
-                }
-                return _control;
-            }
-        } private C3.BytesConverterView.UCBytesConverterViewer _control;
-    }
-     */
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class DisplayArea
-    {
-        public DisplayArea(Label label, Panel panel)
-        {
-            this.Label = label;
-            this.Panel = panel;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public Label Label
-        {
-            get { return _label; }
-            set { _label = value; }
-        } private Label _label;
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Panel Panel
-        {
-            get { return _panel; }
-            set { _panel = value; }
-        } private Panel _panel;
-
 
     }
 }
