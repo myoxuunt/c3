@@ -31,7 +31,8 @@ namespace C3
         /// </summary>
         private void Init()
         {
-            this.ShowLines = false;
+            //this.ShowLines = false;
+            this.ShowRootLines = false;
             this.Click += new EventHandler(OptionTreeView_Click);
             this.AfterSelect += new TreeViewEventHandler(OptionTreeView_AfterSelect);
 

@@ -190,7 +190,6 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        [DeviceInfo("guid", 1)]
         public Guid Guid
         {
             get

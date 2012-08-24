@@ -232,7 +232,7 @@ namespace C3
         #region mnuM_Click
         private void mnuM_Click(object sender, EventArgs e)
         {
-            frmM f = new frmM();
+            frmAddin f = new frmAddin();
             DialogResult dr = f.ShowDialog(this);
         }
         #endregion //mnuM_Click

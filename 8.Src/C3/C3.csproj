@@ -119,11 +119,11 @@
     <Compile Include="Forms\frmHardware.Designer.cs">
       <DependentUpon>frmHardware.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmM.cs">
+    <Compile Include="Forms\frmAddin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmM.Designer.cs">
-      <DependentUpon>frmM.cs</DependentUpon>
+    <Compile Include="Forms\frmAddin.Designer.cs">
+      <DependentUpon>frmAddin.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>
@@ -199,8 +199,8 @@
       <DependentUpon>frmHardware.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmM.resx">
-      <DependentUpon>frmM.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmAddin.resx">
+      <DependentUpon>frmAddin.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">

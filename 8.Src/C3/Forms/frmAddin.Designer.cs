@@ -1,6 +1,6 @@
 ﻿namespace C3
 {
-    partial class frmM
+    partial class frmAddin
     {
         /// <summary>
         /// Required designer variable.
@@ -69,13 +69,13 @@
             this.label1.TabIndex = 0;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // frmM
+            // frmAddin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 473);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "frmM";
+            this.Name = "frmAddin";
             this.ShowInTaskbar = false;
             this.Text = "选项";
             this.Load += new System.EventHandler(this.frmM_Load);

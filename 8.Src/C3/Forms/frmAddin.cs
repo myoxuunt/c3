@@ -10,9 +10,9 @@ using C3.Communi ;
 
 namespace C3
 {
-    public partial class frmM : NUnit.UiKit.FixedDialogBase
+    public partial class frmAddin : NUnit.UiKit.FixedDialogBase
     {
-        public frmM()
+        public frmAddin()
         {
             InitializeComponent();
             Init();
