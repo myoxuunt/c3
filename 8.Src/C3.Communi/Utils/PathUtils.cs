@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Reflection ;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Text;
 
@@ -54,7 +54,48 @@ namespace C3.Communi
 
         static public string MapToStartupPath(string path)
         {
-            return System.Windows.Forms.Application.StartupPath + "\\" + path;
+            return Path.Combine(System.Windows.Forms.Application.StartupPath, path);
+            //return System.Windows.Forms.Application.StartupPath + "\\" + path;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        internal static bool IsAbsolutePhysicalPath(string path)
+        {
+            if ((path == null) || (path.Length < 3))
+            {
+                return false;
+            }
+            return (((path[1] == ':') && IsDirectorySeparatorChar(path[2])) || IsUncSharePath(path));
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        internal static bool IsUncSharePath(string path)
+        {
+            return (((path.Length > 2) && IsDirectorySeparatorChar(path[0])) && IsDirectorySeparatorChar(path[1]));
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ch"></param>
+        /// <returns></returns>
+        private static bool IsDirectorySeparatorChar(char ch)
+        {
+            if (ch != '\\')
+            {
+                return (ch == '/');
+            }
+            return true;
         }
     }
 }

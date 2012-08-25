@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NLog;
 
 namespace C3.Communi
 {
@@ -9,6 +10,7 @@ namespace C3.Communi
     /// </summary>
     public class HardwareFactory
     {
+        static Logger _log = LogManager.GetCurrentClassLogger();
 
         #region ISPUs
         /// <summary>
@@ -53,6 +55,8 @@ namespace C3.Communi
                 if (_spuAssemblyInfos == null)
                 {
                     string path = PathUtils.SPUConfigFileName;
+                    _log.Info("spu config file name: '{0}'",path);
+
                     _spuAssemblyInfos = AssemblyInfoFactory.CreateFromXml(path);
                 }
                 return _spuAssemblyInfos;

@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\App.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="Config\Config.cs" />
     <Compile Include="Forms\frmDeviceType.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,12 +59,12 @@
     <Compile Include="Forms\frmStationType.Designer.cs">
       <DependentUpon>frmStationType.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\DisplayArea.cs" />
-    <Compile Include="Option\AddinTreeNode.cs" />
-    <Compile Include="Option\UCTypeViewer.cs">
+    <Compile Include="AddinView\DisplayArea.cs" />
+    <Compile Include="AddinView\AddinTreeNode.cs" />
+    <Compile Include="AddinView\UCTypeViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Option\UCTypeViewer.Designer.cs">
+    <Compile Include="AddinView\UCTypeViewer.Designer.cs">
       <DependentUpon>UCTypeViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources\CommuniDetailResource.Designer.cs">
@@ -106,13 +106,12 @@
     <Compile Include="Viewer\View\UCTaskViewer.Designer.cs">
       <DependentUpon>UCTaskViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\UCBytesConverterViewer.cs">
+    <Compile Include="AddinView\UCBytesConverterViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Option\UCBytesConverterViewer.Designer.cs">
+    <Compile Include="AddinView\UCBytesConverterViewer.Designer.cs">
       <DependentUpon>UCBytesConverterViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\CRCerOptionTreeNode.cs" />
     <Compile Include="Forms\frmCommuniDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,7 +147,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Icons.resx</DependentUpon>
     </Compile>
-    <Compile Include="Option\AddinTreeView.cs">
+    <Compile Include="AddinView\AddinTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="App\Program.cs" />
@@ -161,7 +160,7 @@
       <DependentUpon>frmStationType.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Option\UCTypeViewer.resx">
+    <EmbeddedResource Include="AddinView\UCTypeViewer.resx">
       <DependentUpon>UCTypeViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -197,7 +196,7 @@
       <DependentUpon>UCTaskViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Option\UCBytesConverterViewer.resx">
+    <EmbeddedResource Include="AddinView\UCBytesConverterViewer.resx">
       <DependentUpon>UCBytesConverterViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -232,11 +231,11 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Option\UCCrcViewer.resx">
+    <EmbeddedResource Include="AddinView\UCCrcViewer.resx">
       <DependentUpon>UCCrcViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Option\UCSpus.resx">
+    <EmbeddedResource Include="AddinView\UCSpus.resx">
       <DependentUpon>UCSpus.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -263,16 +262,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Option\UCCrcViewer.cs">
+    <Compile Include="AddinView\UCCrcViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Option\UCCrcViewer.Designer.cs">
+    <Compile Include="AddinView\UCCrcViewer.Designer.cs">
       <DependentUpon>UCCrcViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Option\UCSpus.cs">
+    <Compile Include="AddinView\UCSpus.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Option\UCSpus.Designer.cs">
+    <Compile Include="AddinView\UCSpus.Designer.cs">
       <DependentUpon>UCSpus.cs</DependentUpon>
     </Compile>
     <Compile Include="Viewer\UCViewerWrapper.cs">

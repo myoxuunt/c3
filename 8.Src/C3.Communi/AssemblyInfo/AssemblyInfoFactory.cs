@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 using Xdgk.Common;
+using NLog;
 
 namespace C3.Communi
 {
@@ -8,6 +9,8 @@ namespace C3.Communi
     /// </summary>
     public class AssemblyInfoFactory
     {
+        static Logger _log = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// 
         /// </summary>
@@ -25,11 +28,31 @@ namespace C3.Communi
                 foreach (XmlNode ciNode in ciList)
                 {
                     string aipath = XmlHelper.GetAttribute(ciNode, AssemblyInfoNodeName.Path);
+                    _log.Info("assembly info path: '{0}'", aipath );
 
+                    
                     AssemblyInfo item = new AssemblyInfo();
-                    item.Path = aipath;
+                    item.Path = FixPath(aipath);
+                    _log.Info("after fix path: '{0}'", item.Path );
+
                     r.Add(item);
                 }
+            }
+            return r;
+        }
+
+        static private string FixPath(string path)
+        {
+            return PathUtils.MapToStartupPath(path);
+
+            string r = string.Empty;
+            if (PathUtils.IsAbsolutePhysicalPath(path))
+            {
+                r = path;
+            }
+            else
+            {
+                r = PathUtils.MapToStartupPath(path);
             }
             return r;
         }
