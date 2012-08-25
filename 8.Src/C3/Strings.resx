@@ -123,6 +123,9 @@
   <data name="Crcer" xml:space="preserve">
     <value>校验</value>
   </data>
+  <data name="DeviceAddinName" xml:space="preserve">
+    <value>设备</value>
+  </data>
   <data name="DeviceType" xml:space="preserve">
     <value>设备类型</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="SelectStationFirst" xml:space="preserve">
     <value>请先选择站点</value>
+  </data>
+  <data name="StationAddinName" xml:space="preserve">
+    <value>站点</value>
   </data>
   <data name="StationType" xml:space="preserve">
     <value>站点类型</value>

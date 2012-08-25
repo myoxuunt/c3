@@ -79,6 +79,15 @@ namespace C3 {
         }
         
         /// <summary>
+        ///   查找类似 设备 的本地化字符串。
+        /// </summary>
+        internal static string DeviceAddinName {
+            get {
+                return ResourceManager.GetString("DeviceAddinName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 设备类型 的本地化字符串。
         /// </summary>
         internal static string DeviceType {
@@ -111,6 +120,15 @@ namespace C3 {
         internal static string SelectStationFirst {
             get {
                 return ResourceManager.GetString("SelectStationFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 站点 的本地化字符串。
+        /// </summary>
+        internal static string StationAddinName {
+            get {
+                return ResourceManager.GetString("StationAddinName", resourceCulture);
             }
         }
         

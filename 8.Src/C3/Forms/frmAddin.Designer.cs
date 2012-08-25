@@ -45,8 +45,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panel1);
             this.splitContainer1.Panel2.Controls.Add(this.label1);
-            this.splitContainer1.Size = new System.Drawing.Size(592, 473);
-            this.splitContainer1.SplitterDistance = 118;
+            this.splitContainer1.Size = new System.Drawing.Size(554, 425);
+            this.splitContainer1.SplitterDistance = 110;
             this.splitContainer1.TabIndex = 1;
             // 
             // panel1
@@ -55,7 +55,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(470, 453);
+            this.panel1.Size = new System.Drawing.Size(440, 405);
             this.panel1.TabIndex = 1;
             // 
             // label1
@@ -65,7 +65,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(470, 20);
+            this.label1.Size = new System.Drawing.Size(440, 20);
             this.label1.TabIndex = 0;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -73,11 +73,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 473);
+            this.ClientSize = new System.Drawing.Size(554, 425);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmAddin";
             this.ShowInTaskbar = false;
-            this.Text = "选项";
+            this.Text = "插件";
             this.Load += new System.EventHandler(this.frmM_Load);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
