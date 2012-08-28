@@ -27,8 +27,18 @@ namespace C3.Communi
             _timer.Interval = 1000;
             _timer.Tick += new EventHandler(_timer_Tick);
             _timer.Start();
+
+            Init();
         }
         #endregion //Constructor
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void Init()
+        {
+            this.RemoteServer.Start();
+        }
 
         #region SocketListenerManager
         /// <summary>
@@ -347,5 +357,23 @@ namespace C3.Communi
         }
         #endregion //
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public RemoteServer RemoteServer
+        {
+            get
+            {
+                if (_remoteServer == null)
+                {
+                    _remoteServer = new RemoteServer();
+                    _remoteServer.Start();
+
+                    log.Info("remote server started.");
+                }
+                return _remoteServer;
+            }
+        } private RemoteServer _remoteServer;
     }
 }

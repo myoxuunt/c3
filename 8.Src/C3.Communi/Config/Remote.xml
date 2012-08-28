@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <system.runtime.remoting>
+    <application name="RemoteServer">
+      <service>
+        <wellknown type="C3.Remote.Request,C3.Remote"
+                   objectUri="C3.Remote.Request"
+                   mode="Singleton"
+                           />
+      </service>
+      <channels>
+        <channel ref="tcp" port="9999">
+
+          <serverProviders>
+             <formatter ref="binary" typeFilterLevel="Full" />
+          </serverProviders>
+ 
+          <clientProviders>
+            <formatter ref="binary" />
+          </clientProviders>
+        </channel>
+      </channels>
+
+    </application>
+    <customErrors mode="Off"/>
+  </system.runtime.remoting>
+</configuration>

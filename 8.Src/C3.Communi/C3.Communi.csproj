@@ -39,6 +39,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -109,6 +110,7 @@
     <Compile Include="Device\DeviceSource\DeviceSourceBase.cs" />
     <Compile Include="Device\Report\ReportItem.cs" />
     <Compile Include="Device\Report\ReportItemCollection.cs" />
+    <Compile Include="RemoteServer\RemoteServer.cs" />
     <Compile Include="Utils\SerialPortSetting.cs" />
     <Compile Include="Utils\StationDiscriminateMode.cs" />
     <Compile Include="Station\IStationUI.cs" />
@@ -301,6 +303,9 @@
     <Content Include="Config\dpu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\Remote.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FrmDeviceGroups.resx">
@@ -350,6 +355,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\C3.Remote\C3.Remote.csproj">
+      <Project>{47F900BA-F2A6-4A34-8938-2353D0DB3E49}</Project>
+      <Name>C3.Remote</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xdgk.Common\Xdgk.Common.csproj">
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
