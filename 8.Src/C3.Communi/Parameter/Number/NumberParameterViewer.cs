@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -74,6 +73,69 @@ namespace C3.Communi
         internal bool Verify()
         {
             return this._uc.Verify();
+        }
+    }
+
+    public class EnumParameterViewer : IViewer
+    {
+
+        public EnumParameterViewer(EnumParameterController c)
+        {
+            if (c == null)
+            {
+                throw new ArgumentNullException("c");
+            }
+            _c = c;
+        }
+        #region IViewer ≥…‘±
+
+        public Control UC
+        {
+            get { return _uc; }
+        } private UCEnumParameterUI _uc = new UCEnumParameterUI();
+
+        public IController Controller
+        {
+            get
+            {
+                return _c;
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        } private EnumParameterController _c;
+
+        #endregion
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Type ValueType
+        {
+            get { return _uc.ValueType; }
+            set { _uc.ValueType = value; }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object EnumValue
+        {
+            get { return _uc.EnumValue; }
+            set { _uc.EnumValue = value; }
+        }
+
+        public string ParameterName
+        {
+            get { return _uc.ParameterName; }
+            set { _uc.ParameterName = value; }
+        }
+
+        public string Unit
+        {
+            get { return _uc.Unit; }
+            set { _uc.Unit = value; }
         }
     }
 

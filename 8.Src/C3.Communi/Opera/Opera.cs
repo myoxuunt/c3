@@ -67,9 +67,9 @@ namespace C3.Communi
         /// </summary>
         public ReceivePartCollection ReceiveParts
         {
-            get 
-            { 
-                if( _receivePartCollection == null )
+            get
+            {
+                if (_receivePartCollection == null)
                     _receivePartCollection = new ReceivePartCollection();
                 return _receivePartCollection;
             }
@@ -170,18 +170,24 @@ namespace C3.Communi
         {
             IParseResult pr = this.ReceiveParts.ToValues(received);
 
-
             if (pr.IsSuccess)
             {
-                // match address
+                // has address data field
                 //
-                object addressObject = pr.Results[ADDRESS];
-                if (addressObject != null)
+                KeyValue addressKV = pr.Results.Find(ADDRESS);
+                bool hasAddress = addressKV != null;
+                if (hasAddress)
                 {
-                    UInt64 address = Convert.ToUInt64(addressObject);
-                    if (address != device.Address)
+                    // match address
+                    //
+                    object addressObject = pr.Results[ADDRESS];
+                    if (addressObject != null)
                     {
-                        pr = new AddressErrorResult(device.Address, address);
+                        UInt64 address = Convert.ToUInt64(addressObject);
+                        if (address != device.Address)
+                        {
+                            pr = new AddressErrorResult(device.Address, address);
+                        }
                     }
                 }
             }

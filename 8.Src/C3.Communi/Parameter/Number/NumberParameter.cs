@@ -23,4 +23,19 @@ namespace C3.Communi
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EnumParameter : ParameterBase
+    {
+        public EnumParameter(string name, Type valueType, object value, int orderNumber)
+            : base(name, valueType, value, orderNumber)
+        {
+            if (!valueType.IsEnum)
+            {
+                throw new ArgumentException("valueType must is enum");
+            }
+        }
+    }
+
 }

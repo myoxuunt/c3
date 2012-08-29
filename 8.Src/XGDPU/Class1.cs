@@ -8,6 +8,9 @@ namespace XGDPU
 {
     internal class DBI : DBIBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
         static internal DBI Instance
         {
             get
@@ -44,6 +47,61 @@ namespace XGDPU
         {
             string s = "select * from tblDevice where DeviceType = 'xgdevice'";
             return ExecuteDataTable(s);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xgData"></param>
+        public void InsertXGData(XGDevice xgdevice, XGData xgData)
+        {
+            int cardID;
+            string person;
+            GetCardID(xgData.CardSN, out cardID, out person);
+
+            int deviceID = GuidHelper.ConvertToInt32(xgdevice.Guid);
+            int stationID = GuidHelper.ConvertToInt32(xgdevice.StationGuid);
+
+            string s = string.Format(
+                "INSERT INTO tblXGData(DT, Person, DeviceID, StationID, CardID) " +
+                "VALUES('{0}', '{1}', {2}, {3}, {4})",
+                xgData.DT, person, deviceID, stationID, cardID);
+            ExecuteScalar(s);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cardSn"></param>
+        /// <returns></returns>
+        public void GetCardID(string cardSn, out int cardID, out string person)
+        {
+            string s = string.Format("select * from tblCard where sn = '{0}'", cardSn);
+            DataTable tbl = ExecuteDataTable(s);
+            if (tbl.Rows.Count > 0)
+            {
+                DataRow row = tbl.Rows[0];
+                cardID = Convert.ToInt32(row["cardID"]);
+                person = row["Person"].ToString();
+            }
+            else
+            {
+                InsertCard(cardSn, "unknown");
+                GetCardID(cardSn, out cardID, out person);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cardSn"></param>
+        /// <param name="person"></param>
+        private void InsertCard(string cardSn, string person)
+        {
+            string s = string.Format(
+                "insert into tblCard(sn, person) values('{0}', '{1}')",
+                cardSn, person );
+            ExecuteScalar(s);
         }
 
     }
@@ -226,217 +284,6 @@ namespace XGDPU
         }
     }
 
-    internal class XGDeviceProcessor : TaskProcessorBase
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="device"></param>
-        /// <param name="bs"></param>
-        /// <returns></returns>
-        //public override IUploadParseResult OnProcessUpload(IDevice device, byte[] bs)
-        public override void  OnProcessUpload(IDevice device, IParseResult pr)
-        {
-            XGDevice xg = (XGDevice)device;
-            DateTime dt = (DateTime)pr.Results["DT"];
-            string cardSN = pr.Results["cardSN"].ToString();
-
-            xg.DeviceDataManager.Last = new XGData(dt, cardSN);
-        }
-
-        public override void OnProcess(ITask task, IParseResult pr)
-        {
-            if (pr.IsSuccess)
-            {
-                string opera = task.Opera.Name;
-                XGDevice xgdevice = (XGDevice)task.Device;
-
-                switch (opera)
-                {
-                    case XGOperaNames.ReadCount:
-                        ProcessXGReadRecordCountResult(xgdevice, pr);
-                        break;
-
-                    case XGOperaNames.ReadRecord :
-                        ProcessXGReadRecordResult(xgdevice, pr);
-                        break;
-
-                    case XGOperaNames.RecordUpload:
-                        ProcessXGUploadRecordResult(xgdevice, pr);
-                        break;
-
-                    case XGOperaNames.ClearRecord:
-                        ProcessXGClearRecordResult(pr);
-                        break;
-
-                    case XGOperaNames.RemoveUpload :
-                        ProcessXGRemoveUploadResult(pr);
-                        break;
-
-                    case XGOperaNames.ReadXGDate:
-                        ProcessXGReadDateResult(xgdevice, pr);
-                        break;
-
-                    case XGOperaNames.ReadXGTime:
-                        ProcessXGReadTimeResult(xgdevice, pr);
-                        break;
-
-                    case XGOperaNames.WriteXGDate:
-                    case XGOperaNames.WriteXGTime:
-                        // do nothing
-                        //
-                        break;
-
-                    default:
-                        {
-                            string errmsg = string.Format("{0} {1}",
-                                                          xgdevice.DeviceType.Text,
-                                                          opera);
-                            throw new NotSupportedException(errmsg);
-                        }
-                }
-            }
-        }
-
-        private void ProcessXGReadTimeResult(XGDevice xgdevice, IParseResult pr)
-        {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xgdevice"></param>
-        /// <param name="parseResult"></param>
-        private void ProcessXGReadDateResult(XGDevice xgdevice, IParseResult pr)
-        {
-            //CZGRApp.Default.MainForm.UpdateXGDate(xgdevice, pr);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parseResult"></param>
-        private void ProcessXGRemoveUploadResult(IParseResult pr)
-        {
-            // do nothing
-            //
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parseResult"></param>
-        private void ProcessXGClearRecordResult(IParseResult pr)
-        {
-            // do nothing
-            //
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="parseResult"></param>
-        private void ProcessXGUploadRecordResult(XGDevice xgdevice, IParseResult pr)
-        {
-            ProcessXGDeviceRecordHelp(xgdevice, pr, false);
-
-            IOperaFactory operaFactory = xgdevice.Dpu.OperaFactory;
-            IOpera op = operaFactory.Create(xgdevice.GetType().Name, XGOperaNames.RemoveUpload);
-            //ITaskFactory taskFactory = xgdevice.Dpu.TaskFactory;
-
-            TimeSpan tsTimeout = TimeSpan.FromMilliseconds(xgdevice.Station.CommuniPortConfig.TimeoutMilliSecond);
-            Task task = new Task(xgdevice, op, new ImmediateStrategy(), tsTimeout);
-
-            xgdevice.TaskManager.Tasks.Enqueue(task);
-
-            
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="st"></param>
-        /// <param name="parseResult"></param>
-        private void ProcessXGReadRecordResult(XGDevice xgdevice, IParseResult pr)
-        {
-            ProcessXGDeviceRecordHelp(xgdevice, pr, false);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xgdevice"></param>
-        /// <param name="parseResult"></param>
-        private void ProcessXGDeviceRecordHelp(XGDevice xgdevice, IParseResult parseResult, bool isFD )
-        {
-            // 1. uploadrecord
-            // 2. readrecord 
-            //    2.1 return record               
-            //    2.2 return record count if record idx out of range
-/*
-            if (parseResult.IsSuccess)
-            {
-                if (StringHelper.Equal(parseResult.ReceivePartName, "recordcount"))
-                {
-                    string errmsg = string.Format("record index '{0}' out of range",
-                        parseResult.NameObjects.GetObject("recordcount"));
-                    //CZGRApp.Default.MainForm.UpdateXGDeviceState(xgdevice, errmsg);   
-                    log.Warning(errmsg);
-                    
-                }
-                else
-                {
-                    // upload record or readrecord
-                    //
-                    DBXGDevice dbxgdevice = xgdevice.DBXGDevice;
-                    DateTime dt = Convert.ToDateTime(parseResult.NameObjects.GetObject("DT"));
-                    string cardsn = parseResult.NameObjects.GetObject("cardsn").ToString();
-                    DBXGData dbxgdata = new DBXGData(dbxgdevice, DBCard.FindCard(cardsn), dt);
-                    dbxgdata.Create();
-
-                    // update xgdatalistview
-                    //
-                    CZGRApp.Default.MainForm.UpdateXGData(xgdevice, parseResult, dbxgdata, isFD);
-                }
-            }
- */
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="st"></param>
-        /// <param name="parseResult"></param>
-        private void ProcessXGReadRecordCountResult(XGDevice xgdevice, IParseResult pr)
-        {
-    /*
-            CommuniSoft soft = CZGRApp.Default.Soft;
-            Debug.Assert(soft != null,"CZGRApp.Default.Soft == null");
-
-            int count = Convert.ToInt32(parseResult.NameObjects.GetObject("recordcount"));
-            if (count > 0)
-            {
-                for (int i = 1; i < count + 1; i++)
-                {
-                    //Opera op = soft.OperaFactory.Create(DeviceTypes.XGDevice,
-                    //    XGOperaNames.ReadRecord);
-                    Opera op = xgdevice.DeviceDefine.CreateOpera(XGOperaNames.ReadRecord);
-                    op.SendPart["recordidx"] = i;
-                    //Task task = new Task(Helper.GetXGDevice(xgdevice), op, new ImmediateStrategy());
-                    Task task = new Task(xgdevice, op, new ImmediateStrategy());
-                    soft.TaskManager.Tasks.Add(task);
-                }
-
-                //Opera clearOP = soft.OperaFactory.Create(DeviceTypes.XGDevice,
-                //    XGOperaNames.ClearRecord);
-                Opera clearOP = xgdevice.DeviceDefine.CreateOpera(XGOperaNames.ClearRecord);
-
-                Task clearTask = new Task(xgdevice, clearOP, new ImmediateStrategy());
-                soft.TaskManager.Tasks.Add(clearTask);
-            }
-     */
-        }
-    }
 
     /// <summary>
     /// 

@@ -45,6 +45,7 @@
     </Compile>
     <Compile Include="App.cs" />
     <Compile Include="AppFactory.cs" />
+    <Compile Include="Attribute.cs" />
     <Compile Include="cccc.cs" />
     <Compile Include="CodeFile1.cs" />
     <Compile Include="DateTimeHelper.cs" />
@@ -95,6 +96,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StringHelper.cs" />
+    <Compile Include="StringStringDictionary.cs" />
     <Compile Include="UserMessage.cs" />
     <Compile Include="WaitCursor.cs" />
     <Compile Include="XmlHelper.cs" />

@@ -32,6 +32,12 @@ namespace C3.Communi
                 NumberParameter numP = (NumberParameter)p;
                 c = new NumberParameterController(numP);
             }
+            else if (p is EnumParameter)
+            {
+                EnumParameter enumP = (EnumParameter)p;
+                c = new EnumParameterController(enumP);
+            }
+
             if (c == null)
             {
                 throw new ArgumentException(p.ToString());

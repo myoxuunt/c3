@@ -71,4 +71,72 @@ namespace C3.Communi
         #endregion
     }
 
+    public class EnumParameterController : IController
+    {
+
+        public EnumParameterController(EnumParameter m)
+        {
+            if (m == null)
+            {
+                throw new ArgumentNullException("m");
+            }
+            _m = m;
+        }
+        #region IController ≥…‘±
+
+        public IModel Model
+        {
+            get
+            {
+                return _m;
+            }
+            set
+            {
+                _m = (EnumParameter)value;
+            }
+        } private EnumParameter _m;
+
+        public IViewer Viewer
+        {
+            get
+            {
+                if (_v == null)
+                {
+                    _v = new EnumParameterViewer(this);
+                }
+                return _v;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+        } private EnumParameterViewer _v;
+
+        public void UpdateModel()
+        {
+            this._m.Value = _v.EnumValue;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void UpdateViewer()
+        {
+            this._v.ParameterName = _m.Text + ":";
+            this._v.ValueType = _m.ValueType;
+            this._v.EnumValue = _m.Value;
+            this._v.Unit = _m.Unit.Text;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool Verify()
+        {
+            return true;
+        }
+
+        #endregion
+    }
 }
