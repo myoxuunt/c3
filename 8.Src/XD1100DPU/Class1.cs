@@ -9,6 +9,9 @@ using NLog;
 
 namespace XD1100DPU
 {
+    /// <summary>
+    /// 
+    /// </summary>
     internal class DBI : DBIBase
     {
         /// <summary>
@@ -239,93 +242,13 @@ namespace XD1100DPU
             DataTable tbl = DBI.Instance.ExecuteXD1100DeviceDataTable();
             foreach (DataRow row in tbl.Rows)
             {
-                XD1100DeviceSource  item = new XD1100DeviceSource(row);
+                XD1100DeviceSource item = new XD1100DeviceSource(row);
                 list.Add(item);
             }
             return list.ToArray();
         }
     }
 
-    internal class XD1100Data : IDeviceData
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <param name="cardSn"></param>
-        public XD1100Data(DateTime dt, string cardSn)
-        {
-            if (cardSn == null) throw new ArgumentNullException("cardSn");
-            if( cardSn.Trim( ).Length == 0 )
-            {
-                throw new ArgumentException("cardSn exception");
-            }
-            this.DT = dt;
-            this.CardSN = cardSn;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public float OutsideTemperature
-        {
-            get { return _ot; }
-            set { _ot = value; }
-        } private float _ot;
-
-        #region IDeviceData 成员
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime DT
-        {
-            get
-            {
-                return _dt;
-            }
-            set
-            {
-                _dt = value;
-            }
-        } private DateTime _dt;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ReportItemCollection GetReportItems()
-        {
-            ReportItemCollection r = new ReportItemCollection();
-            r.Add(new ReportItem("时间", this.DT, Unit.FindByName(Unit.None)));
-            r.Add(new ReportItem("卡号", this.CardSN, Unit.FindByName(Unit.None)));
-            return r;
-        }
-
-        #region CardSN
-        /// <summary>
-        /// 
-        /// </summary>
-        public string CardSN
-        {
-            get
-            {
-                if (_cardSN == null)
-                {
-                    _cardSN = string.Empty;
-                }
-                return _cardSN;
-            }
-            set
-            {
-                _cardSN = value;
-            }
-        } private string _cardSN;
-        #endregion //CardSN
-
-
-        #endregion
-    }
 
     /// <summary>
     /// 
@@ -542,7 +465,7 @@ namespace XD1100DPU
                 if (last != null)
                 {
                     XD1100Data data = (XD1100Data)last;
-                    r = data.OutsideTemperature;
+                    r = data.OT;
                 }
                 return r;
             }
