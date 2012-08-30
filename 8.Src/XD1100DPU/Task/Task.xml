@@ -2,7 +2,7 @@
 <tasks>
   <task>
     <devicetype>xd1100device</devicetype>
-    <operaname>读实时数据</operaname>
+    <operaname>ReadReal</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
       <value>00:10:00</value>

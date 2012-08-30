@@ -3,7 +3,7 @@
   <!--供热控制器Modbus-->
   <devicedefine devicetype="xd1100device" devicetext="供热控制器第二版">
     <!--实时数据-->
-    <operadefine name="读实时数据" text="读取实时数据" processfd="true">
+    <operadefine name="readreal" text="读取实时数据" processfd="true">
       <sendpart>
         <datafield name="address"
             begin="0"
