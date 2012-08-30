@@ -14,7 +14,7 @@
     <operaname>WriteOT</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:10:00</value>
+      <value>00:00:10</value>
     </cyclestrategy>
   </task>
 </tasks>

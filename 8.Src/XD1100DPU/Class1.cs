@@ -206,14 +206,14 @@ namespace XD1100DPU
         }
     }
 
-    internal class XGData : IDeviceData
+    internal class XD1100Data : IDeviceData
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="dt"></param>
         /// <param name="cardSn"></param>
-        public XGData(DateTime dt, string cardSn)
+        public XD1100Data(DateTime dt, string cardSn)
         {
             if (cardSn == null) throw new ArgumentNullException("cardSn");
             if( cardSn.Trim( ).Length == 0 )
@@ -223,6 +223,15 @@ namespace XD1100DPU
             this.DT = dt;
             this.CardSN = cardSn;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float OutsideTemperature
+        {
+            get { return _ot; }
+            set { _ot = value; }
+        } private float _ot;
 
         #region IDeviceData 成员
 
@@ -372,10 +381,15 @@ namespace XD1100DPU
 
     }
 
+    public interface IOutside
+    {
+        float OutsideTemperature { get; }
+    }
+
     /// <summary>
     /// 
     /// </summary>
-    internal class XD1100Device : DeviceBase
+    internal class XD1100Device : DeviceBase , IOutside
     {
         private const string PN_HEATTRANSFERMODE = "heatTransferMode";
         private const int PO_HEATTRANSFERMODE = 1;
@@ -440,13 +454,175 @@ namespace XD1100DPU
         /// <returns></returns>
         public override object GetLazyDataFieldValue(string name)
         {
+            frmOutsideStandard f = new frmOutsideStandard();
+            f.ShowDialog();
+
             if (StringHelper.Equal(name, "dt"))
             {
                 return DateTime.Now;
             }
+            else if (StringHelper.Equal(name, "ot"))
+            {
+                return OutsideTemperatureProviderManager.GetStandardOutsideTemperature(this);
+            }
+            else if (StringHelper.Equal(name, "mode"))
+            {
+                // outside temperature mode value
+                //
+                // 0 - local
+                // 1 - remote
+                //
+                int modeValue = 1;
+                IOutsideTemperatureProvider provider = OutsideTemperatureProviderManager.Provider;
+                if (provider is DeviceOTProvider)
+                {
+                    DeviceOTProvider deviceOtp = (DeviceOTProvider)provider;
+                    if ( deviceOtp.Outside == this )
+                    {
+                        modeValue = 0;
+                    }
+                }
+                return modeValue;
+            }
 
             return base.GetLazyDataFieldValue(name);
         }
+
+        #region IOutside 成员
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public float OutsideTemperature
+        {
+            get
+            {
+                float r = 0f;
+                IDeviceData last = this.DeviceDataManager.Last;
+                if (last != null)
+                {
+                    XD1100Data data = (XD1100Data)last;
+                    r = data.OutsideTemperature;
+                }
+                return r;
+            }
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal interface IOutsideTemperatureProvider
+    {
+        float GetStandardOutsideTemperature(IDevice device);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class FixedOTProvider : IOutsideTemperatureProvider 
+    {
+        public float Value
+        {
+            get { return _value; }
+            set { _value = value; }
+        } private float _value;
+
+        #region IOutsideTemperatureProvider 成员
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        public float GetStandardOutsideTemperature(IDevice device)
+        {
+            return Value;
+        }
+
+        #endregion
+    }
+
+    internal class DeviceOTProvider : IOutsideTemperatureProvider
+    {
+
+        public DeviceOTProvider (IOutside outside)
+        {
+            this.Outside = outside;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IOutside Outside
+        {
+            get { return _outside; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Outside");
+                }
+                _outside = value;
+            }
+        } private IOutside _outside;
+
+        #region IOutsideTemperatureProvider 成员
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        public float GetStandardOutsideTemperature(IDevice device)
+        {
+            return this.Outside.OutsideTemperature;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class OutsideTemperatureProviderManager
+    {
+        private OutsideTemperatureProviderManager()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static public IOutsideTemperatureProvider Provider
+        {
+            get
+            {
+                if (_p == null)
+                {
+                    _p = new FixedOTProvider();
+                }
+                return _p; 
+            }
+            set
+            {
+                _p = value;
+            }
+        } static private IOutsideTemperatureProvider _p;
+
+        #region IOutsideTemperatureProvider 成员
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        static public float GetStandardOutsideTemperature(IDevice device)
+        {
+            return Provider.GetStandardOutsideTemperature(device);
+        }
+
+        #endregion
     }
 
 
@@ -509,6 +685,9 @@ namespace XD1100DPU
             string path = PathUtils.GetAssemblyDirectory(typeof(XD1100Device).Assembly);
             this.TaskFactory = new XmlTaskFactory(this, path);
             this.OperaFactory = new XmlOperaFactory(path);
+
+            // TODO: init outside temperature provider manager
+            //
         }
     }
 

@@ -620,7 +620,8 @@
         <datafield name="Mode"
             begin="7"
             length="2"
-            converter="Xdgk.Communi.Int16ModbusConverter"/>
+            converter="Xdgk.Communi.Int16ModbusConverter"
+            lazy="true"/>
 
         <datafield name="crc"
             begin="9"
