@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Data;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using C3.Communi;
 using Xdgk.Common;
+using NLog;
 
 namespace XD1100DPU
 {
@@ -35,6 +37,10 @@ namespace XD1100DPU
 
         static private DBI _instance;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
         private DBI(string s)
             : base(s)
         {
@@ -48,6 +54,40 @@ namespace XD1100DPU
         {
             string s = "select * from tblDevice where DeviceType = 'xd1100device'";
             return ExecuteDataTable(s);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceID"></param>
+        public void SetOutsideTemperatureProviderDevice(int deviceID)
+        {
+            string s = "delete from tblOTDevice";
+            ExecuteScalar(s);
+
+            s = string.Format(
+                "insert into tblOTDevice(DeviceID) values({0})",
+                deviceID);
+
+            ExecuteScalar(s);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public int GetOutsideTemperatureProviderDevice()
+        {
+            string s = "select DeviceID from tblOTDevice";
+            object obj = ExecuteScalar(s);
+
+            int r = -1;
+            if (obj != null && obj != DBNull.Value)
+            {
+                r = Convert.ToInt32(obj);
+            }
+            return r;
+
         }
     }
 
@@ -664,11 +704,46 @@ namespace XD1100DPU
             return d;
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class UIEntry : IUIEntry
+    {
+
+        #region IUIEntry 成员
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="parentMenuItem"></param>
+        public void Set(System.Windows.Forms.ToolStripMenuItem parentMenuItem)
+        {
+            ToolStripMenuItem item = new ToolStripMenuItem("室外温度(&T)...");
+            item.Click += new EventHandler(item_Click);
+
+            parentMenuItem.DropDownItems.Add(item);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void item_Click(object sender, EventArgs e)
+        {
+            frmOutsideStandard f = new frmOutsideStandard();
+            f.ShowDialog();
+        }
+
+        #endregion
+    }
     /// <summary>
     /// 
     /// </summary>
     public class XD1100Dpu : DPUBase
     {
+        static private Logger _log = LogManager.GetCurrentClassLogger();
+
         public XD1100Dpu()
         {
             this.Name = "XD1100Dpu";
@@ -685,9 +760,32 @@ namespace XD1100DPU
             string path = PathUtils.GetAssemblyDirectory(typeof(XD1100Device).Assembly);
             this.TaskFactory = new XmlTaskFactory(this, path);
             this.OperaFactory = new XmlOperaFactory(path);
+            this.UIEntry = new UIEntry();
 
             // TODO: init outside temperature provider manager
             //
+            SoftManager.GetSoft().HardwareCreated += new EventHandler(XD1100Dpu_HardwareCreated);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void XD1100Dpu_HardwareCreated(object sender, EventArgs e)
+        {
+            int id = DBI.Instance.GetOutsideTemperatureProviderDevice();
+            if (id > 0)
+            {
+                Soft soft = sender as Soft;
+                IDevice d = soft.Hardware.FindDevice(id);
+                if (d != null)
+                {
+                    DeviceOTProvider provider = new DeviceOTProvider((IOutside)d);
+                    OutsideTemperatureProviderManager.Provider = provider;
+                    _log.Info("deviceOT provider is '{0}->{1}'", d.Station.Name, d.GetType().Name);
+                }
+            }
         }
     }
 

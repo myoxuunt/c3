@@ -101,6 +101,10 @@ namespace C3.Communi
         #endregion //DPUs
 
         #region CreateDpus
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private DPUCollection CreateDpus()
         {
             DPUCollection dpus = new DPUCollection();

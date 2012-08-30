@@ -42,7 +42,8 @@ namespace C3.Communi
 
             return r;
         }
-#region CheckExist
+
+        #region CheckExist
         /// <summary>
         /// 
         /// </summary>
@@ -52,7 +53,7 @@ namespace C3.Communi
         {
             return ExistName(stationName, null);
         }
-#endregion
+        #endregion
 
         /// <summary>
         /// 
@@ -72,6 +73,25 @@ namespace C3.Communi
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceID"></param>
+        /// <returns></returns>
+        internal IDevice FindDevice(int deviceID)
+        {
+            IDevice r = null;
+            foreach (IStation st in this)
+            {
+                r = st.Devices.Find(deviceID);
+                if (r != null)
+                {
+                    break;
+                }
+            }
+            return r;
         }
     }
 

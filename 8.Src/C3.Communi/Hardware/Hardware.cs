@@ -26,6 +26,16 @@ namespace C3.Communi
             }
         } private StationCollection _stations;
         #endregion //Stations
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceID"></param>
+        /// <returns></returns>
+        public IDevice FindDevice(int deviceID)
+        {
+            return this.Stations.FindDevice(deviceID);
+        }
     }
 
 }

@@ -139,6 +139,8 @@ namespace C3.Communi
         } private ErrorManager _errorManager;
         #endregion //
 
+        public event EventHandler HardwareCreated;
+
         #region Hardware
         /// <summary>
         /// 
@@ -153,13 +155,18 @@ namespace C3.Communi
                     HardwareFactory factory = this.HardwareFactory;
                     factory.SourceConfigs = ReadSourceConfigs();
                     _hardware = factory.Create();
+
+                    if (HardwareCreated != null)
+                    {
+                        HardwareCreated(this, EventArgs.Empty);
+                    }
                 }
                 return _hardware;
             }
-            set
-            {
-                _hardware = value;
-            }
+            //set
+            //{
+            //    _hardware = value;
+            //}
         } private Hardware _hardware;
         #endregion //Hardware
 

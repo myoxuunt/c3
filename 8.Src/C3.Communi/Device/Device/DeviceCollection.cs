@@ -28,6 +28,26 @@ namespace C3.Communi
             }
             return r;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceID"></param>
+        /// <returns></returns>
+        internal IDevice Find(int deviceID)
+        {
+            IDevice r = null;
+            foreach (IDevice d in this)
+            {
+                int id = GuidHelper.ConvertToInt32(d.Guid);
+                if (id == deviceID)
+                {
+                    r = d;
+                    break;
+                }
+            }
+            return r;
+        }
     }
 
 }

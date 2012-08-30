@@ -77,6 +77,9 @@ namespace XD1100DPU
             {
                 IOutside otDevice = (IOutside)sel;
                 OutsideTemperatureProviderManager.Provider = new DeviceOTProvider(otDevice);
+
+                int deviceid = GuidHelper.ConvertToInt32(((IDevice)otDevice).Guid);
+                DBI.Instance.SetOutsideTemperatureProviderDevice ( deviceid );
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

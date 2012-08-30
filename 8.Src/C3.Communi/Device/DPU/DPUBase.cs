@@ -179,5 +179,15 @@ namespace C3.Communi
             }
         } private IOperaFactory _operaFactory;
         #endregion //OperaFactory
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IUIEntry UIEntry
+        {
+            get { return _uiEntry; }
+            set { _uiEntry = value; }
+        } private IUIEntry _uiEntry;
     }
 }

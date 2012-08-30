@@ -175,6 +175,14 @@ namespace C3
 
             this.mnuToolbar.Checked = this.toolStrip1.Visible;
             this.mnuStatusbar.Checked = this.statusStrip1.Visible;
+
+            foreach (IDPU dpu in this.Soft.DPUs)
+            {
+                if (dpu.UIEntry != null)
+                {
+                    dpu.UIEntry.Set(this.mnuSetting);
+                }
+            }
         }
         #endregion //frmMain_Load
 
@@ -557,5 +565,15 @@ namespace C3
             this.statusStrip1.Visible = item.Checked;
         }
         #endregion //mnuStatusbar_Click
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuSetting_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
