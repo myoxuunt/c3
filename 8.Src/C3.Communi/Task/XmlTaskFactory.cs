@@ -1,5 +1,6 @@
 using System;
 using Xdgk.Common;
+using NLog;
 
 namespace C3.Communi
 {
@@ -8,6 +9,11 @@ namespace C3.Communi
     /// </summary>
     public class XmlTaskFactory : ITaskFactory
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        static private Logger _log = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// 
         /// </summary>
@@ -53,6 +59,8 @@ namespace C3.Communi
 
                 tasks.Add(t);
             }
+
+            _log.Info("create '{0}' task count '{1}'", device.GetType().Name, tasks.Count);
             return tasks;
         }
 
