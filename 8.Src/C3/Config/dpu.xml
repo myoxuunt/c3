@@ -2,16 +2,16 @@
 <!-- simple 
 -->
 <assemblyInfoCollection>
-  
+
   <!--<assemblyInfo path="f:\C3\8.Src\C3.DPUTest\bin\Debug\C3.DPUTest.dll ">
     </assemblyInfo>-->
-  
-  <assemblyInfo path="f:\C3\8.Src\XGDPU\bin\Debug\XGDPU.dll">
-    </assemblyInfo>
-  
-  <assemblyInfo path="f:\C3\8.Src\XD1100DPU\bin\Debug\XD1100DPU.dll">
-    </assemblyInfo>
 
-  <assemblyInfo path="f:\c3\8.Src\SCL6DPU\bin\Debug\SCL6DPU.dll">
-  </assemblyInfo>
+  <assemblyInfo path="f:\C3\8.Src\XGDPU\bin\Debug\XGDPU.dll"> </assemblyInfo>
+
+  <assemblyInfo path="f:\C3\8.Src\XD1100DPU\bin\Debug\XD1100DPU.dll"> </assemblyInfo>
+
+  <assemblyInfo path="f:\c3\8.Src\SCL6DPU\bin\Debug\SCL6DPU.dll"> </assemblyInfo>
+  <assemblyInfo path="f:\C3\8.Src\SCL61DDPU\bin\Debug\SCL61DDPU.dll"></assemblyInfo>
+
+  <assemblyInfo path="f:\C3\8.Src\CRLGXLDPU\bin\Debug\CRLGXLDPU.dll"></assemblyInfo>
 </assemblyInfoCollection>
