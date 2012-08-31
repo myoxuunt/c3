@@ -21,7 +21,7 @@ namespace Xdgk.Common
         protected AppBase()
         {
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            //Application.SetCompatibleTextRenderingDefault(false);
 
             // set default values
             //

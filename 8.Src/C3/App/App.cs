@@ -12,7 +12,7 @@ namespace C3
         /// </summary>
         private C3App()
         {
-            this.IsProcessUnhandleException = false;
+            this.IsProcessUnhandleException = !false;
             //Soft.UISynchronizationContext = new System.Windows.Forms.WindowsFormsSynchronizationContext();
         }
 

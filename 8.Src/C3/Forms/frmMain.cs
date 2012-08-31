@@ -6,7 +6,7 @@ using System.Net;
 
 namespace C3
 {
-    public partial class FrmMain : Form
+    public partial class FrmMain : Form, ISelectedHardwareItem 
     {
 
         #region HardwareTreeView
@@ -180,7 +180,7 @@ namespace C3
             {
                 if (dpu.UIEntry != null)
                 {
-                    dpu.UIEntry.Set(this.mnuSetting);
+                    dpu.UIEntry.Set(this, this.mnuSetting);
                 }
             }
         }
@@ -575,5 +575,37 @@ namespace C3
         {
 
         }
+
+        private void mnuSetting_DropDownOpening(object sender, EventArgs e)
+        {
+            //NUnit.UiKit.UserMessage.Display("opening");
+        }
+
+        #region ISelectedHardwareItem 成员
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public object SelectedHardwareItem
+        {
+            get 
+            {
+                object obj = null;
+                TreeNode node = this._hardwareTreeView.SelectedNode;
+                if (node is DeviceTreeNode)
+                {
+                    DeviceTreeNode dtn = (DeviceTreeNode)node;
+                    obj = dtn.Device;
+                }
+                else if (node is StationTreeNode)
+                {
+                    StationTreeNode stn = (StationTreeNode)node;
+                    obj = stn.Station;
+                }
+                return obj;
+            }
+        }
+
+        #endregion
     }
 }

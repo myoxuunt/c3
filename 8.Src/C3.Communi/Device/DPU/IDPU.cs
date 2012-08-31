@@ -9,7 +9,7 @@ namespace C3.Communi
     /// </summary>
     public interface IUIEntry
     {
-        void Set(ToolStripMenuItem parentMenuItem);
+        void Set(ISelectedHardwareItem sel, ToolStripMenuItem parentMenuItem);
     }
 
     public interface IDPU

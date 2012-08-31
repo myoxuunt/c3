@@ -34,6 +34,11 @@ namespace C3.Communi
                         KeyValue kv = new KeyValue(ta.Text, val);
                         kvs.Add(kv);
                     }
+                    else
+                    {
+                        KeyValue kv = new KeyValue(val.ToString(), val);
+                        kvs.Add(kv);
+                    }
                 }
 
                 this.cmbValue.DisplayMember = "Key";
