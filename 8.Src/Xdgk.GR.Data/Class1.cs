@@ -46,4 +46,103 @@ namespace Xdgk.GR.Data
         } private double _sum;
         #endregion //Sum
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum PumpStatusEnum
+    {
+        Stop = 0,
+        Run = 1,
+    }
+
+    public class PumpStatus
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        static public PumpStatus Run = new PumpStatus(PumpStatusEnum.Run, "运行");
+        /// <summary>
+        /// 
+        /// </summary>
+        static public PumpStatus Stop = new PumpStatus(PumpStatusEnum.Stop, "停止");
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        static public PumpStatus Find(PumpStatusEnum value)
+        {
+            if (value == PumpStatusEnum.Run)
+            {
+                return Run;
+            }
+            else if (value == PumpStatusEnum.Stop)
+            {
+                return Stop;
+            }
+            else
+            {
+                throw new ArgumentException(value.ToString());
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        private PumpStatus(PumpStatusEnum value, string text)
+        {
+            this.PumpStatusEnum = value;
+            this.Text = text;
+        }
+
+        #region PumpStatusEnum
+        /// <summary>
+        /// 
+        /// </summary>
+        public PumpStatusEnum PumpStatusEnum
+        {
+            get
+            {
+                return _pumpStatusEnum;
+            }
+            private set
+            {
+                _pumpStatusEnum = value;
+            }
+        } private PumpStatusEnum _pumpStatusEnum;
+        #endregion //PumpStatusEnum
+
+        #region Text
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Text
+        {
+            get
+            {
+                if (_text == null)
+                {
+                    _text = string.Empty;
+                }
+                return _text;
+            }
+            private set
+            {
+                _text = value;
+            }
+        } private string _text;
+        #endregion //Text
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return Text;
+        }
+    }
 }

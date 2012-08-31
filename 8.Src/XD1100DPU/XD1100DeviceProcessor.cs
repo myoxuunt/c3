@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using C3.Communi;
 using Xdgk.Common;
 using Xdgk.Communi.Interface;
+using Xdgk.GR.Data;
 using NLog;
 
 namespace XD1100DPU
@@ -118,9 +119,17 @@ namespace XD1100DPU
         /// </summary>
         /// <param name="pse"></param>
         /// <returns></returns>
-        bool IsPumpRun(PumpStateEnum pse)
+        PumpStatus IsPumpRun(PumpStateEnum pse)
         {
-            return pse == PumpStateEnum.Run;
+            if (pse == PumpStateEnum.Run)
+            {
+                return PumpStatus.Run;
+            }
+            else if (pse == PumpStateEnum.Stop)
+            {
+                return PumpStatus.Stop;
+            }
+            throw new ArgumentException(pse.ToString());
         }
 
         /// <summary>

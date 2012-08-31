@@ -48,7 +48,7 @@ namespace C3.Data
 
             // temperature
             //
-            Centidegree = "c",
+            Centidegree = "¡æ",
 
             // flow
             //
@@ -57,7 +57,12 @@ namespace C3.Data
 
             // volume
             //
-            M3 = "m3";
+            M3 = "m3",
+
+            //
+            //
+            Percentage = "%";
+
         #endregion //units
         #endregion //Members
 
@@ -130,7 +135,10 @@ namespace C3.Data
             }
             else
             {
-                throw new ArgumentException(string.Format("not fine unit '{0}'", name));
+                Unit newUnit = new Unit(name, UnitType.None);
+                _hash[key] = newUnit;
+                return newUnit;
+                //throw new ArgumentException(string.Format("not fine unit '{0}'", name));
             }
         }
         #endregion //FindByName
