@@ -75,7 +75,7 @@ namespace C3.Data
         /// 
         /// </summary>
         /// <returns></returns>
-        public ReportItemCollection GetReportItems()
+        virtual public ReportItemCollection GetReportItems()
         {
             ReportItemCollection reportItems = new ReportItemCollection();
 

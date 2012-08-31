@@ -2,34 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 using C3.Data;
+
 namespace Xdgk.GR.Data
 {
     /// <summary>
     /// 
     /// </summary>
-    public class FlowmeterData : IDeviceData
+    public class FlowmeterData : DeviceDataBase
     {
-        #region Sum
-        /// <summary>
-        /// 
-        /// </summary>
-        public double Sum
-        {
-            get
-            {
-                return _sum;
-            }
-            set
-            {
-                _sum = value;
-            }
-        } private double _sum;
-        #endregion //Sum
-
         #region InstantFlux
         /// <summary>
         /// 
         /// </summary>
+        [DeviceDataItem("瞬时", 10, Unit.M3PerSecond, "f2")]
         public double InstantFlux
         {
             get
@@ -43,34 +28,22 @@ namespace Xdgk.GR.Data
         } private double _instantFlux;
         #endregion //InstantFlux
 
-
-        #region IDeviceData 成员
-
-        public DateTime DT
-        {
-            get
-            {
-                return _dt;
-            }
-            set
-            {
-                _dt = value;
-            }
-        } DateTime _dt = DateTime.Now;
-
+        #region Sum
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public ReportItemCollection GetReportItems()
+        [DeviceDataItem("累计", 20, Unit.M3, "f0")]
+        public double Sum
         {
-            ReportItemCollection ris = new ReportItemCollection();
-            ris.Add(new ReportItem("时间", this.DT, Unit.FindByName(Unit.None)));
-            ris.Add(new ReportItem("瞬时", this.InstantFlux, Unit.FindByName(Unit.M3PerSecond)));
-            ris.Add(new ReportItem("累计", this.Sum, Unit.FindByName(Unit.M3)));
-            return ris;
-        }
-
-        #endregion
+            get
+            {
+                return _sum;
+            }
+            set
+            {
+                _sum = value;
+            }
+        } private double _sum;
+        #endregion //Sum
     }
 }
