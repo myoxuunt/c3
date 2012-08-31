@@ -297,6 +297,10 @@
       <Project>{C66E606F-39F5-4B29-8187-0C6C454EA245}</Project>
       <Name>C3.Communi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\C3.Data\C3.Data.csproj">
+      <Project>{46745652-7EAA-4018-9ED9-26F101704B5E}</Project>
+      <Name>C3.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\C3.Remote\C3.Remote.csproj">
       <Project>{47F900BA-F2A6-4A34-8938-2353D0DB3E49}</Project>
       <Name>C3.Remote</Name>

@@ -10,7 +10,7 @@ namespace C3.Communi
 {
     public class AttributePropertyInfoPairCollection
         //: Collection<AttributePropertyInfoPair>
-        : OrderNumberCollection < AttributePropertyInfoPair>
+        : OrderNumberCollection<AttributePropertyInfoPair>
     {
         /*
         #region Sort

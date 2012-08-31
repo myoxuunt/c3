@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
+using C3.Data;
 
 namespace C3.Communi
 {
@@ -17,7 +18,7 @@ namespace C3.Communi
         public DeviceDataItemAttribute(string name, int orderNumber, string unit)
             : this(name, orderNumber, unit, null)
         {
-            
+
         }
 
         /// <summary>
@@ -80,9 +81,9 @@ namespace C3.Communi
             {
                 return _orderNumber;
             }
-            set 
+            set
             {
-                _orderNumber = value; 
+                _orderNumber = value;
             }
         } private int _orderNumber;
         #endregion //OrderNumber

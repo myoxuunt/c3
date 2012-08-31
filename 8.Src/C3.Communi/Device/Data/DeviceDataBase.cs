@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using C3.Data;
 
 namespace C3.Communi
 {
@@ -24,7 +25,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// 
-        [DeviceDataItem("时间", -1, Unit.None, "G")]
+        //[DeviceDataItem("时间", -1, Unit.None, "G")]
         public DateTime DT
         {
             get

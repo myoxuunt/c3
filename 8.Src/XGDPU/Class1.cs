@@ -3,6 +3,7 @@ using System.Data;
 using System.Collections.Generic;
 using C3.Communi;
 using Xdgk.Common;
+using C3.Data;
 
 namespace XGDPU
 {

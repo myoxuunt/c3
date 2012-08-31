@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{26F86801-ABBE-42E0-B494-2225CC1C46F2}</ProjectGuid>
+    <ProjectGuid>{5DD9DEDE-5BE3-4324-AE36-843EB23A9242}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>XGDPU</RootNamespace>
-    <AssemblyName>XGDPU</AssemblyName>
+    <RootNamespace>Xdgk.GR.Data</RootNamespace>
+    <AssemblyName>Xdgk.GR.Data</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -38,14 +38,8 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XGDeviceFactory.cs" />
-    <Compile Include="XGDeviceProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\C3.Communi\C3.Communi.csproj">
-      <Project>{C66E606F-39F5-4B29-8187-0C6C454EA245}</Project>
-      <Name>C3.Communi</Name>
-    </ProjectReference>
     <ProjectReference Include="..\C3.Data\C3.Data.csproj">
       <Project>{46745652-7EAA-4018-9ED9-26F101704B5E}</Project>
       <Name>C3.Data</Name>
@@ -54,14 +48,6 @@
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="DeviceDefine\devicedefine.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Task\Task.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

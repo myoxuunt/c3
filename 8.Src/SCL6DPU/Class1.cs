@@ -4,6 +4,8 @@ using System.Data;
 using System.Collections.Generic;
 using System.Text;
 using C3.Communi;
+using SimpleDPU;
+using C3.Data;
 
 namespace SCL6DPU
 {
@@ -48,16 +50,6 @@ namespace SCL6DPU
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public DataTable ExecuteScl6DataTable()
-        {
-            string s = "select * from tblDevice where DeviceType = 'scl6'";
-            return ExecuteDataTable(s);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <param name="deviceID"></param>
         /// <param name="data"></param>
         public void InsertScl6Data(int deviceID, Scl6Data data)
@@ -79,8 +71,9 @@ namespace SCL6DPU
         {
             this.Name = "Scl6Dpu";
             this.DeviceFactory = new Scl6Factory(this);
-            this.DevicePersister = new Scl6Persister();
-            this.DeviceSourceProvider = new Scl6SourceProvider();
+            this.DevicePersister = new Scl6Persister(DBI.Instance);
+            this.DeviceSourceProvider = //new Scl6SourceProvider();
+                new SimpleDeviceSourceProvider(DBI.Instance, typeof(Scl6));
             this.DeviceType = DeviceTypeManager.AddDeviceType(
                 "Scl6",
                 "Scl6(Text)",
@@ -94,7 +87,10 @@ namespace SCL6DPU
         }
     }
 
-    public class Scl6Data : IDeviceData
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FlowmeterData : IDeviceData
     {
         #region Sum
         /// <summary>
@@ -164,6 +160,13 @@ namespace SCL6DPU
     /// <summary>
     /// 
     /// </summary>
+    public class Scl6Data : FlowmeterData  
+    {
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class Scl6Processor : TaskProcessorBase
     {
         /// <summary>
@@ -194,58 +197,15 @@ namespace SCL6DPU
         }
     }
 
-    public class Scl6Persister : DevicePersisterBase 
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="device"></param>
-        protected override void OnAdd(IDevice device)
-        {
-            string s = string.Format(
-                "insert into tblDevice(address, deviceType, stationID) values({0}, '{1}', {2}); select @@identity;",
-                device.Address,
-                device.DeviceType.Name,
-                GuidHelper.ConvertToInt32(device.Station.Guid)
-                );
 
-            object obj = DBI.Instance.ExecuteScalar(s);
-            device.Guid = GuidHelper.Create(Convert.ToInt32(obj));
-        }
-
-        protected override void OnUpdate(IDevice device)
-        {
-            string s = string.Format(
-                "update tblDevice set address = {0} where DeviceID = {1}",
-                device.Address,
-                GuidHelper.ConvertToInt32(device.Guid));
-
-            DBI.Instance.ExecuteScalar(s);
-        }
-
-        protected override void OnDelete(IDevice device)
-        {
-            int id = GuidHelper.ConvertToInt32 ( device.Guid );
-            string s = string.Format("delet from tblDevice where deviceid = {0}", id);
-            DBI.Instance.ExecuteScalar(s);
-        }
-    }
     /// <summary>
     /// 
     /// </summary>
-    public class Scl6SourceProvider : DeviceSourceProviderBase
+    public class Scl6Persister : SimpleDevicePersister 
     {
-        public override IDeviceSource[] OnGetDeviceSources()
+        public Scl6Persister(DBIBase dbi)
+            : base(dbi)
         {
-            List<IDeviceSource> list = new List<IDeviceSource>();
-
-            DataTable tbl = DBI.Instance.ExecuteScl6DataTable();
-            foreach (DataRow row in tbl.Rows)
-            {
-                Scl6Source item = new Scl6Source(row);
-                list.Add(item);
-            }
-            return list.ToArray();
         }
     }
 
@@ -267,7 +227,7 @@ namespace SCL6DPU
         /// <returns></returns>
         public override IDevice OnCreate(IDeviceSource deviceSource)
         {
-            Scl6Source source = (Scl6Source )deviceSource;
+            SimpleDeviceSource source = (SimpleDeviceSource)deviceSource;
             Scl6 d = new Scl6();
             d.Address = source.Address;
             d.DeviceSource = source;
@@ -286,44 +246,4 @@ namespace SCL6DPU
     {
 
     }
-
-    internal class Scl6Source : DeviceSourceBase
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="row"></param>
-        public Scl6Source(DataRow row)
-        {
-            this.DataRow = row;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        public DataRow DataRow
-        {
-            get
-            {
-                return _dataRow;
-            }
-            set
-            {
-                _dataRow = value;
-                this.Address = Convert.ToUInt64(_dataRow["address"]);
-
-                this.DevcieTypeName = _dataRow["DeviceType"].ToString().Trim();
-
-                this.Guid = GuidHelper.Create(
-                    Convert.ToInt32(_dataRow["DeviceID"])
-                    );
-
-                this.StationGuid = GuidHelper.Create(
-                    Convert.ToInt32(_dataRow["StationID"])
-                    );
-            }
-        } private DataRow _dataRow;
-
-    }
-
-
 }

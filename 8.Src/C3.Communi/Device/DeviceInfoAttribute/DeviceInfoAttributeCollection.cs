@@ -4,49 +4,49 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    //public class DeviceInfoAttributeCollection : Collection<DeviceInfoAttribute>
-    //{
-    //    public void Sort()
-    //    {
-    //        var array = new DeviceInfoAttribute[Count];
-    //        CopyTo(array, 0);
+    public class DeviceInfoAttributeCollection : Collection<DeviceInfoAttribute>
+    {
+        public void Sort()
+        {
+            var array = new DeviceInfoAttribute[Count];
+            CopyTo(array, 0);
 
-    //        Array.Sort(array, new Comparer());
+            Array.Sort(array, new Comparer());
 
-    //        Clear();
+            Clear();
 
-    //        foreach (DeviceInfoAttribute item in array)
-    //        {
-    //            Add(item);
-    //        }
-    //    }
+            foreach (DeviceInfoAttribute item in array)
+            {
+                Add(item);
+            }
+        }
 
-    //    #region Comparer
+        #region Comparer
 
-    //    /// <summary>
-    //    /// 
-    //    /// </summary>
-    //    private class Comparer : IComparer<DeviceInfoAttribute>
-    //    {
-    //        #region IComparer<DeviceInfoAttribute> Members
+        /// <summary>
+        /// 
+        /// </summary>
+        private class Comparer : IComparer<DeviceInfoAttribute>
+        {
+            #region IComparer<DeviceInfoAttribute> Members
 
-    //        public int Compare(DeviceInfoAttribute x, DeviceInfoAttribute y)
-    //        {
-    //            if (x == null || y == null)
-    //            {
-    //                throw new ArgumentNullException("x == null or y == null");
-    //            }
-    //            int r = x.OrderNumber - y.OrderNumber;
-    //            if (r == 0)
-    //            {
-    //                r = string.Compare(x.Name, y.Name);
-    //            }
-    //            return r;
-    //        }
+            public int Compare(DeviceInfoAttribute x, DeviceInfoAttribute y)
+            {
+                if (x == null || y == null)
+                {
+                    throw new ArgumentNullException("x == null or y == null");
+                }
+                int r = x.OrderNumber - y.OrderNumber;
+                if (r == 0)
+                {
+                    r = string.Compare(x.Name, y.Name);
+                }
+                return r;
+            }
 
-    //        #endregion
-    //    }
+            #endregion
+        }
 
-    //    #endregion //Comparer
-    //}
+        #endregion //Comparer
+    }
 }

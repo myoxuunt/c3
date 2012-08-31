@@ -1,6 +1,6 @@
 ﻿using System;
 using C3.Communi;
-
+using C3.Data;
 namespace XD1100DPU
 {
     /// <summary>

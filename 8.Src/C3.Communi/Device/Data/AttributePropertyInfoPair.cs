@@ -8,7 +8,7 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public class AttributePropertyInfoPair : IOrderNumber 
+    public class AttributePropertyInfoPair : IOrderNumber
     {
 
         #region AttributePropertyInfoPair
@@ -59,7 +59,7 @@ namespace C3.Communi
         #endregion //PropertyInfo
 
 
-        #region 
+        #region
 
         public int OrderNumber
         {
