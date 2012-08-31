@@ -67,18 +67,12 @@
     <Compile Include="DataField\DatafieldManager.cs" />
     <Compile Include="DeviceType\StationType.cs" />
     <Compile Include="DeviceType\TypeBase.cs" />
-    <Compile Include="Device\Data\AttributePropertyInfoPair.cs" />
-    <Compile Include="Device\Data\AttributePropertyInfoPairCollection.cs" />
-    <Compile Include="Device\Data\DeviceDataItemAttribute.cs" />
     <Compile Include="Device\Data\Unit.cs" />
     <Compile Include="Device\Data\UnitType.cs" />
     <Compile Include="Device\Device\DeviceBase.cs" />
     <Compile Include="Device\Device\DeviceCollection.cs" />
-    <Compile Include="Device\Data\DeviceDataBase.cs" />
     <Compile Include="Device\Data\DeviceDataCollection.cs" />
     <Compile Include="Device\Factory\DeviceFactoryBase.cs" />
-    <Compile Include="Device\DeviceInfoAttribute\DeviceInfoAttribute.cs" />
-    <Compile Include="Device\DeviceInfoAttribute\DeviceInfoAttributeCollection.cs" />
     <Compile Include="Device\DeviceUI\DeviceUI.cs" />
     <Compile Include="Device\DeviceUI\DeviceUIBase.cs" />
     <Compile Include="Device\DeviceUI\IDeviceUI.cs" />
@@ -97,8 +91,6 @@
     <Compile Include="FrmStationGroups.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrderNumber\IOrderNumber.cs" />
-    <Compile Include="OrderNumber\OrderNumberCollection.cs" />
     <Compile Include="DeviceType\DeviceKind.cs" />
     <Compile Include="Device\Persister\DevicePersisterBase.cs" />
     <Compile Include="Device\DeviceSource\DeviceSourceProviderBase.cs" />
