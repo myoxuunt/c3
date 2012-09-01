@@ -92,7 +92,7 @@ namespace C3.Communi
             if (!(current.Status == TaskStatus.Executing ||
                 current.Status == TaskStatus.Timeout ))
             {
-                string s = string.Format("status must be Executing, current is '{0}'", status);
+                string s = string.Format("task status must be Executing|Timeout, current is '{0}'", status);
                 throw new InvalidOperationException(s);
             }
 

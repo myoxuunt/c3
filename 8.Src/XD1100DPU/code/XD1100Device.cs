@@ -78,9 +78,6 @@ namespace XD1100DPU
         /// <returns></returns>
         public override object GetLazyDataFieldValue(string name)
         {
-            frmOutsideStandard f = new frmOutsideStandard();
-            f.ShowDialog();
-
             if (StringHelper.Equal(name, "dt"))
             {
                 return DateTime.Now;

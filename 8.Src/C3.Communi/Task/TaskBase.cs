@@ -172,6 +172,8 @@ namespace C3.Communi
                 {
                     if (this.Stragegy.CanRemove)
                     {
+                        // TODO: 2012-09-01 
+                        //
                         _status = TaskStatus.Completed;
                     }
                     else

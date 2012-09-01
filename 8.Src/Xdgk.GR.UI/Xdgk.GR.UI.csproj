@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{877704B6-0850-4BF6-923B-36E06EDC2E6B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Xdgk.GR.UI</RootNamespace>
+    <AssemblyName>Xdgk.GR.UI</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph, Version=5.1.5.21173, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\GlobalAssembly\Zed\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmOTGT2Value.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOTGT2Value.Designer.cs">
+      <DependentUpon>frmOTGT2Value.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTimeValue.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTimeValue.Designer.cs">
+      <DependentUpon>frmTimeValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UC\UCOTControlLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\UCOTControlLine.Designer.cs">
+      <DependentUpon>UCOTControlLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucTest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucTest.Designer.cs">
+      <DependentUpon>ucTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UCTimeControlLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\UCTimeControlLine.Designer.cs">
+      <DependentUpon>UCTimeControlLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UCTimeControlLine2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\UCTimeControlLine2.Designer.cs">
+      <DependentUpon>UCTimeControlLine2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UCValveOpenDegree.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\UCValveOpenDegree.Designer.cs">
+      <DependentUpon>UCValveOpenDegree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XD100Strings.Designer.cs">
+      <DependentUpon>XD100Strings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmOTGT2Value.resx">
+      <DependentUpon>frmOTGT2Value.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTimeValue.resx">
+      <DependentUpon>frmTimeValue.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\UCOTControlLine.resx">
+      <DependentUpon>UCOTControlLine.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucTest.resx">
+      <DependentUpon>ucTest.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\UCTimeControlLine.resx">
+      <DependentUpon>UCTimeControlLine.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\UCTimeControlLine2.resx">
+      <DependentUpon>UCTimeControlLine2.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\UCValveOpenDegree.resx">
+      <DependentUpon>UCValveOpenDegree.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XD100Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>XD100Strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xdgk.Common\Xdgk.Common.csproj">
+      <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
+      <Name>Xdgk.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xdgk.GR.Data\Xdgk.GR.Data.csproj">
+      <Project>{5DD9DEDE-5BE3-4324-AE36-843EB23A9242}</Project>
+      <Name>Xdgk.GR.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

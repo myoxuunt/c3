@@ -20,7 +20,7 @@ namespace XD1100DPU
 
         private ISelectedHardwareItem _selectedHardwareItem;
 
-#region IUIEntry 成员
+        #region IUIEntry 成员
         /// <summary>
         /// 
         /// </summary>
@@ -49,7 +49,17 @@ namespace XD1100DPU
 
         void _mnuTemperatureLine_Click(object sender, EventArgs e)
         {
-            NUnit.UiKit.UserMessage.Display("temp line");
+            if (this._selectedHardwareItem.SelectedHardwareItem is XD1100Device)
+            {
+                XD1100Device d = this._selectedHardwareItem.SelectedHardwareItem as XD1100Device;
+                Xd1100DPU.frmXD100ModbusTemperatureControl f = new Xd1100DPU.frmXD100ModbusTemperatureControl(d);
+                f.ShowDialog();
+            }
+            else
+            {
+
+                NUnit.UiKit.UserMessage.Display("TODO: need sel xd1100");
+            }
         }
 
         void parentMenuItem_DropDownOpening(object sender, EventArgs e)
@@ -57,7 +67,7 @@ namespace XD1100DPU
             XD1100Device d = _selectedHardwareItem.SelectedHardwareItem as XD1100Device;
             this._mnuTemperatureLine.Visible = d != null;
         }
-#endregion
+        #endregion
     }
 
 }
