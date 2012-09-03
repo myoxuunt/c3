@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
 
@@ -89,42 +90,51 @@ namespace C3.Communi
         {
             TaskStatus status = current.Check();
 
-            if (!(current.Status == TaskStatus.Executing ||
-                current.Status == TaskStatus.Timeout ))
-            {
-                string s = string.Format("task status must be Executing|Timeout, current is '{0}'", status);
-                throw new InvalidOperationException(s);
-            }
-
-            //if (status == TaskStatus.Timeout)
             switch ( status )
             {
+                case TaskStatus.Executing:
+                    break;
+
                 case TaskStatus.Timeout:
                     {
                         ICommuniPort cp = GetCommuniPort(current);
                         current.End(cp);
+                        DoTask(current);
+                    }
+                    break;
 
+                case TaskStatus.Executed:
+                    {
                         IParseResult pr = current.LastParseResult;
 
                         ITaskProcessor processor = GetTaskProcessor(current);
                         processor.Process(current, pr);
 
+                        DoTask(current);
+
+                    }
+                    break;
+
+                case TaskStatus.Wating:
+                    {
                         // clear current task
                         //
                         IDevice device = current.Device;
                         device.TaskManager.Current = null;
 
-                        //
-                        //
-                        if (current.Status == TaskStatus.Wating)
-                        {
-                            device.TaskManager.Tasks.Enqueue(current);
-                        }
+                        device.TaskManager.Tasks.Enqueue(current);
                     }
                     break;
 
-                case TaskStatus.Executing :
+                case TaskStatus.Completed:
+                    { 
+                        // clear current task
+                        //
+                        IDevice device = current.Device;
+                        device.TaskManager.Current = null;
+                    }
                     break;
+
 
                 default:
                     {

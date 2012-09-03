@@ -168,19 +168,19 @@ namespace C3.Communi
 
                 _status = value;
 
-                if (_status == TaskStatus.Executed)
-                {
-                    if (this.Stragegy.CanRemove)
-                    {
-                        // TODO: 2012-09-01 
-                        //
-                        _status = TaskStatus.Completed;
-                    }
-                    else
-                    {
-                        _status = TaskStatus.Wating;
-                    }
-                }
+                //if (_status == TaskStatus.Executed)
+                //{
+                //    if (this.Stragegy.CanRemove)
+                //    {
+                //        // TODO: 2012-09-01 
+                //        //
+                //        _status = TaskStatus.Completed;
+                //    }
+                //    else
+                //    {
+                //        _status = TaskStatus.Wating;
+                //    }
+                //}
 
                 string msg = string.Format("task changed: from '{0}' -> '{1}'", old, _status);
                 log.Debug(msg);
@@ -255,12 +255,28 @@ namespace C3.Communi
                     break;
 
                 case TaskStatus.Timeout:
+                    this.SetStatus(TaskStatus.Executed);
                     break;
 
                 case TaskStatus.Executed:
+                    if (this.Stragegy.CanRemove)
+                    {
+                        this.SetStatus(TaskStatus.Completed);
+                    }
+                    else
+                    {
+                        this.SetStatus(TaskStatus.Wating);
+                    }
                     break;
 
                 case TaskStatus.Completed:
+                    break;
+
+                default:
+                    {
+                        string s = string.Format("exception status status '{0}'", this.Status);
+                        throw new InvalidOperationException (s);
+                    }
                     break;
             }
             return Status;
@@ -424,7 +440,7 @@ namespace C3.Communi
 
                 // 
                 //
-                this.SetStatus(TaskStatus.Executed);
+                // this.SetStatus(TaskStatus.Executed);
 
                 OnEnded(EventArgs.Empty);
             }
