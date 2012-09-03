@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Xdgk.Common;
-using C3.Communi;
 using Xdgk.GR.UI;
+using ControllerIn;
 
-namespace XD1100DPU
+namespace Xdgk.GR.UI
 {
     public partial class frmXD100ModbusTemperatureControl : NUnit.UiKit.SettingsDialogBase
     {
+
 
         private _1100ControllerInterface _controller;
 
@@ -179,12 +180,13 @@ namespace XD1100DPU
         /// <param name="e"></param>
         private void btnRead_Click(object sender, EventArgs e)
         {
-            ParameterBag pb = new ParameterBag();
 
-            //pb.DeviceID = this._controller
-            pb.OperaName = "ReadModbusControl";
-            _controller.Execute(pb);
-                //_controller.ReadMode();
+            this._controller.DeviceID = 5;
+            this._controller.StationName = "station name(posi)";
+            this._controller.OperaName = "ReadModbusControl";
+            //this._controller.Parameters
+            this._controller.Doit();
+
             //if (this._state == State.None)
             //{
                 //_controller.ReadMode();

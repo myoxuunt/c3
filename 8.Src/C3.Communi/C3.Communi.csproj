@@ -101,6 +101,7 @@
     <Compile Include="Device\Report\ReportItem.cs" />
     <Compile Include="Device\Report\ReportItemCollection.cs" />
     <Compile Include="RemoteServer\RemoteServer.cs" />
+    <Compile Include="Task\TaskExecutor.cs" />
     <Compile Include="UC\ParameterUC\UCEnumParameterUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -209,8 +210,6 @@
     <Compile Include="UC\ParameterUC\UCStringParameterUI.Designer.cs">
       <DependentUpon>UCStringParameterUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\KeyValue.cs" />
-    <Compile Include="Utils\KeyValueCollection.cs" />
     <Compile Include="Opera\ParseResult\LengthErrorResult.cs" />
     <Compile Include="Opera\Opera.cs" />
     <Compile Include="Opera\ParseResult\ParseResultBase.cs" />

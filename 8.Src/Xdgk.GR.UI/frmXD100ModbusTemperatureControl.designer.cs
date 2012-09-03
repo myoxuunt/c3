@@ -1,4 +1,4 @@
-﻿namespace XD1100DPU
+﻿namespace Xdgk.GR.UI
 {
     partial class frmXD100ModbusTemperatureControl
     {

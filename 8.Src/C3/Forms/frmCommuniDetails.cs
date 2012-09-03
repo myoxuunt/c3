@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using C3.Communi;
 using C3.Resources;
+using Xdgk.Common;
 
 namespace C3
 {

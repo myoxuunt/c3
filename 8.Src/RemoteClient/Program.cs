@@ -6,6 +6,7 @@ using System.Runtime.Remoting.Channels.Tcp;
 using System.Collections.Generic;
 using System.Text;
 using C3.Remote;
+using Xdgk.GR.UI;
 
 namespace RemoteClient
 {
@@ -65,11 +66,21 @@ namespace RemoteClient
             {
                 Console.WriteLine(ex.ToString());
             }
+
+            frmXD100ModbusTemperatureControl f = new frmXD100ModbusTemperatureControl(
+                new RemoteController());
+            f.ShowDialog();
+            //f
+
             Console.WriteLine("key...");
             Console.Read();
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="status"></param>
         static void Func(object status)
         {
             Console.WriteLine("Func() . " + status );

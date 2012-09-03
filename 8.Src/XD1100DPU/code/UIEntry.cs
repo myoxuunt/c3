@@ -52,8 +52,10 @@ namespace XD1100DPU
             if (this._selectedHardwareItem.SelectedHardwareItem is XD1100Device)
             {
                 XD1100Device d = this._selectedHardwareItem.SelectedHardwareItem as XD1100Device;
-                Xd1100DPU.frmXD100ModbusTemperatureControl f = new Xd1100DPU.frmXD100ModbusTemperatureControl(d);
-                f.ShowDialog();
+
+                //LocalController c = new LocalController(d);
+                //XD1100DPU.frmXD100ModbusTemperatureControl f = new XD1100DPU.frmXD100ModbusTemperatureControl(c);
+                //f.ShowDialog();
             }
             else
             {

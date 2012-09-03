@@ -42,6 +42,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
     <Compile Include="frmOTGT2Value.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +54,12 @@
     </Compile>
     <Compile Include="frmTimeValue.Designer.cs">
       <DependentUpon>frmTimeValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmXD100ModbusTemperatureControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmXD100ModbusTemperatureControl.designer.cs">
+      <DependentUpon>frmXD100ModbusTemperatureControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UC\UCOTControlLine.cs">
@@ -100,6 +107,10 @@
       <DependentUpon>frmTimeValue.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmXD100ModbusTemperatureControl.resx">
+      <DependentUpon>frmXD100ModbusTemperatureControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UC\UCOTControlLine.resx">
       <DependentUpon>UCOTControlLine.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -127,6 +138,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControllerIn\ControllerIn.csproj">
+      <Project>{1CDE1F5A-859F-44B9-A2EA-DF17DC0A056C}</Project>
+      <Name>ControllerIn</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xdgk.Common\Xdgk.Common.csproj">
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>

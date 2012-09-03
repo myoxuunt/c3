@@ -5,15 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7466EEDD-1865-4310-A62B-C374453D1902}</ProjectGuid>
+    <ProjectGuid>{1CDE1F5A-859F-44B9-A2EA-DF17DC0A056C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RemoteClient</RootNamespace>
-    <AssemblyName>RemoteClient</AssemblyName>
+    <RootNamespace>ControllerIn</RootNamespace>
+    <AssemblyName>ControllerIn</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <StartupObject>
-    </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,32 +33,11 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Runtime.Remoting" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="R.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\C3.Remote\C3.Remote.csproj">
-      <Project>{47F900BA-F2A6-4A34-8938-2353D0DB3E49}</Project>
-      <Name>C3.Remote</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ControllerIn\ControllerIn.csproj">
-      <Project>{1CDE1F5A-859F-44B9-A2EA-DF17DC0A056C}</Project>
-      <Name>ControllerIn</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Xdgk.Common\Xdgk.Common.csproj">
-      <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
-      <Name>Xdgk.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Xdgk.GR.UI\Xdgk.GR.UI.csproj">
-      <Project>{877704B6-0850-4BF6-923B-36E06EDC2E6B}</Project>
-      <Name>Xdgk.GR.UI</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

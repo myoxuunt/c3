@@ -59,6 +59,8 @@
       <DependentUpon>FixedDialogBase.cs</DependentUpon>
     </Compile>
     <Compile Include="GuidFactory.cs" />
+    <Compile Include="KeyValue.cs" />
+    <Compile Include="KeyValueCollection.cs" />
     <Compile Include="OrderNumber\IOrderNumber.cs" />
     <Compile Include="OrderNumber\OrderNumberCollection.cs" />
     <Compile Include="Path.cs" />
