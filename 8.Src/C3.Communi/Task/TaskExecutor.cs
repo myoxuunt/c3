@@ -57,8 +57,14 @@ namespace C3.Communi
         /// <param name="device"></param>
         /// <param name="operaName"></param>
         /// <param name="keyValues"></param>
-        public void Execute(IDevice device, string operaName, KeyValueCollection keyValues)
+        public ExecuteResult Execute(IDevice device, string operaName, KeyValueCollection keyValues)
         {
+            if (!(device.Station.CommuniPort != null
+                && device.Station.CommuniPort.IsOpened ))
+            {
+                return ExecuteResult.CreateFailExecuteResult("not connected");
+            }
+
             IOpera opera = device.Dpu.OperaFactory.Create(device.GetType().Name,
                 operaName);
 
@@ -66,6 +72,8 @@ namespace C3.Communi
             this.Task = new Task(device, opera, Strategy.CreateImmediateStrategy(), timeout);
 
             device.TaskManager.Tasks.Enqueue(this.Task);
+
+            return ExecuteResult.CreateSuccessExecuteResult();
 
         }
     }

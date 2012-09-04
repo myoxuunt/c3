@@ -1,10 +1,9 @@
-
 using System;
 using Xdgk.Common;
 
-//namespace C3.Communi
 namespace Xdgk.Common
 {
+    [Serializable]
     public class KeyValue
     {
         /// <summary>

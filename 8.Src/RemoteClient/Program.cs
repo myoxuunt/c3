@@ -5,7 +5,8 @@ using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using System.Collections.Generic;
 using System.Text;
-using C3.Remote;
+using Xdgk.Common;
+//using C3.Remote;
 using Xdgk.GR.UI;
 
 namespace RemoteClient
@@ -45,7 +46,7 @@ namespace RemoteClient
                            "tcp://127.0.0.1:9000/RO"
                            );
 
-            ExecuteParameter p = new ExecuteParameter();
+            ExecuteArgs p = new ExecuteArgs();
             p.StationName = "st";
             p.DeviceAddress = 123;
             p.ExecuteName = "exe_nn";

@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using Xdgk.Common;
-//using ControllerIn;
-//using C3.Remote;
 
 namespace RemoteClient
 {
     public class RemoteController : _1100ControllerInterface
     {
-        #region _1100ControllerInterface 成员
+        private TcpChannel _tcpChannel;
+        public event EventHandler ResultEvent;
 
         /// <summary>
         /// 
@@ -25,7 +21,25 @@ namespace RemoteClient
             obj.Execute(args, w);
         }
 
-        #region Dispose
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="status"></param>
+        private void Target(ResultArgs args)
+        {
+            //Console.WriteLine("RemoteController Target: {0} {1} {2} {3} ",
+            //    args.IsComplete,
+            //    args.IsSuccess,
+            //    args.Message,
+            //    args.ExecuteName);
+
+            this._resultArgs = args;
+            if (this.ResultEvent != null)
+            {
+                this.ResultEvent(this, EventArgs.Empty);
+            }
+        }
+
         public void Dispose()
         {
             if (_tcpChannel != null)
@@ -33,10 +47,10 @@ namespace RemoteClient
                 ChannelServices.UnregisterChannel(_tcpChannel);
             }
         }
-        #endregion //Dispose
-        #endregion
 
-        TcpChannel _tcpChannel;
+
+
+        #region GetRemoteObject
         /// <summary>
         /// 
         /// </summary>
@@ -76,36 +90,10 @@ namespace RemoteClient
 
             return _remoteObject;
         } private RemoteObject _remoteObject;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="status"></param>
-        private void Target(ResultArgs args)
-        {
-            //Console.WriteLine("RemoteController Target: {0} {1} {2} {3} ",
-            //    args.IsComplete,
-            //    args.IsSuccess,
-            //    args.Message,
-            //    args.ExecuteName);
-
-            this._resultArgs = args;
-            if (this.CallbackEvent != null)
-            {
-                this.CallbackEvent(this, EventArgs.Empty);
-            }
-        }
-
-        #region _1100ControllerInterface 成员
+        #endregion //GetRemoteObject
 
 
-        public event EventHandler CallbackEvent;
-
-        #endregion
-
-        #region _1100ControllerInterface 成员
-
-
+        #region ResultArgs
         /// <summary>
         /// 
         /// </summary>
@@ -113,11 +101,6 @@ namespace RemoteClient
         {
             get { return _resultArgs; }
         } private ResultArgs _resultArgs;
-
-        #endregion
-
-        #region IDisposable 成员
-
-        #endregion
+        #endregion //ResultArgs
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,24 @@ using System.IO;
 
 namespace Xdgk.Common
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface _1100ControllerInterface : IDisposable 
+    {
+        //String StationName { get; set; }
+        //int DeviceID { get; set; }
+        //string OperaName { get; set; }
+        //Hashtable Parameters { get; }
+
+
+
+        event EventHandler ResultEvent;
+
+        void Doit(ExecuteArgs args);
+        ResultArgs ResultArgs{ get; }
+    }
 
     /// <summary>
     /// 

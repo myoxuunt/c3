@@ -4,9 +4,8 @@ using System.Threading;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
-using Xdgk.Common;
 
-namespace C3.Remote
+namespace Xdgk.Common
 {
     /// <summary>
     /// 
@@ -39,17 +38,17 @@ namespace C3.Remote
         /// <summary>
         /// 
         /// </summary>
-        public UInt64 DeviceAddress
+        public int DeviceID 
         {
             get
             {
-                return _deviceAddress;
+                return _deviceID;
             }
             set
             {
-                _deviceAddress = value;
+                _deviceID = value;
             }
-        } private UInt64 _deviceAddress;
+        } private int _deviceID;
         #endregion //DeviceAddress
 
         #region ExecuteName
@@ -73,26 +72,36 @@ namespace C3.Remote
         } private string _executeName;
         #endregion //ExecuteName
 
-        #region HashTable
         /// <summary>
         /// 
         /// </summary>
-        public Hashtable HashTable
+        public KeyValueCollection KeyValues
         {
-            get
-            {
-                if (_hashTable == null)
-                {
-                    _hashTable = new Hashtable();
-                }
-                return _hashTable;
-            }
-            set
-            {
-                _hashTable = value;
-            }
-        } private Hashtable _hashTable;
-        #endregion //HashTable
+            get { return _keyValues;  }
+            set { _keyValues = value; }
+        } private KeyValueCollection _keyValues;
+
+        //#region HashTable
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public Hashtable HashTable
+        //{
+        //    get
+        //    {
+        //        if (_hashTable == null)
+        //        {
+        //            _hashTable = new Hashtable();
+        //        }
+        //        return _hashTable;
+        //    }
+        //    set
+        //    {
+        //        _hashTable = value;
+        //    }
+        //} private Hashtable _hashTable;
+        //#endregion //HashTable
+
     }
 
     /// <summary>
@@ -106,8 +115,22 @@ namespace C3.Remote
         /// </summary>
         public ExecuteArgs ExecuteArgs
         {
-            get { return _executeArgs; }
-            set { _executeArgs = value; }
+            get
+            {
+                if (_executeArgs == null)
+                {
+                    throw new InvalidOperationException("ExecuteArgs == null");
+                }
+                return _executeArgs; 
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("ExecuteArgs");
+                }
+                _executeArgs = value; 
+            }
         } private ExecuteArgs _executeArgs;
 
         #region IsComplete
@@ -203,43 +226,56 @@ namespace C3.Remote
     }
 
 
-    [Serializable]
-    public enum ResultEnum
-    {
-        Success,
-        Fail,
-        Unsure,
-    }
-
     /// <summary>
     /// 
     /// </summary>
     [Serializable]
-    public class Result
+    public class ExecuteResult
     {
 
+        static public ExecuteResult CreateSuccessExecuteResult()
+        {
+            return new ExecuteResult(true, string.Empty);
+        }
+
+        static public ExecuteResult CreateFailExecuteResult(string message)
+        {
+            return new ExecuteResult(false, message);
+        }
+        private ExecuteResult(bool success, string message)
+        {
+            this.IsSuccess = success;
+            this.FailMessage = message;
+        }
         /// <summary>
         /// 
         /// </summary>
-        public ResultEnum ResultEnum
+        public bool IsSuccess
         {
-            get { return _resultEnum; }
-            set { _resultEnum = value; }
-        } private ResultEnum _resultEnum;
+            get { return _isSuccess; }
+            set { _isSuccess = value; }
+        } private bool _isSuccess;
 
         /// <summary>
         /// 
         /// </summary>
         public string FailMessage
         {
-            get { return _failMessage; }
+            get
+            {
+                if (_failMessage == null)
+                {
+                    _failMessage = string.Empty;
+                }
+                return _failMessage;
+            }
             set { _failMessage = value; }
         } private string _failMessage;
 
         /// <summary>
         /// 
         /// </summary>
-        public object Values
+        public object Tag
         {
             get { return _values; }
             set { _values = value; }
@@ -251,8 +287,8 @@ namespace C3.Remote
     /// </summary>
     public class ExecuteEventArgs : EventArgs
     {
-        public ExecuteArgs Parameter;
-        public Result Result;
+        public ExecuteArgs ExecuteArgs;
+        public ExecuteResult Result;
         public CallbackWrapper CallbackWrapper;
     }
 
@@ -271,12 +307,12 @@ namespace C3.Remote
         /// <param name="parameter"></param>
         /// <param name="cbWrapper"></param>
         /// <returns></returns>
-        public Result Execute(ExecuteArgs parameter, CallbackWrapper cbWrapper)
+        public ExecuteResult Execute(ExecuteArgs executeArgs, CallbackWrapper cbWrapper)
         {
             if (Executeing != null)
             {
                 ExecuteEventArgs e = new ExecuteEventArgs();
-                e.Parameter = parameter;
+                e.ExecuteArgs = executeArgs;
                 if (cbWrapper != null)
                 {
                     e.CallbackWrapper = cbWrapper;

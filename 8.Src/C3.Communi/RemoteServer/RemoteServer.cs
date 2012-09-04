@@ -6,7 +6,7 @@ using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using System.Text;
 using NLog;
-using C3.Remote;
+using Xdgk.Common;
 
 namespace C3.Communi
 {
@@ -33,7 +33,7 @@ namespace C3.Communi
             {
                 //string filename = "Config\\Remote.xml";
                 //RemotingConfiguration.Configure(filename, false);
-                C3.Remote.RemoteObject.Executeing += new ExecuteEventHandler(RemoteObject_Executeing);
+                Xdgk.Common.RemoteObject.Executeing += new ExecuteEventHandler(RemoteObject_Executeing);
 
                 IDictionary tcpProperties = new Hashtable();
                 tcpProperties["name"] = "RemoteTest";
@@ -56,7 +56,7 @@ namespace C3.Communi
                 ChannelServices.RegisterChannel(tcpChannel, false);
 
                 RemotingConfiguration.RegisterWellKnownServiceType(
-                    typeof(Remote.RemoteObject),
+                    typeof(Xdgk.Common.RemoteObject),
                     "RO",
                      WellKnownObjectMode.Singleton);
 
@@ -71,18 +71,97 @@ namespace C3.Communi
         /// <param name="e"></param>
         void RemoteObject_Executeing(object sender, ExecuteEventArgs e)
         {
-            string s = string.Format("{0}: {1}, ", "stationName",e.Parameter.StationName);
-            s+= string.Format("{0}: {1}, ", "address",e.Parameter.DeviceAddress );
-            s+= string.Format("{0}: {1}, ", "executename",e.Parameter.ExecuteName );
-            s+= string.Format("{0}: {1}, ", "count",e.Parameter.HashTable.Count );
-            log.Info("Executing");
+            //string s = string.Format("{0}: {1}, ", "stationName",e.Parameter.StationName);
+            //s+= string.Format("{0}: {1}, ", "address",e.Parameter.DeviceAddress );
+            //s+= string.Format("{0}: {1}, ", "executename",e.Parameter.ExecuteName );
+            //s+= string.Format("{0}: {1}, ", "count",e.Parameter.HashTable.Count );
+            //log.Info("Executing");
 
-            e.CallbackWrapper.Callback("status");
-            log.Info(s);
-            Result r = new Result();
-            r.ResultEnum = ResultEnum.Fail;
-            r.FailMessage = "fial message.";
+            //ResultArgs args = new ResultArgs();
+            //args.IsComplete = true;
+            //args.IsSuccess = true;
+            //args.Message = "message";
+            ////e.Result 
+
+            //e.CallbackWrapper.Callback(args);
+            ////log.Info(s);
+            //Result r = new Result();
+            //r.ResultEnum = ResultEnum.Fail;
+            //r.FailMessage = "fial message.";
+            //e.Result = r;
+
+            int id = e.ExecuteArgs.DeviceID;
+            IDevice device = SoftManager.GetSoft().Hardware.FindDevice(id);
+
+            TaskExecutor te = new TaskExecutor();
+            ExecuteResult r =  te.Execute(device, e.ExecuteArgs.ExecuteName, e.ExecuteArgs.KeyValues);
+            log.Info("task execute : {0}, {1}", r.IsSuccess, r.FailMessage);
+            if (r.IsSuccess)
+            {
+                this.Add(e, te); 
+            }
             e.Result = r;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Hashtable _eeArgs_te_hash = new Hashtable();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="eeArgs"></param>
+        /// <param name="te"></param>
+        private void Add(ExecuteEventArgs eeArgs, TaskExecutor te)
+        {
+            te.Ended += new EventHandler(te_Ended);
+            _eeArgs_te_hash.Add(eeArgs, te);
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        private ExecuteEventArgs Get(TaskExecutor exe)
+        {
+            ExecuteEventArgs r = null;
+            foreach (object obj in _eeArgs_te_hash.Keys)
+            {
+                TaskExecutor te = (TaskExecutor)_eeArgs_te_hash[obj];
+                if (te == exe)
+                {
+                    r = (ExecuteEventArgs)obj;
+                    break;
+                }
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void te_Ended(object sender, EventArgs e)
+        {
+            TaskExecutor exe = (TaskExecutor)sender;
+            ExecuteEventArgs eeArgs = Get(exe);
+
+            ResultArgs args = new ResultArgs();
+            args.ExecuteArgs = eeArgs.ExecuteArgs;
+            args.IsComplete= true;
+            args.IsSuccess = exe.Task.LastParseResult.IsSuccess;
+            args.Message = exe.Task.LastParseResult.ToString();
+            if (args.IsSuccess)
+            {
+                args.KeyValues = exe.Task.LastParseResult.Results;
+            }
+
+            eeArgs.CallbackWrapper.Callback(args);
+        }
+
     }
 }

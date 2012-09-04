@@ -8,6 +8,7 @@ namespace Xdgk.Common
     /// <summary>
     /// 
     /// </summary>
+    [Serializable]
     public class Collection<T> : System.Collections.ObjectModel.Collection<T>
     {
         public Collection()

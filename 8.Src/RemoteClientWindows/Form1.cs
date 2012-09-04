@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Xdgk.GR.UI;
+using Xdgk.Common;
 using RemoteClient;
 
 namespace RemoteClientWindows

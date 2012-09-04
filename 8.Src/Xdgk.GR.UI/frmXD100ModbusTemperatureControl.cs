@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,21 +8,21 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Xdgk.Common;
+//using C3.Remote;
 using Xdgk.GR.UI;
-using ControllerIn;
+//using ControllerIn;
 
 namespace Xdgk.GR.UI
 {
     public partial class frmXD100ModbusTemperatureControl : NUnit.UiKit.SettingsDialogBase
     {
 
-
         private _1100ControllerInterface _controller;
 
         /// <summary>
         /// 
         /// </summary>
-        //private bool _canWrite = false;
+        private bool _canWrite = false;
 
 
 
@@ -45,7 +47,60 @@ namespace Xdgk.GR.UI
             this.ucValveOpenDegree1.Location = this.ucTimeControlLine21.Location;
 
             this._controller = controller;
+
+            this._controller.ResultEvent += new EventHandler(_controller_CallbackEvent);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void _controller_CallbackEvent(object sender, EventArgs e)
+        {
+            ResultArgs args = this._controller.ResultArgs;
+
+            if (args.IsSuccess)
+            {
+                this.Sync.Post(new SendOrPostCallback(StatusBarTarget), args.Message);
+            }
+            else
+            {
+                this.Sync.Post(new SendOrPostCallback(MessageBoxTarget), args.Message);
+            }
+
+            if (args.IsSuccess)
+            {
+                if (args.IsComplete)
+                {
+                    if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, "ReadModbusControl"))
+                    {
+                        this.Sync.Post(new SendOrPostCallback(ReadLineTarget), args.KeyValues );
+                    }
+                    else if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, "WriteTempControlData"))
+                    {
+                        this.Sync.Post(new SendOrPostCallback(MessageBoxTarget), "write success!");
+                    }
+                }
+            }
+        }
+
+        private void ReadLineTarget(object status)
+        {
+            ProcessReadLine((KeyValueCollection)status);
+        }
+
+        private void StatusBarTarget(object status)
+        {
+            ShowError(status.ToString());
+        }
+
+        private void MessageBoxTarget(object status)
+        {
+            ShowError(status.ToString());
+        }
+
+
         ///// <summary>
         ///// 
         ///// </summary>
@@ -172,6 +227,7 @@ namespace Xdgk.GR.UI
         #endregion //okButton_Click
 
 
+
         #region btnRead_Click
         /// <summary>
         /// 
@@ -180,12 +236,10 @@ namespace Xdgk.GR.UI
         /// <param name="e"></param>
         private void btnRead_Click(object sender, EventArgs e)
         {
-
-            this._controller.DeviceID = 5;
-            this._controller.StationName = "station name(posi)";
-            this._controller.OperaName = "ReadModbusControl";
-            //this._controller.Parameters
-            this._controller.Doit();
+            ExecuteArgs args = new ExecuteArgs();
+            args.DeviceID = 5;
+            args.ExecuteName = "ReadModbusControl";
+            this._controller.Doit(args);
 
             //if (this._state == State.None)
             //{
@@ -226,75 +280,58 @@ namespace Xdgk.GR.UI
         {
             //this.lblError.Text = msg;
             //this.statusBarPanel1.Text = DateTime.Now + " " + msg;
+            this.statusBarPanel1.Text = DateTime.Now.ToString() + " " + msg;
             NUnit.UiKit.UserMessage.DisplayFailure(msg);
         }
         #endregion //ShowError
 
 
+  /// <summary>
+        /// 
+        /// </summary>
+        private void WriteMode()
+        {
+            ExecuteArgs args = new ExecuteArgs();
+            KeyValueCollection hash = args.KeyValues;
+            hash["ControlMode"] = (int)this.cmbControlMode.SelectedValue;
+            hash["ValveType"] = (int)this.cmbValveType.SelectedValue;
 
+            hash["SettingValue"] = GetSettingValue ();
+            hash["OTControlLine"] = this.ucotControlLine1.OTControlLine;
 
+            KeyValuePair<int, int>[] tcLine = this.TimeControlLine2.TimeControlLine;
+            int[] adjustValues = CreateAdjustValuesByTimeControlLine(tcLine);
+            hash["TimeControlLine"] = adjustValues;
 
-        #region ReadMode
+            args.DeviceID = 5;
+            args.ExecuteName = "WriteTempControlData";
+            _controller.Doit(args);
+        }
+
+        #region ProcessReadLine
         /// <summary>
         /// 
         /// </summary>
-        private void ReadMode()
+        /// <param name="e"></param>
+        private void ProcessReadLine(KeyValueCollection  hash)
         {
-         
+            object obj = hash["TimeControlLine"];
+            int[] adjustValues = obj as int[];
+
+            //KeyValuePair<int, int>[] timeControlLine = obj as KeyValuePair<int, int>[adjustValue.Length];
+
+            KeyValuePair<int, int>[] timeControlLine = CreateTimeControlLineByAdjustValues(adjustValues);
+            // tt
+            //this.ucTimeControlLine1.TimeControlLine = timeControlLine;
+            this.TimeControlLine2.TimeControlLine = timeControlLine;
+
+            // ot-gt2 line
+            //
+            obj = hash["OTControlLine"];
+            KeyValuePair<int, int>[] otControlLine = (KeyValuePair<int, int>[])obj;
+            this.ucotControlLine1.OTControlLine = otControlLine;
         }
-        #endregion //ReadMode
-
-
-        
-
-        //#region ReadLine
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //private void ReadLine()
-        //{
-        //    //Opera op = new Opera(CZGRCommon.DeviceTypes.GRDevice, "ReadTempControlData");
-        //    Opera op = CreateOpera("ReadTempControlData");
-        //    _task = new Task(this.Device, op, new ImmediateStrategy());
-        //    CZGRApp.Default.Soft.TaskManager.Tasks.AddToHead(_task);
-        //}
-        //#endregion //ReadLine
-
-
-        //#region ProcessReadLine
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="e"></param>
-        //private void ProcessReadLine(TaskExecutedEventArgs e)
-        //{
-        //    if (e.ParseResult.Success)
-        //    {
-        //        object obj = e.ParseResult.NameObjects.GetObject("TimeControlLine");
-        //        int[] adjustValues = obj as int[];
-
-        //        //KeyValuePair<int, int>[] timeControlLine = obj as KeyValuePair<int, int>[adjustValue.Length];
-
-        //        KeyValuePair<int, int>[] timeControlLine = CreateTimeControlLineByAdjustValues(adjustValues);
-        //        // tt
-        //        //this.ucTimeControlLine1.TimeControlLine = timeControlLine;
-        //        this.TimeControlLine2.TimeControlLine = timeControlLine;
-
-        //        // ot-gt2 line
-        //        //
-        //        obj = e.ParseResult.NameObjects.GetObject("OTControlLine");
-        //        KeyValuePair<int, int>[] otControlLine = (KeyValuePair<int, int>[])obj;
-        //        this.ucotControlLine1.OTControlLine = otControlLine;
-
-        //        this._canWrite = true;
-        //    }
-        //    else
-        //    {
-        //        ShowError();
-        //    }
-        //    SetState(State.None);
-        //}
-        //#endregion //ProcessReadLine
+        #endregion //ProcessReadLine
 
 
         #region KeyValuePair
@@ -424,23 +461,31 @@ namespace Xdgk.GR.UI
         //}
         #endregion //ProcessWriteMode
 
-        //#region WriteLine
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ////private void WriteLine(KeyValuePair<int, int>[] timeControlLine)
-        //private void WriteLine(int[] adjustValues)
-        //{
-        //    Opera op = CreateOpera("WriteTempControlData");
-        //    op.SendPart["TimeControlLine"] = adjustValues;
+        #region WriteLine
+        /// <summary>
+        /// 
+        /// </summary>
+        //private void WriteLine(KeyValuePair<int, int>[] timeControlLine)
+        private void WriteLine(int[] adjustValues)
+        {
+            //Opera op = CreateOpera("WriteTempControlData");
+            //op.SendPart["TimeControlLine"] = adjustValues;
 
-        //    // TODO: 2010-08-31 ot control line
-        //    //
-        //    op.SendPart["OTControlLine"] = this.ucotControlLine1.OTControlLine;
-        //    _task = new Task(this.Device, op, new ImmediateStrategy());
-        //    CZGRApp.Default.Soft.TaskManager.Tasks.AddToHead(_task);
-        //}
-        //#endregion //WriteLine
+            //// TODO: 2010-08-31 ot control line
+            ////
+            //op.SendPart["OTControlLine"] = this.ucotControlLine1.OTControlLine;
+            //_task = new Task(this.Device, op, new ImmediateStrategy());
+            //CZGRApp.Default.Soft.TaskManager.Tasks.AddToHead(_task);
+
+            ExecuteArgs args = new ExecuteArgs();
+            args.DeviceID  = 5;
+            args.ExecuteName = "WriteTempControlData";
+            args.KeyValues ["TimeControlLine"] = adjustValues;
+            args.KeyValues["OTControlLine"] = this.ucotControlLine1.OTControlLine;
+
+            _controller.Doit(args);
+        }
+        #endregion //WriteLine
 
 
         //#region ProcessWriteLine
@@ -471,37 +516,32 @@ namespace Xdgk.GR.UI
         /// <param name="e"></param>
         private void btnWrite_Click(object sender, EventArgs e)
         {
-            //if (this.Device.Station.CommuniPort == null)
-            //{
-            //    NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.NotConnected");
-            //    return;
-            //}
-
-            //if (!this._canWrite)
-            //{
-            //    NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.FirstReadGRControlParams");
-            //    return;
-            //}
+            if (!this._canWrite)
+            {
+                NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.FirstReadGRControlParams");
+                //return;
+            }
 
             //if (this._state != State.None)
             //{
             //    NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.Executing");
             //    return;
             //}
-            //if (this.cmbControlMode.SelectedItem != null)
-            //{
-            //    Xdgk.XD100Modbus.TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.XD100Modbus.TemperatureControlMode;
-            //    if (mode != null)
-            //    {
-            //        if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.ValveOpenDegree)
-            //        {
-            //            string s = string.Format(XD100.XD100ModbusStrings.NotSupportMode,mode.Name );
-            //            NUnit.UiKit.UserMessage.DisplayFailure(s);
-            //            return;
-            //        }
-            //    }
-            //}
-            //WriteMode();
+
+            if (this.cmbControlMode.SelectedItem != null)
+            {
+                Xdgk.XD100Modbus.TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.XD100Modbus.TemperatureControlMode;
+                if (mode != null)
+                {
+                    if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.ValveOpenDegree)
+                    {
+                        string s = string.Format("XD100.XD100ModbusStrings.NotSupportMode,mode.Name" );
+                        NUnit.UiKit.UserMessage.DisplayFailure(s);
+                        return;
+                    }
+                }
+            }
+            WriteMode();
 
             //this._controller.WriteMode();
             //this.SetState(State.Write);
@@ -528,6 +568,8 @@ namespace Xdgk.GR.UI
         private void frmXD100TemperatureControl_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.UnRegisterEvent();
+
+            this._controller.Dispose();
         }
         #endregion //frmXD100TemperatureControl_FormClosed
 
@@ -610,6 +652,14 @@ namespace Xdgk.GR.UI
             }
         } private Control[] _ucControlList;
         #endregion //UCControlList
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private System.Threading.SynchronizationContext Sync
+        {
+            get { return System.Windows.Forms.WindowsFormsSynchronizationContext.Current; }
+        }
 
     }
 

@@ -4,7 +4,7 @@ using System.Text;
 using Xdgk.Common;
 using C3.Communi;
 using Xdgk.GR.UI;
-using ControllerIn;
+//using ControllerIn;
 
 namespace XD1100DPU
 {
