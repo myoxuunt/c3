@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting;
@@ -90,15 +91,39 @@ namespace C3.Communi
             //r.FailMessage = "fial message.";
             //e.Result = r;
 
+            ExecuteResult r = null;
             int id = e.ExecuteArgs.DeviceID;
             IDevice device = SoftManager.GetSoft().Hardware.FindDevice(id);
 
-            TaskExecutor te = new TaskExecutor();
-            ExecuteResult r =  te.Execute(device, e.ExecuteArgs.ExecuteName, e.ExecuteArgs.KeyValues);
-            log.Info("task execute : {0}, {1}", r.IsSuccess, r.FailMessage);
-            if (r.IsSuccess)
+            if (StringHelper.Equal(e.ExecuteArgs.ExecuteName, DefineExecuteNames.IsReady))
             {
-                this.Add(e, te); 
+                if (device == null)
+                {
+                    string s = string.Format("not find device by id '{0}'", id);
+                    r = ExecuteResult.CreateFailExecuteResult(s);
+                }
+                else
+                {
+                    if (device.Station.CommuniPort != null &&
+                        device.Station.CommuniPort.IsOpened)
+                    {
+                        r = ExecuteResult.CreateSuccessExecuteResult();
+                    }
+                    else
+                    {
+                        r = ExecuteResult.CreateFailExecuteResult("not connected");
+                    }
+                }
+            }
+            else
+            {
+                TaskExecutor te = new TaskExecutor();
+                r = te.Execute(device, e.ExecuteArgs.ExecuteName, e.ExecuteArgs.KeyValues);
+                log.Info("task execute : {0}, {1}", r.IsSuccess, r.FailMessage);
+                if (r.IsSuccess)
+                {
+                    this.Add(e, te);
+                }
             }
             e.Result = r;
         }
@@ -161,6 +186,98 @@ namespace C3.Communi
             }
 
             eeArgs.CallbackWrapper.Callback(args);
+        }
+
+    }
+
+    public class LocalController : _1100ControllerInterface 
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public event EventHandler ResultEvent;
+
+        private ExecuteArgs _executeArgs;
+        public ExecuteResult Doit(ExecuteArgs args)
+        {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+
+            this._executeArgs = args;
+            int deviceID = args.DeviceID;
+            IDevice device = SoftManager.GetSoft().Hardware.FindDevice(deviceID);
+
+            ExecuteResult r = null;
+            if (StringHelper.Equal(args.ExecuteName, DefineExecuteNames.IsReady))
+            {
+                if (device == null)
+                {
+                    r = ExecuteResult.CreateFailExecuteResult("not find");
+                }
+                else
+                {
+                    if (device.Station.CommuniPort != null &&
+                        device.Station.CommuniPort.IsOpened)
+                    {
+                        r = ExecuteResult.CreateSuccessExecuteResult();
+                    }
+                    else
+                    {
+                        r = ExecuteResult.CreateFailExecuteResult("not connected");
+                    }
+                }
+            }
+            else
+            {
+                Debug.Assert(device != null);
+                TaskExecutor te = new TaskExecutor();
+                te.Ended += new EventHandler(te_Ended);
+                r = te.Execute(device, args.ExecuteName, args.KeyValues);
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void te_Ended(object sender, EventArgs e)
+        {
+
+            TaskExecutor te = (TaskExecutor)sender;
+            ResultArgs resultArgs = new ResultArgs();
+            resultArgs.ExecuteArgs = this._executeArgs;
+            resultArgs.IsComplete = true;
+            resultArgs.IsSuccess = te.Task.LastParseResult.IsSuccess;
+            resultArgs.Message = te.Task.LastParseResult.ToString();
+            resultArgs.KeyValues = te.Task.LastParseResult.Results;
+
+            this._resultArgs = resultArgs;
+
+            if (this.ResultEvent != null)
+            {
+                ResultEvent(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ResultArgs ResultArgs
+        {
+            get { return _resultArgs; }
+        } private ResultArgs _resultArgs;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Dispose()
+        {
+            // nothing
+            //
         }
 
     }

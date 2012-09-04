@@ -17,12 +17,68 @@ namespace Xdgk.GR.UI
     public partial class frmXD100ModbusTemperatureControl : NUnit.UiKit.SettingsDialogBase
     {
 
+        #region Members
+        /// <summary>
+        /// 
+        /// </summary>
+        private TimeSpan _executeTimeOut = TimeSpan.FromSeconds(10);
+
+        /// <summary>
+        /// 
+        /// </summary>
         private _1100ControllerInterface _controller;
 
         /// <summary>
         /// 
         /// </summary>
+        private DateTime _lastExecuteDateTime;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool _isExecuting;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool _canExecute;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private bool _canWrite = false;
+
+        private const string
+            OPERA_READ = "ReadModbusControl",
+            OPERA_WRITE = "WriteTempControlData";
+        #endregion //
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool IsExecuting()
+        {
+            TimeSpan ts = DateTime.Now - _lastExecuteDateTime;
+            bool b = ts >= _executeTimeOut;
+
+            return _isExecuting && (!b);
+        }
+
+        #region DeviceID
+        /// <summary>
+        /// 
+        /// </summary>
+        public int DeviceID
+        {
+            get
+            {
+                return _deviceID;
+            }
+        } private int _deviceID;
+        #endregion //DeviceID
+
 
 
 
@@ -34,7 +90,7 @@ namespace Xdgk.GR.UI
 
         #region frmXD100TemperatureControl
 
-        public frmXD100ModbusTemperatureControl(_1100ControllerInterface controller)
+        public frmXD100ModbusTemperatureControl(int deviceID, _1100ControllerInterface controller)
         {
             InitializeComponent();
 
@@ -46,9 +102,10 @@ namespace Xdgk.GR.UI
             this.ucValveOpenDegree1.Size = this.ucTimeControlLine21.Size;
             this.ucValveOpenDegree1.Location = this.ucTimeControlLine21.Location;
 
+            this._deviceID = deviceID;
             this._controller = controller;
 
-            this._controller.ResultEvent += new EventHandler(_controller_CallbackEvent);
+            this._controller.ResultEvent += new EventHandler(_controller_ResultEvent);
         }
 
         /// <summary>
@@ -56,7 +113,7 @@ namespace Xdgk.GR.UI
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void _controller_CallbackEvent(object sender, EventArgs e)
+        void _controller_ResultEvent(object sender, EventArgs e)
         {
             ResultArgs args = this._controller.ResultArgs;
 
@@ -73,11 +130,11 @@ namespace Xdgk.GR.UI
             {
                 if (args.IsComplete)
                 {
-                    if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, "ReadModbusControl"))
+                    if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, OPERA_READ))
                     {
-                        this.Sync.Post(new SendOrPostCallback(ReadLineTarget), args.KeyValues );
+                        this.Sync.Post(new SendOrPostCallback(ReadLineTarget), args.KeyValues);
                     }
-                    else if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, "WriteTempControlData"))
+                    else if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, OPERA_WRITE))
                     {
                         this.Sync.Post(new SendOrPostCallback(MessageBoxTarget), "write success!");
                     }
@@ -157,7 +214,7 @@ namespace Xdgk.GR.UI
             //this.cmbControlMode.SelectedItem 
 
             this.cmbValveType.DataSource = Xdgk.GR.Data.XD100Defines.ValveTypeCollection;
-                //Xdgk.XD100.XD100Defines.ValveTypeCollection;
+            //Xdgk.XD100.XD100Defines.ValveTypeCollection;
             this.cmbValveType.DisplayMember = "Name";
             this.cmbValveType.ValueMember = "Value";
         }
@@ -195,7 +252,7 @@ namespace Xdgk.GR.UI
         /// </summary>
         public UCTimeControlLine2 TimeControlLine2
         {
-            get 
+            get
             {
                 return this.ucTimeControlLine21;
             }
@@ -227,6 +284,23 @@ namespace Xdgk.GR.UI
         #endregion //okButton_Click
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool IsReady()
+        {
+            ExecuteArgs args = new ExecuteArgs();
+            args.DeviceID = this.DeviceID;
+            args.ExecuteName = DefineExecuteNames.IsReady;
+
+            ExecuteResult r = this._controller.Doit(args);
+            if (!r.IsSuccess)
+            {
+                NUnit.UiKit.UserMessage.DisplayFailure(r.FailMessage);
+            }
+            return r.IsSuccess;
+        }
 
         #region btnRead_Click
         /// <summary>
@@ -236,23 +310,44 @@ namespace Xdgk.GR.UI
         /// <param name="e"></param>
         private void btnRead_Click(object sender, EventArgs e)
         {
-            ExecuteArgs args = new ExecuteArgs();
-            args.DeviceID = 5;
-            args.ExecuteName = "ReadModbusControl";
-            this._controller.Doit(args);
+            if (!IsReady())
+            {
+                return;
+            }
+
+            if (!IsExecuting())
+            {
+                ExecuteArgs args = new ExecuteArgs();
+                args.DeviceID = this.DeviceID;
+                args.ExecuteName = OPERA_READ;
+
+                ExecuteResult r = this._controller.Doit(args);
+                if (r.IsSuccess)
+                {
+
+                }
+                else
+                {
+                    NUnit.UiKit.UserMessage.DisplayFailure(r.FailMessage);
+                }
+            }
+            else
+            {
+                NUnit.UiKit.UserMessage.DisplayFailure(XD100Strings.Executing);
+            }
 
             //if (this._state == State.None)
             //{
-                //_controller.ReadMode();
-                //if (Device.Station.CommuniPort != null)
-                //{
-                //    this.ReadMode();
-                //    this.SetState(State.Read);
-                //}
-                //else
-                //{
-                //    NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.NotConnected");
-                //}
+            //_controller.ReadMode();
+            //if (Device.Station.CommuniPort != null)
+            //{
+            //    this.ReadMode();
+            //    this.SetState(State.Read);
+            //}
+            //else
+            //{
+            //    NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.NotConnected");
+            //}
             //}
             //else
             //{
@@ -286,7 +381,7 @@ namespace Xdgk.GR.UI
         #endregion //ShowError
 
 
-  /// <summary>
+        /// <summary>
         /// 
         /// </summary>
         private void WriteMode()
@@ -296,14 +391,14 @@ namespace Xdgk.GR.UI
             hash["ControlMode"] = (int)this.cmbControlMode.SelectedValue;
             hash["ValveType"] = (int)this.cmbValveType.SelectedValue;
 
-            hash["SettingValue"] = GetSettingValue ();
+            hash["SettingValue"] = GetSettingValue();
             hash["OTControlLine"] = this.ucotControlLine1.OTControlLine;
 
             KeyValuePair<int, int>[] tcLine = this.TimeControlLine2.TimeControlLine;
             int[] adjustValues = CreateAdjustValuesByTimeControlLine(tcLine);
             hash["TimeControlLine"] = adjustValues;
 
-            args.DeviceID = 5;
+            args.DeviceID = this.DeviceID ;
             args.ExecuteName = "WriteTempControlData";
             _controller.Doit(args);
         }
@@ -313,9 +408,9 @@ namespace Xdgk.GR.UI
         /// 
         /// </summary>
         /// <param name="e"></param>
-        private void ProcessReadLine(KeyValueCollection  hash)
+        private void ProcessReadLine(KeyValueCollection keyValues)
         {
-            object obj = hash["TimeControlLine"];
+            object obj = keyValues["TimeControlLine"];
             int[] adjustValues = obj as int[];
 
             //KeyValuePair<int, int>[] timeControlLine = obj as KeyValuePair<int, int>[adjustValue.Length];
@@ -327,7 +422,7 @@ namespace Xdgk.GR.UI
 
             // ot-gt2 line
             //
-            obj = hash["OTControlLine"];
+            obj = keyValues["OTControlLine"];
             KeyValuePair<int, int>[] otControlLine = (KeyValuePair<int, int>[])obj;
             this.ucotControlLine1.OTControlLine = otControlLine;
         }
@@ -414,7 +509,7 @@ namespace Xdgk.GR.UI
         private int GetSettingValue()
         {
             int value = 0;
-            Xdgk.XD100Modbus.TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.XD100Modbus.TemperatureControlMode ;
+            Xdgk.XD100Modbus.TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.XD100Modbus.TemperatureControlMode;
             if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.ValveOpenDegree)
             {
                 value = this.ucValveOpenDegree1.ValveOpenDegree;
@@ -478,9 +573,9 @@ namespace Xdgk.GR.UI
             //CZGRApp.Default.Soft.TaskManager.Tasks.AddToHead(_task);
 
             ExecuteArgs args = new ExecuteArgs();
-            args.DeviceID  = 5;
+            args.DeviceID = this.DeviceID ;
             args.ExecuteName = "WriteTempControlData";
-            args.KeyValues ["TimeControlLine"] = adjustValues;
+            args.KeyValues["TimeControlLine"] = adjustValues;
             args.KeyValues["OTControlLine"] = this.ucotControlLine1.OTControlLine;
 
             _controller.Doit(args);
@@ -535,7 +630,7 @@ namespace Xdgk.GR.UI
                 {
                     if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.ValveOpenDegree)
                     {
-                        string s = string.Format("XD100.XD100ModbusStrings.NotSupportMode,mode.Name" );
+                        string s = string.Format("XD100.XD100ModbusStrings.NotSupportMode,mode.Name");
                         NUnit.UiKit.UserMessage.DisplayFailure(s);
                         return;
                     }
@@ -584,21 +679,21 @@ namespace Xdgk.GR.UI
             // TODO: local and resize uc
             //
             object obj = this.cmbControlMode.SelectedItem;
-            Xdgk.XD100Modbus.TemperatureControlMode mode = obj as Xdgk.XD100Modbus.TemperatureControlMode ;
+            Xdgk.XD100Modbus.TemperatureControlMode mode = obj as Xdgk.XD100Modbus.TemperatureControlMode;
 
             //if (mode.Mode == Xdgk.XD100.TemperatureControlModeEnum.OT_GT2)
-            if( mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.LineAndBT2 ||
+            if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.LineAndBT2 ||
                 mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.LineAndGT2 ||
-                mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.LineAndDiffT2 )
+                mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.LineAndDiffT2)
             {
                 //this.ucotControlLine1.Visible = true;
                 //this.ucTimeControlLine21.Visible = false;
                 ShowUCControl(this.ucotControlLine1);
             }
             //else if (mode.Mode == Xdgk.XD100.TemperatureControlModeEnum.Time_GT2)
-            else if ( mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndBT2 ||
+            else if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndBT2 ||
                 mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndDiffT2 ||
-                mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndGT2 )
+                mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndGT2)
             {
                 //this.ucotControlLine1.Visible = false;
                 //this.ucTimeControlLine21.Visible = true;
@@ -662,9 +757,6 @@ namespace Xdgk.GR.UI
         }
 
     }
-
-
-
 }
 
 

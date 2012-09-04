@@ -18,10 +18,16 @@ namespace RemoteClientWindows
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             RemoteController c = new RemoteController();
-            frmXD100ModbusTemperatureControl f = new frmXD100ModbusTemperatureControl(c);
+            frmXD100ModbusTemperatureControl f =
+                new frmXD100ModbusTemperatureControl(5, c);
             f.ShowDialog();
         }
     }

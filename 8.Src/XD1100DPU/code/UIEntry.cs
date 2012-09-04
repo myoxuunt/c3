@@ -1,4 +1,3 @@
-
 using System;
 using System.Data.SqlClient;
 using System.Collections;
@@ -9,6 +8,7 @@ using C3.Communi;
 using Xdgk.Common;
 using NLog;
 using C3.Data;
+using Xdgk.GR.UI;
 
 
 namespace XD1100DPU
@@ -53,13 +53,14 @@ namespace XD1100DPU
             {
                 XD1100Device d = this._selectedHardwareItem.SelectedHardwareItem as XD1100Device;
 
-                //LocalController c = new LocalController(d);
-                //XD1100DPU.frmXD100ModbusTemperatureControl f = new XD1100DPU.frmXD100ModbusTemperatureControl(c);
-                //f.ShowDialog();
+                int deviceID = GuidHelper.ConvertToInt32(d.Guid);
+                LocalController c = new LocalController();
+                frmXD100ModbusTemperatureControl f =
+                    new frmXD100ModbusTemperatureControl(deviceID, c);
+                f.ShowDialog();
             }
             else
             {
-
                 NUnit.UiKit.UserMessage.Display("TODO: need sel xd1100");
             }
         }

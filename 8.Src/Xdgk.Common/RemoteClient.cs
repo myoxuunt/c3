@@ -14,11 +14,11 @@ namespace RemoteClient
         /// <summary>
         /// 
         /// </summary>
-        public void Doit(ExecuteArgs args)
+        public ExecuteResult Doit(ExecuteArgs args)
         {
             RemoteObject obj = this.GetRemoteObject();
             CallbackWrapper w = new CallbackWrapper(new ResultDelegate(Target));
-            obj.Execute(args, w);
+            return obj.Execute(args, w);
         }
 
         /// <summary>
@@ -103,4 +103,6 @@ namespace RemoteClient
         } private ResultArgs _resultArgs;
         #endregion //ResultArgs
     }
+
+
 }

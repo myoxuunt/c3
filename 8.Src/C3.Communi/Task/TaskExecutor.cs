@@ -19,7 +19,7 @@ namespace C3.Communi
         public ITask Task
         {
             get { return _task; }
-            set
+            private set
             {
                 if (_task != value)
                 {

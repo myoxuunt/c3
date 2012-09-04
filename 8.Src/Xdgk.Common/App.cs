@@ -9,6 +9,14 @@ using System.IO;
 namespace Xdgk.Common
 {
 
+    public class DefineExecuteNames
+    {
+        private DefineExecuteNames()
+        {
+        }
+
+        public const string IsReady = "is_ready";
+    }
     /// <summary>
     /// 
     /// </summary>
@@ -23,7 +31,7 @@ namespace Xdgk.Common
 
         event EventHandler ResultEvent;
 
-        void Doit(ExecuteArgs args);
+        ExecuteResult Doit(ExecuteArgs args);
         ResultArgs ResultArgs{ get; }
     }
 
