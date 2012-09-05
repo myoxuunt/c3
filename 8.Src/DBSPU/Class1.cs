@@ -67,13 +67,8 @@ namespace DBSPU
             StationSource source = stationSource as StationSource;
             DataRow row = source.DataRow;
 
-            bool isStationDeleted = Convert.ToBoolean(row["Deleted"]);
-            string stationName = row["Name"].ToString();
-            if (stationName == "IP6")
-            {
-                int n = 0;
-            }
-            string xml = row["CommuniTypeContent"].ToString().Trim();
+            string stationName = row["StationName"].ToString();
+            string xml = row["StationCPConfig"].ToString().Trim();
             int stationID = (int)row["StationID"];
 
             Station st = new Station();
@@ -187,7 +182,7 @@ namespace DBSPU
         internal void UpdateStation(int id, string name, string xml)
         {
             string s = string.Format(
-                "update tblStation set name='{1}',  CommuniTypeContent = '{2}' where stationid = {0}",
+                "update tblStation set StationName='{1}',  StationCPConfig= '{2}' where stationid = {0}",
                 id, name, xml);
             Instance.ExecuteScalar(s);
         }
@@ -201,7 +196,7 @@ namespace DBSPU
         internal int InsertStation(string name, string xml)
         {
             string s = string.Format (
-            "insert into tblStation(name, CommuniTypeContent) values('{0}','{1}');select @@identity;",
+            "insert into tblStation(StationName, StationCPConfig) values('{0}','{1}');select @@identity;",
 
             name, xml);
 

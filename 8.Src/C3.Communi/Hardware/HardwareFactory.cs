@@ -174,8 +174,6 @@ namespace C3.Communi
                     IDeviceFactory factory = dpu.DeviceFactory;
                     IDevice device = factory.Create(deviceSource);
 
-                    ITaskFactory taskFactory = dpu.TaskFactory;
-                    taskFactory.Create(device);
 
                     device.DeviceSource = deviceSource;
 
@@ -190,6 +188,9 @@ namespace C3.Communi
                     }
                     station.Devices.Add(device);
                     device.Station = station;
+
+                    ITaskFactory taskFactory = dpu.TaskFactory;
+                    taskFactory.Create(device);
                 }
             }
         }

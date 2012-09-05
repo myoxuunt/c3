@@ -114,7 +114,7 @@ namespace XGDPU
             XGDevice d = (XGDevice)device;
 
             string s = string.Format(
-                "insert into tblDevice(address, deviceType, stationID) values({0}, '{1}', {2}); select @@identity;",
+                "insert into tblDevice(DeviceAddress, deviceType, stationID) values({0}, '{1}', {2}); select @@identity;",
                 d.Address,
                 d.DeviceType.Name,
                 GuidHelper.ConvertToInt32(d.Station.Guid)
@@ -127,7 +127,7 @@ namespace XGDPU
         protected override void OnUpdate(IDevice device)
         {
             string s = string.Format(
-                "update tblDevice set address = {0} where DeviceID = {1}",
+                "update tblDevice set DeviceAddress = {0} where DeviceID = {1}",
                 device.Address, GuidHelper.ConvertToInt32(device.Guid));
 
             DBI.Instance.ExecuteScalar(s);
@@ -167,7 +167,7 @@ namespace XGDPU
             set
             {
                 _dataRow = value;
-                this.Address = Convert.ToUInt64(_dataRow["address"]);
+                this.Address = Convert.ToUInt64(_dataRow["DeviceAddress"]);
                 this.DevcieTypeName = _dataRow["DeviceType"].ToString().Trim();
                 this.Guid = GuidHelper.Create(
                     Convert.ToInt32(_dataRow["DeviceID"])

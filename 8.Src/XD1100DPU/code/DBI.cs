@@ -128,11 +128,11 @@ namespace XD1100DPU
             AddSqlParameter(p, "SR", data.SR);
             AddSqlParameter(p, "OD", data.OD);
             AddSqlParameter(p, "PA2", data.PA2);
-            AddSqlParameter(p, "CM1", data.CM1);
-            AddSqlParameter(p, "CM2", data.CM2);
-            AddSqlParameter(p, "CM3", data.CM3);
-            AddSqlParameter(p, "RM1", data.RM1);
-            AddSqlParameter(p, "RM2", data.RM2);
+            AddSqlParameter(p, "CM1", data.CM1.PumpStatusEnum);
+            AddSqlParameter(p, "CM2", data.CM2.PumpStatusEnum);
+            AddSqlParameter(p, "CM3", data.CM3.PumpStatusEnum);
+            AddSqlParameter(p, "RM1", data.RM1.PumpStatusEnum);
+            AddSqlParameter(p, "RM2", data.RM2.PumpStatusEnum);
             AddSqlParameter(p, "DeviceID", id);
 
             ExecuteScalar(cmd);

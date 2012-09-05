@@ -25,7 +25,7 @@ namespace XD1100DPU
             XD1100Device d = (XD1100Device)device;
 
             string s = string.Format(
-                    "insert into tblDevice(address, deviceType, stationID, extend) values({0}, '{1}', {2}, '{3}'); select @@identity;",
+                    "insert into tblDevice(DeviceAddress, deviceType, stationID, DeviceExtend) values({0}, '{1}', {2}, '{3}'); select @@identity;",
                     d.Address,
                     d.DeviceType.Name,
                     GuidHelper.ConvertToInt32(d.Station.Guid),
@@ -59,7 +59,7 @@ namespace XD1100DPU
             // TODO:
             //
             string s = string.Format(
-                    "update tblDevice set address = {0}, extend = '{1}' where DeviceID = {2}",
+                    "update tblDevice set DeviceAddress = {0}, extend = '{1}' where DeviceID = {2}",
                     device.Address,
                     GetExtend((XD1100Device)device),
                     GuidHelper.ConvertToInt32(device.Guid));

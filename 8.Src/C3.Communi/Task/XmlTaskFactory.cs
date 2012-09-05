@@ -54,7 +54,8 @@ namespace C3.Communi
                 IOpera opera = this.OperaFactory.Create(td.DeviceType, td.OperaName);
 
                 Strategy strategy = td.StrategyDefine.Create();
-                Task t = new Task(device, opera, strategy, td.TimeOut);
+                TimeSpan timeout = TimeSpan.FromMilliseconds(device.Station.CommuniPortConfig.TimeoutMilliSecond);
+                Task t = new Task(device, opera, strategy, timeout);
                 device.TaskManager.Tasks.Enqueue(t);
 
                 tasks.Add(t);

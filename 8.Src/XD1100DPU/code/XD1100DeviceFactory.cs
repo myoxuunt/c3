@@ -42,7 +42,7 @@ namespace XD1100DPU
             d.HtmMode = HeatTransferMode.Parse(source.HtmModeValue);
             d.Pickers = Dpu.OperaFactory.CreatePickers(this.Dpu.DeviceType.Name);
 
-            d.DeviceDataManager.Last = new XD1100Data();
+            //d.DeviceDataManager.Last = new XD1100Data();
             return d;
         }
     }

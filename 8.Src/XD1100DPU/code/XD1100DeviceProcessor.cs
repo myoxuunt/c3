@@ -31,13 +31,13 @@ namespace XD1100DPU
                     XD1100Device d = (XD1100Device)task.Device;
                     ProcessReadReal(d, pr);
                 }
-                else if (StringHelper.Equal(opera, XD1100OperaNames.OPERA_READ))
+                else if (
+                    (StringHelper.Equal(opera, XD1100OperaNames.WriteOT)) ||
+                    (StringHelper.Equal(opera, XD1100OperaNames.OPERA_READ)) ||
+                    (StringHelper.Equal(opera, XD1100OperaNames.OPERA_WRITE))
+                    )
                 {
-                    // nothing
-                }
-                else if (StringHelper.Equal(opera, XD1100OperaNames.OPERA_WRITE))
-                {
-                    // nothing
+
                 }
                 else
                 {

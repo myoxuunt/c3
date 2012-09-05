@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <tasks>
   
-  <!--<task>
+  <task>
     <devicetype>xd1100device</devicetype>
     <operaname>ReadReal</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:10:00</value>
+      <value>00:00:10</value>
     </cyclestrategy>
   </task>
 
@@ -17,5 +17,5 @@
     <cyclestrategy>
       <value>00:00:10</value>
     </cyclestrategy>
-  </task>-->
+  </task>
 </tasks>

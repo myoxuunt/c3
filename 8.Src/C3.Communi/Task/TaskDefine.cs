@@ -5,16 +5,16 @@ namespace C3.Communi
     public class TaskDefine
     {
 
-        #region DefaultTaskTimeout
-        /// <summary>
-        /// 获取或设置默认任务超时时间
-        /// </summary>
-        static public TimeSpan DefaultTaskTimeout
-        {
-            get { return _defaultTaskTimeout; }
-            set { _defaultTaskTimeout = value; }
-        } static private TimeSpan _defaultTaskTimeout = TimeSpan.FromSeconds(10);
-        #endregion //DefaultTaskTimeout
+        //#region DefaultTaskTimeout
+        ///// <summary>
+        ///// 获取或设置默认任务超时时间
+        ///// </summary>
+        //static public TimeSpan DefaultTaskTimeout
+        //{
+        //    get { return _defaultTaskTimeout; }
+        //    set { _defaultTaskTimeout = value; }
+        //} static private TimeSpan _defaultTaskTimeout = TimeSpan.FromSeconds(10);
+        //#endregion //DefaultTaskTimeout
 
         #region TaskDefine
         /// <summary>
@@ -24,8 +24,8 @@ namespace C3.Communi
         /// <param name="operaName"></param>
         /// <param name="strategyDefine"></param>
         /// <param name="taskTimeout"></param>
-        public TaskDefine(string deviceType, string operaName, StrategyDefine strategyDefine,
-                TimeSpan taskTimeout)
+        public TaskDefine(string deviceType, string operaName, StrategyDefine strategyDefine)
+                //TimeSpan taskTimeout)
         {
             if (strategyDefine == null)
             {
@@ -35,7 +35,7 @@ namespace C3.Communi
             this.DeviceType = deviceType;
             this.OperaName = operaName;
             this.StrategyDefine = strategyDefine;
-            this.TimeOut = taskTimeout;
+            //this.TimeOut = taskTimeout;
         }
         #endregion //TaskDefine
 
@@ -61,16 +61,16 @@ namespace C3.Communi
         } private string _operaName;
         #endregion //OperaName
 
-        #region TimeOut
-        /// <summary>
-        /// 
-        /// </summary>
-        public TimeSpan TimeOut
-        {
-            get { return _timeOut; }
-            set { _timeOut = value; }
-        } private TimeSpan _timeOut;
-        #endregion //TimeOut
+        //#region TimeOut
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public TimeSpan TimeOut
+        //{
+        //    get { return _timeOut; }
+        //    set { _timeOut = value; }
+        //} private TimeSpan _timeOut;
+        //#endregion //TimeOut
 
         #region StrategyDefine
         /// <summary>

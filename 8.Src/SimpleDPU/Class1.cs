@@ -26,7 +26,7 @@ namespace SimpleDPU
         protected override void OnAdd(IDevice device)
         {
             string s = string.Format(
-                "insert into tblDevice(address, deviceType, stationID) values({0}, '{1}', {2}); select @@identity;",
+                "insert into tblDevice(DeviceAddress, deviceType, stationID) values({0}, '{1}', {2}); select @@identity;",
                 device.Address,
                 device.DeviceType.Name,
                 GuidHelper.ConvertToInt32(device.Station.Guid)
@@ -43,7 +43,7 @@ namespace SimpleDPU
         protected override void OnUpdate(IDevice device)
         {
             string s = string.Format(
-                "update tblDevice set address = {0} where DeviceID = {1}",
+                "update tblDevice set DeviceAddress = {0} where DeviceID = {1}",
                 device.Address,
                 GuidHelper.ConvertToInt32(device.Guid));
 
@@ -57,7 +57,7 @@ namespace SimpleDPU
         protected override void OnDelete(IDevice device)
         {
             int id = GuidHelper.ConvertToInt32 ( device.Guid );
-            string s = string.Format("delet from tblDevice where deviceid = {0}", id);
+            string s = string.Format("delete from tblDevice where deviceid = {0}", id);
             _dbi.ExecuteScalar(s);
         }
     }
@@ -154,7 +154,7 @@ namespace SimpleDPU
                 }
 
                 _dataRow = value;
-                this.Address = Convert.ToUInt64(_dataRow["address"]);
+                this.Address = Convert.ToUInt64(_dataRow["DeviceAddress"]);
 
                 this.DevcieTypeName = _dataRow["DeviceType"].ToString().Trim();
 

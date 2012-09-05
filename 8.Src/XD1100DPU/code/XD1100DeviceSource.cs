@@ -24,7 +24,7 @@ namespace XD1100DPU
             this.DataRow = row;
         }
 
-#region DataRow
+        #region DataRow
         /// <summary>
         /// 
         /// </summary>
@@ -37,7 +37,7 @@ namespace XD1100DPU
             set
             {
                 _dataRow = value;
-                this.Address = Convert.ToUInt64(_dataRow["address"]);
+                this.Address = Convert.ToUInt64(_dataRow["DeviceAddress"]);
 
                 this.DevcieTypeName = _dataRow["DeviceType"].ToString().Trim();
 
@@ -49,7 +49,7 @@ namespace XD1100DPU
                         Convert.ToInt32(_dataRow["StationID"])
                         );
 
-                string ex = _dataRow["Extend"].ToString();
+                string ex = _dataRow["DeviceExtend"].ToString();
                 StringStringDictionary extend = StringStringDictionaryConverter.Parse(ex);
 
                 foreach (string obj in extend.Keys)
@@ -63,9 +63,9 @@ namespace XD1100DPU
             }
         } private DataRow _dataRow;
 
-#endregion //DataRow
+        #endregion //DataRow
 
-#region HtmModeValue
+        #region HtmModeValue
         /// <summary>
         /// 
         /// </summary>
@@ -79,8 +79,8 @@ namespace XD1100DPU
             {
                 _htmModeValue = value;
             }
-        } private ModeValue  _htmModeValue;
-#endregion //HtmModeValue
+        } private ModeValue _htmModeValue;
+        #endregion //HtmModeValue
 
     }
 

@@ -36,12 +36,12 @@ namespace C3.Communi
             XmlNode tasksNode = doc.SelectSingleNode(TaskFactoryNodeNames.TaskFactoryCollection);
             if (tasksNode != null)
             {
-                XmlAttribute att = tasksNode.Attributes[TaskFactoryNodeNames.Timeout];
-                if (att != null)
-                {
-                    TimeSpan taskDefaultTimeout = TimeSpan.Parse(att.Value);
-                    TaskDefine.DefaultTaskTimeout = taskDefaultTimeout;
-                }
+                //XmlAttribute att = tasksNode.Attributes[TaskFactoryNodeNames.Timeout];
+                //if (att != null)
+                //{
+                //    TimeSpan taskDefaultTimeout = TimeSpan.Parse(att.Value);
+                //    TaskDefine.DefaultTaskTimeout = taskDefaultTimeout;
+                //}
 
                 foreach (XmlNode node in tasksNode)
                 {
@@ -67,7 +67,7 @@ namespace C3.Communi
         {
             string devicetype = string.Empty;
             string opname = string.Empty;
-            TimeSpan timeout = TaskDefine.DefaultTaskTimeout;
+            //TimeSpan timeout = TaskDefine.DefaultTaskTimeout;
 
             StrategyDefine strategyDefine = null;
 
@@ -95,9 +95,9 @@ namespace C3.Communi
                         }
                         break;
 
-                    case TaskFactoryNodeNames.Timeout:
-                        timeout = TimeSpan.Parse(node.InnerText);
-                        break;
+                    //case TaskFactoryNodeNames.Timeout:
+                    //    timeout = TimeSpan.Parse(node.InnerText);
+                    //    break;
                 }
             }
 
@@ -109,7 +109,8 @@ namespace C3.Communi
                 throw new ConfigException(errmsg);
             }
 
-            return new TaskDefine(devicetype, opname, strategyDefine, timeout);
+            //return new TaskDefine(devicetype, opname, strategyDefine, timeout);
+            return new TaskDefine(devicetype, opname, strategyDefine);
         }
         #endregion //CreateTaskDefine
 

@@ -16,7 +16,7 @@
 <sources>
   <source>
     <key>connection</key>
-    <value>server=(local);uid=sa;pwd=sa;database=c3;</value>
+    <value>server=(local);uid=sa;pwd=sa;database=fngrdb2012;</value>
   </source>
   
   <source>

@@ -12,7 +12,8 @@ namespace Xdgk.GR.Data
     {
         public const string ReadReal = "readreal",
             OPERA_READ = "ReadModbusControl",
-            OPERA_WRITE = "WriteModbusControl";
+            OPERA_WRITE = "WriteModbusControl",
+            WriteOT = "WriteOT";
 
     }
     /// <summary>
