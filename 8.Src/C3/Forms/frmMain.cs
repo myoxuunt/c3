@@ -160,6 +160,11 @@ namespace C3
         /// <param name="e"></param>
         private void frmMain_Load(object sender, EventArgs e)
         {
+            //
+            //
+            this.mnuView.Visible = false;
+            this.toolStrip1.Visible = false;
+
             Soft soft = SoftManager.GetSoft();
             object o2 = soft.Hardware;
             int n = soft.Hardware.Stations.Count;

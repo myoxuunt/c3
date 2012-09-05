@@ -111,18 +111,19 @@
             this.mnuView.Name = "mnuView";
             this.mnuView.Size = new System.Drawing.Size(57, 20);
             this.mnuView.Text = "视图(&V)";
+            this.mnuView.Visible = true;
             // 
             // mnuToolbar
             // 
             this.mnuToolbar.Name = "mnuToolbar";
-            this.mnuToolbar.Size = new System.Drawing.Size(124, 22);
+            this.mnuToolbar.Size = new System.Drawing.Size(152, 22);
             this.mnuToolbar.Text = "工具栏(&T)";
             this.mnuToolbar.Click += new System.EventHandler(this.mnuToolbar_Click);
             // 
             // mnuStatusbar
             // 
             this.mnuStatusbar.Name = "mnuStatusbar";
-            this.mnuStatusbar.Size = new System.Drawing.Size(124, 22);
+            this.mnuStatusbar.Size = new System.Drawing.Size(152, 22);
             this.mnuStatusbar.Text = "状态栏(&S)";
             this.mnuStatusbar.Click += new System.EventHandler(this.mnuStatusbar_Click);
             // 
@@ -216,14 +217,14 @@
             // mnuAbout
             // 
             this.mnuAbout.Name = "mnuAbout";
-            this.mnuAbout.Size = new System.Drawing.Size(152, 22);
+            this.mnuAbout.Size = new System.Drawing.Size(113, 22);
             this.mnuAbout.Text = "关于(&A)";
             this.mnuAbout.Click += new System.EventHandler(this.mnuAbout_Click);
             // 
             // mnuTest
             // 
             this.mnuTest.Name = "mnuTest";
-            this.mnuTest.Size = new System.Drawing.Size(152, 22);
+            this.mnuTest.Size = new System.Drawing.Size(113, 22);
             this.mnuTest.Text = "Test";
             this.mnuTest.Click += new System.EventHandler(this.mnuTest_Click);
             // 
@@ -249,9 +250,9 @@
             // 
             this.sc1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sc1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.sc1.Location = new System.Drawing.Point(0, 49);
+            this.sc1.Location = new System.Drawing.Point(0, 24);
             this.sc1.Name = "sc1";
-            this.sc1.Size = new System.Drawing.Size(777, 463);
+            this.sc1.Size = new System.Drawing.Size(777, 488);
             this.sc1.SplitterDistance = 259;
             this.sc1.TabIndex = 9;
             // 
@@ -264,6 +265,7 @@
             this.toolStrip1.Size = new System.Drawing.Size(777, 25);
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.Visible = true;
             // 
             // FrmMain
             // 
