@@ -117,82 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AdjustHeaderText" xml:space="preserve">
-    <value>修正值(℃)</value>
+  <data name="NotConnection" xml:space="preserve">
+    <value>设备未连接</value>
   </data>
-  <data name="AdjustValueOutOfRange" xml:space="preserve">
-    <value>修正值超范围!</value>
-  </data>
-  <data name="AnalogValve" xml:space="preserve">
-    <value>模拟阀</value>
-  </data>
-  <data name="Executing" xml:space="preserve">
-    <value>正在执行操作, 请稍后再试!</value>
-  </data>
-  <data name="ExecutingOpera" xml:space="preserve">
-    <value>执行 '{0}' ...</value>
-  </data>
-  <data name="Fail" xml:space="preserve">
-    <value>失败</value>
-  </data>
-  <data name="FirstReadGRControlParams" xml:space="preserve">
-    <value>请先读取控制参数!</value>
-  </data>
-  <data name="FirstSelectGRDevice" xml:space="preserve">
-    <value>请先选择供热站点!</value>
-  </data>
-  <data name="FirstSelectItem" xml:space="preserve">
-    <value>请先选择一条数据!</value>
-  </data>
-  <data name="GT2" xml:space="preserve">
-    <value>二次供温(℃)</value>
-  </data>
-  <data name="NotConnected" xml:space="preserve">
-    <value>站点尚未连接, 请稍后再试!</value>
-  </data>
-  <data name="NotSupportMode" xml:space="preserve">
-    <value>不支持的模式 '{0}'</value>
-  </data>
-  <data name="OT" xml:space="preserve">
-    <value>室外温度</value>
-  </data>
-  <data name="OTGT2ControlLine" xml:space="preserve">
-    <value>温度控制曲线</value>
-  </data>
-  <data name="OTHeaderText" xml:space="preserve">
-    <value>室外温度</value>
-  </data>
-  <data name="OTMustInMinMax" xml:space="preserve">
-    <value>室外温度必须介于 '{0}' 到 '{1}' 之间</value>
-  </data>
-  <data name="StateNone" xml:space="preserve">
-    <value>等待操作</value>
-  </data>
-  <data name="StateReadLine" xml:space="preserve">
-    <value>读取供温曲线</value>
-  </data>
-  <data name="StateReadMode" xml:space="preserve">
-    <value>读取供温模式</value>
-  </data>
-  <data name="StateWriteLine" xml:space="preserve">
-    <value>设置供温曲线</value>
-  </data>
-  <data name="StateWriteMode" xml:space="preserve">
-    <value>设置供温模式</value>
-  </data>
-  <data name="Time" xml:space="preserve">
-    <value>时间(小时)</value>
-  </data>
-  <data name="TimeControlLine" xml:space="preserve">
-    <value>分时控制曲线</value>
-  </data>
-  <data name="TimeHeaderText" xml:space="preserve">
-    <value>时间(小时)</value>
-  </data>
-  <data name="TrinityValve" xml:space="preserve">
-    <value>三位阀</value>
-  </data>
-  <data name="WriteControlModeSuccess" xml:space="preserve">
-    <value>设置成功</value>
+  <data name="NotFindDeviceByID" xml:space="preserve">
+    <value>未找到编号为 '{0}' 的设备</value>
   </data>
 </root>

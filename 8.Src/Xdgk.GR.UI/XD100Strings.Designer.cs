@@ -97,6 +97,15 @@ namespace Xdgk.GR.UI {
         }
         
         /// <summary>
+        ///   查找类似 执行 &apos;{0}&apos; ... 的本地化字符串。
+        /// </summary>
+        internal static string ExecutingOpera {
+            get {
+                return ResourceManager.GetString("ExecutingOpera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 失败 的本地化字符串。
         /// </summary>
         internal static string Fail {
@@ -147,6 +156,15 @@ namespace Xdgk.GR.UI {
         internal static string NotConnected {
             get {
                 return ResourceManager.GetString("NotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 不支持的模式 &apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string NotSupportMode {
+            get {
+                return ResourceManager.GetString("NotSupportMode", resourceCulture);
             }
         }
         
@@ -264,6 +282,15 @@ namespace Xdgk.GR.UI {
         internal static string TrinityValve {
             get {
                 return ResourceManager.GetString("TrinityValve", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置成功 的本地化字符串。
+        /// </summary>
+        internal static string WriteControlModeSuccess {
+            get {
+                return ResourceManager.GetString("WriteControlModeSuccess", resourceCulture);
             }
         }
     }

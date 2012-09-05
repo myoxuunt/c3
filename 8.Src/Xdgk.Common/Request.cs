@@ -34,7 +34,7 @@ namespace Xdgk.Common
         } private string _stationName;
         #endregion //StationName
 
-        #region DeviceAddress
+        #region DeviceID
         /// <summary>
         /// 
         /// </summary>
@@ -49,7 +49,7 @@ namespace Xdgk.Common
                 _deviceID = value;
             }
         } private int _deviceID;
-        #endregion //DeviceAddress
+        #endregion //DeviceID
 
         #region ExecuteName
         /// <summary>
@@ -77,7 +77,14 @@ namespace Xdgk.Common
         /// </summary>
         public KeyValueCollection KeyValues
         {
-            get { return _keyValues;  }
+            get
+            {
+                if (_keyValues == null)
+                {
+                    _keyValues = new KeyValueCollection();
+                }
+                return _keyValues;  
+            }
             set { _keyValues = value; }
         } private KeyValueCollection _keyValues;
 

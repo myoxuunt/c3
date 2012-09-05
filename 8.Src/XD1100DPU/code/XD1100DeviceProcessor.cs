@@ -31,10 +31,18 @@ namespace XD1100DPU
                     XD1100Device d = (XD1100Device)task.Device;
                     ProcessReadReal(d, pr);
                 }
+                else if (StringHelper.Equal(opera, XD1100OperaNames.OPERA_READ))
+                {
+                    // nothing
+                }
+                else if (StringHelper.Equal(opera, XD1100OperaNames.OPERA_WRITE))
+                {
+                    // nothing
+                }
                 else
                 {
                     throw new NotImplementedException(
-                        string.Format("xd1100 opera '{0}'", opera)
+                        string.Format("not process xd1100 opera '{0}'", opera)
                         );
                 }
             }

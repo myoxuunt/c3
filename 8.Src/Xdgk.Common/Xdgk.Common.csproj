@@ -50,6 +50,7 @@
     <Compile Include="cccc.cs" />
     <Compile Include="CodeFile1.cs" />
     <Compile Include="DateTimeHelper.cs" />
+    <Compile Include="DefineExecuteNames.cs" />
     <Compile Include="DisplayValue.cs" />
     <Compile Include="DisplayValueCollection.cs" />
     <Compile Include="ExceptionLogger.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="UserMessage.cs" />
     <Compile Include="WaitCursor.cs" />
     <Compile Include="XmlHelper.cs" />
+    <Compile Include="IExecuteController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ADEStatusStrings.resx">

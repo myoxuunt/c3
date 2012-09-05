@@ -59,6 +59,16 @@ namespace C3.Communi
         /// <param name="keyValues"></param>
         public ExecuteResult Execute(IDevice device, string operaName, KeyValueCollection keyValues)
         {
+            if (device == null)
+            {
+                throw new ArgumentNullException("device");
+            }
+
+            if (keyValues == null)
+            {
+                keyValues = new KeyValueCollection();
+            }
+
             if (!(device.Station.CommuniPort != null
                 && device.Station.CommuniPort.IsOpened ))
             {
@@ -67,6 +77,11 @@ namespace C3.Communi
 
             IOpera opera = device.Dpu.OperaFactory.Create(device.GetType().Name,
                 operaName);
+
+            foreach (KeyValue kv in keyValues)
+            {
+                opera.SendPart[kv.Key] = kv.Value;
+            }
 
             TimeSpan timeout = TimeSpan.FromMilliseconds(device.Station.CommuniPortConfig.TimeoutMilliSecond );
             this.Task = new Task(device, opera, Strategy.CreateImmediateStrategy(), timeout);

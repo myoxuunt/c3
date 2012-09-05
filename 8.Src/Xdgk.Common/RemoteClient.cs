@@ -6,7 +6,7 @@ using Xdgk.Common;
 
 namespace RemoteClient
 {
-    public class RemoteController : _1100ControllerInterface
+    public class RemoteController : IExecuteController
     {
         private TcpChannel _tcpChannel;
         public event EventHandler ResultEvent;

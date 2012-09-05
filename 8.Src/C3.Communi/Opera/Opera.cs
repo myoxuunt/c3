@@ -62,35 +62,6 @@ namespace C3.Communi
         } private string _deviceType;
         #endregion //DeviceType
 
-        #region ReceiveParts
-        /// <summary>
-        /// 
-        /// </summary>
-        public ReceivePartCollection ReceiveParts
-        {
-            get
-            {
-                if (_receivePartCollection == null)
-                    _receivePartCollection = new ReceivePartCollection();
-                return _receivePartCollection;
-            }
-            set
-            {
-                this._receivePartCollection = value;
-            }
-        } private ReceivePartCollection _receivePartCollection;
-        #endregion //ReceiveParts
-
-        #region SendPart
-        /// <summary>
-        /// 
-        /// </summary>
-        public SendPart SendPart
-        {
-            get { return _sendPart; }
-            set { _sendPart = value; }
-        } private SendPart _sendPart;
-        #endregion //
 
         #region ToString
         /// <summary>

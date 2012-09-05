@@ -90,10 +90,6 @@
       <Project>{46745652-7EAA-4018-9ED9-26F101704B5E}</Project>
       <Name>C3.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ControllerIn\ControllerIn.csproj">
-      <Project>{1CDE1F5A-859F-44B9-A2EA-DF17DC0A056C}</Project>
-      <Name>ControllerIn</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Xdgk.Common\Xdgk.Common.csproj">
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>

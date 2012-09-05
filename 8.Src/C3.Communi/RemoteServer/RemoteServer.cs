@@ -6,8 +6,8 @@ using System.Runtime.Remoting;
 using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Channels.Tcp;
 using System.Text;
-using NLog;
 using Xdgk.Common;
+using NLog;
 
 namespace C3.Communi
 {
@@ -17,14 +17,19 @@ namespace C3.Communi
     public class RemoteServer
     {
         static private NLog.Logger log = LogManager.GetCurrentClassLogger();
+
+        #region IsStarted
         /// <summary>
+        ///
         /// 
         /// </summary>
         public bool IsStarted
         {
             get { return _isStarted; }
         } private bool _isStarted;
+        #endregion //IsStarted
 
+        #region Start
         /// <summary>
         /// 
         /// </summary>
@@ -32,8 +37,6 @@ namespace C3.Communi
         {
             if (!_isStarted)
             {
-                //string filename = "Config\\Remote.xml";
-                //RemotingConfiguration.Configure(filename, false);
                 Xdgk.Common.RemoteObject.Executeing += new ExecuteEventHandler(RemoteObject_Executeing);
 
                 IDictionary tcpProperties = new Hashtable();
@@ -64,7 +67,9 @@ namespace C3.Communi
                 _isStarted = true;
             }
         }
+        #endregion //Start
 
+        #region RemoteObject_Executeing
         /// <summary>
         /// 
         /// </summary>
@@ -72,25 +77,6 @@ namespace C3.Communi
         /// <param name="e"></param>
         void RemoteObject_Executeing(object sender, ExecuteEventArgs e)
         {
-            //string s = string.Format("{0}: {1}, ", "stationName",e.Parameter.StationName);
-            //s+= string.Format("{0}: {1}, ", "address",e.Parameter.DeviceAddress );
-            //s+= string.Format("{0}: {1}, ", "executename",e.Parameter.ExecuteName );
-            //s+= string.Format("{0}: {1}, ", "count",e.Parameter.HashTable.Count );
-            //log.Info("Executing");
-
-            //ResultArgs args = new ResultArgs();
-            //args.IsComplete = true;
-            //args.IsSuccess = true;
-            //args.Message = "message";
-            ////e.Result 
-
-            //e.CallbackWrapper.Callback(args);
-            ////log.Info(s);
-            //Result r = new Result();
-            //r.ResultEnum = ResultEnum.Fail;
-            //r.FailMessage = "fial message.";
-            //e.Result = r;
-
             ExecuteResult r = null;
             int id = e.ExecuteArgs.DeviceID;
             IDevice device = SoftManager.GetSoft().Hardware.FindDevice(id);
@@ -99,7 +85,7 @@ namespace C3.Communi
             {
                 if (device == null)
                 {
-                    string s = string.Format("not find device by id '{0}'", id);
+                    string s = string.Format(RemoteStrings.NotFindDeviceByID, id);
                     r = ExecuteResult.CreateFailExecuteResult(s);
                 }
                 else
@@ -111,7 +97,7 @@ namespace C3.Communi
                     }
                     else
                     {
-                        r = ExecuteResult.CreateFailExecuteResult("not connected");
+                        r = ExecuteResult.CreateFailExecuteResult(RemoteStrings.NotConnection);
                     }
                 }
             }
@@ -127,12 +113,14 @@ namespace C3.Communi
             }
             e.Result = r;
         }
+        #endregion //RemoteObject_Executeing
 
         /// <summary>
         /// 
         /// </summary>
         Hashtable _eeArgs_te_hash = new Hashtable();
 
+        #region Add
         /// <summary>
         /// 
         /// </summary>
@@ -144,7 +132,9 @@ namespace C3.Communi
             _eeArgs_te_hash.Add(eeArgs, te);
             
         }
+        #endregion //Add
 
+        #region Get
         /// <summary>
         /// 
         /// </summary>
@@ -164,13 +154,15 @@ namespace C3.Communi
             }
             return r;
         }
+        #endregion //Get
 
+        #region te_Ended
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void te_Ended(object sender, EventArgs e)
+        private void te_Ended(object sender, EventArgs e)
         {
             TaskExecutor exe = (TaskExecutor)sender;
             ExecuteEventArgs eeArgs = Get(exe);
@@ -187,98 +179,7 @@ namespace C3.Communi
 
             eeArgs.CallbackWrapper.Callback(args);
         }
-
-    }
-
-    public class LocalController : _1100ControllerInterface 
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        public event EventHandler ResultEvent;
-
-        private ExecuteArgs _executeArgs;
-        public ExecuteResult Doit(ExecuteArgs args)
-        {
-            if (args == null)
-            {
-                throw new ArgumentNullException("args");
-            }
-
-            this._executeArgs = args;
-            int deviceID = args.DeviceID;
-            IDevice device = SoftManager.GetSoft().Hardware.FindDevice(deviceID);
-
-            ExecuteResult r = null;
-            if (StringHelper.Equal(args.ExecuteName, DefineExecuteNames.IsReady))
-            {
-                if (device == null)
-                {
-                    r = ExecuteResult.CreateFailExecuteResult("not find");
-                }
-                else
-                {
-                    if (device.Station.CommuniPort != null &&
-                        device.Station.CommuniPort.IsOpened)
-                    {
-                        r = ExecuteResult.CreateSuccessExecuteResult();
-                    }
-                    else
-                    {
-                        r = ExecuteResult.CreateFailExecuteResult("not connected");
-                    }
-                }
-            }
-            else
-            {
-                Debug.Assert(device != null);
-                TaskExecutor te = new TaskExecutor();
-                te.Ended += new EventHandler(te_Ended);
-                r = te.Execute(device, args.ExecuteName, args.KeyValues);
-            }
-            return r;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void te_Ended(object sender, EventArgs e)
-        {
-
-            TaskExecutor te = (TaskExecutor)sender;
-            ResultArgs resultArgs = new ResultArgs();
-            resultArgs.ExecuteArgs = this._executeArgs;
-            resultArgs.IsComplete = true;
-            resultArgs.IsSuccess = te.Task.LastParseResult.IsSuccess;
-            resultArgs.Message = te.Task.LastParseResult.ToString();
-            resultArgs.KeyValues = te.Task.LastParseResult.Results;
-
-            this._resultArgs = resultArgs;
-
-            if (this.ResultEvent != null)
-            {
-                ResultEvent(this, EventArgs.Empty);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public ResultArgs ResultArgs
-        {
-            get { return _resultArgs; }
-        } private ResultArgs _resultArgs;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public void Dispose()
-        {
-            // nothing
-            //
-        }
+        #endregion //te_Ended
 
     }
 }

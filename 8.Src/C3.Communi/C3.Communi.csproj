@@ -100,7 +100,13 @@
     <Compile Include="Device\DeviceSource\DeviceSourceBase.cs" />
     <Compile Include="Device\Report\ReportItem.cs" />
     <Compile Include="Device\Report\ReportItemCollection.cs" />
+    <Compile Include="RemoteServer\LocalController.cs" />
     <Compile Include="RemoteServer\RemoteServer.cs" />
+    <Compile Include="RemoteStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoteStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Task\TaskExecutor.cs" />
     <Compile Include="UC\ParameterUC\UCEnumParameterUI.cs">
       <SubType>UserControl</SubType>
@@ -297,6 +303,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmStationGroups.resx">
       <DependentUpon>FrmStationGroups.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RemoteStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RemoteStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="strings.resx">

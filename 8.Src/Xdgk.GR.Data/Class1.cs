@@ -7,6 +7,9 @@ using Xdgk.Common;
 
 namespace Xdgk.XD100Modbus
 {
+    using Xdgk.GR.Data;
+   
+
     /// <summary>
     /// 
     /// </summary>
@@ -37,32 +40,32 @@ namespace Xdgk.XD100Modbus
                 {
                     _temperatureControlModeCollection = new TemperatureControlModeCollection();
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode("CZGR.XD100.XD100ModbusStrings.LineAndGT2",
+                        new TemperatureControlMode(XD100ModbusStrings.LineAndGT2,
                             TemperatureControlModeEnum.LineAndGT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode("CZGR.XD100.XD100ModbusStrings.LineAndBT2",
+                        new TemperatureControlMode(XD100ModbusStrings.LineAndBT2,
                             TemperatureControlModeEnum.LineAndBT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode("CZGR.XD100.XD100ModbusStrings.LineAndDiffT2 ",
+                        new TemperatureControlMode(XD100ModbusStrings.LineAndDiffT2 ,
                             TemperatureControlModeEnum.LineAndDiffT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode("CZGR.XD100.XD100ModbusStrings.SettingAndGT2 ",
+                        new TemperatureControlMode(XD100ModbusStrings.SettingAndGT2 ,
                             TemperatureControlModeEnum.SettingAndGT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode("CZGR.XD100.XD100ModbusStrings.SettingAndBT2",
+                        new TemperatureControlMode(XD100ModbusStrings.SettingAndBT2,
                             TemperatureControlModeEnum.SettingAndBT2));
 
                     
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode("CZGR.XD100.XD100ModbusStrings.SettingAndDiffT2",
+                        new TemperatureControlMode(XD100ModbusStrings.SettingAndDiffT2,
                             TemperatureControlModeEnum.SettingAndDiffT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode("CZGR.XD100.XD100ModbusStrings.ValveOpenDegree",
+                        new TemperatureControlMode(XD100ModbusStrings.ValveOpenDegree,
                             TemperatureControlModeEnum.ValveOpenDegree));
                 }
                 return _temperatureControlModeCollection;

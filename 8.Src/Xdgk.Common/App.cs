@@ -8,33 +8,6 @@ using System.IO;
 
 namespace Xdgk.Common
 {
-
-    public class DefineExecuteNames
-    {
-        private DefineExecuteNames()
-        {
-        }
-
-        public const string IsReady = "is_ready";
-    }
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface _1100ControllerInterface : IDisposable 
-    {
-        //String StationName { get; set; }
-        //int DeviceID { get; set; }
-        //string OperaName { get; set; }
-        //Hashtable Parameters { get; }
-
-
-
-        event EventHandler ResultEvent;
-
-        ExecuteResult Doit(ExecuteArgs args);
-        ResultArgs ResultArgs{ get; }
-    }
-
     /// <summary>
     /// 
     /// </summary>

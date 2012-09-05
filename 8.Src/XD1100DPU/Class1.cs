@@ -8,7 +8,7 @@ using Xdgk.GR.UI;
 
 namespace XD1100DPU
 {
-//    public class LocalController : _1100ControllerInterface
+//    public class LocalController : IExecuteController
 //    {
 
 //        public LocalController(IDevice d)
@@ -23,7 +23,7 @@ namespace XD1100DPU
 
 //        private _controllerStatus _status;
 
-//        #region _1100ControllerInterface 成员
+//        #region IExecuteController 成员
 
 //        public _controllerStatus ControllerStatus
 //        {
@@ -146,7 +146,7 @@ namespace XD1100DPU
 //    /// <summary>
 //    /// 
 //    /// </summary>
-//    public class RemoteController : _1100ControllerInterface
+//    public class RemoteController : IExecuteController
 //    {
 //        int _deviceID;
 //        private ITask Task
@@ -175,7 +175,7 @@ namespace XD1100DPU
 //            get { return _device; }
 //        } private IDevice _device;
 
-//        #region _1100ControllerInterface 成员
+//        #region IExecuteController 成员
 
 //        _controllerStatus _status;
 

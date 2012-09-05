@@ -10,6 +10,10 @@ namespace C3.Communi
         string Text { get; set; }
         byte[] CreateSendBytes(IDevice device);
 
+        SendPart SendPart { get; set; }
+
+        ReceivePartCollection ReceiveParts { get; set; }
+
         IParseResult ParseReceivedBytes(IDevice device, byte[] received);
     }
 }

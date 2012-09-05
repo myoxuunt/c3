@@ -8,6 +8,16 @@ namespace Xdgk.GR.Data
     /// <summary>
     /// 
     /// </summary>
+    public class XD1100OperaNames
+    {
+        public const string ReadReal = "readreal",
+            OPERA_READ = "ReadModbusControl",
+            OPERA_WRITE = "WriteModbusControl";
+
+    }
+    /// <summary>
+    /// 
+    /// </summary>
     public enum TemperatureControlModeEnum
     {
         OT_GT2 = 0,

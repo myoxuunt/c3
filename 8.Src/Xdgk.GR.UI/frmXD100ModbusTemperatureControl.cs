@@ -8,9 +8,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Xdgk.Common;
-//using C3.Remote;
+using Xdgk.GR.Data;
 using Xdgk.GR.UI;
-//using ControllerIn;
 
 namespace Xdgk.GR.UI
 {
@@ -26,7 +25,7 @@ namespace Xdgk.GR.UI
         /// <summary>
         /// 
         /// </summary>
-        private _1100ControllerInterface _controller;
+        private IExecuteController _controller;
 
         /// <summary>
         /// 
@@ -41,16 +40,9 @@ namespace Xdgk.GR.UI
         /// <summary>
         /// 
         /// </summary>
-        private bool _canExecute;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private bool _canWrite = false;
 
-        private const string
-            OPERA_READ = "ReadModbusControl",
-            OPERA_WRITE = "WriteTempControlData";
+
         #endregion //
 
 
@@ -80,17 +72,13 @@ namespace Xdgk.GR.UI
         #endregion //DeviceID
 
 
-
-
-        // private read | write | none state
-        //
-        // can write state
-        //
-
-
         #region frmXD100TemperatureControl
-
-        public frmXD100ModbusTemperatureControl(int deviceID, _1100ControllerInterface controller)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceID"></param>
+        /// <param name="controller"></param>
+        public frmXD100ModbusTemperatureControl(int deviceID, IExecuteController controller)
         {
             InitializeComponent();
 
@@ -107,6 +95,7 @@ namespace Xdgk.GR.UI
 
             this._controller.ResultEvent += new EventHandler(_controller_ResultEvent);
         }
+        #endregion //frmXD100TemperatureControl
 
         /// <summary>
         /// 
@@ -130,18 +119,26 @@ namespace Xdgk.GR.UI
             {
                 if (args.IsComplete)
                 {
-                    if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, OPERA_READ))
+                    if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, XD1100OperaNames.OPERA_READ))
                     {
                         this.Sync.Post(new SendOrPostCallback(ReadLineTarget), args.KeyValues);
+                        this._canWrite = true;
                     }
-                    else if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, OPERA_WRITE))
+                    else if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, XD1100OperaNames.OPERA_WRITE))
                     {
-                        this.Sync.Post(new SendOrPostCallback(MessageBoxTarget), "write success!");
+                        this.Sync.Post(new SendOrPostCallback(MessageBoxTarget), 
+                            XD100Strings.WriteControlModeSuccess);
                     }
                 }
             }
+
+            this._isExecuting = false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="status"></param>
         private void ReadLineTarget(object status)
         {
             ProcessReadLine((KeyValueCollection)status);
@@ -149,58 +146,13 @@ namespace Xdgk.GR.UI
 
         private void StatusBarTarget(object status)
         {
-            ShowError(status.ToString());
+            this.SetStatusText(status.ToString());
         }
 
         private void MessageBoxTarget(object status)
         {
-            ShowError(status.ToString());
+            NUnit.UiKit.UserMessage.DisplayInfo(status.ToString());
         }
-
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public frmXD100ModbusTemperatureControl(IDevice device)
-        //{
-        //    InitializeComponent();
-
-        //    //this.txtStationName.Text = this.Device.Station.Name;
-        //    BindDatas();
-        //    //this.Device = device;
-        //    this.RegisterEvent();
-        //    this.ucotControlLine1.Size = this.ucTimeControlLine21.Size;
-        //    this.ucotControlLine1.Location = this.ucTimeControlLine21.Location;
-
-        //    this.ucValveOpenDegree1.Size = this.ucTimeControlLine21.Size;
-        //    this.ucValveOpenDegree1.Location = this.ucTimeControlLine21.Location;
-        //}
-        #endregion //frmXD100TemperatureControl
-
-
-        #region RegisterEvent
-        /// <summary>
-        /// 
-        /// </summary>
-        private void RegisterEvent()
-        {
-            //TaskManager tm = CZGRApp.Default.Soft.TaskManager;
-            //tm.Executed += new TaskExecutedEventHandler(tm_Executed);
-        }
-        #endregion //RegisterEvent
-
-
-        #region UnRegisterEvent
-        /// <summary>
-        /// 
-        /// </summary>
-        private void UnRegisterEvent()
-        {
-            //TaskManager tm = CZGRApp.Default.Soft.TaskManager;
-            //tm.Executed -= new TaskExecutedEventHandler(tm_Executed);
-        }
-        #endregion //UnRegisterEvent
-
 
         #region BindDatas
         /// <summary>
@@ -219,7 +171,6 @@ namespace Xdgk.GR.UI
             this.cmbValveType.ValueMember = "Value";
         }
         #endregion //BindDatas
-
 
         #region cancelButton_Click
         /// <summary>
@@ -319,12 +270,15 @@ namespace Xdgk.GR.UI
             {
                 ExecuteArgs args = new ExecuteArgs();
                 args.DeviceID = this.DeviceID;
-                args.ExecuteName = OPERA_READ;
+                args.ExecuteName = XD1100OperaNames.OPERA_READ;
 
                 ExecuteResult r = this._controller.Doit(args);
                 if (r.IsSuccess)
                 {
+                    this._isExecuting = true;
+                    this._lastExecuteDateTime = DateTime.Now;
 
+                    this.SetStatusText(string.Format(XD100Strings.ExecutingOpera, args.ExecuteName));
                 }
                 else
                 {
@@ -335,72 +289,13 @@ namespace Xdgk.GR.UI
             {
                 NUnit.UiKit.UserMessage.DisplayFailure(XD100Strings.Executing);
             }
-
-            //if (this._state == State.None)
-            //{
-            //_controller.ReadMode();
-            //if (Device.Station.CommuniPort != null)
-            //{
-            //    this.ReadMode();
-            //    this.SetState(State.Read);
-            //}
-            //else
-            //{
-            //    NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.NotConnected");
-            //}
-            //}
-            //else
-            //{
-            //    //ShowOPError();
-            //    NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.Executing");
-            //}
         }
         #endregion //btnRead_Click
 
 
-        #region ShowError
-        /// <summary>
-        /// 
-        /// </summary>
-        private void ShowError()
+        private void SetStatusText(string text )
         {
-            //string s = GetStateText(this._state) + "XD100.XD100Strings.Fail";
-            //ShowError(s);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="msg"></param>
-        private void ShowError(string msg)
-        {
-            //this.lblError.Text = msg;
-            //this.statusBarPanel1.Text = DateTime.Now + " " + msg;
-            this.statusBarPanel1.Text = DateTime.Now.ToString() + " " + msg;
-            NUnit.UiKit.UserMessage.DisplayFailure(msg);
-        }
-        #endregion //ShowError
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private void WriteMode()
-        {
-            ExecuteArgs args = new ExecuteArgs();
-            KeyValueCollection hash = args.KeyValues;
-            hash["ControlMode"] = (int)this.cmbControlMode.SelectedValue;
-            hash["ValveType"] = (int)this.cmbValveType.SelectedValue;
-
-            hash["SettingValue"] = GetSettingValue();
-            hash["OTControlLine"] = this.ucotControlLine1.OTControlLine;
-
-            KeyValuePair<int, int>[] tcLine = this.TimeControlLine2.TimeControlLine;
-            int[] adjustValues = CreateAdjustValuesByTimeControlLine(tcLine);
-            hash["TimeControlLine"] = adjustValues;
-
-            args.DeviceID = this.DeviceID ;
-            args.ExecuteName = "WriteTempControlData";
-            _controller.Doit(args);
+            this.statusBarPanel1.Text = DateTime.Now.ToString() + " " + text;
         }
 
         #region ProcessReadLine
@@ -461,44 +356,6 @@ namespace Xdgk.GR.UI
             return r;
         }
         #endregion //CreateAdjustValuesByTimeControlLine
-
-
-        #region tm_Executed
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //void tm_Executed(object sender, TaskExecutedEventArgs e)
-        //{
-        //    //throw new NotImplementedException();
-
-        //    // TODO: check is this task
-        //    //
-        //    switch (this._state)
-        //    {
-        //        case State.Read :
-        //            ProcessReadMode(e);
-        //            break;
-
-        //        //case State.ReadLine:
-        //        //    ProcessReadLine(e);
-        //        //    break;
-
-        //        case State.Write :
-        //            ProcessWriteMode(e);
-        //            break;
-
-        //        //case State.WriteLine :
-        //        //    ProcessWriteLine(e);
-        //        //    break;
-
-        //        default:
-        //            break;
-        //    }
-        //}
-        #endregion //tm_Executed
-
 
 
         #region GetSettingValue
@@ -611,17 +468,22 @@ namespace Xdgk.GR.UI
         /// <param name="e"></param>
         private void btnWrite_Click(object sender, EventArgs e)
         {
-            if (!this._canWrite)
+            if (!IsReady())
             {
-                NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.FirstReadGRControlParams");
-                //return;
+                return;
             }
 
-            //if (this._state != State.None)
-            //{
-            //    NUnit.UiKit.UserMessage.DisplayFailure("XD100.XD100Strings.Executing");
-            //    return;
-            //}
+            if (!this._canWrite)
+            {
+                NUnit.UiKit.UserMessage.DisplayFailure(XD100Strings.FirstReadGRControlParams);
+                return;
+            }
+
+            if (this.IsExecuting())
+            {
+                NUnit.UiKit.UserMessage.DisplayFailure(XD100Strings.Executing);
+                return;
+            }
 
             if (this.cmbControlMode.SelectedItem != null)
             {
@@ -630,16 +492,42 @@ namespace Xdgk.GR.UI
                 {
                     if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.ValveOpenDegree)
                     {
-                        string s = string.Format("XD100.XD100ModbusStrings.NotSupportMode,mode.Name");
+                        //string s = string.Format(XD100ModbusStrings.NotSupportMode, mode.Name);
+                        string s = string.Format(XD100Strings.NotSupportMode, mode.Name);
                         NUnit.UiKit.UserMessage.DisplayFailure(s);
                         return;
                     }
                 }
             }
-            WriteMode();
 
-            //this._controller.WriteMode();
-            //this.SetState(State.Write);
+            ExecuteArgs args = new ExecuteArgs();
+            KeyValueCollection hash = args.KeyValues;
+            hash["ControlMode"] = (int)this.cmbControlMode.SelectedValue;
+            hash["ValveType"] = (int)this.cmbValveType.SelectedValue;
+
+            hash["SettingValue"] = GetSettingValue();
+            hash["OTControlLine"] = this.ucotControlLine1.OTControlLine;
+
+            KeyValuePair<int, int>[] tcLine = this.TimeControlLine2.TimeControlLine;
+            int[] adjustValues = CreateAdjustValuesByTimeControlLine(tcLine);
+            hash["TimeControlLine"] = adjustValues;
+
+            args.DeviceID = this.DeviceID;
+            args.ExecuteName = XD1100OperaNames.OPERA_WRITE;
+            ExecuteResult r = _controller.Doit(args);
+
+            if (r.IsSuccess)
+            {
+                this._isExecuting = true;
+                this._lastExecuteDateTime = DateTime.Now;
+
+                this.SetStatusText(string.Format(XD100Strings.ExecutingOpera, args.ExecuteName));
+            }
+            else
+            {
+                NUnit.UiKit.UserMessage.DisplayFailure(r.FailMessage);
+            }
+
         }
         #endregion //btnWrite_Click
 
@@ -662,8 +550,7 @@ namespace Xdgk.GR.UI
         /// <param name="e"></param>
         private void frmXD100TemperatureControl_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.UnRegisterEvent();
-
+            this._controller.ResultEvent -= new EventHandler(_controller_ResultEvent);
             this._controller.Dispose();
         }
         #endregion //frmXD100TemperatureControl_FormClosed

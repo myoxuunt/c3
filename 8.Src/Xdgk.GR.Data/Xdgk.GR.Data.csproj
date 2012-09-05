@@ -39,6 +39,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Class2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XD100ModbusStrings.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C3.Data\C3.Data.csproj">
@@ -49,6 +50,11 @@
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XD100ModbusStrings.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
