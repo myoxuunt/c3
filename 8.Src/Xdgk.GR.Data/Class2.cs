@@ -13,7 +13,8 @@ namespace Xdgk.GR.Data
         public const string ReadReal = "readreal",
             OPERA_READ = "ReadModbusControl",
             OPERA_WRITE = "WriteModbusControl",
-            WriteOT = "WriteOT";
+            WriteOT = "WriteOT",
+            WriteOTMode = "WriteOTMode";
 
     }
     /// <summary>

@@ -54,6 +54,7 @@ namespace XD1100DPU
                 }
                 else if (
                     (StringHelper.Equal(opera, XD1100OperaNames.WriteOT)) ||
+                    (StringHelper.Equal(opera, XD1100OperaNames.WriteOTMode)) ||
                     (StringHelper.Equal(opera, XD1100OperaNames.OPERA_READ)) ||
                     (StringHelper.Equal(opera, XD1100OperaNames.OPERA_WRITE))
                     )

@@ -18,4 +18,13 @@
       <value>00:00:10</value>
     </cyclestrategy>
   </task>
+
+  <task>
+    <devicetype>xd1100device</devicetype>
+    <operaname>WriteOTMode</operaname>
+    <strategytype>cyclestrategy</strategytype>
+    <cyclestrategy>
+      <value>00:00:10</value>
+    </cyclestrategy>
+  </task>
 </tasks>
