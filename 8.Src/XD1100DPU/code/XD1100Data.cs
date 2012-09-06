@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text;
+using System.Collections;
 using C3.Communi;
 using C3.Data;
 using Xdgk.GR.Data;
@@ -13,6 +15,7 @@ namespace XD1100DPU
     {
         private const string FloatFormat = "f2",
             IntFormat = "G";
+
         #region Members
         private float _GT1;
         private float _BT1;
@@ -38,6 +41,8 @@ namespace XD1100DPU
         private PumpStatus _CM3;
         private PumpStatus _RM1;
         private PumpStatus _RM2;
+
+        private WarnWrapper _warnWrapper;
         #endregion //Members
 
         #region XD1100Data
@@ -377,5 +382,74 @@ namespace XD1100DPU
             set { _RM2 = value; }
         }
         #endregion //RM2
+
+        #region Warn
+        /// <summary>
+        /// 
+        /// </summary>
+        [DeviceDataItem("报警", 24, Unit.None)]
+        public WarnWrapper Warn
+        {
+            get
+            {
+                if (_warnWrapper == null)
+                {
+                    _warnWrapper = new WarnWrapper();
+                }
+                return _warnWrapper;
+            }
+            set { _warnWrapper = value; }
+        }
+        #endregion //Warn
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class WarnWrapper
+    {
+        public WarnWrapper()
+        {
+
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="list"></param>
+        public WarnWrapper(IList list)
+        {
+            this.WarnList = list;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IList WarnList
+        {
+            get
+            {
+                if (_warnList == null)
+                {
+                    _warnList = new ArrayList();
+                }
+                return _warnList;
+            }
+            set { _warnList = value; }
+        } private IList _warnList;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (object item in this.WarnList)
+            {
+                sb.Append(item.ToString());
+                sb.Append(";");
+            }
+            return sb.ToString();
+        }
     }
 }

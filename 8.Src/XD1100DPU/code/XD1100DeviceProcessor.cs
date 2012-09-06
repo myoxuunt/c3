@@ -19,6 +19,26 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        private IFluxProvider GetFluxProvider(IDevice device)
+        {
+            IFluxProvider r = null;
+            DeviceCollection devices = device.Station.Devices;
+            foreach (IDevice item in devices)
+            {
+                if (item is IFluxProvider && item != device)
+                {
+                    r = (IFluxProvider)item;
+                    break;
+                }
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="task"></param>
         /// <param name="pr"></param>
         public override void OnProcess(ITask task, IParseResult pr)
@@ -29,7 +49,8 @@ namespace XD1100DPU
                 if (StringHelper.Equal(opera, XD1100OperaNames.ReadReal))
                 {
                     XD1100Device d = (XD1100Device)task.Device;
-                    ProcessReadReal(d, pr);
+                    IFluxProvider fluxProvider = GetFluxProvider(d);
+                    ProcessReadReal(d, pr, fluxProvider);
                 }
                 else if (
                     (StringHelper.Equal(opera, XD1100OperaNames.WriteOT)) ||
@@ -53,7 +74,7 @@ namespace XD1100DPU
         /// </summary>
         /// <param name="d"></param>
         /// <param name="pr"></param>
-        private void ProcessReadReal(XD1100Device d, IParseResult pr)
+        private void ProcessReadReal(XD1100Device d, IParseResult pr, IFluxProvider fluxProvider)
         {
             XD1100Data data = new XD1100Data();
 
@@ -114,7 +135,21 @@ namespace XD1100DPU
                 }
             }
 
+            object objWarn = pr.Results["Warn"];
+            IList listWarn = (IList)objWarn;
+            WarnWrapper ww = new WarnWrapper(listWarn);
+            data.Warn = ww;
+
+            //
+            //
+            if (fluxProvider != null)
+            {
+                data.I1 = Convert.ToSingle(fluxProvider.InstantFlux);
+                data.S1 = Convert.ToInt32(fluxProvider.Sum);
+            }
+
             d.DeviceDataManager.Last = data;
+
 
             // save
             //

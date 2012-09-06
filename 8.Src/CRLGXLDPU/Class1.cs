@@ -115,8 +115,39 @@ namespace CRLGXLDPU
         }
     }
 
-    public class Crlgxl : DeviceBase
+    public class Crlgxl : DeviceBase, IFluxProvider
     {
+        #region IFluxProvider 成员
+
+        public double InstantFlux
+        {
+            get
+            {
+                double r = 0d;
+                CrlgxlData data = this.DeviceDataManager.Last as CrlgxlData;
+                if (data != null)
+                {
+                    r = data.InstantFlux;
+                }
+                return r;
+            }
+        }
+
+        public double Sum
+        {
+            get
+            {
+                double r = 0d;
+                CrlgxlData data = this.DeviceDataManager.Last as CrlgxlData;
+                if (data != null)
+                {
+                    r = data.InstantFlux;
+                }
+                return r;
+            }
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -150,9 +181,9 @@ namespace CRLGXLDPU
         /// <param name="pr"></param>
         public override void OnProcess(ITask task, IParseResult pr)
         {
-             if (pr.IsSuccess)
+            if (pr.IsSuccess)
             {
-                string opera = task.Opera.Name ;
+                string opera = task.Opera.Name;
                 if (StringHelper.Equal(opera, "read"))
                 {
                     CrlgxlData data = new CrlgxlData();
@@ -161,7 +192,7 @@ namespace CRLGXLDPU
 
                     task.Device.DeviceDataManager.Last = data;
 
-                    int id = GuidHelper.ConvertToInt32 (task.Device.Guid );
+                    int id = GuidHelper.ConvertToInt32(task.Device.Guid);
                     DBI.Instance.InsertScl6Data(id, data);
                 }
             }

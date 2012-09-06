@@ -1,12 +1,7 @@
 ﻿using System;
-using Xdgk.Common;
-using System.Data;
-using System.Collections.Generic;
-using System.Text;
-
-using C3.Data;
 using C3.Communi;
 using SimpleDPU;
+using Xdgk.Common;
 using Xdgk.GR.Data;
 
 namespace SCL6DPU
@@ -247,8 +242,40 @@ namespace SCL6DPU
     /// <summary>
     /// 
     /// </summary>
-    internal class Scl6 : DeviceBase
+    internal class Scl6 : DeviceBase, IFluxProvider 
     {
 
+        #region IFluxProvider 成员
+
+        public double InstantFlux
+        {
+            get
+            {
+                double r = 0d;
+                Scl6Data data = this.DeviceDataManager.Last as Scl6Data;
+                if (data != null)
+                {
+                    r = data.InstantFlux;
+                }
+                return r;
+            }
+        }
+
+        public double Sum
+        {
+            get
+            {
+
+                double r = 0d;
+                Scl6Data data = this.DeviceDataManager.Last as Scl6Data;
+                if (data != null)
+                {
+                    r = data.Sum;
+                }
+                return r;
+            }
+        }
+
+        #endregion
     }
 }

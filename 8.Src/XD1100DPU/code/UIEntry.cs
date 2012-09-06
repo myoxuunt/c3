@@ -20,7 +20,10 @@ namespace XD1100DPU
 
         private ISelectedHardwareItem _selectedHardwareItem;
 
-        #region IUIEntry 成员
+        private const string 
+            MENU_OT = "室外温度(&T)...",
+            MENU_GRSETTING = "供温设置(&S)...";
+
         /// <summary>
         /// 
         /// </summary>
@@ -30,23 +33,33 @@ namespace XD1100DPU
             _selectedHardwareItem = sel;
             parentMenuItem.DropDownOpening += new EventHandler(parentMenuItem_DropDownOpening);
 
-            ToolStripMenuItem _otProviderSetting = new ToolStripMenuItem("室外温度(&T)...");
+            _otProviderSetting = new ToolStripMenuItem(MENU_OT);
             _otProviderSetting.Click += new EventHandler(_otProviderSetting_Click);
             parentMenuItem.DropDownItems.Add(_otProviderSetting);
 
 
-            _mnuTemperatureLine = new ToolStripMenuItem("tempLine(&L)...");
+            _mnuTemperatureLine = new ToolStripMenuItem(MENU_GRSETTING);
             _mnuTemperatureLine.Click += new EventHandler(_mnuTemperatureLine_Click);
             parentMenuItem.DropDownItems.Add(_mnuTemperatureLine);
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void _otProviderSetting_Click(object sender, EventArgs e)
         {
             frmOutsideStandard f = new frmOutsideStandard();
             f.ShowDialog();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void _mnuTemperatureLine_Click(object sender, EventArgs e)
         {
             if (this._selectedHardwareItem.SelectedHardwareItem is XD1100Device)
@@ -61,16 +74,20 @@ namespace XD1100DPU
             }
             else
             {
-                NUnit.UiKit.UserMessage.Display("TODO: need sel xd1100");
+                NUnit.UiKit.UserMessage.Display("selecte xd1100 device first");
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void parentMenuItem_DropDownOpening(object sender, EventArgs e)
         {
             XD1100Device d = _selectedHardwareItem.SelectedHardwareItem as XD1100Device;
             this._mnuTemperatureLine.Visible = d != null;
         }
-        #endregion
     }
 
 }

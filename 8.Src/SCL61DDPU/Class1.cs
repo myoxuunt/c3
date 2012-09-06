@@ -116,8 +116,40 @@ namespace SCL61DDPU
         }
     }
 
-    public class Scl61d : DeviceBase
+    public class Scl61d : DeviceBase, IFluxProvider
     {
+        #region IFluxProvider 成员
+
+        public double InstantFlux
+        {
+            get
+            {
+                double r = 0d;
+                Scl61dData data = this.DeviceDataManager.Last as Scl61dData;
+                if (data != null)
+                {
+                    return data.InstantFlux;
+                }
+                return r;
+            }
+        }
+
+        public double Sum
+        {
+
+            get
+            {
+                double r = 0d;
+                Scl61dData data = this.DeviceDataManager.Last as Scl61dData;
+                if (data != null)
+                {
+                    return data.Sum;
+                }
+                return r;
+            }
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -151,9 +183,9 @@ namespace SCL61DDPU
         /// <param name="pr"></param>
         public override void OnProcess(ITask task, IParseResult pr)
         {
-             if (pr.IsSuccess)
+            if (pr.IsSuccess)
             {
-                string opera = task.Opera.Name ;
+                string opera = task.Opera.Name;
                 if (StringHelper.Equal(opera, "read"))
                 {
                     Scl61dData data = new Scl61dData();
@@ -162,7 +194,7 @@ namespace SCL61DDPU
 
                     task.Device.DeviceDataManager.Last = data;
 
-                    int id = GuidHelper.ConvertToInt32 (task.Device.Guid );
+                    int id = GuidHelper.ConvertToInt32(task.Device.Guid);
                     DBI.Instance.InsertScl6Data(id, data);
                 }
             }

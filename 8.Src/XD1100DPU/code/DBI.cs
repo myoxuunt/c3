@@ -136,8 +136,28 @@ namespace XD1100DPU
             AddSqlParameter(p, "DeviceID", id);
 
             ExecuteScalar(cmd);
+
+            InsertGRAlarmData(id, data.DT, data.Warn.WarnList);
         }
 
+        internal void InsertGRAlarmData(int deviceID, DateTime dt, IList warnList )
+        {
+            if (warnList != null)
+            {
+                foreach (object obj in warnList)
+                {
+                    InsertGRAlarmData(deviceID, dt, obj.ToString());
+                }
+            }
+        }
+
+        internal void InsertGRAlarmData(int deviceID, DateTime dt, string warnMessage)
+        {
+            string s = string.Format(
+                "insert into tblGRAlarmData(deviceid, dt, content) values({0}, '{1}', '{2}')", 
+                deviceID, dt, warnMessage);
+            this.ExecuteScalar(s);
+        }
         /// <summary>
         /// 
         /// </summary>

@@ -25,8 +25,28 @@ namespace XD1100DPU
         {
             // init 
             //
-            IParameter p = GetHeatTransferModeParameter();
+            IParameter p = null;
+            p = GetHeatTransferModeParameter();
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public bool IsUseExternalFlux
+        //{
+        //    get
+        //    {
+        //    }
+        //    set
+        //    {
+
+        //    }
+        //}
+
+        //private IParameter GetIsUseExternalFluxParameter()
+        //{
+
+        //}
 
         /// <summary>
         /// 

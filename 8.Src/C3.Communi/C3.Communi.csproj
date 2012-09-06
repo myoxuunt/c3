@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BytesConverter\BytesConverterCollection.cs" />
     <Compile Include="BytesConverter\BytesConverterManager.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="CommuniDetail\CommuniDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetailCollection.cs" />
