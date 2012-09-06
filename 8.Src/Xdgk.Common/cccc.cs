@@ -120,6 +120,10 @@ namespace Xdgk.Common
         /// <returns></returns>
         override public object Format(object value)
         {
+            if (value == DBNull.Value)
+            {
+                return -1d;
+            }
             Single v = (Single)value;
             return (double)Math.Round(v, this.Digits);
         }
