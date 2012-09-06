@@ -24,7 +24,7 @@ namespace C3.Communi
             log.Info("Soft Constructor");
 
             _timer = new Timer();
-            _timer.Interval = 1000;
+            _timer.Interval = 50;
             _timer.Tick += new EventHandler(_timer_Tick);
             _timer.Start();
 

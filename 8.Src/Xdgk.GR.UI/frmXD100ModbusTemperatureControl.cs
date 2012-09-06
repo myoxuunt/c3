@@ -305,14 +305,28 @@ namespace Xdgk.GR.UI
         /// <param name="e"></param>
         private void ProcessReadLine(KeyValueCollection keyValues)
         {
-            object obj = keyValues["TimeControlLine"];
+            object obj = null;
+
+            obj = keyValues["ControlMode"];
+            int ctrlMode = Convert.ToInt16(obj);
+            this.cmbControlMode.SelectedValue = ctrlMode;
+
+            obj = keyValues["ValveType"];
+            int valveType = Convert.ToInt32(obj);
+            this.cmbValveType.SelectedValue = valveType;
+
+            obj = keyValues["SettingValue"];
+            int settingValue = Convert.ToInt32(obj);
+            settingValue = (int)(settingValue / 10);
+            this.ucTimeControlLine21.GTBase2 = settingValue;
+
+            this.ucValveOpenDegree1.ValveOpenDegree = settingValue;
+            
+
+            obj = keyValues["TimeControlLine"];
             int[] adjustValues = obj as int[];
 
-            //KeyValuePair<int, int>[] timeControlLine = obj as KeyValuePair<int, int>[adjustValue.Length];
-
             KeyValuePair<int, int>[] timeControlLine = CreateTimeControlLineByAdjustValues(adjustValues);
-            // tt
-            //this.ucTimeControlLine1.TimeControlLine = timeControlLine;
             this.TimeControlLine2.TimeControlLine = timeControlLine;
 
             // ot-gt2 line

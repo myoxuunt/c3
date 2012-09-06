@@ -59,7 +59,7 @@ namespace XD1100DPU
             // TODO:
             //
             string s = string.Format(
-                    "update tblDevice set DeviceAddress = {0}, extend = '{1}' where DeviceID = {2}",
+                    "update tblDevice set DeviceAddress = {0}, DeviceExtend = '{1}' where DeviceID = {2}",
                     device.Address,
                     GetExtend((XD1100Device)device),
                     GuidHelper.ConvertToInt32(device.Guid));
