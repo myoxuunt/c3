@@ -78,9 +78,10 @@ namespace Xdgk.GR.UI
         /// </summary>
         /// <param name="deviceID"></param>
         /// <param name="controller"></param>
-        public frmXD100ModbusTemperatureControl(int deviceID, IExecuteController controller)
+        public frmXD100ModbusTemperatureControl(string stationName, int deviceID, IExecuteController controller)
         {
             InitializeComponent();
+            this.txtStationName.Text = stationName.Trim();
 
             BindDatas();
 

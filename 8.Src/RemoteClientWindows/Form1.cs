@@ -27,7 +27,7 @@ namespace RemoteClientWindows
         {
             RemoteController c = new RemoteController();
             frmXD100ModbusTemperatureControl f =
-                new frmXD100ModbusTemperatureControl(2, c);
+                new frmXD100ModbusTemperatureControl("test station name",2, c);
             f.ShowDialog();
         }
     }

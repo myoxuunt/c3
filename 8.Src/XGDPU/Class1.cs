@@ -64,9 +64,9 @@ namespace XGDPU
             int stationID = GuidHelper.ConvertToInt32(xgdevice.StationGuid);
 
             string s = string.Format(
-                "INSERT INTO tblXGData(DT, Person, DeviceID, StationID, CardID) " +
-                "VALUES('{0}', '{1}', {2}, {3}, {4})",
-                xgData.DT, person, deviceID, stationID, cardID);
+                "INSERT INTO tblXGData(DT, Person, DeviceID,  CardID) " +
+                "VALUES('{0}', '{1}', {2}, {3})",
+                xgData.DT, person, deviceID, cardID);
             ExecuteScalar(s);
         }
 
@@ -300,6 +300,7 @@ namespace XGDPU
         public const string ReadXGTime = "readtime";
         public const string WriteXGDate = "writedate";
         public const string WriteXGTime = "writetime";
+        public const string WriteMode = "writemode";
     }
 
     /// <summary>

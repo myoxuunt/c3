@@ -334,7 +334,7 @@
 
     <!--读取巡更数据-->
     <operadefine name="readrecord" processfd="true"
-        text="读取第 '{0}' 条巡更记录" args="recordidx">
+        text="读取巡更记录" args="recordidx">
       <sendpart>
         <datafield name="df1"
             begin="0"
@@ -388,31 +388,6 @@
 
         <datafield name="crc"
             begin="23"
-            length="2"
-            crc="true"/>
-        <crcer name="Xdgk.Communi.CRC16"/>
-      </receivepart>
-
-      <receivepart name="recordcount" length="10">
-        <datafield name="df1"
-            begin="0"
-            length="3"
-            bytes="21 58 44"
-            matchcheck="true" />
-
-        <datafield name="df2"
-            begin="4"
-            length="3"
-            bytes="B0 07 01"
-            matchcheck="true"/>
-
-        <datafield name="recordcount"
-            begin="7"
-            length="1"
-            converter="Xdgk.Communi.Int8Converter" />
-
-        <datafield name="crc"
-            begin="8"
             length="2"
             crc="true"/>
         <crcer name="Xdgk.Communi.CRC16"/>
@@ -488,6 +463,56 @@
       </sendpart>
 
       <receivepart length="0"/>
+    </operadefine>
+
+    <operadefine name="WriteMode">
+      <sendpart>
+        <datafield name="df1"
+            begin="0"
+            length="3"
+            bytes="21 58 44"/>
+
+        <datafield name="address"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="df2"
+            begin="4"
+            length="3"
+            bytes="B0 0B 01"/>
+
+        <datafield name="mode"
+            begin="7"
+            length="1"
+            bytes="02"/>
+
+        <datafield name="crc"
+            begin="8"
+            length="2"
+            crc="true"/>
+        <crcer name="Xdgk.Communi.CRC16"/>
+      </sendpart>
+      
+      <receivepart length="9">
+        <datafield name="df1"
+            begin="0"
+            length="3"
+            bytes="21 58 44"
+            matchcheck="true" />
+
+        <datafield name="df2"
+            begin="4"
+            length="3"
+            bytes="B0 0B 00"
+            matchcheck="true"/>
+
+        <datafield name="crc"
+            begin="7"
+            length="2"
+            crc="true"/>
+        <crcer name="Xdgk.Communi.CRC16"/>
+      </receivepart>
     </operadefine>
 
     <uploaddefine name="recordupload">

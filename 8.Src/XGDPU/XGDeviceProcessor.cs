@@ -44,6 +44,7 @@ namespace XGDPU
             if (pr.IsSuccess)
             {
                 string opera = task.Opera.Name;
+                opera = opera.ToLower();
                 XGDevice xgdevice = (XGDevice)task.Device;
 
                 switch (opera)
@@ -78,6 +79,7 @@ namespace XGDPU
 
                     case XGOperaNames.WriteXGDate:
                     case XGOperaNames.WriteXGTime:
+                    case XGOperaNames.WriteMode:
                         // do nothing
                         //
                         break;
@@ -109,10 +111,7 @@ namespace XGDPU
         /// <param name="parseResult"></param>
         private void ProcessXGReadDateResult(XGDevice xgdevice, IParseResult pr)
         {
-            DateTime dt = (DateTime)pr.Results["DT"];
-            string cardSn = pr.Results["cardsn"].ToString();
 
-            dt = SaveToDBAndUpdateLast(xgdevice, dt, cardSn);
         }
 
         /// <summary>
@@ -177,7 +176,10 @@ namespace XGDPU
         /// <param name="parseResult"></param>
         private void ProcessXGReadRecordResult(XGDevice xgdevice, IParseResult pr)
         {
-            ProcessXGDeviceRecordHelp(xgdevice, pr, false);
+            DateTime dt = (DateTime)pr.Results["DT"];
+            string cardSn = pr.Results["cardsn"].ToString();
+
+            dt = SaveToDBAndUpdateLast(xgdevice, dt, cardSn);
         }
 
         /// <summary>
