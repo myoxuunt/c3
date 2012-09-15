@@ -5,6 +5,27 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
+    public enum CommuniPortStatus
+    {
+
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface ICommuniPortConfig
+    {
+        bool CanCreate { get; }
+        ICommuniPort Create();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cp"></param>
+        /// <returns></returns>
+        bool IsMatch(ICommuniPort cp);
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -75,4 +96,78 @@ namespace C3.Communi
         }
 
     }
+
+    public class CommuniPortCollection : Xdgk.Common.Collection<ICommuniPort>
+    {
+
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IIdentityParser
+    {
+        bool Parse(byte[] identityBytes, out string identity);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class IdentityParserCollection : Collection<IIdentityParser>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identityBytes"></param>
+        /// <returns></returns>
+        public bool Parse(byte[] identityBytes, out string identity)
+        {
+            bool b = false;
+            identity = null;
+
+            foreach (IIdentityParser parser in this)
+            {
+                b = parser.Parse(identityBytes, out identity);
+                if (b)
+                {
+                    break;
+                }
+            }
+            return b;
+        }
+    }
+
+    public interface IFilter
+    {
+        byte[] Filt( byte[] source);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FilterCollection : Collection<IFilter>
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public byte[] Filt(byte[] source)
+        {
+            //if (this.Count == 0)
+            //{
+            //    return source;
+            //}
+
+            //string temp = (string)HexStringConverter.Default.ConvertToObject(source);
+            //foreach (IFilter f in this)
+            //{
+            //    temp = f.Filt(temp);
+            //}
+            //byte[] bs = (byte[])HexStringConverter.Default.ConvertToBytes(temp);
+            //return bs;
+            throw new NotImplementedException();
+        }
+    }
+
 }
