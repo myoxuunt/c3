@@ -66,10 +66,12 @@ namespace XD100EDPU
         /// 
         /// </summary>
         /// <param name="data"></param>
-        internal void InsertXd100eData(Xd100eData data)
+        internal void InsertXd100eData(int deviceID, Xd100eData data)
         {
-            string columns = string.Empty;
-            string values = string.Empty;
+            string columns = //string.Empty;
+                "DeviceID, DT,";
+            string values =// string.Empty;
+                string.Format("{0}, '{1}',", deviceID, data.DT.ToString());
 
             for (int i = Xd100eData.BeginChannelNO; i <= Xd100eData.EndChannelNO; i++)
             {
@@ -77,14 +79,28 @@ namespace XD100EDPU
                 values += data.GetChannelDataAI(i).ToString() + ",";
 
                 columns += "di" + i + ",";
-                values += data.GetChannelDataDI(i) ? "1" : "0" + ",";
+                values += (data.GetChannelDataDI(i) ? "1" : "0") + ",";
             }
 
-            columns = columns.Substring(0, columns.Length - 1);
-            values = values.Substring(0, columns.Length - 1);
+            columns = RemoveLastChar(columns);
+            values = RemoveLastChar(values);
 
             string s = string.Format("insert into tblXd100eData({0}) values({1})", columns, values);
             ExecuteScalar(s);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private string RemoveLastChar(string s)
+        {
+            if (s != null && s.Length > 1)
+            {
+                return s.Substring(0, s.Length - 1);
+            }
+            return s;
         }
     }
 
@@ -134,7 +150,7 @@ namespace XD100EDPU
     /// </summary>
     internal class Xd100eData : DeviceDataBase
     {
-        private DateTime _createDT = new DateTime();
+        private DateTime _createDT = DateTime.Now;
         #region IsSetAI
         /// <summary>
         /// 
@@ -632,7 +648,8 @@ namespace XD100EDPU
                     data.DT = DateTime.Now;
                     xd100eDevice.DeviceDataManager.Last = data;
 
-                    DBI.Instance.InsertXd100eData(data);
+                    int deviceID = GuidHelper.ConvertToInt32(xd100eDevice.Guid);
+                    DBI.Instance.InsertXd100eData(deviceID, data);
                 }
             }
         }
