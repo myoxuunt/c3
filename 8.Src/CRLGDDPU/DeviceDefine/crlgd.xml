@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<devicedefines>
+  <devicedefine devicetype="CRLGD" devicetext="CRLGD">
+    <operadefine name="read">
+      <sendpart>
+        <datafield name="f1"
+            begin="0"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="2A"/>
+
+        <datafield name="address"
+            begin="1"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="f3"
+            begin="2"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="4A"/>
+      </sendpart>
+
+      <receivepart length="37">
+        <datafield name="f1"
+            begin="0"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="26"
+            matchcheck="true" />
+
+        <datafield name="address"
+            begin="1"
+            length="1"
+            converter="HZ.BytesConverter.Int8Converter"/>
+
+        <datafield name="f2"
+            begin="2"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="4A"
+            matchcheck="true" />
+
+        <datafield name="if"
+            begin="11"
+            length="4"
+            converter="Xdgk.Communi.BCD4ByteConverter"/>
+
+        <datafield name="sum"
+            begin="15"
+            length="4"
+            converter="Xdgk.Communi.BCD4ByteConverter" />
+
+        <datafield name="crc"
+            begin="36"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter" 
+            crc="true"/>
+
+        <crcer name="Xdgk.Communi.CRCer.SUM"/>
+      </receivepart>
+    </operadefine>
+  </devicedefine>
+</devicedefines>

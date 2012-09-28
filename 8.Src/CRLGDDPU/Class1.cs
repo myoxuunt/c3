@@ -6,7 +6,7 @@ using Xdgk.Common;
 using Xdgk.GR.Data;
 using SimpleDPU;
 
-namespace CRLGXLDPU
+namespace CRLGDDPU
 {
     internal class DBI : DBIBase
     {
@@ -50,7 +50,7 @@ namespace CRLGXLDPU
         /// </summary>
         /// <param name="deviceID"></param>
         /// <param name="data"></param>
-        public void InsertCrlgxlData(int deviceID, CrlgxlData data)
+        public void InsertCrlgdData(int deviceID, CrlgdData data)
         {
             string s = string.Format(
                 "insert into tblFluxData(deviceid, DT, instantFlux, sum) values({0}, '{1}', {2}, {3}",
@@ -63,34 +63,35 @@ namespace CRLGXLDPU
     /// <summary>
     /// 
     /// </summary>
-    public class CrlgxlDpu : DPUBase
+    public class CrlgdDpu : DPUBase
     {
-        public CrlgxlDpu()
+        public CrlgdDpu()
         {
-            this.Name = "CrlgxlDpu";
-            this.DeviceFactory = new CrlgxlFactory(this);
-            this.DevicePersister = new CrlgxlPersister(DBI.Instance);
-            this.DeviceSourceProvider = new SimpleDeviceSourceProvider(DBI.Instance, typeof(Crlgxl));
+            this.Name = "CrlgdDpu";
+            this.DeviceFactory = new CrlgdFactory(this);
+            this.DevicePersister = new CrlgdPersister(DBI.Instance);
+            this.DeviceSourceProvider = //new Scl6SourceProvider();
+                new SimpleDeviceSourceProvider(DBI.Instance, typeof(Crlgd));
             this.DeviceType = DeviceTypeManager.AddDeviceType(
-                "Crlgxl",
-                "Crlgxl(Text)",
-                typeof(Crlgxl));
+                "Crlgd",
+                "Crlgd(Text)",
+                typeof(Crlgd));
             this.DeviceUI = new DeviceUI(this);
-            this.Processor = new CrlgxlProcessor();
+            this.Processor = new Scl6Processor();
 
-            string path = PathUtils.GetAssemblyDirectory(typeof(Crlgxl).Assembly);
+            string path = PathUtils.GetAssemblyDirectory(typeof(Crlgd).Assembly);
             this.TaskFactory = new XmlTaskFactory(this, path);
             this.OperaFactory = new XmlOperaFactory(path);
         }
     }
 
-    public class CrlgxlFactory : DeviceFactoryBase
+    public class CrlgdFactory : DeviceFactoryBase
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="dpu"></param>
-        public CrlgxlFactory(IDPU dpu)
+        public CrlgdFactory(IDPU dpu)
             : base(dpu)
         {
         }
@@ -103,7 +104,7 @@ namespace CRLGXLDPU
         public override IDevice OnCreate(IDeviceSource deviceSource)
         {
             SimpleDeviceSource source = (SimpleDeviceSource)deviceSource;
-            Crlgxl d = new Crlgxl();
+            Crlgd d = new Crlgd();
             d.Address = source.Address;
             d.DeviceSource = source;
             d.DeviceType = this.Dpu.DeviceType;
@@ -114,7 +115,7 @@ namespace CRLGXLDPU
         }
     }
 
-    public class Crlgxl : DeviceBase, IFluxProvider
+    public class Crlgd : DeviceBase, IFluxProvider
     {
         #region IFluxProvider 成员
 
@@ -123,7 +124,7 @@ namespace CRLGXLDPU
             get
             {
                 double r = 0d;
-                CrlgxlData data = this.DeviceDataManager.Last as CrlgxlData;
+                CrlgdData data = this.DeviceDataManager.Last as CrlgdData;
                 if (data != null)
                 {
                     r = data.InstantFlux;
@@ -137,7 +138,7 @@ namespace CRLGXLDPU
             get
             {
                 double r = 0d;
-                CrlgxlData data = this.DeviceDataManager.Last as CrlgxlData;
+                CrlgdData data = this.DeviceDataManager.Last as CrlgdData;
                 if (data != null)
                 {
                     r = data.InstantFlux;
@@ -152,7 +153,7 @@ namespace CRLGXLDPU
     /// <summary>
     /// 
     /// </summary>
-    public class CrlgxlData : FlowmeterData
+    public class CrlgdData : FlowmeterData
     {
 
     }
@@ -160,9 +161,9 @@ namespace CRLGXLDPU
     /// <summary>
     /// 
     /// </summary>
-    public class CrlgxlPersister : SimpleDevicePersister
+    public class CrlgdPersister : SimpleDevicePersister
     {
-        public CrlgxlPersister(DBIBase dbi)
+        public CrlgdPersister(DBIBase dbi)
             : base(dbi)
         {
         }
@@ -171,7 +172,7 @@ namespace CRLGXLDPU
     /// <summary>
     /// 
     /// </summary>
-    public class CrlgxlProcessor : TaskProcessorBase
+    public class Scl6Processor : TaskProcessorBase
     {
         /// <summary>
         /// 
@@ -185,14 +186,14 @@ namespace CRLGXLDPU
                 string opera = task.Opera.Name;
                 if (StringHelper.Equal(opera, "read"))
                 {
-                    CrlgxlData data = new CrlgxlData();
+                    CrlgdData data = new CrlgdData();
                     data.InstantFlux = Convert.ToDouble(pr.Results["if"]);
                     data.Sum = Convert.ToDouble(pr.Results["sum"]);
 
                     task.Device.DeviceDataManager.Last = data;
 
                     int id = GuidHelper.ConvertToInt32(task.Device.Guid);
-                    DBI.Instance.InsertCrlgxlData(id, data);
+                    DBI.Instance.InsertCrlgdData(id, data);
                 }
             }
         }

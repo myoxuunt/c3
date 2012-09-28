@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XD100EDPU", "XD100EDPU\XD10
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SCL9DPU", "SCL9DPU\SCL9DPU.csproj", "{A980D4B4-3153-404D-A582-268997731EA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRLGDDPU", "CRLGDDPU\CRLGDDPU.csproj", "{30E90408-FC89-4416-B126-AA369BBE80FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,10 @@ Global
 		{A980D4B4-3153-404D-A582-268997731EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A980D4B4-3153-404D-A582-268997731EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A980D4B4-3153-404D-A582-268997731EA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E90408-FC89-4416-B126-AA369BBE80FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E90408-FC89-4416-B126-AA369BBE80FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E90408-FC89-4416-B126-AA369BBE80FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E90408-FC89-4416-B126-AA369BBE80FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
