@@ -56,7 +56,7 @@ namespace SimpleDPU
         /// <param name="device"></param>
         protected override void OnDelete(IDevice device)
         {
-            int id = GuidHelper.ConvertToInt32 ( device.Guid );
+            int id = GuidHelper.ConvertToInt32(device.Guid);
             string s = string.Format("delete from tblDevice where deviceid = {0}", id);
             _dbi.ExecuteScalar(s);
         }

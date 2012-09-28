@@ -8,28 +8,6 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public class Hardware
-    {
-        public StationCollection Stations
-        {
-            get
-            {
-                if (_stations == null)
-                {
-                    _stations = new StationCollection();
-                }
-                return _stations;
-            }
-            set 
-            { 
-                _stations = value;
-            }
-        } private StationCollection _stations;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     public class HardwareFactory
     {
         static Logger _log = LogManager.GetCurrentClassLogger();

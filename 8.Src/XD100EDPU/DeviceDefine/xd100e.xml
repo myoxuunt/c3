@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<devicedefines>
+  <!--xd100e(xd1142) 扩展模块仪表-->
+  <devicedefine devicetype="xd100e" devicetext="xd100e">
+    <operadefine name="ReadReal" processfd="true">
+      <sendpart>
+        <datafield name="df1"
+            begin="0"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="21 58 44"/>
+
+        <datafield name="address"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="df2"
+            begin="4"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="AA 06 00"/>
+
+        <datafield name="crc"
+            begin="7"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            crc="true" />
+        <crcer name="Xdgk.Communi.CRC16"/>
+
+      </sendpart>
+
+      <receivepart length="49">
+        <datafield name="df1"
+            begin="0"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="21 58 44"
+            matchcheck="true"/>
+
+        <datafield name="address"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter" />
+
+        <datafield name ="df2"
+            begin="4"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="AA 06 28"
+            matchcheck="true"/>
+
+        <datafield name="Channal1Value"
+            begin="7"
+            length="4"
+            converter="Xdgk.Communi.Int32Converter"/>
+
+        <datafield name="Channal1Unit"
+            begin="11"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal2Value"
+            begin="12"
+            length="4"
+            converter="Xdgk.Communi.Int32Converter"/>
+
+        <datafield name="Channal2Unit"
+            begin="16"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal3Value"
+            begin="17"
+            length="4"
+            converter="Xdgk.Communi.Int32Converter"/>
+
+        <datafield name="Channal3Unit"
+            begin="21"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal4Value"
+            begin="22"
+            length="4"
+            converter="Xdgk.Communi.Int32Converter"/>
+
+        <datafield name="Channal4Unit"
+            begin="26"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal5Value"
+            begin="27"
+            length="4"
+            converter="Xdgk.Communi.Int32Converter"/>
+
+        <datafield name="Channal5Unit"
+            begin="31"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal6Value"
+            begin="32"
+            length="4"
+            converter="Xdgk.Communi.Int32Converter"/>
+
+        <datafield name="Channal6Unit"
+            begin="36"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal7Value"
+            begin="37"
+            length="4"
+            converter="Xdgk.Communi.Int32Converter"/>
+
+        <datafield name="Channal7Unit"
+            begin="41"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal8Value"
+            begin="42"
+            length="4"
+            converter="Xdgk.Communi.Int32Converter"/>
+
+        <datafield name="Channal8Unit"
+            begin="46"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="crc"
+            begin="47"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            crc="true"/>
+
+        <crcer name="Xdgk.Communi.CRC16"/>
+      </receivepart>
+    </operadefine>
+
+    <operadefine name="ReadRealDI" processfd="true">
+      <sendpart>
+        <datafield name="df1"
+            begin="0"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="21 58 44"/>
+
+        <datafield name="address"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="df2"
+            begin="4"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="AA 05 00"/>
+
+        <datafield name="crc"
+            begin="7"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            crc="true" />
+        <crcer name="Xdgk.Communi.CRC16"/>
+
+      </sendpart>
+
+      <receivepart length="17">
+        <datafield name="df1"
+            begin="0"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="21 58 44"
+            matchcheck="true"/>
+
+        <datafield name="address"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter" />
+
+        <datafield name ="df2"
+            begin="4"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="AA 05 08"
+            matchcheck="true"/>
+
+        <datafield name="Channal1Value"
+            begin="7"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal2Value"
+            begin="8"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal3Value"
+            begin="9"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal4Value"
+            begin="10"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal5Value"
+            begin="11"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal6Value"
+            begin="12"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal7Value"
+            begin="13"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="Channal8Value"
+            begin="14"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="crc"
+            begin="15"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            crc="true"/>
+
+        <crcer name="Xdgk.Communi.CRC16"/>
+      </receivepart>
+    </operadefine>
+  </devicedefine>
+</devicedefines>
