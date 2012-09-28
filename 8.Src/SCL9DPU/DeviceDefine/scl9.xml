@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<devicedefines>
+  <devicedefine devicetype="Scl9" devicetext="Scl9">
+    <operadefine name="read">
+      <sendpart>
+        <datafield name="f1"
+            begin="0"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="2A 3A"/>
+
+        <datafield name="address"
+            begin="2"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="f3"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="7E"/>
+
+        <datafield name="crc"
+            begin="4"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            crc="true"/>
+
+        <crcer name="Xdgk.Communi.CRCer.SUM"/>
+
+      </sendpart>
+
+      <receivepart length="64">
+        <datafield name="f1"
+            begin="0"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="26 3A"
+            matchcheck="true" />
+
+        <datafield name="address"
+            begin="2"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="f2"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="7E"
+            matchcheck="true"/>
+
+        <datafield name="if"
+            begin="4"
+            length="13"
+            converter="HZ.BytesConverter.AsciiValueConverter"/>
+
+        <datafield name="sum"
+            begin="23"
+            length="13"
+            converter="HZ.BytesConverter.AsciiValueConverter" />
+
+        <datafield name="crc"
+            begin="63"
+            length="1"
+            converter="HZ.BytesConverter.AsciiValueConverter" 
+            crc="true"/>
+
+        <crcer name="Xdgk.Communi.CRCer.SUM"/>
+      </receivepart>
+    </operadefine>
+  </devicedefine>
+</devicedefines>
