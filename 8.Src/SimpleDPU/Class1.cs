@@ -28,7 +28,7 @@ namespace SimpleDPU
             string s = string.Format(
                 "insert into tblDevice(DeviceAddress, deviceType, stationID) values({0}, '{1}', {2}); select @@identity;",
                 device.Address,
-                device.DeviceType.Name,
+                device.DeviceType.Type.Name,
                 GuidHelper.ConvertToInt32(device.Station.Guid)
                 );
 

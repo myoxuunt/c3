@@ -14,8 +14,8 @@ namespace C3.Communi
         /// </summary>
         /// <param name="name"></param>
         /// <param name="type"></param>
-        internal StationType(string name, Type type)
-            : this(name, null, null, type)
+        internal StationType( Type type)
+            : this( null, null, type)
         {
         }
         /// <summary>
@@ -24,8 +24,8 @@ namespace C3.Communi
         /// <param name="name"></param>
         /// <param name="text"></param>
         /// <param name="type"></param>
-        internal StationType(string name, string text, Type type)
-            : this(name, text, null, type)
+        internal StationType(  string text, Type type)
+            : this( text, null, type)
         {
         }
 
@@ -33,8 +33,8 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="name"></param>
-        internal StationType(string name, string text, string description, Type type)
-            : base(name, text, description, type)
+        internal StationType( string text, string description, Type type)
+            : base( text, description, type)
         {
         }
 

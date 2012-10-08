@@ -36,7 +36,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="name"></param>
         internal DeviceType(string name, string text, string description, Type type)
-            : base(name, text, description, type)
+            : base( text, description, type)
         {
         }
         #endregion //DeviceType

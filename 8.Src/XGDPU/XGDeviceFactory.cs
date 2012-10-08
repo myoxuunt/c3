@@ -28,7 +28,7 @@ namespace XGDPU
             d.Dpu = this.Dpu;
             d.Guid = source.Guid;
             d.StationGuid = source.StationGuid;
-            d.Pickers = Dpu.OperaFactory.CreatePickers(this.Dpu.DeviceType.Name);
+            d.Pickers = Dpu.OperaFactory.CreatePickers(this.Dpu.DeviceType.Type.Name);
             return d;
         }
     }

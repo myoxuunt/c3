@@ -12,9 +12,11 @@ public class TypeBase
     /// <param name="text"></param>
     /// <param name="description"></param>
     /// <param name="type"></param>
-    internal TypeBase(string name, string text, string description, Type type)
+    internal TypeBase(
+        //string name, 
+        string text, string description, Type type)
     {
-        this.Name = name;
+        //this.Name = name;
         this.Text = text;
         this.Description = description;
         this.Type = type;
@@ -31,7 +33,8 @@ public class TypeBase
         {
             if (_text == null)
             {
-                _text = this.Name;
+                //_text = this.Name;
+                _text = this.Type.Name;
             }
             return _text;
         }
@@ -84,27 +87,27 @@ public class TypeBase
     } private Type _type;
     #endregion //Type
 
-    #region Name
-    /// <summary>
-    /// 
-    /// </summary>
-    public string Name
-    {
-        get
-        {
-            if (_name == null)
-            {
-                _name = string.Empty;
-            }
-            return _name;
-        }
-        private
-        set
-        {
-            _name = value;
-        }
-    } private string _name;
-    #endregion //Name
+    //#region Name
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    //public string Name
+    //{
+    //    get
+    //    {
+    //        if (_name == null)
+    //        {
+    //            _name = string.Empty;
+    //        }
+    //        return _name;
+    //    }
+    //    private
+    //    set
+    //    {
+    //        _name = value;
+    //    }
+    //} private string _name;
+    //#endregion //Name
 
     #region ToString
     /// <summary>

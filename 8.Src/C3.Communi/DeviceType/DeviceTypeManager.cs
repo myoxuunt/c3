@@ -76,13 +76,13 @@ namespace C3.Communi
             DeviceType r = null;
             foreach (DeviceType item in DeviceTypes)
             {
-                if (StringHelper.Equal(item.Name, typeName))
+                //if (StringHelper.Equal(item.Name, typeName))
+                if (StringHelper.Equal(item.Type.Name , typeName))
                 {
                     r = item;
                     break;
                 }
             }
-
             //if (r == null)
             //{
             //    r = new DeviceType(typeName);
@@ -165,7 +165,8 @@ namespace C3.Communi
             StationType r = null;
             foreach (StationType item in StationTypes)
             {
-                if (StringHelper.Equal(item.Name, typeName))
+                //if (StringHelper.Equal(item.Name, typeName))
+                if (StringHelper.Equal(item.Type.Name, typeName))
                 {
                     r = item;
                     break;

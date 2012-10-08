@@ -116,7 +116,7 @@ namespace XGDPU
             string s = string.Format(
                 "insert into tblDevice(DeviceAddress, deviceType, stationID) values({0}, '{1}', {2}); select @@identity;",
                 d.Address,
-                d.DeviceType.Name,
+                d.DeviceType.Type.Name,
                 GuidHelper.ConvertToInt32(d.Station.Guid)
                 );
 
