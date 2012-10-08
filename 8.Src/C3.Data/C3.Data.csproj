@@ -42,8 +42,6 @@
     <Compile Include="DataBase.cs" />
     <Compile Include="DataCollection.cs" />
     <Compile Include="DataItemAttribute.cs" />
-    <Compile Include="DeviceInfoAttribute\DeviceInfoAttribute.cs" />
-    <Compile Include="DeviceInfoAttribute\DeviceInfoAttributeCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ReportItem.cs" />
     <Compile Include="Report\ReportItemCollection.cs" />
