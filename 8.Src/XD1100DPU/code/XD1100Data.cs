@@ -11,7 +11,7 @@ namespace XD1100DPU
     /// 
     /// </summary>
     /// 
-    internal class XD1100Data : DeviceDataBase
+    internal class XD1100Data : DataBase
     {
         private const string FloatFormat = "f2",
             IntFormat = "G";
@@ -60,7 +60,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("一次供温", 1, Unit.Centidegree, FloatFormat)]
+        [DataItem("一次供温", 1, Unit.Centidegree, FloatFormat)]
         public float GT1
         {
             get { return _GT1; }
@@ -72,7 +72,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("一次回温", 2, Unit.Centidegree, FloatFormat)]
+        [DataItem("一次回温", 2, Unit.Centidegree, FloatFormat)]
         public float BT1
         {
             get { return _BT1; }
@@ -84,7 +84,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("二次供温", 3, Unit.Centidegree, FloatFormat)]
+        [DataItem("二次供温", 3, Unit.Centidegree, FloatFormat)]
         public float GT2
         {
             get { return _GT2; }
@@ -96,7 +96,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("二次回温", 4, Unit.Centidegree, FloatFormat)]
+        [DataItem("二次回温", 4, Unit.Centidegree, FloatFormat)]
         public float BT2
         {
             get { return _BT2; }
@@ -108,7 +108,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("室外温度", 5, Unit.Centidegree, FloatFormat)]
+        [DataItem("室外温度", 5, Unit.Centidegree, FloatFormat)]
         public float OT
         {
             get { return _OT; }
@@ -120,7 +120,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("供温基准", 6, Unit.Centidegree, FloatFormat)]
+        [DataItem("供温基准", 6, Unit.Centidegree, FloatFormat)]
         public float GTBase2
         {
             get { return _GTBase2; }
@@ -132,7 +132,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("一次供压", 7, Unit.Mpa, FloatFormat)]
+        [DataItem("一次供压", 7, Unit.Mpa, FloatFormat)]
         public float GP1
         {
             get { return _GP1; }
@@ -144,7 +144,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("一次回压", 8, Unit.Mpa, FloatFormat)]
+        [DataItem("一次回压", 8, Unit.Mpa, FloatFormat)]
         public float BP1
         {
             get { return _BP1; }
@@ -156,7 +156,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("水箱水位", 9, Unit.M, FloatFormat)]
+        [DataItem("水箱水位", 9, Unit.M, FloatFormat)]
         public float WL
         {
             get { return _WL; }
@@ -168,7 +168,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("二次供压", 10, Unit.Mpa, FloatFormat)]
+        [DataItem("二次供压", 10, Unit.Mpa, FloatFormat)]
         public float GP2
         {
             get { return _GP2; }
@@ -180,7 +180,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("二次回压", 11, Unit.Mpa, FloatFormat)]
+        [DataItem("二次回压", 11, Unit.Mpa, FloatFormat)]
         public float BP2
         {
             get { return _BP2; }
@@ -192,7 +192,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("一次瞬时", 12, Unit.M3PerSecond, FloatFormat)]
+        [DataItem("一次瞬时", 12, Unit.M3PerSecond, FloatFormat)]
         public float I1
         {
             get { return _I1; }
@@ -204,7 +204,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("二次瞬时", 13, Unit.M3PerSecond, FloatFormat)]
+        [DataItem("二次瞬时", 13, Unit.M3PerSecond, FloatFormat)]
         public float I2
         {
             get { return _I2; }
@@ -216,7 +216,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("补水瞬时", 14, Unit.M3PerSecond, FloatFormat)]
+        [DataItem("补水瞬时", 14, Unit.M3PerSecond, FloatFormat)]
         public float IR
         {
             get
@@ -232,7 +232,7 @@ namespace XD1100DPU
         #endregion //IR
 
         #region S1
-        [DeviceDataItem("一次累计", 15, Unit.M3, IntFormat)]
+        [DataItem("一次累计", 15, Unit.M3, IntFormat)]
         /// <summary>
         /// 
         /// </summary>
@@ -244,7 +244,7 @@ namespace XD1100DPU
         #endregion //S1
 
         #region S2
-        [DeviceDataItem("二次累计", 16, Unit.M3, IntFormat)]
+        [DataItem("二次累计", 16, Unit.M3, IntFormat)]
         public Int32 S2
         {
             get { return _S2; }
@@ -256,7 +256,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("补水累计", 17, Unit.M3, IntFormat)]
+        [DataItem("补水累计", 17, Unit.M3, IntFormat)]
         public Int32 SR
         {
             get { return _SR; }
@@ -268,7 +268,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("阀门开度", 18, Unit.Percentage, IntFormat)]
+        [DataItem("阀门开度", 18, Unit.Percentage, IntFormat)]
         public int OD
         {
             get { return _OD; }
@@ -291,7 +291,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("循环泵1", 19, Unit.None)]
+        [DataItem("循环泵1", 19, Unit.None)]
         public PumpStatus CM1
         {
             get
@@ -310,7 +310,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("循环泵2", 20, Unit.None)]
+        [DataItem("循环泵2", 20, Unit.None)]
         public PumpStatus CM2
         {
             get
@@ -329,7 +329,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("循环泵3", 21, Unit.None)]
+        [DataItem("循环泵3", 21, Unit.None)]
         public PumpStatus CM3
         {
             get
@@ -349,7 +349,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("补水泵1", 22, Unit.None)]
+        [DataItem("补水泵1", 22, Unit.None)]
         public PumpStatus RM1
         {
             get
@@ -368,7 +368,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("补水泵2", 23, Unit.None)]
+        [DataItem("补水泵2", 23, Unit.None)]
         public PumpStatus RM2
         {
             get
@@ -387,7 +387,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("报警", 24, Unit.None)]
+        [DataItem("报警", 24, Unit.None)]
         public WarnWrapper Warn
         {
             get

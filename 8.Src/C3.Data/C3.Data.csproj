@@ -38,9 +38,10 @@
   <ItemGroup>
     <Compile Include="AttributePropertyInfoPair.cs" />
     <Compile Include="AttributePropertyInfoPairCollection.cs" />
-    <Compile Include="Class1.cs" />
-    <Compile Include="DeviceDataBase.cs" />
-    <Compile Include="DeviceDataItemAttribute.cs" />
+    <Compile Include="IData.cs" />
+    <Compile Include="DataBase.cs" />
+    <Compile Include="DataCollection.cs" />
+    <Compile Include="DataItemAttribute.cs" />
     <Compile Include="DeviceInfoAttribute\DeviceInfoAttribute.cs" />
     <Compile Include="DeviceInfoAttribute\DeviceInfoAttributeCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

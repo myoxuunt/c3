@@ -9,12 +9,12 @@ namespace C3.Data
     /// <summary>
     /// 
     /// </summary>
-    public class DeviceDataItemAttribute : System.Attribute
+    public class DataItemAttribute : System.Attribute
     {
 
         #region Constructor
 
-        public DeviceDataItemAttribute(string name, int orderNumber, string unit)
+        public DataItemAttribute(string name, int orderNumber, string unit)
             : this(name, orderNumber, unit, null)
         {
 
@@ -26,7 +26,7 @@ namespace C3.Data
         /// <param name="name"></param>
         /// <param name="orderNumber"></param>
         /// <param name="unit"></param>
-        public DeviceDataItemAttribute(string name, int orderNumber, string unit, string format)
+        public DataItemAttribute(string name, int orderNumber, string unit, string format)
             : this(name, orderNumber, Unit.FindByName(unit), format)
         {
 
@@ -38,7 +38,7 @@ namespace C3.Data
         /// <param name="name"></param>
         /// <param name="orderNumber"></param>
         /// <param name="unit"></param>
-        public DeviceDataItemAttribute(string name, int orderNumber, Unit unit, string format)
+        public DataItemAttribute(string name, int orderNumber, Unit unit, string format)
         {
             this._name = name;
             this._orderNumber = orderNumber;

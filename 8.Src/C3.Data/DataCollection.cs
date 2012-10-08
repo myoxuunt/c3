@@ -4,7 +4,7 @@ using System.Text;
 
 namespace C3.Data
 {
-    public class DeviceDataCollection : Xdgk.Common.Collection<IDeviceData>
+    public class DataCollection : Xdgk.Common.Collection<IData>
     {
         private const int DEFAULT_CAPABILITY = 1000;
         private const int MIN_CAPABILITY = 10;
@@ -14,7 +14,7 @@ namespace C3.Data
         /// 
         /// </summary>
         /// <param name="deviceData"></param>
-        internal new void Add(IDeviceData deviceData)
+        internal new void Add(IData deviceData)
         {
             base.Add(deviceData);
         }
@@ -26,7 +26,7 @@ namespace C3.Data
         /// </summary>
         /// <param name="index"></param>
         /// <param name="item"></param>
-        internal new void Insert(int index, IDeviceData item)
+        internal new void Insert(int index, IData item)
         {
             base.Insert(index, item);
         }
@@ -56,7 +56,7 @@ namespace C3.Data
         /// </summary>
         /// <param name="index"></param>
         /// <param name="item"></param>
-        protected override void InsertItem(int index, IDeviceData item)
+        protected override void InsertItem(int index, IData item)
         {
             if (this.Count >= this.Capability)
             {

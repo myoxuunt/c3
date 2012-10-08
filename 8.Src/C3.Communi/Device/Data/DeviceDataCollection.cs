@@ -61,11 +61,11 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public IDeviceData Last
+        public IData Last
         {
             get
             {
-                IDeviceData last = null;
+                IData last = null;
                 if (this.Datas.Count > 0)
                 {
                     last = this.Datas[this.Datas.Count - 1];
@@ -96,13 +96,13 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public DeviceDataCollection Datas
+        public DataCollection Datas
         {
             get
             {
                 if (_datas == null)
                 {
-                    _datas = new DeviceDataCollection();
+                    _datas = new DataCollection();
                 }
                 return _datas;
             }
@@ -110,7 +110,7 @@ namespace C3.Communi
             {
                 _datas = value;
             }
-        } private DeviceDataCollection _datas;
+        } private DataCollection _datas;
         #endregion //Datas
 
 

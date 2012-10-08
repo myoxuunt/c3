@@ -18,8 +18,8 @@ namespace C3.Communi
 
         IStation Station { get; set; }
 
-        //IDeviceData LastData { get; set; }
-        //DeviceDataCollection DeviceDatas { get; }
+        //IData LastData { get; set; }
+        //DataCollection DeviceDatas { get; }
         //event EventHandler LastDataChanged;
 
         DeviceDataManager DeviceDataManager { get; }

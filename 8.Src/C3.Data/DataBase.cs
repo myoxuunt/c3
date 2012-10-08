@@ -7,25 +7,25 @@ namespace C3.Data
     /// <summary>
     /// 
     /// </summary>
-    abstract public class DeviceDataBase : IDeviceData
+    abstract public class DataBase : IData
     {
 
-        #region DeviceDataBase
+        #region DataBase
         /// <summary>
         /// 
         /// </summary>
-        protected DeviceDataBase()
+        protected DataBase()
         {
             this.DT = DateTime.Now;
         }
-        #endregion //DeviceDataBase
+        #endregion //DataBase
 
         #region DT
         /// <summary>
         /// 
         /// </summary>
         /// 
-        [DeviceDataItem("时间", -1, Unit.None, "G")]
+        [DataItem("时间", -1, Unit.None, "G")]
         public DateTime DT
         {
             get
@@ -44,16 +44,16 @@ namespace C3.Data
         /// 
         /// </summary>
         /// <returns></returns>
-        public AttributePropertyInfoPairCollection GetDeviceDataItemAttributes()
+        internal AttributePropertyInfoPairCollection GetDeviceDataItemAttributes()
         {
             AttributePropertyInfoPairCollection result = new AttributePropertyInfoPairCollection();
             PropertyInfo[] propertyInfos = this.GetType().GetProperties();
             foreach (PropertyInfo pi in propertyInfos)
             {
-                object[] atts = pi.GetCustomAttributes(typeof(DeviceDataItemAttribute), false);
+                object[] atts = pi.GetCustomAttributes(typeof(DataItemAttribute), false);
                 if (atts.Length > 0)
                 {
-                    DeviceDataItemAttribute att = (DeviceDataItemAttribute)atts[0];
+                    DataItemAttribute att = (DataItemAttribute)atts[0];
 
                     AttributePropertyInfoPair pair = new AttributePropertyInfoPair(
                         att, pi);
@@ -82,7 +82,7 @@ namespace C3.Data
             AttributePropertyInfoPairCollection attPropertyInfos = this.GetDeviceDataItemAttributes();
             foreach (AttributePropertyInfoPair item in attPropertyInfos)
             {
-                DeviceDataItemAttribute att = item.Attribute;
+                DataItemAttribute att = item.Attribute;
                 PropertyInfo pi = item.PropertyInfo;
                 object value = pi.GetValue(this, null);
                 ReportItem reportItem = new ReportItem(att.Name, value, att.Unit, att.Format);

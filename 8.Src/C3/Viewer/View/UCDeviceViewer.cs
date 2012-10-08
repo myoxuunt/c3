@@ -218,7 +218,7 @@ namespace C3
 
                 this.lvDeviceDataLast.Items.Clear();
 
-                IDeviceData lastData = Device.DeviceDataManager.Last;
+                IData lastData = Device.DeviceDataManager.Last;
                 if (lastData != null)
                 {
                     ReportItemCollection reportItems = lastData.GetReportItems();

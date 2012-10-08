@@ -3,7 +3,7 @@ using Xdgk.Common;
 
 namespace C3.Data
 {
-    public class AttributePropertyInfoPair : IOrderNumber
+    internal class AttributePropertyInfoPair : IOrderNumber
     {
 
         #region AttributePropertyInfoPair
@@ -12,7 +12,7 @@ namespace C3.Data
         /// </summary>
         /// <param name="att"></param>
         /// <param name="pi"></param>
-        public AttributePropertyInfoPair(DeviceDataItemAttribute att, PropertyInfo pi)
+        public AttributePropertyInfoPair(DataItemAttribute att, PropertyInfo pi)
         {
             this.Attribute = att;
             this.PropertyInfo = pi;
@@ -23,7 +23,7 @@ namespace C3.Data
         /// <summary>
         /// 
         /// </summary>
-        public DeviceDataItemAttribute Attribute
+        public DataItemAttribute Attribute
         {
             get
             {
@@ -33,7 +33,7 @@ namespace C3.Data
             {
                 _attribute = value;
             }
-        } private DeviceDataItemAttribute _attribute;
+        } private DataItemAttribute _attribute;
         #endregion //Attribute
 
         #region PropertyInfo
@@ -53,9 +53,10 @@ namespace C3.Data
         } private PropertyInfo _propertyInfo;
         #endregion //PropertyInfo
 
-
-        #region
-
+        #region OrderNumber
+        /// <summary>
+        /// 
+        /// </summary>
         public int OrderNumber
         {
             get
@@ -68,7 +69,7 @@ namespace C3.Data
             }
         }
 
-        #endregion
+        #endregion //OrderNumber
     }
 
 }

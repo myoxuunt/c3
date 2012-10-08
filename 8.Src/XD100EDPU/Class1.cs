@@ -148,7 +148,7 @@ namespace XD100EDPU
     /// <summary>
     /// 
     /// </summary>
-    internal class Xd100eData : DeviceDataBase
+    internal class Xd100eData : DataBase
     {
         private DateTime _createDT = DateTime.Now;
         #region IsSetAI
@@ -295,7 +295,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("AI1",11,"")]
+        [DataItem ("AI1",11,"")]
         public float AI1
         {
             get
@@ -313,7 +313,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("AI2",12,"")]
+        [DataItem ("AI2",12,"")]
         public float AI2
         {
             get
@@ -331,7 +331,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("AI3",13,"")]
+        [DataItem ("AI3",13,"")]
         public float AI3
         {
             get
@@ -349,7 +349,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("AI4",14,"")]
+        [DataItem ("AI4",14,"")]
         public float AI4
         {
             get
@@ -367,7 +367,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("AI5",15,"")]
+        [DataItem ("AI5",15,"")]
         public float AI5
         {
             get
@@ -385,7 +385,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("AI6",16,"")]
+        [DataItem ("AI6",16,"")]
         public float AI6
         {
             get
@@ -403,7 +403,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("AI7",17,"")]
+        [DataItem ("AI7",17,"")]
         public float AI7
         {
             get
@@ -421,7 +421,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("AI8",18,"")]
+        [DataItem ("AI8",18,"")]
         public float AI8
         {
             get
@@ -439,7 +439,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("DI1",21,"")]
+        [DataItem ("DI1",21,"")]
         public bool DI1
         {
             get
@@ -457,7 +457,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("DI2",22,"")]
+        [DataItem ("DI2",22,"")]
         public bool DI2
         {
             get
@@ -475,7 +475,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("DI3",23,"")]
+        [DataItem ("DI3",23,"")]
         public bool DI3
         {
             get
@@ -493,7 +493,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("DI4",24,"")]
+        [DataItem ("DI4",24,"")]
         public bool DI4
         {
             get
@@ -511,7 +511,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("DI5",25,"")]
+        [DataItem ("DI5",25,"")]
         public bool DI5
         {
             get
@@ -529,7 +529,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("DI6",26,"")]
+        [DataItem ("DI6",26,"")]
         public bool DI6
         {
             get
@@ -547,7 +547,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("DI7",27,"")]
+        [DataItem ("DI7",27,"")]
         public bool DI7
         {
             get
@@ -565,7 +565,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem ("DI8",28,"")]
+        [DataItem ("DI8",28,"")]
         public bool DI8
         {
             get

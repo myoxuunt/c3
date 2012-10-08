@@ -130,13 +130,13 @@ namespace Xdgk.GR.Data
     /// <summary>
     /// 
     /// </summary>
-    public class FlowmeterData : DeviceDataBase
+    public class FlowmeterData : DataBase
     {
         #region InstantFlux
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("瞬时", 10, Unit.M3PerSecond, "f2")]
+        [DataItem("瞬时", 10, Unit.M3PerSecond, "f2")]
         public double InstantFlux
         {
             get
@@ -154,7 +154,7 @@ namespace Xdgk.GR.Data
         /// <summary>
         /// 
         /// </summary>
-        [DeviceDataItem("累计", 20, Unit.M3, "f0")]
+        [DataItem("累计", 20, Unit.M3, "f0")]
         public double Sum
         {
             get

@@ -7,16 +7,9 @@ namespace C3.Data
     /// <summary>
     /// 
     /// </summary>
-    public interface IDeviceData
+    public interface IData
     {
         DateTime DT { get; set; }
         ReportItemCollection GetReportItems();
     }
-
-    #region DeviceDataCollection
-    /// <summary>
-    /// 
-    /// </summary>
-    #endregion //DeviceDataCollection
-
 }

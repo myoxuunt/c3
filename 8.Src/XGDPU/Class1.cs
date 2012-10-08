@@ -196,7 +196,7 @@ namespace XGDPU
         }
     }
 
-    internal class XGData : IDeviceData
+    internal class XGData : IData
     {
         /// <summary>
         /// 
@@ -214,7 +214,7 @@ namespace XGDPU
             this.CardSN = cardSn;
         }
 
-        #region IDeviceData 成员
+        #region IData 成员
 
         /// <summary>
         /// 

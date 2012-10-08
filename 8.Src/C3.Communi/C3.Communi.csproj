@@ -112,7 +112,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RemoteStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="SimpleDPU\Class1.cs" />
+    <Compile Include="SimpleDPU\SimpleDPU.cs" />
     <Compile Include="Task\TaskExecutor.cs" />
     <Compile Include="UC\ParameterUC\UCEnumParameterUI.cs">
       <SubType>UserControl</SubType>

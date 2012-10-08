@@ -87,7 +87,7 @@ namespace SCL6DPU
     ///// <summary>
     ///// 
     ///// </summary>
-    //public class FlowmeterData : IDeviceData
+    //public class FlowmeterData : IData
     //{
     //    #region Sum
     //    /// <summary>
@@ -124,7 +124,7 @@ namespace SCL6DPU
     //    #endregion //InstantFlux
 
 
-    //    #region IDeviceData 成员
+    //    #region IData 成员
 
     //    public DateTime DT
     //    {

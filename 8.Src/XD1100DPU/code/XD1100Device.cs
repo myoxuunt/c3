@@ -139,7 +139,7 @@ namespace XD1100DPU
             get
             {
                 float r = 0f;
-                IDeviceData last = this.DeviceDataManager.Last;
+                IData last = this.DeviceDataManager.Last;
                 if (last != null)
                 {
                     XD1100Data data = (XD1100Data)last;
