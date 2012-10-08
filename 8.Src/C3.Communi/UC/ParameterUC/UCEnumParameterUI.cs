@@ -56,12 +56,18 @@ namespace C3.Communi
             set { this.lblName.Text = value; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public object EnumValue
         {
             get { return this.cmbValue.SelectedValue; }
             set { this.cmbValue.SelectedValue = value; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Unit
         {
             get { return this.lblUnit.Text; }

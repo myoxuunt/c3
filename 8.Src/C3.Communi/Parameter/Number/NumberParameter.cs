@@ -1,6 +1,5 @@
 using System;
 
-
 namespace C3.Communi
 {
     public class NumberParameter : ParameterBase

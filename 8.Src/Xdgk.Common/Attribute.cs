@@ -6,10 +6,15 @@ namespace Xdgk.Common
 {
     public class EnumTextAttribute : System.Attribute 
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
         public EnumTextAttribute(string text)
         {
             this.Text = text;
         }
+
         #region Text
         /// <summary>
         /// 

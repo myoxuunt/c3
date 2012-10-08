@@ -1,15 +1,7 @@
-
 using System;
-using System.Data.SqlClient;
-using System.Collections;
-using System.Data;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using C3.Communi;
-using Xdgk.Common;
-using NLog;
 using C3.Data;
-
+using Xdgk.Common;
 
 namespace XD1100DPU
 {
@@ -18,6 +10,7 @@ namespace XD1100DPU
         private const string PN_HEATTRANSFERMODE = "heatTransferMode";
         private const int PO_HEATTRANSFERMODE = 1;
 
+        #region XD1100Device
         /// <summary>
         /// 
         /// </summary>
@@ -28,6 +21,7 @@ namespace XD1100DPU
             IParameter p = null;
             p = GetHeatTransferModeParameter();
         }
+        #endregion //XD1100Device
 
         ///// <summary>
         ///// 
@@ -48,6 +42,7 @@ namespace XD1100DPU
 
         //}
 
+        #region HtmMode
         /// <summary>
         /// 
         /// </summary>
@@ -68,7 +63,9 @@ namespace XD1100DPU
                 p.Value = value.ModeValue;
             }
         }
+        #endregion //HtmMode
 
+        #region GetHeatTransferModeParameter
         /// <summary>
         /// 
         /// </summary>
@@ -85,12 +82,14 @@ namespace XD1100DPU
                         ModeValue.Mixed,
                         PO_HEATTRANSFERMODE);
 
-                p.Text = "htm text";
+                p.Text = "换热方式";
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;
         }
+        #endregion //GetHeatTransferModeParameter
 
+        #region GetLazyDataFieldValue
         /// <summary>
         /// 
         /// </summary>
@@ -128,9 +127,10 @@ namespace XD1100DPU
 
             return base.GetLazyDataFieldValue(name);
         }
+        #endregion //GetLazyDataFieldValue
 
-#region IOutside 成员
 
+        #region OutsideTemperature
         /// <summary>
         /// 
         /// </summary>
@@ -148,8 +148,7 @@ namespace XD1100DPU
                 return r;
             }
         }
-
-#endregion
+        #endregion //OutsideTemperature
     }
 
 }
