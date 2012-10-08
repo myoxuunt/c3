@@ -29,7 +29,11 @@ namespace C3
         /// </summary>
         public override string Title
         {
-            get { return this.Device.Name + ":" + this.Device.Text; }
+            get
+            {
+                //return "stationname(P)" + this.Device.Name + ":" + this.Device.Text;
+                return string.Format("{0}:{1}", this.Device.Station.Name, this.Device.Dpu.DeviceType.Text);
+            }
         }
     }
 

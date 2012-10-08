@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace C3
 {
     public partial class UCViewerWrapper : UserControl
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public UCViewerWrapper()
         {
             InitializeComponent();
@@ -23,6 +20,9 @@ namespace C3
             get { return this.panel1; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string Title
         {
             get { return this.label1.Text; }

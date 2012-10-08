@@ -29,8 +29,7 @@ namespace C3
         } private UCViewerWrapper _ucViewerWrapper;
         #endregion //UCViewerWrapper
 
-        //private Panel _panel;
-
+        #region Act
         /// <summary>
         /// 
         /// </summary>
@@ -45,22 +44,10 @@ namespace C3
             this.UcViewerWrapper.Title = model.Title;
             Controllers.OnlyShow(c);
 
-            //foreach(Controller item in this.Controllers)
-            //{
-            //    item.View.ViewControl.Visible = false;
-            //}
-            //c.View.ViewControl.Visible = true;
         }
+        #endregion //Act
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="panel"></param>
-        //public ControllerManager(Panel panel)
-        //{
-        //    _panel = panel;
-        //}
-
+        #region Controllers
         /// <summary>
         /// 
         /// </summary>
@@ -72,7 +59,7 @@ namespace C3
                 {
                     _controllers = new ControllerCollection();
 
-                    StationView sv = new StationView( this.UcViewerWrapper.ViewContainer);
+                    StationView sv = new StationView(this.UcViewerWrapper.ViewContainer);
                     StationController sc = new StationController(sv);
                     _controllers.Add(sc);
 
@@ -88,6 +75,7 @@ namespace C3
                 _controllers = value;
             }
         } private ControllerCollection _controllers;
+        #endregion //Controllers
 
         ///// <summary>
         ///// 
@@ -121,5 +109,4 @@ namespace C3
         //    ////v.ShowMeOnly();
         //}
     }
-
 }
