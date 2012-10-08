@@ -4,7 +4,7 @@ using System.Text;
 using C3.Communi;
 using Xdgk.Common;
 using Xdgk.GR.Data;
-using SimpleDPU;
+using C3.Communi.SimpleDPU;
 
 namespace CRLGDDPU
 {

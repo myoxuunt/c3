@@ -1,6 +1,6 @@
 ﻿using System;
 using C3.Communi;
-using SimpleDPU;
+using C3.Communi.SimpleDPU;
 using Xdgk.Common;
 using Xdgk.GR.Data;
 

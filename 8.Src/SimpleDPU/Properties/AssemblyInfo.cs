@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("SimpleDPU")]
+[assembly: AssemblyTitle("C3.Communi.SimpleDPU")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("xd")]
-[assembly: AssemblyProduct("SimpleDPU")]
+[assembly: AssemblyProduct("C3.Communi.SimpleDPU")]
 [assembly: AssemblyCopyright("Copyright © xd 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

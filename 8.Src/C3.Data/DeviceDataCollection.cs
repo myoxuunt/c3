@@ -1,22 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace C3.Data
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface IDeviceData
-    {
-        DateTime DT { get; set; }
-        ReportItemCollection GetReportItems();
-    }
-
-    #region DeviceDataCollection
-    /// <summary>
-    /// 
-    /// </summary>
     public class DeviceDataCollection : Xdgk.Common.Collection<IDeviceData>
     {
         private const int DEFAULT_CAPABILITY = 1000;
@@ -82,6 +69,5 @@ namespace C3.Data
         }
         #endregion //InsertItem
     }
-    #endregion //DeviceDataCollection
 
 }

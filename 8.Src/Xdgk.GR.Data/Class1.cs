@@ -1,15 +1,10 @@
-﻿using C3.Data;
-using System.Collections.Generic;
-using System.Text;
-using System;
+﻿using System;
+using C3.Data;
 using Xdgk.Common;
-
+using Xdgk.GR.Data;
 
 namespace Xdgk.XD100Modbus
 {
-    using Xdgk.GR.Data;
-   
-
     /// <summary>
     /// 
     /// </summary>

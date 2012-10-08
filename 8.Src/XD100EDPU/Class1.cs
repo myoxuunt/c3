@@ -5,7 +5,7 @@ using System.Text;
 using C3.Communi;
 using C3.Data;
 using Xdgk.Common;
-using SimpleDPU;
+using C3.Communi.SimpleDPU;
 
 namespace XD100EDPU
 {

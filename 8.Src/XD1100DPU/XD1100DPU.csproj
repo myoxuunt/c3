@@ -50,7 +50,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="code\DBI.cs" />
     <Compile Include="code\DeviceOTProvider.cs" />
     <Compile Include="code\FixedOTProvider.cs" />
