@@ -7,7 +7,8 @@
 
   <!--<assemblyInfo path="f:\c3\8.Src\DBSPU\bin\Debug\DBSPU.dll">
   </assemblyInfo>-->
-  
-  <assemblyInfo path="..\..\..\DBSPU\bin\Debug\DBSPU.dll">
-  </assemblyInfo>
+  -->
+
+  <assemblyInfo path="..\..\..\DBSPU\bin\Debug\DBSPU.dll"> </assemblyInfo>
+  <!--<assemblyInfo path="e:\_t_\c3\DBSPU\DBSPU.dll"> </assemblyInfo>-->
 </assemblyInfoCollection>

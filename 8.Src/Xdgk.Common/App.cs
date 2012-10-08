@@ -62,7 +62,12 @@ namespace Xdgk.Common
         abstract public Form MainForm
         {
             get;
-        } 
+            //get { return _mainForm; }
+            //set
+            //{
+            //    _mainForm = value;
+            //}
+        }//  private Form _mainForm;
         #endregion //MainForm
 
         #region IsProcessUnhandleException
@@ -173,6 +178,7 @@ namespace Xdgk.Common
             else
             {
                 Application.Run(MainForm);
+                //Application.Run(new System.Windows.Forms.Form());
             }
         }
         #endregion //Run

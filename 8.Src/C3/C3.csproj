@@ -43,6 +43,10 @@
     <Reference Include="System.Messaging" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Xdgk.Communi.Interface, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\GlobalAssembly\Xdgk.Communi.Interface\Xdgk.Communi.Interface.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\App.cs" />
@@ -308,10 +312,6 @@
     <ProjectReference Include="..\Xdgk.Common\Xdgk.Common.csproj">
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Xdgk.Communi.Interface\Xdgk.Communi.Interface.csproj">
-      <Project>{65166530-2CBD-4210-8BBB-76A00509D2D4}</Project>
-      <Name>Xdgk.Communi.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

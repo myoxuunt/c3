@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Xml;
 using Xdgk.Communi.Interface;
 using Xdgk.Common;
@@ -196,6 +197,73 @@ namespace C3.Communi
         }
         #endregion //GetAttribute
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataFieldNode"></param>
+        /// <returns></returns>
+        static private bool HasBytesConverterChildNode(XmlNode dataFieldNode)
+        {
+            XmlNode bytesConverterNode = dataFieldNode.SelectSingleNode(DeviceDefineNodeNames.BytesConverter);
+            return bytesConverterNode != null;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataFieldNode"></param>
+        /// <returns></returns>
+        static private BytesConverterConfig CreateBytesConverterConfig(XmlNode bytesConverterNode)
+        {
+            BytesConverterConfig r = new BytesConverterConfig();
+            string name = GetAttribute((XmlElement)bytesConverterNode, DeviceDefineNodeNames.Name,false );
+
+            //
+            //
+            string str = GetAttribute((XmlElement)bytesConverterNode, DeviceDefineNodeNames.HasInner, true);
+            bool hasInner = false;
+            if (str != null && str.Length > 0)
+            {
+                hasInner = Convert.ToBoolean(str);
+            }
+
+            r.Name = name;
+            r.HasInner = hasInner;
+
+            r.Propertys = GetPropertys(bytesConverterNode);
+            if (hasInner)
+            {
+                XmlNode innerNode = bytesConverterNode.SelectSingleNode(DeviceDefineNodeNames.BytesConverter);
+                if (innerNode == null)
+                {
+                    string s = string.Format("has not inner bytesConverter");
+                    throw new InvalidOperationException(s);
+                }
+                r.InnerBytesConverterConfig = CreateBytesConverterConfig(innerNode);
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytesConverterNode"></param>
+        /// <returns></returns>
+        private static System.Collections.Hashtable GetPropertys(XmlNode bytesConverterNode)
+        {
+            Hashtable hash = new Hashtable();
+            XmlNodeList nodes = bytesConverterNode.SelectNodes(DeviceDefineNodeNames.Property);
+            foreach (XmlNode node in nodes)
+            {
+                string name = GetAttribute((XmlElement)node, DeviceDefineNodeNames.Name, false);
+                string value = GetAttribute((XmlElement)node, DeviceDefineNodeNames.Value, false);
+                hash[name] = value;
+            }
+            return hash;
+        }
+
+
+
         #region CreateDataField
         /// <summary>
         /// 
@@ -227,27 +295,42 @@ namespace C3.Communi
             str = GetAttribute(el, DeviceDefineNodeNames.Length);
             length = int.Parse(str);
 
-            str = GetAttribute(el, DeviceDefineNodeNames.Converter, true);
-            if (str == null || str.Length == 0)
-                str = "Xdgk.Communi.OriginalConverter";
 
-            //
-            //
-            factor = GetAttribute(el, DeviceDefineNodeNames.Factor, true);
-            if (factor != null && factor.Length > 0)
+            if (HasBytesConverterChildNode(datafieldnode))
             {
-                try
-                {
-                    float n = Convert.ToSingle(factor);
-                    convertArgs = new object[] { n };
-                }
-                catch (FormatException formatEx)
-                {
-                    string s = string.Format("Invalid Factor '{0}'", factor);
-                    throw new ConfigException(s, formatEx);
-                }
+                XmlNode bytesConverterNode = datafieldnode.SelectSingleNode(
+                    DeviceDefineNodeNames.BytesConverter);
+                BytesConverterConfig cfg = CreateBytesConverterConfig(bytesConverterNode);
+                ibc = GetBytesConverter(cfg);
             }
-            ibc = GetBytesConvert(str, convertArgs);
+            else
+            {
+                // converter
+                // 
+                str = GetAttribute(el, DeviceDefineNodeNames.Converter, true);
+                if (str == null || str.Length == 0)
+                {
+                    str = "Xdgk.Communi.OriginalConverter";
+                }
+
+                //
+                //
+                factor = GetAttribute(el, DeviceDefineNodeNames.Factor, true);
+                if (factor != null && factor.Length > 0)
+                {
+                    try
+                    {
+                        float n = Convert.ToSingle(factor);
+                        convertArgs = new object[] { n };
+                    }
+                    catch (FormatException formatEx)
+                    {
+                        string s = string.Format("Invalid Factor '{0}'", factor);
+                        throw new ConfigException(s, formatEx);
+                    }
+                }
+                ibc = GetBytesConvert(str, convertArgs);
+            }
 
             //
             //
@@ -318,6 +401,14 @@ namespace C3.Communi
             else
             {
             }
+            return bc;
+        }
+
+        static private IBytesConverter GetBytesConverter(BytesConverterConfig cfg)
+        {
+            Soft soft = SoftManager.GetSoft();
+            BytesConverterManager bcm = soft.BytesConverterManager;
+            IBytesConverter bc = bcm.CreateBytesConverter(cfg);
             return bc;
         }
         #endregion //GetBytesConvert

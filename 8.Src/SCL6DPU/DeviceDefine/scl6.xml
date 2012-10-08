@@ -41,7 +41,13 @@
         <datafield name="sum"
             begin="36"
             length="13"
-            converter="HZ.BytesConverter.AsciiValueConverter" />
+            converter="HZ.BytesConverter.AsciiValueConverter">
+          
+           <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+                <property name="Rate" value="1000"></property>
+                <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
 
         <datafield name="crc"
             begin="102"

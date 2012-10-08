@@ -8,6 +8,7 @@ using System.Reflection;
 using NUnit.Core;
 using Xdgk.Common;
 using Xdgk.Communi.Interface;
+using System.Collections ;
 
 namespace C3.Communi
 {
@@ -52,8 +53,12 @@ namespace C3.Communi
             DirectoryInfo dir = new DirectoryInfo(addinDirectory);
 
             if (dir.Exists)
+            {
                 foreach (FileInfo file in dir.GetFiles("*.dll"))
+                {
                     Register(file.FullName);
+                }
+            }
         }
         #endregion //RegisterAddins
 
@@ -134,9 +139,142 @@ namespace C3.Communi
             }
             else
             {
-                return null;
+                //return null;
+                string s = string.Format("Cannot create bytes converter by '{0}'", typeName);
+                throw new ArgumentException(s);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cfg"></param>
+        /// <returns></returns>
+        public IBytesConverter CreateBytesConverter(BytesConverterConfig cfg)
+        {
+            if (cfg == null)
+            {
+                throw new ArgumentNullException("cfg");
+            }
+
+            IBytesConverter bc = CreateBytesConverter(cfg.Name, null);
+            foreach (object key in cfg.Propertys.Keys)
+            {
+                string value = cfg.Propertys[key].ToString();
+                SetValue(bc, key.ToString(), value);
+            }
+
+            if (cfg.HasInner)
+            {
+                IBytesConverter innerBc = CreateBytesConverter(cfg.InnerBytesConverterConfig);
+                bc.InnerBytesConverter = innerBc;
+            }
+
+            return bc;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="propertyName"></param>
+        /// <param name="value"></param>
+        private void SetValue(object obj, string propertyName, string value)
+        {
+            bool isSet = false;
+            PropertyInfo[] pis = obj.GetType().GetProperties();
+            foreach (PropertyInfo pi in pis)
+            {
+                if (StringHelper.Equal(pi.Name, propertyName))
+                {
+                    object objValue = Convert.ChangeType(value, pi.PropertyType);
+                    pi.SetValue(obj, objValue, null);
+                    isSet = true;
+                    break;
+                }
+            }
+
+            if (!isSet)
+            {
+                string s = string.Format("not set property '{0}'", propertyName);
+                throw new ArgumentException(s);
+            }
+        }
+
         #endregion //CreateBytesConverter
+    }
+
+    public class BytesConverterConfig
+    {
+        #region Name
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                if (_name == null)
+                {
+                    _name = string.Empty;
+                }
+                return _name;
+            }
+            set
+            {
+                _name = value;
+            }
+        } private string _name;
+        #endregion //Name
+
+        #region HasInner
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool HasInner
+        {
+            get
+            {
+                return _hasInner;
+            }
+            set
+            {
+                _hasInner = value;
+            }
+        } private bool _hasInner;
+        #endregion //HasInner
+
+        #region InnerBytesConverterConfig
+        /// <summary>
+        /// 
+        /// </summary>
+        public BytesConverterConfig InnerBytesConverterConfig
+        {
+            get
+            {
+                return _innerBytesConverterConfig;
+            }
+            set
+            {
+                _innerBytesConverterConfig = value;
+            }
+        } private BytesConverterConfig _innerBytesConverterConfig;
+        #endregion //InnerBytesConverterConfig
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Hashtable Propertys
+        {
+            get
+            {
+                if (_hash == null)
+                {
+                    _hash = new Hashtable();
+                }
+                return _hash;
+            }
+            set { _hash = value; }
+        } private Hashtable _hash;
     }
 }

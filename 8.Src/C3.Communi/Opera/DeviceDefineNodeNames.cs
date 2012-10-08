@@ -37,7 +37,15 @@ namespace C3.Communi
             ReceivePartDataLength = "length",
             ReceivePartName = "name",
             CRCBegin = "CRCBegin",
-            Lazy = "lazy";
+            Lazy = "lazy",
+            //
+            BytesConverter = "converter",
+            Name = "name",
+            HasInner = "hasInner",
+            Property = "property",
+            Value = "value";
+
+
     }
 
 }

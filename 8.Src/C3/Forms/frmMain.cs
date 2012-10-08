@@ -48,7 +48,6 @@ namespace C3
         public FrmMain()
         {
             InitializeComponent();
-            Init();
         }
         #endregion //FrmMain
 
@@ -160,6 +159,9 @@ namespace C3
         /// <param name="e"></param>
         private void frmMain_Load(object sender, EventArgs e)
         {
+
+            Init();
+
             //
             //
             this.mnuView.Visible = false;
@@ -262,27 +264,14 @@ namespace C3
         }
         #endregion //mnuTest_Click
 
+        #region Test
         /// <summary>
         /// 
         /// </summary>
         private void Test()
         {
-            //string s = Soft.Hardware.Stations[0].Devices[0].ToString();
-            frmGroups f = new frmGroups();
-            //GroupCollection gs = new GroupCollection();
-            //CommuniPortConfigParameter p = new CommuniPortConfigParameter(
-            //    "nonennnnn",
-            //    new SerialCommuniPortConfig(
-            //    new SerialPortSetting("com1",
-            //        9600, System.IO.Ports.Parity.Even,
-            //        8, System.IO.Ports.StopBits.None)),
-            //        0);
-            //Group g = new Group();
-            //g.Parameters.Add(p);
-            //gs.Add(g);
-            //f.Groups = gs;
-            //f.ShowDialog();
         }
+        #endregion //Test
 
         #region mnuDeviceEdit_Click
         private void mnuDeviceEdit_Click(object sender, EventArgs e)
@@ -581,6 +570,11 @@ namespace C3
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuSetting_DropDownOpening(object sender, EventArgs e)
         {
             //NUnit.UiKit.UserMessage.Display("opening");
@@ -612,5 +606,29 @@ namespace C3
         }
 
         #endregion
+
+        private bool _isSuredToQuit = false;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!_isSuredToQuit)
+            {
+                DialogResult dr = NUnit.UiKit.UserMessage.Ask(Strings.SureToQuit);
+                if (dr == DialogResult.Yes)
+                {
+                    _isSuredToQuit = true;
+                    this.Close();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
     }
 }

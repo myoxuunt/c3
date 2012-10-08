@@ -7,15 +7,21 @@ namespace C3
     /// </summary>
     public class C3App : Xdgk.Common.AppBase
     {
+
+        #region C3App
         /// <summary>
         /// 
         /// </summary>
         private C3App()
         {
-            this.IsProcessUnhandleException = !false;
+            this.IsProcessUnhandleException = true;
             //Soft.UISynchronizationContext = new System.Windows.Forms.WindowsFormsSynchronizationContext();
-        }
 
+            object obj = this.Soft;
+        }
+        #endregion //C3App
+
+        #region App
         /// <summary>
         /// 
         /// </summary>
@@ -23,15 +29,22 @@ namespace C3
         {
             get
             {
-                if (Xdgk.Common.AppBase.DefaultInstance== null)
+                if (Xdgk.Common.AppBase.DefaultInstance == null)
                 {
-                    Xdgk.Common.AppBase.DefaultInstance = new C3App();
+                    C3App app = new C3App();
+                    //app.MainForm = new FrmMain();
+
+                    Xdgk.Common.AppBase.DefaultInstance = app;
+                    app.Soft.Prepare();
+                    app.Soft.Start();
+
                 }
                 return Xdgk.Common.AppBase.DefaultInstance as C3App;
             }
-        } 
+        }
+        #endregion //App
 
-
+        #region MainForm
         /// <summary>
         /// 
         /// </summary>
@@ -46,7 +59,9 @@ namespace C3
                 return _mainForm;
             }
         } private System.Windows.Forms.Form _mainForm;
+        #endregion //MainForm
 
+        #region Soft
         /// <summary>
         /// 
         /// </summary>
@@ -57,7 +72,9 @@ namespace C3
                 return SoftManager.GetSoft();
             }
         }
+        #endregion //Soft
 
+        #region Config
         /// <summary>
         /// 
         /// </summary>
@@ -73,5 +90,6 @@ namespace C3
                 return _config;
             }
         } private Config _config;
+        #endregion //Config
     }
 }

@@ -146,6 +146,8 @@ namespace DBSPU
             {
                 if (_instance == null)
                 {
+                    Debug.Assert(SoftManager.GetSoft() != null);
+
                     SourceConfig sc = SoftManager.GetSoft().SourceConfigs.Find("Connection");
                     if (sc != null)
                     {

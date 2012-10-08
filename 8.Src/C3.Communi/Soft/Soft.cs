@@ -7,11 +7,17 @@ namespace C3.Communi
 {
     using Timer = System.Windows.Forms.Timer;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class Soft
     {
-
         #region Members
         static private NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+
+        private const int MinScaningCycle = 50;
+        private const int DefaultScaningCycle = 1000;
+
         private Timer _timer;
         #endregion //Members
 
@@ -24,9 +30,12 @@ namespace C3.Communi
             log.Info("Soft Constructor");
 
             _timer = new Timer();
-            _timer.Interval = 50;
+            _timer.Interval = DefaultScaningCycle;
             _timer.Tick += new EventHandler(_timer_Tick);
-            _timer.Start();
+
+            //this.Prepare();
+
+            //_timer.Start();
 
             Init();
         }
@@ -35,10 +44,77 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
+        #region Prepare
+        public void Prepare()
+        {
+            Hardware temp = this.Hardware;
+        }
+        #endregion //Prepare
+
+        #region Init
+        /// <summary>
+        /// 
+        /// </summary>
         private void Init()
         {
-            this.RemoteServer.Start();
+            bool enabledRemoteService = false;
+
+            if (enabledRemoteService)
+            {
+                this.RemoteServer.Start();
+            }
         }
+        #endregion //Init
+
+        #region IsStarted
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool IsStarted()
+        {
+            return this._timer.Enabled;
+        }
+        #endregion //IsStarted
+
+        #region Start
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Start()
+        {
+            this._timer.Start();
+        }
+        #endregion //Start
+
+        #region Stop
+        /// <summary>
+        /// 
+        /// </summary>
+        public void Stop()
+        {
+            this._timer.Stop();
+        }
+        #endregion //Stop
+
+        #region ScanningCycle
+        /// <summary>
+        /// unit is milliseconds 
+        /// </summary>
+        public int ScanningCycle
+        {
+            get { return _scaningCycle; }
+            set
+            {
+                if (value < MinScaningCycle)
+                {
+                    value = MinScaningCycle;
+                }
+                _scaningCycle = value;
+                this._timer.Interval = _scaningCycle;
+            }
+        } private int _scaningCycle;
+        #endregion //ScanningCycle
 
         #region SocketListenerManager
         /// <summary>
@@ -139,7 +215,12 @@ namespace C3.Communi
         } private ErrorManager _errorManager;
         #endregion //
 
+        #region HardwareCreated
+        /// <summary>
+        /// 
+        /// </summary>
         public event EventHandler HardwareCreated;
+        #endregion //HardwareCreated
 
         #region Hardware
         /// <summary>
@@ -364,7 +445,7 @@ namespace C3.Communi
         }
         #endregion //
 
-
+        #region RemoteServer
         /// <summary>
         /// 
         /// </summary>
@@ -382,5 +463,6 @@ namespace C3.Communi
                 return _remoteServer;
             }
         } private RemoteServer _remoteServer;
+        #endregion //RemoteServer
     }
 }
