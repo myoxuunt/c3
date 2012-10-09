@@ -42,15 +42,13 @@
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xdgk.Communi.Interface, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GlobalAssembly\Xdgk.Communi.Interface\Xdgk.Communi.Interface.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BytesConverter\BytesConverterCollection.cs" />
     <Compile Include="BytesConverter\BytesConverterManager.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="_I\BytesConverter.cs" />
+    <Compile Include="_I\communi.Interface.cs" />
     <Compile Include="CommuniDetail\CommuniDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetailCollection.cs" />
@@ -292,6 +290,9 @@
     <Compile Include="Parameter\String\StringParameterController.cs" />
     <Compile Include="Parameter\String\StringParameterViewer.cs" />
     <Compile Include="CommuniPortConfigSerializer.cs" />
+    <Compile Include="_I\IBytesConverter.cs" />
+    <Compile Include="_I\IBytesWrapper.cs" />
+    <Compile Include="_I\ICRCer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NLog.config">

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic ;
 using System.Diagnostics;
-using Xdgk.Communi.Interface;
+//using Xdgk.Communi.Interface;
 using Xdgk.Common;
 
 namespace C3.Communi

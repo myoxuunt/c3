@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Diagnostics;
 using System.Collections;
-using Xdgk.Communi.Interface;
+//using Xdgk.Communi.Interface;
 using NUnit.Core;
 using Xdgk.Common;
 

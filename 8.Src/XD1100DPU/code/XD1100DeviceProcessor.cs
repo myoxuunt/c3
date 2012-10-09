@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using C3.Communi;
 using Xdgk.Common;
-using Xdgk.Communi.Interface;
+//using Xdgk.Communi.Interface;
 using Xdgk.GR.Common;
 using NLog;
 
@@ -100,41 +100,44 @@ namespace XD1100DPU
             data.SR = Convert.ToInt32(pr.Results["SR"]);
             data.OD = Convert.ToInt32(pr.Results["OD"]);
 
-            PumpStateCollection pss = (PumpStateCollection)pr.Results["pumpstate"];
-            foreach (PumpState ps in pss)
-            {
-                if (ps.PumpTypeEnum == PumpTypeEnum.CyclePump)
-                {
-                    switch (ps.PumpNO)
-                    {
-                        case 1:
-                            data.CM1 = IsPumpRun(ps.PumpStateEnum);
-                            break;
-                        case 2:
-                            data.CM2 = IsPumpRun(ps.PumpStateEnum);
-                            break;
-                        case 3:
-                            data.CM3 = IsPumpRun(ps.PumpStateEnum);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                else if (ps.PumpTypeEnum == PumpTypeEnum.RecruitPump)
-                {
-                    switch (ps.PumpNO)
-                    {
-                        case 1:
-                            data.RM1 = IsPumpRun(ps.PumpStateEnum);
-                            break;
-                        case 2:
-                            data.RM2 = IsPumpRun(ps.PumpStateEnum);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
+            // TODO: 2012-10-09 xd1100 pump status
+            //
+            //PumpStatusCollection pss = (PumpStatusCollection)pr.Results["pumpstate"];
+            //foreach (PumpStatus ps in pss)
+            //{
+            //    ps.pum
+            //    if (ps.PumpTypeEnum == PumpTypeEnum.CyclePump)
+            //    {
+            //        switch (ps.PumpNO)
+            //        {
+            //            case 1:
+            //                data.CM1 = IsPumpRun(ps.PumpStateEnum);
+            //                break;
+            //            case 2:
+            //                data.CM2 = IsPumpRun(ps.PumpStateEnum);
+            //                break;
+            //            case 3:
+            //                data.CM3 = IsPumpRun(ps.PumpStateEnum);
+            //                break;
+            //            default:
+            //                break;
+            //        }
+            //    }
+            //    else if (ps.PumpTypeEnum == PumpTypeEnum.RecruitPump)
+            //    {
+            //        switch (ps.PumpNO)
+            //        {
+            //            case 1:
+            //                data.RM1 = IsPumpRun(ps.PumpStateEnum);
+            //                break;
+            //            case 2:
+            //                data.RM2 = IsPumpRun(ps.PumpStateEnum);
+            //                break;
+            //            default:
+            //                break;
+            //        }
+            //    }
+            //}
 
             object objWarn = pr.Results["Warn"];
             IList listWarn = (IList)objWarn;
@@ -163,13 +166,13 @@ namespace XD1100DPU
         /// </summary>
         /// <param name="pse"></param>
         /// <returns></returns>
-        PumpStatus IsPumpRun(PumpStateEnum pse)
+        PumpStatus IsPumpRun(PumpStatusEnum pse)
         {
-            if (pse == PumpStateEnum.Run)
+            if (pse == PumpStatusEnum.Run)
             {
                 return PumpStatus.Run;
             }
-            else if (pse == PumpStateEnum.Stop)
+            else if (pse == PumpStatusEnum.Stop)
             {
                 return PumpStatus.Stop;
             }

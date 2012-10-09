@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Net;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
+using System.Net;
 using System.Windows.Forms;
 
 namespace C3.Communi

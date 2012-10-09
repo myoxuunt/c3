@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO.Ports;
 using System.Windows.Forms;
-using C3.Communi;
 
 namespace C3.Communi
 {

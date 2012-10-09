@@ -40,10 +40,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xdgk.Communi.Interface, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GlobalAssembly\Xdgk.Communi.Interface\Xdgk.Communi.Interface.dll</HintPath>
-    </Reference>
     <Reference Include="ZedGraph, Version=5.1.5.21173, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\GlobalAssembly\Zed\ZedGraph.dll</HintPath>

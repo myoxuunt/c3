@@ -1,5 +1,4 @@
-﻿using System;
-using C3.Communi;
+﻿using C3.Communi;
 using Xdgk.Common;
 
 namespace C3.SPUTest

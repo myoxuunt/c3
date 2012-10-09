@@ -101,4 +101,12 @@ namespace Xdgk.GR.Common
         #endregion //ToString
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public class PumpStatusCollection : Xdgk.Common.Collection<PumpStatus>
+    {
+
+    }
+
 }

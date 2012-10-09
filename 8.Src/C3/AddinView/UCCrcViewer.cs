@@ -6,7 +6,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using C3.Communi;
-using Xdgk.Communi.Interface;
+//using Xdgk.Communi.Interface;
 
 namespace C3
 {
