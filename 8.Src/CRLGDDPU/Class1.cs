@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using C3.Communi;
+using C3.Communi.SimpleDPU;
 using Xdgk.Common;
 using Xdgk.GR.Common;
-using C3.Communi.SimpleDPU;
 
 namespace CRLGDDPU
 {

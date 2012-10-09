@@ -1,4 +1,5 @@
-using C3.Data;
+//using C3.Data;
+using Xdgk.Common;
 
 namespace Xdgk.GR.Common
 {

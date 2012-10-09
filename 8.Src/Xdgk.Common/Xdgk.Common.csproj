@@ -47,6 +47,16 @@
     <Compile Include="App.cs" />
     <Compile Include="AppFactory.cs" />
     <Compile Include="Attribute.cs" />
+    <Compile Include="C3.Data\AttributePropertyInfoPair.cs" />
+    <Compile Include="C3.Data\AttributePropertyInfoPairCollection.cs" />
+    <Compile Include="C3.Data\DataBase.cs" />
+    <Compile Include="C3.Data\DataCollection.cs" />
+    <Compile Include="C3.Data\DataItemAttribute.cs" />
+    <Compile Include="C3.Data\IData.cs" />
+    <Compile Include="C3.Data\Report\ReportItem.cs" />
+    <Compile Include="C3.Data\Report\ReportItemCollection.cs" />
+    <Compile Include="C3.Data\Unit.cs" />
+    <Compile Include="C3.Data\UnitType.cs" />
     <Compile Include="cccc.cs" />
     <Compile Include="CodeFile1.cs" />
     <Compile Include="DateTimeHelper.cs" />

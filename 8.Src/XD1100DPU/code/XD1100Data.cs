@@ -2,7 +2,8 @@
 using System.Text;
 using System.Collections;
 using C3.Communi;
-using C3.Data;
+//using C3.Data;
+using Xdgk.Common;
 using Xdgk.GR.Common;
 
 namespace XD1100DPU

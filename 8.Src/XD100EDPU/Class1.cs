@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
 using C3.Communi;
-using C3.Data;
+//using C3.Data;
 using Xdgk.Common;
 using C3.Communi.SimpleDPU;
 

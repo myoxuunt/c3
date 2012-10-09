@@ -85,10 +85,6 @@
       <Project>{C66E606F-39F5-4B29-8187-0C6C454EA245}</Project>
       <Name>C3.Communi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\C3.Data\C3.Data.csproj">
-      <Project>{46745652-7EAA-4018-9ED9-26F101704B5E}</Project>
-      <Name>C3.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Xdgk.Common\Xdgk.Common.csproj">
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
