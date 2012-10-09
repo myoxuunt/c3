@@ -38,16 +38,16 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xdgk.Communi.Interface, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GlobalAssembly\Xdgk.Communi.Interface\Xdgk.Communi.Interface.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\C3.Communi\C3.Communi.csproj">
+      <Project>{C66E606F-39F5-4B29-8187-0C6C454EA245}</Project>
+      <Name>C3.Communi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HZ.CRC\HZ.CRC.csproj">
       <Project>{BC3F098B-DA5F-4618-947D-176AB9826A56}</Project>
       <Name>HZ.CRC</Name>
