@@ -64,6 +64,7 @@
     <Compile Include="UInt32Converter.cs" />
     <Compile Include="UInt32ModbusConverter.cs" />
     <Compile Include="XD1100AlarmNO2Converter.cs" />
+    <Compile Include="XD2300\DTConverter.cs" />
     <Compile Include="XGDateConverter.cs" />
     <Compile Include="XGDateTimeConverter.cs" />
     <Compile Include="XGTimeConverter.cs" />

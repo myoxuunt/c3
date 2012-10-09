@@ -34,10 +34,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Xdgk.Communi.Interface, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\GlobalAssembly\Xdgk.Communi.Interface\Xdgk.Communi.Interface.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CRC16.cs" />
@@ -46,6 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\History.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\C3.Communi\C3.Communi.csproj">
+      <Project>{C66E606F-39F5-4B29-8187-0C6C454EA245}</Project>
+      <Name>C3.Communi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

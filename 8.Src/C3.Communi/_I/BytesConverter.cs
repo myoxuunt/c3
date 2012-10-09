@@ -73,7 +73,7 @@ namespace C3.Communi
         }
 
 
-#region IBytesConverter 成员
+        #region IBytesConverter 成员
 
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace C3.Communi
             }
         } private IBytesConverter _innerBytesConverter;
 
-#endregion
+        #endregion
     }
 
 }

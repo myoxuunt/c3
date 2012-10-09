@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Xdgk.Communi.Interface;
+using C3.Communi;
 
 namespace Xdgk.Communi
 {

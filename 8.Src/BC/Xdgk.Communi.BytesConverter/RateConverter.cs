@@ -31,15 +31,6 @@ namespace Xdgk.Communi
         /// <summary>
         /// 
         /// </summary>
-        public IBytesConverter InnerBytesConverter
-        {
-            get { return _innerBytesConverter; }
-            set { _innerBytesConverter = value; }
-        } private IBytesConverter _innerBytesConverter;
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void VerifyInnerBytesConverter()
         {
             if (InnerBytesConverter == null)

@@ -100,44 +100,15 @@ namespace XD1100DPU
             data.SR = Convert.ToInt32(pr.Results["SR"]);
             data.OD = Convert.ToInt32(pr.Results["OD"]);
 
-            // TODO: 2012-10-09 xd1100 pump status
+            // 2012-10-09 xd1100 pump status
             //
-            //PumpStatusCollection pss = (PumpStatusCollection)pr.Results["pumpstate"];
-            //foreach (PumpStatus ps in pss)
-            //{
-            //    ps.pum
-            //    if (ps.PumpTypeEnum == PumpTypeEnum.CyclePump)
-            //    {
-            //        switch (ps.PumpNO)
-            //        {
-            //            case 1:
-            //                data.CM1 = IsPumpRun(ps.PumpStateEnum);
-            //                break;
-            //            case 2:
-            //                data.CM2 = IsPumpRun(ps.PumpStateEnum);
-            //                break;
-            //            case 3:
-            //                data.CM3 = IsPumpRun(ps.PumpStateEnum);
-            //                break;
-            //            default:
-            //                break;
-            //        }
-            //    }
-            //    else if (ps.PumpTypeEnum == PumpTypeEnum.RecruitPump)
-            //    {
-            //        switch (ps.PumpNO)
-            //        {
-            //            case 1:
-            //                data.RM1 = IsPumpRun(ps.PumpStateEnum);
-            //                break;
-            //            case 2:
-            //                data.RM2 = IsPumpRun(ps.PumpStateEnum);
-            //                break;
-            //            default:
-            //                break;
-            //        }
-            //    }
-            //}
+            bool[] pumpStatusArray = (bool[])pr.Results["pumpstate"];
+
+            data.CM1 = IsPumpRun(pumpStatusArray[0]);
+            data.CM2 = IsPumpRun(pumpStatusArray[1]);
+            data.CM3 = IsPumpRun(pumpStatusArray[2]);
+            data.RM1 = IsPumpRun(pumpStatusArray[3]);
+            data.RM2 = IsPumpRun(pumpStatusArray[4]);
 
             object objWarn = pr.Results["Warn"];
             IList listWarn = (IList)objWarn;
@@ -164,9 +135,18 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        private PumpStatus IsPumpRun(bool b)
+        {
+            return IsPumpRun(b ? PumpStatusEnum.Run : PumpStatusEnum.Stop);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="pse"></param>
         /// <returns></returns>
-        PumpStatus IsPumpRun(PumpStatusEnum pse)
+        private PumpStatus IsPumpRun(PumpStatusEnum pse)
         {
             if (pse == PumpStatusEnum.Run)
             {

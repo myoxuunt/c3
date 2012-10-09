@@ -7,8 +7,7 @@ namespace HZ.BytesConverter
     /// <summary>
     /// 
     /// </summary>
-    public class AsciiValueConverter : 
-        Xdgk.Communi.Interface.BytesConverter
+    public class AsciiValueConverter : C3.Communi.BytesConverter
     {
         /// <summary>
         /// 

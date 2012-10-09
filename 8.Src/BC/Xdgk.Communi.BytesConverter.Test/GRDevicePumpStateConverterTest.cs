@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xdgk.Communi.BytesConverter;
 using NUnit.Framework;
-using Xdgk.Communi.Interface;
+using C3.Communi;
 
 namespace Xdgk.Communi.BytesConverter.Test
 {
@@ -16,25 +16,21 @@ namespace Xdgk.Communi.BytesConverter.Test
         {
             GRDevicePumpStateConverter c= new GRDevicePumpStateConverter();
             object obj = c.ConvertToObject(new byte[] { 00, 02 });
-            PumpStateCollection pss = obj as PumpStateCollection;
-
-            foreach (PumpState ps in pss)
+            bool[] pumpStatusArray = (bool[])obj;
+            foreach ( bool b in pumpStatusArray )
             {
-                printPumpState(ps);
+                printPumpState(b);
             }
 
-            byte[] bs = c.ConvertToBytes(pss);
+            byte[] bs = c.ConvertToBytes(pumpStatusArray);
             Assert.AreEqual(2, bs.Length);
             Assert.AreEqual(0, bs[0]);
             Assert.AreEqual(02, bs[1]);
         }
 
-        private void printPumpState(PumpState ps)
+        private void printPumpState(bool value)
         {
-            String s = string.Format("{0} {1} {2}",
-                ps.PumpNO, ps.PumpTypeEnum, ps.PumpStateEnum) ;
-
-            Console.WriteLine(s);
+            Console.WriteLine(value);
         }
     }
 

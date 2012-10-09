@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using Xdgk.Communi;
+using C3.Communi;
 
 namespace Xdgk.Communi.BytesConverter.Test
 {
