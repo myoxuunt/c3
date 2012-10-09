@@ -1,4 +1,4 @@
-﻿namespace CommuniServer
+﻿namespace C3.Communi
 {
     partial class UCSerialPortSetting
     {

@@ -1,8 +1,9 @@
 using System;
+using System.Diagnostics;
 using System.Windows.Forms;
-using Xdgk.Common;
+using C3.Communi;
 
-namespace C3.Communi
+namespace C3
 {
     public class StationTreeNode : TreeNode
     {
@@ -61,7 +62,8 @@ namespace C3.Communi
         /// <param name="e"></param>
         void station_CommuniPortChanged(object sender, EventArgs e)
         {
-            IStation station = sender as IStation ;
+            IStation station = sender as IStation;
+            Debug.Assert(station != null, "station != null");
             ICommuniPort cp = station.CommuniPort;
 
             if (cp != null)
@@ -80,19 +82,6 @@ namespace C3.Communi
         /// <param name="key"></param>
         private void SetImageKey(string key)
         {
-            //if (this.TreeView != null)
-            //{
-            //    Console.WriteLine(this.TreeView.InvokeRequired);
-            //    if (this.TreeView.InvokeRequired)
-            //    {
-            //    }
-            //    else
-            //    {
-            //        this.ImageKey = key;
-            //        this.SelectedImageKey = key;
-            //    }
-            //}
-
             this.ImageKey = key;
             this.SelectedImageKey = key;
         }

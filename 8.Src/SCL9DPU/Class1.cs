@@ -74,7 +74,6 @@ namespace SCL9DPU
             this.DeviceSourceProvider = new SimpleDeviceSourceProvider(DBI.Instance, typeof(Scl9));
             this.DeviceType = DeviceTypeManager.AddDeviceType(
                 "Scl9",
-                "Scl9(Text)",
                 typeof(Scl9));
             this.DeviceUI = new DeviceUI(this);
             this.Processor = new Scl9Processor();

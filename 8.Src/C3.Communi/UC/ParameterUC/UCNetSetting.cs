@@ -8,7 +8,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 
-namespace C3.Communi.UC.Parameter
+namespace C3.Communi
 {
     public partial class UCNetSetting : UserControl
     {

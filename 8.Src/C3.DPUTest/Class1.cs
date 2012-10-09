@@ -31,7 +31,7 @@ namespace C3.DPUTest
                 //r = new DeviceType();
                 //r.Name = "TDevice";
                 //r.Type = typeof(TDevice);
-                DeviceType t = DeviceTypeManager.AddDeviceType("TDevice", null, typeof (TDevice));
+                DeviceType t = DeviceTypeManager.AddDeviceType("TDevice", typeof (TDevice));
                 //DeviceTypeManager.Add(t);
                 r = t;
             }

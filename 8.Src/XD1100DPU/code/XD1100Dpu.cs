@@ -17,7 +17,6 @@ namespace XD1100DPU
             this.DeviceSourceProvider = new XD1100DeviceSourceProvider ();
             this.DeviceType = DeviceTypeManager.AddDeviceType(
                     "XD1100Device",
-                    "XD1100Device(Text)",
                     typeof(XD1100Device));
             this.DeviceUI = new DeviceUI(this);
             this.Processor = new XD1100DeviceProcessor();

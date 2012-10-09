@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using C3.Communi;
+using C3.Communi.SimpleDPU;
 using Xdgk.Common;
 using Xdgk.GR.Common;
-using C3.Communi.SimpleDPU;
 
 namespace CRLGXLDPU
 {
@@ -73,7 +71,6 @@ namespace CRLGXLDPU
             this.DeviceSourceProvider = new SimpleDeviceSourceProvider(DBI.Instance, typeof(Crlgxl));
             this.DeviceType = DeviceTypeManager.AddDeviceType(
                 "Crlgxl",
-                "Crlgxl(Text)",
                 typeof(Crlgxl));
             this.DeviceUI = new DeviceUI(this);
             this.Processor = new CrlgxlProcessor();

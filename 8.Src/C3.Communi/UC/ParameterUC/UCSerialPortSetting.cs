@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
 using System.IO.Ports;
-//using Xdgk.Communi;
+using System.Windows.Forms;
 using C3.Communi;
 
-namespace CommuniServer
+namespace C3.Communi
 {
     using KV = KeyValuePair<string, object>;
     using KVList = List<KeyValuePair<string, object>>;

@@ -1,9 +1,9 @@
 
 using System;
 using System.Windows.Forms;
-using Xdgk.Common;
+using C3.Communi;
 
-namespace C3.Communi
+namespace C3
 {
     public class DeviceTreeNode : TreeNode
     {

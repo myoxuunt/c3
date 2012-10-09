@@ -23,7 +23,6 @@ namespace XD100EDPU
                 new SimpleDeviceSourceProvider(DBI.Instance, typeof(Xd100e));
             this.DeviceType = DeviceTypeManager.AddDeviceType(
                 "Xd100e",
-                "Xd100e(Text)",
                 typeof(Xd100e));
             this.DeviceUI = new DeviceUI(this);
             this.Processor = new Xd100eProcessor();

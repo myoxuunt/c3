@@ -1,4 +1,4 @@
-﻿namespace C3.Communi.UC.Parameter
+﻿namespace C3.Communi
 {
     partial class UCNetSetting
     {

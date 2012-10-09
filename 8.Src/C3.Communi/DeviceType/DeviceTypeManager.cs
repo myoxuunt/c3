@@ -21,23 +21,13 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="name"></param>
         /// <param name="text"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        static public DeviceType AddDeviceType(string name, string text, Type type)
+        static public DeviceType AddDeviceType(  string text, Type type)
         {
-            return new DeviceType(name, text, type);
+            return new DeviceType( text, type);
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deviceType"></param>
-        //static public void Add(DeviceType deviceType)
-        //{
-            //DeviceTypes.Add(deviceType);
-        //}
 
         /// <summary>
         /// 
@@ -108,13 +98,12 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="name"></param>
         /// <param name="text"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        static public  StationType AddStationType (string name, string text, Type type)
+        static public  StationType AddStationType (string text, Type type)
         {
-            StationType t = new StationType(name, text, type);
+            StationType t = new StationType(text, type);
             StationTypes.Add(t);
             return t;
         }
@@ -122,16 +111,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="deviceType"></param>
-        //static public void Add(DeviceType deviceType)
-        //{
-            //DeviceTypes.Add(deviceType);
-        //}
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deviceType"></param>
+        /// <param name="stationType"></param>
         static public void Remove(StationType stationType)
         {
             StationTypes.Remove(stationType);

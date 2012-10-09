@@ -73,7 +73,6 @@ namespace SCL6DPU
                 new SimpleDeviceSourceProvider(DBI.Instance, typeof(Scl6));
             this.DeviceType = DeviceTypeManager.AddDeviceType(
                 "Scl6",
-                "Scl6(Text)",
                 typeof(Scl6));
             this.DeviceUI = new DeviceUI(this);
             this.Processor = new Scl6Processor();

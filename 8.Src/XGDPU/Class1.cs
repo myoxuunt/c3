@@ -313,8 +313,8 @@ namespace XGDPU
             this.DeviceFactory = new XGDeviceFactory(this);
             this.DevicePersister = new XGDevicePersister();
             this.DeviceSourceProvider = new XGDeviceSourceProvider();
-            this.DeviceType = DeviceTypeManager.AddDeviceType("XGDevice",
-                "Xun Geng(Text)",
+            this.DeviceType = DeviceTypeManager.AddDeviceType(
+                "XGDevice",
                 typeof(XGDevice));
             this.DeviceUI = new DeviceUI(this);
             this.Processor = new XGDeviceProcessor();

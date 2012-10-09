@@ -1,16 +1,15 @@
 
-using System;
-using Xdgk.Common;
-
-namespace C3.Communi
+namespace C3
 {
-    public class IconNames
+    public static class IconNames
     {
-        static public readonly string
-            Connect = "Connect",
-                    Disconnect = "DisConnect",
-                    Device = "Device",
-                    Empty = "Empty";
+        public const string Connect = "Connect";
+
+        public const string Disconnect = "DisConnect";
+
+        public const string Device = "Device";
+
+        public const string Empty = "Empty";
     }
 
 }

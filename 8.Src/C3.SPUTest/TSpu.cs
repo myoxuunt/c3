@@ -8,7 +8,7 @@ namespace C3.SPUTest
     {
         public Tspu()
         {
-            StationTypeManager.AddStationType("Tspu", "stationtypetext", typeof(TStation));
+            StationTypeManager.AddStationType("Tspu",  typeof(TStation));
 
             this.Name = "Tspu";
             this.Description = "T description";

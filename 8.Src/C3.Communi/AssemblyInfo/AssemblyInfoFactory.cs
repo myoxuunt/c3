@@ -44,17 +44,6 @@ namespace C3.Communi
         static private string FixPath(string path)
         {
             return PathUtils.MapToStartupPath(path);
-
-            string r = string.Empty;
-            if (PathUtils.IsAbsolutePhysicalPath(path))
-            {
-                r = path;
-            }
-            else
-            {
-                r = PathUtils.MapToStartupPath(path);
-            }
-            return r;
         }
 
         /// <summary>

@@ -234,7 +234,9 @@ namespace DBSPU
             this.StationPersister = new StationPersister();
             this.StationSourceProvider = new StationSourceProvider();
             this.StationUI = new StationUI(this);
-            this.StationType = StationTypeManager.AddStationType("stationname", "DBStation", typeof(Station));
+            this.StationType = StationTypeManager.AddStationType(
+                "Station", 
+                typeof(Station));
         }
     }
 }

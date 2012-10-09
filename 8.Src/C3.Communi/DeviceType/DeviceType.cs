@@ -1,42 +1,20 @@
 using System;
-using Xdgk.Common;
 
 namespace C3.Communi
 {
-
-
     /// <summary>
     /// 
     /// </summary>
     public class DeviceType : TypeBase 
     {
         #region DeviceType
-
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="type"></param>
-        internal DeviceType(string name, Type type)
-            : this(name, null, null, type)
-        {
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
         /// <param name="text"></param>
         /// <param name="type"></param>
-        internal DeviceType(string name, string text, Type type)
-            : this(name, text, null, type)
-        {
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        internal DeviceType(string name, string text, string description, Type type)
-            : base( text, description, type)
+        internal DeviceType(string text, Type type)
+            : base(text, type)
         {
         }
         #endregion //DeviceType

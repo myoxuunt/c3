@@ -35,8 +35,8 @@
             this.rbSerialPort = new System.Windows.Forms.RadioButton();
             this.label5 = new System.Windows.Forms.Label();
             this.rbNull = new System.Windows.Forms.RadioButton();
-            this.ucNetSetting1 = new C3.Communi.UC.Parameter.UCNetSetting();
-            this.ucSerialPortSetting1 = new CommuniServer.UCSerialPortSetting();
+            this.ucNetSetting1 = new C3.Communi.UCNetSetting();
+            this.ucSerialPortSetting1 = new C3.Communi.UCSerialPortSetting();
             this.lblTimeout = new System.Windows.Forms.Label();
             this.numTimeout = new System.Windows.Forms.NumericUpDown();
             this.lblTimeoutUnit = new System.Windows.Forms.Label();
@@ -172,8 +172,8 @@
         private System.Windows.Forms.RadioButton rbSocket;
         private System.Windows.Forms.RadioButton rbSerialPort;
         private System.Windows.Forms.Label label5;
-        private CommuniServer.UCSerialPortSetting ucSerialPortSetting1;
-        private C3.Communi.UC.Parameter.UCNetSetting ucNetSetting1;
+        private C3.Communi.UCSerialPortSetting ucSerialPortSetting1;
+        private C3.Communi.UCNetSetting ucNetSetting1;
         private System.Windows.Forms.RadioButton rbNull;
         private System.Windows.Forms.Label lblTimeout;
         private System.Windows.Forms.NumericUpDown numTimeout;

@@ -72,7 +72,6 @@ namespace CRLGDDPU
                 new SimpleDeviceSourceProvider(DBI.Instance, typeof(Crlgd));
             this.DeviceType = DeviceTypeManager.AddDeviceType(
                 "Crlgd",
-                "Crlgd(Text)",
                 typeof(Crlgd));
             this.DeviceUI = new DeviceUI(this);
             this.Processor = new Scl6Processor();
