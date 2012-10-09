@@ -97,10 +97,6 @@
       <Project>{5DD9DEDE-5BE3-4324-AE36-843EB23A9242}</Project>
       <Name>Xdgk.GR.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Xdgk.GR.UI\Xdgk.GR.UI.csproj">
-      <Project>{877704B6-0850-4BF6-923B-36E06EDC2E6B}</Project>
-      <Name>Xdgk.GR.UI</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="DeviceDefine\xd1100.xml">

@@ -8,7 +8,7 @@ using C3.Communi;
 using Xdgk.Common;
 using NLog;
 using C3.Data;
-using Xdgk.GR.UI;
+using Xdgk.GR.Common;
 
 
 namespace XD1100DPU

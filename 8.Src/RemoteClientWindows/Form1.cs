@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Xdgk.GR.UI;
+using Xdgk.GR.Common;
 using Xdgk.Common;
 using RemoteClient;
 

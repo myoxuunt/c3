@@ -8,7 +8,7 @@
     <ProjectGuid>{877704B6-0850-4BF6-923B-36E06EDC2E6B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xdgk.GR.UI</RootNamespace>
+    <RootNamespace>Xdgk.GR.Common</RootNamespace>
     <AssemblyName>Xdgk.GR.UI</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -42,7 +42,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="frmOTGT2Value.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,12 +66,6 @@
     </Compile>
     <Compile Include="UC\UCOTControlLine.Designer.cs">
       <DependentUpon>UCOTControlLine.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UC\ucTest.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UC\ucTest.Designer.cs">
-      <DependentUpon>ucTest.cs</DependentUpon>
     </Compile>
     <Compile Include="UC\UCTimeControlLine.cs">
       <SubType>UserControl</SubType>
@@ -113,10 +106,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC\UCOTControlLine.resx">
       <DependentUpon>UCOTControlLine.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UC\ucTest.resx">
-      <DependentUpon>ucTest.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UC\UCTimeControlLine.resx">
