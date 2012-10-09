@@ -4,8 +4,12 @@ using System.Text;
 
 namespace Xdgk.Common
 {
-    public class EnumTextAttribute : System.Attribute 
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EnumTextAttribute : System.Attribute
     {
+        #region EnumTextAttribute
         /// <summary>
         /// 
         /// </summary>
@@ -14,6 +18,7 @@ namespace Xdgk.Common
         {
             this.Text = text;
         }
+        #endregion //EnumTextAttribute
 
         #region Text
         /// <summary>
