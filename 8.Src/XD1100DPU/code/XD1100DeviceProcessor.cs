@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using C3.Communi;
 using Xdgk.Common;
-//using Xdgk.Communi.Interface;
+//using C3.Communi;
 using Xdgk.GR.Common;
 using NLog;
 

@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Xml;
-//using Xdgk.Communi.Interface;
 using Xdgk.Common;
 using NLog;
 

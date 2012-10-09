@@ -5,7 +5,6 @@ using System.Text;
 using System.Xml;
 using System.IO;
 using Xdgk.Common;
-//using Xdgk.Communi.Interface;
 
 namespace C3.Communi
 {

@@ -4,7 +4,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
-//using Xdgk.Communi.Interface;
 using NUnit.Core;
 
 namespace C3.Communi

@@ -8,7 +8,7 @@ namespace Xdgk.Common
     /// <summary>
     /// 提供十六进制字符串到byte[]之间的转换
     /// </summary>
-    //public class HexStringConverter : Xdgk.Communi.Interface.BytesConverter
+    //public class HexStringConverter : C3.Communi.BytesConverter
     public class HexStringConverter 
     {
         /// <summary>

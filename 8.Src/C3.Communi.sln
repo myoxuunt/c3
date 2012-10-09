@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Spus", "Spus", "{A97C1875-F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xdgk.GR.Common", "Xdgk.GR.Common\Xdgk.GR.Common.csproj", "{5DD9DEDE-5BE3-4324-AE36-843EB23A9242}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xdgk.Communi.BytesConverter", "BC\Xdgk.Communi.BytesConverter\Xdgk.Communi.BytesConverter.csproj", "{A26507F6-3E08-4FBE-99ED-834CCD86B52C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -117,6 +119,10 @@ Global
 		{5DD9DEDE-5BE3-4324-AE36-843EB23A9242}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DD9DEDE-5BE3-4324-AE36-843EB23A9242}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DD9DEDE-5BE3-4324-AE36-843EB23A9242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A26507F6-3E08-4FBE-99ED-834CCD86B52C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A26507F6-3E08-4FBE-99ED-834CCD86B52C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A26507F6-3E08-4FBE-99ED-834CCD86B52C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A26507F6-3E08-4FBE-99ED-834CCD86B52C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

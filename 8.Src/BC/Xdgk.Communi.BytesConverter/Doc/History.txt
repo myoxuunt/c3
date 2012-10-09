@@ -1,0 +1,87 @@
+﻿v0.14.0.0	2012-09-29
+	use communi interface v0.3
+	add decimal value adapater converter
+	
+v0.13.0.0	2012-07-10
+	add int64 converter
+
+v0.12.0.0	2012-03-22
+	add xd1100AlarmNO2Converter
+
+v0.11.0.0	2012-01-04
+	add bcd4byteconverter bcd2byteconverter bcd1byteconverter 
+
+v0.10.0.0	2011-10-04
+	fix grDevicePumpStateConvert error
+
+v0.9.0.0    2011-05-12
+    add int32 modbus converter
+
+v0.8.1.0    2010-12-06
+    modify xd100 modbus time control line converter
+
+v0.7.0.0	2010-11-17
+	add floatmodbusconverter
+
+v0.6.0.0	2010-11-12
+	修改版本号标记方式
+
+v0.0.6.0	2010-08-31
+	fixed ByteRealValueConverter
+
+v0.0.5.0	2010-08-31
+	fixed XD100OTControlLineConverter error
+
+
+v0.0.4.0	2010-08-20
+	add XD100TemperatureControlModeConverter
+	add XD100OTControlLineConverter
+	add XD100TimeControlLineConverter
+
+v0.0.3.0
+	add uint32 modbus converter
+
+v0.0.2.0
+	int8 convert to object return byte
+
+v0.0.1.3
+	add uint16 converter
+
+v0.0.1.2
+	add int16 converter
+
+v0.0.1.1
+	add uint32 converter
+
+v0010
+	use BytesConverter
+
+v000.12
+	add int16floatconverter, int32floatconverter, int32converter
+
+v000.10
+	fix xgdatetimeconverter error
+
+v0009
+	add xgdate xgtime converter
+
+v0008
+	add gralarmdata converter
+
+v0007
+	check xgdatatimeconverter converttoobject argument
+
+v0005
+	add xgdatetimeconverter cardsnconverter
+
+
+v0004
+	add grdevicepumpstate
+
+
+v0003
+	add floatconverter
+v0002
+	* intconverter
+v0001
+	add intconverter

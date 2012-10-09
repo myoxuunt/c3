@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 using C3.Communi;
-//using Xdgk.Communi.Interface;
+//using C3.Communi;
 
 namespace C3
 {

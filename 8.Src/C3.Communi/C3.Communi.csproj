@@ -48,7 +48,6 @@
     <Compile Include="BytesConverter\BytesConverterManager.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="_I\BytesConverter.cs" />
-    <Compile Include="_I\communi.Interface.cs" />
     <Compile Include="CommuniDetail\CommuniDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetailCollection.cs" />

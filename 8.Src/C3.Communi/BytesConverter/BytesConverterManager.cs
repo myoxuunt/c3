@@ -7,7 +7,6 @@ using System.Reflection;
 
 using NUnit.Core;
 using Xdgk.Common;
-//using Xdgk.Communi.Interface;
 using System.Collections ;
 
 namespace C3.Communi
