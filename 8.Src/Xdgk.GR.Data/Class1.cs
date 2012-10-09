@@ -1,9 +1,9 @@
 ﻿using System;
 using C3.Data;
 using Xdgk.Common;
-using Xdgk.GR.Data;
+using Xdgk.GR.Common;
 
-namespace Xdgk.GR.Data
+namespace Xdgk.GR.Common
 {
     /// <summary>
     /// 

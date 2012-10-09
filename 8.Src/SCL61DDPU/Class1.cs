@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using C3.Communi;
 using Xdgk.Common;
-using Xdgk.GR.Data;
+using Xdgk.GR.Common;
 using C3.Communi.SimpleDPU;
 
 namespace SCL61DDPU

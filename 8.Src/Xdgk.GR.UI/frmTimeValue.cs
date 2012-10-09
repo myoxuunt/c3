@@ -20,8 +20,8 @@ namespace Xdgk.GR.UI
         {
             InitializeComponent();
 
-            this.numAdjust.Minimum = Xdgk.GR.Data.TimeControlLineDefines.MinAdjustValue;
-            this.numAdjust.Maximum = Xdgk.GR.Data.TimeControlLineDefines.MaxAdjustValue;
+            this.numAdjust.Minimum = Xdgk.GR.Common.TimeControlLineDefines.MinAdjustValue;
+            this.numAdjust.Maximum = Xdgk.GR.Common.TimeControlLineDefines.MaxAdjustValue;
 
             this.Time = time;
 
@@ -71,13 +71,13 @@ namespace Xdgk.GR.UI
             get { return Convert.ToInt32(this.numAdjust.Value ); }
             set
             {
-                if (value < Xdgk.GR.Data.TimeControlLineDefines.MinAdjustValue)
+                if (value < Xdgk.GR.Common.TimeControlLineDefines.MinAdjustValue)
                 {
-                    value = Xdgk.GR.Data.TimeControlLineDefines.MinAdjustValue;
+                    value = Xdgk.GR.Common.TimeControlLineDefines.MinAdjustValue;
                 }
-                if (value > Xdgk.GR.Data.TimeControlLineDefines.MaxAdjustValue)
+                if (value > Xdgk.GR.Common.TimeControlLineDefines.MaxAdjustValue)
                 {
-                    value = Xdgk.GR.Data.TimeControlLineDefines.MaxAdjustValue;
+                    value = Xdgk.GR.Common.TimeControlLineDefines.MaxAdjustValue;
                 }
                 this.numAdjust.Value = value;
             }
@@ -109,7 +109,7 @@ namespace Xdgk.GR.UI
         /// <returns></returns>
         private bool CheckAdjust()
         {
-            if (!Xdgk.GR.Data.TimeControlLineDefines.CheckTimeAdjustValue(this.Adjust))
+            if (!Xdgk.GR.Common.TimeControlLineDefines.CheckTimeAdjustValue(this.Adjust))
             {
                 NUnit.UiKit.UserMessage.Display(XD100Strings.AdjustValueOutOfRange);
                 return false;

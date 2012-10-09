@@ -1,6 +1,6 @@
 using Xdgk.Common;
 
-namespace Xdgk.GR.Data
+namespace Xdgk.GR.Common
 {
     public class ValveTypeCollection : Collection<ValveType>
     {

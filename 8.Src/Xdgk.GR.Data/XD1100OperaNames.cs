@@ -5,7 +5,7 @@ using System.Text;
 using Xdgk.Common;
 
 
-namespace Xdgk.GR.Data
+namespace Xdgk.GR.Common
 {
     public class XD1100OperaNames
     {

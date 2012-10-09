@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Xdgk.GR.Data{
+namespace Xdgk.GR.Common{
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Xdgk.GR.Data{
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Xdgk.GR.Data.XD100ModbusStrings", typeof(XD100ModbusStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Xdgk.GR.Common.XD100ModbusStrings", typeof(XD100ModbusStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

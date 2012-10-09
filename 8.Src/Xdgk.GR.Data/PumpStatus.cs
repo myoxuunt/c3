@@ -1,6 +1,6 @@
 using System;
 
-namespace Xdgk.GR.Data
+namespace Xdgk.GR.Common
 {
     public class PumpStatus
     {

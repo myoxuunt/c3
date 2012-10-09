@@ -1,4 +1,4 @@
-namespace Xdgk.GR.Data
+namespace Xdgk.GR.Common
 {
     public enum XD100TemperatureControlModeEnum
     {

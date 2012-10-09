@@ -2,7 +2,7 @@
 using C3.Communi;
 using C3.Communi.SimpleDPU;
 using Xdgk.Common;
-using Xdgk.GR.Data;
+using Xdgk.GR.Common;
 
 namespace SCL6DPU
 {

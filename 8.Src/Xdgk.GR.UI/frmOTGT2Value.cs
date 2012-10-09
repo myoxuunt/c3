@@ -21,11 +21,11 @@ namespace Xdgk.GR.UI
         public frmOTGT2Value( int ot, int gt2, int otPrevious, int otNext)
         {
             InitializeComponent();
-            this.numOT.Minimum = Xdgk.GR.Data.OTControlLineDefines.OTMin;
-            this.numOT.Maximum = Xdgk.GR.Data.OTControlLineDefines.OTMax;
+            this.numOT.Minimum = Xdgk.GR.Common.OTControlLineDefines.OTMin;
+            this.numOT.Maximum = Xdgk.GR.Common.OTControlLineDefines.OTMax;
 
-            this.numGT2.Minimum = Xdgk.GR.Data.OTControlLineDefines.GT2Min;
-            this.numGT2.Maximum = Xdgk.GR.Data.OTControlLineDefines.GT2Max;
+            this.numGT2.Minimum = Xdgk.GR.Common.OTControlLineDefines.GT2Min;
+            this.numGT2.Maximum = Xdgk.GR.Common.OTControlLineDefines.GT2Max;
 
             this.numOT.Value = ot;
             this.numGT2.Value = gt2;

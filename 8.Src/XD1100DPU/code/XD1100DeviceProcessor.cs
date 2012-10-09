@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using C3.Communi;
 using Xdgk.Common;
 using Xdgk.Communi.Interface;
-using Xdgk.GR.Data;
+using Xdgk.GR.Common;
 using NLog;
 
 namespace XD1100DPU

@@ -65,8 +65,8 @@ namespace Xdgk.GR.UI
             gp.XAxis.Title.Text = XD100Strings.OT;
             gp.XAxis.Scale.MajorStep = 10;
             gp.XAxis.Scale.MinorStep = 5;
-            gp.XAxis.Scale.Min = Xdgk.GR.Data.OTControlLineDefines.OTMin;
-            gp.XAxis.Scale.Max = Xdgk.GR.Data.OTControlLineDefines.OTMax;
+            gp.XAxis.Scale.Min = Xdgk.GR.Common.OTControlLineDefines.OTMin;
+            gp.XAxis.Scale.Max = Xdgk.GR.Common.OTControlLineDefines.OTMax;
             gp.XAxis.Scale.Format = "G";
             SetMajorTicStyle(gp.XAxis.MajorTic);
             SetMinorTicStyle(gp.XAxis.MinorTic);
@@ -76,8 +76,8 @@ namespace Xdgk.GR.UI
             gp.YAxis.Title.FontSpec.Size = fontSize;
             gp.YAxis.MajorGrid.IsVisible = false;
             gp.YAxis.Title.Text = XD100Strings.GT2;
-            gp.YAxis.Scale.Min = Xdgk.GR.Data.OTControlLineDefines.GT2Min;
-            gp.YAxis.Scale.Max = Xdgk.GR.Data.OTControlLineDefines.GT2Max;
+            gp.YAxis.Scale.Min = Xdgk.GR.Common.OTControlLineDefines.GT2Min;
+            gp.YAxis.Scale.Max = Xdgk.GR.Common.OTControlLineDefines.GT2Max;
             gp.YAxis.Scale.MajorStep = 10;
             gp.YAxis.Scale.MinorStep = 5;
             gp.YAxis.Scale.Format = "G";
@@ -265,7 +265,7 @@ namespace Xdgk.GR.UI
             }
             else
             {
-                return Xdgk.GR.Data.OTControlLineDefines.OTMin;
+                return Xdgk.GR.Common.OTControlLineDefines.OTMin;
             }
         }
 
@@ -279,7 +279,7 @@ namespace Xdgk.GR.UI
             int n = index + 1;
             if (n >= this.dgvTimeControlLine.Rows.Count)
             {
-                return Xdgk.GR.Data.OTControlLineDefines.OTMax;
+                return Xdgk.GR.Common.OTControlLineDefines.OTMax;
             }
             else
             {

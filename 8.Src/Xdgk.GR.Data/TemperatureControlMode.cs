@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xdgk.Common;
 
-namespace Xdgk.GR.Data
+namespace Xdgk.GR.Common
 {
     public class XD100TemperatureControlMode
     {

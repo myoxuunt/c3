@@ -1,6 +1,6 @@
 using C3.Data;
 
-namespace Xdgk.GR.Data
+namespace Xdgk.GR.Common
 {
     public class FlowmeterData : DataBase
     {
