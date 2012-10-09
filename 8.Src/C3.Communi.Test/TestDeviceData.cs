@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
 using NUnit.Framework;
-//using C3.Data;
+
 using Xdgk.Common;
 
 namespace C3.Communi.Test

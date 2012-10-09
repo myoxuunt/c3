@@ -1,6 +1,6 @@
 using System;
-//using C3.Data;
 using Xdgk.Common;
+
 namespace C3.Communi
 {
     abstract public class ParameterBase : IParameter

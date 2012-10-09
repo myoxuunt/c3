@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using C3.Communi;
 using C3.Resources;
-//using C3.Data;
 using Xdgk.Common;
 using NLog;
 

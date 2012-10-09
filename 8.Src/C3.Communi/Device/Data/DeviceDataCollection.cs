@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using Xdgk.Common;
-//using C3.Data;
+
 
 namespace C3.Communi
 {

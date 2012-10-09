@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Text;
 using System.Collections;
-using C3.Communi;
-//using C3.Data;
+using System.Text;
 using Xdgk.Common;
 using Xdgk.GR.Common;
 

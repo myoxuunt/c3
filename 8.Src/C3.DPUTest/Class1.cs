@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using C3.Communi;
 using C3.Communi.Test;
 using Xdgk.Common;
-//using C3.Data;
 using Xdgk.Common;
 
 namespace C3.DPUTest
