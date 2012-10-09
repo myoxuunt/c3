@@ -89,7 +89,7 @@
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Xdgk.GR.Data\Xdgk.GR.Common.csproj">
+    <ProjectReference Include="..\Xdgk.GR.Common\Xdgk.GR.Common.csproj">
       <Project>{5DD9DEDE-5BE3-4324-AE36-843EB23A9242}</Project>
       <Name>Xdgk.GR.Common</Name>
     </ProjectReference>
