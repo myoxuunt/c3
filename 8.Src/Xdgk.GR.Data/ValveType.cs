@@ -1,26 +1,19 @@
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xdgk.Common;
-
-
 namespace Xdgk.GR.Data
 {
     public class ValveType
     {
+        #region ValveType
         /// <summary>
         /// 
         /// </summary>
-        //public ValveType (string name, int value)
         public ValveType(string name, ValveTypeEnum type)
         {
             this.Name = name;
-            //this.Value = value;
             this._valveTypeEnum = type;
         }
+        #endregion //ValveType
 
-#region Name
+        #region Name
         /// <summary>
         /// 
         /// </summary>
@@ -29,9 +22,9 @@ namespace Xdgk.GR.Data
             get { return _name; }
             set { _name = value; }
         } private string _name;
-#endregion //Name
+        #endregion //Name
 
-#region Value
+        #region Value
         /// <summary>
         /// 
         /// </summary>
@@ -39,8 +32,9 @@ namespace Xdgk.GR.Data
         {
             get { return (int)this._valveTypeEnum; }
         }
-#endregion //Value
+        #endregion //Value
 
+        #region ValveTypeEnum
         /// <summary>
         /// 
         /// </summary>
@@ -48,6 +42,7 @@ namespace Xdgk.GR.Data
         {
             get { return _valveTypeEnum; }
         } private ValveTypeEnum _valveTypeEnum;
+        #endregion //ValveTypeEnum
     }
 
 }

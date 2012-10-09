@@ -1,13 +1,11 @@
-
 using System;
-using C3.Data;
-using Xdgk.Common;
-using Xdgk.GR.Data;
 
 namespace Xdgk.GR.Data
 {
     public class PumpStatus
     {
+
+        #region Members
         /// <summary>
         /// 
         /// </summary>
@@ -16,8 +14,9 @@ namespace Xdgk.GR.Data
         /// 
         /// </summary>
         static public PumpStatus Stop = new PumpStatus(PumpStatusEnum.Stop, "ֹͣ");
+        #endregion //Members
 
-
+        #region Find
         /// <summary>
         /// 
         /// </summary>
@@ -38,6 +37,9 @@ namespace Xdgk.GR.Data
                 throw new ArgumentException(value.ToString());
             }
         }
+        #endregion //Find
+
+        #region PumpStatus
         /// <summary>
         /// 
         /// </summary>
@@ -47,8 +49,9 @@ namespace Xdgk.GR.Data
             this.PumpStatusEnum = value;
             this.Text = text;
         }
+        #endregion //PumpStatus
 
-#region PumpStatusEnum
+        #region PumpStatusEnum
         /// <summary>
         /// 
         /// </summary>
@@ -63,9 +66,9 @@ namespace Xdgk.GR.Data
                 _pumpStatusEnum = value;
             }
         } private PumpStatusEnum _pumpStatusEnum;
-#endregion //PumpStatusEnum
+        #endregion //PumpStatusEnum
 
-#region Text
+        #region Text
         /// <summary>
         /// 
         /// </summary>
@@ -84,8 +87,9 @@ namespace Xdgk.GR.Data
                 _text = value;
             }
         } private string _text;
-#endregion //Text
+        #endregion //Text
 
+        #region ToString
         /// <summary>
         /// 
         /// </summary>
@@ -94,6 +98,7 @@ namespace Xdgk.GR.Data
         {
             return Text;
         }
+        #endregion //ToString
     }
 
 }

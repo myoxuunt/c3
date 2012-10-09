@@ -3,12 +3,12 @@ using C3.Data;
 using Xdgk.Common;
 using Xdgk.GR.Data;
 
-namespace Xdgk.XD100Modbus
+namespace Xdgk.GR.Data
 {
     /// <summary>
     /// 
     /// </summary>
-    public enum TemperatureControlModeEnum
+    public enum XD1100TemperatureControlModeEnum
     {
         LineAndGT2 = 0,
         LineAndBT2 = 1,
@@ -22,64 +22,64 @@ namespace Xdgk.XD100Modbus
     /// <summary>
     /// 
     /// </summary>
-    public class XD100ModbusDefines
+    public class XD1100Defines
     {
         /// <summary>
         /// 
         /// </summary>
-        static public TemperatureControlModeCollection TemperatureControlModeCollection
+        static public XD1100TemperatureControlModeCollection TemperatureControlModeCollection
         {
             get
             {
                 if (_temperatureControlModeCollection == null)
                 {
-                    _temperatureControlModeCollection = new TemperatureControlModeCollection();
+                    _temperatureControlModeCollection = new XD1100TemperatureControlModeCollection();
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode(XD100ModbusStrings.LineAndGT2,
-                            TemperatureControlModeEnum.LineAndGT2));
+                        new XD1100TemperatureControlMode(XD100ModbusStrings.LineAndGT2,
+                            XD1100TemperatureControlModeEnum.LineAndGT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode(XD100ModbusStrings.LineAndBT2,
-                            TemperatureControlModeEnum.LineAndBT2));
+                        new XD1100TemperatureControlMode(XD100ModbusStrings.LineAndBT2,
+                            XD1100TemperatureControlModeEnum.LineAndBT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode(XD100ModbusStrings.LineAndDiffT2 ,
-                            TemperatureControlModeEnum.LineAndDiffT2));
+                        new XD1100TemperatureControlMode(XD100ModbusStrings.LineAndDiffT2 ,
+                            XD1100TemperatureControlModeEnum.LineAndDiffT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode(XD100ModbusStrings.SettingAndGT2 ,
-                            TemperatureControlModeEnum.SettingAndGT2));
+                        new XD1100TemperatureControlMode(XD100ModbusStrings.SettingAndGT2 ,
+                            XD1100TemperatureControlModeEnum.SettingAndGT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode(XD100ModbusStrings.SettingAndBT2,
-                            TemperatureControlModeEnum.SettingAndBT2));
+                        new XD1100TemperatureControlMode(XD100ModbusStrings.SettingAndBT2,
+                            XD1100TemperatureControlModeEnum.SettingAndBT2));
 
                     
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode(XD100ModbusStrings.SettingAndDiffT2,
-                            TemperatureControlModeEnum.SettingAndDiffT2));
+                        new XD1100TemperatureControlMode(XD100ModbusStrings.SettingAndDiffT2,
+                            XD1100TemperatureControlModeEnum.SettingAndDiffT2));
 
                     _temperatureControlModeCollection.Add(
-                        new TemperatureControlMode(XD100ModbusStrings.ValveOpenDegree,
-                            TemperatureControlModeEnum.ValveOpenDegree));
+                        new XD1100TemperatureControlMode(XD100ModbusStrings.ValveOpenDegree,
+                            XD1100TemperatureControlModeEnum.ValveOpenDegree));
                 }
                 return _temperatureControlModeCollection;
             }
-        } static private TemperatureControlModeCollection _temperatureControlModeCollection;
+        } static private XD1100TemperatureControlModeCollection _temperatureControlModeCollection;
     }
 
     /// <summary>
     /// 
     /// </summary>
-    public class TemperatureControlMode
+    public class XD1100TemperatureControlMode
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        //public TemperatureControlMode(string name, int value)
-        public TemperatureControlMode(string name, TemperatureControlModeEnum mode)
+        //public XD1100TemperatureControlMode(string name, int value)
+        public XD1100TemperatureControlMode(string name, XD1100TemperatureControlModeEnum mode)
         {
             this.Name = name;
             //this.Value = value;
@@ -108,10 +108,10 @@ namespace Xdgk.XD100Modbus
         /// <summary>
         /// 
         /// </summary>
-        public TemperatureControlModeEnum Mode
+        public XD1100TemperatureControlModeEnum Mode
         {
             get { return this._mode;}
-        } private TemperatureControlModeEnum _mode;
+        } private XD1100TemperatureControlModeEnum _mode;
 
 
     }
@@ -119,20 +119,8 @@ namespace Xdgk.XD100Modbus
     /// <summary>
     /// 
     /// </summary>
-    public class TemperatureControlModeCollection : Collection<TemperatureControlMode>
+    public class XD1100TemperatureControlModeCollection : Collection<XD1100TemperatureControlMode>
     {
         
     }
-}
-
-namespace Xdgk.GR.Data
-{
-    /// <summary>
-    /// 
-    /// </summary>
-
-    /// <summary>
-    /// 
-    /// </summary>
-
 }

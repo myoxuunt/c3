@@ -161,7 +161,7 @@ namespace Xdgk.GR.UI
         /// </summary>
         private void BindDatas()
         {
-            this.cmbControlMode.DataSource = Xdgk.XD100Modbus.XD100ModbusDefines.TemperatureControlModeCollection;
+            this.cmbControlMode.DataSource = Xdgk.GR.Data.XD1100Defines.TemperatureControlModeCollection;
             this.cmbControlMode.DisplayMember = "Name";
             this.cmbControlMode.ValueMember = "Value";
             //this.cmbControlMode.SelectedItem 
@@ -381,14 +381,14 @@ namespace Xdgk.GR.UI
         private int GetSettingValue()
         {
             int value = 0;
-            Xdgk.XD100Modbus.TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.XD100Modbus.TemperatureControlMode;
-            if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.ValveOpenDegree)
+            Xdgk.GR.Data.XD1100TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.GR.Data.XD1100TemperatureControlMode;
+            if (mode.Mode == Xdgk.GR.Data.XD1100TemperatureControlModeEnum.ValveOpenDegree)
             {
                 value = this.ucValveOpenDegree1.ValveOpenDegree;
             }
-            //else if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndBT2 ||
-            //    mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndDiffT2 ||
-            //    mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndGT2)
+            //else if (mode.Mode == Xdgk.GR.Data.XD100TemperatureControlModeEnum.SettingAndBT2 ||
+            //    mode.Mode == Xdgk.GR.Data.XD100TemperatureControlModeEnum.SettingAndDiffT2 ||
+            //    mode.Mode == Xdgk.GR.Data.XD100TemperatureControlModeEnum.SettingAndGT2)
             else
             {
                 value = (int)ucTimeControlLine21.GTBase2;
@@ -502,10 +502,10 @@ namespace Xdgk.GR.UI
 
             if (this.cmbControlMode.SelectedItem != null)
             {
-                Xdgk.XD100Modbus.TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.XD100Modbus.TemperatureControlMode;
+                Xdgk.GR.Data.XD1100TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.GR.Data.XD1100TemperatureControlMode;
                 if (mode != null)
                 {
-                    if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.ValveOpenDegree)
+                    if (mode.Mode == Xdgk.GR.Data.XD1100TemperatureControlModeEnum.ValveOpenDegree)
                     {
                         //string s = string.Format(XD100ModbusStrings.NotSupportMode, mode.Name);
                         string s = string.Format(XD100Strings.NotSupportMode, mode.Name);
@@ -581,27 +581,27 @@ namespace Xdgk.GR.UI
             // TODO: local and resize uc
             //
             object obj = this.cmbControlMode.SelectedItem;
-            Xdgk.XD100Modbus.TemperatureControlMode mode = obj as Xdgk.XD100Modbus.TemperatureControlMode;
+            Xdgk.GR.Data.XD1100TemperatureControlMode mode = obj as Xdgk.GR.Data.XD1100TemperatureControlMode;
 
-            //if (mode.Mode == Xdgk.XD100.TemperatureControlModeEnum.OT_GT2)
-            if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.LineAndBT2 ||
-                mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.LineAndGT2 ||
-                mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.LineAndDiffT2)
+            //if (mode.Mode == Xdgk.XD100.XD100TemperatureControlModeEnum.OT_GT2)
+            if (mode.Mode == Xdgk.GR.Data.XD1100TemperatureControlModeEnum.LineAndBT2 ||
+                mode.Mode == Xdgk.GR.Data.XD1100TemperatureControlModeEnum.LineAndGT2 ||
+                mode.Mode == Xdgk.GR.Data.XD1100TemperatureControlModeEnum.LineAndDiffT2)
             {
                 //this.ucotControlLine1.Visible = true;
                 //this.ucTimeControlLine21.Visible = false;
                 ShowUCControl(this.ucotControlLine1);
             }
-            //else if (mode.Mode == Xdgk.XD100.TemperatureControlModeEnum.Time_GT2)
-            else if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndBT2 ||
-                mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndDiffT2 ||
-                mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.SettingAndGT2)
+            //else if (mode.Mode == Xdgk.XD100.XD100TemperatureControlModeEnum.Time_GT2)
+            else if (mode.Mode == Xdgk.GR.Data.XD1100TemperatureControlModeEnum.SettingAndBT2 ||
+                mode.Mode == Xdgk.GR.Data.XD1100TemperatureControlModeEnum.SettingAndDiffT2 ||
+                mode.Mode == Xdgk.GR.Data.XD1100TemperatureControlModeEnum.SettingAndGT2)
             {
                 //this.ucotControlLine1.Visible = false;
                 //this.ucTimeControlLine21.Visible = true;
                 ShowUCControl(this.ucTimeControlLine21);
             }
-            else if (mode.Mode == Xdgk.XD100Modbus.TemperatureControlModeEnum.ValveOpenDegree)
+            else if (mode.Mode == Xdgk.GR.Data.XD1100TemperatureControlModeEnum.ValveOpenDegree)
             {
                 //this.ucTimeControlLine21.Visible = false;
                 //this.ucotControlLine1.Visible = false;

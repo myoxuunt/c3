@@ -1,28 +1,27 @@
-
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xdgk.Common;
 
-
 namespace Xdgk.GR.Data
 {
-    public class TemperatureControlMode
+    public class XD100TemperatureControlMode
     {
+        #region XD100TemperatureControlMode
         /// <summary>
         /// 
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        //public TemperatureControlMode(string name, int value)
-        public TemperatureControlMode(string name, TemperatureControlModeEnum mode)
+        public XD100TemperatureControlMode(string name, XD100TemperatureControlModeEnum mode)
         {
             this.Name = name;
             //this.Value = value;
             this._mode = mode;
         }
+        #endregion //XD100TemperatureControlMode
 
-#region Name
+        #region Name
         /// <summary>
         /// 
         /// </summary>
@@ -31,8 +30,9 @@ namespace Xdgk.GR.Data
             get { return _name; }
             set { _name = value; }
         } private string _name;
-#endregion //Name
+        #endregion //Name
 
+        #region Value
         /// <summary>
         /// 
         /// </summary>
@@ -40,15 +40,17 @@ namespace Xdgk.GR.Data
         {
             get { return (int)this.Mode; }
         }
+        #endregion //Value
 
+        #region Mode
         /// <summary>
         /// 
         /// </summary>
-        public TemperatureControlModeEnum Mode
+        public XD100TemperatureControlModeEnum Mode
         {
             get { return this._mode; }
-        } private TemperatureControlModeEnum _mode;
-
+        } private XD100TemperatureControlModeEnum _mode;
+        #endregion //Mode
 
     }
 

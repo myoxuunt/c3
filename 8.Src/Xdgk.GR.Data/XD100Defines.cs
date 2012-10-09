@@ -1,10 +1,3 @@
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xdgk.Common;
-
-
 namespace Xdgk.GR.Data
 {
     public class XD100Defines
@@ -20,17 +13,17 @@ namespace Xdgk.GR.Data
                 {
                     _temperatureControlModeCollection = new TemperatureControlModeCollection();
 
-                    TemperatureControlMode m = null;
-                    m = new TemperatureControlMode(
+                    XD100TemperatureControlMode m = null;
+                    m = new XD100TemperatureControlMode(
                             //CZGR1.XD100.XD100Strings.OTGT2ControlLine, 
                             "温度控制曲线",
-                            TemperatureControlModeEnum.OT_GT2);
+                            XD100TemperatureControlModeEnum.OT_GT2);
                     _temperatureControlModeCollection.Add(m);
 
-                    m = new TemperatureControlMode(
+                    m = new XD100TemperatureControlMode(
                             //CZGR1.XD100.XD100Strings.TimeControlLine, 
                             "分时控制曲线",
-                            TemperatureControlModeEnum.Time_GT2);
+                            XD100TemperatureControlModeEnum.Time_GT2);
                     _temperatureControlModeCollection.Add(m);
                 }
                 return _temperatureControlModeCollection;

@@ -7,7 +7,7 @@ using Xdgk.Common;
 
 namespace Xdgk.GR.Data
 {
-    public class TemperatureControlModeCollection : Collection<TemperatureControlMode>
+    public class TemperatureControlModeCollection : Collection<XD100TemperatureControlMode>
     {
 
     }
