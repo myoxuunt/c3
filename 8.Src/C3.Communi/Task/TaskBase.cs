@@ -438,7 +438,7 @@ namespace C3.Communi
                 );
                 this.Device.CommuniDetails.Add(cd);
 
-                //CommuniLogger
+                DeviceCommuniLogger.Log(this.Device, cd);
                 //this.device
 
                 // 

@@ -54,7 +54,7 @@
       <DependentUpon>frmCommuniDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="IFluxProvider.cs" />
-    <Compile Include="Resource\CommuniDetailResource.Designer.cs">
+    <Compile Include="Resources\CommuniDetailResource.Designer.cs">
       <DependentUpon>CommuniDetailResource.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -332,7 +332,7 @@
       <LastGenOutput>RemoteStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resource\CommuniDetailResource.resx">
+    <EmbeddedResource Include="Resources\CommuniDetailResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CommuniDetailResource.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
