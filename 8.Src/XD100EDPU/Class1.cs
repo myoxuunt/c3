@@ -54,7 +54,7 @@ namespace XD100EDPU
             {
                 if (_instance == null)
                 {
-                    string conn = C3.Communi.SoftManager.GetSoft().SourceConfigs.Find("Connection").Value;
+                    string conn = SourceConfigManager.SourceConfigs.Find("Connection").Value;
                     _instance = new DBI(conn);
                 }
                 return _instance;

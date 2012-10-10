@@ -20,7 +20,7 @@ namespace XD1100DPU
                 if (_instance == null)
                 {
 
-                    SourceConfig sc = SoftManager.GetSoft().SourceConfigs.Find("Connection");
+                    SourceConfig sc = SourceConfigManager.SourceConfigs.Find("Connection");
                     if (sc != null)
                     {
                         _instance = new DBI(sc.Value);

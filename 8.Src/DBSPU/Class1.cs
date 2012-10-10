@@ -148,7 +148,7 @@ namespace DBSPU
                 {
                     Debug.Assert(SoftManager.GetSoft() != null);
 
-                    SourceConfig sc = SoftManager.GetSoft().SourceConfigs.Find("Connection");
+                    SourceConfig sc = SourceConfigManager.SourceConfigs.Find("Connection");
                     if (sc != null)
                     {
                         string conn = sc.Value;

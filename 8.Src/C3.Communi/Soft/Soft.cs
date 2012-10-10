@@ -41,10 +41,10 @@ namespace C3.Communi
         }
         #endregion //Constructor
 
+        #region Prepare
         /// <summary>
         /// 
         /// </summary>
-        #region Prepare
         public void Prepare()
         {
             Hardware temp = this.Hardware;
@@ -234,7 +234,10 @@ namespace C3.Communi
                 {
                     //HardwareFactory factory = new HardwareFactory();
                     HardwareFactory factory = this.HardwareFactory;
-                    factory.SourceConfigs = ReadSourceConfigs();
+                    //factory.SourceConfigs = ReadSourceConfigs();
+                    //factory.SourceConfigs = this.SourceConfigs;
+                    factory.SourceConfigs = SourceConfigManager.SourceConfigs;
+
                     _hardware = factory.Create();
 
                     if (HardwareCreated != null)
@@ -294,45 +297,21 @@ namespace C3.Communi
         } private HardwareFactory _hardwareFactory;
         #endregion //HardwareFactory
 
-        #region SourceConfigs
-        public SourceConfigCollection SourceConfigs
-        {
-            get
-            {
-                if (_sourceConfigs == null)
-                {
-                    _sourceConfigs = ReadSourceConfigs();
-                }
-                return _sourceConfigs;
-            }
-        } private SourceConfigCollection _sourceConfigs;
-        #endregion //SourceConfigs
+        //#region SourceConfigs
+        //public SourceConfigCollection SourceConfigs
+        //{
+        //    get
+        //    {
+        //        if (_sourceConfigs == null)
+        //        {
+        //            //_sourceConfigs = ReadSourceConfigs();
+        //        }
+        //        return _sourceConfigs;
+        //    }
+        //} private SourceConfigCollection _sourceConfigs;
+        //#endregion //SourceConfigs
 
-        #region ReadSourceConfigs
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private SourceConfigCollection ReadSourceConfigs()
-        {
-            SourceConfigCollection sourceConfigs = new SourceConfigCollection();
-            XmlDocument doc = new XmlDocument();
-            doc.Load(PathUtils.SourceConfigFileName);
 
-            XmlNode sourcesNode = doc.SelectSingleNode("sources");
-            foreach (XmlNode item in sourcesNode.ChildNodes)
-            {
-                XmlElement sourceNode = item as XmlElement;
-                string key = sourceNode["key"].ChildNodes[0].Value;
-                string value = sourceNode["value"].ChildNodes[0].Value;
-
-                SourceConfig sourceConfig = new SourceConfig(key, value);
-                sourceConfigs.Add(sourceConfig);
-            }
-
-            return sourceConfigs;
-        }
-        #endregion //ReadSourceConfigs
 
         #region BytesConverterManager
         /// <summary>
