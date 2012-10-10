@@ -85,7 +85,7 @@ namespace C3.Communi
                 Directory.CreateDirectory(dir);
             }
 
-            FileStream fs = File.Open(path, FileMode.Append, FileAccess.ReadWrite);
+            FileStream fs = File.Open(path, FileMode.Append);
             StreamWriter sw = new StreamWriter(fs);
             return sw;
         }
