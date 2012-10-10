@@ -9,35 +9,35 @@ namespace C3.Communi
     //    /// <summary>
     //    /// 
     //    /// </summary>
-    //    /// <param name="item"></param>
-    //    public new void Add(T item)
+    //    /// <param name="this1"></param>
+    //    public new void Add(T this1)
     //    {
-    //        this.CheckNullOrExist(item);
-    //        base.Add(item);
+    //        this.CheckNullOrExist(this1);
+    //        base.Add(this1);
     //    }
 
     //    /// <summary>
     //    /// 
     //    /// </summary>
     //    /// <param name="index"></param>
-    //    /// <param name="item"></param>
-    //    public new void Insert( int index, T item )
+    //    /// <param name="this1"></param>
+    //    public new void Insert( int index, T this1 )
     //    {
-    //        this.CheckNullOrExist(item);
-    //        base.Insert(index, item);
+    //        this.CheckNullOrExist(this1);
+    //        base.Insert(index, this1);
     //    }
 
     //    /// <summary>
     //    /// 
     //    /// </summary>
-    //    /// <param name="item"></param>
-    //    private void CheckNullOrExist(T item)
+    //    /// <param name="this1"></param>
+    //    private void CheckNullOrExist(T this1)
     //    {
-    //        if (item == null)
-    //            throw new ArgumentNullException("item");
+    //        if (this1 == null)
+    //            throw new ArgumentNullException("this1");
 
-    //        if (this.Contains(item))
-    //            throw new ArgumentException("exist item: " + item );
+    //        if (this.Contains(this1))
+    //            throw new ArgumentException("exist this1: " + this1 );
     //    }
     //}
 
@@ -77,7 +77,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="index"></param>
-        /// <param name="item"></param>
+        /// <param name="this1"></param>
         protected override void InsertItem(int index, DataField item)
         {
             if( this.Contains( item.Name ) )

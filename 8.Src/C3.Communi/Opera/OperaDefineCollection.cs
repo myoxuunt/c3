@@ -16,11 +16,11 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="index"></param>
-        /// <param name="item"></param>
+        /// <param name="this1"></param>
         protected override void InsertItem(int index, OperaDefine item)
         {
             if (item == null)
-                throw new ArgumentNullException("item");
+                throw new ArgumentNullException("this1");
 
             if (Exist(item.DeviceType))
             {

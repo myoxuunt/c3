@@ -438,6 +438,9 @@ namespace C3.Communi
                 );
                 this.Device.CommuniDetails.Add(cd);
 
+                //CommuniLogger
+                //this.device
+
                 // 
                 //
                 // this.SetStatus(TaskStatus.Executed);

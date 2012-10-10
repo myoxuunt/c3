@@ -46,7 +46,19 @@
   <ItemGroup>
     <Compile Include="BytesConverter\BytesConverterCollection.cs" />
     <Compile Include="BytesConverter\BytesConverterManager.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="DeviceCommuniLogger.cs" />
+    <Compile Include="frmCommuniDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCommuniDetails.Designer.cs">
+      <DependentUpon>frmCommuniDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IFluxProvider.cs" />
+    <Compile Include="Resource\CommuniDetailResource.Designer.cs">
+      <DependentUpon>CommuniDetailResource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="_I\BytesConverter.cs" />
     <Compile Include="CommuniDetail\CommuniDetail.cs" />
     <Compile Include="CommuniDetail\CommuniFailDetail.cs" />
@@ -299,6 +311,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmCommuniDetails.resx">
+      <DependentUpon>frmCommuniDetails.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmDeviceGroups.resx">
       <DependentUpon>FrmDeviceGroups.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -314,6 +330,11 @@
     <EmbeddedResource Include="RemoteStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>RemoteStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource\CommuniDetailResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommuniDetailResource.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="strings.resx">

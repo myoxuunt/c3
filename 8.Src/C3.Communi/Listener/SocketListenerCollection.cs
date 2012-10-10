@@ -11,7 +11,7 @@ namespace C3.Communi
     public class SocketListenerCollection : Xdgk.Common.Collection<SocketListener>
     {
         // 1. listen add or insert value new socket event
-        // 2. remove new socket event for remove item
+        // 2. remove new socket event for remove this1
         //
     }
 }

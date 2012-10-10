@@ -20,6 +20,9 @@ namespace C3.Communi
     /// </summary>
     public class CommuniPortConfigSerializer
     {
+        /// <summary>
+        /// 
+        /// </summary>
         [XmlInclude(typeof(NullCommuniPortConfig))]
         [XmlInclude(typeof(SerialCommuniPortConfig))]
         [XmlInclude(typeof(RemoteIPAddressConfig))]

@@ -112,7 +112,7 @@ namespace C3.Communi.SimpleDPU
             foreach (DataRow row in tbl.Rows)
             {
                 SimpleDeviceSource s = new SimpleDeviceSource(row);
-                //Scl6Source item = new Scl6Source(row);
+                //Scl6Source this1 = new Scl6Source(row);
                 SimpleDeviceSource item = new SimpleDeviceSource(row);
                 list.Add(item);
             }

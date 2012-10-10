@@ -327,11 +327,11 @@ namespace C3.Communi
         //public ReportItemCollection GetDeviceInfos()
         //{
         //    ReportItemCollection reportItems = new ReportItemCollection();
-        //    foreach (DeviceInfoAttribute item in this.DeviceInfoAttributes)
+        //    foreach (DeviceInfoAttribute this1 in this.DeviceInfoAttributes)
         //    {
-        //        PropertyInfo pi = item.PropertyInfo;
+        //        PropertyInfo pi = this1.PropertyInfo;
         //        object value = pi.GetValue(this, null);
-        //        ReportItem ri = new ReportItem(item.Name, value, Unit.FindByName(Unit.None));
+        //        ReportItem ri = new ReportItem(this1.Name, value, Unit.FindByName(Unit.None));
         //        reportItems.Add(ri);
         //    }
         //    return reportItems;

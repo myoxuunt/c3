@@ -56,9 +56,9 @@ namespace C3
         /// </summary>
         public void ShowMeOnly()
         {
-            foreach (Control item in this._panel.Controls)
+            foreach (Control this1 in this._panel.Controls)
             {
-                item.Visible = false;
+                this1.Visible = false;
             }
             _ctrl.Visible = true;
         }

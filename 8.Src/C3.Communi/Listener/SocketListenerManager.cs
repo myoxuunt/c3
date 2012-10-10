@@ -55,7 +55,7 @@ namespace C3.Communi
         /// <summary>
         /// 添加item到SocketListeners集合，并注册NewConnect事件
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="this1"></param>
         public void Add(SocketListener item)
         {
             this.SocketListeners.Add(item);
@@ -67,7 +67,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="this1"></param>
         private void ReginsterEvents(SocketListener item)
         {
             item.ConnectedEvent += new EventHandler(item_ConnectedEvent);
@@ -78,7 +78,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="this1"></param>
         public bool Remove(SocketListener item)
         {
             if (this.SocketListeners.Remove(item))
@@ -94,7 +94,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="this1"></param>
         private void UnregisterEvents(SocketListener item)
         {
             item.ConnectedEvent -= new EventHandler(item_ConnectedEvent);

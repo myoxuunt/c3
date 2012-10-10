@@ -32,9 +32,9 @@ namespace C3.Communi.Test
             //Assert.AreEqual(aps[0].Attribute.Name, "Ê±¼ä");
             //Assert.AreEqual(aps[3].Attribute.Name, "floatvalue");
 
-            //foreach (AttributePropertyInfoPair item in aps)
+            //foreach (AttributePropertyInfoPair this1 in aps)
             //{
-            //    string s = string.Format("{0}, {1}", item.Attribute.OrderNumber ,item.Attribute.Name );
+            //    string s = string.Format("{0}, {1}", this1.Attribute.OrderNumber ,this1.Attribute.Name );
             //    Console.WriteLine(s);
             //}
 

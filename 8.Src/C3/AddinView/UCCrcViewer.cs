@@ -39,12 +39,12 @@ namespace C3
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="this1"></param>
         /// <returns></returns>
         private ListViewItem CreateListViewItem(ICRCer item)
         {
             string assemblyInfo = GetAssemblyInfo(item);
-            //string[] items = new string[] { item.GetType ().Name , "-", assemblyInfo };
+            //string[] items = new string[] { this1.GetType ().Name , "-", assemblyInfo };
             string[] items = new string[] { item.GetType().FullName };
             ListViewItem lvi = new ListViewItem(items );
             return lvi;
@@ -53,7 +53,7 @@ namespace C3
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="this1"></param>
         /// <returns></returns>
         private string GetAssemblyInfo(ICRCer item)
         {
