@@ -6,14 +6,22 @@ using System.Text;
 
 namespace C3.Communi
 {
-    public class DeviceCommuniLogger
+    static public class DeviceCommuniLogger
     {
         /// <summary>
         /// 
         /// </summary>
-        private DeviceCommuniLogger()
+        static DeviceCommuniLogger()
         {
-
+            string enableCommuniLog = System.Configuration.ConfigurationManager.AppSettings["EnableCommuniLog"];
+            if (!string.IsNullOrEmpty(enableCommuniLog))
+            {
+                bool b = false;
+                if (bool.TryParse(enableCommuniLog, out b))
+                {
+                    Enabled = b;
+                }
+            }
         }
 
         /// <summary>
@@ -22,7 +30,8 @@ namespace C3.Communi
         static public bool Enabled
         {
             get { return _enabled; }
-        } static private bool _enabled = true;
+            set { _enabled = value; }
+        } static private bool _enabled = false;
 
         /// <summary>
         /// 
