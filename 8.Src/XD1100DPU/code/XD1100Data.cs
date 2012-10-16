@@ -191,7 +191,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("一次瞬时", 12, Unit.M3PerSecond, FloatFormat)]
+        [DataItem("一次瞬时", 12, Unit.M3PerHour, FloatFormat)]
         public float I1
         {
             get { return _I1; }
@@ -203,7 +203,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("二次瞬时", 13, Unit.M3PerSecond, FloatFormat)]
+        [DataItem("二次瞬时", 13, Unit.M3PerHour, FloatFormat)]
         public float I2
         {
             get { return _I2; }
@@ -215,7 +215,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("补水瞬时", 14, Unit.M3PerSecond, FloatFormat)]
+        [DataItem("补水瞬时", 14, Unit.M3PerHour, FloatFormat)]
         public float IR
         {
             get

@@ -9,7 +9,8 @@ namespace Xdgk.GR.Common
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("˲ʱ", 10, Unit.M3PerSecond, "f2")]
+        //[DataItem("˲ʱ", 10, Unit.M3PerSecond, "f2")]
+        [DataItem("˲ʱ", 10, Unit.M3PerHour, "f2")]
         public double InstantFlux
         {
             get
