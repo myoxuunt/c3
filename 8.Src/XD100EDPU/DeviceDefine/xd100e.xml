@@ -54,12 +54,6 @@
             begin="7"
             length="4"
             converter="Xdgk.Communi.Int32Converter">
-          
-          <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
-            <property name="Rate" value="0.10"></property>
-            <converter name="Xdgk.Communi.Int32Converter"></converter>
-          </converter>
-          
         </datafield>
 
         <datafield name="Channal1Unit"

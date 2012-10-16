@@ -142,6 +142,20 @@ namespace XD100EDPU
     /// </summary>
     internal class Xd100e : DeviceBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Xd100eData GetCachedData()
+        {
+            if (_cachedData == null ||
+                _cachedData.IsComplete() ||
+                _cachedData.IsTimeout())
+            {
+                _cachedData = new Xd100eData();
+            }
+            return _cachedData;
+        } private Xd100eData _cachedData;
     }
 
     /// <summary>
@@ -206,20 +220,20 @@ namespace XD100EDPU
             return IsSetAI && IsSetDI;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        static public Xd100eData GetCachedData()
-        {
-            if (_cachedData == null ||
-                _cachedData.IsComplete() ||
-                _cachedData.IsTimeout())
-            {
-                _cachedData = new Xd100eData();
-            }
-            return _cachedData;
-        } static private Xd100eData _cachedData;
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //static public Xd100eData GetCachedData()
+        //{
+        //    if (_cachedData == null ||
+        //        _cachedData.IsComplete() ||
+        //        _cachedData.IsTimeout())
+        //    {
+        //        _cachedData = new Xd100eData();
+        //    }
+        //    return _cachedData;
+        //} static private Xd100eData _cachedData;
 
         /// <summary>
         /// 
@@ -237,7 +251,7 @@ namespace XD100EDPU
         /// <summary>
         /// 
         /// </summary>
-        private Xd100eData()
+        internal Xd100eData()
         {
         }
 
@@ -608,9 +622,13 @@ namespace XD100EDPU
         {
             if (pr.IsSuccess)
             {
-                Xd100eData data = Xd100eData.GetCachedData();
+                //Xd100eData data = Xd100eData.GetCachedData();
 
                 Xd100e xd100eDevice = (Xd100e)task.Device;
+                Xd100eData data = xd100eDevice.GetCachedData();
+
+                Console.WriteLine("ori xd100e id: " + GuidHelper.ConvertToInt32(xd100eDevice.Guid));
+
                 string opera = task.Opera.Name;
 
                 if (StringHelper.Equal(opera, ReadReal))
@@ -648,6 +666,7 @@ namespace XD100EDPU
                     xd100eDevice.DeviceDataManager.Last = data;
 
                     int deviceID = GuidHelper.ConvertToInt32(xd100eDevice.Guid);
+                    Console.WriteLine("write xd100e id: " + deviceID);
                     DBI.Instance.InsertXd100eData(deviceID, data);
                 }
             }
