@@ -500,20 +500,22 @@ namespace Xdgk.GR.Common
                 return;
             }
 
-            if (this.cmbControlMode.SelectedItem != null)
-            {
-                Xdgk.GR.Common.XD1100TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.GR.Common.XD1100TemperatureControlMode;
-                if (mode != null)
-                {
-                    if (mode.Mode == Xdgk.GR.Common.XD1100TemperatureControlModeEnum.ValveOpenDegree)
-                    {
-                        //string s = string.Format(XD100ModbusStrings.NotSupportMode, mode.Name);
-                        string s = string.Format(XD100Strings.NotSupportMode, mode.Name);
-                        NUnit.UiKit.UserMessage.DisplayFailure(s);
-                        return;
-                    }
-                }
-            }
+            // enable valve open degree setting
+            //
+            //if (this.cmbControlMode.SelectedItem != null)
+            //{
+            //    Xdgk.GR.Common.XD1100TemperatureControlMode mode = this.cmbControlMode.SelectedItem as Xdgk.GR.Common.XD1100TemperatureControlMode;
+            //    if (mode != null)
+            //    {
+            //        if (mode.Mode == Xdgk.GR.Common.XD1100TemperatureControlModeEnum.ValveOpenDegree)
+            //        {
+            //            //string s = string.Format(XD100ModbusStrings.NotSupportMode, mode.Name);
+            //            string s = string.Format(XD100Strings.NotSupportMode, mode.Name);
+            //            NUnit.UiKit.UserMessage.DisplayFailure(s);
+            //            return;
+            //        }
+            //    }
+            //}
 
             ExecuteArgs args = new ExecuteArgs();
             KeyValueCollection hash = args.KeyValues;
