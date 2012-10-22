@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<assemblyInfoCollection>
+  <assemblyInfo path=".\d\CRLGD\CRLGDDPU.dll"></assemblyInfo>
+  <assemblyInfo path=".\d\CRLGXL\CRLGXLDPU.dll"></assemblyInfo>
+
+  <assemblyInfo path=".\d\SCL6\SCL6DPU.dll"> </assemblyInfo>
+  <assemblyInfo path=".\d\SCL61D\SCL61DDPU.dll"></assemblyInfo>
+  <assemblyInfo path=".\d\SCL9\SCL9DPU.dll"> </assemblyInfo>
+
+  <assemblyInfo path=".\d\XD1100\XD1100DPU.dll"> </assemblyInfo>
+  <assemblyInfo path=".\d\xd100e\xd100eDPU.dll"></assemblyInfo>
+  <assemblyInfo path=".\d\XG\XGDPU.dll"> </assemblyInfo>
+</assemblyInfoCollection>

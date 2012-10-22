@@ -45,7 +45,7 @@ namespace Xdgk.GR.Common
 
         #endregion //
 
-
+        #region IsExecuting
         /// <summary>
         /// 
         /// </summary>
@@ -57,6 +57,7 @@ namespace Xdgk.GR.Common
 
             return _isExecuting && (!b);
         }
+        #endregion //IsExecuting
 
         #region DeviceID
         /// <summary>
@@ -98,6 +99,7 @@ namespace Xdgk.GR.Common
         }
         #endregion //frmXD100TemperatureControl
 
+        #region _controller_ResultEvent
         /// <summary>
         /// 
         /// </summary>
@@ -127,7 +129,7 @@ namespace Xdgk.GR.Common
                     }
                     else if (StringHelper.Equal(args.ExecuteArgs.ExecuteName, XD1100OperaNames.OPERA_WRITE))
                     {
-                        this.Sync.Post(new SendOrPostCallback(MessageBoxTarget), 
+                        this.Sync.Post(new SendOrPostCallback(MessageBoxTarget),
                             XD100Strings.WriteControlModeSuccess);
                     }
                 }
@@ -135,7 +137,9 @@ namespace Xdgk.GR.Common
 
             this._isExecuting = false;
         }
+        #endregion //_controller_ResultEvent
 
+        #region ReadLineTarget
         /// <summary>
         /// 
         /// </summary>
@@ -144,16 +148,29 @@ namespace Xdgk.GR.Common
         {
             ProcessReadLine((KeyValueCollection)status);
         }
+        #endregion //ReadLineTarget
 
+        #region StatusBarTarget
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="status"></param>
         private void StatusBarTarget(object status)
         {
             this.SetStatusText(status.ToString());
         }
+        #endregion //StatusBarTarget
 
+        #region MessageBoxTarget
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="status"></param>
         private void MessageBoxTarget(object status)
         {
             NUnit.UiKit.UserMessage.DisplayInfo(status.ToString());
         }
+        #endregion //MessageBoxTarget
 
         #region BindDatas
         /// <summary>
@@ -235,7 +252,7 @@ namespace Xdgk.GR.Common
         }
         #endregion //okButton_Click
 
-
+        #region IsReady
         /// <summary>
         /// 
         /// </summary>
@@ -253,6 +270,7 @@ namespace Xdgk.GR.Common
             }
             return r.IsSuccess;
         }
+        #endregion //IsReady
 
         #region btnRead_Click
         /// <summary>
@@ -293,11 +311,16 @@ namespace Xdgk.GR.Common
         }
         #endregion //btnRead_Click
 
-
-        private void SetStatusText(string text )
+        #region SetStatusText
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        private void SetStatusText(string text)
         {
             this.statusBarPanel1.Text = DateTime.Now.ToString() + " " + text;
         }
+        #endregion //SetStatusText
 
         #region ProcessReadLine
         /// <summary>
@@ -322,7 +345,7 @@ namespace Xdgk.GR.Common
             this.ucTimeControlLine21.GTBase2 = settingValue;
 
             this.ucValveOpenDegree1.ValveOpenDegree = settingValue;
-            
+
 
             obj = keyValues["TimeControlLine"];
             int[] adjustValues = obj as int[];
@@ -445,7 +468,7 @@ namespace Xdgk.GR.Common
             //CZGRApp.Default.Soft.TaskManager.Tasks.AddToHead(_task);
 
             ExecuteArgs args = new ExecuteArgs();
-            args.DeviceID = this.DeviceID ;
+            args.DeviceID = this.DeviceID;
             args.ExecuteName = "WriteTempControlData";
             args.KeyValues["TimeControlLine"] = adjustValues;
             args.KeyValues["OTControlLine"] = this.ucotControlLine1.OTControlLine;
@@ -652,6 +675,7 @@ namespace Xdgk.GR.Common
         } private Control[] _ucControlList;
         #endregion //UCControlList
 
+        #region Sync
         /// <summary>
         /// 
         /// </summary>
@@ -659,6 +683,7 @@ namespace Xdgk.GR.Common
         {
             get { return System.Windows.Forms.WindowsFormsSynchronizationContext.Current; }
         }
+        #endregion //Sync
 
     }
 }
