@@ -127,6 +127,7 @@ namespace XD100EDPU
             SimpleDeviceSource s = (SimpleDeviceSource)deviceSource;
             Xd100e d = new Xd100e();
             d.Address = s.Address;
+            d.Name = s.DeviceName;
             d.DeviceSource = deviceSource;
             d.DeviceType = this.Dpu.DeviceType;
             d.Dpu = this.Dpu;
@@ -164,6 +165,7 @@ namespace XD100EDPU
     internal class Xd100eData : DataBase
     {
         private DateTime _createDT = DateTime.Now;
+
         #region IsSetAI
         /// <summary>
         /// 

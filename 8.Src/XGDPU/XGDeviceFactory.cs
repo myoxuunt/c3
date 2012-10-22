@@ -23,6 +23,7 @@ namespace XGDPU
             XGDeviceSource source = (XGDeviceSource)deviceSource;
             XGDevice d = new XGDevice();
             d.Address = source.Address;
+            d.Name = source.DeviceName;
             d.DeviceSource = source;
             d.DeviceType = this.Dpu.DeviceType;
             d.Dpu = this.Dpu;

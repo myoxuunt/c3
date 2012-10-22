@@ -24,6 +24,7 @@ namespace XD1100DPU
             XD1100DeviceSource source = (XD1100DeviceSource)deviceSource;
             XD1100Device d = new XD1100Device();
             d.Address = source.Address;
+            d.Name = source.DeviceName;
             d.DeviceSource = source;
             d.DeviceType = this.Dpu.DeviceType;
             d.Dpu = this.Dpu;

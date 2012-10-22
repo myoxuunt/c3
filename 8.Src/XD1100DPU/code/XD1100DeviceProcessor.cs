@@ -63,9 +63,8 @@ namespace XD1100DPU
                 }
                 else
                 {
-                    throw new NotImplementedException(
-                        string.Format("not process xd1100 opera '{0}'", opera)
-                        );
+                    string s = string.Format("not process xd1100 opera '{0}'", opera);
+                    throw new NotImplementedException(s);
                 }
             }
         }
@@ -119,8 +118,26 @@ namespace XD1100DPU
             //
             if (fluxProvider != null)
             {
-                data.I1 = Convert.ToSingle(fluxProvider.InstantFlux);
-                data.S1 = Convert.ToInt32(fluxProvider.Sum);
+                switch (fluxProvider.FluxPlace)
+                {
+                    case FluxPlace.FirstSide:
+                        data.I1 = Convert.ToSingle(fluxProvider.InstantFlux);
+                        data.S1 = Convert.ToInt32(fluxProvider.Sum);
+                        break;
+
+                    case FluxPlace.SecondSide:
+                        data.I2 = Convert.ToSingle(fluxProvider.InstantFlux);
+                        data.S2 = Convert.ToInt32(fluxProvider.Sum);
+                        break;
+
+                    case FluxPlace.RecruitSide:
+                        data.IR = Convert.ToSingle(fluxProvider.InstantFlux);
+                        data.SR = Convert.ToInt32(fluxProvider.Sum);
+                        break;
+
+                    default:
+                        break;
+                }
             }
 
             d.DeviceDataManager.Last = data;

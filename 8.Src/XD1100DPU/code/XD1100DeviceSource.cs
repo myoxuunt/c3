@@ -44,6 +44,9 @@ namespace XD1100DPU
                         Convert.ToInt32(_dataRow["StationID"])
                         );
 
+                this.DeviceName = _dataRow["DeviceName"].ToString().Trim();
+
+
                 string ex = _dataRow["DeviceExtend"].ToString();
                 StringStringDictionary extend = StringStringDictionaryConverter.Parse(ex);
 
@@ -76,7 +79,5 @@ namespace XD1100DPU
             }
         } private ModeValue _htmModeValue;
         #endregion //HtmModeValue
-
     }
-
 }

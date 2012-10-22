@@ -100,7 +100,7 @@ namespace XGDPU
         {
             string s = string.Format(
                 "insert into tblCard(sn, person) values('{0}', '{1}')",
-                cardSn, person );
+                cardSn, person);
             ExecuteScalar(s);
         }
 
@@ -113,10 +113,11 @@ namespace XGDPU
             XGDevice d = (XGDevice)device;
 
             string s = string.Format(
-                "insert into tblDevice(DeviceAddress, deviceType, stationID) values({0}, '{1}', {2}); select @@identity;",
+                "insert into tblDevice(DeviceAddress, deviceType, stationID, DeviceName) values({0}, '{1}', {2}, '{3}'); select @@identity;",
                 d.Address,
                 d.DeviceType.Type.Name,
-                GuidHelper.ConvertToInt32(d.Station.Guid)
+                GuidHelper.ConvertToInt32(d.Station.Guid),
+                d.Name
                 );
 
             object obj = DBI.Instance.ExecuteScalar(s);
@@ -126,8 +127,10 @@ namespace XGDPU
         protected override void OnUpdate(IDevice device)
         {
             string s = string.Format(
-                "update tblDevice set DeviceAddress = {0} where DeviceID = {1}",
-                device.Address, GuidHelper.ConvertToInt32(device.Guid));
+                "update tblDevice set DeviceAddress = {0}, DeviceName = '{1}' where DeviceID = {2}",
+                device.Address,
+                device.Name,
+                GuidHelper.ConvertToInt32(device.Guid));
 
             DBI.Instance.ExecuteScalar(s);
         }
@@ -174,9 +177,33 @@ namespace XGDPU
                 this.StationGuid = GuidHelper.Create(
                     Convert.ToInt32(_dataRow["StationID"])
                     );
+
+                this.DeviceName = _dataRow["DeviceName"].ToString().Trim();
             }
         } private DataRow _dataRow;
         #endregion //DataRow
+
+        #region DeviceName
+        /// <summary>
+        /// 
+        /// </summary>
+        public string DeviceName
+        {
+            get
+            {
+                if (_deviceName == null)
+                {
+                    _deviceName = string.Empty;
+                }
+                return _deviceName;
+            }
+            set
+            {
+                _deviceName = value;
+            }
+        } private string _deviceName;
+        #endregion //DeviceName
+
     }
 
     internal class XGDeviceSourceProvider : DeviceSourceProviderBase
@@ -205,7 +232,7 @@ namespace XGDPU
         public XGData(DateTime dt, string cardSn)
         {
             if (cardSn == null) throw new ArgumentNullException("cardSn");
-            if( cardSn.Trim( ).Length == 0 )
+            if (cardSn.Trim().Length == 0)
             {
                 throw new ArgumentException("cardSn exception");
             }
