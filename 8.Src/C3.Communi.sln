@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HZ.BytesConverter.Test", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HZ.CRC.Test", "CRC\HZ.CRC.Test\HZ.CRC.Test.csproj", "{6FF37B83-1A64-4DF0-B834-BEACF82696DF}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "C3Setup", "C3Setup\C3Setup.vdproj", "{C8D068B0-56B4-4EF8-A30C-B70D0F7B59F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,8 @@ Global
 		{6FF37B83-1A64-4DF0-B834-BEACF82696DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FF37B83-1A64-4DF0-B834-BEACF82696DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FF37B83-1A64-4DF0-B834-BEACF82696DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D068B0-56B4-4EF8-A30C-B70D0F7B59F8}.Debug|Any CPU.ActiveCfg = Debug
+		{C8D068B0-56B4-4EF8-A30C-B70D0F7B59F8}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
