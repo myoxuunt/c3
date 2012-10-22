@@ -7,6 +7,7 @@ namespace C3.Communi
     abstract public class DeviceSourceBase : IDeviceSource
     {
 
+        #region StationGuid
         /// <summary>
         /// 
         /// </summary>
@@ -21,7 +22,9 @@ namespace C3.Communi
                 _stationGuid = value;
             }
         } private Guid _stationGuid;
+        #endregion //StationGuid
 
+        #region Guid
         /// <summary>
         /// 
         /// </summary>
@@ -36,6 +39,7 @@ namespace C3.Communi
                 _guid = value;
             }
         } private Guid _guid;
+        #endregion //Guid
 
         #region Address
         /// <summary>
@@ -74,6 +78,48 @@ namespace C3.Communi
             }
         } private string _devcieTypeName;
         #endregion //DevcieTypeName
+
+        #region DeviceName
+        /// <summary>
+        /// 
+        /// </summary>
+        public string DeviceName
+        {
+            get
+            {
+                if (_deviceName == null)
+                {
+                    _deviceName = string.Empty;
+                }
+                return _deviceName;
+            }
+            set
+            {
+                _deviceName = value;
+            }
+        } private string _deviceName;
+        #endregion //DeviceName
+
+        #region DeviceExtendParameters
+        /// <summary>
+        /// 
+        /// </summary>
+        public string DeviceExtendParameters
+        {
+            get
+            {
+                if (_deviceExtendParameters == null)
+                {
+                    _deviceExtendParameters = string.Empty;
+                }
+                return _deviceExtendParameters;
+            }
+            set
+            {
+                _deviceExtendParameters = value;
+            }
+        } private string _deviceExtendParameters;
+        #endregion //DeviceExtendParameters
 
     }
 

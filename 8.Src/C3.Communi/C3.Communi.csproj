@@ -47,6 +47,7 @@
     <Compile Include="BytesConverter\BytesConverterCollection.cs" />
     <Compile Include="BytesConverter\BytesConverterManager.cs" />
     <Compile Include="Device\DeviceCommuniLogger.cs" />
+    <Compile Include="Device\Device\FluxDeviceBase.cs" />
     <Compile Include="Forms\frmCommuniDetails.cs">
       <SubType>Form</SubType>
     </Compile>

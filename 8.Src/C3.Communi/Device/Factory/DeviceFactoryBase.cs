@@ -6,6 +6,10 @@ namespace C3.Communi
 {
     abstract public class DeviceFactoryBase : IDeviceFactory
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dpu"></param>
         public DeviceFactoryBase(IDPU dpu)
         {
             this.Dpu = dpu;

@@ -1,5 +1,8 @@
 using System;
 using System.Diagnostics;
+using Xdgk.Common;
+//using Xdgk.
+using NLog;
 
 namespace C3.Communi
 {
@@ -478,5 +481,35 @@ namespace C3.Communi
         } private PickerCollection _pickers;
 
         #endregion
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetStringParameters()
+        {
+            string s = string.Empty;
+            foreach (IGroup g in this.Groups )
+            {
+                foreach (IParameter p in g.Parameters)
+                {
+                    if (StringHelper.Equal(p.Name, PN_ADDRESS) ||
+                        StringHelper.Equal(p.Name, PN_NAME))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        s += string.Format("{0}{1}{2}{3}",
+                            p.Name,
+                            StringStringDictionaryConverter.KeyValueSplitChar,
+                            p.Value.ToString(),
+                            StringStringDictionaryConverter.ItemSplitChar);
+                    }
+                }
+            }
+            return s;
+        }
     }
 }

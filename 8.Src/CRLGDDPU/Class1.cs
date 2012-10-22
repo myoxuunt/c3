@@ -82,7 +82,7 @@ namespace CRLGDDPU
         }
     }
 
-    public class CrlgdFactory : DeviceFactoryBase
+    public class CrlgdFactory : FluxDeviceFactoryBase 
     {
         /// <summary>
         /// 
@@ -100,51 +100,14 @@ namespace CRLGDDPU
         /// <returns></returns>
         public override IDevice OnCreate(IDeviceSource deviceSource)
         {
-            SimpleDeviceSource source = (SimpleDeviceSource)deviceSource;
             Crlgd d = new Crlgd();
-            d.Address = source.Address;
-            d.DeviceSource = source;
-            d.DeviceType = this.Dpu.DeviceType;
-            d.Dpu = this.Dpu;
-            d.Guid = source.Guid;
-            d.StationGuid = source.StationGuid;
+            SetDeviceProperties(d, deviceSource);
             return d;
         }
     }
 
-    public class Crlgd : DeviceBase, IFluxProvider
+    public class Crlgd : FluxDeviceBase 
     {
-        #region IFluxProvider 成员
-
-        public double InstantFlux
-        {
-            get
-            {
-                double r = 0d;
-                CrlgdData data = this.DeviceDataManager.Last as CrlgdData;
-                if (data != null)
-                {
-                    r = data.InstantFlux;
-                }
-                return r;
-            }
-        }
-
-        public double Sum
-        {
-            get
-            {
-                double r = 0d;
-                CrlgdData data = this.DeviceDataManager.Last as CrlgdData;
-                if (data != null)
-                {
-                    r = data.InstantFlux;
-                }
-                return r;
-            }
-        }
-
-        #endregion
     }
 
     /// <summary>

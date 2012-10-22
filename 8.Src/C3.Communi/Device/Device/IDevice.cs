@@ -45,6 +45,8 @@ namespace C3.Communi
         byte[] ProcessUpload(byte[] bs);
 
         PickerCollection Pickers { get; set; }
+
+        string GetStringParameters();
     }
 
 }

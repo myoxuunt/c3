@@ -35,9 +35,12 @@ namespace C3.Communi.SimpleDPU
         protected override void OnAdd(IDevice device)
         {
             string s = string.Format(
-                "insert into tblDevice(DeviceAddress, deviceType, stationID) values({0}, '{1}', {2}); select @@identity;",
+                "insert into tblDevice(DeviceAddress, DeviceName, deviceType, deviceExtend, stationID) " +
+                "values({0}, '{1}', '{2}', '{3}', {4}); select @@identity;",
                 device.Address,
+                device.Name ,
                 device.DeviceType.Type.Name,
+                device.GetStringParameters (),
                 GuidHelper.ConvertToInt32(device.Station.Guid)
                 );
 
@@ -52,8 +55,10 @@ namespace C3.Communi.SimpleDPU
         protected override void OnUpdate(IDevice device)
         {
             string s = string.Format(
-                "update tblDevice set DeviceAddress = {0} where DeviceID = {1}",
+                "update tblDevice set DeviceAddress = {0}, DeviceName = '{1}', DeviceExtend='{2}' where DeviceID = {3}",
                 device.Address,
+                device.Name,
+                device.GetStringParameters (),
                 GuidHelper.ConvertToInt32(device.Guid));
 
             _dbi.ExecuteScalar(s);
@@ -111,7 +116,7 @@ namespace C3.Communi.SimpleDPU
             DataTable tbl = _dbi.ExecuteDataTable (GetSql());
             foreach (DataRow row in tbl.Rows)
             {
-                SimpleDeviceSource s = new SimpleDeviceSource(row);
+                //SimpleDeviceSource s = new SimpleDeviceSource(row);
                 //Scl6Source this1 = new Scl6Source(row);
                 SimpleDeviceSource item = new SimpleDeviceSource(row);
                 list.Add(item);
@@ -166,6 +171,9 @@ namespace C3.Communi.SimpleDPU
                 this.Address = Convert.ToUInt64(_dataRow["DeviceAddress"]);
 
                 this.DevcieTypeName = _dataRow["DeviceType"].ToString().Trim();
+
+                this.DeviceName = _dataRow["DeviceName"].ToString().Trim();
+                this.DeviceExtendParameters = _dataRow["DeviceExtend"].ToString().Trim();
 
                 this.Guid = GuidHelper.Create(
                     Convert.ToInt32(_dataRow["DeviceID"])

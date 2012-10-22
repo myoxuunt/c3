@@ -11,6 +11,8 @@ namespace Xdgk.Common
 
     public class StringStringDictionaryConverter 
     {
+        public const char KeyValueSplitChar = '=';
+        public const char ItemSplitChar = ';';
         /// <summary>
         /// 
         /// </summary>
@@ -26,10 +28,10 @@ namespace Xdgk.Common
         static public StringStringDictionary Parse(string s)
         {
             StringStringDictionary  ht = new StringStringDictionary();
-            string[] pairs = s.Split(';');
+            string[] pairs = s.Split(ItemSplitChar);
             foreach (string pair in pairs)
             {
-                string[] kv = pair.Split('=');
+                string[] kv = pair.Split(KeyValueSplitChar);
                 if (kv.Length == 2)
                 {
                     string k = kv[0].Trim ();

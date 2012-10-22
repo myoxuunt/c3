@@ -9,6 +9,4 @@ namespace C3.Communi
         Guid StationGuid { get; set; }
         Guid Guid { get; set; }
     }
-
-
 }

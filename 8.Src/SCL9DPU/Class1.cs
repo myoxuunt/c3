@@ -84,7 +84,7 @@ namespace SCL9DPU
         }
     }
 
-    public class Scl9Factory : DeviceFactoryBase
+    public class Scl9Factory : FluxDeviceFactoryBase 
     {
         /// <summary>
         /// 
@@ -102,52 +102,14 @@ namespace SCL9DPU
         /// <returns></returns>
         public override IDevice OnCreate(IDeviceSource deviceSource)
         {
-            SimpleDeviceSource source = (SimpleDeviceSource)deviceSource;
             Scl9 d = new Scl9();
-            d.Address = source.Address;
-            d.DeviceSource = source;
-            d.DeviceType = this.Dpu.DeviceType;
-            d.Dpu = this.Dpu;
-            d.Guid = source.Guid;
-            d.StationGuid = source.StationGuid;
+            SetDeviceProperties(d, deviceSource);
             return d;
         }
     }
 
-    public class Scl9 : DeviceBase, IFluxProvider
+    public class Scl9 : FluxDeviceBase 
     {
-        #region IFluxProvider 成员
-
-        public double InstantFlux
-        {
-            get
-            {
-                double r = 0d;
-                Scl9Data data = this.DeviceDataManager.Last as Scl9Data;
-                if (data != null)
-                {
-                    return data.InstantFlux;
-                }
-                return r;
-            }
-        }
-
-        public double Sum
-        {
-
-            get
-            {
-                double r = 0d;
-                Scl9Data data = this.DeviceDataManager.Last as Scl9Data;
-                if (data != null)
-                {
-                    return data.Sum;
-                }
-                return r;
-            }
-        }
-
-        #endregion
     }
 
     /// <summary>

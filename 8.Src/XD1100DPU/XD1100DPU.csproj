@@ -49,7 +49,6 @@
     <Compile Include="code\DBI.cs" />
     <Compile Include="code\DeviceOTProvider.cs" />
     <Compile Include="code\FixedOTProvider.cs" />
-    <Compile Include="Forms\Class1.cs" />
     <Compile Include="Forms\frmOutsideStandard.cs">
       <SubType>Form</SubType>
     </Compile>

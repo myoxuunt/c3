@@ -83,76 +83,6 @@ namespace SCL6DPU
         }
     }
 
-    ///// <summary>
-    ///// 
-    ///// </summary>
-    //public class FlowmeterData : IData
-    //{
-    //    #region Sum
-    //    /// <summary>
-    //    /// 
-    //    /// </summary>
-    //    public double Sum
-    //    {
-    //        get
-    //        {
-    //            return _sum;
-    //        }
-    //        set
-    //        {
-    //            _sum = value;
-    //        }
-    //    } private double _sum;
-    //    #endregion //Sum
-
-    //    #region InstantFlux
-    //    /// <summary>
-    //    /// 
-    //    /// </summary>
-    //    public double InstantFlux
-    //    {
-    //        get
-    //        {
-    //            return _instantFlux;
-    //        }
-    //        set
-    //        {
-    //            _instantFlux = value;
-    //        }
-    //    } private double _instantFlux;
-    //    #endregion //InstantFlux
-
-
-    //    #region IData 成员
-
-    //    public DateTime DT
-    //    {
-    //        get
-    //        {
-    //            return _dt;
-    //        }
-    //        set
-    //        {
-    //            _dt = value;
-    //        }
-    //    } DateTime _dt = DateTime.Now;
-
-    //    /// <summary>
-    //    /// 
-    //    /// </summary>
-    //    /// <returns></returns>
-    //    public ReportItemCollection GetReportItems()
-    //    {
-    //        ReportItemCollection ris = new ReportItemCollection();
-    //        ris.Add(new ReportItem("时间", this.DT, Unit.FindByName(Unit.None)));
-    //        ris.Add(new ReportItem("瞬时", this.InstantFlux, Unit.FindByName(Unit.M3PerSecond)));
-    //        ris.Add(new ReportItem("累计", this.Sum, Unit.FindByName(Unit.M3)));
-    //        return ris;
-    //    }
-
-    //    #endregion
-    //}
-
     /// <summary>
     /// 
     /// </summary>
@@ -208,7 +138,7 @@ namespace SCL6DPU
         }
     }
 
-    public class Scl6Factory : DeviceFactoryBase
+    public class Scl6Factory : FluxDeviceFactoryBase 
     {
         /// <summary>
         /// 
@@ -226,14 +156,8 @@ namespace SCL6DPU
         /// <returns></returns>
         public override IDevice OnCreate(IDeviceSource deviceSource)
         {
-            SimpleDeviceSource source = (SimpleDeviceSource)deviceSource;
             Scl6 d = new Scl6();
-            d.Address = source.Address;
-            d.DeviceSource = source;
-            d.DeviceType = this.Dpu.DeviceType;
-            d.Dpu = this.Dpu;
-            d.Guid = source.Guid;
-            d.StationGuid = source.StationGuid;
+            SetDeviceProperties(d, deviceSource);
             return d;
         }
     }
@@ -241,40 +165,7 @@ namespace SCL6DPU
     /// <summary>
     /// 
     /// </summary>
-    internal class Scl6 : DeviceBase, IFluxProvider 
+    internal class Scl6 : FluxDeviceBase 
     {
-
-        #region IFluxProvider 成员
-
-        public double InstantFlux
-        {
-            get
-            {
-                double r = 0d;
-                Scl6Data data = this.DeviceDataManager.Last as Scl6Data;
-                if (data != null)
-                {
-                    r = data.InstantFlux;
-                }
-                return r;
-            }
-        }
-
-        public double Sum
-        {
-            get
-            {
-
-                double r = 0d;
-                Scl6Data data = this.DeviceDataManager.Last as Scl6Data;
-                if (data != null)
-                {
-                    r = data.Sum;
-                }
-                return r;
-            }
-        }
-
-        #endregion
     }
 }
