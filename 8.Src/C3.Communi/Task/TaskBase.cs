@@ -47,7 +47,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public Strategy Stragegy
+        public Strategy Strategy
         {
             get { return _stragegy; }
             set
@@ -224,7 +224,7 @@ namespace C3.Communi
         /// <returns></returns>
         public bool NeedExecute(DateTime dt)
         {
-            return this.Stragegy.NeedExecute(dt);
+            return this.Strategy.NeedExecute(dt);
         }
         #endregion //NeedExecute
 
@@ -259,7 +259,7 @@ namespace C3.Communi
                     break;
 
                 case TaskStatus.Executed:
-                    if (this.Stragegy.CanRemove)
+                    if (this.Strategy.CanRemove)
                     {
                         this.SetStatus(TaskStatus.Completed);
                     }

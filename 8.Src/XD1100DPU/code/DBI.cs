@@ -166,6 +166,14 @@ namespace XD1100DPU
             parameters.Add(new SqlParameter(name, value));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        internal void ClearOutsideTemperatureProviderDevice()
+        {
+            string s = "delete from tblOTDevice";
+            ExecuteScalar(s);
+        }
     }
 
 }

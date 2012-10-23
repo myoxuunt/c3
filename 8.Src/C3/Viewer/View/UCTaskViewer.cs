@@ -11,11 +11,21 @@ namespace C3
 {
     public partial class UCTaskViewer : UserControl 
     {
+
+        #region UCTaskViewer
+        /// <summary>
+        /// 
+        /// </summary>
         public UCTaskViewer()
         {
             InitializeComponent();
         }
+        #endregion //UCTaskViewer
 
+        #region Device
+        /// <summary>
+        /// 
+        /// </summary>
         public IDevice Device
         {
             get { return _device; }
@@ -27,14 +37,22 @@ namespace C3
                     FillTaskListView();
                 }
             }
-        }
-        private IDevice _device;
+        } private IDevice _device;
+        #endregion //Device
 
+        #region frmTask_Load
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmTask_Load(object sender, EventArgs e)
         {
             FillTaskListView();
         }
+        #endregion //frmTask_Load
 
+        #region FillTaskListView
         /// <summary>
         /// 
         /// </summary>
@@ -58,7 +76,9 @@ namespace C3
                 }
             }
         }
+        #endregion //FillTaskListView
 
+        #region CreateTaskListViewItem
         /// <summary>
         /// 
         /// </summary>
@@ -70,7 +90,57 @@ namespace C3
                 "-",
                 task.Status.ToString() };
             ListViewItem lvi= new ListViewItem(items);
+            lvi.Tag = task;
             return lvi;
+        }
+        #endregion //CreateTaskListViewItem
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmsTaskItem_Opening(object sender, CancelEventArgs e)
+        {
+            Console.WriteLine("taskItem opening");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuRunTask_Click(object sender, EventArgs e)
+        {
+            ITask sel = GetSelectedTask();
+            if (sel != null)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private itask getselectedtask()
+        {
+            itask r = null;
+            if (this.listview1.selecteditems.count > 0)
+            {
+                r = (itask)this.listview1.selecteditems[0].tag;
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuTaskDetail_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

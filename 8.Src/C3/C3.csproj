@@ -67,6 +67,12 @@
     <Compile Include="AddinView\UCTypeViewer.Designer.cs">
       <DependentUpon>UCTypeViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmTaskDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTaskDetail.Designer.cs">
+      <DependentUpon>frmTaskDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resources\DeviceDataResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -94,12 +100,6 @@
     </Compile>
     <Compile Include="Viewer\View\UCStationViewer.Designer.cs">
       <DependentUpon>UCStationViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Viewer\View\UCTaskViewer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Viewer\View\UCTaskViewer.Designer.cs">
-      <DependentUpon>UCTaskViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="AddinView\UCBytesConverterViewer.cs">
       <SubType>UserControl</SubType>
@@ -153,6 +153,10 @@
       <DependentUpon>UCTypeViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTaskDetail.resx">
+      <DependentUpon>frmTaskDetail.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\DeviceDataResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DeviceDataResource.Designer.cs</LastGenOutput>
@@ -174,10 +178,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Viewer\View\UCStationViewer.resx">
       <DependentUpon>UCStationViewer.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Viewer\View\UCTaskViewer.resx">
-      <DependentUpon>UCTaskViewer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AddinView\UCBytesConverterViewer.resx">

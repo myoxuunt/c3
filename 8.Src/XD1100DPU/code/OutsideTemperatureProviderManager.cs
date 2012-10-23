@@ -28,7 +28,7 @@ namespace XD1100DPU
             }
         } static private IOutsideTemperatureProvider _p;
 
-#region IOutsideTemperatureProvider 成员
+        #region IOutsideTemperatureProvider 成员
         /// <summary>
         /// 
         /// </summary>
@@ -39,7 +39,7 @@ namespace XD1100DPU
             return Provider.GetStandardOutsideTemperature(device);
         }
 
-#endregion
+        #endregion
     }
 
 }

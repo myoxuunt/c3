@@ -5,7 +5,7 @@ using NUnit.Framework ;
 
 namespace HZ.CRC.Test
 {
-    [TestFixture ]
+    [TestFixture]
     public class HZCRCTester
     {
         [Test]

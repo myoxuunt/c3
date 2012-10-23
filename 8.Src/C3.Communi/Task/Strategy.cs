@@ -128,7 +128,8 @@ namespace C3.Communi
             get { return _cycle; }
             set
             {
-                if (!(value >= s_MinCycle && value <= s_MaxCycle))
+                //if (!(value >= s_MinCycle && value <= s_MaxCycle))
+                if (!CheckCycleTimeSpan(value))
                 {
                     string b = "cycle must between {1} to {2}";
                     string s = string.Format(b, value, s_MinCycle, s_MaxCycle);
@@ -139,6 +140,24 @@ namespace C3.Communi
         } private TimeSpan _cycle;
         #endregion //
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ts"></param>
+        /// <returns></returns>
+        static public bool CheckCycleTimeSpan(TimeSpan value)
+        {
+            if (value >= s_MinCycle && value <= s_MaxCycle)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
 
         /// <summary>
         /// 获取一个值，该值指示Task是否需要执行。

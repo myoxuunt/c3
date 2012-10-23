@@ -9,7 +9,7 @@ namespace C3.Communi
     public interface ITask
     {
         IDevice Device { get; set; }
-
+        Strategy Strategy { get; set; }
         IParseResult LastParseResult { get; set; }
         DateTime LastExecute { get; set; }
         TimeSpan Timeout { get; set; }

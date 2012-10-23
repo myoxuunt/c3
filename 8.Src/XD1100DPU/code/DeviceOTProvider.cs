@@ -28,7 +28,7 @@ namespace XD1100DPU
             }
         } private IOutside _outside;
 
-#region IOutsideTemperatureProvider 成员
+        #region IOutsideTemperatureProvider 成员
         /// <summary>
         /// 
         /// </summary>
@@ -38,8 +38,6 @@ namespace XD1100DPU
         {
             return this.Outside.OutsideTemperature;
         }
-
-#endregion
+        #endregion
     }
-
 }

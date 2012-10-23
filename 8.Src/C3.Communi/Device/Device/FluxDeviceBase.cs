@@ -50,7 +50,7 @@ namespace C3.Communi
             get
             {
                 IData last = this.DeviceDataManager.Last;
-                if (last.DT != null)
+                if (last != null)
                 {
                     FlowmeterData d = last as FlowmeterData;
                     Debug.Assert(d != null, "is not flowmeter data");
@@ -71,7 +71,7 @@ namespace C3.Communi
             get
             {
                 IData last = this.DeviceDataManager.Last;
-                if (last.DT != null)
+                if (last != null)
                 {
                     FlowmeterData d = last as FlowmeterData;
                     Debug.Assert(d != null, "is not flowmeter data");

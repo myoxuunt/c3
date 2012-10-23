@@ -28,17 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lvTask = new System.Windows.Forms.ListView();
             this.chOperaName = new System.Windows.Forms.ColumnHeader();
             this.chLastExecute = new System.Windows.Forms.ColumnHeader();
             this.chStrategy = new System.Windows.Forms.ColumnHeader();
             this.chStatus = new System.Windows.Forms.ColumnHeader();
+            this.cmnuTask = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuRunTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTaskDetail = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lvDeviceDataLast = new System.Windows.Forms.ListView();
             this.chNO = new System.Windows.Forms.ColumnHeader();
             this.chName = new System.Windows.Forms.ColumnHeader();
             this.chValue = new System.Windows.Forms.ColumnHeader();
             this.chUnit = new System.Windows.Forms.ColumnHeader();
+            this.cmnuTask.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -51,6 +56,7 @@
             this.chLastExecute,
             this.chStrategy,
             this.chStatus});
+            this.lvTask.ContextMenuStrip = this.cmnuTask;
             this.lvTask.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvTask.FullRowSelect = true;
             this.lvTask.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -79,6 +85,29 @@
             // chStatus
             // 
             this.chStatus.Text = "Status";
+            // 
+            // cmnuTask
+            // 
+            this.cmnuTask.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuRunTask,
+            this.mnuTaskDetail});
+            this.cmnuTask.Name = "cmnuTask";
+            this.cmnuTask.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.cmnuTask.Size = new System.Drawing.Size(153, 70);
+            // 
+            // mnuRunTask
+            // 
+            this.mnuRunTask.Name = "mnuRunTask";
+            this.mnuRunTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuRunTask.Text = "执行(&I)";
+            this.mnuRunTask.Click += new System.EventHandler(this.mnuRunTask_Click);
+            // 
+            // mnuTaskDetail
+            // 
+            this.mnuTaskDetail.Name = "mnuTaskDetail";
+            this.mnuTaskDetail.Size = new System.Drawing.Size(152, 22);
+            this.mnuTaskDetail.Text = "详细(&D)";
+            this.mnuTaskDetail.Click += new System.EventHandler(this.mnuTaskDetail_Click);
             // 
             // splitContainer1
             // 
@@ -139,6 +168,7 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "UCDeviceViewer";
             this.Size = new System.Drawing.Size(387, 376);
+            this.cmnuTask.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
@@ -159,5 +189,8 @@
         private System.Windows.Forms.ColumnHeader chName;
         private System.Windows.Forms.ColumnHeader chValue;
         private System.Windows.Forms.ColumnHeader chUnit;
+        private System.Windows.Forms.ContextMenuStrip cmnuTask;
+        private System.Windows.Forms.ToolStripMenuItem mnuRunTask;
+        private System.Windows.Forms.ToolStripMenuItem mnuTaskDetail;
     }
 }

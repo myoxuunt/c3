@@ -53,6 +53,10 @@ namespace XD1100DPU
                 }
             }
 
+            //
+            //
+            kvs.Insert(0, new KeyValue("<无>", null));
+
             this.cmbStandard.DisplayMember = "Key";
             this.cmbStandard.ValueMember = "Value";
             this.cmbStandard.DataSource = kvs;
@@ -79,14 +83,17 @@ namespace XD1100DPU
                 OutsideTemperatureProviderManager.Provider = new DeviceOTProvider(otDevice);
 
                 int deviceid = GuidHelper.ConvertToInt32(((IDevice)otDevice).Guid);
-                DBI.Instance.SetOutsideTemperatureProviderDevice ( deviceid );
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                DBI.Instance.SetOutsideTemperatureProviderDevice(deviceid);
             }
             else
             {
-                NUnit.UiKit.UserMessage.DisplayFailure("请先选择测点");
+                DBI.Instance.ClearOutsideTemperatureProviderDevice();
+
+                OutsideTemperatureProviderManager.Provider = null;
             }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

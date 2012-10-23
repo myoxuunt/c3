@@ -26,23 +26,23 @@ namespace C3
         } private HardwareTreeView _hardwareTreeView;
         #endregion //HardwareTreeView
 
-        #region UCTaskViewer
-        /// <summary>
-        /// 
-        /// </summary>
-        public UCTaskViewer UCTaskViewer
-        {
-            get
-            {
-                if (_uCTaskViewer == null)
-                {
-                    _uCTaskViewer = new UCTaskViewer();
-                    _uCTaskViewer.Dock = DockStyle.Fill;
-                }
-                return _uCTaskViewer;
-            }
-        } private UCTaskViewer _uCTaskViewer;
-        #endregion //UCTaskViewer
+        //#region UCTaskViewer
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public UCTaskViewer UCTaskViewer
+        //{
+        //    get
+        //    {
+        //        if (_uCTaskViewer == null)
+        //        {
+        //            _uCTaskViewer = new UCTaskViewer();
+        //            _uCTaskViewer.Dock = DockStyle.Fill;
+        //        }
+        //        return _uCTaskViewer;
+        //    }
+        //} private UCTaskViewer _uCTaskViewer;
+        //#endregion //UCTaskViewer
 
         #region FrmMain
         public FrmMain()

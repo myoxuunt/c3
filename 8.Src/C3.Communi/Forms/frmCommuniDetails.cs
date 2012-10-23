@@ -121,7 +121,7 @@ namespace C3
         private void SetFormText(IDevice device)
         {
             this.Text = string.Format(
-                "{0}-{1}",
+                "{0}:{1}",
                 device.Station.Name,
                 device.Text
                 );

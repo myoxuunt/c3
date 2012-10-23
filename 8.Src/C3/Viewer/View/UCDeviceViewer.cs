@@ -295,6 +295,54 @@ namespace C3
             return lvi;
         }
         #endregion //CreateTaskListViewItem
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private ITask  GetSelectedTask()
+        {
+            ITask  r = null;
+            if (this.lvTask.SelectedItems.Count > 0)
+            {
+                r = (ITask)this.lvTask.SelectedItems[0].Tag;
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuRunTask_Click(object sender, EventArgs e)
+        {
+            ITask sel = GetSelectedTask();
+            if (sel != null)
+            {
+                sel.LastExecute = DateTime.MinValue;
+            }
+            else
+            {
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuTaskDetail_Click(object sender, EventArgs e)
+        {
+            ITask sel = this.GetSelectedTask();
+            if (sel != null)
+            {
+                frmTaskDetail f = new frmTaskDetail();
+                f.Task = sel;
+                f.ShowDialog();
+            }
+        }
     }
 
 }

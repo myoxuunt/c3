@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listView1 = new System.Windows.Forms.ListView();
             this.chOperaName = new System.Windows.Forms.ColumnHeader();
             this.chLastExecute = new System.Windows.Forms.ColumnHeader();
             this.chStrategy = new System.Windows.Forms.ColumnHeader();
             this.chStatus = new System.Windows.Forms.ColumnHeader();
+            this.cmsTaskItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuRunTask = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTaskDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsTaskItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // listView1
@@ -42,6 +47,7 @@
             this.chLastExecute,
             this.chStrategy,
             this.chStatus});
+            this.listView1.ContextMenuStrip = this.cmsTaskItem;
             this.listView1.Location = new System.Drawing.Point(61, 29);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(397, 126);
@@ -68,6 +74,29 @@
             // 
             this.chStatus.Text = "Status";
             // 
+            // cmsTaskItem
+            // 
+            this.cmsTaskItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuRunTask,
+            this.mnuTaskDetail});
+            this.cmsTaskItem.Name = "cmsTaskItem";
+            this.cmsTaskItem.Size = new System.Drawing.Size(114, 48);
+            this.cmsTaskItem.Opening += new System.ComponentModel.CancelEventHandler(this.cmsTaskItem_Opening);
+            // 
+            // mnuRunTask
+            // 
+            this.mnuRunTask.Name = "mnuRunTask";
+            this.mnuRunTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuRunTask.Text = "执行(&I)";
+            this.mnuRunTask.Click += new System.EventHandler(this.mnuRunTask_Click);
+            // 
+            // mnuTaskDetail
+            // 
+            this.mnuTaskDetail.Name = "mnuTaskDetail";
+            this.mnuTaskDetail.Size = new System.Drawing.Size(152, 22);
+            this.mnuTaskDetail.Text = "详细(&D)";
+            this.mnuTaskDetail.Click += new System.EventHandler(this.mnuTaskDetail_Click);
+            // 
             // UCTaskViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -76,6 +105,7 @@
             this.Name = "UCTaskViewer";
             this.Size = new System.Drawing.Size(512, 251);
             this.Load += new System.EventHandler(this.frmTask_Load);
+            this.cmsTaskItem.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -87,5 +117,8 @@
         private System.Windows.Forms.ColumnHeader chLastExecute;
         private System.Windows.Forms.ColumnHeader chStrategy;
         private System.Windows.Forms.ColumnHeader chStatus;
+        private System.Windows.Forms.ContextMenuStrip cmsTaskItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuRunTask;
+        private System.Windows.Forms.ToolStripMenuItem mnuTaskDetail;
     }
 }

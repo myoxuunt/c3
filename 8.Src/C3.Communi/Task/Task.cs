@@ -13,7 +13,7 @@ namespace C3.Communi
         {
             this.Device = device;
             this.Opera = opera;
-            this.Stragegy = strategy;
+            this.Strategy = strategy;
             this.Timeout = timeout;
         }
     }

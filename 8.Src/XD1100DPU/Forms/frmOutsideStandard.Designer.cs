@@ -34,12 +34,12 @@
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(62, 250);
+            this.okButton.Location = new System.Drawing.Point(131, 43);
             this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(140, 250);
+            this.cancelButton.Location = new System.Drawing.Point(209, 43);
             // 
             // label1
             // 
@@ -51,18 +51,18 @@
             // 
             // cmbStandard
             // 
-            this.cmbStandard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.Simple;
+            this.cmbStandard.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStandard.FormattingEnabled = true;
-            this.cmbStandard.Location = new System.Drawing.Point(12, 34);
+            this.cmbStandard.Location = new System.Drawing.Point(81, 6);
             this.cmbStandard.Name = "cmbStandard";
-            this.cmbStandard.Size = new System.Drawing.Size(200, 210);
+            this.cmbStandard.Size = new System.Drawing.Size(200, 20);
             this.cmbStandard.TabIndex = 22;
             // 
             // frmOutsideStandard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(224, 284);
+            this.ClientSize = new System.Drawing.Size(293, 79);
             this.Controls.Add(this.cmbStandard);
             this.Controls.Add(this.label1);
             this.Name = "frmOutsideStandard";
