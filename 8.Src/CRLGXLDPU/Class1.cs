@@ -51,7 +51,7 @@ namespace CRLGXLDPU
         public void InsertCrlgxlData(int deviceID, CrlgxlData data)
         {
             string s = string.Format(
-                "insert into tblFluxData(deviceid, DT, instantFlux, sum) values({0}, '{1}', {2}, {3}",
+                "insert into tblFluxData(deviceid, DT, instantFlux, sum) values({0}, '{1}', {2}, {3})",
                 deviceID, data.DT, data.InstantFlux, data.Sum);
 
             ExecuteScalar(s);
