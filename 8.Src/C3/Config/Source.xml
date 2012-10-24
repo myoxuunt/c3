@@ -1,26 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- simple 
-<sources>
-  <source>
-    <key>source1</key>
-    <value>value1</value>
-  </source>
-  
-  <source>
-    <key>source2</key>
-    <value>value2</value>
-  </source>
-</sources>
--->
-
 <sources>
   <source>
     <key>connection</key>
     <value>server=(local);uid=sa;pwd=sa;database=fngrdb2012;</value>
-  </source>
-  
-  <source>
-    <key>source2</key>
-    <value>value2</value>
   </source>
 </sources>

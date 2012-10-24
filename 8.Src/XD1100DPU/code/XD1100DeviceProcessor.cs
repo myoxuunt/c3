@@ -140,6 +140,17 @@ namespace XD1100DPU
                 }
             }
 
+            switch (d.HtmMode.ModeValue )
+            {
+                case ModeValue.Direct :
+                    data.GT1 = data.GT2;
+                    data.BT1 = data.BT2;
+                    break;
+
+                case ModeValue.Mixed :
+                    data.BT1 = data.BT2;
+                    break;
+            }
             d.DeviceDataManager.Last = data;
 
 
