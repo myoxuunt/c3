@@ -33,7 +33,6 @@ namespace C3.Communi
         public event EventHandler CommuniPortChanged;
         #endregion //Events
 
-
         #region StationBase
         protected StationBase()
         {
@@ -438,13 +437,15 @@ namespace C3.Communi
         {
             get
             {
-                return _ordinal;
+                IParameter p = GetOrdinalParameter();
+                return Convert.ToInt32(p.Value);
             }
             set
             {
-                _ordinal = value;
+                IParameter p = GetOrdinalParameter();
+                p.Value = value;
             }
-        } private int _ordinal;
+        }
         #endregion //Ordinal
 
         #region GetOrdinalParameter

@@ -17,6 +17,10 @@ namespace DBSPU
     /// </summary>
     public class StationSource : StationSourceBase
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="row"></param>
         public StationSource(DataRow row)
         {
             if (row == null)
@@ -27,6 +31,7 @@ namespace DBSPU
             this.DataRow = row;
             this.Guid = GuidHelper.Create((UInt32)(int)row["StationID"]);
         }
+
         #region DataRow
         /// <summary>
         /// 
@@ -70,9 +75,11 @@ namespace DBSPU
             string stationName = row["StationName"].ToString();
             string xml = row["StationCPConfig"].ToString().Trim();
             int stationID = (int)row["StationID"];
+            int ordinal = Convert.ToInt32(row["StationOrdinal"]);
 
             Station st = new Station();
             st.Name = stationName;
+            st.Ordinal = ordinal;
             st.Guid = GuidHelper.Create((uint)stationID);
             st.Spu = this.Spu;
             st.StationSource = stationSource;
@@ -92,18 +99,17 @@ namespace DBSPU
             //throw new NotImplementedException();
             Station st = (Station)station;
             string xml = CommuniPortConfigSerializer.Serialize(st.CommuniPortConfig);
-            int id = DBI.Instance.InsertStation(st.Name, xml);
+            int id = DBI.Instance.InsertStation(st.Name, xml, st.Ordinal);
             st.Guid = GuidHelper.Create((uint)id);
         }
 
         public override void OnUpdate(IStation station)
         {
-            //throw new NotImplementedException();
             Station st = (Station)station;
             //st.Name;
             string xml = CommuniPortConfigSerializer.Serialize(st.CommuniPortConfig);
             int id = (int)GuidHelper.ConvertToUInt32 ( st.Guid );
-            DBI.Instance.UpdateStation(id, st.Name, xml);
+            DBI.Instance.UpdateStation(id, st.Name, xml, st.Ordinal);
         }
 
         public override void OnDelete(IStation station)
@@ -181,11 +187,11 @@ namespace DBSPU
 
         ///
 
-        internal void UpdateStation(int id, string name, string xml)
+        internal void UpdateStation(int id, string name, string xml, int ordinal)
         {
             string s = string.Format(
-                "update tblStation set StationName='{1}',  StationCPConfig= '{2}' where stationid = {0}",
-                id, name, xml);
+                "update tblStation set StationName='{1}',  StationCPConfig= '{2}', StationOrdinal = {3} where stationid = {0}",
+                id, name, xml, ordinal);
             Instance.ExecuteScalar(s);
         }
 
@@ -195,12 +201,16 @@ namespace DBSPU
         /// <param name="p"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        internal int InsertStation(string name, string xml)
+        internal int InsertStation(string name, string xml, int ordinal)
         {
             string s = string.Format (
-            "insert into tblStation(StationName, StationCPConfig) values('{0}','{1}');select @@identity;",
+            "insert into tblStation(StationName, StationCPConfig, StationOrdinal) values('{0}','{1}', {2});" +
+            "select @@identity;",
 
-            name, xml);
+            name, 
+            xml,
+            ordinal 
+            );
 
             object obj = ExecuteScalar(s);
             return Convert.ToInt32(obj);
