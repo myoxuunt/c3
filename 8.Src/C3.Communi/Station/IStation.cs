@@ -4,11 +4,9 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public interface ITag
-    {
-        object Tag { get; set; }
-    }
-
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IStation :ITag 
     {
         Guid Guid { get; set; }
@@ -23,6 +21,7 @@ namespace C3.Communi
         ISPU Spu { get; set; }
         event EventHandler CommuniPortChanged;
         GroupCollection Groups { get; }
+        int Ordinal { get; set; }
     }
 
 }

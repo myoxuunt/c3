@@ -234,4 +234,7 @@
   <data name="StationName" xml:space="preserve">
     <value>名称</value>
   </data>
+  <data name="Ordinal" xml:space="preserve">
+    <value>序号</value>
+  </data>
 </root>

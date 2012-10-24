@@ -55,6 +55,7 @@
       <DependentUpon>frmCommuniDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="IFluxProvider.cs" />
+    <Compile Include="ITag.cs" />
     <Compile Include="Resources\CommuniDetailResource.Designer.cs">
       <DependentUpon>CommuniDetailResource.resx</DependentUpon>
       <AutoGen>True</AutoGen>

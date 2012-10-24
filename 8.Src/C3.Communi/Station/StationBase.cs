@@ -7,14 +7,18 @@ namespace C3.Communi
 {
     abstract public class StationBase : IStation
     {
+        #region const members
         private const string PN_NAME = "Name",
-            PN_COMMUNIPORTCONFIG = "CommuniPortConfig";
+            PN_COMMUNIPORTCONFIG = "CommuniPortConfig",
+            PN_ORDINAL = "Ordinal";
 
         private const string GN_GENERAL = "General",
             GN_COMMUNIPORTCONFIG = "CommuniPortConfig";
 
         private const int PO_NAME = -90,
-            PO_COMMUNIPORTCONFIG = -80;
+            PO_COMMUNIPORTCONFIG = -80,
+            PO_ORDINAL = -70;
+        #endregion //const members
 
         #region Events
 
@@ -37,6 +41,7 @@ namespace C3.Communi
             //
             this.GetNameParameter();
             this.GetCommuniPortConfig();
+            this.GetOrdinalParameter();
         }
         #endregion //StationBase
 
@@ -83,6 +88,7 @@ namespace C3.Communi
         }
         #endregion //OnNameChanged
 
+        #region GetNameParameter
         /// <summary>
         /// 
         /// </summary>
@@ -98,6 +104,7 @@ namespace C3.Communi
             }
             return p;
         }
+        #endregion //GetNameParameter
 
         #region Devices
         /// <summary>
@@ -259,6 +266,11 @@ namespace C3.Communi
         //private ICommuniPortConfig _communiPortConfig;
         #endregion //CommuniPortConfig
 
+        #region GetCommuniPortConfig
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private IParameter GetCommuniPortConfig()
         {
             IParameter p = this.CommuniPortConfigGroup.Parameters[PN_COMMUNIPORTCONFIG];
@@ -273,6 +285,7 @@ namespace C3.Communi
             }
             return p;
         }
+        #endregion //GetCommuniPortConfig
 
         #region Guid
         public Guid Guid
@@ -360,6 +373,7 @@ namespace C3.Communi
         }
         #endregion //GeneralGroup
 
+        #region CommuniPortConfigGroup
         /// <summary>
         /// 
         /// </summary>
@@ -376,6 +390,7 @@ namespace C3.Communi
                 return g;
             }
         }
+        #endregion //CommuniPortConfigGroup
 
         #region Groups
         /// <summary>
@@ -414,5 +429,42 @@ namespace C3.Communi
             }
         } private ISPU _spu;
         #endregion //Spu
+
+        #region Ordinal
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Ordinal
+        {
+            get
+            {
+                return _ordinal;
+            }
+            set
+            {
+                _ordinal = value;
+            }
+        } private int _ordinal;
+        #endregion //Ordinal
+
+        #region GetOrdinalParameter
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IParameter GetOrdinalParameter()
+        {
+            IParameter p = this.GeneralGroup.Parameters[PN_ORDINAL];
+            if (p == null)
+            {
+                p = new NumberParameter(PN_ORDINAL, typeof(Int32), 0, PO_ORDINAL);
+                p.Text = strings.Ordinal;
+
+                this.GeneralGroup.Parameters.Add(p);
+            }
+            return p;
+        }
+        #endregion //GetOrdinalParameter
+
     }
 }

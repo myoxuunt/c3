@@ -313,6 +313,15 @@ namespace C3.Communi {
         }
         
         /// <summary>
+        ///   查找类似 序号 的本地化字符串。
+        /// </summary>
+        internal static string Ordinal {
+            get {
+                return ResourceManager.GetString("Ordinal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 请选择设备类型 的本地化字符串。
         /// </summary>
         internal static string PleaseSelectDeviceType {
