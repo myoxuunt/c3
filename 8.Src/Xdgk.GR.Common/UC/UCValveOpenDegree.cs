@@ -7,7 +7,7 @@ namespace Xdgk.GR.Common
     public partial class UCValveOpenDegree : UserControl
     {
         public const int MIN = 0;
-        public const int MAX = 0;
+        public const int MAX = 100;
 
         /// <summary>
         /// 
