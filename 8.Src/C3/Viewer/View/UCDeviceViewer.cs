@@ -270,7 +270,7 @@ namespace C3
                     this.lvTask.Items.Add(taskLvi);
                 }
 
-                foreach (ITask task in _device.TaskManager.Tasks.ToArray())
+                foreach (ITask task in _device.TaskManager.Tasks)
                 {
                     ListViewItem lvi = CreateTaskListViewItem(task);
                     this.lvTask.Items.Add(lvi);

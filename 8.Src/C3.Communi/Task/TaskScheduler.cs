@@ -154,7 +154,7 @@ namespace C3.Communi
                         //
                         throw new NotSupportedException(status.ToString());
                     }
-                    break;
+                    //break;
             }
         }
         #endregion //DoTask task
@@ -176,38 +176,124 @@ namespace C3.Communi
 
             while (tasks.Count > 0)
             {
-                ITask head = tasks.Dequeue();
+                ITask headTask = tasks.Dequeue();
 
-                TaskStatus status = head.Check();
+                TaskStatus status = headTask.Check();
 
                 if (status == TaskStatus.Ready)
                 {
-                    ICommuniPort cp = GetCommuniPort(head);
+                    ICommuniPort cp = GetCommuniPort(headTask);
                     if ((cp != null) &&
-                        (!cp.IsOccupy))
+                        (!cp.IsOccupy) &&
+                        IsHighestLevel(headTask, cp))
                     {
 
-                        IDevice device = head.Device;
-                        head.Begin(cp);
+                        IDevice device = headTask.Device;
+                        headTask.Begin(cp);
 
-                        device.TaskManager.Current = head;
+                        device.TaskManager.Current = headTask;
                         break;
                     }
                     else
                     {
-                        tempTasks.Add(head);
+                        tempTasks.Add(headTask);
                     }
                 }
                 else
                 {
-                    tempTasks.Add(head);
+                    tempTasks.Add(headTask);
                 }
             }
             tasks.Enqueue(tempTasks);
         }
         #endregion //DoTasks queue
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="cp"></param>
+        /// <returns></returns>
+        private bool IsHighestLevel(ITask task, ICommuniPort cp)
+        {
+            bool r = false;
+            StationCollection stations = GetStations(cp);
+
+            TaskCollection tasks = GetNeedExecuteTasks(stations);
+            r = IsHighestLevel(task, tasks);
+            return r; 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="tasks"></param>
+        /// <returns></returns>
+        private bool IsHighestLevel(ITask task, TaskCollection tasks)
+        {
+            bool r = true;
+            foreach (ITask item in tasks)
+            {
+                if (task.LastExecute > item.LastExecute)
+                {
+                    r = false;
+                    break;
+                }
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stations"></param>
+        /// <returns></returns>
+        private TaskCollection GetNeedExecuteTasks(StationCollection stations)
+        {
+            TaskCollection r = new TaskCollection();
+            foreach (IStation st in stations)
+            {
+                foreach (IDevice device in st.Devices)
+                {
+                    //Debug.Assert(device.TaskManager.Current == null);
+
+                    foreach (ITask task in device.TaskManager.Tasks)
+                    {
+                        if (task.Check() == TaskStatus.Ready)
+                        {
+                            r.Add(task);
+                        }
+                    }
+                }
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cp"></param>
+        /// <returns></returns>
+        private StationCollection GetStations(ICommuniPort cp)
+        {
+            StationCollection r = new StationCollection();
+            foreach (IStation st in Soft.Hardware.Stations)
+            {
+                if (st.CommuniPort == cp)
+                {
+                    r.Add(st);
+                }
+            }
+            return r;
+        }
+
         #region GetCommuniPort
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
         private ICommuniPort GetCommuniPort(ITask task)
         {
             IDevice device = task.Device;
