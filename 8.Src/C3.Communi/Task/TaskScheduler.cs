@@ -31,6 +31,7 @@ namespace C3.Communi
         } private Soft _soft;
         #endregion //Soft
 
+        #region Hardware
         /// <summary>
         /// 
         /// </summary>
@@ -41,6 +42,7 @@ namespace C3.Communi
                 return this.Soft.Hardware;
             }
         }
+        #endregion //Hardware
 
         #region Doit
         /// <summary>
@@ -55,6 +57,11 @@ namespace C3.Communi
         }
         #endregion //Doit
 
+        #region DoStation station
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="station"></param>
         private void DoStation(IStation station)
         {
             foreach (IDevice device in station.Devices)
@@ -62,7 +69,9 @@ namespace C3.Communi
                 DoDevice(device);
             }
         }
+        #endregion //DoStation station
 
+        #region DoDevice device
         /// <summary>
         /// 
         /// </summary>
@@ -81,7 +90,9 @@ namespace C3.Communi
                 DoTasks(device.TaskManager.Tasks);
             }
         }
+        #endregion //DoDevice device
 
+        #region DoTask task
         /// <summary>
         /// 
         /// </summary>
@@ -90,7 +101,7 @@ namespace C3.Communi
         {
             TaskStatus status = current.Check();
 
-            switch ( status )
+            switch (status)
             {
                 case TaskStatus.Executing:
                     break;
@@ -127,7 +138,7 @@ namespace C3.Communi
                     break;
 
                 case TaskStatus.Completed:
-                    { 
+                    {
                         // clear current task
                         //
                         IDevice device = current.Device;
@@ -146,7 +157,9 @@ namespace C3.Communi
                     break;
             }
         }
+        #endregion //DoTask task
 
+        #region DoTasks queue
         /// <summary>
         /// 
         /// </summary>
@@ -192,6 +205,7 @@ namespace C3.Communi
             }
             tasks.Enqueue(tempTasks);
         }
+        #endregion //DoTasks queue
 
         #region GetCommuniPort
         private ICommuniPort GetCommuniPort(ITask task)
