@@ -7,6 +7,8 @@ namespace C3.Communi
 {
     public class TaskScheduler
     {
+        NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+
         #region Constructor
         /// <summary>
         /// 
@@ -128,11 +130,9 @@ namespace C3.Communi
 
                 case TaskStatus.Wating:
                     {
-                        // clear current task
-                        //
-                        IDevice device = current.Device;
-                        device.TaskManager.Current = null;
+                        ClearDeviceCurrentTask(current);
 
+                        IDevice device = current.Device;
                         device.TaskManager.Tasks.Enqueue(current);
                     }
                     break;
@@ -141,8 +141,10 @@ namespace C3.Communi
                     {
                         // clear current task
                         //
-                        IDevice device = current.Device;
-                        device.TaskManager.Current = null;
+                        // current may not equal to current.Device.TaskManager.Current
+                        // so an other executing task will be remove
+                        // 
+                        ClearDeviceCurrentTask(current);
                     }
                     break;
 
@@ -154,11 +156,33 @@ namespace C3.Communi
                         //
                         throw new NotSupportedException(status.ToString());
                     }
-                    //break;
             }
+
+#if DEBUG
+            if (current.Strategy is CycleStrategy)
+            {
+                if (current.Device.TaskManager.Current == null)
+                {
+                    bool b = current.Device.TaskManager.Tasks.Contains(current);
+                    Debug.Assert(b == true);
+                }
+            }
+#endif
         }
         #endregion //DoTask task
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="current"></param>
+        private void ClearDeviceCurrentTask( ITask current )
+        {
+            IDevice device = current.Device;
+            if (current == device.TaskManager.Current)
+            {
+                device.TaskManager.Current = null;
+            }
+        }
         #region DoTasks queue
         /// <summary>
         /// 
@@ -208,6 +232,7 @@ namespace C3.Communi
         }
         #endregion //DoTasks queue
 
+        #region IsHighestLevel
         /// <summary>
         /// 
         /// </summary>
@@ -223,7 +248,9 @@ namespace C3.Communi
             r = IsHighestLevel(task, tasks);
             return r; 
         }
+        #endregion //IsHighestLevel
 
+        #region IsHighestLevel
         /// <summary>
         /// 
         /// </summary>
@@ -243,7 +270,9 @@ namespace C3.Communi
             }
             return r;
         }
+        #endregion //IsHighestLevel
 
+        #region GetNeedExecuteTasks
         /// <summary>
         /// 
         /// </summary>
@@ -269,7 +298,9 @@ namespace C3.Communi
             }
             return r;
         }
+        #endregion //GetNeedExecuteTasks
 
+        #region GetStations
         /// <summary>
         /// 
         /// </summary>
@@ -287,6 +318,7 @@ namespace C3.Communi
             }
             return r;
         }
+        #endregion //GetStations
 
         #region GetCommuniPort
         /// <summary>

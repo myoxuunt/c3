@@ -561,7 +561,8 @@ namespace Xdgk.GR.Common
                 this._isExecuting = true;
                 this._lastExecuteDateTime = DateTime.Now;
 
-                this.SetStatusText(string.Format(XD100Strings.ExecutingOpera, args.ExecuteName));
+                string statusText = string.Format(XD100Strings.ExecutingOpera, args.ExecuteName);
+                this.SetStatusText(statusText);
             }
             else
             {
