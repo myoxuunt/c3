@@ -32,9 +32,6 @@ namespace C3.Communi
             base.InsertItem(index, item);
             if (this.Count >= MAXCOUNT)
             {
-                // 2010-09-09
-                //
-                //this.RemoveAt(this.Count - 1);
                 this.RemoveAt(0);
             }
         }
