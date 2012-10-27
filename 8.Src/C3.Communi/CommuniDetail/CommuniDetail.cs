@@ -129,6 +129,7 @@ namespace C3.Communi
         } private bool _isSuccess;
         #endregion //IsSuccess
 
+        #region GetReport
         /// <summary>
         /// 
         /// </summary>
@@ -143,9 +144,9 @@ namespace C3.Communi
             sb.AppendLine(CommuniDetailResource.Result + _splitString + this.ParseResult);
             sb.AppendLine(CommuniDetailResource.Sended + _splitString + GetBytesString(this.Send));
             sb.AppendLine(CommuniDetailResource.Received + _splitString + GetBytesString(this.Received));
-            //sb.AppendLine();
             return sb.ToString();
         }
+        #endregion //GetReport
 
         #region GetBytesString
         /// <summary>
@@ -164,6 +165,8 @@ namespace C3.Communi
             return s;
         }
         #endregion //GetBytesString
+
+        #region ToString
         /// <summary>
         /// 
         /// </summary>
@@ -172,5 +175,6 @@ namespace C3.Communi
         {
             return GetReport();
         }
+        #endregion //ToString
     }
 }

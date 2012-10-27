@@ -189,37 +189,14 @@ namespace C3
             {
                 if (this.SelectedViewOption.IsPass(item.IsSuccess))
                 {
-                    //sb.AppendLine(CommuniDetailResource.SendDateTime + _splitString + this1.SendDateTime.ToString());
-                    //sb.AppendLine(CommuniDetailResource.Opera + _splitString + this1.OperaText);
-                    //sb.AppendLine(CommuniDetailResource.Result + _splitString + this1.ParseResult);
-                    //sb.AppendLine(CommuniDetailResource.Sended + _splitString + GetBytesString(this1.Send));
-                    //sb.AppendLine(CommuniDetailResource.Received + _splitString + GetBytesString(this1.Received));
-                    //sb.AppendLine();
-                    sb.AppendLine(item.ToString());
+                    sb.Append(item.ToString());
                     sb.AppendLine();
                 }
             }
             this.richTextBox1.AppendText(sb.ToString());
+            this.richTextBox1.ScrollToCaret();
         }
         #endregion //Fill
-
-        //#region GetBytesString
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="bs"></param>
-        ///// <returns></returns>
-        //private string GetBytesString(byte[] bs)
-        //{
-        //    if (bs == null || bs.Length == 0)
-        //    {
-        //        return null;
-        //    }
-
-        //    string s = string.Format("[{0:000}] ", bs.Length) + BitConverter.ToString(bs);
-        //    return s;
-        //}
-        //#endregion //GetBytesString
 
         #region btnCopyContext_Click
         /// <summary>

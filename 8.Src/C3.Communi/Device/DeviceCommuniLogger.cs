@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.IO;
-using System.Collections.Generic;
-using System.Text;
 
 namespace C3.Communi
 {
     static public class DeviceCommuniLogger
     {
+
+        #region DeviceCommuniLogger
         /// <summary>
         /// 
         /// </summary>
@@ -23,7 +22,9 @@ namespace C3.Communi
                 }
             }
         }
+        #endregion //DeviceCommuniLogger
 
+        #region Enabled
         /// <summary>
         /// 
         /// </summary>
@@ -32,7 +33,9 @@ namespace C3.Communi
             get { return _enabled; }
             set { _enabled = value; }
         } static private bool _enabled = false;
+        #endregion //Enabled
 
+        #region Log
         /// <summary>
         /// 
         /// </summary>
@@ -56,7 +59,9 @@ namespace C3.Communi
                 sw.Flush();
             }
         }
+        #endregion //Log
 
+        #region StreamWriter
         /// <summary>
         /// 
         /// </summary>
@@ -76,12 +81,16 @@ namespace C3.Communi
             }
             return sw;
         }
+        #endregion //StreamWriter
 
+        #region Members
         /// <summary>
         /// 
         /// </summary>
         static private Hashtable _hash = new Hashtable();
+        #endregion //Members
 
+        #region CreateFile
         /// <summary>
         /// 
         /// </summary>
@@ -98,5 +107,6 @@ namespace C3.Communi
             StreamWriter sw = new StreamWriter(fs);
             return sw;
         }
+        #endregion //CreateFile
     }
 }

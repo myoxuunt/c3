@@ -10,7 +10,14 @@ namespace C3.Communi
     /// </summary>
     public class CommuniDetailCollection : Xdgk.Common.Collection<CommuniDetail>
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private static int MAXCOUNT = 1000;
+
+        /// <summary>
+        /// 
+        /// </summary>
         public CommuniDetailCollection()
         {
         }
