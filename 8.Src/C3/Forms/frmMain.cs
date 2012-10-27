@@ -9,6 +9,10 @@ namespace C3
     public partial class FrmMain : Form, ISelectedHardwareItem 
     {
 
+        #region Members
+        private bool _isSuredToQuit = false;
+        #endregion //Members
+
         #region HardwareTreeView
         private HardwareTreeView HardwareTreeView
         {
@@ -362,7 +366,9 @@ namespace C3
         /// <param name="e"></param>
         private void mnuDeviceAdd_Click(object sender, EventArgs e)
         {
-            IStation selectedStation = this.GetSelectedStation(true);
+            IStation selectedStation = null;
+            selectedStation = this.GetSelectedStation(true);
+
             if (selectedStation != null)
             {
                 frmDeviceType f = new frmDeviceType();
@@ -560,6 +566,7 @@ namespace C3
         }
         #endregion //mnuStatusbar_Click
 
+        #region mnuSetting_Click
         /// <summary>
         /// 
         /// </summary>
@@ -569,7 +576,9 @@ namespace C3
         {
 
         }
+        #endregion //mnuSetting_Click
 
+        #region mnuSetting_DropDownOpening
         /// <summary>
         /// 
         /// </summary>
@@ -579,9 +588,9 @@ namespace C3
         {
             //NUnit.UiKit.UserMessage.Display("opening");
         }
+        #endregion //mnuSetting_DropDownOpening
 
-        #region ISelectedHardwareItem 成员
-
+        #region ISelectedHardwareItem 
         /// <summary>
         /// 
         /// </summary>
@@ -604,11 +613,9 @@ namespace C3
                 return obj;
             }
         }
+        #endregion //ISelectedHardwareItem 成员
 
-        #endregion
-
-        private bool _isSuredToQuit = false;
-
+        #region FrmMain_FormClosing
         /// <summary>
         /// 
         /// </summary>
@@ -630,5 +637,61 @@ namespace C3
                 }
             }
         }
+        #endregion //FrmMain_FormClosing
+
+        #region mnuDevice_DropDownOpening
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuDevice_DropDownOpening(object sender, EventArgs e)
+        {
+            bool b = IsSelectedDeviceTreeNode();
+            this.mnuDeviceAdd.Enabled = !b;
+            this.mnuDeviceEdit.Enabled = b;
+            this.mnuDeviceDelete.Enabled = b;
+            this.mnuCommuniDetail.Enabled = b;
+        }
+        #endregion //mnuDevice_DropDownOpening
+
+        #region IsSelectedDeviceTreeNode
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool IsSelectedDeviceTreeNode()
+        {
+            IDevice d = this.GetSelectedDevice(false);
+            return d != null;
+        }
+        #endregion //IsSelectedDeviceTreeNode
+
+        #region IsSelectedStationTreeNode
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool IsSelectedStationTreeNode()
+        {
+            IStation s = this.GetSelectedStation(false);
+            return s != null;
+        }
+        #endregion //IsSelectedStationTreeNode
+
+        #region mnuStation_DropDownOpening
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuStation_DropDownOpening(object sender, EventArgs e)
+        {
+            bool b = IsSelectedStationTreeNode();
+            this.mnuDeviceAdd.Enabled = b;
+            this.mnuStationEdit.Enabled = b;
+            this.mnuStationDelete.Enabled = b;
+        }
+        #endregion //mnuStation_DropDownOpening
     }
 }

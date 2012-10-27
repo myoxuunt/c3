@@ -135,25 +135,26 @@
             this.mnuStation.Name = "mnuStation";
             this.mnuStation.Size = new System.Drawing.Size(57, 20);
             this.mnuStation.Text = "站点(&S)";
+            this.mnuStation.DropDownOpening += new System.EventHandler(this.mnuStation_DropDownOpening);
             // 
             // mnuStationAdd
             // 
             this.mnuStationAdd.Name = "mnuStationAdd";
-            this.mnuStationAdd.Size = new System.Drawing.Size(125, 22);
+            this.mnuStationAdd.Size = new System.Drawing.Size(152, 22);
             this.mnuStationAdd.Text = "添加(&A)...";
             this.mnuStationAdd.Click += new System.EventHandler(this.mnuStationAdd_Click);
             // 
             // mnuStationEdit
             // 
             this.mnuStationEdit.Name = "mnuStationEdit";
-            this.mnuStationEdit.Size = new System.Drawing.Size(125, 22);
+            this.mnuStationEdit.Size = new System.Drawing.Size(152, 22);
             this.mnuStationEdit.Text = "修改(&E)...";
             this.mnuStationEdit.Click += new System.EventHandler(this.mnuStationEdit_Click);
             // 
             // mnuStationDelete
             // 
             this.mnuStationDelete.Name = "mnuStationDelete";
-            this.mnuStationDelete.Size = new System.Drawing.Size(125, 22);
+            this.mnuStationDelete.Size = new System.Drawing.Size(152, 22);
             this.mnuStationDelete.Text = "删除(&D)...";
             this.mnuStationDelete.Click += new System.EventHandler(this.mnuStationDelete_Click);
             // 
@@ -167,32 +168,33 @@
             this.mnuDevice.Name = "mnuDevice";
             this.mnuDevice.Size = new System.Drawing.Size(58, 20);
             this.mnuDevice.Text = "设备(&D)";
+            this.mnuDevice.DropDownOpening += new System.EventHandler(this.mnuDevice_DropDownOpening);
             // 
             // mnuDeviceAdd
             // 
             this.mnuDeviceAdd.Name = "mnuDeviceAdd";
-            this.mnuDeviceAdd.Size = new System.Drawing.Size(147, 22);
+            this.mnuDeviceAdd.Size = new System.Drawing.Size(152, 22);
             this.mnuDeviceAdd.Text = "添加(&A)...";
             this.mnuDeviceAdd.Click += new System.EventHandler(this.mnuDeviceAdd_Click);
             // 
             // mnuDeviceEdit
             // 
             this.mnuDeviceEdit.Name = "mnuDeviceEdit";
-            this.mnuDeviceEdit.Size = new System.Drawing.Size(147, 22);
+            this.mnuDeviceEdit.Size = new System.Drawing.Size(152, 22);
             this.mnuDeviceEdit.Text = "修改(&E)...";
             this.mnuDeviceEdit.Click += new System.EventHandler(this.mnuDeviceEdit_Click);
             // 
             // mnuDeviceDelete
             // 
             this.mnuDeviceDelete.Name = "mnuDeviceDelete";
-            this.mnuDeviceDelete.Size = new System.Drawing.Size(147, 22);
+            this.mnuDeviceDelete.Size = new System.Drawing.Size(152, 22);
             this.mnuDeviceDelete.Text = "删除(&D)...";
             this.mnuDeviceDelete.Click += new System.EventHandler(this.mnuDeviceDelete_Click);
             // 
             // mnuCommuniDetail
             // 
             this.mnuCommuniDetail.Name = "mnuCommuniDetail";
-            this.mnuCommuniDetail.Size = new System.Drawing.Size(147, 22);
+            this.mnuCommuniDetail.Size = new System.Drawing.Size(152, 22);
             this.mnuCommuniDetail.Text = "通讯记录(&L)...";
             this.mnuCommuniDetail.Click += new System.EventHandler(this.mnuCommuniDetail_Click);
             // 
@@ -216,14 +218,14 @@
             // mnuAbout
             // 
             this.mnuAbout.Name = "mnuAbout";
-            this.mnuAbout.Size = new System.Drawing.Size(152, 22);
+            this.mnuAbout.Size = new System.Drawing.Size(113, 22);
             this.mnuAbout.Text = "关于(&A)";
             this.mnuAbout.Click += new System.EventHandler(this.mnuAbout_Click);
             // 
             // mnuTest
             // 
             this.mnuTest.Name = "mnuTest";
-            this.mnuTest.Size = new System.Drawing.Size(152, 22);
+            this.mnuTest.Size = new System.Drawing.Size(113, 22);
             this.mnuTest.Text = "Test";
             this.mnuTest.Visible = false;
             this.mnuTest.Click += new System.EventHandler(this.mnuTest_Click);
