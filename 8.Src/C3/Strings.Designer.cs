@@ -70,6 +70,15 @@ namespace C3 {
         }
         
         /// <summary>
+        ///   查找类似 添加设备(&amp;A)... 的本地化字符串。
+        /// </summary>
+        internal static string ContextMenuAddDevice {
+            get {
+                return ResourceManager.GetString("ContextMenuAddDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 校验 的本地化字符串。
         /// </summary>
         internal static string Crcer {

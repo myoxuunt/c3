@@ -79,8 +79,40 @@ namespace C3
             }
 
             this.tssListenPort.Text = string.Format("{0}: {1}", Strings.Listening, s);
+
+            //
+            //
+            this.HardwareTreeView.StationContextMenus = new ToolStripItem[] 
+            { 
+                CreateMenuItem(this.mnuStationEdit.Text, this.mnuStationEdit_Click),
+                CreateMenuItem (this.mnuStationDelete.Text, this.mnuStationDelete_Click),
+                new ToolStripSeparator(),
+                CreateMenuItem (Strings.ContextMenuAddDevice , this.mnuDeviceAdd_Click ),
+            };
+
+            this.HardwareTreeView.DeviceContextMenus = new ToolStripItem[] 
+            { 
+                CreateMenuItem(this.mnuDeviceEdit.Text, mnuDeviceEdit_Click),
+                CreateMenuItem(this.mnuDeviceDelete.Text, mnuDeviceDelete_Click),
+                new ToolStripSeparator(),
+                CreateMenuItem(this.mnuCommuniDetail.Text, mnuCommuniDetail_Click)
+            };
         }
         #endregion //Init
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="menu"></param>
+        /// <param name="h"></param>
+        /// <returns></returns>
+        private ToolStripMenuItem CreateMenuItem(string text, EventHandler h)
+        {
+            ToolStripMenuItem r = new ToolStripMenuItem(text, null, h);
+            return r;
+        }
 
         #region t_AfterSelect
         /// <summary>

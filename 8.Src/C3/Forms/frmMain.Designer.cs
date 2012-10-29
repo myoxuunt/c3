@@ -53,6 +53,7 @@
             this.tssListenPort = new System.Windows.Forms.ToolStripStatusLabel();
             this.sc1 = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sc1.SuspendLayout();
@@ -164,6 +165,7 @@
             this.mnuDeviceAdd,
             this.mnuDeviceEdit,
             this.mnuDeviceDelete,
+            this.toolStripSeparator2,
             this.mnuCommuniDetail});
             this.mnuDevice.Name = "mnuDevice";
             this.mnuDevice.Size = new System.Drawing.Size(58, 20);
@@ -173,28 +175,28 @@
             // mnuDeviceAdd
             // 
             this.mnuDeviceAdd.Name = "mnuDeviceAdd";
-            this.mnuDeviceAdd.Size = new System.Drawing.Size(152, 22);
+            this.mnuDeviceAdd.Size = new System.Drawing.Size(181, 22);
             this.mnuDeviceAdd.Text = "添加(&A)...";
             this.mnuDeviceAdd.Click += new System.EventHandler(this.mnuDeviceAdd_Click);
             // 
             // mnuDeviceEdit
             // 
             this.mnuDeviceEdit.Name = "mnuDeviceEdit";
-            this.mnuDeviceEdit.Size = new System.Drawing.Size(152, 22);
+            this.mnuDeviceEdit.Size = new System.Drawing.Size(181, 22);
             this.mnuDeviceEdit.Text = "修改(&E)...";
             this.mnuDeviceEdit.Click += new System.EventHandler(this.mnuDeviceEdit_Click);
             // 
             // mnuDeviceDelete
             // 
             this.mnuDeviceDelete.Name = "mnuDeviceDelete";
-            this.mnuDeviceDelete.Size = new System.Drawing.Size(152, 22);
+            this.mnuDeviceDelete.Size = new System.Drawing.Size(181, 22);
             this.mnuDeviceDelete.Text = "删除(&D)...";
             this.mnuDeviceDelete.Click += new System.EventHandler(this.mnuDeviceDelete_Click);
             // 
             // mnuCommuniDetail
             // 
             this.mnuCommuniDetail.Name = "mnuCommuniDetail";
-            this.mnuCommuniDetail.Size = new System.Drawing.Size(152, 22);
+            this.mnuCommuniDetail.Size = new System.Drawing.Size(181, 22);
             this.mnuCommuniDetail.Text = "通讯记录(&L)...";
             this.mnuCommuniDetail.Click += new System.EventHandler(this.mnuCommuniDetail_Click);
             // 
@@ -268,6 +270,11 @@
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(178, 6);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -318,6 +325,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuAddin;
         private System.Windows.Forms.ToolStripMenuItem mnuTest;
         private System.Windows.Forms.ToolStripMenuItem mnuSetting;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 
