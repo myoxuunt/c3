@@ -12,6 +12,10 @@ namespace C3.Communi
         Strategy Strategy { get; set; }
         IParseResult LastParseResult { get; set; }
         DateTime LastExecute { get; set; }
+
+        byte[] LastSendBytes { get; set; }
+        byte[] LastReceivedBytes { get; set; }
+
         TimeSpan Timeout { get; set; }
         IOpera Opera { get; set; }
 

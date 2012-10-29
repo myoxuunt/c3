@@ -84,7 +84,8 @@ namespace C3.Communi
             {
                 if (_text == null)
                 {
-                    _text = string.Empty;
+                    //_text = string.Empty;
+                    _text = this.Name;
                 }
                 return _text;
             }

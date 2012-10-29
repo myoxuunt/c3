@@ -41,9 +41,32 @@ namespace Xdgk.Common
         /// 
         /// </summary>
         /// <param name="bytes"></param>
+        /// <param name="outputLength"></param>
+        /// <returns></returns>
+        public static string BytesToString(byte[] bytes, bool outputLength)
+        {
+            return BytesToString(bytes, "X2", outputLength);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
         /// <param name="format"></param>
         /// <returns></returns>
         public static string BytesToString(byte[] bytes, string format)
+        {
+            return BytesToString(bytes, format, true);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <param name="format"></param>
+        /// <param name="outputLength"></param>
+        /// <returns></returns>
+        public static string BytesToString(byte[] bytes, string format, bool outputLength)
         {
             if (bytes == null)
             {
@@ -52,7 +75,12 @@ namespace Xdgk.Common
             if (bytes.Length == 0)
                 return string.Empty;
 
-            string s = "[ " + bytes.Length + " ] ";
+            string s = string.Empty;
+            if (outputLength)
+            {
+                s = "[ " + bytes.Length + " ] ";
+            }
+
             for (int i = 0; i < bytes.Length; i++)
             {
                 s += bytes[i].ToString(format) + ((i != bytes.Length - 1) ? " " : "");

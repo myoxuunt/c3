@@ -43,6 +43,7 @@
             this.chName = new System.Windows.Forms.ColumnHeader();
             this.chValue = new System.Windows.Forms.ColumnHeader();
             this.chUnit = new System.Windows.Forms.ColumnHeader();
+            this.mnuCustomTask = new System.Windows.Forms.ToolStripMenuItem();
             this.cmnuTask.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -90,10 +91,11 @@
             // 
             this.cmnuTask.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuRunTask,
-            this.mnuTaskDetail});
+            this.mnuTaskDetail,
+            this.mnuCustomTask});
             this.cmnuTask.Name = "cmnuTask";
             this.cmnuTask.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.cmnuTask.Size = new System.Drawing.Size(153, 70);
+            this.cmnuTask.Size = new System.Drawing.Size(153, 92);
             // 
             // mnuRunTask
             // 
@@ -161,6 +163,13 @@
             // 
             this.chUnit.Text = "Unit";
             // 
+            // mnuCustomTask
+            // 
+            this.mnuCustomTask.Name = "mnuCustomTask";
+            this.mnuCustomTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuCustomTask.Text = "CustomTask";
+            this.mnuCustomTask.Click += new System.EventHandler(this.mnuCustomTask_Click);
+            // 
             // UCDeviceViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -192,5 +201,6 @@
         private System.Windows.Forms.ContextMenuStrip cmnuTask;
         private System.Windows.Forms.ToolStripMenuItem mnuRunTask;
         private System.Windows.Forms.ToolStripMenuItem mnuTaskDetail;
+        private System.Windows.Forms.ToolStripMenuItem mnuCustomTask;
     }
 }

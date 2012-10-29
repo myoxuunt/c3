@@ -5,7 +5,7 @@ namespace C3.Communi
     /// <summary>
     /// 代表从设备返回的数据的定义以及相关处理
     /// </summary>
-    public class ReceivePart
+    public class ReceivePart : PartBase 
     {
         #region Constructor
         /// <summary>
@@ -40,20 +40,20 @@ namespace C3.Communi
         } private string _name = string.Empty;
 
 
-        #region DatafieldManager
-        /// <summary>
-        /// 
-        /// </summary>
-        public DatafieldManager DataFieldManager
-        {
-            get
-            {
-                if (this._DatafieldManager == null)
-                    this._DatafieldManager = new DatafieldManager();
-                return this._DatafieldManager;
-            }
-        } private DatafieldManager _DatafieldManager;
-        #endregion //
+        //#region DatafieldManager
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public DatafieldManager DataFieldManager
+        //{
+        //    get
+        //    {
+        //        if (this._DatafieldManager == null)
+        //            this._DatafieldManager = new DatafieldManager();
+        //        return this._DatafieldManager;
+        //    }
+        //} private DatafieldManager _DatafieldManager;
+        //#endregion //
 
         #region ToValues
         /// <summary>
@@ -91,11 +91,15 @@ namespace C3.Communi
         }
         #endregion //Add
 
-        #region Remove
-        public void Remove(DataField df)
-        {
-            this.DataFieldManager.DataFields.Remove(df);
-        }
-        #endregion //Remove
+        //#region Remove
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="df"></param>
+        //public void Remove(DataField df)
+        //{
+        //    this.DataFieldManager.DataFields.Remove(df);
+        //}
+        //#endregion //Remove
     }
 }
