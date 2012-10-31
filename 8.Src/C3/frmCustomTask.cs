@@ -39,9 +39,16 @@ namespace C3
         {
             //this.DialogResult = DialogResult.OK;
             //this.Close();
+
+            if (!IsDeviceConnected())
+            {
+                NUnit.UiKit.UserMessage.DisplayFailure(Strings.StationNotConnected);
+                return;
+            }
+
             if (_task != null)
             {
-                NUnit.UiKit.UserMessage.DisplayFailure("executing");
+                NUnit.UiKit.UserMessage.DisplayFailure("正在执行");
                 return;
             }
 
@@ -50,12 +57,42 @@ namespace C3
                 return;
             }
 
+            this.txtReceived.Clear();
+
             ITask task = this.CreateTask();
             task.Ended += new EventHandler(task_Ended);
 
             this._device.TaskManager.Tasks.Add(task);
             _task = task;
+
+            string status = string.Format("执行 '{0}' ...", task.Opera.Name);
+            SetStatusText(status);
             
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        private void SetStatusText(string text)
+        {
+            this.tssStatus.Text = string.Format("{0} {1}", DateTime.Now, text);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool IsDeviceConnected()
+        {
+            bool r = false;
+            ICommuniPort cp = this._device.Station.CommuniPort;
+            if (cp != null )
+            {
+                r = cp.IsOpened;
+            }
+            return r;
         }
 
 
@@ -74,6 +111,9 @@ namespace C3
             // clear task
             //
             this._task = null;
+
+            string status = string.Format("执行结束");
+            SetStatusText(status);
         }
 
         /// <summary>
@@ -87,7 +127,7 @@ namespace C3
                 byte[] bs = Xdgk.Common.HexStringConverter.HexStringToBytes(this.txtSend.Text);
                 if (bs.Length == 0)
                 {
-                    NUnit.UiKit.UserMessage.DisplayFailure("send bytes len == 0");
+                    NUnit.UiKit.UserMessage.DisplayFailure("发送数据无效");
                     return false;
                 }
             }

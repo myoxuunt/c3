@@ -142,6 +142,15 @@ namespace C3 {
         }
         
         /// <summary>
+        ///   查找类似 站点未连接 的本地化字符串。
+        /// </summary>
+        internal static string StationNotConnected {
+            get {
+                return ResourceManager.GetString("StationNotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 站点类型 的本地化字符串。
         /// </summary>
         internal static string StationType {

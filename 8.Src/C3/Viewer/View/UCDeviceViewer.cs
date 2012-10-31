@@ -355,6 +355,11 @@ namespace C3
             f.Device = this.Device;
             f.ShowDialog();
         }
+
+        private void cmnuTask_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
     }
 
 }

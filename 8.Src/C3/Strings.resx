@@ -144,6 +144,9 @@
   <data name="StationAddinName" xml:space="preserve">
     <value>站点</value>
   </data>
+  <data name="StationNotConnected" xml:space="preserve">
+    <value>站点未连接</value>
+  </data>
   <data name="StationType" xml:space="preserve">
     <value>站点类型</value>
   </data>
