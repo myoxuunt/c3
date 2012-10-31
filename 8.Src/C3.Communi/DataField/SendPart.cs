@@ -2,31 +2,28 @@ using System;
 
 namespace C3.Communi
 {
+
     /// <summary>
-    /// 发送数据部分
+    /// 
     /// </summary>
-    public class SendPart
+    public class PartBase
     {
-        #region Constructor
+        #region IsNeedAddress
         /// <summary>
         /// 
         /// </summary>
-        public SendPart()
+        public bool IsNeedAddress
         {
-
-        }
-        #endregion //
-
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public string Name
-        //{
-        //    get { return _name; }
-        //    set { _name = value; }
-        //} private string _name;
-
+            get
+            {
+                return _isNeedAddress;
+            }
+            set
+            {
+                _isNeedAddress = value;
+            }
+        } private bool _isNeedAddress = true;
+        #endregion //IsNeedAddress
 
         #region DataFieldManager
         /// <summary>
@@ -43,7 +40,33 @@ namespace C3.Communi
         } private DatafieldManager _DatafieldManager;
         #endregion //DataFieldManager
 
+        #region Remove
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="df"></param>
+        public void Remove(DataField df)
+        {
+            this.DataFieldManager.DataFields.Remove(df);
+        }
+        #endregion //Remove
 
+    }
+
+    /// <summary>
+    /// 发送数据部分
+    /// </summary>
+    public class SendPart : PartBase 
+    {
+        #region Constructor
+        /// <summary>
+        /// 
+        /// </summary>
+        public SendPart()
+        {
+
+        }
+        #endregion //
 
         #region this
         /// <summary>
@@ -83,7 +106,6 @@ namespace C3.Communi
         }
         #endregion //this
 
-
         #region ToBytes
         /// <summary>
         /// 
@@ -100,7 +122,6 @@ namespace C3.Communi
         }
         #endregion //ToBytes
 
-
         #region Add
         /// <summary>
         /// 
@@ -115,16 +136,5 @@ namespace C3.Communi
         }
         #endregion //Add
 
-
-        #region Remove
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="df"></param>
-        public void Remove(DataField df)
-        {
-            this.DataFieldManager.DataFields.Remove(df);
-        }
-        #endregion //Remove
     }
 }

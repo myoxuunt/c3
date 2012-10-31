@@ -343,6 +343,23 @@ namespace C3
                 f.ShowDialog();
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuCustomTask_Click(object sender, EventArgs e)
+        {
+            frmCustomTask f = new frmCustomTask();
+            f.Device = this.Device;
+            f.ShowDialog();
+        }
+
+        private void cmnuTask_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
     }
 
 }

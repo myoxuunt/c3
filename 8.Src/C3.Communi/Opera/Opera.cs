@@ -122,7 +122,10 @@ namespace C3.Communi
         {
             //TODO: address string 
             //
-            this.SendPart[ADDRESS] = device.Address;
+            if (this.SendPart.IsNeedAddress)
+            {
+                this.SendPart[ADDRESS] = device.Address;
+            }
 
             DataFieldValueProvider valueProvider = new DataFieldValueProvider(device);
             byte[] bytes = this.SendPart.ToBytes(valueProvider);

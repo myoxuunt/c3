@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,43 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BytesConverter" xml:space="preserve">
-    <value>转换</value>
-  </data>
-  <data name="ContextMenuAddDevice" xml:space="preserve">
-    <value>添加设备(&amp;A)...</value>
-  </data>
-  <data name="Crcer" xml:space="preserve">
-    <value>校验</value>
-  </data>
-  <data name="DeviceAddinName" xml:space="preserve">
-    <value>设备</value>
-  </data>
-  <data name="DeviceType" xml:space="preserve">
-    <value>设备类型</value>
-  </data>
-  <data name="Listening" xml:space="preserve">
-    <value>监听</value>
-  </data>
-  <data name="SelectDeviceFirst" xml:space="preserve">
-    <value>请先选择设备</value>
-  </data>
-  <data name="SelectStationFirst" xml:space="preserve">
-    <value>请先选择站点</value>
-  </data>
-  <data name="StationAddinName" xml:space="preserve">
-    <value>站点</value>
-  </data>
-  <data name="StationNotConnected" xml:space="preserve">
-    <value>站点未连接</value>
-  </data>
-  <data name="StationType" xml:space="preserve">
-    <value>站点类型</value>
-  </data>
-  <data name="SureToDelete" xml:space="preserve">
-    <value>确定删除吗?</value>
-  </data>
-  <data name="SureToQuit" xml:space="preserve">
-    <value>确定退出吗?</value>
-  </data>
+  <metadata name="okButton.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cancelButton.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="txtName.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="lblName.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="lblSend.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="txtSend.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="label1.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="txtReceived.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="statusStrip1.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

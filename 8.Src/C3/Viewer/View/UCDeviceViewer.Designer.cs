@@ -37,6 +37,7 @@
             this.cmnuTask = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuRunTask = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTaskDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCustomTask = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lvDeviceDataLast = new System.Windows.Forms.ListView();
             this.chNO = new System.Windows.Forms.ColumnHeader();
@@ -90,24 +91,33 @@
             // 
             this.cmnuTask.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuRunTask,
-            this.mnuTaskDetail});
+            this.mnuTaskDetail,
+            this.mnuCustomTask});
             this.cmnuTask.Name = "cmnuTask";
             this.cmnuTask.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.cmnuTask.Size = new System.Drawing.Size(153, 70);
+            this.cmnuTask.Size = new System.Drawing.Size(138, 70);
+            this.cmnuTask.Opening += new System.ComponentModel.CancelEventHandler(this.cmnuTask_Opening);
             // 
             // mnuRunTask
             // 
             this.mnuRunTask.Name = "mnuRunTask";
-            this.mnuRunTask.Size = new System.Drawing.Size(152, 22);
+            this.mnuRunTask.Size = new System.Drawing.Size(137, 22);
             this.mnuRunTask.Text = "执行(&I)";
             this.mnuRunTask.Click += new System.EventHandler(this.mnuRunTask_Click);
             // 
             // mnuTaskDetail
             // 
             this.mnuTaskDetail.Name = "mnuTaskDetail";
-            this.mnuTaskDetail.Size = new System.Drawing.Size(152, 22);
-            this.mnuTaskDetail.Text = "详细(&D)";
+            this.mnuTaskDetail.Size = new System.Drawing.Size(137, 22);
+            this.mnuTaskDetail.Text = "详细(&D)...";
             this.mnuTaskDetail.Click += new System.EventHandler(this.mnuTaskDetail_Click);
+            // 
+            // mnuCustomTask
+            // 
+            this.mnuCustomTask.Name = "mnuCustomTask";
+            this.mnuCustomTask.Size = new System.Drawing.Size(137, 22);
+            this.mnuCustomTask.Text = "自定义(&U)...";
+            this.mnuCustomTask.Click += new System.EventHandler(this.mnuCustomTask_Click);
             // 
             // splitContainer1
             // 
@@ -192,5 +202,6 @@
         private System.Windows.Forms.ContextMenuStrip cmnuTask;
         private System.Windows.Forms.ToolStripMenuItem mnuRunTask;
         private System.Windows.Forms.ToolStripMenuItem mnuTaskDetail;
+        private System.Windows.Forms.ToolStripMenuItem mnuCustomTask;
     }
 }
