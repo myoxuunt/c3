@@ -42,13 +42,21 @@
 
         <datafield name="if"
             begin="3"
-            length="4"
-            converter="Xdgk.Communi.BCD4ByteConverter"/>
+            length="4">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="1000"></property>
+              <converter name="Xdgk.Communi.BCD4ByteConverter"></converter>
+            </converter>
+          </datafield>
 
         <datafield name="sum"
             begin="7"
-            length="4"
-            converter="Xdgk.Communi.BCD4ByteConverter" />
+            length="4">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="10"></property>
+              <converter name="Xdgk.Communi.BCD4ByteConverter"></converter>
+            </converter>
+        </datafield>
 
         <datafield name="crc"
             begin="102"

@@ -52,18 +52,26 @@
 
         <datafield name="if"
             begin="4"
-            length="13"
-            converter="HZ.BytesConverter.AsciiValueConverter"/>
+            length="13">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="1000"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
 
         <datafield name="sum"
             begin="23"
-            length="13"
-            converter="HZ.BytesConverter.AsciiValueConverter" />
+            length="13">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="100"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
 
         <datafield name="crc"
             begin="63"
             length="1"
-            converter="HZ.BytesConverter.AsciiValueConverter" 
+            converter="Xdgk.Communi.OriginalConverter" 
             crc="true"/>
 
         <crcer name="Xdgk.Communi.CRCer.SUM"/>
