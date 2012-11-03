@@ -13,6 +13,9 @@ TestResults
 *.user
 *.sln.docstates
 
+#vim temp file
+*.swp
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
