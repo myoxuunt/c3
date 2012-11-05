@@ -122,6 +122,8 @@ namespace CRLGDPU
         /// <summary>
         /// 
         /// </summary>
+        /// 
+        //[DataItem ("瞬时热量",30, "GJ/h")]
         public double IH
         {
             get
@@ -139,6 +141,7 @@ namespace CRLGDPU
         /// <summary>
         /// 
         /// </summary>
+        //[DataItem ("累计热量",40, "GJ")]
         public double SH
         {
             get
@@ -193,6 +196,19 @@ namespace CRLGDPU
                     DBI.Instance.InsertCrlgData(id, data);
                 }
             }
+            //else
+            //{
+            //    //NUnit.UiKit.UserMessage.Display("test crlg");
+            //    //System.Diagnostics.Debug.Fail("test crl - g");
+
+            //    CrlgData data = new CrlgData();
+
+            //    task.Device.DeviceDataManager.Last = data;
+
+            //    int id = GuidHelper.ConvertToInt32(task.Device.Guid);
+            //    DBI.Instance.InsertCrlgData(id, data);
+
+            //}
         }
 
         public override void OnProcessUpload(IDevice device, IParseResult pr)
