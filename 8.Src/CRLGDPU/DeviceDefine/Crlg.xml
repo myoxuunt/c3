@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<devicedefines>
+  <!-- HZ Crl G -->
+  <devicedefine devicetype="Crlg" devicetext="Crlg">
+    <operadefine name="read">
+      <sendpart>
+        <datafield name="f1"
+            begin="0"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="2A"/>
+        <datafield name="address"
+            begin="1"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+        <datafield name="f3"
+            begin="2"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="3A 52"/>
+      </sendpart>
+
+      <receivepart length="118">
+        <datafield name="f1"
+            begin="0"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="26 3A"
+            matchcheck="true" />
+
+        <datafield name="address"
+            begin="2"
+            length="3"
+            converter="HZ.BytesConverter.AsciiValueConverter"/>
+
+        <datafield name="if"
+            begin="23"
+            length="13">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="100000"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
+
+        <datafield name="sum"
+            begin="36"
+            length="13">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="1000"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
+        
+        <datafield name="ih"
+            begin="79"
+            length="13">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="100000"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
+
+        <datafield name="sh"
+            begin="92"
+            length="13">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="1000"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
+
+        <datafield name="crc"
+            begin="115"
+            length="3"
+            converter="HZ.BytesConverter.AsciiValueConverter"
+            crc="true"/>
+
+        <crcer name="HZ.CRC.AsciiSum"/>
+      </receivepart>
+    </operadefine>
+  </devicedefine>
+</devicedefines>

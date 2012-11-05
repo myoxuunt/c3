@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 
-
 namespace Xdgk.Common
 {
     /// <summary>
@@ -93,6 +92,10 @@ namespace Xdgk.Common
         }
         #endregion //GetReportItems
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class FlowmeterData : DataBase
     {
         #region InstantFlux
