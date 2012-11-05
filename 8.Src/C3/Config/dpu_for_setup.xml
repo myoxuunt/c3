@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <assemblyInfoCollection>
+  
+  <assemblyInfo path=".\d\CRLGD\CRLGDPU.dll"></assemblyInfo>
   <assemblyInfo path=".\d\CRLGD\CRLGDDPU.dll"></assemblyInfo>
   <assemblyInfo path=".\d\CRLGXL\CRLGXLDPU.dll"></assemblyInfo>
 
