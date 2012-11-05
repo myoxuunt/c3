@@ -76,7 +76,7 @@ namespace CRLGDPU
                 "Crlg",
                 typeof(Crlg));
             this.DeviceUI = new DeviceUI(this);
-            this.Processor = new Scl6Processor();
+            this.Processor = new CrlgProcessor();
 
             string path = PathUtils.GetAssemblyDirectory(typeof(Crlg).Assembly);
             this.TaskFactory = new XmlTaskFactory(this, path);
@@ -170,7 +170,7 @@ namespace CRLGDPU
     /// <summary>
     /// 
     /// </summary>
-    public class Scl6Processor : TaskProcessorBase
+    public class CrlgProcessor : TaskProcessorBase
     {
         /// <summary>
         /// 
