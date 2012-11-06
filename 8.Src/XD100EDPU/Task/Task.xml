@@ -6,7 +6,7 @@
     <operaname>readrealdi</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:00:10</value>
+      <value>00:01:00</value>
     </cyclestrategy>
   </task>
   
@@ -15,7 +15,7 @@
     <operaname>readreal</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:00:10</value>
+      <value>00:01:00</value>
     </cyclestrategy>
   </task>
 </tasks>

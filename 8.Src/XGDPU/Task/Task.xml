@@ -5,7 +5,7 @@
     <operaname>readcount</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:00:10</value>
+      <value>00:30:00</value>
     </cyclestrategy>
   </task>
   
@@ -14,7 +14,7 @@
     <operaname>writedate</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:00:10</value>
+      <value>00:30:00</value>
     </cyclestrategy>
   </task>
   
@@ -23,7 +23,7 @@
     <operaname>writetime</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:00:10</value>
+      <value>00:30:00</value>
     </cyclestrategy>
   </task>
   
@@ -32,7 +32,7 @@
     <operaname>writeMode</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:00:10</value>
+      <value>00:30:00</value>
     </cyclestrategy>
   </task>
 </tasks>
