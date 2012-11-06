@@ -394,6 +394,15 @@ namespace C3.Communi {
         }
         
         /// <summary>
+        ///   查找类似 区域 的本地化字符串。
+        /// </summary>
+        internal static string Street {
+            get {
+                return ResourceManager.GetString("Street", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 成功 的本地化字符串。
         /// </summary>
         internal static string SuccessResult {

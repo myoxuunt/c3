@@ -76,10 +76,12 @@ namespace DBSPU
             string xml = row["StationCPConfig"].ToString().Trim();
             int stationID = (int)row["StationID"];
             int ordinal = Convert.ToInt32(row["StationOrdinal"]);
+            string street = row["Street"].ToString().Trim();
 
             Station st = new Station();
             st.Name = stationName;
             st.Ordinal = ordinal;
+            st.Street = street;
             st.Guid = GuidHelper.Create((uint)stationID);
             st.Spu = this.Spu;
             st.StationSource = stationSource;
@@ -99,7 +101,7 @@ namespace DBSPU
             //throw new NotImplementedException();
             Station st = (Station)station;
             string xml = CommuniPortConfigSerializer.Serialize(st.CommuniPortConfig);
-            int id = DBI.Instance.InsertStation(st.Name, xml, st.Ordinal);
+            int id = DBI.Instance.InsertStation(st.Name, xml, st.Ordinal, st.Street);
             st.Guid = GuidHelper.Create((uint)id);
         }
 
@@ -109,7 +111,7 @@ namespace DBSPU
             //st.Name;
             string xml = CommuniPortConfigSerializer.Serialize(st.CommuniPortConfig);
             int id = (int)GuidHelper.ConvertToUInt32 ( st.Guid );
-            DBI.Instance.UpdateStation(id, st.Name, xml, st.Ordinal);
+            DBI.Instance.UpdateStation(id, st.Name, xml, st.Ordinal, st.Street);
         }
 
         public override void OnDelete(IStation station)
@@ -187,11 +189,12 @@ namespace DBSPU
 
         ///
 
-        internal void UpdateStation(int id, string name, string xml, int ordinal)
+        internal void UpdateStation(int id, string name, string xml, int ordinal, string street)
         {
             string s = string.Format(
-                "update tblStation set StationName='{1}',  StationCPConfig= '{2}', StationOrdinal = {3} where stationid = {0}",
-                id, name, xml, ordinal);
+                "update tblStation set StationName='{1}',  " +
+                "StationCPConfig= '{2}', StationOrdinal = {3}, Street = '{4}' where stationid = {0}",
+                id, name, xml, ordinal, street);
             Instance.ExecuteScalar(s);
         }
 
@@ -201,15 +204,16 @@ namespace DBSPU
         /// <param name="p"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        internal int InsertStation(string name, string xml, int ordinal)
+        internal int InsertStation(string name, string xml, int ordinal, string street)
         {
             string s = string.Format (
-            "insert into tblStation(StationName, StationCPConfig, StationOrdinal) values('{0}','{1}', {2});" +
+            "insert into tblStation(StationName, StationCPConfig, StationOrdinal, Street) values('{0}','{1}', {2}, '{3}');" +
             "select @@identity;",
 
             name, 
             xml,
-            ordinal 
+            ordinal,
+            street
             );
 
             object obj = ExecuteScalar(s);

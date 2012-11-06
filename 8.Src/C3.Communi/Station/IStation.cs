@@ -22,6 +22,7 @@ namespace C3.Communi
         event EventHandler CommuniPortChanged;
         GroupCollection Groups { get; }
         int Ordinal { get; set; }
+        string Street { get; set; }
     }
 
 }

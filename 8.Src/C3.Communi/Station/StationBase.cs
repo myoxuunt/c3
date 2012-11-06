@@ -10,6 +10,7 @@ namespace C3.Communi
         #region const members
         private const string PN_NAME = "Name",
             PN_COMMUNIPORTCONFIG = "CommuniPortConfig",
+            PN_STREET = "Street",
             PN_ORDINAL = "Ordinal";
 
         private const string GN_GENERAL = "General",
@@ -17,7 +18,8 @@ namespace C3.Communi
 
         private const int PO_NAME = -90,
             PO_COMMUNIPORTCONFIG = -80,
-            PO_ORDINAL = -70;
+            PO_STREET = -70,
+            PO_ORDINAL = -60;
         #endregion //const members
 
         #region Events
@@ -40,7 +42,12 @@ namespace C3.Communi
             //
             this.GetNameParameter();
             this.GetCommuniPortConfig();
+            this.GetStreetParameter();
             this.GetOrdinalParameter();
+
+            // order by order number, otherwise by parameter init order
+            //
+            //this.GeneralGroup.Parameters.Sort();
         }
         #endregion //StationBase
 
@@ -467,5 +474,40 @@ namespace C3.Communi
         }
         #endregion //GetOrdinalParameter
 
+        #region Street
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Street
+        {
+            get
+            {
+                IParameter p = GetStreetParameter();
+                return p.Value.ToString();
+            }
+            set
+            {
+                IParameter p = GetStreetParameter();
+                p.Value = value;
+            }
+        }
+        #endregion //Street
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IParameter GetStreetParameter()
+        {
+            IParameter p = this.GeneralGroup.Parameters[PN_STREET];
+            if (p == null)
+            {
+                p = new StringParameter(PN_STREET, string.Empty, PO_STREET);
+                p.Text = strings.Street;
+
+                this.GeneralGroup.Parameters.Add(p);
+            }
+            return p;
+        }
     }
 }

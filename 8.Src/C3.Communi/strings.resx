@@ -237,4 +237,7 @@
   <data name="Ordinal" xml:space="preserve">
     <value>序号</value>
   </data>
+  <data name="Street" xml:space="preserve">
+    <value>区域</value>
+  </data>
 </root>
