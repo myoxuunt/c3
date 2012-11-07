@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Xd100eProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Task\Task.xml">

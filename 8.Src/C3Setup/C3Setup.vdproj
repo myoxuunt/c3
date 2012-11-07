@@ -64,12 +64,6 @@
         "Entry"
         {
         "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
-        "OwnerKey" = "8:_64A8E2121C4F420C927A336BE4674695"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
         "OwnerKey" = "8:_F229BC36D8F641438E84B8EC32DAB592"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -101,6 +95,12 @@
         {
         "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
         "OwnerKey" = "8:_670733E8D7914325BEBAD1EC403AFFE2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
+        "OwnerKey" = "8:_64A8E2121C4F420C927A336BE4674695"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -322,12 +322,6 @@
         "Entry"
         {
         "MsmKey" = "8:_DCDB75F8622FEB2E2276EA14F555049E"
-        "OwnerKey" = "8:_64A8E2121C4F420C927A336BE4674695"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DCDB75F8622FEB2E2276EA14F555049E"
         "OwnerKey" = "8:_F6DB1FF221A3C640F09A9D9C0A705F45"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -365,6 +359,12 @@
         {
         "MsmKey" = "8:_DCDB75F8622FEB2E2276EA14F555049E"
         "OwnerKey" = "8:_670733E8D7914325BEBAD1EC403AFFE2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DCDB75F8622FEB2E2276EA14F555049E"
+        "OwnerKey" = "8:_64A8E2121C4F420C927A336BE4674695"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -430,12 +430,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_64A8E2121C4F420C927A336BE4674695"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F229BC36D8F641438E84B8EC32DAB592"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -485,6 +479,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_670733E8D7914325BEBAD1EC403AFFE2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_64A8E2121C4F420C927A336BE4674695"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -650,7 +650,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DBSPU, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:DBSPU, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_01664EF3D3D84458A9F42CF3B4E9FD57"
@@ -2586,7 +2586,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:安装程序将引导您完成在您的计算机上安装 C3 V1.0 所需的步骤。"
+                            "Value" = "8:安装程序将引导您完成在您的计算机上安装 C3 V1.2 所需的步骤。"
                             "DefaultValue" = "8:#1203"
                             "UsePlugInResources" = "11:TRUE"
                             }

@@ -81,6 +81,10 @@ namespace XD100EDPU
                 values += (data.GetChannelDataDI(i) ? "1" : "0") + ",";
             }
 
+
+            columns += "ir,sr,REx,";
+            values += string.Format("{0}, {1}, '{2}',", data.IR, data.SR, data.REx);
+
             columns = RemoveLastChar(columns);
             values = RemoveLastChar(values);
 
@@ -594,6 +598,63 @@ namespace XD100EDPU
         }
         #endregion //DI8
 
+        #region IR
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem ("补水瞬时", 29, "m3/h", "f2")]
+        public double IR
+        {
+            get
+            {
+                return _iR;
+            }
+            set
+            {
+                _iR = value;
+            }
+        } private double _iR;
+        #endregion //IR
+
+        #region SR
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem ("补水累计", 30, "m3", "f0")]
+        public double SR
+        {
+            get
+            {
+                return _sR;
+            }
+            set
+            {
+                _sR = value;
+            }
+        } private double _sR;
+        #endregion //SR
+
+        #region REx
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem ("备注", 31, "")]
+        public string REx
+        {
+            get
+            {
+                if (_rEx == null)
+                {
+                    _rEx = string.Empty;
+                }
+                return _rEx;
+            }
+            set
+            {
+                _rEx = value;
+            }
+        } private string _rEx;
+        #endregion //REx
 
     }
 
@@ -605,90 +666,6 @@ namespace XD100EDPU
         public Xd100ePersister(DBIBase dbi)
             : base(dbi)
         {
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    internal class Xd100eProcessor : TaskProcessorBase
-    {
-        private string ReadReal = "ReadReal",
-            ReadRealDI = "ReadRealDI";
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="task"></param>
-        /// <param name="pr"></param>
-        public override void OnProcess(ITask task, IParseResult pr)
-        {
-            if (pr.IsSuccess)
-            {
-                //Xd100eData data = Xd100eData.GetCachedData();
-
-                Xd100e xd100eDevice = (Xd100e)task.Device;
-                Xd100eData data = xd100eDevice.GetCachedData();
-
-                Console.WriteLine("ori xd100e id: " + GuidHelper.ConvertToInt32(xd100eDevice.Guid));
-
-                string opera = task.Opera.Name;
-
-                if (StringHelper.Equal(opera, ReadReal))
-                {
-                    for (int i = Xd100eData.BeginChannelNO; i <= Xd100eData.EndChannelNO; i++)
-                    {
-                        int no = i;
-                        string channelName = GetChannelName(no);
-
-                        float val = Convert.ToSingle(pr.Results[channelName]);
-                        val /= 100f;
-
-                        data.SetChannelDataAI(no, val);
-                        data.IsSetAI = true;
-                    }
-                }
-
-                else if (StringHelper.Equal(opera, ReadRealDI))
-                {
-                    //XD100EData data = xd100eDevice.XD100EData;
-                    for (int i = Xd100eData.BeginChannelNO; i <= Xd100eData.EndChannelNO; i++)
-                    {
-                        int no = i;
-                        string channelName = GetChannelName(no);
-                        byte value = Convert.ToByte(pr.Results[channelName]);
-                        data.SetChannelDataDI(no, value > 0);
-                        data.IsSetDI = true;
-                    }
-
-                }
-
-                if (data.IsComplete())
-                {
-                    data.DT = DateTime.Now;
-                    xd100eDevice.DeviceDataManager.Last = data;
-
-                    int deviceID = GuidHelper.ConvertToInt32(xd100eDevice.Guid);
-                    Console.WriteLine("write xd100e id: " + deviceID);
-                    DBI.Instance.InsertXd100eData(deviceID, data);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="no"></param>
-        /// <returns></returns>
-        private string GetChannelName(int no)
-        {
-            string r = string.Format("Channal{0}Value", no);
-            return r;
-        }
-
-        public override void OnProcessUpload(IDevice device, IParseResult pr)
-        {
-
-            //throw new NotImplementedException();
         }
     }
 }
