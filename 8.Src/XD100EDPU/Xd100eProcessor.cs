@@ -118,6 +118,13 @@ namespace XD100EDPU
         /// 
         /// </summary>
         /// <param name="fluxProviderList"></param>
+        /// <remarks>
+        /// recurit ex message:
+        /// 1. DT
+        /// 2. Device.Name
+        /// 3. IR
+        /// 4. SR
+        /// </remarks>
         /// <returns></returns>
         private string GetRecuritEx(List<IFluxProvider> fluxProviderList)
         {
@@ -126,8 +133,11 @@ namespace XD100EDPU
             {
                 string s = string.Format(
                     "{0},{1},{2},{3}|",
-                    fp.FluxDataDT, fp.FluxPlace,
-                    fp.InstantFlux, fp.Sum);
+                    fp.FluxDataDT,
+                    ((IDevice)fp).Name,
+                    fp.InstantFlux, 
+                    fp.Sum
+                    );
                 sb.Append(s);
             }
 
