@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Xdgk.Common")]
+[assembly: AssemblyTitle("Xdgk.Common.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("xd")]
-[assembly: AssemblyProduct("Xdgk.Common")]
-[assembly: AssemblyCopyright("Copyright xd 2009")]
+[assembly: AssemblyProduct("Xdgk.Common.Test")]
+[assembly: AssemblyCopyright("Copyright © xd 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("e08e7a7a-dd9c-490c-b09c-87b61833123a")]
+[assembly: Guid("709c1fa8-3872-4e6e-80f7-b06635c818fa")]
 
 // 程序集的版本信息由下面四个值组成:
 //
@@ -31,5 +31,6 @@ using System.Runtime.InteropServices;
 //
 // 可以指定所有这些值，也可以使用“内部版本号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”:
-[assembly: AssemblyVersion("0.10.0.0")]
-[assembly: AssemblyFileVersion("0.10.0.0")]
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

@@ -9,28 +9,28 @@ namespace Xdgk.Common
         private const int DEFAULT_CAPABILITY = 1000;
         private const int MIN_CAPABILITY = 10;
 
-        #region Add
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deviceData"></param>
-        internal new void Add(IData deviceData)
-        {
-            base.Add(deviceData);
-        }
-        #endregion //Add
+        //#region Add
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="deviceData"></param>
+        //internal new void Add(IData deviceData)
+        //{
+        //    base.Add(deviceData);
+        //}
+        //#endregion //Add
 
-        #region Insert
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="index"></param>
-        /// <param name="item"></param>
-        internal new void Insert(int index, IData item)
-        {
-            base.Insert(index, item);
-        }
-        #endregion //Insert
+        //#region Insert
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="index"></param>
+        ///// <param name="item"></param>
+        //internal new void Insert(int index, IData item)
+        //{
+        //    base.Insert(index, item);
+        //}
+        //#endregion //Insert
 
         #region Capability
         /// <summary>
@@ -58,6 +58,8 @@ namespace Xdgk.Common
         /// <param name="item"></param>
         protected override void InsertItem(int index, IData item)
         {
+            base.InsertItem(index, item);
+
             if (this.Count >= this.Capability)
             {
                 if (this.Count > 0)
@@ -65,7 +67,6 @@ namespace Xdgk.Common
                     this.RemoveAt(0);
                 }
             }
-            base.InsertItem(index, item);
         }
         #endregion //InsertItem
     }

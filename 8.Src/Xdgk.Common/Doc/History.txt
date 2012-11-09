@@ -1,4 +1,6 @@
-﻿
+﻿v0.10.0.0		2012-11-09
+	fixed data collection insert item bug: index out of range
+	
 v0.8.5.0		2012-07-19
 remove DBIBase Instance property
 
