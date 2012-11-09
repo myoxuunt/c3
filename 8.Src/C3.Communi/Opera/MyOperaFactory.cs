@@ -79,6 +79,23 @@ namespace C3.Communi
         }
         #endregion //Create
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="element"></param>
+        static private int GetCRCBegin(XmlElement element)
+        {
+            int crcBegin = 0;
+
+            string crcBeginString = GetAttribute(element, 
+                DeviceDefineNodeNames.CRCBegin, true);
+
+            if (crcBeginString != null && crcBeginString.Trim().Length > 0)
+            {
+                crcBegin = int.Parse(crcBeginString);
+            }
+            return crcBegin;
+        }
         #region CreateReceivePart
         /// <summary>
         /// 
@@ -94,6 +111,7 @@ namespace C3.Communi
             string name = GetAttribute(e, DeviceDefineNodeNames.ReceivePartName, true);
 
             ReceivePart rp = new ReceivePart(name, rpLength);
+            rp.DataFieldManager.CRCBegin = GetCRCBegin(e);
 
             foreach (XmlNode node in recievepartnode.ChildNodes)
             {
@@ -127,6 +145,7 @@ namespace C3.Communi
         static private SendPart CreateSendPart(XmlNode sendpartnode)
         {
             SendPart sp = new SendPart();
+            sp.DataFieldManager.CRCBegin = GetCRCBegin((XmlElement)sendpartnode);
 
             DataField df = null;
             foreach (XmlNode node in sendpartnode.ChildNodes)

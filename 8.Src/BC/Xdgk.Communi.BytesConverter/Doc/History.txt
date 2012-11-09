@@ -1,4 +1,7 @@
-﻿v0.14.0.0	2012-09-29
+﻿v0.15.0.0	2012-11-09
+	bcd converter add LowByteFirst property
+	
+v0.14.0.0	2012-09-29
 	use communi interface v0.3
 	add decimal value adapater converter
 	

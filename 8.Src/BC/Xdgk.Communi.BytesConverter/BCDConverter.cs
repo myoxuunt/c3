@@ -51,7 +51,12 @@ namespace Xdgk.Communi
         /// <summary>
         /// BCD低位在前
         /// </summary>
-        private bool _lowByteFirst = true;
+        /// 
+        public bool LowByteFirst
+        {
+            get { return _lowByteFirst; }
+            set { _lowByteFirst = value; }
+        } private bool _lowByteFirst = true;
 
         #region IBytesConverter 成员
         /// <summary>
