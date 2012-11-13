@@ -6,7 +6,7 @@ using Xdgk.Common;
 
 namespace Xdgk.Common
 {
-    internal class AttributePropertyInfoPairCollection
+    public class AttributePropertyInfoPairCollection
         : OrderNumberCollection<AttributePropertyInfoPair>
     {
     }

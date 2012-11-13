@@ -1,4 +1,5 @@
 ﻿using System;
+using Xdgk.Common;
 using System.Diagnostics;
 using System.Windows.Forms;
 using C3.Communi;
@@ -725,5 +726,35 @@ namespace C3
             this.mnuStationDelete.Enabled = b;
         }
         #endregion //mnuStation_DropDownOpening
+
+        private void mnuDeviceHistoryData_Click(object sender, EventArgs e)
+        {
+            IDevice device = this.GetSelectedDevice(true);
+            if (device != null)
+            {
+                //  add test data
+                //
+                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
+                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
+                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
+                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
+                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
+
+                frmDeviceHistoryData f = new frmDeviceHistoryData();
+                //attribute
+                foreach (AttributePropertyInfoPair item in ((DataBase)device.DeviceDataManager.Last).GetDeviceDataItemAttributes())
+                {
+                    DataGridViewColumn c = new DataGridViewColumn();
+                    c.HeaderText = item.Attribute.Name;
+                    c.DataPropertyName = item.PropertyInfo.Name;
+                    c.CellTemplate = new DataGridViewCell();
+                    f.DV.Columns.Add(c);
+                }
+                //device.DeviceDataManager.Last.ge
+                object obj = device.DeviceDataManager.Datas;
+                f.DataSource = obj;
+                f.ShowDialog();
+            }
+        }
     }
 }

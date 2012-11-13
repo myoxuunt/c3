@@ -43,7 +43,7 @@ namespace Xdgk.Common
         /// 
         /// </summary>
         /// <returns></returns>
-        internal AttributePropertyInfoPairCollection GetDeviceDataItemAttributes()
+        public AttributePropertyInfoPairCollection GetDeviceDataItemAttributes()
         {
             AttributePropertyInfoPairCollection result = new AttributePropertyInfoPairCollection();
             PropertyInfo[] propertyInfos = this.GetType().GetProperties();
