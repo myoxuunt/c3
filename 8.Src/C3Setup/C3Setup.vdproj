@@ -64,6 +64,30 @@
         "Entry"
         {
         "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
+        "OwnerKey" = "8:_9C8C47FBFF7046CAACD5B29596AD06C5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
+        "OwnerKey" = "8:_4F8D3D2FF6EB4715B0A6D4B16E5DD4B1"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
+        "OwnerKey" = "8:_3BDA78D691934A18A725DEC584317C37"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
+        "OwnerKey" = "8:_32322677D34447B6B1F730052CEFED87"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
         "OwnerKey" = "8:_F229BC36D8F641438E84B8EC32DAB592"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -1138,7 +1162,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:C3, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:C3, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_55C98D2FD0BB4E6DBA6F4351E04F6A64"
@@ -1424,7 +1448,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:XD100EDPU, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:XD100EDPU, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_9587D9E65EA64925B7E58FC9739BA4B8"
@@ -2155,7 +2179,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:C3"
         "ProductCode" = "8:{8B0325CB-9DE7-4ECB-9791-B76B6BA5BA55}"
-        "PackageCode" = "8:{93A33E34-4506-42C6-84CC-B2099CBF5763}"
+        "PackageCode" = "8:{6873B4BF-8CD4-4A20-A8FE-4091E4734423}"
         "UpgradeCode" = "8:{16980D7F-5286-449D-8ACC-4639F82422D3}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
@@ -2586,7 +2610,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:安装程序将引导您完成在您的计算机上安装 C3 V1.4 所需的步骤。"
+                            "Value" = "8:安装程序将引导您完成在您的计算机上安装 C3 V1.5 所需的步骤。"
                             "DefaultValue" = "8:#1203"
                             "UsePlugInResources" = "11:TRUE"
                             }
