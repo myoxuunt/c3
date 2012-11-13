@@ -85,6 +85,11 @@ namespace XD100EDPU
             columns += "ir,sr,REx,";
             values += string.Format("{0}, {1}, '{2}',", data.IR, data.SR, data.REx);
 
+            //
+            //
+            columns += "if1, sf1,";
+            values += string.Format("{0}, {1},",data.IF1, data.SF1 );
+
             columns = RemoveLastChar(columns);
             values = RemoveLastChar(values);
 
@@ -655,6 +660,43 @@ namespace XD100EDPU
             }
         } private string _rEx;
         #endregion //REx
+
+        #region IF1
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem ("一次瞬时", 32, "m3/h", "f2")]
+        public double IF1
+        {
+            get
+            {
+                return _iF1;
+            }
+            set
+            {
+                _iF1 = value;
+            }
+        } private double _iF1;
+        #endregion //IF1
+
+        #region SF1
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem ("一次累计", 33, "m3", "f0")]
+        public double SF1
+        {
+            get
+            {
+                return _sF1;
+            }
+            set
+            {
+                _sF1 = value;
+            }
+        } private double _sF1;
+        #endregion //SF2
+
 
     }
 

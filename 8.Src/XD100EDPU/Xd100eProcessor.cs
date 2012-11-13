@@ -65,11 +65,21 @@ namespace XD100EDPU
                     string recuritEx;
                     bool success = GetRecruitValues(xd100eDevice, out ir, out sr, out recuritEx);
 
-                    if (success)
+                    double if1, sf1;
+                    bool success2 = GetSide1Values(xd100eDevice, out if1, out sf1);
+
+                    if (success && success2)
                     {
                         data.IR = ir;
                         data.SR = sr;
                         data.REx = recuritEx;
+
+                        data.IF1 = if1;
+                        data.SF1 = sf1;
+
+                        // xd100e ai5 == if1
+                        //
+                        data.AI5 = Convert.ToSingle(if1);
 
                         data.DT = DateTime.Now;
                         xd100eDevice.DeviceDataManager.Last = data;
@@ -80,6 +90,39 @@ namespace XD100EDPU
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xd100eDevice"></param>
+        /// <param name="if1"></param>
+        /// <param name="sf1"></param>
+        /// <returns></returns>
+        private bool GetSide1Values(Xd100e xd100eDevice, out double if1, out double sf1)
+        {
+            bool r = false;
+            if1 = 0d;
+            sf1 = 0d;
+            IStation st = xd100eDevice.Station;
+
+            foreach (IDevice d in st.Devices)
+            {
+                if (d is IFluxProvider)
+                {
+                    IFluxProvider fp = d as IFluxProvider;
+                    if (fp.FluxPlace == FluxPlace.FirstSide)
+                    {
+                        if (fp.FluxDataDT != DateTime.MinValue)
+                        {
+                            if1 = fp.InstantFlux;
+                            sf1 = fp.Sum;
+                            r = true;
+                        }
+                    }
+                }
+            }
+            return r;
         }
 
         /// <summary>
