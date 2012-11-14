@@ -21,16 +21,18 @@ namespace XD1100DPU
         /// </summary>
         /// <param name="device"></param>
         /// <returns></returns>
-        private IFluxProvider GetFluxProvider(IDevice device)
+        private List<IFluxProvider> GetFluxProviderList(IDevice device)
         {
-            IFluxProvider r = null;
+            List<IFluxProvider> r = new List<IFluxProvider>();
+
             DeviceCollection devices = device.Station.Devices;
             foreach (IDevice item in devices)
             {
                 if (item is IFluxProvider && item != device)
                 {
-                    r = (IFluxProvider)item;
-                    break;
+                    //r = (IFluxProvider)item;
+                    //break;
+                    r.Add((IFluxProvider)item);
                 }
             }
             return r;
@@ -49,8 +51,11 @@ namespace XD1100DPU
                 if (StringHelper.Equal(opera, XD1100OperaNames.ReadReal))
                 {
                     XD1100Device d = (XD1100Device)task.Device;
-                    IFluxProvider fluxProvider = GetFluxProvider(d);
-                    ProcessReadReal(d, pr, fluxProvider);
+                    List<IFluxProvider> fluxProviderList = GetFluxProviderList(d);
+                    if (IsFluxProviderDataValid(fluxProviderList))
+                    {
+                        ProcessReadReal(d, pr, fluxProviderList);
+                    }
                 }
                 else if (
                     (StringHelper.Equal(opera, XD1100OperaNames.WriteOT)) ||
@@ -72,9 +77,42 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="fluxProviderList"></param>
+        /// <returns></returns>
+        private bool IsFluxProviderDataValid(List<IFluxProvider> fluxProviderList)
+        {
+            bool r = true;
+            foreach (IFluxProvider fp in fluxProviderList)
+            {
+                if (fp.FluxPlace != FluxPlace.Unknown)
+                {
+                    if (!IsFluxProviderDataValid(fp))
+                    {
+                        r = false;
+                        break;
+                    }
+                }
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fp"></param>
+        /// <returns></returns>
+        private bool IsFluxProviderDataValid(IFluxProvider fp)
+        {
+            return fp.FluxDataDT != DateTime.MinValue;
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="d"></param>
         /// <param name="pr"></param>
-        private void ProcessReadReal(XD1100Device d, IParseResult pr, IFluxProvider fluxProvider)
+        private void ProcessReadReal(XD1100Device d, IParseResult pr, List<IFluxProvider> fluxProviderList)
         {
             XD1100Data data = new XD1100Data();
 
@@ -116,7 +154,8 @@ namespace XD1100DPU
 
             //
             //
-            if (fluxProvider != null)
+            //if (fluxProviderList != null)
+            foreach (IFluxProvider fluxProvider in fluxProviderList)
             {
                 switch (fluxProvider.FluxPlace)
                 {
