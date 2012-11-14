@@ -20,7 +20,7 @@
             bytes="4A"/>
       </sendpart>
 
-      <receivepart length="17">
+      <receivepart length="17" CRCBegin="3">
         <datafield name="f1"
             begin="0"
             length="1"
@@ -45,7 +45,9 @@
             length="4">
             <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
               <property name="Rate" value="1000"></property>
-              <converter name="Xdgk.Communi.BCD4ByteConverter"></converter>
+              <converter name="Xdgk.Communi.BCD4ByteConverter">
+                <property name="LowByteFirst" value="False"></property>
+              </converter>
             </converter>
           </datafield>
 
@@ -54,17 +56,19 @@
             length="4">
             <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
               <property name="Rate" value="10"></property>
-              <converter name="Xdgk.Communi.BCD4ByteConverter"></converter>
+              <converter name="Xdgk.Communi.BCD4ByteConverter">
+                <property name="LowByteFirst" value="False"></property>
+              </converter>
             </converter>
         </datafield>
 
         <datafield name="crc"
-            begin="102"
-            length="3"
-            converter="HZ.BytesConverter.AsciiValueConverter" 
+            begin="16"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
 
-        <crcer name="HZ.CRC.AsciiSum"/>
+        <crcer name="Xdgk.Communi.CRCer.SUM"/>
       </receivepart>
     </operadefine>
   </devicedefine>
