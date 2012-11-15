@@ -277,7 +277,6 @@ namespace C3.Communi
                         string s = string.Format("exception status status '{0}'", this.Status);
                         throw new InvalidOperationException (s);
                     }
-                    break;
             }
             return Status;
         }

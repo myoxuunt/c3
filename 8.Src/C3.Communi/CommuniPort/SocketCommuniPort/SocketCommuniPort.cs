@@ -45,7 +45,25 @@ namespace C3.Communi
             //IPEndPoint ipep = this._socket.LocalEndPoint;
 
             //this.CommuniPortState = new SocketCommuniPortConnectedState(this);
-            BeginReceiveHelper();
+            try
+            {
+                BeginReceiveHelper();
+            }
+            catch (ObjectDisposedException odEx)
+            {
+                OnException(odEx);
+                return;
+            }
+            catch (SocketException sckEx)
+            {
+                OnException(sckEx);
+                this.CloseHelper();
+                return;
+            }
+            catch
+            {
+                throw;
+            }
         }
         #endregion //SocketCommuniPort
 
@@ -165,6 +183,8 @@ namespace C3.Communi
         /// </summary>
         private void BeginReceiveHelper()
         {
+            // TODO: 2012-11-15 SocketException
+            //
             try
             {
                 AsyncCallback cb = this.ReceiveCallback;
@@ -238,7 +258,25 @@ namespace C3.Communi
                     FireReceivedEvent(EventArgs.Empty);
                 }
 
-                BeginReceiveHelper();
+                try
+                {
+                    BeginReceiveHelper();
+                }
+                catch (ObjectDisposedException odEx)
+                {
+                    OnException(odEx);
+                    return;
+                }
+                catch (SocketException sckEx)
+                {
+                    OnException(sckEx);
+                    this.CloseHelper();
+                    return;
+                }
+                catch
+                {
+                    throw;
+                }
             }
             else
             {

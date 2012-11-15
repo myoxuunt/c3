@@ -64,7 +64,7 @@ namespace C3.Communi.Test
         [Test]
         public void t()
         {
-            UInt32 min = 0,
+            UInt32 //min = 0,
                 max = UInt32.MaxValue;
             max = 1;
 

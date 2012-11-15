@@ -64,19 +64,19 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        protected override bool  Verify2()
+        protected override bool Verify2()
         {
-            // TODO: verify device address
+            // TODO: verify device address, device address cannot same
             //
             return true;
-            bool exist = this.Station.Devices.ExistAddress(this.Device.Address, this.Device);
-            if (exist)
-            {
-                NUnit.UiKit.UserMessage.DisplayFailure(
-                        string.Format("Exist address '{0}'", Device.Address)
-                        );
-            }
-            return !exist;
+            //bool exist = this.Station.Devices.ExistAddress(this.Device.Address, this.Device);
+            //if (exist)
+            //{
+            //    NUnit.UiKit.UserMessage.DisplayFailure(
+            //            string.Format("Exist address '{0}'", Device.Address)
+            //            );
+            //}
+            //return !exist;
         }
         #endregion //Verify
 
