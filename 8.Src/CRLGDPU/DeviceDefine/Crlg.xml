@@ -68,6 +68,15 @@
               <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
             </converter>
         </datafield>
+        
+        <datafield name="gt1"
+            begin="105"
+            length="5">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="100"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
 
         <datafield name="crc"
             begin="115"
