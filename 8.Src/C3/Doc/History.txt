@@ -1,0 +1,2 @@
+﻿v1.7.0.0	2012-11-22
+	replace xd100e.ai1 by crl-g.gt1
