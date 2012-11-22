@@ -8,6 +8,16 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
+    public interface IGT1Provider
+    {
+        DateTime GT1DataDT { get; }
+        double GT1 { get; }
+    }
+
+
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IFluxProvider
     {
         /// <summary>

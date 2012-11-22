@@ -89,6 +89,7 @@ namespace XD100EDPU
                             // xd100e ai5 == if1
                             //
                             data.AI5 = Convert.ToSingle(if1);
+                            data.AI1 = Convert.ToSingle(GetGT1FromCRL_G(xd100eDevice));
                         }
 
                         data.DT = DateTime.Now;
@@ -102,6 +103,28 @@ namespace XD100EDPU
             }
         }
         #endregion //OnProcess
+
+        /// <summary>
+        /// get crl-g gt1 property
+        /// </summary>
+        /// <param name="xd100eDevice"></param>
+        /// <returns></returns>
+        private double GetGT1FromCRL_G(Xd100e xd100eDevice)
+        {
+            double r = 0d;
+            foreach (IDevice device in xd100eDevice.Station.Devices)
+            {
+                if (device is IGT1Provider)
+                {
+                    IGT1Provider gt1Pro = device as IGT1Provider;
+                    if (gt1Pro.GT1DataDT != DateTime.MinValue)
+                    {
+                        r = gt1Pro.GT1;
+                    }
+                }
+            }
+            return r;
+        }
 
         //#region GetFirstSideValues
         ///// <summary>

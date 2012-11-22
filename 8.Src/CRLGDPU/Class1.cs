@@ -108,9 +108,45 @@ namespace CRLGDPU
         }
     }
 
-    public class Crlg : FluxDeviceBase
+    public class Crlg : FluxDeviceBase, IGT1Provider 
     {
 
+        #region IGT1Provider 成员
+
+        public DateTime GT1DataDT
+        {
+            get
+            {
+                DateTime r = DateTime.MinValue;
+                IData last = this.DeviceDataManager.Last;
+                if (last!= null)
+                {
+                    r = last.DT;
+                }
+                return r;
+            }
+        }
+
+        public double GT1
+        {
+            get
+            {
+                double r = 0d;
+
+                IData last = this.DeviceDataManager.Last;
+                if (last != null)
+                {
+                    CrlgData data = last as CrlgData;
+                    if (data != null)
+                    {
+                        r = data.GT1;
+                    }
+                }
+                return r;
+            }
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -154,6 +190,25 @@ namespace CRLGDPU
             }
         } private double _sH;
         #endregion //SH
+
+        #region GT1
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem("一次供温", 41, "℃", "f2")]
+        public double GT1
+        {
+            get
+            {
+                return _gT1;
+            }
+            set
+            {
+                _gT1 = value;
+            }
+        } private double _gT1;
+        #endregion //GT1
+
     }
 
     /// <summary>
@@ -189,6 +244,7 @@ namespace CRLGDPU
                     data.Sum = Convert.ToDouble(pr.Results["sum"]);
                     data.IH = Convert.ToDouble(pr.Results["ih"]);
                     data.SH = Convert.ToDouble(pr.Results["sh"]);
+                    data.GT1 = Convert.ToDouble(pr.Results["gt1"]);
 
                     task.Device.DeviceDataManager.Last = data;
 
