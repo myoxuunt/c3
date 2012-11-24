@@ -14,6 +14,15 @@ namespace C3.Communi
         double GT1 { get; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public interface IBT1Provider
+    {
+        DateTime BT1DataDT { get; }
+        double BT1 { get; }
+    }
+
 
     /// <summary>
     /// 

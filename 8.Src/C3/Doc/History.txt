@@ -1,2 +1,5 @@
-﻿v1.7.0.0	2012-11-22
+﻿v1.8.0.0	2012-11-24
+	replace xd100e.ai2 by crl-g.bt1
+	
+v1.7.0.0	2012-11-22
 	replace xd100e.ai1 by crl-g.gt1

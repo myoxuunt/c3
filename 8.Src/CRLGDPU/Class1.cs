@@ -108,7 +108,7 @@ namespace CRLGDPU
         }
     }
 
-    public class Crlg : FluxDeviceBase, IGT1Provider 
+    public class Crlg : FluxDeviceBase, IGT1Provider , IBT1Provider 
     {
 
         #region IGT1Provider 成员
@@ -140,6 +140,43 @@ namespace CRLGDPU
                     if (data != null)
                     {
                         r = data.GT1;
+                    }
+                }
+                return r;
+            }
+        }
+
+        #endregion
+
+        #region IBT1Provider 成员
+
+        public DateTime BT1DataDT
+        {
+            get
+            {
+                DateTime r = DateTime.MinValue;
+                IData last = this.DeviceDataManager.Last;
+                if (last != null)
+                {
+                    r = last.DT;
+                }
+                return r;
+            }
+        }
+
+        public double BT1
+        {
+            get
+            {
+                double r = 0d;
+
+                IData last = this.DeviceDataManager.Last;
+                if (last != null)
+                {
+                    CrlgData data = last as CrlgData;
+                    if (data != null)
+                    {
+                        r = data.BT1;
                     }
                 }
                 return r;
@@ -209,6 +246,25 @@ namespace CRLGDPU
         } private double _gT1;
         #endregion //GT1
 
+        #region BT1
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem("一次回温", 42, "℃", "f2")]
+        public double BT1
+        {
+            get
+            {
+                return _bT1;
+            }
+            set
+            {
+                _bT1 = value;
+            }
+        } private double _bT1;
+        #endregion //BT1
+
+
     }
 
     /// <summary>
@@ -245,6 +301,7 @@ namespace CRLGDPU
                     data.IH = Convert.ToDouble(pr.Results["ih"]);
                     data.SH = Convert.ToDouble(pr.Results["sh"]);
                     data.GT1 = Convert.ToDouble(pr.Results["gt1"]);
+                    data.BT1 = Convert.ToDouble(pr.Results["bt1"]);
 
                     task.Device.DeviceDataManager.Last = data;
 

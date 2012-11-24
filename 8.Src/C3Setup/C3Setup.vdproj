@@ -76,12 +76,6 @@
         "Entry"
         {
         "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
-        "OwnerKey" = "8:_9C8C47FBFF7046CAACD5B29596AD06C5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
         "OwnerKey" = "8:_9587D9E65EA64925B7E58FC9739BA4B8"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -118,25 +112,7 @@
         "Entry"
         {
         "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
-        "OwnerKey" = "8:_4F8D3D2FF6EB4715B0A6D4B16E5DD4B1"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
         "OwnerKey" = "8:_4EFB79BB5E0842458229855135455F08"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
-        "OwnerKey" = "8:_3BDA78D691934A18A725DEC584317C37"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2D225A533D13C928CA5D2068159CAAC8"
-        "OwnerKey" = "8:_32322677D34447B6B1F730052CEFED87"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -825,7 +801,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:C3.Communi, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:C3.Communi, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_2D225A533D13C928CA5D2068159CAAC8"
@@ -1213,7 +1189,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CRLGDPU, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:CRLGDPU, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_64A8E2121C4F420C927A336BE4674695"
@@ -1448,7 +1424,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:XD100EDPU, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:XD100EDPU, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_9587D9E65EA64925B7E58FC9739BA4B8"
@@ -2192,7 +2168,7 @@
         "Title" = "8:C3"
         "Subject" = "8:"
         "ARPCONTACT" = "8:xd"
-        "Keywords" = "8:c3 v1.7"
+        "Keywords" = "8:c3 v1.8"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:"
@@ -2610,7 +2586,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:安装程序将引导您完成在您的计算机上安装 C3 V1.7 所需的步骤。"
+                            "Value" = "8:安装程序将引导您完成在您的计算机上安装 C3 V1.8 所需的步骤。"
                             "DefaultValue" = "8:#1203"
                             "UsePlugInResources" = "11:TRUE"
                             }

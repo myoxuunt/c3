@@ -88,8 +88,11 @@ namespace XD100EDPU
                         {
                             // xd100e ai5 == if1
                             //
+                            // ai1 - gt1, ai2 - bt1
+                            //
                             data.AI5 = Convert.ToSingle(if1);
                             data.AI1 = Convert.ToSingle(GetGT1FromCRL_G(xd100eDevice));
+                            data.AI2 = Convert.ToSingle(GetBT1FromCRL_G(xd100eDevice));
                         }
 
                         data.DT = DateTime.Now;
@@ -101,6 +104,23 @@ namespace XD100EDPU
                     }
                 }
             }
+        }
+
+        private double GetBT1FromCRL_G(Xd100e xd100eDevice)
+        {
+            double r = 0d;
+            foreach (IDevice device in xd100eDevice.Station.Devices)
+            {
+                if (device is IBT1Provider)
+                {
+                    IBT1Provider bt1Pro = device as IBT1Provider;
+                    if (bt1Pro.BT1DataDT != DateTime.MinValue)
+                    {
+                        r = bt1Pro.BT1;
+                    }
+                }
+            }
+            return r;
         }
         #endregion //OnProcess
 
