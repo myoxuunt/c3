@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Xdgk.Common {
+namespace Xdgk.Common.Core {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Xdgk.Common {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Xdgk.Common.ADEStatusStrings", typeof(ADEStatusStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Xdgk.Common.Core.ADEStatusStrings", typeof(ADEStatusStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

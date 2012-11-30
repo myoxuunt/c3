@@ -28,15 +28,15 @@ namespace Xdgk.Common
             switch (adeStatus)
             {
                 case ADEStatus.Add :
-                    r = ADEStatusStrings.Add;
+                    r = Core.ADEStatusStrings.Add;
                     break;
 
                 case ADEStatus.Edit :
-                    r = ADEStatusStrings.Edit;
+                    r = Core.ADEStatusStrings.Edit;
                     break;
 
                 case ADEStatus.Delete :
-                    r = ADEStatusStrings.Delete;
+                    r = Core.ADEStatusStrings.Delete;
                     break;
             }
             return r;

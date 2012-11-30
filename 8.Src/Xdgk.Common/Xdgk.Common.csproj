@@ -39,14 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ADEStatusStrings.Designer.cs">
+    <Compile Include="Core\ADEStatusStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ADEStatusStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="ADEStatusText.cs" />
-    <Compile Include="App.cs" />
-    <Compile Include="AppFactory.cs" />
+    <Compile Include="Core\ADEStatusText.cs" />
+    <Compile Include="App\App.cs" />
+    <Compile Include="App\AppFactory.cs" />
     <Compile Include="DataFormatter\DataFormatterBase.cs" />
     <Compile Include="DataFormatter\DataFormatterCollection.cs" />
     <Compile Include="DataFormatter\DecimalFormatter.cs" />
@@ -57,7 +57,7 @@
     <Compile Include="DataFormatter\SingleFormatter.cs" />
     <Compile Include="DGVConfig\DGVColumnConfig.cs" />
     <Compile Include="DGVConfig\DGVColumnConfigCollection.cs" />
-    <Compile Include="EnumTextAttribute.cs" />
+    <Compile Include="Core\EnumTextAttribute.cs" />
     <Compile Include="C3.Data\AttributePropertyInfoPair.cs" />
     <Compile Include="C3.Data\AttributePropertyInfoPairCollection.cs" />
     <Compile Include="C3.Data\DataBase.cs" />
@@ -70,76 +70,76 @@
     <Compile Include="C3.Data\UnitType.cs" />
     <Compile Include="Calc\Calc.cs" />
     <Compile Include="Calc\CalcType.cs" />
-    <Compile Include="DateTimeHelper.cs" />
-    <Compile Include="DefineExecuteNames.cs" />
-    <Compile Include="DisplayValue.cs" />
-    <Compile Include="DisplayValueCollection.cs" />
-    <Compile Include="ExceptionLogger.cs" />
-    <Compile Include="FixedDialogBase.cs">
+    <Compile Include="DateTime\DateTimeHelper.cs" />
+    <Compile Include="Remote\DefineExecuteNames.cs" />
+    <Compile Include="_others\DisplayValue.cs" />
+    <Compile Include="_others\DisplayValueCollection.cs" />
+    <Compile Include="Core\ExceptionLogger.cs" />
+    <Compile Include="_others\FixedDialogBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FixedDialogBase.Designer.cs">
+    <Compile Include="_others\FixedDialogBase.Designer.cs">
       <DependentUpon>FixedDialogBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="GuidFactory.cs" />
-    <Compile Include="KeyValue.cs" />
-    <Compile Include="KeyValueCollection.cs" />
+    <Compile Include="Core\GuidFactory.cs" />
+    <Compile Include="KeyValueCollection\KeyValue.cs" />
+    <Compile Include="KeyValueCollection\KeyValueCollection.cs" />
     <Compile Include="OrderNumber\IOrderNumber.cs" />
     <Compile Include="OrderNumber\OrderNumberCollection.cs" />
-    <Compile Include="Path.cs" />
-    <Compile Include="RangeConstraint.cs" />
-    <Compile Include="Constraint.cs" />
-    <Compile Include="DBIBase.cs" />
-    <Compile Include="DBInfo.cs" />
-    <Compile Include="Decorator.cs" />
-    <Compile Include="ADEStatus.cs" />
-    <Compile Include="FileEncryptor.cs" />
-    <Compile Include="COPYDATASTRUCT.cs" />
+    <Compile Include="IO\Path.cs" />
+    <Compile Include="Constraint\RangeConstraint.cs" />
+    <Compile Include="Constraint\Constraint.cs" />
+    <Compile Include="DBI\DBIBase.cs" />
+    <Compile Include="DBI\DBInfo.cs" />
+    <Compile Include="_others\Decorator.cs" />
+    <Compile Include="Core\ADEStatus.cs" />
+    <Compile Include="IO\FileEncryptor.cs" />
+    <Compile Include="_others\COPYDATASTRUCT.cs" />
     <Compile Include="JMSoftware.Widgets\BaseWidget.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BytesValueComparer.cs" />
-    <Compile Include="CommandLineOptions.cs" />
-    <Compile Include="HexStringConverter.cs" />
-    <Compile Include="NameValue.cs" />
-    <Compile Include="NameValueCollection.cs" />
+    <Compile Include="_others\BytesValueComparer.cs" />
+    <Compile Include="Codeblast\CommandLineOptions.cs" />
+    <Compile Include="Converter\HexStringConverter.cs" />
+    <Compile Include="KeyValueCollection\NameValue.cs" />
+    <Compile Include="KeyValueCollection\NameValueCollection.cs" />
     <Compile Include="NUnit\AssemblyHelper.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BytesConverter.cs" />
-    <Compile Include="Collection.cs" />
-    <Compile Include="Diagnostics.cs" />
-    <Compile Include="ExceptionHandler.cs" />
+    <Compile Include="Converter\BytesConverter.cs" />
+    <Compile Include="Core\Collection.cs" />
+    <Compile Include="Core\Diagnostics.cs" />
+    <Compile Include="Core\ExceptionHandler.cs" />
     <Compile Include="NUnit\InternalTrace.cs" />
     <Compile Include="NUnit\InternalTraceWriter.cs" />
     <Compile Include="NUnit\Logger.cs" />
     <Compile Include="NUnit\NTrace.cs" />
-    <Compile Include="ObjectBase.cs" />
+    <Compile Include="Core\ObjectBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReflectionHelper.cs" />
-    <Compile Include="RemoteClient.cs" />
-    <Compile Include="Request.cs" />
-    <Compile Include="SelfSerializer.cs" />
-    <Compile Include="SerializableFont.cs" />
-    <Compile Include="SerializableColor.cs" />
-    <Compile Include="SettingsDialogBase.cs">
+    <Compile Include="Reflection\ReflectionHelper.cs" />
+    <Compile Include="Remote\RemoteClient.cs" />
+    <Compile Include="Remote\Request.cs" />
+    <Compile Include="Serializer\SelfSerializer.cs" />
+    <Compile Include="Serializer\SerializableFont.cs" />
+    <Compile Include="Serializer\SerializableColor.cs" />
+    <Compile Include="NUnit\SettingsDialogBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StringFormat.cs" />
-    <Compile Include="StringHelper.cs" />
-    <Compile Include="StringStringDictionary.cs" />
-    <Compile Include="UserMessage.cs" />
-    <Compile Include="WaitCursor.cs" />
-    <Compile Include="XmlHelper.cs" />
-    <Compile Include="IExecuteController.cs" />
+    <Compile Include="Converter\StringFormat.cs" />
+    <Compile Include="Core\StringHelper.cs" />
+    <Compile Include="KeyValueCollection\StringStringDictionary.cs" />
+    <Compile Include="NUnit\UserMessage.cs" />
+    <Compile Include="NUnit\WaitCursor.cs" />
+    <Compile Include="Xml\XmlHelper.cs" />
+    <Compile Include="Remote\IExecuteController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ADEStatusStrings.resx">
+    <EmbeddedResource Include="Core\ADEStatusStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ADEStatusStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="FixedDialogBase.resx">
+    <EmbeddedResource Include="_others\FixedDialogBase.resx">
       <DependentUpon>FixedDialogBase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -147,7 +147,7 @@
       <DependentUpon>BaseWidget.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsDialogBase.resx">
+    <EmbeddedResource Include="NUnit\SettingsDialogBase.resx">
       <DependentUpon>SettingsDialogBase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
