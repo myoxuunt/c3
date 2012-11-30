@@ -23,7 +23,8 @@ namespace C3.Communi
         //event EventHandler LastDataChanged;
 
         DeviceDataManager DeviceDataManager { get; }
-
+        bool HasData();
+ 
         IDeviceSource DeviceSource { get; set; }
 
         //TaskQueue Tasks { get; set; }

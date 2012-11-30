@@ -2,7 +2,7 @@
 using C3.Communi;
 using C3.Communi.SimpleDPU;
 using Xdgk.Common;
-using Xdgk.GR.Common;
+//using Xdgk.GR.Common;
 
 namespace SCL61DDPU
 {
@@ -83,7 +83,7 @@ namespace SCL61DDPU
         }
     }
 
-    public class Scl61dFactory : FluxDeviceFactoryBase 
+    public class Scl61dFactory : PlaceDeviceFactoryBase 
     {
         /// <summary>
         /// 
@@ -107,7 +107,8 @@ namespace SCL61DDPU
         }
     }
 
-    public class Scl61d : FluxDeviceBase 
+    [DeviceKind ("FluxDevice")]
+    public class Scl61d : PlaceDeviceBase 
     {
     }
 

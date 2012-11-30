@@ -7,17 +7,39 @@ using NLog;
 
 namespace C3.Communi
 {
+    //abstract public class HeatDeviceBase : DeviceBase, IPlace 
+    //{
+    //    #region IPlace 成员
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    public FluxPlace Place
+    //    {
+    //        get
+    //        {
+    //            return _fluxPlace;
+    //        }
+    //        set
+    //        {
+    //            _fluxPlace = value;
+    //        }
+    //    } private FluxPlace _fluxPlace = FluxPlace.Unknown;
+
+    //    #endregion
+    //}
+
     /// <summary>
     /// 
     /// </summary>
-    abstract public class FluxDeviceBase : DeviceBase, IFluxProvider
+    //abstract public class PlaceDeviceBase : DeviceBase, IFluxProvider
+    abstract public class PlaceDeviceBase : DeviceBase, IPlace  
     {
         static Logger log = NLog.LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// 
         /// </summary>
-        protected FluxDeviceBase()
+        protected PlaceDeviceBase()
         {
             // init
             //
@@ -26,63 +48,63 @@ namespace C3.Communi
 
 
         #region IFluxProvider 成员
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime FluxDataDT
-        {
-            get
-            {
-                IData last = this.DeviceDataManager.Last;
-                if (last != null)
-                {
-                    return last.DT;
-                }
-                else
-                {
-                    return DateTime.MinValue;
-                }
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public DateTime FluxDataDT
+        //{
+        //    get
+        //    {
+        //        IData last = this.DeviceDataManager.Last;
+        //        if (last != null)
+        //        {
+        //            return last.DT;
+        //        }
+        //        else
+        //        {
+        //            return DateTime.MinValue;
+        //        }
+        //    }
+        //}
 
-        public double InstantFlux
-        {
-            get
-            {
-                IData last = this.DeviceDataManager.Last;
-                if (last != null)
-                {
-                    FlowmeterData d = last as FlowmeterData;
-                    Debug.Assert(d != null, "is not flowmeter data");
-                    if (d != null)
-                    {
-                        return d.InstantFlux;
-                    }
-                }
-                return 0f;
-            }
-        }
+        //public double InstantFlux
+        //{
+        //    get
+        //    {
+        //        IData last = this.DeviceDataManager.Last;
+        //        if (last != null)
+        //        {
+        //            FlowmeterData d = last as FlowmeterData;
+        //            Debug.Assert(d != null, "is not flowmeter data");
+        //            if (d != null)
+        //            {
+        //                return d.InstantFlux;
+        //            }
+        //        }
+        //        return 0f;
+        //    }
+        //}
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public double Sum
-        {
-            get
-            {
-                IData last = this.DeviceDataManager.Last;
-                if (last != null)
-                {
-                    FlowmeterData d = last as FlowmeterData;
-                    Debug.Assert(d != null, "is not flowmeter data");
-                    if (d != null)
-                    {
-                        return d.Sum;
-                    }
-                }
-                return 0f;
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public double Sum
+        //{
+        //    get
+        //    {
+        //        IData last = this.DeviceDataManager.Last;
+        //        if (last != null)
+        //        {
+        //            FlowmeterData d = last as FlowmeterData;
+        //            Debug.Assert(d != null, "is not flowmeter data");
+        //            if (d != null)
+        //            {
+        //                return d.Sum;
+        //            }
+        //        }
+        //        return 0f;
+        //    }
+        //}
 
         /// <summary>
         /// 
@@ -118,16 +140,32 @@ namespace C3.Communi
             return p;
         }
         #endregion
+
+        #region IPlace 成员
+
+        public FluxPlace Place
+        {
+            get
+            {
+                return this.FluxPlace;
+            }
+            set
+            {
+                this.FluxPlace = value;
+            }
+        }
+
+        #endregion
     }
 
     /// <summary>
     /// 
     /// </summary>
-    abstract public class FluxDeviceFactoryBase : DeviceFactoryBase
+    abstract public class PlaceDeviceFactoryBase : DeviceFactoryBase
     {
         static NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
 
-        public FluxDeviceFactoryBase(IDPU dpu)
+        public PlaceDeviceFactoryBase(IDPU dpu)
             : base(dpu)
         {
 
@@ -137,7 +175,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="fluxDevice"></param>
         /// <param name="deviceSource"></param>
-        protected void SetDeviceProperties(FluxDeviceBase fluxDevice, IDeviceSource deviceSource)
+        protected void SetDeviceProperties(PlaceDeviceBase fluxDevice, IDeviceSource deviceSource)
         {
             SimpleDeviceSource source = (SimpleDeviceSource)deviceSource;
             fluxDevice.Address = source.Address;
@@ -159,9 +197,9 @@ namespace C3.Communi
         {
             FluxPlace p = FluxPlace.Unknown;
             StringStringDictionary ssd = StringStringDictionaryConverter.Parse(deviceExtendParameters);
-            if (ssd.ContainsKey(FluxDeviceBase.PN_FLUXPLACE))
+            if (ssd.ContainsKey(PlaceDeviceBase.PN_FLUXPLACE))
             {
-                string place = ssd[FluxDeviceBase.PN_FLUXPLACE];
+                string place = ssd[PlaceDeviceBase.PN_FLUXPLACE];
 
                 try
                 {

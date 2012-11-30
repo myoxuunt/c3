@@ -84,7 +84,7 @@ namespace SCL9DPU
         }
     }
 
-    public class Scl9Factory : FluxDeviceFactoryBase 
+    public class Scl9Factory : PlaceDeviceFactoryBase 
     {
         /// <summary>
         /// 
@@ -108,7 +108,8 @@ namespace SCL9DPU
         }
     }
 
-    public class Scl9 : FluxDeviceBase 
+    [DeviceKind ("FluxDevice")]
+    public class Scl9 : PlaceDeviceBase 
     {
     }
 

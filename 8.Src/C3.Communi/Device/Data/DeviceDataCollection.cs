@@ -57,6 +57,15 @@ namespace C3.Communi
         } private SendOrPostCallback _onLastDataChangedCallback;
         #endregion //OnLastDataChangedCallback
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool HasData()
+        {
+            return this.Last != null;
+        }
+
         #region Last
         /// <summary>
         /// 

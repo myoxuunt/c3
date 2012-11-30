@@ -41,10 +41,20 @@
             bytes="4A"
             matchcheck="true" />
 
+        <datafield name="sh"
+            begin="7"
+            length="4">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="1"></property>
+              <converter name="Xdgk.Communi.BCD4ByteConverter">
+                <property name="LowByteFirst" value="False"></property>
+              </converter>
+            </converter>
+        </datafield>
+
         <datafield name="if"
             begin="11"
             length="4">
-
             <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
               <property name="Rate" value="1000"></property>
               <converter name="Xdgk.Communi.BCD4ByteConverter">
@@ -55,6 +65,39 @@
 
         <datafield name="sum"
             begin="15"
+            length="4">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="10"></property>
+              <converter name="Xdgk.Communi.BCD4ByteConverter">
+                <property name="LowByteFirst" value="False"></property>
+              </converter>
+            </converter>
+        </datafield>
+
+        <datafield name="gt"
+            begin="19"
+            length="4">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="100"></property>
+              <converter name="Xdgk.Communi.BCD4ByteConverter">
+                <property name="LowByteFirst" value="False"></property>
+              </converter>
+            </converter>
+        </datafield>
+
+        <datafield name="bt"
+            begin="23"
+            length="4">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="100"></property>
+              <converter name="Xdgk.Communi.BCD4ByteConverter">
+                <property name="LowByteFirst" value="False"></property>
+              </converter>
+            </converter>
+        </datafield>
+
+        <datafield name="ih"
+            begin="27"
             length="4">
             <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
               <property name="Rate" value="10"></property>

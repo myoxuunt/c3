@@ -54,6 +54,43 @@
             </converter>
         </datafield>
 
+        <datafield name="ih"
+            begin="79"
+            length="13">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="100000"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
+
+        <datafield name="sh"
+            begin="92"
+            length="13">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="1000"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
+
+
+        <datafield name="bt"
+            begin="105"
+            length="5">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="100"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
+
+        <datafield name="gt"
+            begin="110"
+            length="5">
+            <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+              <property name="Rate" value="100"></property>
+              <converter name="HZ.BytesConverter.AsciiValueConverter"></converter>
+            </converter>
+        </datafield>
+
         <datafield name="crc"
             begin="115"
             length="3"

@@ -81,7 +81,7 @@ namespace CRLGXLDPU
         }
     }
 
-    public class CrlgxlFactory : FluxDeviceFactoryBase 
+    public class CrlgxlFactory : PlaceDeviceFactoryBase 
     {
         /// <summary>
         /// 
@@ -105,14 +105,16 @@ namespace CRLGXLDPU
         }
     }
 
-    public class Crlgxl : FluxDeviceBase 
+    [DeviceKind ("HeatDevice")]
+    public class Crlgxl : PlaceDeviceBase 
+    //public class Crlgxl : placedevice 
     {
     }
 
     /// <summary>
     /// 
     /// </summary>
-    public class CrlgxlData : FlowmeterData
+    public class CrlgxlData : HeatData
     {
 
     }
@@ -148,6 +150,10 @@ namespace CRLGXLDPU
                     CrlgxlData data = new CrlgxlData();
                     data.InstantFlux = Convert.ToDouble(pr.Results["if"]);
                     data.Sum = Convert.ToDouble(pr.Results["sum"]);
+                    data.InstantHeat = Convert.ToDouble(pr.Results["ih"]);
+                    data.SumHeat = Convert.ToDouble(pr.Results["sh"]);
+                    data.GT = Convert.ToDouble(pr.Results["gt"]);
+                    data.BT = Convert.ToDouble(pr.Results["bt"]);
 
                     task.Device.DeviceDataManager.Last = data;
 

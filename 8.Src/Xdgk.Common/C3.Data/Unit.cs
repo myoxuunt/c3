@@ -61,7 +61,13 @@ namespace Xdgk.Common
 
             //
             //
-            Percentage = "%";
+            Percentage = "%",
+
+            // 
+            GJ = "GJ",
+            GJPerHour = "GJ/h";
+
+
 
         #endregion //units
         #endregion //Members

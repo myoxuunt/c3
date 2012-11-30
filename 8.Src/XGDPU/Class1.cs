@@ -222,7 +222,7 @@ namespace XGDPU
         }
     }
 
-    internal class XGData : IData
+    internal class XGData : DataBase 
     {
         /// <summary>
         /// 

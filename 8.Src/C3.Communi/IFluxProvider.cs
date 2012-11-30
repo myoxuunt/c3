@@ -5,6 +5,7 @@ using System.Text;
 
 namespace C3.Communi
 {
+    /*
     /// <summary>
     /// 
     /// </summary>
@@ -22,34 +23,42 @@ namespace C3.Communi
         DateTime BT1DataDT { get; }
         double BT1 { get; }
     }
+    */
 
+
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    //public interface IFluxProvider
+    //{
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    DateTime FluxDataDT { get; }
+
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    double InstantFlux { get; }
+
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    double Sum { get; }
+
+    //    /// <summary>
+    //    /// 
+    //    /// </summary>
+    //    FluxPlace FluxPlace { get; }
+    //}
 
     /// <summary>
     /// 
     /// </summary>
-    public interface IFluxProvider
+    public interface IPlace
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        DateTime FluxDataDT { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        double InstantFlux { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        double Sum { get; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        FluxPlace FluxPlace { get; }
+        FluxPlace Place { get; set; }
     }
-
 
     /// <summary>
     /// 

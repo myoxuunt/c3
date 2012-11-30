@@ -10,6 +10,10 @@ namespace Xdgk.Common
     public interface IData
     {
         DateTime DT { get; set; }
+        bool IsValid { get; }
+        object GetValue(string propertyName);
+        bool HasPropertyName(string propertyName);
+
         ReportItemCollection GetReportItems();
     }
 }

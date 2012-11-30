@@ -69,7 +69,7 @@
             </converter>
         </datafield>
         
-        <datafield name="bt1"
+        <datafield name="bt"
             begin="105"
             length="5">
             <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
@@ -78,7 +78,7 @@
             </converter>
         </datafield>
         
-        <datafield name="gt1"
+        <datafield name="gt"
             begin="110"
             length="5">
             <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">

@@ -138,7 +138,7 @@ namespace SCL6DPU
         }
     }
 
-    public class Scl6Factory : FluxDeviceFactoryBase 
+    public class Scl6Factory : PlaceDeviceFactoryBase 
     {
         /// <summary>
         /// 
@@ -165,7 +165,8 @@ namespace SCL6DPU
     /// <summary>
     /// 
     /// </summary>
-    internal class Scl6 : FluxDeviceBase 
+    [DeviceKind("FluxDevice")]
+    internal class Scl6 : PlaceDeviceBase 
     {
     }
 }

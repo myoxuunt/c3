@@ -9,7 +9,6 @@ using System.Text;
 using System.Windows.Forms;
 using Xdgk.Common;
 using Xdgk.GR.Common;
-using Xdgk.GR.Common;
 
 namespace Xdgk.GR.Common
 {

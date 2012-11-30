@@ -261,6 +261,15 @@ namespace C3.Communi
 
         #endregion //
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool HasData()
+        {
+            return this.DeviceDataManager.HasData();
+        }
+
         #region DeviceDataManager
         /// <summary>
         /// 

@@ -99,8 +99,8 @@ namespace XD1100DPU
             KeyValueCollection kvs = new KeyValueCollection();
             SqlCommand cmd = new SqlCommand();
 
-            string s = " INSERT INTO tblGRData(DT, GT1, BT1, GT2, BT2, OT, GTBase2, GP1, BP1, WL, GP2, BP2, I1, I2, IR, S1, S2, SR, OD, PA2, CM1, CM2, CM3, RM1, RM2, DeviceID)" +
-                " VALUES(@dt, @gt1, @BT1, @GT2, @BT2, @OT, @GTBase2, @GP1, @BP1, @WL, @GP2, @BP2, @I1, @I2, @IR, @S1, @S2, @SR, @OD, @PA2, @CM1, @CM2, @CM3, @RM1, @RM2, @DeviceID)";
+            string s = " INSERT INTO tblGRData(DT, GT1, BT1, GT2, BT2, OT, GTBase2, GP1, BP1, WL, GP2, BP2, I1, I2, IR, S1, S2, SR, OD, PA2, IH1, SH1, CM1, CM2, CM3, RM1, RM2, DeviceID)" +
+                " VALUES(@dt, @gt1, @BT1, @GT2, @BT2, @OT, @GTBase2, @GP1, @BP1, @WL, @GP2, @BP2, @I1, @I2, @IR, @S1, @S2, @SR, @OD, @PA2, @IH1, @SH1, @CM1, @CM2, @CM3, @RM1, @RM2, @DeviceID)";
 
             cmd.CommandText = s;
             SqlParameterCollection p = cmd.Parameters ;
@@ -125,6 +125,9 @@ namespace XD1100DPU
             AddSqlParameter(p, "SR", data.SR);
             AddSqlParameter(p, "OD", data.OD);
             AddSqlParameter(p, "PA2", data.PA2);
+            AddSqlParameter(p, "IH1", data.IH1);
+            AddSqlParameter(p, "SH1", data.SH1);
+
             AddSqlParameter(p, "CM1", data.CM1.PumpStatusEnum);
             AddSqlParameter(p, "CM2", data.CM2.PumpStatusEnum);
             AddSqlParameter(p, "CM3", data.CM3.PumpStatusEnum);

@@ -286,11 +286,47 @@ namespace XD1100DPU
         }
         #endregion //PA2
 
+        #region IH1
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem("瞬时热量", 19, Unit.GJPerHour , FloatFormat )]
+        public double IH1
+        {
+            get
+            {
+                return _iH1;
+            }
+            set
+            {
+                _iH1 = value;
+            }
+        } private double _iH1;
+        #endregion //IH1
+
+        #region SH1
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem("累计热量", 20, Unit.GJ, IntFormat)]
+        public double SH1
+        {
+            get
+            {
+                return _sH1;
+            }
+            set
+            {
+                _sH1 = value;
+            }
+        } private double _sH1;
+        #endregion //SH1
+
         #region CM1
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("循环泵1", 19, Unit.None)]
+        [DataItem("循环泵1", 119, Unit.None)]
         public PumpStatus CM1
         {
             get
@@ -309,7 +345,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("循环泵2", 20, Unit.None)]
+        [DataItem("循环泵2", 120, Unit.None)]
         public PumpStatus CM2
         {
             get
@@ -328,7 +364,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("循环泵3", 21, Unit.None)]
+        [DataItem("循环泵3", 121, Unit.None)]
         public PumpStatus CM3
         {
             get
@@ -348,7 +384,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("补水泵1", 22, Unit.None)]
+        [DataItem("补水泵1", 122, Unit.None)]
         public PumpStatus RM1
         {
             get
@@ -367,7 +403,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("补水泵2", 23, Unit.None)]
+        [DataItem("补水泵2", 123, Unit.None)]
         public PumpStatus RM2
         {
             get
@@ -386,7 +422,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("报警", 24, Unit.None)]
+        [DataItem("报警", 124, Unit.None)]
         public WarnWrapper Warn
         {
             get
