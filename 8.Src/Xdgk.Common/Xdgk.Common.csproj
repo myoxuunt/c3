@@ -55,6 +55,8 @@
     <Compile Include="DataFormatter\IDataFormatter.cs" />
     <Compile Include="DataFormatter\NumberFormatterBase.cs" />
     <Compile Include="DataFormatter\SingleFormatter.cs" />
+    <Compile Include="DGVConfig\DGVColumnConfig.cs" />
+    <Compile Include="DGVConfig\DGVColumnConfigCollection.cs" />
     <Compile Include="EnumTextAttribute.cs" />
     <Compile Include="C3.Data\AttributePropertyInfoPair.cs" />
     <Compile Include="C3.Data\AttributePropertyInfoPairCollection.cs" />
@@ -68,7 +70,6 @@
     <Compile Include="C3.Data\UnitType.cs" />
     <Compile Include="Calc\Calc.cs" />
     <Compile Include="Calc\CalcType.cs" />
-    <Compile Include="CodeFile1.cs" />
     <Compile Include="DateTimeHelper.cs" />
     <Compile Include="DefineExecuteNames.cs" />
     <Compile Include="DisplayValue.cs" />

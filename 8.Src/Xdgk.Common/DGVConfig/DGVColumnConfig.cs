@@ -1,8 +1,11 @@
-﻿namespace Xdgk.Common
+namespace Xdgk.Common
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DGVColumnConfig
     {
-
+        #region DGVColumnConfig
         /// <summary>
         /// 
         /// </summary>
@@ -14,6 +17,7 @@
         {
 
         }
+        #endregion //DGVColumnConfig
 
         #region DGVColumnConfig
         /// <summary>
@@ -30,7 +34,6 @@
             this.Width = width;
         }
         #endregion //DGVColumnConfig
-
 
         #region DataPropertyName
         /// <summary>
@@ -72,14 +75,13 @@
         {
             get
             {
-                if( _width < 0)
+                if (_width < 0)
                     _width = 90;
                 return _width;
             }
             set { _width = value; }
         } private int _width;
         #endregion //Width
-
 
         #region Text
         /// <summary>
@@ -110,11 +112,4 @@
 
     }
 
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class DGVColumnConfigCollection : Xdgk.Common.Collection<DGVColumnConfig>
-    {
-    }
 }
