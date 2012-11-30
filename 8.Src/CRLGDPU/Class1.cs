@@ -6,7 +6,7 @@ using Xdgk.GR.Common;
 
 namespace CRLGDPU
 {
-    internal class DBI : DBIBase
+    internal class DBI : DBIForHZ 
     {
         /// <summary>
         /// 
@@ -50,13 +50,7 @@ namespace CRLGDPU
         /// <param name="data"></param>
         public void InsertCrlgData(int deviceID, CrlgData data)
         {
-            string s = string.Format(
-                "insert into tblHeatData(deviceid, DT, instantFlux, sum, ih, sh) " + 
-                "values({0}, '{1}', {2}, {3}, {4}, {5})",
-                deviceID, data.DT, data.InstantFlux,
-                data.Sum, data.InstantHeat, data.SumHeat);
-
-            ExecuteScalar(s);
+            base.InsertHeatData(deviceID, data);
         }
     }
 
@@ -110,82 +104,8 @@ namespace CRLGDPU
 
 
     [DeviceKind("HeatDevice")]
-    public class Crlg : PlaceDeviceBase//, IGT1Provider , IBT1Provider 
+    public class Crlg : PlaceDeviceBase
     {
-
-        //#region IGT1Provider 成员
-
-        //public DateTime GT1DataDT
-        //{
-        //    get
-        //    {
-        //        DateTime r = DateTime.MinValue;
-        //        IData last = this.DeviceDataManager.Last;
-        //        if (last!= null)
-        //        {
-        //            r = last.DT;
-        //        }
-        //        return r;
-        //    }
-        //}
-
-        //public double GT1
-        //{
-        //    get
-        //    {
-        //        double r = 0d;
-
-        //        IData last = this.DeviceDataManager.Last;
-        //        if (last != null)
-        //        {
-        //            CrlgData data = last as CrlgData;
-        //            if (data != null)
-        //            {
-        //                r = data.GT1;
-        //            }
-        //        }
-        //        return r;
-        //    }
-        //}
-
-        //#endregion
-
-        //#region IBT1Provider 成员
-
-        //public DateTime BT1DataDT
-        //{
-        //    get
-        //    {
-        //        DateTime r = DateTime.MinValue;
-        //        IData last = this.DeviceDataManager.Last;
-        //        if (last != null)
-        //        {
-        //            r = last.DT;
-        //        }
-        //        return r;
-        //    }
-        //}
-
-        //public double BT1
-        //{
-        //    get
-        //    {
-        //        double r = 0d;
-
-        //        IData last = this.DeviceDataManager.Last;
-        //        if (last != null)
-        //        {
-        //            CrlgData data = last as CrlgData;
-        //            if (data != null)
-        //            {
-        //                r = data.BT1;
-        //            }
-        //        }
-        //        return r;
-        //    }
-        //}
-
-        //#endregion
     }
 
     /// <summary>

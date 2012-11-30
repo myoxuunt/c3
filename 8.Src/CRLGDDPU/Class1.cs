@@ -6,7 +6,7 @@ using Xdgk.GR.Common;
 
 namespace CRLGDDPU
 {
-    internal class DBI : DBIBase
+    internal class DBI : DBIForHZ 
     {
         /// <summary>
         /// 
@@ -50,11 +50,7 @@ namespace CRLGDDPU
         /// <param name="data"></param>
         public void InsertCrlgdData(int deviceID, CrlgdData data)
         {
-            string s = string.Format(
-                "insert into tblFluxData(deviceid, DT, instantFlux, sum) values({0}, '{1}', {2}, {3})",
-                deviceID, data.DT, data.InstantFlux, data.Sum);
-
-            ExecuteScalar(s);
+            base.InsertHeatData(deviceID, data);
         }
     }
 

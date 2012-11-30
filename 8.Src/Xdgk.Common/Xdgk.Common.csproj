@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="C3.Data\FlowmeterData.cs" />
+    <Compile Include="C3.Data\HeatData.cs" />
     <Compile Include="Core\ADEStatusStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -55,6 +57,8 @@
     <Compile Include="DataFormatter\IDataFormatter.cs" />
     <Compile Include="DataFormatter\NumberFormatterBase.cs" />
     <Compile Include="DataFormatter\SingleFormatter.cs" />
+    <Compile Include="DBI\DBIForHZ.cs" />
+    <Compile Include="DBI\DBInfoException.cs" />
     <Compile Include="DGVConfig\DGVColumnConfig.cs" />
     <Compile Include="DGVConfig\DGVColumnConfigCollection.cs" />
     <Compile Include="Core\EnumTextAttribute.cs" />
@@ -71,6 +75,7 @@
     <Compile Include="Calc\Calc.cs" />
     <Compile Include="Calc\CalcType.cs" />
     <Compile Include="DateTime\DateTimeHelper.cs" />
+    <Compile Include="KeyValueCollection\StringStringDictionaryConverter.cs" />
     <Compile Include="Remote\DefineExecuteNames.cs" />
     <Compile Include="_others\DisplayValue.cs" />
     <Compile Include="_others\DisplayValueCollection.cs" />

@@ -1138,7 +1138,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:C3, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:C3, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_55C98D2FD0BB4E6DBA6F4351E04F6A64"
@@ -2168,7 +2168,7 @@
         "Title" = "8:C3"
         "Subject" = "8:"
         "ARPCONTACT" = "8:xd"
-        "Keywords" = "8:c3 v1.8"
+        "Keywords" = "8:c3 v1.9"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:"
@@ -2586,7 +2586,7 @@
                             "ContextData" = "8:"
                             "Attributes" = "3:0"
                             "Setting" = "3:2"
-                            "Value" = "8:安装程序将引导您完成在您的计算机上安装 C3 V1.8 所需的步骤。"
+                            "Value" = "8:安装程序将引导您完成在您的计算机上安装 C3 V1.9 所需的步骤。"
                             "DefaultValue" = "8:#1203"
                             "UsePlugInResources" = "11:TRUE"
                             }

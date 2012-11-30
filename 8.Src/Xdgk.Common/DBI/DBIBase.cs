@@ -6,41 +6,11 @@ using System.Data.SqlClient;
 
 namespace Xdgk.Common
 {
-    #region DBInfoException
-    /// <summary>
-    /// 
-    /// </summary>
-    public class DBInfoException : Exception
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="message"></param>
-        public DBInfoException(string message)
-            : base(message)
-        {
-        }
-    }
-    #endregion //DBInfoException
-
     /// <summary>
     /// 
     /// </summary>
     public class DBIBase
     {
-        //#region static DBIBase
-        ///// <summary>
-        ///// 保存近最创建的DBIBase实例
-        ///// </summary>
-        //static public DBIBase Instance
-        //{
-        //    get
-        //    {
-        //        return _DBIBase;
-        //    }
-        //} static private DBIBase _DBIBase;
-        //#endregion //static DBIBase
-
         private string _connString;
 
         /// <summary>
@@ -50,35 +20,7 @@ namespace Xdgk.Common
         public DBIBase(string connString)
         {
             this._connString = connString;
-            //_DBIBase = this;
         }
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public void Open()
-        //{
-        //    this._connection = new SqlConnection(_connString);
-        //    this._connection.Open();
-        //}
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public void Close()
-        //{
-        //    this._connection.Close();
-        //}
-
-        //#region Connection
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        //public SqlConnection Connection
-        //{
-        //    get { return _connection; }
-        //} private SqlConnection _connection;
-        //#endregion //Connection
 
         #region ExecuteDataTable
         /// <summary>
@@ -88,7 +30,6 @@ namespace Xdgk.Common
         /// <returns></returns>
         public DataTable ExecuteDataTable(string sql)
         {
-            //SqlCommand cmd = this._connection.CreateCommand();
             SqlCommand cmd = new SqlCommand(sql);
             return ExecuteDataTable(cmd);
         }
@@ -129,6 +70,17 @@ namespace Xdgk.Common
         }
         #endregion //ExecuteScalar
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public object ExecuteScalar(string sql, KeyValueCollection parameters)
+        {
+            return ExecuteScalar(new SqlCommand(sql), parameters);
+        }
+
         #region ExecuteScalar
         /// <summary>
         /// 
@@ -137,14 +89,29 @@ namespace Xdgk.Common
         /// <returns></returns>
         public object ExecuteScalar(SqlCommand cmd)
         {
+            return ExecuteScalar(cmd, null);
+        }
+        #endregion //ExecuteScalar
+
+        public object ExecuteScalar(SqlCommand cmd, KeyValueCollection parameters)
+        {
             using (SqlConnection cn = new SqlConnection(this._connString))
             {
                 cn.Open();
                 cmd.Connection = cn;
+
+                if ( parameters != null )
+                {
+                    foreach (KeyValue kv in parameters)
+                    {
+                        SqlParameter sp = new SqlParameter(kv.Key, kv.Value);
+                        cmd.Parameters.Add(sp);
+                    }
+                }
+
                 return cmd.ExecuteScalar();
             }
         }
-        #endregion //ExecuteScalar
 
         #region GetDBInfo
         /// <summary>
@@ -232,4 +199,8 @@ namespace Xdgk.Common
             cmd.Parameters.Add(p);
         }
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
 }

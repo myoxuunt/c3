@@ -9,6 +9,17 @@ namespace Xdgk.Common
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void Add(string key, object value)
+        {
+            KeyValue kv = new KeyValue(key, value);
+            this.Add(kv);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="index"></param>
         /// <param name="item"></param>
         protected override void InsertItem(int index, KeyValue item)

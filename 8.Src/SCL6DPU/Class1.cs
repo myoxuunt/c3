@@ -7,7 +7,7 @@ using Xdgk.GR.Common;
 namespace SCL6DPU
 {
 
-    internal class DBI : DBIBase
+    internal class DBI : DBIForHZ 
     {
         /// <summary>
         /// 
@@ -51,11 +51,7 @@ namespace SCL6DPU
         /// <param name="data"></param>
         public void InsertScl6Data(int deviceID, Scl6Data data)
         {
-            string s = string.Format(
-                "insert into tblFluxData(deviceid, DT, instantFlux, sum) values({0}, '{1}', {2}, {3})",
-                deviceID, data.DT, data.InstantFlux, data.Sum);
-
-            ExecuteScalar(s);
+            base.InsertFlowmeterData(deviceID, data);
         }
     }
 
