@@ -5,15 +5,6 @@ namespace Xdgk.Common
     /// <summary>
     /// 
     /// </summary>
-    public enum StringFormat
-    {
-        Hex,
-        Dec,
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
     public class BytesConverter 
     {
         private static bool _isWithLength = true;

@@ -44,9 +44,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ADEStatusStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="ADEStatusText.cs" />
     <Compile Include="App.cs" />
     <Compile Include="AppFactory.cs" />
-    <Compile Include="Attribute.cs" />
+    <Compile Include="DataFormatter\DataFormatterBase.cs" />
+    <Compile Include="DataFormatter\DataFormatterCollection.cs" />
+    <Compile Include="DataFormatter\DecimalFormatter.cs" />
+    <Compile Include="DataFormatter\DoubleFormatter.cs" />
+    <Compile Include="DataFormatter\Int32Formatter.cs" />
+    <Compile Include="DataFormatter\IDataFormatter.cs" />
+    <Compile Include="DataFormatter\NumberFormatterBase.cs" />
+    <Compile Include="DataFormatter\SingleFormatter.cs" />
+    <Compile Include="EnumTextAttribute.cs" />
     <Compile Include="C3.Data\AttributePropertyInfoPair.cs" />
     <Compile Include="C3.Data\AttributePropertyInfoPairCollection.cs" />
     <Compile Include="C3.Data\DataBase.cs" />
@@ -59,7 +68,6 @@
     <Compile Include="C3.Data\UnitType.cs" />
     <Compile Include="Calc\Calc.cs" />
     <Compile Include="Calc\CalcType.cs" />
-    <Compile Include="cccc.cs" />
     <Compile Include="CodeFile1.cs" />
     <Compile Include="DateTimeHelper.cs" />
     <Compile Include="DefineExecuteNames.cs" />
@@ -83,7 +91,7 @@
     <Compile Include="DBIBase.cs" />
     <Compile Include="DBInfo.cs" />
     <Compile Include="Decorator.cs" />
-    <Compile Include="Enum.cs" />
+    <Compile Include="ADEStatus.cs" />
     <Compile Include="FileEncryptor.cs" />
     <Compile Include="COPYDATASTRUCT.cs" />
     <Compile Include="JMSoftware.Widgets\BaseWidget.cs">
@@ -116,6 +124,7 @@
     <Compile Include="SettingsDialogBase.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="StringFormat.cs" />
     <Compile Include="StringHelper.cs" />
     <Compile Include="StringStringDictionary.cs" />
     <Compile Include="UserMessage.cs" />

@@ -4,17 +4,7 @@ using System.Text;
 
 namespace Xdgk.Common
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public enum ADEStatus
-    {
-        Add,
-        Edit,
-        Delete,
-    }
-
-    /// <summary>
+  /// <summary>
     /// 
     /// </summary>
     public class ADEStatusText
