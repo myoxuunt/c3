@@ -35,47 +35,47 @@ namespace XD1100DPU
             }
             return r;
         }
-        private bool IsFluxDevice(IDevice device)
-        {
-            bool r = false;
-            Type t = device.GetType();
-            object[] objs = t.GetCustomAttributes(typeof(DeviceKind), true);
-            foreach (object obj in objs)
-            {
-                DeviceKindAttribute kind = obj as DeviceKindAttribute;
-                if (StringHelper.Equal(kind.Name, KIND_FLUX))
-                {
-                    r = true;
-                    break;
-                }
-            }
-            return r;
-        }
+        //private bool IsFluxDevice(IDevice device)
+        //{
+        //    bool r = false;
+        //    Type t = device.GetType();
+        //    object[] objs = t.GetCustomAttributes(typeof(DeviceKind), true);
+        //    foreach (object obj in objs)
+        //    {
+        //        DeviceKindAttribute kind = obj as DeviceKindAttribute;
+        //        if (StringHelper.Equal(kind.Name, KIND_FLUX))
+        //        {
+        //            r = true;
+        //            break;
+        //        }
+        //    }
+        //    return r;
+        //}
         /// <summary>
         /// 
         /// </summary>
         /// <param name="device"></param>
         /// <returns></returns>
         //private List<IFluxProvider> GetFluxProviderList(IDevice device)
-        private DeviceCollection GetFluxDevices(IDevice device)
-        {
-            //List<IFluxProvider> r = new List<IFluxProvider>();
-            DeviceCollection r = new DeviceCollection();
+        //private DeviceCollection GetFluxDevices(IDevice device)
+        //{
+        //    //List<IFluxProvider> r = new List<IFluxProvider>();
+        //    DeviceCollection r = new DeviceCollection();
 
-            DeviceCollection devices = device.Station.Devices;
-            foreach (IDevice item in devices)
-            {
-                if (item != device &&
-                    IsFluxDevice(item)
-                    )
-                {
-                    //r = (IFluxProvider)item;
-                    //break;
-                    r.Add(item);
-                }
-            }
-            return r;
-        }
+        //    DeviceCollection devices = device.Station.Devices;
+        //    foreach (IDevice item in devices)
+        //    {
+        //        if (item != device &&
+        //            IsFluxDevice(item)
+        //            )
+        //        {
+        //            //r = (IFluxProvider)item;
+        //            //break;
+        //            r.Add(item);
+        //        }
+        //    }
+        //    return r;
+        //}
 
         /// <summary>
         /// 

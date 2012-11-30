@@ -107,7 +107,7 @@ namespace SCL61DDPU
         }
     }
 
-    [DeviceKind ("FluxDevice")]
+    [DeviceKind("FluxDevice")]
     public class Scl61d : PlaceDeviceBase 
     {
     }

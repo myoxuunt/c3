@@ -57,6 +57,8 @@
     <Compile Include="C3.Data\Report\ReportItemCollection.cs" />
     <Compile Include="C3.Data\Unit.cs" />
     <Compile Include="C3.Data\UnitType.cs" />
+    <Compile Include="Calc\Calc.cs" />
+    <Compile Include="Calc\CalcType.cs" />
     <Compile Include="cccc.cs" />
     <Compile Include="CodeFile1.cs" />
     <Compile Include="DateTimeHelper.cs" />
