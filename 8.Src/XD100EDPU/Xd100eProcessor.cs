@@ -98,7 +98,7 @@ namespace XD100EDPU
                     // [x] get place == first ?
                     // get device gt bt
 
-                    double if1 = 0d, sf1 = 0d, gt1 = 0d, bt1 = 0d;
+                    double if1 = 0d, sf1 = 0d, gt1 = 0d, bt1 = 0d, ih1 = 0d, sh1=0d;
                     //bool hasFirstFluxDevice;
                     //string firstEx;
                     //bool success2 = GetFluxValues(xd100eDevice, FluxPlace.FirstSide, out hasFirstFluxDevice,
@@ -115,6 +115,8 @@ namespace XD100EDPU
                         sf1 = Calc(hs, "Sum", CalcType.Sum);
                         gt1 = Calc(hs, "GT", CalcType.Avg);
                         bt1 = Calc(hs, "BT", CalcType.Avg);
+                        ih1 = Calc(hs, "InstantHeat", CalcType.Sum);
+                        sh1 = Calc(hs, "SumHeat", CalcType.Sum);
 
                     }
 
@@ -151,6 +153,9 @@ namespace XD100EDPU
                                 data.AI5 = Convert.ToSingle(if1);
                                 data.AI1 = Convert.ToSingle(gt1);
                                 data.AI2 = Convert.ToSingle(bt1);
+
+                                data.IH1 = ih1;
+                                data.SH1 = sh1;
                             }
                             else
                             {

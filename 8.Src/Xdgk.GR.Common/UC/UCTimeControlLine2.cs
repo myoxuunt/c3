@@ -24,6 +24,17 @@ namespace Xdgk.GR.Common
             get { return (float)this.numGTBase2.Value; }
             set
             {
+                // check value range
+                //
+                if (value < 0)
+                {
+                    value = 0;
+                }
+                if (value > 100)
+                {
+                    value = 100;
+                }
+
                 this.numGTBase2.Value = (decimal)value;
                 this.ucTimeControlLine1.GTBase2 = (int)this.numGTBase2.Value;
             }

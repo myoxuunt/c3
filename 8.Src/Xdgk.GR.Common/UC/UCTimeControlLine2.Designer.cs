@@ -52,18 +52,13 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(219, 5);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(83, 12);
+            this.label5.Size = new System.Drawing.Size(89, 12);
             this.label5.TabIndex = 18;
-            this.label5.Text = "（0 ~ 99 ℃）";
+            this.label5.Text = "（0 ~ 100 ℃）";
             // 
             // numGTBase2
             // 
             this.numGTBase2.Location = new System.Drawing.Point(76, 3);
-            this.numGTBase2.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
             this.numGTBase2.Name = "numGTBase2";
             this.numGTBase2.Size = new System.Drawing.Size(137, 21);
             this.numGTBase2.TabIndex = 17;

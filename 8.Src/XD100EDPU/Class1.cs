@@ -87,8 +87,8 @@ namespace XD100EDPU
 
             //
             //
-            columns += "if1, sf1,";
-            values += string.Format("{0}, {1},",data.IF1, data.SF1 );
+            columns += "if1, sf1, ih1, sh1,";
+            values += string.Format("{0}, {1}, {2}, {3},", data.IF1, data.SF1, data.IH1, data.SH1);
 
             columns = RemoveLastChar(columns);
             values = RemoveLastChar(values);
@@ -697,6 +697,41 @@ namespace XD100EDPU
         } private double _sF1;
         #endregion //SF2
 
+        #region IH1
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem ("瞬时热量", 34, Unit.GJPerHour , "f2")]
+        public double IH1
+        {
+            get
+            {
+                return _iH;
+            }
+            set
+            {
+                _iH = value;
+            }
+        } private double _iH;
+        #endregion //IH1
+
+        #region SH1
+        /// <summary>
+        /// 
+        /// </summary>
+        [DataItem ("累计热量", 35, Unit.GJ, "f0")]
+        public double SH1
+        {
+            get
+            {
+                return _sH;
+            }
+            set
+            {
+                _sH = value;
+            }
+        } private double _sH;
+        #endregion //SH1
 
     }
 

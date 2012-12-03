@@ -1,0 +1,4 @@
+﻿Xdgk.GR.Common
+
+v1.2.0.0	2012-12-03
+	ucTimeControlLine2 up down number data range exception

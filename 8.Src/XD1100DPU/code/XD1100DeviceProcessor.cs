@@ -223,8 +223,10 @@ namespace XD1100DPU
             data.S1 = Convert.ToInt32(pr.Results["S1"]);
             data.SR = Convert.ToInt32(pr.Results["SR"]);
             data.OD = Convert.ToInt32(pr.Results["OD"]);
-            data.IH1 = Convert.ToDouble (pr.Results ["IH1"]);
-            data.SH1 = Convert.ToDouble (pr.Results ["SH1"]);
+            //data.IH1 = Convert.ToDouble (pr.Results ["IH1"]);
+            //data.SH1 = Convert.ToDouble (pr.Results ["SH1"]);
+            data.IH1 = 0d;
+            data.SH1 = 0d;
 
             // 2012-10-09 xd1100 pump status
             //
