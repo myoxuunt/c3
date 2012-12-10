@@ -240,39 +240,11 @@ namespace XGDPU
             this.CardSN = cardSn;
         }
 
-        #region IData 成员
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime DT
-        {
-            get
-            {
-                return _dt;
-            }
-            set
-            {
-                _dt = value;
-            }
-        } private DateTime _dt;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public ReportItemCollection GetReportItems()
-        {
-            ReportItemCollection r = new ReportItemCollection();
-            r.Add(new ReportItem("时间", this.DT, Unit.FindByName(Unit.None)));
-            r.Add(new ReportItem("卡号", this.CardSN, Unit.FindByName(Unit.None)));
-            return r;
-        }
-
         #region CardSN
         /// <summary>
         /// 
         /// </summary>
+        [DataItem ("卡号", 10, Unit.None )]
         public string CardSN
         {
             get
@@ -290,8 +262,6 @@ namespace XGDPU
         } private string _cardSN;
         #endregion //CardSN
 
-
-        #endregion
     }
 
     internal class XGDevice : DeviceBase
