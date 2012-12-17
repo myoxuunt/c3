@@ -55,57 +55,91 @@ namespace XGDPU
         /// <param name="xgData"></param>
         public void InsertXGData(XGDevice xgdevice, XGData xgData)
         {
-            int cardID;
-            string person;
-            GetCardID(xgData.CardSN, out cardID, out person);
-
+            int tmCardID = GetTMCardID (xgData.CardSN);
             int deviceID = GuidHelper.ConvertToInt32(xgdevice.Guid);
-            int stationID = GuidHelper.ConvertToInt32(xgdevice.StationGuid);
-
             string s = string.Format(
-                "INSERT INTO tblXGData(DT, Person, DeviceID,  CardID) " +
-                "VALUES('{0}', '{1}', {2}, {3})",
-                xgData.DT, person, deviceID, cardID);
+                "insert into tblTMData( DeviceID, TMID, TMDataDT) values ({0}, {1}, '{2}')",
+                deviceID, tmCardID, xgData.DT);
             ExecuteScalar(s);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cardSn"></param>
+        /// <param name="cardSN"></param>
         /// <returns></returns>
-        public void GetCardID(string cardSn, out int cardID, out string person)
+        private int GetTMCardID(string cardSn)
         {
-            string s = string.Format("select * from tblCard where sn = '{0}'", cardSn);
-            DataTable tbl = ExecuteDataTable(s);
-            if (tbl.Rows.Count > 0)
+            string s = string.Format("select TMID from tblTM where TmSN = '{0}'", cardSn);
+            object value = ExecuteScalar(s);
+            if (value != null && value != DBNull.Value)
             {
-                DataRow row = tbl.Rows[0];
-                cardID = Convert.ToInt32(row["cardID"]);
-                person = row["Person"].ToString();
+                return Convert.ToInt32(value);
             }
             else
             {
-                InsertCard(cardSn, "unknown");
-                GetCardID(cardSn, out cardID, out person);
+                InsertTMCard(cardSn);
+
+                return GetTMCardID(cardSn);
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cardSn"></param>
-        /// <param name="person"></param>
-        private void InsertCard(string cardSn, string person)
+        private void InsertTMCard(string cardSn)
         {
-            string s = string.Format(
-                "insert into tblCard(sn, person) values('{0}', '{1}')",
-                cardSn, person);
-            ExecuteScalar(s);
+            // insert tm card
+            //
+            string sInsert = string.Format("insert into tblTM (tmsn) values ('{0}')", cardSn);
+            ExecuteScalar(sInsert);
+
+            // insert person with the tm card
+            //
+            int tmid = GetTMCardID(cardSn);
+            string insertPerson = string.Format(
+                "INSERT INTO tblPerson(PersonName, TmID) VALUES('{0}', {1})",
+                "unknown", tmid);
+            ExecuteScalar(insertPerson);
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="cardSn"></param>
+        ///// <returns></returns>
+        //public void GetCardID(string cardSn, out int cardID, out string person)
+        //{
+        //    string s = string.Format("select * from tblCard where sn = '{0}'", cardSn);
+        //    DataTable tbl = ExecuteDataTable(s);
+        //    if (tbl.Rows.Count > 0)
+        //    {
+        //        DataRow row = tbl.Rows[0];
+        //        cardID = Convert.ToInt32(row["cardID"]);
+        //        person = row["Person"].ToString();
+        //    }
+        //    else
+        //    {
+        //        InsertCard(cardSn, "unknown");
+        //        GetCardID(cardSn, out cardID, out person);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="cardSn"></param>
+        ///// <param name="person"></param>
+        //private void InsertCard(string cardSn, string person)
+        //{
+        //    string s = string.Format(
+        //        "insert into tblCard(sn, person) values('{0}', '{1}')",
+        //        cardSn, person);
+        //    ExecuteScalar(s);
+        //}
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class XGDevicePersister : DevicePersisterBase
     {
         protected override void OnAdd(IDevice device)
