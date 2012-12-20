@@ -61,18 +61,35 @@ namespace C3
         /// </summary>
         private void Bind()
         {
-            foreach (IStation station in Hardware.Stations)
+            List<IStation> stationsList = Sort(Hardware.Stations);
+
+            foreach (IStation station in stationsList)
             {
                 TreeNode stationNode = new StationTreeNode(station);
                 this.Nodes.Add(stationNode);
             }
         }
-
-        void a()
-        {
-            //this.Invoke (
-        }
         #endregion //Bind
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stationCollection"></param>
+        /// <returns></returns>
+        private List<IStation> Sort(StationCollection stations)
+        {
+            List<IStation> stationList = new List<IStation>(stations);
+            stationList.Sort(new StationComparer());
+            return stationList;
+        }
+
+        private class StationComparer : IComparer<IStation>
+        {
+            public int Compare(IStation x, IStation y)
+            {
+                return x.Name.CompareTo(y.Name);
+            }
+        }
 
 
         #region InitializeComponent
