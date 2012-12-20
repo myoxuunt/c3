@@ -1177,5 +1177,62 @@
         <crcer name="Xdgk.Communi.CRC16"/>
       </receivepart>
     </operadefine>
+
+    <operadefine name="ReadStatus" text="读取状态" >
+      <sendpart>
+        <datafield name="address"
+            begin="0"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="df1"
+            begin="1"
+            length="5"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="02 00 00 00 20"/>
+
+        <datafield name="crc"
+            begin="6"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            crc="true" />
+        <crcer name="Xdgk.Communi.CRC16"/>
+      </sendpart>
+
+      <receivepart length="9">
+
+        <datafield name="address"
+            begin="0"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="fc"
+            begin="1"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"
+            bytes="02"
+            matchcheck="true"/>
+
+        <datafield name="datalen"
+            begin="2"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="04"
+            matchcheck="true"/>
+
+        <datafield name="data"
+            begin="3"
+            length="4"
+            converter="Xdgk.Communi.OriginalConverter" />
+
+        <datafield name="crc"
+            begin="7"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            crc="true"/>
+
+        <crcer name="Xdgk.Communi.CRC16"/>
+      </receivepart>
+    </operadefine>
   </devicedefine>
 </devicedefines>

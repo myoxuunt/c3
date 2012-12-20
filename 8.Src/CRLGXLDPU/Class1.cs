@@ -103,7 +103,6 @@ namespace CRLGXLDPU
 
     [DeviceKind ("HeatDevice")]
     public class Crlgxl : PlaceDeviceBase 
-    //public class Crlgxl : placedevice 
     {
     }
 

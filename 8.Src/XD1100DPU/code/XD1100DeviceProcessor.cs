@@ -1,13 +1,10 @@
 using System;
 using System.Collections;
-using System.Data;
 using System.Collections.Generic;
-using System.Windows.Forms;
+using System.Diagnostics;
 using C3.Communi;
 using Xdgk.Common;
-//using C3.Communi;
 using Xdgk.GR.Common;
-using NLog;
 
 namespace XD1100DPU
 {
@@ -16,9 +13,29 @@ namespace XD1100DPU
     /// </summary>
     public class XD1100DeviceProcessor : TaskProcessorBase
     {
-        string KIND_FLUX = "FluxDevice";
-        string KIND_HEAT = "HeatDevice";
+        #region Members
+        /// <summary>
+        /// 
+        /// </summary>
+        private string KIND_FLUX = "FluxDevice";
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private string KIND_HEAT = "HeatDevice";
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private const string POWER_ALARM = "µÁ‘¥π ’œ";
+        #endregion //Members
+
+        #region RemoveUnkonwnPlaceDevice
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="devices"></param>
+        /// <returns></returns>
         private DeviceCollection RemoveUnkonwnPlaceDevice(DeviceCollection devices)
         {
             DeviceCollection r = new DeviceCollection();
@@ -35,48 +52,9 @@ namespace XD1100DPU
             }
             return r;
         }
-        //private bool IsFluxDevice(IDevice device)
-        //{
-        //    bool r = false;
-        //    Type t = device.GetType();
-        //    object[] objs = t.GetCustomAttributes(typeof(DeviceKind), true);
-        //    foreach (object obj in objs)
-        //    {
-        //        DeviceKindAttribute kind = obj as DeviceKindAttribute;
-        //        if (StringHelper.Equal(kind.Name, KIND_FLUX))
-        //        {
-        //            r = true;
-        //            break;
-        //        }
-        //    }
-        //    return r;
-        //}
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="device"></param>
-        /// <returns></returns>
-        //private List<IFluxProvider> GetFluxProviderList(IDevice device)
-        //private DeviceCollection GetFluxDevices(IDevice device)
-        //{
-        //    //List<IFluxProvider> r = new List<IFluxProvider>();
-        //    DeviceCollection r = new DeviceCollection();
+        #endregion //RemoveUnkonwnPlaceDevice
 
-        //    DeviceCollection devices = device.Station.Devices;
-        //    foreach (IDevice item in devices)
-        //    {
-        //        if (item != device &&
-        //            IsFluxDevice(item)
-        //            )
-        //        {
-        //            //r = (IFluxProvider)item;
-        //            //break;
-        //            r.Add(item);
-        //        }
-        //    }
-        //    return r;
-        //}
-
+        #region OnProcess
         /// <summary>
         /// 
         /// </summary>
@@ -90,6 +68,10 @@ namespace XD1100DPU
                 if (StringHelper.Equal(opera, XD1100OperaNames.ReadReal))
                 {
                     ProcessReadReal(task, pr);
+                }
+                else if( StringHelper.Equal ( opera, XD1100OperaNames.ReadStatus ))
+                {
+                    ProcessReadStatus(task, pr);
                 }
                 else if (
                     (StringHelper.Equal(opera, XD1100OperaNames.WriteOT)) ||
@@ -107,7 +89,27 @@ namespace XD1100DPU
                 }
             }
         }
+        #endregion //OnProcess
 
+        #region ProcessReadStatus
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="pr"></param>
+        private void ProcessReadStatus(ITask task, IParseResult pr)
+        {
+            XD1100Device d = (XD1100Device ) task.Device;
+
+            byte[] bsStatus = (byte[])pr.Results["data"];
+            Debug.Assert(bsStatus.Length == 4);
+            byte b = bsStatus[3];
+            bool hasPowerAlarm = (b & (byte)Math.Pow(2, 7)) > 0;
+            d.StatusAndAlarmDictionary[XD1100Device.StatusAndAlarmEnum.AlaramPower] = hasPowerAlarm;
+        }
+        #endregion //ProcessReadStatus
+
+        #region GetFluxDatas
         /// <summary>
         /// 
         /// </summary>
@@ -132,7 +134,15 @@ namespace XD1100DPU
 
             return hs;
         }
+        #endregion //GetFluxDatas
 
+        #region GetHashValue
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hs"></param>
+        /// <param name="fluxPlace"></param>
+        /// <returns></returns>
         private List<double> GetHashValue(Hashtable hs, FluxPlace fluxPlace)
         {
             object obj =  hs[fluxPlace];
@@ -152,55 +162,16 @@ namespace XD1100DPU
                 return list;
             }
         }
+        #endregion //GetHashValue
 
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="fluxProviderList"></param>
-        ///// <returns></returns>
-        //private bool IsFluxProviderDataValid(List<IFluxProvider> fluxProviderList)
-        //{
-        //    bool r = true;
-        //    foreach (IFluxProvider fp in fluxProviderList)
-        //    {
-        //        if (fp.FluxPlace != FluxPlace.Unknown)
-        //        {
-        //            if (!IsFluxProviderDataValid(fp))
-        //            {
-        //                r = false;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    return r;
-        //}
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="fp"></param>
-        ///// <returns></returns>
-        //private bool IsFluxProviderDataValid(IFluxProvider fp)
-        //{
-        //    return fp.FluxDataDT != DateTime.MinValue;
-        //}
-
-
+        #region ProcessReadReal
         /// <summary>
         /// 
         /// </summary>
         /// <param name="d"></param>
         /// <param name="pr"></param>
-        //private void ProcessReadReal(XD1100Device d, IParseResult pr, List<IFluxProvider> fluxProviderList)
-        private void ProcessReadReal ( ITask task, IParseResult pr )
+        private void ProcessReadReal(ITask task, IParseResult pr)
         {
-
-
-                    //if (IsFluxProviderDataValid(fluxProviderList))
-                    //{
-                    //    ProcessReadReal(d, pr, fluxProviderList);
-                    //}
-
             XD1100Data data = new XD1100Data();
 
             data.DT = DateTime.Now;
@@ -240,6 +211,16 @@ namespace XD1100DPU
 
             object objWarn = pr.Results["Warn"];
             IList listWarn = (IList)objWarn;
+
+            bool isContainsPowerAlaram = listWarn.Contains(POWER_ALARM);
+            if (!isContainsPowerAlaram)
+            {
+                if (HasPowerAlaramInStatus(task.Device as XD1100Device))
+                {
+                    listWarn.Add(POWER_ALARM);
+                }
+            }
+
             WarnWrapper ww = new WarnWrapper(listWarn);
             data.Warn = ww;
 
@@ -252,7 +233,7 @@ namespace XD1100DPU
             bool hasFluxData = fluxDevices.HasData(HasDataOption.All);
 
             bool success = true;
-            if (hasFluxDevices )
+            if (hasFluxDevices)
             {
                 if (hasFluxData)
                 {
@@ -314,11 +295,11 @@ namespace XD1100DPU
                     double sh = 0d;
                     foreach (IDevice hd in heatDevices)
                     {
-                        IData  last = hd.DeviceDataManager.Last;
+                        IData last = hd.DeviceDataManager.Last;
                         ih += Convert.ToDouble(last.GetValue("InstantHeat"));
                         sh += Convert.ToDouble(last.GetValue("SumHeat"));
                         instantFlux += Convert.ToDouble(last.GetValue("InstantFlux"));
-                        sumFlux += Convert.ToDouble(last.GetValue ("Sum"));
+                        sumFlux += Convert.ToDouble(last.GetValue("Sum"));
                     }
 
                     data.I1 = Convert.ToSingle(instantFlux);
@@ -337,32 +318,6 @@ namespace XD1100DPU
                 return;
             }
 
-            //
-            //
-            //if (fluxProviderList != null)
-            //foreach (IFluxProvider fluxProvider in fluxProviderList)
-            //{
-            //    switch (fluxProvider.FluxPlace)
-            //    {
-            //        case FluxPlace.FirstSide:
-            //            data.I1 = Convert.ToSingle(fluxProvider.InstantFlux);
-            //            data.S1 = Convert.ToInt32(fluxProvider.Sum);
-            //            break;
-
-            //        case FluxPlace.SecondSide:
-            //            data.I2 = Convert.ToSingle(fluxProvider.InstantFlux);
-            //            data.S2 = Convert.ToInt32(fluxProvider.Sum);
-            //            break;
-
-            //        case FluxPlace.RecruitSide:
-            //            data.IR = Convert.ToSingle(fluxProvider.InstantFlux);
-            //            data.SR = Convert.ToInt32(fluxProvider.Sum);
-            //            break;
-
-            //        default:
-            //            break;
-            //    }
-            //}
             switch (d.HtmMode.ModeValue)
             {
                 case ModeValue.Direct:
@@ -382,7 +337,25 @@ namespace XD1100DPU
             int id = GuidHelper.ConvertToInt32(d.Guid);
             DBI.Instance.InsertXD1100Data(id, data);
         }
+        #endregion //ProcessReadReal
 
+        #region HasPowerAlaramInStatus
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private bool HasPowerAlaramInStatus(XD1100Device xd1100)
+        {
+            bool b = xd1100.StatusAndAlarmDictionary.ContainsKey(XD1100Device.StatusAndAlarmEnum.AlaramPower);
+            if (b)
+            {
+                return xd1100.StatusAndAlarmDictionary[XD1100Device.StatusAndAlarmEnum.AlaramPower];
+            }
+            return false;
+        }
+        #endregion //HasPowerAlaramInStatus
+
+        #region IsPumpRun
         /// <summary>
         /// 
         /// </summary>
@@ -392,6 +365,9 @@ namespace XD1100DPU
         {
             return IsPumpRun(b ? PumpStatusEnum.Run : PumpStatusEnum.Stop);
         }
+        #endregion //IsPumpRun
+
+        #region IsPumpRun
         /// <summary>
         /// 
         /// </summary>
@@ -409,7 +385,15 @@ namespace XD1100DPU
             }
             throw new ArgumentException(pse.ToString());
         }
+        #endregion //IsPumpRun
 
+        #region Filter
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="devices"></param>
+        /// <param name="fluxPlace"></param>
+        /// <returns></returns>
         private DeviceCollection Filter(DeviceCollection devices, FluxPlace fluxPlace)
         {
             DeviceCollection r = new DeviceCollection();
@@ -423,7 +407,9 @@ namespace XD1100DPU
             }
             return r;
         }
+        #endregion //Filter
 
+        #region OnProcessUpload
         /// <summary>
         /// 
         /// </summary>
@@ -433,6 +419,6 @@ namespace XD1100DPU
         {
             throw new NotImplementedException();
         }
+        #endregion //OnProcessUpload
     }
-
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using C3.Communi;
 using Xdgk.Common;
 
@@ -6,6 +7,11 @@ namespace XD1100DPU
 {
     internal class XD1100Device : DeviceBase , IOutside
     {
+        internal enum StatusAndAlarmEnum
+        {
+            AlaramPower,
+        }
+
         private const string PN_HEATTRANSFERMODE = "heatTransferMode";
         private const int PO_HEATTRANSFERMODE = 1;
 
@@ -148,6 +154,21 @@ namespace XD1100DPU
             }
         }
         #endregion //OutsideTemperature
-    }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public Dictionary<StatusAndAlarmEnum , bool> StatusAndAlarmDictionary
+        {
+            get
+            {
+                if (_statusAndAlaramDictionary == null)
+                {
+                    _statusAndAlaramDictionary = new Dictionary<StatusAndAlarmEnum , bool>();
+                }
+                return _statusAndAlaramDictionary;
+            }
+        }
+        private Dictionary<StatusAndAlarmEnum, bool> _statusAndAlaramDictionary;
+    }
 }

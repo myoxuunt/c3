@@ -13,7 +13,8 @@ namespace Xdgk.GR.Common
                OPERA_READ = "ReadModbusControl",
                OPERA_WRITE = "WriteModbusControl",
                WriteOT = "WriteOT",
-               WriteOTMode = "WriteOTMode";
+               WriteOTMode = "WriteOTMode",
+               ReadStatus = "ReadStatus";
 
     }
 
