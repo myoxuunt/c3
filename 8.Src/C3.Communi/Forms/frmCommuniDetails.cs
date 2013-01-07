@@ -209,6 +209,7 @@ namespace C3
             if (this.richTextBox1.Text != string.Empty)
             {
                 Clipboard.SetText(this.richTextBox1.Text);
+                NUnit.UiKit.UserMessage.DisplayInfo(strings.ContentCopied);
             }
         }
         #endregion //btnCopyContext_Click

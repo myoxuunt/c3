@@ -160,6 +160,15 @@ namespace C3.Communi {
         }
         
         /// <summary>
+        ///   查找类似 内容已经复制 的本地化字符串。
+        /// </summary>
+        internal static string ContentCopied {
+            get {
+                return ResourceManager.GetString("ContentCopied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 转换器 的本地化字符串。
         /// </summary>
         internal static string Converter {

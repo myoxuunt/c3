@@ -217,26 +217,26 @@ namespace XGDPU
         } private DataRow _dataRow;
         #endregion //DataRow
 
-        #region DeviceName
-        /// <summary>
-        /// 
-        /// </summary>
-        public string DeviceName
-        {
-            get
-            {
-                if (_deviceName == null)
-                {
-                    _deviceName = string.Empty;
-                }
-                return _deviceName;
-            }
-            set
-            {
-                _deviceName = value;
-            }
-        } private string _deviceName;
-        #endregion //DeviceName
+        //#region DeviceName
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public string DeviceName
+        //{
+        //    get
+        //    {
+        //        if (_deviceName == null)
+        //        {
+        //            _deviceName = string.Empty;
+        //        }
+        //        return _deviceName;
+        //    }
+        //    set
+        //    {
+        //        _deviceName = value;
+        //    }
+        //} private string _deviceName;
+        //#endregion //DeviceName
 
     }
 
@@ -256,10 +256,6 @@ namespace XGDPU
         }
     }
 
-//<<<<<<< HEAD
-//=======
-    //internal class XGData : IData
-//>>>>>>> history_view
     internal class XGData : DataBase 
     {
         /// <summary>
@@ -278,8 +274,6 @@ namespace XGDPU
             this.CardSN = cardSn;
         }
 
-//<<<<<<< HEAD
-//=======
         #region IData 成员
 
         ///// <summary>
@@ -331,6 +325,7 @@ namespace XGDPU
             }
         } private string _cardSN;
         #endregion //CardSN
+        #endregion //IData 成员
 
     }
 
