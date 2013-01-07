@@ -73,16 +73,16 @@
     <Compile Include="Forms\frmTaskDetail.Designer.cs">
       <DependentUpon>frmTaskDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCustomTask.cs">
+    <Compile Include="Forms\frmCustomTask.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCustomTask.Designer.cs">
+    <Compile Include="Forms\frmCustomTask.Designer.cs">
       <DependentUpon>frmCustomTask.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmDeviceHistoryData.cs">
+    <Compile Include="Forms\frmDeviceHistoryData.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmDeviceHistoryData.Designer.cs">
+    <Compile Include="Forms\frmDeviceHistoryData.Designer.cs">
       <DependentUpon>frmDeviceHistoryData.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources\DeviceDataResource.Designer.cs">
@@ -169,11 +169,11 @@
       <DependentUpon>frmTaskDetail.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCustomTask.resx">
+    <EmbeddedResource Include="Forms\frmCustomTask.resx">
       <DependentUpon>frmCustomTask.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmDeviceHistoryData.resx">
+    <EmbeddedResource Include="Forms\frmDeviceHistoryData.resx">
       <DependentUpon>frmDeviceHistoryData.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
