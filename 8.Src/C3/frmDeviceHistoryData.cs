@@ -6,26 +6,28 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Xdgk.Common;
+using C3.Communi;
 
 namespace C3
 {
     public partial class frmDeviceHistoryData : Form
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public object DataSource
-        {
-            get { return _dataSource; }
-            set { _dataSource = value; }
-        } private object _dataSource;
+        private IDevice _device;
+        private DataTable _dataSourceDataTable;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="obj"></param>
-        public frmDeviceHistoryData()
+        public frmDeviceHistoryData(IDevice device)
         {
+            if (device == null)
+            {
+                throw new ArgumentNullException("device");
+            }
+            _device = device;
+            _dataSourceDataTable = ConvertToDataTable(_device.DeviceDataManager.Datas);
+
             InitializeComponent();
 
             this.dataGridView1.AutoGenerateColumns = false;
@@ -41,13 +43,15 @@ namespace C3
         /// <param name="e"></param>
         private void frmDeviceHistoryData_Load(object sender, EventArgs e)
         {
-            DataTable tbl = _dataSource as DataTable;
+            this.Text = string.Format("{0}:{1}", 
+                this._device.Station.Text, this._device.Text);
+            //DataTable tbl = _dataSourceDataTable;
 
-            foreach (DataColumn tblColumn in tbl.Columns)
+            foreach (DataColumn tblColumn in _dataSourceDataTable.Columns)
             {
                 this.dataGridView1.Columns.Add(Create(tblColumn));
             }
-            this.dataGridView1.DataSource = _dataSource;
+            this.dataGridView1.DataSource = _dataSourceDataTable;
         }
 
         /// <summary>
@@ -86,7 +90,7 @@ namespace C3
         /// <returns></returns>
         private int GetDataGridViewColumnWidth(Type type)
         {
-            int def = 100;
+            int def = 80;
             int[] widths = new int[] { 140 };
             Type[] types = new Type[] { typeof(DateTime) };
 
@@ -100,5 +104,98 @@ namespace C3
             return def;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
+        private DataTable ConvertToDataTable(DataCollection datas)
+        {
+            DataTable tbl = new DataTable();
+            if (datas.Count > 0)
+            {
+                IData last = datas[datas.Count - 1];
+                Type lastType = last.GetType();
+                //ReportItemCollection reportItems = last.GetReportItems();
+
+                //foreach (ReportItem ri in reportItems)
+                //{
+                //    Type valueType = ri.Value.GetType();
+                //    DataColumn column = new DataColumn(ri.Name, valueType);
+                //    tbl.Columns.Add(column);
+                //}
+
+                //foreach (IData data in datas)
+                //{
+                //    if (data.GetType() != lastType)
+                //    {
+                //        continue;
+                //    }
+                //    object[] values = GetReportItemCollectionValues(data.GetReportItems());
+                //    tbl.Rows.Add(values);
+                //}
+
+
+
+                AttributePropertyInfoPairCollection ss = last.GetDeviceDataItemAttributes();
+                foreach (AttributePropertyInfoPair s in ss)
+                {
+                    Type valueType = s.PropertyInfo.PropertyType;
+                    DataItemAttribute diAttribute = s.Attribute;
+                    string columnName = diAttribute.Name;
+
+                    DataColumn column = new DataColumn(columnName, valueType);
+                    column.ExtendedProperties["unit"] = diAttribute.Unit.Text;
+                    column.ExtendedProperties["format"] = diAttribute.Format;
+                    column.ExtendedProperties["name"] = diAttribute.Name;
+                    tbl.Columns.Add(column);
+                }
+
+
+                foreach (IData data in datas)
+                {
+                    if (data.GetType() != lastType)
+                    {
+                        continue;
+                    }
+                    object[] values = new object[ss.Count];
+                    int idx = 0;
+                    foreach (AttributePropertyInfoPair s in ss)
+                    {
+                        object v= s.PropertyInfo.GetValue(data, null);
+                        values[idx++] = v;
+                    }
+                    tbl.Rows.Add(values);
+                }
+            }
+            return tbl;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="ris"></param>
+        ///// <returns></returns>
+        //private object[] GetReportItemCollectionValues(ReportItemCollection ris)
+        //{
+        //    object[] r = new object[ris.Count] ;
+        //    int idx = 0;
+        //    foreach (ReportItem ri in ris)
+        //    {
+        //        r[idx++] = ri.Value;
+        //    }
+        //    return r;
+        //}
     }
 }

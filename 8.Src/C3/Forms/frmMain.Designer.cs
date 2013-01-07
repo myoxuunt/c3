@@ -46,6 +46,7 @@
             this.mnuDeviceDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuCommuniDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDeviceHistoryData = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,6 @@
             this.tssListenPort = new System.Windows.Forms.ToolStripStatusLabel();
             this.sc1 = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.mnuDeviceHistoryData = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sc1.SuspendLayout();
@@ -167,8 +167,8 @@
             this.mnuDeviceEdit,
             this.mnuDeviceDelete,
             this.toolStripSeparator2,
-            this.mnuCommuniDetail,
-            this.mnuDeviceHistoryData});
+            this.mnuDeviceHistoryData,
+            this.mnuCommuniDetail});
             this.mnuDevice.Name = "mnuDevice";
             this.mnuDevice.Size = new System.Drawing.Size(58, 20);
             this.mnuDevice.Text = "设备(&D)";
@@ -206,6 +206,13 @@
             this.mnuCommuniDetail.Size = new System.Drawing.Size(152, 22);
             this.mnuCommuniDetail.Text = "通讯记录(&L)...";
             this.mnuCommuniDetail.Click += new System.EventHandler(this.mnuCommuniDetail_Click);
+            // 
+            // mnuDeviceHistoryData
+            // 
+            this.mnuDeviceHistoryData.Name = "mnuDeviceHistoryData";
+            this.mnuDeviceHistoryData.Size = new System.Drawing.Size(152, 22);
+            this.mnuDeviceHistoryData.Text = "历史数据(&H)...";
+            this.mnuDeviceHistoryData.Click += new System.EventHandler(this.mnuDeviceHistoryData_Click);
             // 
             // mnuSetting
             // 
@@ -276,13 +283,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(777, 25);
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // mnuDeviceHistoryData
-            // 
-            this.mnuDeviceHistoryData.Name = "mnuDeviceHistoryData";
-            this.mnuDeviceHistoryData.Size = new System.Drawing.Size(152, 22);
-            this.mnuDeviceHistoryData.Text = "HistoryData";
-            this.mnuDeviceHistoryData.Click += new System.EventHandler(this.mnuDeviceHistoryData_Click);
             // 
             // FrmMain
             // 
