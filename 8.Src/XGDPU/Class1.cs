@@ -256,6 +256,10 @@ namespace XGDPU
         }
     }
 
+//<<<<<<< HEAD
+//=======
+    //internal class XGData : IData
+//>>>>>>> history_view
     internal class XGData : DataBase 
     {
         /// <summary>
@@ -274,6 +278,38 @@ namespace XGDPU
             this.CardSN = cardSn;
         }
 
+//<<<<<<< HEAD
+//=======
+        #region IData 成员
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public DateTime DT
+        //{
+        //    get
+        //    {
+        //        return _dt;
+        //    }
+        //    set
+        //    {
+        //        _dt = value;
+        //    }
+        //} private DateTime _dt;
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <returns></returns>
+        //public ReportItemCollection GetReportItems()
+        //{
+        //    ReportItemCollection r = new ReportItemCollection();
+        //    r.Add(new ReportItem("时间", this.DT, Unit.FindByName(Unit.None)));
+        //    r.Add(new ReportItem("卡号", this.CardSN, Unit.FindByName(Unit.None)));
+        //    return r;
+        //}
+
+//>>>>>>> history_view
         #region CardSN
         /// <summary>
         /// 

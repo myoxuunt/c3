@@ -3,7 +3,7 @@ using Xdgk.Common;
 
 namespace Xdgk.Common
 {
-    internal class AttributePropertyInfoPair : IOrderNumber
+    public class AttributePropertyInfoPair : IOrderNumber
     {
 
         #region AttributePropertyInfoPair

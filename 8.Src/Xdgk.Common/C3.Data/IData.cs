@@ -15,5 +15,6 @@ namespace Xdgk.Common
         bool HasPropertyName(string propertyName);
 
         ReportItemCollection GetReportItems();
+        AttributePropertyInfoPairCollection GetDeviceDataItemAttributes();
     }
 }

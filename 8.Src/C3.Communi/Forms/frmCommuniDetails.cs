@@ -224,5 +224,17 @@ namespace C3
             Fill();
         }
         #endregion //cmbView_SelectedIndexChanged
+
+        #region btnClose_Click
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion //btnClose_Click
     }
 }

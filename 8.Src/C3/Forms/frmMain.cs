@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 using C3.Communi;
-using System.Net;
+using Xdgk.Common;
 
 namespace C3
 {
-    public partial class FrmMain : Form, ISelectedHardwareItem 
+    public partial class FrmMain : Form, ISelectedHardwareItem
     {
 
         #region Members
@@ -95,6 +96,7 @@ namespace C3
                 CreateMenuItem(this.mnuDeviceEdit.Text, mnuDeviceEdit_Click),
                 CreateMenuItem(this.mnuDeviceDelete.Text, mnuDeviceDelete_Click),
                 new ToolStripSeparator(),
+                CreateMenuItem (this.mnuDeviceHistoryData.Text, mnuDeviceHistoryData_Click),
                 CreateMenuItem(this.mnuCommuniDetail.Text, mnuCommuniDetail_Click)
             };
         }
@@ -313,7 +315,7 @@ namespace C3
         private void mnuDeviceEdit_Click(object sender, EventArgs e)
         {
             IDevice device = GetSelectedDevice(true);
-            if (device!= null)
+            if (device != null)
             {
                 IDeviceUI ui = device.Dpu.DeviceUI;
                 DialogResult dr = ui.Edit(device);
@@ -622,13 +624,13 @@ namespace C3
         }
         #endregion //mnuSetting_DropDownOpening
 
-        #region ISelectedHardwareItem 
+        #region ISelectedHardwareItem
         /// <summary>
         /// 
         /// </summary>
         public object SelectedHardwareItem
         {
-            get 
+            get
             {
                 object obj = null;
                 TreeNode node = this._hardwareTreeView.SelectedNode;
@@ -684,6 +686,7 @@ namespace C3
             this.mnuDeviceEdit.Enabled = b;
             this.mnuDeviceDelete.Enabled = b;
             this.mnuCommuniDetail.Enabled = b;
+            this.mnuDeviceHistoryData.Enabled = b;
         }
         #endregion //mnuDevice_DropDownOpening
 
@@ -725,5 +728,27 @@ namespace C3
             this.mnuStationDelete.Enabled = b;
         }
         #endregion //mnuStation_DropDownOpening
+
+        private void mnuDeviceHistoryData_Click(object sender, EventArgs e)
+        {
+            IDevice device = this.GetSelectedDevice(true);
+            if (device != null)
+            {
+                //while (device.DeviceDataManager.Datas.Count < 10)
+                //{
+                //    //  add test data
+                //    //
+                //    FlowmeterData d = new Xdgk.Common.FlowmeterData();
+                //    d.InstantFlux = 10.2f;
+                //    d.Sum = 20.4f;
+
+                //    device.DeviceDataManager.Last = d;
+                //}
+
+                frmDeviceHistoryData f = new frmDeviceHistoryData(device);
+                f.ShowDialog();
+            }
+        }
+
     }
 }

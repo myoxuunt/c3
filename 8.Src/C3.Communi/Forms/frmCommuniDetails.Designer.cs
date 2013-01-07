@@ -32,6 +32,7 @@
             this.btnCopyContext = new System.Windows.Forms.Button();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -48,7 +49,7 @@
             // 
             // btnCopyContext
             // 
-            this.btnCopyContext.Location = new System.Drawing.Point(387, 502);
+            this.btnCopyContext.Location = new System.Drawing.Point(306, 502);
             this.btnCopyContext.Name = "btnCopyContext";
             this.btnCopyContext.Size = new System.Drawing.Size(75, 23);
             this.btnCopyContext.TabIndex = 3;
@@ -75,11 +76,23 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "查看:";
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(387, 502);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 4;
+            this.btnClose.Text = "关闭";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // frmCommuniDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(472, 535);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbView);
             this.Controls.Add(this.btnCopyContext);
@@ -102,5 +115,6 @@
         private System.Windows.Forms.Button btnCopyContext;
         private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnClose;
     }
 }
