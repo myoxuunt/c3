@@ -1,13 +1,13 @@
 ﻿using System;
-using Xdgk.Common;
+using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 using C3.Communi;
-using System.Net;
+using Xdgk.Common;
 
 namespace C3
 {
-    public partial class FrmMain : Form, ISelectedHardwareItem 
+    public partial class FrmMain : Form, ISelectedHardwareItem
     {
 
         #region Members
@@ -314,7 +314,7 @@ namespace C3
         private void mnuDeviceEdit_Click(object sender, EventArgs e)
         {
             IDevice device = GetSelectedDevice(true);
-            if (device!= null)
+            if (device != null)
             {
                 IDeviceUI ui = device.Dpu.DeviceUI;
                 DialogResult dr = ui.Edit(device);
@@ -623,13 +623,13 @@ namespace C3
         }
         #endregion //mnuSetting_DropDownOpening
 
-        #region ISelectedHardwareItem 
+        #region ISelectedHardwareItem
         /// <summary>
         /// 
         /// </summary>
         public object SelectedHardwareItem
         {
-            get 
+            get
             {
                 object obj = null;
                 TreeNode node = this._hardwareTreeView.SelectedNode;
@@ -732,29 +732,121 @@ namespace C3
             IDevice device = this.GetSelectedDevice(true);
             if (device != null)
             {
-                //  add test data
-                //
-                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
-                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
-                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
-                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
-                device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
+                while (device.DeviceDataManager.Datas.Count < 900)
+                {
+                    //  add test data
+                    //
+                    FlowmeterData d = new Xdgk.Common.FlowmeterData();
+                    d.InstantFlux = 10.2f;
+                    d.Sum = 20.4f;
+
+                    device.DeviceDataManager.Last = d;
+                }
+                //device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
+                //device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
+                //device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
+                //device.DeviceDataManager.Last = new Xdgk.Common.FlowmeterData();
 
                 frmDeviceHistoryData f = new frmDeviceHistoryData();
                 //attribute
-                foreach (AttributePropertyInfoPair item in ((DataBase)device.DeviceDataManager.Last).GetDeviceDataItemAttributes())
-                {
-                    DataGridViewColumn c = new DataGridViewColumn();
-                    c.HeaderText = item.Attribute.Name;
-                    c.DataPropertyName = item.PropertyInfo.Name;
-                    c.CellTemplate = new DataGridViewCell();
-                    f.DV.Columns.Add(c);
-                }
+                //IData last = device.DeviceDataManager.Last;
+                //AttributePropertyInfoPairCollection atts = ((DataBase)last).GetDeviceDataItemAttributes();
+                //foreach (AttributePropertyInfoPair item in atts)
+                //{
+                //    DataGridViewColumn c = new DataGridViewTextBoxColumn();
+                //    c.HeaderText = item.Attribute.Name;
+                //    c.DataPropertyName = item.PropertyInfo.Name;
+                //    //c.CellTemplate = new DataGridViewCell();
+                //    f.DV.Columns.Add(c);
+                //}
                 //device.DeviceDataManager.Last.ge
-                object obj = device.DeviceDataManager.Datas;
-                f.DataSource = obj;
+                //f.DV.AutoGenerateColumns = true;
+                f.DataSource = ConvertToDataTable(device.DeviceDataManager.Datas);
                 f.ShowDialog();
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="datas"></param>
+        /// <returns></returns>
+        private DataTable ConvertToDataTable(DataCollection datas)
+        {
+            DataTable tbl = new DataTable();
+            if (datas.Count > 0)
+            {
+                IData last = datas[datas.Count - 1];
+                Type lastType = last.GetType();
+                //ReportItemCollection reportItems = last.GetReportItems();
+
+                //foreach (ReportItem ri in reportItems)
+                //{
+                //    Type valueType = ri.Value.GetType();
+                //    DataColumn column = new DataColumn(ri.Name, valueType);
+                //    tbl.Columns.Add(column);
+                //}
+
+                //foreach (IData data in datas)
+                //{
+                //    if (data.GetType() != lastType)
+                //    {
+                //        continue;
+                //    }
+                //    object[] values = GetReportItemCollectionValues(data.GetReportItems());
+                //    tbl.Rows.Add(values);
+                //}
+
+
+
+                AttributePropertyInfoPairCollection ss = last.GetDeviceDataItemAttributes();
+                foreach (AttributePropertyInfoPair s in ss)
+                {
+                    Type valueType = s.PropertyInfo.PropertyType;
+                    DataItemAttribute diAttribute = s.Attribute;
+                    string columnName = diAttribute.Name;
+
+                    DataColumn column = new DataColumn(columnName, valueType);
+                    column.ExtendedProperties["unit"] = diAttribute.Unit.Text;
+                    column.ExtendedProperties["format"] = diAttribute.Format;
+                    column.ExtendedProperties["name"] = diAttribute.Name;
+                    tbl.Columns.Add(column);
+                }
+
+
+                foreach (IData data in datas)
+                {
+                    if (data.GetType() != lastType)
+                    {
+                        continue;
+                    }
+                    object[] values = new object[ss.Count];
+                    int idx = 0;
+                    foreach (AttributePropertyInfoPair s in ss)
+                    {
+                        object v= s.PropertyInfo.GetValue(data, null);
+                        values[idx++] = v;
+                    }
+                    tbl.Rows.Add(values);
+                }
+            }
+            return tbl;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ris"></param>
+        /// <returns></returns>
+        private object[] GetReportItemCollectionValues(ReportItemCollection ris)
+        {
+            object[] r = new object[ris.Count] ;
+            int idx = 0;
+            foreach (ReportItem ri in ris)
+            {
+                r[idx++] = ri.Value;
+            }
+            return r;
         }
     }
 }

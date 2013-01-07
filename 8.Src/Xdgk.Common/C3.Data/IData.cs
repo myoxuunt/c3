@@ -11,5 +11,6 @@ namespace Xdgk.Common
     {
         DateTime DT { get; set; }
         ReportItemCollection GetReportItems();
+        AttributePropertyInfoPairCollection GetDeviceDataItemAttributes();
     }
 }
