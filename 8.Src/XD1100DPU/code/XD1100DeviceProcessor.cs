@@ -320,6 +320,11 @@ namespace XD1100DPU
 
             switch (d.HtmMode.ModeValue)
             {
+                case ModeValue.Indirect:
+                    data.CyclePumpDatas.Add(new PumpData("1#", Convert.ToInt32(pr.Results["cyclefrequency"])));
+                    data.RecruitPumpDatas.Add(new PumpData("1#", Convert.ToInt32(pr.Results["recruitfrequency"])));
+                    break;
+
                 case ModeValue.Direct:
                     data.GT1 = data.GT2;
                     data.BT1 = data.BT2;
@@ -327,6 +332,11 @@ namespace XD1100DPU
 
                 case ModeValue.Mixed:
                     data.BT1 = data.BT2;
+                    data.CyclePumpDatas.AddRange(
+                        new PumpData("1#", Convert.ToInt32(pr.Results["cyclefrequency"])),
+                        new PumpData("2#", Convert.ToInt32(pr.Results["recruitfrequency"])),
+                        new PumpData("3#", Convert.ToInt32(pr.Results["I2"])));
+
                     break;
             }
             d.DeviceDataManager.Last = data;

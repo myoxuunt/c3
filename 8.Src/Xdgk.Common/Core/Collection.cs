@@ -15,7 +15,13 @@ namespace Xdgk.Common
             : this( false, false )
         {
         }
-
+        public void AddRange(params T[] items)
+        {
+            foreach (T item in items)
+            {
+                this.Add(item);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>

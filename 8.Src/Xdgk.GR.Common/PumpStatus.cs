@@ -101,4 +101,88 @@ namespace Xdgk.GR.Common
         #endregion //ToString
     }
 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class PumpData
+    {
+        public PumpData(string pumpName, int runningFrequency)
+        {
+            this.PumpName = pumpName;
+            this.RunningFrequency = runningFrequency;
+        }
+        #region PumpName
+        /// <summary>
+        /// 
+        /// </summary>
+        public string PumpName
+        {
+            get
+            {
+                if (_pumpName == null)
+                {
+                    _pumpName = string.Empty;
+                }
+                return _pumpName;
+            }
+            set
+            {
+                _pumpName = value;
+            }
+        } private string _pumpName;
+        #endregion //PumpName
+
+        #region PumpStatus
+        /// <summary>
+        /// 
+        /// </summary>
+        public PumpStatus PumpStatus
+        {
+            get
+            {
+                return this.RunningFrequency > 0 ? PumpStatus.Run : PumpStatus.Stop;
+            }
+        } 
+        #endregion //PumpStatus
+
+        #region RunningFrequency
+        /// <summary>
+        /// 
+        /// </summary>
+        public int RunningFrequency
+        {
+            get
+            {
+                return _runningFrequency;
+            }
+            set
+            {
+                _runningFrequency = value;
+            }
+        } private int _runningFrequency;
+        #endregion //RunningFrequency
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1}Hz", this.PumpName, this.RunningFrequency);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class PumpDataCollection : Xdgk.Common.Collection<PumpData>
+    {
+        public override string ToString()
+        {
+            string s = string.Empty;
+            for (int i = 0; i < this.Count; i++)
+            {
+                s += this[i].ToString() + ((i == Count - 1) ? "" : ", ");
+            }
+            return s; 
+        }
+    }
+
 }

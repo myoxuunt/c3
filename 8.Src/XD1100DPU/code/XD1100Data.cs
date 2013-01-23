@@ -290,7 +290,7 @@ namespace XD1100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("瞬时热量", 19, Unit.GJPerHour , FloatFormat )]
+        [DataItem("瞬时热量", 19, Unit.GJPerHour, FloatFormat)]
         public double IH1
         {
             get
@@ -418,11 +418,30 @@ namespace XD1100DPU
         }
         #endregion //RM2
 
+
+        [DataItem("循环泵频率", 124, Unit.None)]
+        public string CMFrequencyDisplay
+        {
+            get
+            {
+                return this.CyclePumpDatas.ToString();
+            }
+        }
+
+        [DataItem("补水泵频率", 125, Unit.None)]
+        public string RMFrequencyDisplay
+        {
+            get 
+            {
+                return this.RecruitPumpDatas.ToString();
+            }
+        }
+
         #region Warn
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("报警", 124, Unit.None)]
+        [DataItem("报警", 126, Unit.None)]
         public WarnWrapper Warn
         {
             get
@@ -436,6 +455,40 @@ namespace XD1100DPU
             set { _warnWrapper = value; }
         }
         #endregion //Warn
+
+        #region CyclePumpDatas
+        /// <summary>
+        /// 
+        /// </summary>
+        public PumpDataCollection CyclePumpDatas
+        {
+            get
+            {
+                if (_cyclePumpDatas == null)
+                {
+                    _cyclePumpDatas = new PumpDataCollection();
+                }
+                return _cyclePumpDatas;
+            }
+        } private PumpDataCollection _cyclePumpDatas;
+        #endregion //CyclePumpDatas
+
+        #region RecruitPumpDatas
+        /// <summary>
+        /// 
+        /// </summary>
+        public PumpDataCollection RecruitPumpDatas
+        {
+            get
+            {
+                if (_recruitPumpDatas == null)
+                {
+                    _recruitPumpDatas = new PumpDataCollection();
+                }
+                return _recruitPumpDatas;
+            }
+        } private PumpDataCollection _recruitPumpDatas;
+        #endregion //RecruitPumpDatas
     }
 
     /// <summary>
