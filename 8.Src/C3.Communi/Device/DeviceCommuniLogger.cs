@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.IO;
 
 namespace C3.Communi
@@ -57,11 +58,12 @@ namespace C3.Communi
                 sw.WriteLine(cd.ToString());
                 sw.WriteLine();
                 sw.Flush();
+                sw.Close();
             }
         }
         #endregion //Log
 
-        #region StreamWriter
+        #region GetStreamWriter
         /// <summary>
         /// 
         /// </summary>
@@ -69,33 +71,16 @@ namespace C3.Communi
         /// <returns></returns>
         private static StreamWriter GetStreamWriter(string path)
         {
-            string key = path.ToUpper();
-
-            StreamWriter sw = null;
-            sw = _hash[key] as StreamWriter;
-
-            if (sw == null)
-            {
-                sw = CreateFile(path);
-                _hash[key] = sw;
-            }
-            return sw;
+            return CreateStreamWriter(path);
         }
-        #endregion //StreamWriter
+        #endregion //GetStreamWriter
 
-        #region Members
-        /// <summary>
-        /// 
-        /// </summary>
-        static private Hashtable _hash = new Hashtable();
-        #endregion //Members
-
-        #region CreateFile
+        #region CreateStreamWriter
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
-        static private StreamWriter CreateFile(string path)
+        static private StreamWriter CreateStreamWriter(string path)
         {
             string dir = System.IO.Path.GetDirectoryName(path);
             if (!Directory.Exists(dir))
@@ -103,10 +88,9 @@ namespace C3.Communi
                 Directory.CreateDirectory(dir);
             }
 
-            FileStream fs = File.Open(path, FileMode.Append);
-            StreamWriter sw = new StreamWriter(fs);
+            StreamWriter sw = new StreamWriter(path, true, System.Text.Encoding.UTF8);
             return sw;
         }
-        #endregion //CreateFile
+        #endregion //CreateStreamWriter
     }
 }
