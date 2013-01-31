@@ -25,6 +25,19 @@ namespace C3.Communi
         }
         #endregion //TaskBase
 
+
+        public Retry Retry
+        {
+            get
+            {
+                if (_retry == null)
+                {
+                    _retry = new Retry(2);
+                }
+                return _retry;
+            }
+            set { _retry = value; }
+        } private Retry _retry;
         #region TimeoutValues
         /// <summary>
         /// 
@@ -259,14 +272,23 @@ namespace C3.Communi
                     break;
 
                 case TaskStatus.Executed:
-                    if (this.Strategy.CanRemove)
+                    if (this.LastParseResult.IsSuccess)
                     {
-                        this.SetStatus(TaskStatus.Completed);
+                        ExecutedOrRetryMaxed();
                     }
                     else
                     {
-                        this.SetStatus(TaskStatus.Wating);
+                        this.Retry.IncreaseCurrent();
+                        if (this.Retry.CanTry())
+                        {
+                            this.SetStatus(TaskStatus.Ready);
+                        }
+                        else
+                        {
+                            ExecutedOrRetryMaxed();
+                        }
                     }
+
                     break;
 
                 case TaskStatus.Completed:
@@ -281,6 +303,22 @@ namespace C3.Communi
             return Status;
         }
         #endregion //Check
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ExecutedOrRetryMaxed()
+        {
+            this.Retry.Reset();
+            if (this.Strategy.CanRemove)
+            {
+                this.SetStatus(TaskStatus.Completed);
+            }
+            else
+            {
+                this.SetStatus(TaskStatus.Wating);
+            }
+        }
 
         #region LastExecute
         /// <summary>

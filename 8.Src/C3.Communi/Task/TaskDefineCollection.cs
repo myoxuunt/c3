@@ -20,7 +20,8 @@ namespace C3.Communi
                                       CycleStrategy = "cyclestrategy",
                                       CycleValue = "value",
                                       DeviceType = "devicetype",
-                                      Timeout = "timeout";
+                                      Timeout = "timeout",
+                                      RetryTimes = "retrytimes";
         }
         #endregion // TaskFactoryNodeNames
 
@@ -68,6 +69,7 @@ namespace C3.Communi
             string devicetype = string.Empty;
             string opname = string.Empty;
             //TimeSpan timeout = TaskDefine.DefaultTaskTimeout;
+            int retryTimes = 1;
 
             StrategyDefine strategyDefine = null;
 
@@ -95,6 +97,10 @@ namespace C3.Communi
                         }
                         break;
 
+                    case TaskFactoryNodeNames.RetryTimes:
+                        retryTimes = int.Parse(node.InnerText);
+                        break;
+
                     //case TaskFactoryNodeNames.Timeout:
                     //    timeout = TimeSpan.Parse(node.InnerText);
                     //    break;
@@ -110,7 +116,7 @@ namespace C3.Communi
             }
 
             //return new TaskDefine(devicetype, opname, strategyDefine, timeout);
-            return new TaskDefine(devicetype, opname, strategyDefine);
+            return new TaskDefine(devicetype, opname, strategyDefine, retryTimes);
         }
         #endregion //CreateTaskDefine
 

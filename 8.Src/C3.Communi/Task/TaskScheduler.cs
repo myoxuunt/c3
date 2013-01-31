@@ -85,7 +85,7 @@ namespace C3.Communi
             ITask current = device.TaskManager.Current;
             if (current != null)
             {
-                DoTask(current);
+                DoCurrentTask(current);
             }
             else
             {
@@ -94,17 +94,29 @@ namespace C3.Communi
         }
         #endregion //DoDevice device
 
-        #region DoTask task
+        #region DoCurrentTask task
         /// <summary>
         /// 
         /// </summary>
         /// <param name="current"></param>
-        private void DoTask(ITask current)
+        private void DoCurrentTask(ITask current)
         {
             TaskStatus status = current.Check();
 
             switch (status)
             {
+                case TaskStatus.Ready:
+                    {
+                        ICommuniPort cp = GetCommuniPort(current);
+                        if ((cp != null) &&
+                            (!cp.IsOccupy))
+                        //IsHighestLevel(headTask, cp))
+                        {
+                            current.Begin(cp);
+                        }
+                    }
+                    break;
+
                 case TaskStatus.Executing:
                     break;
 
@@ -112,7 +124,7 @@ namespace C3.Communi
                     {
                         ICommuniPort cp = GetCommuniPort(current);
                         current.End(cp);
-                        DoTask(current);
+                        DoCurrentTask(current);
                     }
                     break;
 
@@ -123,7 +135,7 @@ namespace C3.Communi
                         ITaskProcessor processor = GetTaskProcessor(current);
                         processor.Process(current, pr);
 
-                        DoTask(current);
+                        DoCurrentTask(current);
 
                     }
                     break;
@@ -169,7 +181,7 @@ namespace C3.Communi
             }
 #endif
         }
-        #endregion //DoTask task
+        #endregion //DoCurrentTask task
 
         /// <summary>
         /// 
@@ -196,39 +208,52 @@ namespace C3.Communi
             }
 
             TaskCollection tempTasks = new TaskCollection();
-            //IDevice device = tasks;
 
             while (tasks.Count > 0)
             {
                 ITask headTask = tasks.Dequeue();
 
-                TaskStatus status = headTask.Check();
-
-                if (status == TaskStatus.Ready)
+                bool b = DoNotExecutingTask(headTask);
+                if (b)
                 {
-                    ICommuniPort cp = GetCommuniPort(headTask);
-                    if ((cp != null) &&
-                        (!cp.IsOccupy) &&
-                        IsHighestLevel(headTask, cp))
-                    {
-
-                        IDevice device = headTask.Device;
-                        headTask.Begin(cp);
-
-                        device.TaskManager.Current = headTask;
-                        break;
-                    }
-                    else
-                    {
-                        tempTasks.Add(headTask);
-                    }
+                    break;
                 }
                 else
                 {
                     tempTasks.Add(headTask);
                 }
             }
+
+            //
+            //
             tasks.Enqueue(tempTasks);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="headTask"></param>
+        /// <returns></returns>
+        private bool DoNotExecutingTask(ITask headTask)
+        {
+            TaskStatus status = headTask.Check();
+
+            if (status == TaskStatus.Ready)
+            {
+                ICommuniPort cp = GetCommuniPort(headTask);
+                if ((cp != null) &&
+                    (!cp.IsOccupy) &&
+                    IsHighestLevel(headTask, cp))
+                {
+
+                    IDevice device = headTask.Device;
+                    headTask.Begin(cp);
+
+                    device.TaskManager.Current = headTask;
+                    return true;
+                }
+            }
+            return false;
         }
         #endregion //DoTasks queue
 

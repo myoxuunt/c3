@@ -3,6 +3,7 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
+
     /// <summary>
     /// 
     /// </summary>
@@ -18,6 +19,8 @@ namespace C3.Communi
 
         TimeSpan Timeout { get; set; }
         IOpera Opera { get; set; }
+
+        Retry Retry { get; set; }
 
         TaskStatus Status { get; /*set;*/ }
         TaskStatus Check();

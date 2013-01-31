@@ -192,7 +192,7 @@ namespace C3
                 this._device,
                 this.CreateOpera(),
                 Strategy.CreateImmediateStrategy(),
-                timeout);
+                timeout, 1);
 
             return task;
         }

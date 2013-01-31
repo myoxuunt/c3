@@ -55,7 +55,7 @@ namespace C3.Communi
 
                 Strategy strategy = td.StrategyDefine.Create();
                 TimeSpan timeout = TimeSpan.FromMilliseconds(device.Station.CommuniPortConfig.TimeoutMilliSecond);
-                Task t = new Task(device, opera, strategy, timeout);
+                Task t = new Task(device, opera, strategy, timeout, td.RetryTimes);
                 device.TaskManager.Tasks.Enqueue(t);
 
                 tasks.Add(t);

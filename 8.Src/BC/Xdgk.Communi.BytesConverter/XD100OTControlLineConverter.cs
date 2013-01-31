@@ -142,7 +142,7 @@ namespace Xdgk.Communi
             //if (rv < 0)
             //    return (byte)(rv + 256);
 
-            //if (rv <= Max)
+            //if (rv <= Times)
             //    return (byte)rv;
 
             if (rv > Max || rv < Min)

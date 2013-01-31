@@ -24,7 +24,7 @@ namespace C3.Communi
         /// <param name="operaName"></param>
         /// <param name="strategyDefine"></param>
         /// <param name="taskTimeout"></param>
-        public TaskDefine(string deviceType, string operaName, StrategyDefine strategyDefine)
+        public TaskDefine(string deviceType, string operaName, StrategyDefine strategyDefine, int retryTimes)
                 //TimeSpan taskTimeout)
         {
             if (strategyDefine == null)
@@ -35,6 +35,7 @@ namespace C3.Communi
             this.DeviceType = deviceType;
             this.OperaName = operaName;
             this.StrategyDefine = strategyDefine;
+            this.RetryTimes = retryTimes;
             //this.TimeOut = taskTimeout;
         }
         #endregion //TaskDefine
@@ -83,6 +84,25 @@ namespace C3.Communi
         } private StrategyDefine _strategyDefine;
         #endregion //StrategyDefine
 
+        public int RetryTimes
+        {
+            get { return _retryTimes; }
+            set
+            {
+                if (value < Retry.RETRY_MIN)
+                {
+                    _retryTimes = Retry.RETRY_MIN;
+                }
+                else if (value > Retry.RETRY_MAX)
+                {
+                    _retryTimes = Retry.RETRY_MAX;
+                }
+                else
+                {
+                    _retryTimes = value;
+                }
+            }
+        } private int _retryTimes = 1;
 
         #region Create
         /*

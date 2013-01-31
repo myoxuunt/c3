@@ -84,7 +84,7 @@ namespace C3.Communi
             }
 
             TimeSpan timeout = TimeSpan.FromMilliseconds(device.Station.CommuniPortConfig.TimeoutMilliSecond );
-            this.Task = new Task(device, opera, Strategy.CreateImmediateStrategy(), timeout);
+            this.Task = new Task(device, opera, Strategy.CreateImmediateStrategy(), timeout, 1);
 
             device.TaskManager.Tasks.Enqueue(this.Task);
 

@@ -30,7 +30,7 @@ namespace XGDPU
                 XGOperaNames.RemoveUpload);
 
             TimeSpan timeout = TimeSpan.FromMilliseconds(device.Station.CommuniPortConfig.TimeoutMilliSecond);
-            Task task = new Task(device, op, Strategy.CreateImmediateStrategy(), timeout);
+            Task task = new Task(device, op, Strategy.CreateImmediateStrategy(), timeout,1);
             device.TaskManager.Tasks.Enqueue(task);
         }
 
@@ -162,7 +162,7 @@ namespace XGDPU
             //ITaskFactory taskFactory = xgdevice.Dpu.TaskFactory;
 
             TimeSpan tsTimeout = TimeSpan.FromMilliseconds(xgdevice.Station.CommuniPortConfig.TimeoutMilliSecond);
-            Task task = new Task(xgdevice, op, new ImmediateStrategy(), tsTimeout);
+            Task task = new Task(xgdevice, op, new ImmediateStrategy(), tsTimeout,1);
 
             xgdevice.TaskManager.Tasks.Enqueue(task);
 
@@ -239,13 +239,13 @@ namespace XGDPU
                     Opera op = (Opera)operaFactory.Create(xgdevice.GetType().Name, XGOperaNames.ReadRecord);
                     op.SendPart["recordidx"] = i;
 
-                    Task task = new Task(xgdevice, op, new ImmediateStrategy(), timeout);
+                    Task task = new Task(xgdevice, op, new ImmediateStrategy(), timeout, 2);
                     xgdevice.TaskManager.Tasks.Enqueue(task);
                 }
 
                 Opera clearOP = (Opera)operaFactory.Create(xgdevice.GetType().Name, XGOperaNames.ClearRecord);
 
-                Task clearTask = new Task(xgdevice, clearOP, new ImmediateStrategy(), timeout);
+                Task clearTask = new Task(xgdevice, clearOP, new ImmediateStrategy(), timeout, 1);
                 xgdevice.TaskManager.Tasks.Enqueue(clearTask);
 
             }
