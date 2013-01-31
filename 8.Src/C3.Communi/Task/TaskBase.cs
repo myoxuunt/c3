@@ -25,19 +25,24 @@ namespace C3.Communi
         }
         #endregion //TaskBase
 
-
+        #region Retry
+        /// <summary>
+        /// 
+        /// </summary>
         public Retry Retry
         {
             get
             {
                 if (_retry == null)
                 {
-                    _retry = new Retry(2);
+                    _retry = new Retry(1);
                 }
                 return _retry;
             }
             set { _retry = value; }
         } private Retry _retry;
+        #endregion //Retry
+
         #region TimeoutValues
         /// <summary>
         /// 
@@ -304,6 +309,7 @@ namespace C3.Communi
         }
         #endregion //Check
 
+        #region ExecutedOrRetryMaxed
         /// <summary>
         /// 
         /// </summary>
@@ -319,6 +325,7 @@ namespace C3.Communi
                 this.SetStatus(TaskStatus.Wating);
             }
         }
+        #endregion //ExecutedOrRetryMaxed
 
         #region LastExecute
         /// <summary>
