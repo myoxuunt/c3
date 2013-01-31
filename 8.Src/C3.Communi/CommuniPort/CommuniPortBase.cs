@@ -86,29 +86,56 @@ namespace C3.Communi
         }
         #endregion //Close
 
+        #region OnClose
         /// <summary>
         /// 
         /// </summary>
         abstract protected void OnClose();
+        #endregion //OnClose
 
 
         #region Write
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
         public bool Write(byte[] bytes)
         {
             return OnWrite(bytes);
         }
         #endregion //Write
 
+        #region OnWrite
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
         abstract protected bool OnWrite(byte[] bytes);
+        #endregion //OnWrite
 
 
         #region Read
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public byte[] Read()
         {
-            return OnRead();
+            byte[] bs = OnRead();
+            bs = this.Filters.Filtrate(bs);
+            return bs;
         }
         #endregion //Read
+
+        #region OnRead
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         abstract protected byte[] OnRead();
+        #endregion //OnRead
 
         #region IsOccupy
         /// <summary>
@@ -208,6 +235,7 @@ namespace C3.Communi
         } private FilterCollection _filters;
         #endregion //Filters
 
+        #region IsOpened
         /// <summary>
         /// 
         /// </summary>
@@ -218,8 +246,15 @@ namespace C3.Communi
                 return OnGetIsOpened();
             }
         }
+        #endregion //IsOpened
 
+        #region OnGetIsOpened
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         abstract protected bool OnGetIsOpened();
+        #endregion //OnGetIsOpened
     }
 
 }

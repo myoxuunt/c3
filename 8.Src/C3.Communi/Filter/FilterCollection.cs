@@ -9,7 +9,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public byte[] Filt(byte[] source)
+        public byte[] Filtrate(byte[] source)
         {
             if (this.Count == 0)
             {
@@ -19,7 +19,7 @@ namespace C3.Communi
             byte[] bs = source;
             foreach (IFilter f in this)
             {
-                bs = f.Filt(bs);
+                bs = f.Filtrate(bs);
             }
             return bs;
         }

@@ -106,7 +106,8 @@ namespace C3.Communi
             {
                 if (_filters == null)
                 {
-                    _filters = new FilterCollection();
+                    //_filters = new FilterCollection();
+                    _filters = FilterFactory.CreateFromConfigFile();
                 }
                 return _filters;
             }

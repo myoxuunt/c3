@@ -307,6 +307,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\Cpfilter.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\dpu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
