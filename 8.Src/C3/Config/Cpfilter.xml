@@ -3,6 +3,7 @@
   <filter>
     <type></type>
     <name></name>
-    <pattern>00</pattern>
+    <pattern>^\d\d (.*)$</pattern>
+    <replacement>$1</replacement>
   </filter>
 </filters>

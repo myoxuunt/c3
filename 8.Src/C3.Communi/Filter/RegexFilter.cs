@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 using Xdgk.Common;
 
 namespace C3.Communi
@@ -6,12 +7,12 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public class RegexFilter : IFilter 
+    public class RegexFilter : IFilter
     {
 
         #region Members
         private Regex _regex;
-        private string _replaceString = string.Empty;
+        private string _replacement = string.Empty;
         #endregion //Members
 
         #region RegexFilter
@@ -20,7 +21,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="pattern"></param>
         public RegexFilter(string pattern)
-            : this(string.Empty, pattern)
+            : this(string.Empty, pattern, string.Empty)
         {
 
         }
@@ -31,10 +32,11 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="pattern"></param>
-        public RegexFilter(string name ,string pattern)
+        public RegexFilter(string name, string pattern, string replacement)
         {
             this.Name = name;
             this.Pattern = pattern;
+            this.Replacement = replacement;
 
             RegexOptions options = RegexOptions.IgnoreCase;
             _regex = new Regex(this.Pattern, options);
@@ -47,17 +49,33 @@ namespace C3.Communi
         /// </summary>
         public string Name
         {
-            get 
+            get
             {
                 if (_name == null)
                 {
                     _name = string.Empty;
                 }
-                return _name; 
+                return _name;
             }
             set { _name = value; }
         } private string _name;
         #endregion //Name
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Replacement
+        {
+            get
+            {
+                if (_replacement == null)
+                {
+                    _replacement = string.Empty;
+                }
+                return _replacement;
+            }
+            set { _replacement = value; }
+        }
 
         #region Pattern
         /// <summary>
@@ -88,7 +106,16 @@ namespace C3.Communi
             string strTemp = (string)HexStringConverter.Default.ConvertToObject(source);
             strTemp = Filtrate(strTemp);
 
-            byte[] bs = (byte[])HexStringConverter.Default.ConvertToBytes(strTemp);
+            byte[] bs = null;
+            try
+            {
+                bs = HexStringConverter.Default.ConvertToBytes(strTemp);
+            }
+            catch (Exception ex)
+            {
+                ErrorManager em = SoftManager.GetSoft().ErrorManager;
+                
+            }
             return bs;
         }
         #endregion //Filtrate
@@ -104,7 +131,7 @@ namespace C3.Communi
             bool isMatch = _regex.IsMatch(source);
             if (isMatch)
             {
-                source = _regex.Replace(source, _replaceString);
+                source = _regex.Replace(source, _replacement);
             }
             return source;
         }
