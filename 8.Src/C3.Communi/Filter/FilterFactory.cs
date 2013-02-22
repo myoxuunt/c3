@@ -5,10 +5,27 @@ namespace C3.Communi
 {
     public class FilterFactory
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         static public FilterCollection CreateFromConfigFile()
+        { 
+            string path = PathUtils.CpFilterConfigFileName;
+            return CreateFromConfigFile(path);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        static public FilterCollection CreateFromConfigFile(string path)
         {
             FilterCollection r = new FilterCollection ();
-            string path = PathUtils.CpFilterConfigFileName;
+            //string path = PathUtils.CpFilterConfigFileName;
             XmlDocument doc = new XmlDocument();
             doc.Load(path);
             XmlNode filtersNode = doc.SelectSingleNode("filters");

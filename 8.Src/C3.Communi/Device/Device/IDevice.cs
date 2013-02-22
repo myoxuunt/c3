@@ -48,6 +48,8 @@ namespace C3.Communi
         PickerCollection Pickers { get; set; }
 
         string GetStringParameters();
+
+        FilterCollection Filters { get; set; }
     }
 
 }

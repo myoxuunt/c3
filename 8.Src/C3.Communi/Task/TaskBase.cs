@@ -462,6 +462,10 @@ namespace C3.Communi
                     bytes = cp.Read();
                 }
 
+                // filte bytes by device 
+                //
+                bytes = this.Device.Filters.Filtrate(bytes);
+
                 this.LastReceivedBytes = bytes;
                 this.LastReceivedDateTime = DateTime.Now;
 

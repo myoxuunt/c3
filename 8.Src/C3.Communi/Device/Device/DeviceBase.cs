@@ -32,6 +32,7 @@ namespace C3.Communi
         //}
         //#endregion //DeviceBase
 
+        #region Constructor
         /// <summary>
         /// 
         /// </summary>
@@ -42,6 +43,7 @@ namespace C3.Communi
             object obj = this.GetAddressParameter();
             obj = this.GetNameParameter();
         }
+        #endregion //Constructor
 
         #region Address
         /// <summary>
@@ -242,7 +244,7 @@ namespace C3.Communi
                 string text = string.Format("{0}({1})", this.Name, this.DeviceType.Text);
                 return text;
             }
-        } 
+        }
         #endregion //Text
 
         #region Tag
@@ -261,6 +263,7 @@ namespace C3.Communi
 
         #endregion //
 
+        #region HasData
         /// <summary>
         /// 
         /// </summary>
@@ -269,6 +272,7 @@ namespace C3.Communi
         {
             return this.DeviceDataManager.HasData();
         }
+        #endregion //HasData
 
         #region DeviceDataManager
         /// <summary>
@@ -406,21 +410,27 @@ namespace C3.Communi
         //} private ParameterCollection _deviceParameters;
         //#endregion //Parameters
 
-
+        #region GeneralGroup
+        /// <summary>
+        /// 
+        /// </summary>
         protected IGroup GeneralGroup
         {
             get
             {
                 string name = "General";
-                IGroup g = this.Groups.GetGroup(name );
+                IGroup g = this.Groups.GetGroup(name);
                 if (g == null)
                 {
                     g = new Group(name, strings.General);
-                    this.Groups.Add (g);
+                    this.Groups.Add(g);
                 }
                 return g;
             }
         }
+        #endregion //GeneralGroup
+
+        #region Groups
         /// <summary>
         /// 
         /// </summary>
@@ -432,14 +442,12 @@ namespace C3.Communi
                 {
                     _parameterGroups = new GroupCollection();
                 }
-                return _parameterGroups ;
+                return _parameterGroups;
             }
         } private GroupCollection _parameterGroups;
+        #endregion //Groups
 
-
-        #region IDevice 成员
-
-
+        #region GetLazyDataFieldValue
         /// <summary>
         /// 
         /// </summary>
@@ -449,12 +457,14 @@ namespace C3.Communi
         {
             return null;
         }
+        #endregion //GetLazyDataFieldValue
 
-        #endregion
-
-        #region IDevice 成员
-
-
+        #region ProcessUpload
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bs"></param>
+        /// <returns></returns>
         public byte[] ProcessUpload(byte[] bs)
         {
             byte[] bsWork = bs;
@@ -469,7 +479,9 @@ namespace C3.Communi
             }
             return bsWork;
         }
+        #endregion //ProcessUpload
 
+        #region Pickers
         /// <summary>
         /// 
         /// </summary>
@@ -477,7 +489,7 @@ namespace C3.Communi
         {
             get
             {
-                if (_pickers==null)
+                if (_pickers == null)
                 {
                     _pickers = new PickerCollection();
                 }
@@ -488,10 +500,9 @@ namespace C3.Communi
                 _pickers = value;
             }
         } private PickerCollection _pickers;
+        #endregion //Pickers
 
-        #endregion
-
-
+        #region GetStringParameters
         /// <summary>
         /// 
         /// </summary>
@@ -499,7 +510,7 @@ namespace C3.Communi
         public string GetStringParameters()
         {
             string s = string.Empty;
-            foreach (IGroup g in this.Groups )
+            foreach (IGroup g in this.Groups)
             {
                 foreach (IParameter p in g.Parameters)
                 {
@@ -520,5 +531,29 @@ namespace C3.Communi
             }
             return s;
         }
+        #endregion //GetStringParameters
+
+        #region Filters
+        /// <summary>
+        /// 
+        /// </summary>
+        public FilterCollection Filters
+        {
+            get
+            {
+                if (_filters == null)
+                {
+                    _filters = new FilterCollection();
+                }
+                return _filters;
+            }
+            set
+            {
+                _filters = value;
+            }
+        } private FilterCollection _filters;
+
+        #endregion //Filters
+
     }
 }

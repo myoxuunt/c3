@@ -55,6 +55,9 @@
     <Content Include="DeviceDefine\devicedefine.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Filter\Filter.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Task\Task.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
