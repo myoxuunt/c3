@@ -13,13 +13,30 @@ namespace Xdgk.Common
     /// </summary>
     abstract public class AppBase
     {
+        #region Members
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool _enabledNotifyIcon = false;
+        #endregion //Members
 
         #region App
         /// <summary>
         /// 
         /// </summary>
         protected AppBase()
+            : this(false)
         {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        protected AppBase(bool enabledNotifyIcon)
+        {
+            this._enabledNotifyIcon = enabledNotifyIcon;
+
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
 
@@ -177,6 +194,8 @@ namespace Xdgk.Common
             }
             else
             {
+
+                NotifyIconManager.Start();
                 Application.Run(MainForm);
                 //Application.Run(new System.Windows.Forms.Form());
             }
@@ -255,10 +274,10 @@ namespace Xdgk.Common
         {
             OnApplicationExit();
             DisposeMainFormOrNot();
+            NotifyIconManager.Stop();
             Environment.Exit(exitCode);
         }
         #endregion //Exit
-
 
         #region DisposeMainFormOrNot
         /// <summary>
@@ -275,5 +294,76 @@ namespace Xdgk.Common
             }
         }
         #endregion //DisposeMainFormOrNot
+
+        #region NotifyIconManager
+        /// <summary>
+        /// 
+        /// </summary>
+        public NotifyIconManager NotifyIconManager
+        {
+            get
+            {
+                if (_notifyIconManager == null)
+                {
+                    _notifyIconManager = new NotifyIconManager(_enabledNotifyIcon);
+                    _notifyIconManager.NotifyIconDoubleClick += new EventHandler(_notifyIconManager_NotifyIconDoubleClick);
+                    ContextMenu contextMenu = _notifyIconManager.GetContextMenu();
+
+                    MenuItem displayMi = new MenuItem("显示(&D)", OnDisplayMenuItemClick);
+                    contextMenu.MenuItems.Add(displayMi);
+
+                    MenuItem spMi = new MenuItem("-");
+                    contextMenu.MenuItems.Add(spMi);
+
+                    MenuItem exitMi = new MenuItem("退出(&X)", OnExitMenuItemClick);
+                    contextMenu.MenuItems.Add(exitMi);
+                }
+                return _notifyIconManager;
+            }
+            set
+            {
+                _notifyIconManager = value;
+            }
+        }private NotifyIconManager _notifyIconManager;
+        #endregion //NotifyIconManager
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void _notifyIconManager_NotifyIconDoubleClick(object sender, EventArgs e)
+        {
+            ShowAndActivateMainForm();
+        } 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnDisplayMenuItemClick(object sender, EventArgs e)
+        {
+            ShowAndActivateMainForm();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ShowAndActivateMainForm()
+        {
+            this.MainForm.Show();
+            this.MainForm.Activate();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnExitMenuItemClick(object sender, EventArgs e)
+        {
+            this.Exit(0);
+        }
     }
 }

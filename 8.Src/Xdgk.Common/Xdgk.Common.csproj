@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Remoting" />
@@ -39,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App\NotifyIconManager.cs" />
     <Compile Include="C3.Data\FlowmeterData.cs" />
     <Compile Include="C3.Data\HeatData.cs" />
     <Compile Include="Core\ADEStatusStrings.Designer.cs">
@@ -77,6 +79,11 @@
     <Compile Include="DateTime\DateTimeHelper.cs" />
     <Compile Include="KeyValueCollection\StringStringDictionaryConverter.cs" />
     <Compile Include="Remote\DefineExecuteNames.cs" />
+    <Compile Include="Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="_others\DisplayValue.cs" />
     <Compile Include="_others\DisplayValueCollection.cs" />
     <Compile Include="Core\ExceptionLogger.cs" />
@@ -144,6 +151,11 @@
       <LastGenOutput>ADEStatusStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="_others\FixedDialogBase.resx">
       <DependentUpon>FixedDialogBase.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -159,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Doc\History.txt" />
+    <None Include="Resources\DefaultNotifyIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
