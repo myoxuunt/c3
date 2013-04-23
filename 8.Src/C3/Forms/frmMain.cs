@@ -11,7 +11,7 @@ namespace C3
     {
 
         #region Members
-        private bool _isSuredToQuit = false;
+        //private bool _isSuredToQuit = false;
         #endregion //Members
 
         #region HardwareTreeView
@@ -239,11 +239,12 @@ namespace C3
         /// <param name="e"></param>
         private void mnuExit_Click(object sender, EventArgs e)
         {
-            DialogResult dr = NUnit.UiKit.UserMessage.Ask(Strings.SureToQuit);
-            if (dr == DialogResult.Yes)
-            {
-                this.Close();
-            }
+            //DialogResult dr = NUnit.UiKit.UserMessage.Ask(Strings.SureToQuit);
+            //if (dr == DialogResult.Yes)
+            //{
+            //    this.Close();
+            //}
+            App.Exit(0);
         }
         #endregion //mnuExit_Click
 
@@ -650,27 +651,27 @@ namespace C3
         #endregion //ISelectedHardwareItem 成员
 
         #region FrmMain_FormClosing
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (!_isSuredToQuit)
-            {
-                DialogResult dr = NUnit.UiKit.UserMessage.Ask(Strings.SureToQuit);
-                if (dr == DialogResult.Yes)
-                {
-                    _isSuredToQuit = true;
-                    this.Close();
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)
+        //{
+        //    if (!_isSuredToQuit)
+        //    {
+        //        DialogResult dr = NUnit.UiKit.UserMessage.Ask(Strings.SureToQuit);
+        //        if (dr == DialogResult.Yes)
+        //        {
+        //            _isSuredToQuit = true;
+        //            this.Close();
+        //        }
+        //        else
+        //        {
+        //            e.Cancel = true;
+        //        }
+        //    }
+        //}
         #endregion //FrmMain_FormClosing
 
         #region mnuDevice_DropDownOpening
@@ -749,6 +750,5 @@ namespace C3
                 f.ShowDialog();
             }
         }
-
     }
 }

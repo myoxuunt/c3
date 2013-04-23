@@ -18,6 +18,11 @@ namespace Xdgk.Common
         /// 
         /// </summary>
         private bool _enabledNotifyIcon = false;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool _isSuredToQuit = false;
         #endregion //Members
 
         #region App
@@ -194,13 +199,30 @@ namespace Xdgk.Common
             }
             else
             {
+                if (NotifyIconManager.EnabledNotifyIcon)
+                {
+                    NotifyIconManager.Start();
+                    this.MainForm.FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
+                }
 
-                NotifyIconManager.Start();
                 Application.Run(MainForm);
-                //Application.Run(new System.Windows.Forms.Form());
             }
         }
         #endregion //Run
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!_isSuredToQuit)
+            {
+                e.Cancel = true;
+                this.MainForm.Hide();
+            }
+        }
 
         #region ShowRunningMessage
         /// <summary>
@@ -272,10 +294,13 @@ namespace Xdgk.Common
         /// <param name="exitCode"></param>
         virtual public void Exit(int exitCode)
         {
+            this._isSuredToQuit = true;
+
             OnApplicationExit();
             DisposeMainFormOrNot();
             NotifyIconManager.Stop();
-            Environment.Exit(exitCode);
+            //Environment.Exit(exitCode);
+            this.MainForm.Close();
         }
         #endregion //Exit
 
@@ -363,7 +388,11 @@ namespace Xdgk.Common
         /// <param name="e"></param>
         private void OnExitMenuItemClick(object sender, EventArgs e)
         {
+            //this.Exit(0);
+            //this._isSuredToQuit = true;
+            //this.MainForm.Close();
             this.Exit(0);
         }
+
     }
 }
