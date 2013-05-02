@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<devicedefines>
+  <!--xd100e(xd1142) 扩展模块仪表-->
+  <devicedefine devicetype="hddevice" devicetext="hddevice">
+    <operadefine name="read" processfd="false">
+      <sendpart>
+        <datafield name="df1"
+            begin="0"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="7b 94 00 11 31 33 39 31 32 33 34 35 36 37 38 1b 7b"/>
+
+        <!--<datafield name="address"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="df2"
+            begin="4"
+            length="3"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="AA 06 00"/>
+
+        <datafield name="crc"
+            begin="7"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            crc="true" />
+        <crcer name="Xdgk.Communi.CRC16"/>-->
+
+      </sendpart>
+
+      <receivepart length="18">
+        <datafield name="df1"
+            begin="0"
+            length="16"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="7b 94 00 12 31 33 39 31 32 33 34 35 36 37 38 00"
+            matchcheck="true"/>
+
+        <datafield name="value"
+            begin="16"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter">
+        </datafield>
+
+        <datafield name="Channal1Unit"
+            begin="17"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="7b"
+            matchcheck="true"/>
+
+        <!--<datafield name="crc"
+            begin="47"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            crc="true"/>
+
+        <crcer name="Xdgk.Communi.CRC16"/>-->
+      </receivepart>
+    </operadefine>
+  </devicedefine>
+</devicedefines>
