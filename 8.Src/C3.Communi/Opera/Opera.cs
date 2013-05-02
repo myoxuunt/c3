@@ -124,7 +124,10 @@ namespace C3.Communi
             //
             if (this.SendPart.IsNeedAddress)
             {
-                this.SendPart[ADDRESS] = device.Address;
+                if (this.SendPart.DataFieldManager[ADDRESS] != null)
+                {
+                    this.SendPart[ADDRESS] = device.Address;
+                }
             }
 
             DataFieldValueProvider valueProvider = new DataFieldValueProvider(device);

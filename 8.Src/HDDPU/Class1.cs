@@ -49,10 +49,10 @@ namespace HDDPU
         /// </summary>
         /// <param name="deviceID"></param>
         /// <param name="data"></param>
-        public void InsertH7710Value(int deviceID, HDDeviceData data)
+        public void InsertHDData(int deviceID, HDDeviceData data)
         {
             string s = string.Format(
-                "insert into tblH7710(deviceID, DT, Value) values({0}, '{1}', {2})", 
+                "insert into tblHDData(deviceID, DT, Value) values({0}, '{1}', {2})", 
                 deviceID,
                 data.DT.ToString(),
                 data.Value ? 1 : 0);
@@ -65,7 +65,7 @@ namespace HDDPU
         /// <returns></returns>
         public DataTable ExecuteHDDeviceDataTable()
         {
-            string s = "select * from tblDevice where DeviceType = 'H7710'";
+            string s = "select * from tblDevice where DeviceType = 'HDDevice'";
             return ExecuteDataTable(s);
         }
     }
@@ -75,7 +75,7 @@ namespace HDDPU
 
         public HDDevice()
         {
-            this.DeviceType = DeviceTypeManager.AddDeviceType("H7710", typeof(HDDevice));
+            this.DeviceType = DeviceTypeManager.AddDeviceType("HDDevice", typeof(HDDevice));
         }
     }
 
@@ -119,7 +119,7 @@ namespace HDDPU
                     task.Device.DeviceDataManager.Last = data;
 
                     int id = GuidHelper.ConvertToInt32 ( task.Device.Guid );
-                    DBI.Instance.InsertH7710Value(id, data);
+                    DBI.Instance.InsertHDData(id, data);
                 }
             }
         }
