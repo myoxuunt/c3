@@ -10,22 +10,22 @@
             bytes="7b 94 00 11 31 33 39 31 32 33 34 35 36 37 38 1b 7b"/>
       </sendpart>
 
-      <receivepart length="18">
+      <receivepart length="19">
         <datafield name="df1"
             begin="0"
-            length="16"
+            length="17"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="7b 94 00 12 31 33 39 31 32 33 34 35 36 37 38 00"
+            bytes="7b 14 00 13 31 33 39 31 32 33 34 35 36 37 38 1B 00"
             matchcheck="true"/>
 
         <datafield name="value"
-            begin="16"
+            begin="17"
             length="1"
             converter="Xdgk.Communi.Int8Converter">
         </datafield>
 
         <datafield name="df2"
-            begin="17"
+            begin="18"
             length="1"
             converter="Xdgk.Communi.OriginalConverter"
             bytes="7b"
