@@ -60,6 +60,14 @@ namespace C3.Communi
             }
         }
 
+        static public string HideParameterConfigFileName
+        {
+            get
+            {
+                return System.Windows.Forms.Application.StartupPath + "\\Config\\hp.xml";
+            }
+        }
+
         static public string MapToStartupPath(string path)
         {
             return Path.Combine(System.Windows.Forms.Application.StartupPath, path);

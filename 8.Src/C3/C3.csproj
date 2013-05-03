@@ -331,6 +331,9 @@
     <Content Include="Config\spu_for_setup.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\hp.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Doc\History.txt" />
     <Content Include="Res\Connect.ico" />
     <Content Include="Res\Device.ico" />

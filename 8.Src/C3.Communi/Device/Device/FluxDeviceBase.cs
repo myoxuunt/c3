@@ -132,7 +132,7 @@ namespace C3.Communi
             IParameter p = this.GeneralGroup.Parameters[PN_FLUXPLACE];
             if (p == null)
             {
-                p = new EnumParameter(PN_FLUXPLACE, typeof(FluxPlace), FluxPlace.FirstSide, PO_FLUXPLACE);
+                p = new EnumParameter(PN_FLUXPLACE, typeof(FluxPlace), FluxPlace.Unknown, PO_FLUXPLACE);
                 p.Text = "Œª÷√";
                 this.GeneralGroup.Parameters.Add(p);
             }

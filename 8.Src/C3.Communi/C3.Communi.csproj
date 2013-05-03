@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BytesConverter\BytesConverterCollection.cs" />
     <Compile Include="BytesConverter\BytesConverterManager.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Device\DeviceCommuniLogger.cs" />
     <Compile Include="Device\Device\FluxDeviceBase.cs" />
     <Compile Include="Filter\FilterFactory.cs" />

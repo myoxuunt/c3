@@ -48,8 +48,11 @@ namespace C3.Communi
                     _controllers = new ControllerCollection();
                     foreach (IParameter p in this._group.Parameters)
                     {
-                        IController c = ControllerFactory.Create(p);
-                        _controllers.Add(c);
+                        if (!HideParameterManager.Include(p.Name))
+                        {
+                            IController c = ControllerFactory.Create(p);
+                            _controllers.Add(c);
+                        }
                     }
                 }
                 return _controllers;
