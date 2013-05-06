@@ -2,6 +2,6 @@
 <sources>
   <source>
     <key>connection</key>
-    <value>server=(local);uid=sa;pwd=sa;database=hdcdb_t;</value>
+    <value>server=(local);uid=sa;pwd=sa;database=bcdb;</value>
   </source>
 </sources>

@@ -44,29 +44,33 @@
                    bytes="22"
                    matchcheck="true"/>
 
+        <!--m3/s-->
         <datafield name="IF"
                    begin="3"
                    length="4"
                    converter="Xdgk.Communi.UInt32ModbusConverter"/>
 
-        <datafield name="RemainAmount"
+        <!--m3-->
+        <datafield name="RemainedAmount"
                    begin="7"
                    length="4"
                    converter="Xdgk.Communi.UInt32ModbusConverter"/>
-
+        <!--cm-->
         <datafield name="Height"
                    begin="11"
                    length="2"
                    converter="Xdgk.Communi.UInt16Converter"
                    littleendian="false"/>
 
-        <datafield name="WL2"
+        <!--cm-->
+        <datafield name="BehindWL"
                    begin="25"
                    length="2"
                    converter="Xdgk.Communi.Int16Converter"
                    littleendian="false"/>
 
-        <datafield name="WL1"
+        <!--cm-->
+        <datafield name="BeforeWL"
                    begin="35"
                    length="2"
                    converter="Xdgk.Communi.Int16Converter"

@@ -54,7 +54,7 @@ namespace XD202DPU
         {
 
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = @"INSERT INTO tblMeasureSluiceData](
+            cmd.CommandText = @"INSERT INTO tblMeasureSluiceData(
 [DeviceID], [DT], [BeforeWL], [BehindWL], [InstantFlux], [Height], [RemainedAmount], [UsedAmount])
 VALUES(
 @DeviceID, @DT, @BeforeWL, @BehindWL, @InstantFlux, @Height, @RemainedAmount, @UsedAmount)";
@@ -117,6 +117,10 @@ VALUES(
 
     internal class Xd202DeviceProcessor : TaskProcessorBase
     {
+        static private double CM2M(double value)
+        {
+            return value / 100;
+        }
         public override void OnProcess(ITask task, IParseResult pr)
         {
             if (pr.IsSuccess)
@@ -128,9 +132,13 @@ VALUES(
                     data.BeforeWL = Convert.ToDouble(task.LastParseResult.Results["BeforeWL"]);
                     data.BehindWL = Convert.ToDouble(task.LastParseResult.Results["BehindWL"]);
                     data.Height = Convert.ToDouble(task.LastParseResult.Results["Height"]);
-                    data.InstantFlux = Convert.ToDouble(task.LastParseResult.Results["InstantFlux"]);
-                    data.UsedAmount = Convert.ToDouble(task.LastParseResult.Results["UsedAmount"]);
+                    data.InstantFlux = Convert.ToDouble(task.LastParseResult.Results["IF"]);
                     data.RemainedAmount = Convert.ToDouble(task.LastParseResult.Results["RemainedAmount"]);
+                    data.UsedAmount = 0 - data.RemainedAmount;
+
+                    data.BeforeWL = CM2M(data.BeforeWL);
+                    data.BehindWL = CM2M(data.BehindWL);
+                    data.Height = CM2M(data.Height);
 
                     task.Device.DeviceDataManager.Last = data;
 
@@ -172,11 +180,12 @@ VALUES(
     /// </summary>
     internal class Xd202Data : DataBase
     {
+        private const string FloatFormat = "f2";
         #region BeforeWL
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("闸前水位", 10, Unit.M)]
+        [DataItem("闸前水位", 10, Unit.M, FloatFormat)]
         public double BeforeWL
         {
             get
@@ -194,7 +203,7 @@ VALUES(
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("闸后水位", 20, Unit.M)]
+        [DataItem("闸后水位", 20, Unit.M, FloatFormat)]
         public double BehindWL
         {
             get
@@ -212,7 +221,7 @@ VALUES(
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("闸高", 30, Unit.M)]
+        [DataItem("闸高", 30, Unit.M, FloatFormat)]
         public double Height
         {
             get
