@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE devicedefines []>
+<devicedefines>
+  <!--for xd202-->
+  <devicedefine devicetype="xd202" devicetext="xd202Text">
+    <operadefine name="ReadReal">
+      <sendpart>
+        <datafield name="address"
+                   begin="0"
+                   length="1"
+                   converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="others"
+                   begin="1"
+                   length="5"
+                   converter="Xdgk.Communi.OriginalConverter"
+                   bytes="04 00 00 00 11"/>
+
+        <datafield name="crc"
+                   begin="6"
+                   length="2"
+                   converter="Xdgk.Communi.OriginalConverter"
+                   crc="true"/>
+        <crcer name="Xdgk.Communi.CRC16"/>
+      </sendpart>
+
+      <receivepart length="39">
+        <datafield name="address"
+                   begin="0"
+                   length="1"
+                   converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="fc"
+                   begin="1"
+                   length="1"
+                   converter="Xdgk.Communi.Int8Converter"
+                   bytes="04"
+                   matchcheck="true"/>
+
+        <datafield name="indatalength"
+                   begin="2"
+                   length="1"
+                   converter="Xdgk.Communi.Int8Converter"
+                   bytes="22"
+                   matchcheck="true"/>
+
+        <datafield name="IF"
+                   begin="3"
+                   length="4"
+                   converter="Xdgk.Communi.UInt32ModbusConverter"/>
+
+        <datafield name="RemainAmount"
+                   begin="7"
+                   length="4"
+                   converter="Xdgk.Communi.UInt32ModbusConverter"/>
+
+        <datafield name="Height"
+                   begin="11"
+                   length="2"
+                   converter="Xdgk.Communi.UInt16Converter"
+                   littleendian="false"/>
+
+        <datafield name="WL2"
+                   begin="25"
+                   length="2"
+                   converter="Xdgk.Communi.Int16Converter"
+                   littleendian="false"/>
+
+        <datafield name="WL1"
+                   begin="35"
+                   length="2"
+                   converter="Xdgk.Communi.Int16Converter"
+                   littleendian="false"/>
+
+        <datafield name="crc"
+                   begin="37"
+                   length="2"
+                   converter="Xdgk.Communi.OriginalConverter"
+                   crc="true"/>
+
+        <crcer name="Xdgk.Communi.CRC16"/>
+      </receivepart>
+    </operadefine>
+
+  </devicedefine>
+</devicedefines>

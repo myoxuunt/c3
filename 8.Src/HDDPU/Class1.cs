@@ -156,7 +156,7 @@ namespace HDDPU
     /// </summary>
     internal class HDDeviceData : DataBase
     {
-        [DataItem("断电状态", 10, Unit.None)]
+        [DataItem("市电状态", 10, Unit.None)]
         public bool Value
         {
             get { return _value; }
