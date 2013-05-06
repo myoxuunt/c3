@@ -308,7 +308,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\Cpfilter.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\dpu.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -332,6 +331,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\hp.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\dpu_for_baicheng.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\spu_for_baicheng.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Doc\History.txt" />

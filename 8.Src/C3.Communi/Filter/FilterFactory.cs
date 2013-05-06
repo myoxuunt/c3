@@ -1,10 +1,13 @@
 using System.Xml;
+using System.IO;
 using Xdgk.Common;
 
 namespace C3.Communi
 {
     public class FilterFactory
     {
+        static private NLog.Logger log = NLog.LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// 
         /// </summary>
@@ -25,21 +28,27 @@ namespace C3.Communi
         static public FilterCollection CreateFromConfigFile(string path)
         {
             FilterCollection r = new FilterCollection ();
-            //string path = PathUtils.CpFilterConfigFileName;
-            XmlDocument doc = new XmlDocument();
-            doc.Load(path);
-            XmlNode filtersNode = doc.SelectSingleNode("filters");
-            if ( filtersNode != null )
+            if (Directory.Exists(path))
             {
-                XmlNodeList filterNodeList = filtersNode.SelectNodes("filter");
-                foreach (XmlNode node in filterNodeList)
+                XmlDocument doc = new XmlDocument();
+                doc.Load(path);
+                XmlNode filtersNode = doc.SelectSingleNode("filters");
+                if (filtersNode != null)
                 {
-                    IFilter f = CreateFromFilterNode(node);
-                    if (f != null)
+                    XmlNodeList filterNodeList = filtersNode.SelectNodes("filter");
+                    foreach (XmlNode node in filterNodeList)
                     {
-                        r.Add(f);
+                        IFilter f = CreateFromFilterNode(node);
+                        if (f != null)
+                        {
+                            r.Add(f);
+                        }
                     }
                 }
+            }
+            else
+            {
+                log.Info("not find cp filter file: {0}", path);
             }
             return r ;
 
