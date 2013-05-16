@@ -84,6 +84,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Length\Length.cs" />
+    <Compile Include="Length\LengthType.cs" />
     <Compile Include="_others\DisplayValue.cs" />
     <Compile Include="_others\DisplayValueCollection.cs" />
     <Compile Include="Core\ExceptionLogger.cs" />

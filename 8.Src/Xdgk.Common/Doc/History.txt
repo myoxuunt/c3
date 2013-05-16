@@ -1,4 +1,7 @@
-﻿v0.11.0.0		2012-11-30
+﻿v0.12.0.0		2013-05-16
+	+ Length class
+	
+v0.11.0.0		2012-11-30
 	+ dbi executeScalar with parameter
 	+ keyvalueCollection.Add()
 	+ FlowmeterData, HeatData
