@@ -175,17 +175,13 @@ namespace C3.Communi
         /// </summary>
         /// <param name="fluxDevice"></param>
         /// <param name="deviceSource"></param>
-        protected void SetDeviceProperties(PlaceDeviceBase fluxDevice, IDeviceSource deviceSource)
+        protected override void  SetDeviceProperties(IDevice fluxDevice, IDeviceSource deviceSource)
         {
-            SimpleDeviceSource source = (SimpleDeviceSource)deviceSource;
-            fluxDevice.Address = source.Address;
-            fluxDevice.Name = source.DeviceName;
-            fluxDevice.DeviceSource = deviceSource;
-            fluxDevice.DeviceType = this.Dpu.DeviceType;
-            fluxDevice.Dpu = this.Dpu;
-            fluxDevice.Guid = source.Guid;
-            fluxDevice.StationGuid = source.StationGuid;
-            fluxDevice.FluxPlace = GetFluxPlace(source.DeviceExtendParameters);
+            PlaceDeviceBase s = (PlaceDeviceBase)fluxDevice;
+            base.SetDeviceProperties(fluxDevice, deviceSource);
+
+            DeviceSourceBase source = (DeviceSourceBase)deviceSource;
+            s.FluxPlace = GetFluxPlace(source.DeviceExtendParameters);
         }
 
         /// <summary>

@@ -105,6 +105,24 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="fluxDevice"></param>
+        /// <param name="deviceSource"></param>
+        //protected virtual void SetDeviceProperties(PlaceDeviceBase fluxDevice, IDeviceSource deviceSource)
+        protected virtual void SetDeviceProperties(IDevice fluxDevice, IDeviceSource deviceSource)
+        {
+            DeviceSourceBase source = (DeviceSourceBase)deviceSource;
+            fluxDevice.Address = source.Address;
+            fluxDevice.Name = source.DeviceName;
+            fluxDevice.DeviceSource = deviceSource;
+            fluxDevice.DeviceType = this.Dpu.DeviceType;
+            fluxDevice.Dpu = this.Dpu;
+            fluxDevice.Guid = source.Guid;
+            fluxDevice.StationGuid = source.StationGuid;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         //abstract public ITaskFactory TaskFactory { get; set; }
 
         /// <summary>

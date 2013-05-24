@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{01B5D26C-7EF6-48CA-897D-EA04322B7EDD}</ProjectGuid>
+    <ProjectGuid>{D4E1AD07-7F2B-45FE-B6F1-61DB67971ECD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SCL6DPU</RootNamespace>
-    <AssemblyName>SCL6DPU</AssemblyName>
+    <RootNamespace>PS.DATA7203DPU</RootNamespace>
+    <AssemblyName>PS.DATA7203DPU</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -36,7 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scl6Dpu.cs" />
+    <Compile Include="Data7203Dpu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,13 +48,9 @@
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Xdgk.GR.Common\Xdgk.GR.Common.csproj">
-      <Project>{5DD9DEDE-5BE3-4324-AE36-843EB23A9242}</Project>
-      <Name>Xdgk.GR.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DeviceDefine\scl6.xml">
+    <Content Include="DevcieDefine\scl6.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Task\Task.xml">
