@@ -50,7 +50,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DevcieDefine\scl6.xml">
+    <Content Include="DeviceDefine\Data7203.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Task\Task.xml">
