@@ -39,7 +39,7 @@
 ; 注: AppId的值为单独标识该应用程序。
 ; 不要为其他安装程序使用相同的AppId值。
 ; (生成新的GUID，点击 工具|在IDE中生成GUID。)
-AppId               ={{0FF109B7-12DE-44C5-9ECE-46BF4932CFB5}
+AppId               ={{7803D7CA-5BB5-4A53-B110-06513D959DB9}
 AppName             ={#MyAppName}
 AppVersion          ={#MyAppVersion}
 ;AppVerName         ={#MyAppName} {#MyAppVersion}
@@ -71,33 +71,43 @@ Source: "{#C3Dir}\Nlog.Config"; DestDir: "{app}"; Flags: ignoreversion
 
 ; config
 ;
-Source: "{#ConfigDir}\hp.xml"; DestDir: "{app}\Config\"; Flags: ignoreversion
-Source: "{#ConfigDir}\ListenPort.xml"; DestDir: "{app}\Config\"; Flags: ignoreversion
-Source: "{#ConfigDir}\spu_for_hdc.xml"; DestDir: "{app}\Config\spu.xml"; Flags: ignoreversion
-Source: "{#ConfigDir}\dpu_for_hdc.xml"; DestDir: "{app}\Config\dpu.xml"; Flags: ignoreversion
-Source: "{#ConfigDir}\Source_for_hdc.xml"; DestDir: "{app}\Config\Source.xml"; Flags: ignoreversion
+Source: "{#ConfigDir}\hp.xml"; DestDir: "{app}\Config"; Flags: ignoreversion
+Source: "{#ConfigDir}\ListenPort.xml"; DestDir: "{app}\Config"; Flags: ignoreversion
+
+Source: "{#ConfigDir}\spu_for_hdc.xml"; DestDir: "{app}\Config";  DestName: "spu.xml"; Flags: ignoreversion
+Source: "{#ConfigDir}\dpu_for_hdc.xml"; DestDir: "{app}\Config"; DestName: "dpu.xml"; Flags: ignoreversion
+Source: "{#ConfigDir}\Source_for_hdc.xml"; DestDir: "{app}\Config"; DestName: "Source.xml"; Flags: ignoreversion
+
+; bc
+;
+Source: "{#C3Dir}\bc\*.dll"; DestDir: "{app}\bc"; Flags: ignoreversion
+
+; crc
+;
+Source: "{#C3Dir}\crc\*.dll"; DestDir: "{app}\crc"; Flags: ignoreversion
+
 
 ; spu
 ;
-Source: "{#SpuDir}\DBSpu.dll"; DestDir: "{app}\s\DBspu.dll"; Flags: ignoreversion
+Source: "{#SpuDir}\DBSpu.dll"; DestDir: "{app}\s"; Flags: ignoreversion
 
 ; scl6
 ;
-Source: "..\..\SCL6DPU\bin\Debug\SCL6Dpu.dll"; DestDir: "{app}\d\scl6\SCL6DPU.dll"; Flags: ignoreversion
-Source: "..\..\SCL6DPU\bin\Debug\DeviceDefine\SCL6.xml"; DestDir: "{app}\d\scl6\DeviceDefine\scl6.xml"; Flags: ignoreversion
-Source: "..\..\SCL6DPU\bin\Debug\Task\Task.xml"; DestDir: "{app}\d\scl6\Task\Task.xml"; Flags: ignoreversion
+Source: "..\..\SCL6DPU\bin\Debug\SCL6Dpu.dll"; DestDir: "{app}\d\scl6"; Flags: ignoreversion
+Source: "..\..\SCL6DPU\bin\Debug\DeviceDefine\*.xml"; DestDir: "{app}\d\scl6\DeviceDefine"; Flags: ignoreversion
+Source: "..\..\SCL6DPU\bin\Debug\Task\*.xml"; DestDir: "{app}\d\scl6\Task"; Flags: ignoreversion
 
 ; hd
 ;
-Source: "..\..\HDDPU\bin\Debug\HDDpu.dll"; DestDir: "{app}\d\hd\HDDPU.dll"; Flags: ignoreversion
-Source: "..\..\HDDPU\bin\Debug\DeviceDefine\DeviceDefine.xml"; DestDir: "{app}\d\hd\DeviceDefine\DeviceDefine.xml"; Flags: ignoreversion
-Source: "..\..\HDDPU\bin\Debug\Task\Task.xml"; DestDir: "{app}\d\hd\Task\Task.xml"; Flags: ignoreversion
+Source: "..\..\HDDPU\bin\Debug\HDDpu.dll"; DestDir: "{app}\d\hd"; Flags: ignoreversion
+Source: "..\..\HDDPU\bin\Debug\DeviceDefine\*.xml"; DestDir: "{app}\d\hd\DeviceDefine"; Flags: ignoreversion
+Source: "..\..\HDDPU\bin\Debug\Task\*.xml"; DestDir: "{app}\d\hd\Task"; Flags: ignoreversion
 
 ; 7203
 ;
-Source: "..\..\PS.Data7203DPU\bin\Debug\PS.DATA7203DPU.dll"; DestDir: "{app}\d\Data7203\PS.Data7203DPU.dll"; Flags: ignoreversion
-Source: "..\..\PS.Data7203DPU\bin\Debug\DeviceDefine\Data7203.xml"; DestDir: "{app}\d\Data7203\DeviceDefine\Data7203.xml"; Flags: ignoreversion
-Source: "..\..\PS.Data7203DPU\bin\Debug\Task\Task.xml"; DestDir: "{app}\d\Data7203\Task\Task.xml"; Flags: ignoreversion
+Source: "..\..\PS.Data7203DPU\bin\Debug\PS.DATA7203DPU.dll"; DestDir: "{app}\d\Data7203"; Flags: ignoreversion
+Source: "..\..\PS.Data7203DPU\bin\Debug\DeviceDefine\*.xml"; DestDir: "{app}\d\Data7203\DeviceDefine"; Flags: ignoreversion
+Source: "..\..\PS.Data7203DPU\bin\Debug\Task\*.xml"; DestDir: "{app}\d\Data7203\Task"; Flags: ignoreversion
 
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”
 
