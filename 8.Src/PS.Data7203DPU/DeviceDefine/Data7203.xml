@@ -12,7 +12,7 @@
             begin="1"
             length="5"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="04 13 88 00 04"/>
+            bytes="04 13 89 00 04"/>
 
         <datafield name="crc"
              begin="6"
