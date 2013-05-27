@@ -33,18 +33,26 @@
             length="2"
             bytes="04 08"
             converter="Xdgk.Communi.OriginalConverter"/>
-        
+
         <datafield name="sum"
             begin="3"
-            length="4"
-            converter="Xdgk.Communi.Int32ModbusConverter" />
+            length="4">
+
+          <converter name="LY.Converters.Int32Converter">
+            <property name="IsLowWordFirst" value="false"></property>
+            <property name="IsLowByteFirst" value="false"></property>
+          </converter>
+        </datafield>
 
         <datafield name="if"
             begin="7"
             length="4">
             <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
               <property name="Rate" value="100"></property>
-              <converter name="Xdgk.Communi.Int32ModbusConverter"></converter>
+              <converter name="LY.Converters.Int32Converter">
+                <property name="IsLowWordFirst" value="false"></property>
+                <property name="IsLowByteFirst" value="false"></property>
+              </converter>
             </converter>
         </datafield>
 

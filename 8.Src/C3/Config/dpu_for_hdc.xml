@@ -2,4 +2,5 @@
 <assemblyInfoCollection>
   <assemblyInfo path=".\d\scl6\SCL6DPU.dll"> </assemblyInfo>
   <assemblyInfo path=".\d\hd\HDDPU.dll"> </assemblyInfo>
+  <assemblyInfo path=".\d\Data7203\PS.Data7203DPU.dll"> </assemblyInfo>
 </assemblyInfoCollection>

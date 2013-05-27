@@ -6,6 +6,15 @@ using Xdgk.Communi.BytesConverter;
 
 namespace Xdgk.Communi.BytesConverter.Test
 {
+    //[TestFixture ]
+    //public class PsModbusConverterTest 
+    //{
+    //    [Test]
+    //    public void test()
+    //    { 
+    //       PS.Convertes.Int32Converter c
+    //    }
+    //}
     [TestFixture ]
     public class ModbusConverterTest
     {
