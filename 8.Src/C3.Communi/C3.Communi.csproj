@@ -270,8 +270,6 @@
     <Compile Include="Listener\SocketListenerCollection.cs" />
     <Compile Include="Listener\SocketListenerManager.cs" />
     <Compile Include="Soft\Soft.cs" />
-    <Compile Include="SourceConfig\SourceConfig.cs" />
-    <Compile Include="SourceConfig\SourceConfigCollection.cs" />
     <Compile Include="Station\StationBase.cs" />
     <Compile Include="Station\StationCollection.cs" />
     <Compile Include="Station\StationCommuniPortBinder.cs" />

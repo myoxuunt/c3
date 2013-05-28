@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Xml;
 using System.Windows.Forms;
+using Xdgk.Common;
 
 namespace C3.Communi
 {

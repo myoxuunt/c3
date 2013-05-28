@@ -86,6 +86,8 @@
     </Compile>
     <Compile Include="Length\Length.cs" />
     <Compile Include="Length\LengthType.cs" />
+    <Compile Include="SourceConfig\SourceConfig.cs" />
+    <Compile Include="SourceConfig\SourceConfigCollection.cs" />
     <Compile Include="_others\DisplayValue.cs" />
     <Compile Include="_others\DisplayValueCollection.cs" />
     <Compile Include="Core\ExceptionLogger.cs" />

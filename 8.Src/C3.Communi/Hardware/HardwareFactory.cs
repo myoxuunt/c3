@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using NLog;
+using Xdgk.Common;
 
 namespace C3.Communi
 {
