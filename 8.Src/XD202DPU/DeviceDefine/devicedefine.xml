@@ -47,8 +47,13 @@
         <!--m3/s-->
         <datafield name="IF"
                    begin="3"
-                   length="4"
-                   converter="Xdgk.Communi.UInt32ModbusConverter"/>
+                   length="4">
+                   <converter name="Xdgk.Communi.DecimalValueAdapterConverter" hasInner="true">
+                    <property name="Rate" value="100"></property>
+                    <converter name="Xdgk.Communi.UInt32ModbusConverter">
+                    </converter>
+                </converter>
+            </datafield>
 
         <!--m3-->
         <datafield name="RemainedAmount"
