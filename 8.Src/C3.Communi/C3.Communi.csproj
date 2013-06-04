@@ -47,6 +47,7 @@
     <Compile Include="BytesConverter\BytesConverterCollection.cs" />
     <Compile Include="BytesConverter\BytesConverterManager.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="CommuniPort\CommuniPortEventProcessor.cs" />
     <Compile Include="Device\DeviceCommuniLogger.cs" />
     <Compile Include="Device\Device\FluxDeviceBase.cs" />
     <Compile Include="Filter\FilterFactory.cs" />
@@ -64,6 +65,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Soft\ISoft.cs" />
     <Compile Include="Task\Retry.cs" />
     <Compile Include="_I\BytesConverter.cs" />
     <Compile Include="CommuniDetail\CommuniDetail.cs" />

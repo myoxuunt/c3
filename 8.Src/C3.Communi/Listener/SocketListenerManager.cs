@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Net.Sockets;
-using NUnit.Core;
+using NLog;
 
 namespace C3.Communi
 {
@@ -11,30 +11,39 @@ namespace C3.Communi
     /// </summary>
     public class SocketListenerManager
     {
-        //static Logger log = InternalTrace.GetLogger(typeof(SocketListenerManager));
+        static private Logger log = LogManager.GetCurrentClassLogger();
 
         #region SocketListenerManager
-        public SocketListenerManager(Soft soft)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="soft"></param>
+        //public SocketListenerManager(Soft soft)
+        //{
+        //    if (soft == null)
+        //        throw new ArgumentNullException("communiSoft");
+        //    this._soft = soft;
+        //}
+
+        public SocketListenerManager ()
         {
-            if (soft == null)
-                throw new ArgumentNullException("communiSoft");
-            this._soft = soft;
         }
         #endregion //SocketListenerManager
 
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public Soft Soft
-        {
-            get { return _soft; }
-        } private Soft _soft;
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public Soft Soft
+        //{
+        //    get { return _soft; }
+        //} private Soft _soft;
 
         ///// <summary>
         ///// 
         ///// </summary>
         //public event NewConnectEventHandler NewConnectEvent;
+        public event EventHandler NewCommuniPortEvent;
 
         #region SocketListeners
         /// <summary>
@@ -123,15 +132,35 @@ namespace C3.Communi
             {
                 scp = new SocketCommuniPort(newsocket);
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
                 CloseSocket(newsocket);
-                this.Soft.ErrorManager.Process(ex);
+                //this.Soft.ErrorManager.Process(ex);
+                log.Error(ex);
                 return;
             }
 
-            this.Soft.CommuniPortManager.Add(scp);
+            this._newCommuniPort = scp;
+
+            //this.Soft.CommuniPortManager.Add(scp);
+            OnNewCommuniPortEvent();
         }
+
+        private void OnNewCommuniPortEvent()
+        {
+            if (NewCommuniPortEvent  != null)
+            {
+                NewCommuniPortEvent(this, EventArgs.Empty);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommuniPort NewCommuniPort
+        {
+            get { return _newCommuniPort; }
+        } private ICommuniPort _newCommuniPort;
 
         /// <summary>
         /// 
@@ -146,7 +175,8 @@ namespace C3.Communi
             }
             catch(Exception ex)
             {
-                this.Soft.ErrorManager.Process(ex, "SocketListenerManager.CloseSocket exception"); 
+                //this.Soft.ErrorManager.Process(ex, "SocketListenerManager.CloseSocket exception"); 
+                log.Error(ex);
             }
         }
 

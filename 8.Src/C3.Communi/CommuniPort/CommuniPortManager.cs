@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using NLog;
 
 namespace C3.Communi
@@ -19,62 +20,22 @@ namespace C3.Communi
         public event CommuniPortEventHandler RemovedCommuniPort;
 
         public event CommuniPortEventHandler DeterminedCommuniPort;
+
+        public event CommuniPortEventHandler ClosedCommuniPort;
+
+        public event CommuniPortEventHandler ReceivedCommuniPort;
         #endregion //Events
 
-        #region Constructor
         #region CommuniPortManager
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="soft"></param>
-        public CommuniPortManager(Soft soft)
+        public CommuniPortManager()
         {
-            this.Soft = soft;
         }
         #endregion //CommuniPortManager
-        #endregion //
-
 
         #region Properties
-
-        #region Soft
-        /// <summary>
-        /// 
-        /// </summary>
-        public Soft Soft
-        {
-            get
-            {
-                return _soft;
-            }
-            set
-            {
-                _soft = value;
-            }
-        } private Soft _soft;
-        #endregion //Soft
-
-        #region CommuniPortFactory
-        /// <summary>
-        /// 
-        /// </summary>
-        public CommuniPortFactory CommuniPortFactory
-        {
-            get
-            {
-                if (_communiPortFactory == null)
-                {
-                    _communiPortFactory = new CommuniPortFactory();
-                }
-                return _communiPortFactory;
-            }
-            set
-            {
-                _communiPortFactory = value;
-            }
-        } private CommuniPortFactory _communiPortFactory;
-        #endregion //CommuniPortFactory
-
         #region CommuniPorts
         /// <summary>
         /// 
@@ -140,30 +101,11 @@ namespace C3.Communi
 
         #region Methods
 
-        #region CreateCommuniPort
-        public ICommuniPort CreateCommuniPort(ICommuniPortConfig cpConfig)
-        {
-            ICommuniPort cp =null;
-            try
-            {
-                cp = CommuniPortFactory.Create(cpConfig);
-            }
-            catch (Exception ex)
-            {
-                // log ERROR
-                //
-                _log.Fatal(ex);
-            }
-
-            if (cp != null)
-            {
-                this.Add(cp);
-            }
-            return cp;
-        }
-        #endregion //
-
         #region Add
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cp"></param>
         public void Add(ICommuniPort cp)
         {
             if (cp == null)
@@ -186,10 +128,51 @@ namespace C3.Communi
             cp.Determined += new EventHandler(cp_Determined);
             cp.Closed += new EventHandler(cp_Closed);
 
-            StationCommuniPortBinder.Bind(cp, this.Soft.Hardware);
+            //StationCommuniPortBinder.Bind(cp, this.Soft.Hardware);
+
+            //
+            //
+            if (AddedCommuniPort != null)
+            {
+                AddedCommuniPort(this, new CommuniPortEventArgs(cp));
+            }
         }
         #endregion //Add
 
+        #region Remove
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cp"></param>
+        /// <returns></returns>
+        public bool Remove(ICommuniPort cp)
+        {
+            if (cp == null)
+            {
+                throw new ArgumentNullException("cp");
+            }
+
+            // remove cp event handler
+            //
+            cp.Determined -= new EventHandler(cp_Determined);
+            cp.Closed -= new EventHandler(cp_Closed);
+
+            //Hardware hd = this.Soft.Hardware;
+            //StationCommuniPortBinder.Unbind(cp, hd);
+
+            bool r = this.CommuniPorts.Remove(cp);
+
+            //
+            //
+            if (RemovedCommuniPort != null)
+            {
+                RemovedCommuniPort(this, new CommuniPortEventArgs(cp));
+            }
+            return r;
+        }
+        #endregion //
+
+        #region ProcessReceived
         /// <summary>
         /// 
         /// </summary>
@@ -197,6 +180,12 @@ namespace C3.Communi
         /// <param name="e"></param>
         private void cp_Received(object sender, EventArgs e)
         {
+            if (ReceivedCommuniPort != null)
+            {
+                ReceivedCommuniPort(this, new CommuniPortEventArgs((ICommuniPort)sender));
+            }
+
+            /*
             ICommuniPort cp = (ICommuniPort)sender;
             byte[] bs = cp.Read();
 
@@ -224,33 +213,9 @@ namespace C3.Communi
                     }
                 }
             }
-
+*/
         }
-
-        #region Remove
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cp"></param>
-        /// <returns></returns>
-        public bool Remove(ICommuniPort cp)
-        {
-            if (cp == null)
-            {
-                throw new ArgumentNullException("cp");
-            }
-
-            // remove cp event handler
-            //
-            cp.Determined -= new EventHandler(cp_Determined);
-            cp.Closed -= new EventHandler(cp_Closed);
-
-            Hardware hd = this.Soft.Hardware;
-            StationCommuniPortBinder.Unbind(cp, hd);
-
-            return this.CommuniPorts.Remove(cp);
-        }
-        #endregion //
+        #endregion //ProcessReceived
 
         #region cp_Closed
         /// <summary>
@@ -260,13 +225,17 @@ namespace C3.Communi
         /// <param name="e"></param>
         void cp_Closed(object sender, EventArgs e)
         {
-            ICommuniPort cp = sender as ICommuniPort;
+            if (this.ClosedCommuniPort != null)
+            {
+                this.ClosedCommuniPort(this, new CommuniPortEventArgs((ICommuniPort)sender));
+            }
 
+            ICommuniPort cp = sender as ICommuniPort;
             this.Remove(cp);
         }
         #endregion //cp_Closed
 
-        #region cp_Determined
+        #region ProcessDetermined
         /// <summary>
         /// 
         /// </summary>
@@ -274,13 +243,21 @@ namespace C3.Communi
         /// <param name="e"></param>
         void cp_Determined(object sender, EventArgs e)
         {
+
+            if (this.DeterminedCommuniPort != null)
+            {
+                DeterminedCommuniPort(this, new CommuniPortEventArgs((ICommuniPort)sender));
+            }
+
+            /*
             ICommuniPort cp = sender as ICommuniPort;
 
             Hardware hd = this.Soft.Hardware;
 
             StationCommuniPortBinder.Bind(cp, hd);
+             */
         }
-        #endregion //cp_Determined
+        #endregion //ProcessDetermined
 
 
         #endregion //Methods

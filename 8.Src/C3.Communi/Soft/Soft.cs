@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Xml;
 using System.Windows.Forms;
@@ -127,30 +128,68 @@ namespace C3.Communi
             {
                 if (_socketListenerManager == null)
                 {
-                    _socketListenerManager = new SocketListenerManager(this);
+                    _socketListenerManager = new SocketListenerManager();
 
                     string path = PathUtils.SocketListenerConfigFileName;
                     XmlSocketListenBuilder builder = new XmlSocketListenBuilder(path);
                     builder.Build(_socketListenerManager);
+
+                    _socketListenerManager.NewCommuniPortEvent += new EventHandler(_socketListenerManager_NewCommuniPortEvent);
                 }
                 return _socketListenerManager;
             }
         } private SocketListenerManager _socketListenerManager;
         #endregion //SocketListenerManager
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void _socketListenerManager_NewCommuniPortEvent(object sender, EventArgs e)
+        {
+            SocketListenerManager slMan = sender as SocketListenerManager;
+            ICommuniPort cp = slMan.NewCommuniPort;
+
+            Debug.Assert(cp != null);
+
+            this.CommuniPortManager.Add(cp);
+        }
+
         #region CommuniPortManager
+        /// <summary>
+        /// 
+        /// </summary>
         public CommuniPortManager CommuniPortManager
         {
             get
             {
                 if (_communiPortManager == null)
                 {
-                    _communiPortManager = new CommuniPortManager(this);
+                    //CommuniPortEventProcessor cpep = this.GetCommuniPortEventProcessor ();
+
+                    _communiPortManager = new CommuniPortManager();
+                    //_communiPortManager .AddedCommuniPort += cpep
+                    _cpEventProcessor = new CommuniPortEventProcessor(this, _communiPortManager);
                 }
                 return _communiPortManager;
             }
         } private CommuniPortManager _communiPortManager;
         #endregion //CommuniPortManager
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        //private CommuniPortEventProcessor GetCommuniPortEventProcessor ()
+        //{
+        //    if ( _cpEventProcessor == null )
+        //    {
+        //        _cpEventProcessor = new CommuniPortEventProcessor(this,);
+        //    }
+        //    return _cpEventProcessor;
+        //} 
+        private CommuniPortEventProcessor _cpEventProcessor;
 
         #region _timer_Tick
         /// <summary>
