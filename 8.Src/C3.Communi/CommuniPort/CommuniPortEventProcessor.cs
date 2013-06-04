@@ -14,6 +14,8 @@ namespace C3.Communi
         {
             Debug.Assert(soft != null);
             this._soft = soft;
+
+            Debug.Assert(cpManager != null);
             this._cpManager = cpManager;
 
             _cpManager.AddedCommuniPort += new CommuniPortEventHandler(_cpManager_AddedCommuniPort);
@@ -103,20 +105,6 @@ namespace C3.Communi
         }
         #endregion //ProcessReceived
 
-        //#region cp_Closed
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //void cp_Closed(object sender, EventArgs e)
-        //{
-        //    ICommuniPort cp = sender as ICommuniPort;
-
-        //    this.Remove(cp);
-        //}
-        //#endregion //cp_Closed
-
         #region ProcessDetermined
         /// <summary>
         /// 
@@ -125,10 +113,7 @@ namespace C3.Communi
         /// <param name="e"></param>
         void ProcessDetermined(ICommuniPort cp )
         {
-            //ICommuniPort cp = sender as ICommuniPort;
-
             Hardware hd = this.GetHardware();
-
             StationCommuniPortBinder.Bind(cp, hd);
         }
         #endregion //ProcessDetermined
