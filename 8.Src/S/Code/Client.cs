@@ -6,54 +6,7 @@ using C3.Communi;
 
 namespace S
 {
-    internal class RPProcessor
-    {
-        static private ReceivePart RP
 
-        {
-            get
-            {
-                if (_rp == null)
-                {
-                    string xmlPath = Application.StartupPath + @"\Config\DeviceDefine.xml";
-                    _rp = ReceivePartFacotry.Create(xmlPath, "vFlux", "receive");
-                }
-                return _rp;
-            }
-        }
-        static ReceivePart _rp;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private RPProcessor()
-        {
-
-        }
-
-        static public void Process(Client client, byte[] bs)
-        {
-            IParseResult pr = RP.ToValues(bs);
-            if (pr.IsSuccess)
-            {
-                string name = Convert.ToString(pr.Results["name"]);
-                name = name.Trim();
-
-                //long ticks = Convert.ToInt64(pr.Results["dt"]);
-                //byte[] bs2 = BitConverter.GetBytes(ticks);
-                DateTime dt = (DateTime)pr.Results["dt"];
-                //Console.WriteLine(BitConverter.ToString(bs2));
-                Console.WriteLine(name + " : " + dt);
-
-            }
-            else
-            {
-
-            }
-
-            Console.WriteLine(BitConverter.ToString(bs));
-        }
-    }
     public class Client : ITag 
     {
         // TODO: unregister received event
