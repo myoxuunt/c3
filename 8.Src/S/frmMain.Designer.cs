@@ -31,6 +31,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuView = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStatusbar = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,9 +43,10 @@
             this.tssListenPort = new System.Windows.Forms.ToolStripStatusLabel();
             this.sc1 = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.sc1.Panel1.SuspendLayout();
             this.sc1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +76,14 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(109, 6);
+            // 
+            // mnuExit
+            // 
+            this.mnuExit.Name = "mnuExit";
+            this.mnuExit.Size = new System.Drawing.Size(112, 22);
+            this.mnuExit.Text = "退出(&X)";
+            this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
             // 
             // mnuView
             // 
@@ -88,13 +97,13 @@
             // mnuToolbar
             // 
             this.mnuToolbar.Name = "mnuToolbar";
-            this.mnuToolbar.Size = new System.Drawing.Size(152, 22);
+            this.mnuToolbar.Size = new System.Drawing.Size(124, 22);
             this.mnuToolbar.Text = "工具栏(&T)";
             // 
             // mnuStatusbar
             // 
             this.mnuStatusbar.Name = "mnuStatusbar";
-            this.mnuStatusbar.Size = new System.Drawing.Size(152, 22);
+            this.mnuStatusbar.Size = new System.Drawing.Size(124, 22);
             this.mnuStatusbar.Text = "状态栏(&S)";
             // 
             // mnuSetting
@@ -115,13 +124,13 @@
             // mnuAbout
             // 
             this.mnuAbout.Name = "mnuAbout";
-            this.mnuAbout.Size = new System.Drawing.Size(152, 22);
+            this.mnuAbout.Size = new System.Drawing.Size(112, 22);
             this.mnuAbout.Text = "关于(&A)";
             // 
             // mnuTest
             // 
             this.mnuTest.Name = "mnuTest";
-            this.mnuTest.Size = new System.Drawing.Size(152, 22);
+            this.mnuTest.Size = new System.Drawing.Size(112, 22);
             this.mnuTest.Text = "Test";
             this.mnuTest.Visible = false;
             // 
@@ -149,6 +158,10 @@
             this.sc1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.sc1.Location = new System.Drawing.Point(0, 49);
             this.sc1.Name = "sc1";
+            // 
+            // sc1.Panel1
+            // 
+            this.sc1.Panel1.Controls.Add(this.treeView1);
             this.sc1.Size = new System.Drawing.Size(777, 463);
             this.sc1.SplitterDistance = 259;
             this.sc1.TabIndex = 9;
@@ -163,12 +176,13 @@
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // mnuExit
+            // treeView1
             // 
-            this.mnuExit.Name = "mnuExit";
-            this.mnuExit.Size = new System.Drawing.Size(152, 22);
-            this.mnuExit.Text = "退出(&X)";
-            this.mnuExit.Click += new System.EventHandler(this.mnuExit_Click);
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Location = new System.Drawing.Point(0, 0);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(259, 463);
+            this.treeView1.TabIndex = 0;
             // 
             // FrmMain
             // 
@@ -181,10 +195,12 @@
             this.Controls.Add(this.statusStrip1);
             this.Name = "FrmMain";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.sc1.Panel1.ResumeLayout(false);
             this.sc1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -208,6 +224,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuTest;
         private System.Windows.Forms.ToolStripMenuItem mnuSetting;
         private System.Windows.Forms.ToolStripMenuItem mnuExit;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 

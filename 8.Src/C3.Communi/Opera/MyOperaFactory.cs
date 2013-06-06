@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Collections;
 using System.Xml;
 using Xdgk.Common;
@@ -6,6 +7,57 @@ using NLog;
 
 namespace C3.Communi
 {
+
+    public class ReceivePartFacotry
+    {
+        private ReceivePartFacotry()
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="xmlPath"></param>
+        /// <param name="operaName"></param>
+        /// <returns></returns>
+        static public ReceivePart Create(string xmlPath, string deviceType, string operaName)
+        {
+
+            // "/devicedefines/devicedefine[attribute::devicetype='vFlux']/operadefine[attribute::name='read']/receivepart"
+            //
+            string format = "/{0}/{1}[attribute::{2}='{{0}}']/{3}[attribute::{4}='{{1}}']/{5}";
+            string xpath = string.Format(format, 
+                DeviceDefineNodeNames.DeviceDefineCollection,
+                DeviceDefineNodeNames.DeviceDefine,
+                DeviceDefineNodeNames.DeviceType,
+                DeviceDefineNodeNames.OperaDefine,
+                DeviceDefineNodeNames.OperaName,
+                DeviceDefineNodeNames.ReceivePart);
+
+            xpath = string.Format(xpath, deviceType, operaName);
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlPath);
+
+            XmlNodeList list = doc.SelectNodes(xpath);
+            Debug.Assert(list.Count > 0);
+
+            XmlNode node = list[0];
+            return Create(node);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="receivePartNode"></param>
+        /// <returns></returns>
+        static public ReceivePart Create(XmlNode receivePartNode)
+        {
+            return MyOperaFactory.CreateReceivePart(receivePartNode);
+        }
+    }
+
     public class MyOperaFactory
     {
 
@@ -83,7 +135,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="element"></param>
-        static private int GetCRCBegin(XmlElement element)
+        static internal int GetCRCBegin(XmlElement element)
         {
             int crcBegin = 0;
 
@@ -102,29 +154,29 @@ namespace C3.Communi
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        static private ReceivePart CreateReceivePart(XmlNode recievepartnode)
+        static internal ReceivePart CreateReceivePart(XmlNode receivePartNode)
         {
-            XmlElement e = recievepartnode as XmlElement;
-            string str = GetAttribute(e, DeviceDefineNodeNames.ReceivePartDataLength);
+            XmlElement e = receivePartNode as XmlElement;
+            string str = XmlHelper.GetAttribute(e, DeviceDefineNodeNames.ReceivePartDataLength);
             int rpLength = int.Parse(str);
 
-            string name = GetAttribute(e, DeviceDefineNodeNames.ReceivePartName, true);
+            string name = XmlHelper.GetAttribute(e, DeviceDefineNodeNames.ReceivePartName, true);
 
             ReceivePart rp = new ReceivePart(name, rpLength);
-            rp.DataFieldManager.CRCBegin = GetCRCBegin(e);
+            rp.DataFieldManager.CRCBegin = MyOperaFactory.GetCRCBegin(e);
 
-            foreach (XmlNode node in recievepartnode.ChildNodes)
+            foreach (XmlNode node in receivePartNode.ChildNodes)
             {
                 switch (node.Name)
                 {
                     case DeviceDefineNodeNames.DataField:
-                        DataField df = CreateDataField(node);
+                        DataField df = MyOperaFactory.CreateDataField(node);
                         df.IsBytesVolatile = true;
                         rp.Add(df);
                         break;
                 }
             }
-            ICRCer crcer = GetCRCer(recievepartnode);
+            ICRCer crcer = MyOperaFactory.GetCRCer(receivePartNode);
             rp.DataFieldManager.CRCer = crcer;
 
             if (rp.DataFieldManager.CRCer == null &&
@@ -172,14 +224,13 @@ namespace C3.Communi
         /// </summary>
         /// <param name="node">sendpart xmlnode or receivepart xmlnode</param>
         /// <returns></returns>
-        static private ICRCer GetCRCer(XmlNode node)
+        static internal ICRCer GetCRCer(XmlNode node)
         {
             XmlNode crcerNode = node.SelectSingleNode(DeviceDefineNodeNames.CRCer);
             if (crcerNode != null)
             {
                 string name = crcerNode.Attributes["name"].Value;
-                Soft soft = SoftManager.GetSoft();
-                ICRCer crcer = soft.CRCerManager.GetCRCer(name);
+                ICRCer crcer = CRCerManager.Default.GetCRCer(name);
                 if (crcer == null)
                     throw new ConfigException("not find CRCer: " + name);
                 return crcer;
@@ -288,7 +339,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="datafieldnode"></param>
         /// <returns></returns>
-        static private DataField CreateDataField(XmlNode datafieldnode)
+        static internal DataField CreateDataField(XmlNode datafieldnode)
         {
             string name = string.Empty;
             string factor = string.Empty;
@@ -325,11 +376,11 @@ namespace C3.Communi
             {
                 // converter
                 // 
-                str = GetAttribute(el, DeviceDefineNodeNames.Converter, true);
-                if (str == null || str.Length == 0)
-                {
-                    str = "Xdgk.Communi.OriginalConverter";
-                }
+                str = GetAttribute(el, DeviceDefineNodeNames.Converter, false);
+                //if (str == null || str.Length == 0)
+                //{
+                //    str = "Xdgk.Communi.OriginalConverter";
+                //}
 
                 //
                 //
@@ -408,8 +459,7 @@ namespace C3.Communi
         /// <returns></returns>
         static private IBytesConverter GetBytesConvert(string converterName, object[] args)
         {
-            Soft soft = SoftManager.GetSoft();
-            BytesConverterManager bcm = soft.BytesConverterManager;
+            BytesConverterManager bcm = BytesConverterManager.Default;
             IBytesConverter bc = bcm.CreateBytesConverter(converterName, args);
             if (bc == null)
             {
@@ -424,8 +474,7 @@ namespace C3.Communi
 
         static private IBytesConverter GetBytesConverter(BytesConverterConfig cfg)
         {
-            Soft soft = SoftManager.GetSoft();
-            BytesConverterManager bcm = soft.BytesConverterManager;
+            BytesConverterManager bcm = BytesConverterManager.Default;
             IBytesConverter bc = bcm.CreateBytesConverter(cfg);
             return bc;
         }

@@ -39,6 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientCollection.cs" />
+    <Compile Include="ClientEventArgs.cs" />
+    <Compile Include="ClientManager.cs" />
+    <Compile Include="CommuniPortEventProcessor.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +61,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
@@ -70,6 +80,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="SApp.cs" />
+    <Compile Include="Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C3.Communi\C3.Communi.csproj">
@@ -80,6 +95,14 @@
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\DeviceDefine.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\ListenPort.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

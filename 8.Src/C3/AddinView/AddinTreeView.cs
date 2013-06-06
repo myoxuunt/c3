@@ -11,8 +11,6 @@ namespace C3
     /// </summary>
     public class AddinTreeView : TreeView 
     {
-
-
         private Soft _soft;
         private DisplayArea _displayArea;
         private AddinTreeNode _bcNode, _crcNode;
@@ -69,7 +67,7 @@ namespace C3
         {
             if (_crcNode == null)
             {
-                CRCerCollection crcers = _soft.CRCerManager.CRCers;
+                CRCerCollection crcers = CRCerManager.Default.CRCers;
                 Control c = new UCCrcViewer(crcers);
                 _crcNode  = new AddinTreeNode(Strings.Crcer , c);
             }
@@ -86,7 +84,7 @@ namespace C3
         {
             if (_bcNode == null)
             {
-                BytesConverterCollection bcs = _soft.BytesConverterManager.BytesConverters;
+                BytesConverterCollection bcs = BytesConverterManager.Default.BytesConverters;
                 UCBytesConverterViewer c1 = new UCBytesConverterViewer(bcs);
                 _bcNode = new AddinTreeNode(Strings.BytesConverter, c1);
             }

@@ -47,6 +47,7 @@
     <Compile Include="FloatModbusConverter.cs" />
     <Compile Include="Int64Converter.cs" />
     <Compile Include="RateConverter.cs" />
+    <Compile Include="Encoding\Utf8EncodingConverter.cs" />
     <Compile Include="XD100Modbus\XD100ModbusOTControlLineConverter.cs" />
     <Compile Include="XD100TemperatureControlModeConverter.cs" />
     <Compile Include="XD100OTControlLineConverter.cs" />

@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<devicedefines>
+  <devicedefine devicetype="vFlux" devicetext="vFlux">
+    <operadefine name="receive">
+      <receivepart length="45">
+        <datafield name="f1"
+            begin="0"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="5B 5B"
+            matchcheck="true"/>
+
+        <datafield name="address"
+            begin="2"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="f3"
+            begin="3"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="05 00"
+            matchcheck="true"/>
+
+        <datafield name="name"
+            begin="5"
+            length="30"
+            converter="Xdgk.Communi.Utf8EncodingConverter"/>
+
+        <datafield name="dt"
+            begin="35"
+            length="8"
+            converter="Xdgk.Communi.TicksDateTimeConverter"/>
+
+        <datafield name="end"
+            begin="43"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="5D 5D"
+            matchcheck="true"/>
+      </receivepart>
+    </operadefine>
+
+    <operadefine name="read">
+      <sendpart>
+        <datafield name="f1"
+            begin="0"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="5B 5B"/>
+
+        <datafield name="address"
+            begin="2"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="f3"
+            begin="3"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="05 00"/>
+
+        <datafield name="name"
+            begin="5"
+            length="30"
+            converter="Xdgk.Communi.Utf8EncodingConverter"/>
+
+        <datafield name="dt"
+            begin="35"
+            length="8"
+            converter="Xdgk.Communi.TicksDateTimeConverter"/>
+
+        <datafield name="end"
+            begin="43"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="5D 5D"/>
+      </sendpart>
+
+      <receivepart length="198">
+        <datafield name="f1"
+            begin="0"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="5B 5B"
+            matchcheck="true"/>
+
+        <datafield name="address"
+            begin="2"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="f2"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="85"
+            matchcheck="true" />
+
+        <datafield name="status"
+            begin="4"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"/>
+
+        <datafield name="name"
+            begin="5"
+            length="30"
+            converter="Xdgk.Communi.Utf8EncodingConverter"/>
+
+        <datafield name="count"
+            begin="35"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="datas"
+            begin="36"
+            length="160"
+            converter="Xdgk.Communi.OriginalConverter"/>
+
+        <datafield name="end"
+            begin="196"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="5D 5D"
+            matchcheck="true"/>
+      </receivepart>
+    </operadefine>
+  </devicedefine>
+</devicedefines>

@@ -353,35 +353,35 @@ namespace C3.Communi
 
 
 
-        #region BytesConverterManager
-        /// <summary>
-        /// 
-        /// </summary>
-        public BytesConverterManager BytesConverterManager
-        {
-            get
-            {
-                if (this._bytesConverterManager == null)
-                    this._bytesConverterManager = new BytesConverterManager();
-                return this._bytesConverterManager;
-            }
-        } private BytesConverterManager _bytesConverterManager;
-        #endregion //BytesConverterManager
+        //#region BytesConverterManager
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public BytesConverterManager BytesConverterManager
+        //{
+        //    get
+        //    {
+        //        if (this._bytesConverterManager == null)
+        //            this._bytesConverterManager =  BytesConverterManager.;
+        //        return this._bytesConverterManager;
+        //    }
+        //} private BytesConverterManager _bytesConverterManager;
+        //#endregion //BytesConverterManager
 
-        #region CRCerManager
-        /// <summary>
-        /// 
-        /// </summary>
-        public CRCerManager CRCerManager
-        {
-            get
-            {
-                if (_crcerManager == null)
-                    _crcerManager = new CRCerManager();
-                return _crcerManager;
-            }
-        } private CRCerManager _crcerManager;
-        #endregion //CRCerManager
+        //#region CRCerManager
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public CRCerManager CRCerManager
+        //{
+        //    get
+        //    {
+        //        if (_crcerManager == null)
+        //            _crcerManager = new CRCerManager();
+        //        return _crcerManager;
+        //    }
+        //} private CRCerManager _crcerManager;
+        //#endregion //CRCerManager
 
         #region IsUseUISynchronizationContext
         /// <summary>

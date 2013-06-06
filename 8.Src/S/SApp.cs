@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Xdgk.Common;
 using C3.Communi;
+using System.Threading;
 
 namespace S
 {
+
     public class SApp : AppBase
     {
 
@@ -17,6 +19,8 @@ namespace S
         {
             get
             {
+                //ReceivePart rp = ReceivePartFacotry.Create("f:\\C3\\8.Src\\S\\bin\\Debug\\Config\\Def.xml ", "vFlux","read");
+
                 if (AppBase.DefaultInstance == null)
                 {
                     AppBase.DefaultInstance = new SApp();
@@ -83,10 +87,33 @@ namespace S
                 if (_communiPortManager == null)
                 {
                     _communiPortManager = new CommuniPortManager();
+                    _communiPortManager.AddedCommuniPort += new CommuniPortEventHandler(_communiPortManager_AddedCommuniPort);
+                    _communiPortManager.ClosedCommuniPort += new CommuniPortEventHandler(_communiPortManager_ClosedCommuniPort);       
+                    //_communiPortManager.DeterminedCommuniPort 
+                    //_communiPortManager.ReceivedCommuniPort +
+                    _communiPortManager.RemovedCommuniPort += new CommuniPortEventHandler(_communiPortManager_RemovedCommuniPort);
                 }
                 return _communiPortManager;
             }
-        } private CommuniPortManager _communiPortManager;
+        }
+
+        void _communiPortManager_RemovedCommuniPort(object sender, CommuniPortEventArgs e)
+        {
+            this.ClientManager.RemoveByCommuniPort(e.CommuniPort);
+        }
+
+        void _communiPortManager_ClosedCommuniPort(object sender, CommuniPortEventArgs e)
+        {
+            // do nothing
+            //
+        }
+
+        void _communiPortManager_AddedCommuniPort(object sender, CommuniPortEventArgs e)
+        {
+            this.ClientManager.Add(new Client(e.CommuniPort));
+        } 
+        
+        private CommuniPortManager _communiPortManager;
         #endregion //CommuniPortManager
 
         #region ClientManager
@@ -120,54 +147,70 @@ namespace S
         //} private ErrorManager _errorManager;
         //#endregion //
 
-    }
+        #region UISynchronizationContext
+        /// <summary>
+        /// 获取或设置UI线程上下文
+        /// </summary>
+        static public SynchronizationContext UISynchronizationContext
+        {
+            get
+            {
+                //System.
+                if (_uiSynchronizationContext == null)
+                {
+                    //_uiSynchronizationContext = SynchronizationContext.Current;
+                    if (WindowsFormsSynchronizationContext.Current != null)
+                    {
+                        _uiSynchronizationContext = WindowsFormsSynchronizationContext.Current;
+                    }
+                    else
+                    {
+                        _uiSynchronizationContext = new WindowsFormsSynchronizationContext();
+                    }
+                }
+                return _uiSynchronizationContext;
+            }
+            set
+            {
+                _uiSynchronizationContext = value;
+            }
+        } static private SynchronizationContext _uiSynchronizationContext;
+        #endregion //UISynchronizationContext
 
-    internal class CommuniPortEventProcessor
-    {
-        private CommuniPortManager _cpManager;
-        private ClientManager _clientManager;
 
+        #region Post
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="cpManager"></param>
-        internal CommuniPortEventProcessor(CommuniPortManager cpManager)
+        /// <param name="sendOrPostCallback"></param>
+        /// <param name="eventArgs"></param>
+        internal static void Post(SendOrPostCallback sendOrPostCallback, object state)
         {
-            Debug.Assert(cpManager != null);
-            this._cpManager = cpManager;
+            if (UISynchronizationContext == null)
+            {
+                string s = "Soft.UISynchronizationContext is null";
+                throw new InvalidOperationException(s);
+            }
 
+            if (sendOrPostCallback == null)
+            {
+                throw new ArgumentNullException("sendOrPostCallback");
+            }
 
-            _cpManager.AddedCommuniPort += new CommuniPortEventHandler(_cpManager_AddedCommuniPort);
-            _cpManager.ClosedCommuniPort += new CommuniPortEventHandler(_cpManager_ClosedCommuniPort);
-            _cpManager.DeterminedCommuniPort += new CommuniPortEventHandler(_cpManager_DeterminedCommuniPort);
-            _cpManager.ReceivedCommuniPort += new CommuniPortEventHandler(_cpManager_ReceivedCommuniPort);
-            _cpManager.RemovedCommuniPort += new CommuniPortEventHandler(_cpManager_RemovedCommuniPort);
+            UISynchronizationContext.Post(sendOrPostCallback, state);
         }
+        #endregion //Post
 
-        void _cpManager_RemovedCommuniPort(object sender, CommuniPortEventArgs e)
+        #region Send
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sendOrPostCallback"></param>
+        /// <param name="state"></param>
+        internal static void Send(SendOrPostCallback sendOrPostCallback, object state)
         {
-            this._clientManager.RemoveByCommuniPort(e.CommuniPort);
+            UISynchronizationContext.Send(sendOrPostCallback, state);
         }
-
-        void _cpManager_ReceivedCommuniPort(object sender, CommuniPortEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        void _cpManager_DeterminedCommuniPort(object sender, CommuniPortEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        void _cpManager_ClosedCommuniPort(object sender, CommuniPortEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
-        void _cpManager_AddedCommuniPort(object sender, CommuniPortEventArgs e)
-        {
-            Client c = new Client(e.CommuniPort);
-            this._clientManager.Add(c);
-        }
+        #endregion //
     }
 }

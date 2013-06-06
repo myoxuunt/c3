@@ -10,7 +10,23 @@ namespace C3.Communi
 {
     public class CRCerManager
     {
+        static public CRCerManager Default
+        {
+            get
+            {
+                if (_default == null)
+                {
+                    _default = new CRCerManager();
+                }
+                return _default;
+            }
+        } static private CRCerManager _default;
         static private Logger log = InternalTrace.GetLogger(typeof(CRCerManager));
+
+        private CRCerManager ()
+        {
+
+        }
         /// <summary>
         /// 
         /// </summary>

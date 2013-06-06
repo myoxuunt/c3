@@ -8,6 +8,23 @@ namespace Xdgk.Communi
 {
 
 
+    public class TicksDateTimeConverter : BytesConverter
+    {
+        public override byte[] ConvertToBytes(object obj)
+        {
+            DateTime dt = Convert.ToDateTime(obj);
+            Int64 ticks = dt.Ticks;
+            byte[] bs = BitConverter.GetBytes(ticks);
+            return bs;
+        }
+
+        public override object ConvertToObject(byte[] bytes)
+        {
+            Int64 n = BitConverter.ToInt64(bytes, 0);
+            DateTime dt = new DateTime(n);
+            return dt;
+        }
+    }
 
     /// <summary>
     /// 

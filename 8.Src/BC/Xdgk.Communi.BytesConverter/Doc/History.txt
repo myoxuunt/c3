@@ -1,4 +1,7 @@
-﻿v0.15.0.0	2012-11-09
+﻿v0.16.0.0	2013-06-05
+	add double converter, uint64 converter, utf8Encoding converter
+	
+v0.15.0.0	2012-11-09
 	bcd converter add LowByteFirst property
 	
 v0.14.0.0	2012-09-29
