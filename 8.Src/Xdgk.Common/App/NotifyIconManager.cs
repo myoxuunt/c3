@@ -78,8 +78,8 @@ namespace Xdgk.Common
         private string GetNotifyIconText()
         {
             string s = ConfigurationManager.AppSettings["AppName"];
-            return s; 
-        } 
+            return s;
+        }
 
         /// <summary>
         /// 
@@ -109,6 +109,19 @@ namespace Xdgk.Common
         }
         public event EventHandler NotifyIconDoubleClick;
 
+
+        public Icon Icon
+        {
+            get
+            {
+                return _icon;
+            }
+            set
+            {
+                _icon = value;
+            }
+        } private Icon _icon = null;
+
         #region GetIcon
         /// <summary>
         /// 
@@ -116,27 +129,29 @@ namespace Xdgk.Common
         /// <returns></returns>
         private System.Drawing.Icon GetIcon()
         {
-            Icon icon = null;
+            if (_icon == null)
+            {
+                string fileName = System.IO.Path.Combine(
+                    Application.StartupPath,
+                    this.IconPath);
+                try
+                {
+                    _icon = new Icon(fileName);
+                }
+                catch (Exception ex)
+                {
+                    // TODO:
+                    //
+                    Console.WriteLine(ex.Message);
+                }
 
-            string fileName = System.IO.Path.Combine(
-                Application.StartupPath,
-                this.IconPath);
-            try
-            {
-                icon = new Icon(fileName);
-            }
-            catch (Exception ex)
-            {
-                // TODO:
-                //
-                Console.WriteLine(ex.Message);
-            }
+                if (_icon == null)
+                {
+                    _icon = Resources.Resource.DefaultNotifyIcon;
+                }
 
-            if (icon == null)
-            {
-                icon = Resources.Resource.DefaultNotifyIcon;
             }
-            return icon;
+            return _icon;
         }
         #endregion //GetIcon
 

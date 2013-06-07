@@ -41,6 +41,8 @@ namespace S
         /// <param name="bs"></param>
         static public void Process(Client client, byte[] bs)
         {
+            StringBuilder sb = new StringBuilder();
+
             IParseResult pr = RP.ToValues(bs);
             if (pr.IsSuccess)
             {
@@ -50,16 +52,20 @@ namespace S
                 DateTime dt = (DateTime)pr.Results["dt"];
 
                 Console.WriteLine(name + " : " + dt);
+                sb.AppendLine(string.Format("数据请求: '{0}', '{1}'", name, dt));
 
-                byte[] bsReply = CreateReplyBytes(name, dt);
+                byte[] bsReply = CreateReplyBytes(name, dt, sb);
 
-                client.CommuniPort.Write(bsReply);
-
+                bool r = client.CommuniPort.Write(bsReply);
             }
             else
             {
-
+                sb.AppendLine(string.Format("无效请求: '{0}'", BitConverter.ToString(bs)));
             }
+
+            LogItem log = new LogItem(DateTime.Now, sb.ToString());
+            client.LogItems.Add(log);
+
             Console.WriteLine(BitConverter.ToString(bs));
         }
 
@@ -69,21 +75,23 @@ namespace S
         /// <param name="name"></param>
         /// <param name="dt"></param>
         /// <returns></returns>
-        private static byte[] CreateReplyBytes(string name, DateTime dt)
+        private static byte[] CreateReplyBytes(string name, DateTime dt, StringBuilder logContentBuilder)
         {
             byte status = 0;
 
             bool existGate = DB.ExistGate(name);
-            DataTable tbl = null;
             if (!existGate)
             {
                 status = 1;
+                logContentBuilder.AppendLine(string.Format("名称不存在: '{0}'", name));
             }
 
-            tbl = DB.GetGateDataTable(name, dt);
+            DataTable tbl = DB.GetGateDataTable(name, dt);
 
             GateDataResponse rep = new GateDataResponse(name, status, tbl);
-            return rep.ToBytes();
+            byte[] bs= rep.ToBytes();
+            logContentBuilder.AppendLine(string.Format("获取'{0}'条记录", rep.CountOfCreated));
+            return bs;
         }
     }
 
@@ -230,6 +238,7 @@ namespace S
             {
                 rows = max;
             }
+            _countOfCreated = rows;
 
             ms.WriteByte((byte)rows);
 
@@ -272,6 +281,11 @@ namespace S
         {
             ms.Write(bs, 0, bs.Length);
         }
+
+        public int CountOfCreated
+        {
+            get { return _countOfCreated; }
+        } private int _countOfCreated;
     }
 
 }

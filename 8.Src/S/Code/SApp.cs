@@ -32,6 +32,15 @@ namespace S
         /// <summary>
         /// 
         /// </summary>
+        private SApp()
+        {
+            base.NotifyIconManager.EnabledNotifyIcon = true;
+            base.NotifyIconManager.Icon = Resource.notifyIcon;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public override Form MainForm
         {
             get

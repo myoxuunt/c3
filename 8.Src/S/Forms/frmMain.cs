@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using System.Data;
 using System.Diagnostics;
@@ -105,6 +106,11 @@ namespace S
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            this.Text = Config.Default.AppName;
+
+            this.toolStrip1.Visible = false;
+            this.mnuView.Visible = false;
+
             //
             //
             string s = string.Empty;
@@ -120,6 +126,64 @@ namespace S
             this.tssListenPort.Text = string.Format("{0}: {1}", Strings.Listening, s);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode node = e.Node;
+            Client c = node.Tag as Client;
 
+            RefreshClient(c);
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        private string GetClientInfo(Client c)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("连接信息: " + c.CommuniPort.ToString());
+            sb.AppendLine("连接时间: " + c.CommuniPort.CreateDateTime);
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mnuAbout_Click(object sender, EventArgs e)
+        {
+            NUnit.UiKit.UserMessage.DisplayInfo(
+                string.Format("{0}\r\n\r\n版本: {1}", 
+                Config.Default.AppName, 
+                Config.Default.Version)
+                );
+        }
+
+        private void mnuRefresh_Click(object sender, EventArgs e)
+        {
+            if (this.treeView1.SelectedNode != null)
+            {
+                Client c = this.treeView1.SelectedNode.Tag as Client;
+                RefreshClient(c);
+            }
+        }
+
+        private void RefreshClient(Client c)
+        {
+            this.txtClientInfo.Text = GetClientInfo(c);
+            this.richTextBox1.Focus();
+            this.richTextBox1.Text = c.LogItems.ToString();
+            this.richTextBox1.Select(this.richTextBox1.Text.Length, 0);
+            this.richTextBox1.ScrollToCaret();
+        }
     }
 }

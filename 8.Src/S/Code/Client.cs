@@ -7,7 +7,7 @@ using C3.Communi;
 namespace S
 {
 
-    public class Client : ITag 
+    public class Client : ITag
     {
         // TODO: unregister received event
         //
@@ -30,7 +30,7 @@ namespace S
         /// <param name="e"></param>
         void CommuniPort_Received(object sender, EventArgs e)
         {
-            ICommuniPort cp = (ICommuniPort )sender ;
+            ICommuniPort cp = (ICommuniPort)sender;
             byte[] bs = cp.Read();
 
             // TODO: 
@@ -68,8 +68,28 @@ namespace S
                 _tag = value;
             }
         } private object _tag;
-
         #endregion
-    }
 
+        #region LogItems
+        /// <summary>
+        /// 
+        /// </summary>
+        public LogItemCollection LogItems
+        {
+            get
+            {
+                if (_logItems == null)
+                {
+                    _logItems = new LogItemCollection();
+                }
+                return _logItems;
+            }
+            set
+            {
+                _logItems = value;
+            }
+        } private LogItemCollection _logItems;
+        #endregion //LogItems
+
+    }
 }

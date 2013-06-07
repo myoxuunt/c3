@@ -13,7 +13,7 @@ namespace S
         {
             if (_db == null)
             {
-                string conn = ConfigurationManager.ConnectionStrings[0].ConnectionString;
+                string conn = ConfigurationManager.ConnectionStrings[1].ConnectionString;
                 _db = new DB(conn);
             }
             return _db;
@@ -38,7 +38,7 @@ namespace S
         static internal DataTable GetGateDataTable(string gateName, DateTime fromDT)
         {
             string s = string.Format(
-                "select * from vGateDatas where Address='{0}' and StrTime > '{1}' order by strTime",
+                "select * from v_GateDatas where Address='{0}' and StrTime > '{1}' order by strTime",
                 gateName , fromDT
                 );
 
