@@ -90,6 +90,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S", "S\S.csproj", "{92C77C0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "S_", "S_", "{1907B480-7057-4A2E-8CA6-B8A4B859A474}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbNetLink", "DbNetLink\DbNetLink.csproj", "{9D6EB61F-A762-425A-856B-93197DEC9F48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -216,6 +218,10 @@ Global
 		{92C77C09-1260-479A-9D2A-B8F22B7EC4FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92C77C09-1260-479A-9D2A-B8F22B7EC4FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92C77C09-1260-479A-9D2A-B8F22B7EC4FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D6EB61F-A762-425A-856B-93197DEC9F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D6EB61F-A762-425A-856B-93197DEC9F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D6EB61F-A762-425A-856B-93197DEC9F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D6EB61F-A762-425A-856B-93197DEC9F48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
