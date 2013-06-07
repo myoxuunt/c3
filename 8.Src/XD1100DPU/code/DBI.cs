@@ -1,5 +1,5 @@
-
 using System;
+using System.Collections.Specialized;
 using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
@@ -96,46 +96,42 @@ namespace XD1100DPU
         /// <param name="data"></param>
         internal void InsertXD1100Data(int id, XD1100Data data)
         {
-            KeyValueCollection kvs = new KeyValueCollection();
-            SqlCommand cmd = new SqlCommand();
-
             string s = " INSERT INTO tblGRData(DT, GT1, BT1, GT2, BT2, OT, GTBase2, GP1, BP1, WL, GP2, BP2, I1, I2, IR, S1, S2, SR, OD, PA2, IH1, SH1, CM1, CM2, CM3, RM1, RM2, DeviceID)" +
                 " VALUES(@dt, @gt1, @BT1, @GT2, @BT2, @OT, @GTBase2, @GP1, @BP1, @WL, @GP2, @BP2, @I1, @I2, @IR, @S1, @S2, @SR, @OD, @PA2, @IH1, @SH1, @CM1, @CM2, @CM3, @RM1, @RM2, @DeviceID)";
 
-            cmd.CommandText = s;
-            SqlParameterCollection p = cmd.Parameters ;
+            ListDictionary listDict = new ListDictionary();
 
-            AddSqlParameter(p, "DT", data.DT);
-            AddSqlParameter(p, "GT1", data.GT1);
-            AddSqlParameter(p, "BT1", data.BT1);
-            AddSqlParameter(p, "GT2", data.GT2);
-            AddSqlParameter(p, "BT2", data.BT2);
-            AddSqlParameter(p, "OT", data.OT);
-            AddSqlParameter(p, "GTBase2", data.GTBase2);
-            AddSqlParameter(p, "GP1", data.GP1);
-            AddSqlParameter(p, "BP1", data.BP1);
-            AddSqlParameter(p, "WL", data.WL);
-            AddSqlParameter(p, "GP2", data.GP2);
-            AddSqlParameter(p, "BP2", data.BP2);
-            AddSqlParameter(p, "I1", data.I1);
-            AddSqlParameter(p, "I2", data.I2);
-            AddSqlParameter(p, "IR", data.IR);
-            AddSqlParameter(p, "S1", data.S1);
-            AddSqlParameter(p, "S2", data.S2);
-            AddSqlParameter(p, "SR", data.SR);
-            AddSqlParameter(p, "OD", data.OD);
-            AddSqlParameter(p, "PA2", data.PA2);
-            AddSqlParameter(p, "IH1", data.IH1);
-            AddSqlParameter(p, "SH1", data.SH1);
+            listDict.Add("DT", data.DT);
+            listDict.Add("GT1", data.GT1);
+            listDict.Add("BT1", data.BT1);
+            listDict.Add("GT2", data.GT2);
+            listDict.Add("BT2", data.BT2);
+            listDict.Add("OT", data.OT);
+            listDict.Add("GTBase2", data.GTBase2);
+            listDict.Add("GP1", data.GP1);
+            listDict.Add("BP1", data.BP1);
+            listDict.Add("WL", data.WL);
+            listDict.Add("GP2", data.GP2);
+            listDict.Add("BP2", data.BP2);
+            listDict.Add("I1", data.I1);
+            listDict.Add("I2", data.I2);
+            listDict.Add("IR", data.IR);
+            listDict.Add("S1", data.S1);
+            listDict.Add("S2", data.S2);
+            listDict.Add("SR", data.SR);
+            listDict.Add("OD", data.OD);
+            listDict.Add("PA2", data.PA2);
+            listDict.Add("IH1", data.IH1);
+            listDict.Add("SH1", data.SH1);
 
-            AddSqlParameter(p, "CM1", data.CM1.PumpStatusEnum);
-            AddSqlParameter(p, "CM2", data.CM2.PumpStatusEnum);
-            AddSqlParameter(p, "CM3", data.CM3.PumpStatusEnum);
-            AddSqlParameter(p, "RM1", data.RM1.PumpStatusEnum);
-            AddSqlParameter(p, "RM2", data.RM2.PumpStatusEnum);
-            AddSqlParameter(p, "DeviceID", id);
+            listDict.Add("CM1", data.CM1.PumpStatusEnum);
+            listDict.Add("CM2", data.CM2.PumpStatusEnum);
+            listDict.Add("CM3", data.CM3.PumpStatusEnum);
+            listDict.Add("RM1", data.RM1.PumpStatusEnum);
+            listDict.Add("RM2", data.RM2.PumpStatusEnum);
+            listDict.Add("DeviceID", id);
 
-            ExecuteScalar(cmd);
+            ExecuteScalar(s,listDict);
 
             InsertGRAlarmData(id, data.DT, data.Warn.WarnList);
         }

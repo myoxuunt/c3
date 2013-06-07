@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Specialized;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using DbNetLink;
 
 namespace Xdgk.Common
 {
@@ -12,48 +15,68 @@ namespace Xdgk.Common
     public class DBIBase
     {
         private string _connString;
+        private DataProvider _dataProvider;
+        private DatabaseType _dataBaseType;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="connString"></param>
         public DBIBase(string connString)
+            : this(connString, DataProvider.SqlClient, DatabaseType.SqlServer)
         {
             this._connString = connString;
         }
 
-        #region ExecuteDataTable
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="sql"></param>
-        /// <returns></returns>
-        public DataTable ExecuteDataTable(string sql)
+        /// <param name="connString"></param>
+        /// <param name="dataProvider"></param>
+        /// <param name="databaseType"></param>
+        public DBIBase(string connString, DataProvider dataProvider, DatabaseType databaseType)
         {
-            SqlCommand cmd = new SqlCommand(sql);
-            return ExecuteDataTable(cmd);
+            this._connString = connString;
+            this._dataProvider = dataProvider;
+            this._dataBaseType = databaseType;
         }
-        #endregion //ExecuteDataTable
 
         #region ExecuteDataTable
+
+        public DataTable ExecuteDataTable(QueryCommandConfig cmd)
+        {
+            using (DbNetData db = new DbNetData(_connString,
+                 this._dataProvider, this._dataBaseType))
+            {
+                db.Open();
+                DataTable tbl = db.GetDataTable(cmd);
+                return tbl;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>
-        public DataTable ExecuteDataTable(SqlCommand cmd)
+        public DataTable ExecuteDataTable(string sql, IDictionary paramsDict)
         {
-            using (SqlConnection cn = new SqlConnection(this._connString))
+            using (DbNetData db = new DbNetData(_connString,
+                 this._dataProvider, this._dataBaseType))
             {
-                cn.Open();
-                cmd.Connection = cn;
-                DataSet ds = new DataSet();
-                SqlDataAdapter sqlda = new SqlDataAdapter(cmd);
-                sqlda.Fill(ds);
-                return ds.Tables[0];
+                db.Open();
+                DataTable tbl = db.GetDataTable(sql, paramsDict);
+                return tbl;
             }
         }
+
+        public DataTable ExecuteDataTable(string sql)
+        {
+            return ExecuteDataTable(sql, new ListDictionary());
+        }
+
         #endregion //ExecuteDataTable
+
 
         #region ExecuteScalar
         /// <summary>
@@ -65,10 +88,18 @@ namespace Xdgk.Common
         {
             // 执行查询, 并返回查询所返回的结果集中第一行的第一列, 如果结果集为空, 则为空引用.
             //
-            SqlCommand cmd = new SqlCommand(sql);
+            return ExecuteScalar(new CommandConfig(sql));
+        }
+
+        public object ExecuteScalar(string sql, ListDictionary paramsDict)
+        {
+            CommandConfig cmd = new CommandConfig(sql);
+            if (paramsDict != null)
+            {
+                cmd.Params = paramsDict;
+            }
             return ExecuteScalar(cmd);
         }
-        #endregion //ExecuteScalar
 
         /// <summary>
         /// 
@@ -78,40 +109,71 @@ namespace Xdgk.Common
         /// <returns></returns>
         public object ExecuteScalar(string sql, KeyValueCollection parameters)
         {
-            return ExecuteScalar(new SqlCommand(sql), parameters);
+            CommandConfig cmd = new CommandConfig(sql);
+            foreach (KeyValue kv in parameters)
+            {
+                cmd.Params.Add(kv.Key, kv.Value);
+            }
+            return ExecuteScalar(cmd);
         }
 
-        #region ExecuteScalar
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cmd"></param>
-        /// <returns></returns>
-        public object ExecuteScalar(SqlCommand cmd)
+        public object ExecuteScalar(CommandConfig cmd)
         {
-            return ExecuteScalar(cmd, null);
+            using (DbNetData db = new DbNetData(_connString, _dataProvider, _dataBaseType))
+            {
+                return db.ExecuteScalar(cmd);
+            }
         }
         #endregion //ExecuteScalar
 
-        public object ExecuteScalar(SqlCommand cmd, KeyValueCollection parameters)
+        #region ExecuteNonQuery
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public object ExecuteNonQuery(string sql)
         {
-            using (SqlConnection cn = new SqlConnection(this._connString))
+            // 执行查询, 并返回查询所返回的结果集中第一行的第一列, 如果结果集为空, 则为空引用.
+            //
+            return ExecuteNonQuery(new CommandConfig(sql));
+        }
+
+        public object ExecuteNonQuery(string sql, ListDictionary paramsDict)
+        {
+            CommandConfig cmd = new CommandConfig(sql);
+            if (paramsDict != null)
             {
-                cn.Open();
-                cmd.Connection = cn;
+                cmd.Params = paramsDict;
+            }
+            return ExecuteNonQuery(cmd);
+        }
 
-                if ( parameters != null )
-                {
-                    foreach (KeyValue kv in parameters)
-                    {
-                        SqlParameter sp = new SqlParameter(kv.Key, kv.Value);
-                        cmd.Parameters.Add(sp);
-                    }
-                }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public object ExecuteNonQuery(string sql, KeyValueCollection parameters)
+        {
+            CommandConfig cmd = new CommandConfig(sql);
+            foreach (KeyValue kv in parameters)
+            {
+                cmd.Params.Add(kv.Key, kv.Value);
+            }
+            return ExecuteNonQuery(cmd);
+        }
 
-                return cmd.ExecuteScalar();
+        public object ExecuteNonQuery(CommandConfig cmd)
+        {
+            using (DbNetData db = new DbNetData(_connString, _dataProvider, _dataBaseType))
+            {
+                return db.ExecuteNonQuery(cmd);
             }
         }
+        #endregion //ExecuteNonQuery
+
 
         #region GetDBInfo
         /// <summary>
@@ -138,6 +200,7 @@ namespace Xdgk.Common
         #endregion //GetDBInfo
 
 
+        #region VerifyDBInfo
         /// <summary>
         /// 
         /// </summary>
@@ -156,7 +219,7 @@ namespace Xdgk.Common
             if (StringHelper.Equal(project, dbinfo.Project) &&
                 majorVersion == dbinfo.MajorVersion &&
                 minorVersion == dbinfo.MinorVersion &&
-                revisionVersion == dbinfo.RevisionVersion )
+                revisionVersion == dbinfo.RevisionVersion)
             {
                 return;
             }
@@ -168,39 +231,6 @@ namespace Xdgk.Common
                 throw new DBInfoException(s);
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public int GetIdentity()
-        {
-            string sql = "select @@IDENTITY";
-            object obj = ExecuteScalar(sql);
-            if (obj == DBNull.Value)
-            {
-                return 0;
-            }
-            else
-            {
-                return Convert.ToInt32(obj);
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cmd"></param>
-        /// <param name="parameterName"></param>
-        /// <param name="value"></param>
-        static public void AddSqlParameter(SqlCommand cmd, string parameterName, object value)
-        {
-            SqlParameter p = new SqlParameter(parameterName, value);
-            cmd.Parameters.Add(p);
-        }
+        #endregion //VerifyDBInfo
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
 }

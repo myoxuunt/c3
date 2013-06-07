@@ -177,6 +177,12 @@
     <Content Include="Doc\History.txt" />
     <None Include="Resources\DefaultNotifyIcon.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DbNetLink\DbNetLink.csproj">
+      <Project>{9D6EB61F-A762-425A-856B-93197DEC9F48}</Project>
+      <Name>DbNetLink</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

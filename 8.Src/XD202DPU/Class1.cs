@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
@@ -53,21 +54,24 @@ namespace XD202DPU
         public void InsertXd202Data(int deviceID, Xd202Data data)
         {
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = @"INSERT INTO tblMeasureSluiceData(
+            
+            string sql = @"INSERT INTO tblMeasureSluiceData(
 [DeviceID], [DT], [BeforeWL], [BehindWL], [InstantFlux], [Height], [RemainedAmount], [UsedAmount])
 VALUES(
 @DeviceID, @DT, @BeforeWL, @BehindWL, @InstantFlux, @Height, @RemainedAmount, @UsedAmount)";
 
-            DBIBase.AddSqlParameter(cmd, "deviceID", deviceID);
-            DBIBase.AddSqlParameter(cmd, "dt", data.DT);
-            DBIBase.AddSqlParameter(cmd, "BeforeWL", data.BeforeWL);
-            DBIBase.AddSqlParameter(cmd, "BehindWL", data.BehindWL);
-            DBIBase.AddSqlParameter(cmd, "InstantFlux", data.InstantFlux);
-            DBIBase.AddSqlParameter(cmd, "Height", data.Height);
-            DBIBase.AddSqlParameter(cmd, "RemainedAmount", data.RemainedAmount);
-            DBIBase.AddSqlParameter(cmd, "UsedAmount", data.UsedAmount);
-            ExecuteScalar(cmd);
+            ListDictionary listDict = new ListDictionary ();
+            listDict.Add ( 1,2);
+            listDict.Add ("deviceID", deviceID);
+            listDict.Add ("dt", data.DT);
+            listDict.Add ("BeforeWL", data.BeforeWL);
+            listDict.Add ("BehindWL", data.BehindWL);
+            listDict.Add ("InstantFlux", data.InstantFlux);
+            listDict.Add ("Height", data.Height);
+            listDict.Add ("RemainedAmount", data.RemainedAmount);
+            listDict.Add ("UsedAmount", data.UsedAmount);
+            //ExecuteScalar(cmd);
+            ExecuteScalar(sql, listDict);
         }
 
         /// <summary>

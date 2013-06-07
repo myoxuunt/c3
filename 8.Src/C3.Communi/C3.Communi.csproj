@@ -383,6 +383,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DbNetLink\DbNetLink.csproj">
+      <Project>{9D6EB61F-A762-425A-856B-93197DEC9F48}</Project>
+      <Name>DbNetLink</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xdgk.Common\Xdgk.Common.csproj">
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
