@@ -24,7 +24,7 @@ namespace C3.Communi
         static public ReceivePart Create(string xmlPath, string deviceType, string operaName)
         {
 
-            // "/devicedefines/devicedefine[attribute::devicetype='vFlux']/operadefine[attribute::name='read']/receivepart"
+            // "/devicedefines/devicedefine[attribute::devicetype='vGate100']/operadefine[attribute::name='read']/receivepart"
             //
             string format = "/{0}/{1}[attribute::{2}='{{0}}']/{3}[attribute::{4}='{{1}}']/{5}";
             string xpath = string.Format(format, 

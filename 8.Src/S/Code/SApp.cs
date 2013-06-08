@@ -19,8 +19,6 @@ namespace S
         {
             get
             {
-                //ReceivePart rp = ReceivePartFacotry.Create("f:\\C3\\8.Src\\S\\bin\\Debug\\Config\\Def.xml ", "vFlux","read");
-
                 if (AppBase.DefaultInstance == null)
                 {
                     AppBase.DefaultInstance = new SApp();

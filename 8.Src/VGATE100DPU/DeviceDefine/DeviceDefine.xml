@@ -25,11 +25,13 @@
         <datafield name="name"
             begin="5"
             length="30"
+            lazy="true"
             converter="Xdgk.Communi.Utf8EncodingConverter"/>
 
         <datafield name="dt"
             begin="35"
             length="8"
+            lazy="true"
             converter="Xdgk.Communi.TicksDateTimeConverter"/>
 
         <datafield name="end"
@@ -63,11 +65,13 @@
         <datafield name="name"
             begin="5"
             length="30"
+            lazy="true"
             converter="Xdgk.Communi.Utf8EncodingConverter"/>
 
         <datafield name="dt"
             begin="35"
             length="8"
+            lazy="true"
             converter="Xdgk.Communi.TicksDateTimeConverter"/>
 
         <datafield name="end"

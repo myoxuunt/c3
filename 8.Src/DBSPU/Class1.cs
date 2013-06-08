@@ -207,20 +207,33 @@ namespace DBSPU
         internal int InsertStation(string name, string xml, int ordinal, string street)
         {
             string s = string.Format (
-            "insert into tblStation(StationName, StationCPConfig, StationOrdinal, Street) values('{0}','{1}', {2}, '{3}');" +
-            "select @@identity;",
-
+            "insert into tblStation(StationName, StationCPConfig, StationOrdinal, Street) values('{0}','{1}', {2}, '{3}')",
             name, 
             xml,
             ordinal,
             street
             );
 
-            object obj = ExecuteScalar(s);
-            return Convert.ToInt32(obj);
+            ExecuteScalar(s);
+            return GetMaxStationID();
 
         }
 
+        public int GetMaxStationID ( )
+        {
+            string sql = "select Max(stationID) from tblStation";
+            object obj = ExecuteScalar (sql );
+
+            if (obj != null && obj != DBNull.Value)
+            {
+                return Convert.ToInt32(obj);
+            }
+            else
+            {
+                string msg = "not find max stationID in tblStation";
+                throw new InvalidOperationException(msg);
+            }
+        }
         /// <summary>
         /// 
         /// </summary>

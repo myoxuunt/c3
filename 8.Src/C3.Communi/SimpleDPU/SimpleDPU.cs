@@ -36,7 +36,7 @@ namespace C3.Communi.SimpleDPU
         {
             string s = string.Format(
                 "insert into tblDevice(DeviceAddress, DeviceName, deviceType, deviceExtend, stationID) " +
-                "values({0}, '{1}', '{2}', '{3}', {4}); select @@identity;",
+                "values({0}, '{1}', '{2}', '{3}', {4})",
                 device.Address,
                 device.Name ,
                 device.DeviceType.Type.Name,
@@ -44,7 +44,8 @@ namespace C3.Communi.SimpleDPU
                 GuidHelper.ConvertToInt32(device.Station.Guid)
                 );
 
-            object obj = _dbi.ExecuteScalar(s);
+            _dbi.ExecuteScalar(s);
+            object obj = GetMaxDeviceID(_dbi);
             device.Guid = GuidHelper.Create(Convert.ToInt32(obj));
         }
 

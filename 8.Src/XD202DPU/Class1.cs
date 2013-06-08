@@ -359,15 +359,15 @@ VALUES(
             Xd202 d = (Xd202)device;
 
             string s = string.Format(
-                    "insert into tblDevice(DeviceAddress, deviceType, stationID, DeviceName) values({0}, '{1}', {2}, '{3}'); select @@identity;",
+                    "insert into tblDevice(DeviceAddress, deviceType, stationID, DeviceName) values({0}, '{1}', {2}, '{3}')",
                     d.Address,
                     d.DeviceType.Type.Name,
                     GuidHelper.ConvertToInt32(d.Station.Guid),
                     d.Name
                     );
 
-            object obj = DBI.Instance.ExecuteScalar(s);
-            d.Guid = GuidHelper.Create(Convert.ToInt32(obj));
+            DBI.Instance.ExecuteScalar(s);
+            d.Guid = GuidHelper.Create(GetMaxDeviceID(DBI.Instance));
         }
 
         protected override void OnDelete(IDevice device)

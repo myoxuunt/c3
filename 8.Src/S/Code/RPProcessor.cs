@@ -19,7 +19,7 @@ namespace S
                 if (_rp == null)
                 {
                     string xmlPath = Application.StartupPath + @"\Config\DeviceDefine.xml";
-                    _rp = ReceivePartFacotry.Create(xmlPath, "vFlux", "receive");
+                    _rp = ReceivePartFacotry.Create(xmlPath, "vGate100", "receive");
                 }
                 return _rp;
             }

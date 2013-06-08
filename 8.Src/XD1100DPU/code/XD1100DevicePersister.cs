@@ -19,16 +19,15 @@ namespace XD1100DPU
             XD1100Device d = (XD1100Device)device;
 
             string s = string.Format(
-                    "insert into tblDevice(DeviceAddress, deviceType, stationID, DeviceExtend, DeviceName) values({0}, '{1}', {2}, '{3}', '{4}'); select @@identity;",
+                    "insert into tblDevice(DeviceAddress, deviceType, stationID, DeviceExtend, DeviceName) values({0}, '{1}', {2}, '{3}', '{4}')",
                     d.Address,
                     d.DeviceType.Type.Name,
                     GuidHelper.ConvertToInt32(d.Station.Guid),
                     GetExtend(d),
                     d.Name 
                     );
-
-            object obj = DBI.Instance.ExecuteScalar(s);
-            d.Guid = GuidHelper.Create(Convert.ToInt32(obj));
+            DBI.Instance.ExecuteScalar(s);
+            d.Guid = GuidHelper.Create(GetMaxDeviceID(DBI.Instance));
         }
 
         /// <summary>
