@@ -61,9 +61,9 @@ VALUES(
 @DeviceID, @DT, @BeforeWL, @BehindWL, @InstantFlux, @Height, @RemainedAmount, @UsedAmount)";
 
             ListDictionary listDict = new ListDictionary ();
-            listDict.Add ( 1,2);
+            //listDict.Add ( 1,2);
             listDict.Add ("deviceID", deviceID);
-            listDict.Add ("dt", data.DT);
+            listDict.Add("dt", data.DT);
             listDict.Add ("BeforeWL", data.BeforeWL);
             listDict.Add ("BehindWL", data.BehindWL);
             listDict.Add ("InstantFlux", data.InstantFlux);

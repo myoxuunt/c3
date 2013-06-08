@@ -15,40 +15,49 @@ namespace Xdgk.Common
     public class DBIBase
     {
         private string _connString;
-        private DataProvider _dataProvider;
-        private DatabaseType _dataBaseType;
+        //private DataProvider _dataProvider;
+        //private DatabaseType _dataBaseType;
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="connString"></param>
         public DBIBase(string connString)
-            : this(connString, DataProvider.SqlClient, DatabaseType.SqlServer)
+        //    : this(connString, DataProvider.SqlClient, DatabaseType.SqlServer)
         {
             this._connString = connString;
         }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="connString"></param>
+        ///// <param name="dataProvider"></param>
+        ///// <param name="databaseType"></param>
+        //public DBIBase(string connString, DataProvider dataProvider, DatabaseType databaseType)
+        //{
+        //    this._connString = connString;
+        //    this._dataProvider = dataProvider;
+        //    this._dataBaseType = databaseType;
+        //}
+
+        #region ExecuteDataTable
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="connString"></param>
-        /// <param name="dataProvider"></param>
-        /// <param name="databaseType"></param>
-        public DBIBase(string connString, DataProvider dataProvider, DatabaseType databaseType)
+        /// <returns></returns>
+        private DbNetData CreateDbNetData()
         {
-            this._connString = connString;
-            this._dataProvider = dataProvider;
-            this._dataBaseType = databaseType;
+            DbNetData db = new DbNetData(_connString);
+            db.Open();
+            return db;
         }
-
-        #region ExecuteDataTable
 
         public DataTable ExecuteDataTable(QueryCommandConfig cmd)
         {
-            using (DbNetData db = new DbNetData(_connString,
-                 this._dataProvider, this._dataBaseType))
+            using (DbNetData db = CreateDbNetData())
             {
-                db.Open();
                 DataTable tbl = db.GetDataTable(cmd);
                 return tbl;
             }
@@ -61,10 +70,8 @@ namespace Xdgk.Common
         /// <returns></returns>
         public DataTable ExecuteDataTable(string sql, IDictionary paramsDict)
         {
-            using (DbNetData db = new DbNetData(_connString,
-                 this._dataProvider, this._dataBaseType))
+            using (DbNetData db = CreateDbNetData())
             {
-                db.Open();
                 DataTable tbl = db.GetDataTable(sql, paramsDict);
                 return tbl;
             }
@@ -119,7 +126,7 @@ namespace Xdgk.Common
 
         public object ExecuteScalar(CommandConfig cmd)
         {
-            using (DbNetData db = new DbNetData(_connString, _dataProvider, _dataBaseType))
+            using (DbNetData db = CreateDbNetData()) 
             {
                 return db.ExecuteScalar(cmd);
             }
@@ -167,7 +174,7 @@ namespace Xdgk.Common
 
         public object ExecuteNonQuery(CommandConfig cmd)
         {
-            using (DbNetData db = new DbNetData(_connString, _dataProvider, _dataBaseType))
+            using (DbNetData db = CreateDbNetData())
             {
                 return db.ExecuteNonQuery(cmd);
             }

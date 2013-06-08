@@ -17,6 +17,7 @@
 	License along with this library; if not, write to the Free Software
 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+
 #define WINDOWS
 
 using System;
@@ -4444,12 +4445,26 @@ namespace DbNetLink.Data
                     }
 
                     if (Params[Key] == null)
+                    {
                         DbParam.Value = System.DBNull.Value;
+                    }
                     else if (Params[Key].ToString() == "" && this.ConvertEmptyToNull)
+                    {
                         DbParam.Value = System.DBNull.Value;
+                    }
                     else
                     {
                         DbParam.Value = Params[Key];
+
+                        if (DbParam.Value is DateTime &&
+                            DbParam is OleDbParameter)
+                        {
+                            OleDbParameter oledbParam = (OleDbParameter)DbParam;
+                            if (oledbParam.OleDbType == OleDbType.DBTimeStamp)
+                            {
+                                oledbParam.OleDbType = OleDbType.Date;
+                            }
+                        }
 
                         if (DbParam is OdbcParameter)
                             if (DbParam.Value is Byte[])
