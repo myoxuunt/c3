@@ -72,7 +72,6 @@
           </converter>
         </datafield>
         
-
         <datafield name="dt"
             begin="35"
             length="8"
@@ -109,7 +108,7 @@
         <datafield name="status"
             begin="4"
             length="1"
-            converter="Xdgk.Communi.OriginalConverter"/>
+            converter="Xdgk.Communi.Int8Converter"/>
 
         <datafield name="name"
             begin="5"

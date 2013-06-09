@@ -40,12 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VGATE100DPU\Class1.cs">
+      <Link>Code\Class1.cs</Link>
+    </Compile>
+    <Compile Include="Code\BaseOpera.cs" />
     <Compile Include="Code\Client.cs" />
     <Compile Include="Code\ClientCollection.cs" />
     <Compile Include="Code\ClientEventArgs.cs" />
     <Compile Include="Code\ClientManager.cs" />
+    <Compile Include="Code\ColumnNames.cs" />
     <Compile Include="Code\CommuniPortEventProcessor.cs" />
     <Compile Include="Code\Config.cs" />
+    <Compile Include="Code\GateDataResponse.cs" />
     <Compile Include="Code\RPProcessor.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="Forms\frmMain.cs">
@@ -117,8 +123,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Config\DeviceDefine.xml">
+    <None Include="Config\DeviceDefine.xml.bak">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="..\VGATE100DPU\DeviceDefine\DeviceDefine.xml">
+      <Link>Config\DeviceDefine.xml</Link>
     </Content>
     <Content Include="Config\ListenPort.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

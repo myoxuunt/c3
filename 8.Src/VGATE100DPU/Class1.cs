@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Diagnostics;
 using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Text;
@@ -8,107 +10,6 @@ using C3.Communi.SimpleDPU;
 
 namespace VGATE100DPU
 {
-
-    internal class DBI : DBIBase
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        static internal DBI Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-
-                    SourceConfig sc = SourceConfigManager.SourceConfigs.Find("Connection");
-                    if (sc != null)
-                    {
-                        _instance = new DBI(sc.Value);
-                    }
-                    else
-                    {
-                        throw new ConfigException("connection");
-                    }
-                }
-                return _instance;
-            }
-        } static private DBI _instance;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="s"></param>
-        private DBI(string s)
-            : base(s)
-        {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deviceID"></param>
-        /// <param name="data"></param>
-        public void InsertVGate100Data(int deviceID, VGate100Data data)
-        {
-            string s = " insert into tblGateData(deviceid, DT, BeforeWL, BehindWL, Height, instantFlux, TotalAmount, RemianAmount) " +
-                       " values(@deviceID, @dt, @beforeWL, @behindWL, @height, @instantFlux, @totalAmount, @remainAmount)";
-
-            ListDictionary list = new ListDictionary();
-            list.Add("DeviceID", deviceID);
-            list.Add("Dt", data.DT);
-            list.Add("BeforeWL", data.BeforeWL);
-            list.Add("BehindWL", data.BehindWL);
-            list.Add("Height", data.Height);
-            list.Add("InstantFlux", data.InstantFlux);
-            list.Add("TotalAmount", data.TotalAmount);
-            list.Add("RemainAmount", data.RemainAmount);
-
-            ExecuteScalar(s, list);
-        }
-
-        public DateTime GetVGateLastDateTime(int deviceID)
-        {
-            string s = "select Max(DT) from tblGateData where DeviceID = @deviceID";
-            ListDictionary list = new ListDictionary();
-            list.Add("deviceID", deviceID);
-
-            object obj = ExecuteScalar(s, list);
-            if (obj != null && obj != DBNull.Value)
-            {
-                return Convert.ToDateTime(obj);
-            }
-            else
-            {
-                return DateTime.Now.Date;
-            }
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class VGate100Dpu : DPUBase
-    {
-        public VGate100Dpu()
-        {
-            this.Name = "VGate100Dpu";
-            this.DeviceFactory = new VGate100Factory(this);
-            this.DevicePersister = new VGate100Persister(DBI.Instance);
-            this.DeviceSourceProvider = //new VGate100SourceProvider();
-                new SimpleDeviceSourceProvider(DBI.Instance, typeof(VGate100));
-            this.DeviceType = DeviceTypeManager.AddDeviceType(
-                "VGate100",
-                typeof(VGate100));
-            this.DeviceUI = new DeviceUI(this);
-            this.Processor = new VGate100Processor();
-
-            string path = PathUtils.GetAssemblyDirectory(typeof(VGate100).Assembly);
-            this.TaskFactory = new XmlTaskFactory(this, path);
-            this.OperaFactory = new XmlOperaFactory(path);
-        }
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -118,7 +19,7 @@ namespace VGATE100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem ("闸前水位", 20, "m")]
+        [DataItem("闸前水位", 20, "m")]
         public double BeforeWL
         {
             get
@@ -136,7 +37,7 @@ namespace VGATE100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem ("闸后水位", 30, "m")]
+        [DataItem("闸后水位", 30, "m")]
         public double BehindWL
         {
             get
@@ -154,7 +55,7 @@ namespace VGATE100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem ("闸高", 40, "m")]
+        [DataItem("闸高", 40, "m")]
         public double Height
         {
             get
@@ -172,7 +73,7 @@ namespace VGATE100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem ("瞬时流量", 50, "m3/s")]
+        [DataItem("瞬时流量", 50, "m3/s")]
         public double InstantFlux
         {
             get
@@ -190,7 +91,7 @@ namespace VGATE100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem ("累计流量", 60, "m3")]
+        [DataItem("累计流量", 60, "m3")]
         public double TotalAmount
         {
             get
@@ -208,7 +109,7 @@ namespace VGATE100DPU
         /// <summary>
         /// 
         /// </summary>
-        [DataItem ("剩余水量", 70, "m3")]
+        [DataItem("剩余水量", 70, "m3")]
         public double RemainAmount
         {
             get
@@ -223,104 +124,90 @@ namespace VGATE100DPU
         #endregion //RemianAmount
 
 
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class VGate100Processor : TaskProcessorBase
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="task"></param>
-        /// <param name="pr"></param>
-        public override void OnProcess(ITask task, IParseResult pr)
+        public byte[] ToBytes()
         {
-            if (pr.IsSuccess)
-            {
-                string opera = task.Opera.Name;
-                if (StringHelper.Equal(opera, "read"))
-                {
-                    VGate100Data data = new VGate100Data();
-                    //data.InstantFlux = Convert.ToDouble(pr.Results["if"]);
-                    //data.Sum = Convert.ToDouble(pr.Results["sum"]);
-
-                    task.Device.DeviceDataManager.Last = data;
-
-                    int id = GuidHelper.ConvertToInt32(task.Device.Guid);
-                    DBI.Instance.InsertVGate100Data(id, data);
-                }
-            }
-        }
-
-        public override void OnProcessUpload(IDevice device, IParseResult pr)
-        {
-            // nothing
-            //
-        }
-    }
-
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class VGate100Persister : SimpleDevicePersister
-    {
-        public VGate100Persister(DBIBase dbi)
-            : base(dbi)
-        {
-        }
-    }
-
-    public class VGate100Factory : DeviceFactoryBase
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="dpu"></param>
-        public VGate100Factory(IDPU dpu)
-            : base(dpu)
-        {
+            return ToBytes(this);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="deviceSource"></param>
+        /// <param name="data"></param>
         /// <returns></returns>
-        public override IDevice OnCreate(IDeviceSource deviceSource)
+        static public byte[] ToBytes(VGate100Data data)
         {
-            VGate100 d = new VGate100();
-            //d.DeviceSource = deviceSource;
-            //SetDeviceProperties(d, deviceSource);
-            base.SetDeviceProperties(d, deviceSource);
-            return d;
-        }
-    }
+            DateTime dt = data.DT;
+            float lwBefore = (float)data.BeforeWL;
+            float lwBehind = (float)data.BehindWL;
+            float height = (float)data.Height;
+            float flux = (float)data.Height;
+            float sum = (float)data.TotalAmount;
+            float remain = (float)data.RemainAmount;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    [DeviceKind("FluxDevice")]
-    internal class VGate100 : DeviceBase
-    {
-        public override object GetLazyDataFieldValue(string name)
+            MemoryStream ms = new MemoryStream();
+            Write(ms, BitConverter.GetBytes(dt.Ticks));
+            Write(ms, BitConverter.GetBytes(lwBefore));
+            Write(ms, BitConverter.GetBytes(lwBehind));
+            Write(ms, BitConverter.GetBytes(height));
+            Write(ms, BitConverter.GetBytes(flux));
+            Write(ms, BitConverter.GetBytes(sum));
+            Write(ms, BitConverter.GetBytes(remain));
+            return ms.ToArray();
+        }
+
+        static void Write(MemoryStream ms, byte[] bs)
         {
-            if (StringHelper.Equal(name, "name"))
+            ms.Write(bs, 0, bs.Length);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bs"></param>
+        /// <returns></returns>
+        static public VGate100Data ToVGate100Data(byte[] bs, int beginOffset)
+        {
+            int start = beginOffset;
+
+            long ticks = BitConverter.ToInt64(bs, start);
+            start += 8;
+
+            float lwBefore = BitConverter.ToSingle(bs, start);
+            start += 4;
+
+            float lwBehind = BitConverter.ToInt64(bs, start);
+            start += 4;
+
+            float height = BitConverter.ToInt64(bs, start);
+            start += 4;
+
+            float flux = BitConverter.ToInt64(bs, start);
+            start += 4;
+
+            float sum = BitConverter.ToInt64(bs, start);
+            start += 4;
+
+            float remain = BitConverter.ToInt64(bs, start);
+            start += 4;
+
+            DateTime dt = new DateTime(ticks);
+
+            VGate100Data r = new VGate100Data();
+            r.DT = dt;
+            r.BeforeWL = lwBefore;
+            r.BehindWL = lwBehind;
+            r.Height = height;
+            r.InstantFlux = flux;
+            r.RemainAmount = remain;
+            r.TotalAmount = sum;
+
+            return r;
+        }
+
+        static public int BytesCountOfVGateData
+        {
+            get
             {
-                return this.Station.Name;
-            }
-            else if (StringHelper.Equal(name, "dt"))
-            {
-                //return DateTime.Now;
-                int deviceID = GuidHelper.ConvertToInt32(this.Guid);
-                return DBI.Instance.GetVGateLastDateTime(deviceID);
-            }
-            else
-            {
-                string msg = "not find lazy name: " + name;
-                throw new InvalidOperationException(msg);
+                return 8 + 4 * 6;
             }
         }
     }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Xdgk.Common;
 using C3.Communi;
+using VGATE100DPU;
 
 namespace S
 {
@@ -88,204 +89,56 @@ namespace S
 
             DataTable tbl = DB.GetGateDataTable(name, dt);
 
-            GateDataResponse rep = new GateDataResponse(name, status, tbl);
-            byte[] bs= rep.ToBytes();
-            logContentBuilder.AppendLine(string.Format("获取'{0}'条记录", rep.CountOfCreated));
+            int createdCount;
+            GateDataResponse rep = new GateDataResponse(name, status, ConvertToVGate100Datas(tbl, out createdCount));
+            byte[] bs = rep.ToBytes();
+            logContentBuilder.AppendLine(string.Format("获取'{0}'条记录", createdCount));
             return bs;
         }
-    }
-
-
-    class ColumnNames
-    {
-        public const string StrTime = "StrTime";
-        public const string BeforeLevel = "BeforeLevel";
-        public const string BehindLevel = "BehindLevel";
-        public const string Height = "Height";
-        public const string Flux = "Flux";
-        public const string ReWater = "ReWater";
-        public const string TuWater = "TuWater";
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    abstract public class BaseOpera
-    {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="address"></param>
-        /// <param name="commandType"></param>
-        public BaseOpera(byte address, byte commandType)
-        {
-            this.Address = address;
-            this.CommandType = commandType;
-        }
-
-        #region Address
-        /// <summary>
-        /// 
-        /// </summary>
-        public byte Address
-        {
-            get
-            {
-                return _address;
-            }
-            set
-            {
-                _address = value;
-            }
-        } private byte _address;
-        #endregion //Address
 
         /// <summary>
         /// 
         /// </summary>
-        public byte CommandNO
+        /// <param name="tbl"></param>
+        /// <returns></returns>
+        static private VGate100Data[] ConvertToVGate100Datas(DataTable dataTable, out int createdCount)
         {
-            get { return _commandNO; }
-            set { _commandNO = value; }
-        } private byte _commandNO;
+            createdCount = 0;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public byte CommandType
-        {
-            get { return _commandType; }
-            set { _commandType = value; }
-        } private byte _commandType;
+            List<VGate100Data> list = new List<VGate100Data>();
 
-        public byte[] ToBytes()
-        {
-            MemoryStream ms = new MemoryStream();
-            byte[] h = new byte[] { 0x5b, 0x5b };
-            byte[] t = new byte[] { 0x5d, 0x5d };
-
-            ms.Write(h, 0, h.Length);
-            ms.WriteByte(this.Address);
-            ms.WriteByte(this.CommandType);
-            ms.WriteByte(this.CommandNO);
-
-            byte[] bs = OnToBytes();
-            ms.Write(bs, 0, bs.Length);
-            ms.Write(t, 0, t.Length);
-
-            return ms.ToArray();
-
-        }
-        abstract public byte[] OnToBytes();
-    }
-
-    public class GateDataResponse : BaseOpera
-    {
-        private DataTable _gateTable;
-
-        public GateDataResponse(string gateName, byte status, DataTable gateDatatable)
-            : base(0, 0x85)
-        {
-            this.GateName = gateName;
-            this.Status = status;
-            this._gateTable = gateDatatable;
-        }
-
-        /// <summary>
-        /// 0 - success
-        /// 1 - not find gate name
-        /// </summary>
-        public byte Status
-        {
-            get { return base.CommandNO; }
-            set { base.CommandNO = value; }
-        }
-
-        public string GateName
-        {
-            get { return _gateName; }
-            set { _gateName = value; }
-        } private string _gateName;
-
-
-        public override byte[] OnToBytes()
-        {
-
-            byte[] bs = ASCIIEncoding.ASCII.GetBytes(new string(' ', 30));
-            Debug.Assert(bs.Length == 30);
-
-            byte[] bsName = UTF8Encoding.UTF8.GetBytes(this.GateName);
-            Debug.Assert(bsName.Length <= 30);
-
-            Array.Copy(bsName, bs, bsName.Length);
-
-            MemoryStream ms = new MemoryStream();
-            ms.Write(bs, 0, bs.Length);
-
-            byte[] bs2 = GetGateDataBytes(this._gateTable);
-            ms.Write(bs2, 0, bs2.Length);
-
-            return ms.ToArray();
-        }
-
-        const int max = 5;
-
-        private byte[] GetGateDataBytes(DataTable dataTable)
-        {
-            MemoryStream ms = new MemoryStream();
-            int rows = dataTable.Rows.Count;
-            if (rows > max)
+            foreach (DataRow row in dataTable.Rows)
             {
-                rows = max;
-            }
-            _countOfCreated = rows;
+                DateTime dt = Convert.ToDateTime(row[ColumnNames.StrTime]);
+                float lwBefore = Convert.ToSingle(row[ColumnNames.BeforeLevel]);
+                float lwBehind = Convert.ToSingle(row[ColumnNames.BehindLevel]);
+                float height = Convert.ToSingle(row[ColumnNames.Height]);
+                float flux = Convert.ToSingle(row[ColumnNames.Flux]);
+                float sum = Convert.ToSingle(row[ColumnNames.TuWater]);
+                float remain = Convert.ToSingle(row[ColumnNames.ReWater]);
 
-            ms.WriteByte((byte)rows);
+                VGate100Data data = new VGate100Data();
+                data.DT = dt;
+                data.BeforeWL = lwBefore;
+                data.BehindWL = lwBehind;
+                data.Height = height;
+                data.InstantFlux = flux;
+                data.TotalAmount = sum;
+                data.RemainAmount = remain;
 
-            for (int i = 0; i < max; i++)
-            {
-                DateTime dt = DateTime.MinValue;
-                float lwBefore = 0;
-                float lwBehind = 0;
-                float height = 0;
-                float flux = 0;
-                float sum = 0;
-                float remain = 0;
-
-                if (i < dataTable.Rows.Count)
+                list.Add(data);
+                if (list.Count >= 5)
                 {
-                    DataRow row = dataTable.Rows[i];
-
-                    dt = Convert.ToDateTime(row[ColumnNames.StrTime]);
-                    lwBefore = Convert.ToSingle(row[ColumnNames.BeforeLevel]);
-                    lwBehind = Convert.ToSingle(row[ColumnNames.BehindLevel]);
-                    height = Convert.ToSingle(row[ColumnNames.Height]);
-                    flux = Convert.ToSingle(row[ColumnNames.Flux]);
-                    sum = Convert.ToSingle(row[ColumnNames.TuWater]);
-                    remain = Convert.ToSingle(row[ColumnNames.ReWater]);
+                    break;
                 }
-
-                Write(ms, BitConverter.GetBytes(dt.Ticks));
-                Write(ms, BitConverter.GetBytes(lwBefore));
-                Write(ms, BitConverter.GetBytes(lwBehind));
-                Write(ms, BitConverter.GetBytes(height));
-                Write(ms, BitConverter.GetBytes(flux));
-                Write(ms, BitConverter.GetBytes(sum));
-                Write(ms, BitConverter.GetBytes(remain));
             }
+            createdCount = list.Count;
 
-            return ms.ToArray();
+            while (list.Count < 5)
+            {
+                list.Add(new VGate100Data());
+            }
+            return list.ToArray();
         }
-
-        void Write(MemoryStream ms, byte[] bs)
-        {
-            ms.Write(bs, 0, bs.Length);
-        }
-
-        public int CountOfCreated
-        {
-            get { return _countOfCreated; }
-        } private int _countOfCreated;
     }
-
 }
