@@ -33,9 +33,7 @@ namespace VGATE100DPU
                 }
                 return _instance;
             }
-        }
-
-        static private DBI _instance;
+        } static private DBI _instance;
 
         /// <summary>
         /// 
@@ -53,15 +51,6 @@ namespace VGATE100DPU
         /// <param name="data"></param>
         public void InsertVGate100Data(int deviceID, VGate100Data data)
         {
-            InsertFlowmeterData(deviceID, data);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="data"></param>
-        private object InsertFlowmeterData(int deviceID, VGate100Data   data)
-        {
             string s = " insert into tblGateData(deviceid, DT, BeforeWL, BehindWL, Height, instantFlux, TotalAmount, RemianAmount) " +
                        " values(@deviceID, @dt, @beforeWL, @behindWL, @height, @instantFlux, @totalAmount, @remainAmount)";
 
@@ -75,7 +64,24 @@ namespace VGATE100DPU
             list.Add("TotalAmount", data.TotalAmount);
             list.Add("RemainAmount", data.RemainAmount);
 
-            return ExecuteScalar(s, list);
+            ExecuteScalar(s, list);
+        }
+
+        public DateTime GetVGateLastDateTime(int deviceID)
+        {
+            string s = "select Max(DT) from tblGateData where DeviceID = @deviceID";
+            ListDictionary list = new ListDictionary();
+            list.Add("deviceID", deviceID);
+
+            object obj = ExecuteScalar(s, list);
+            if (obj != null && obj != DBNull.Value)
+            {
+                return Convert.ToDateTime(obj);
+            }
+            else
+            {
+                return DateTime.Now.Date;
+            }
         }
     }
 
@@ -303,11 +309,13 @@ namespace VGATE100DPU
         {
             if (StringHelper.Equal(name, "name"))
             {
-                return this.Station.Name.PadRight(30);
+                return this.Station.Name;
             }
             else if (StringHelper.Equal(name, "dt"))
             {
-                return DateTime.Now;
+                //return DateTime.Now;
+                int deviceID = GuidHelper.ConvertToInt32(this.Guid);
+                return DBI.Instance.GetVGateLastDateTime(deviceID);
             }
             else
             {

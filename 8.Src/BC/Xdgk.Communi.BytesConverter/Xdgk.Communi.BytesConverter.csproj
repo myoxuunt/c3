@@ -87,4 +87,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PostBuildEvent>afterBuild.bat</PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -65,8 +65,13 @@
         <datafield name="name"
             begin="5"
             length="30"
-            lazy="true"
-            converter="Xdgk.Communi.Utf8EncodingConverter"/>
+            lazy="true">
+
+          <converter name="Xdgk.Communi.Utf8EncodingConverter">
+            <property name="BytesCountForConvert" value="30"></property>
+          </converter>
+        </datafield>
+        
 
         <datafield name="dt"
             begin="35"
