@@ -1,7 +1,6 @@
 using System;
 using System.Net;
 
-
 namespace C3.Communi
 {
     public class LocalPortConfig : INetCommuniPortConfig
