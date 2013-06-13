@@ -4,12 +4,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
-using NUnit.Core;
+using NLog ;
 
 namespace C3.Communi
 {
     public class CRCerManager
     {
+        static private Logger log = LogManager.GetCurrentClassLogger();
+
         static public CRCerManager Default
         {
             get
@@ -21,7 +23,6 @@ namespace C3.Communi
                 return _default;
             }
         } static private CRCerManager _default;
-        static private Logger log = InternalTrace.GetLogger(typeof(CRCerManager));
 
         private CRCerManager ()
         {

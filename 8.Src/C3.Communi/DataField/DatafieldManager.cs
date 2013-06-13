@@ -1,9 +1,7 @@
 using System;
 using System.IO;
-using System.IO.IsolatedStorage;
-using System.Diagnostics;
 using System.Collections;
-using NUnit.Core;
+using NLog;
 using Xdgk.Common;
 
 namespace C3.Communi
@@ -21,7 +19,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        private static Logger log = InternalTrace.GetLogger(typeof(DatafieldManager));
+        private static Logger log = LogManager.GetCurrentClassLogger();
         #endregion //static
 
         #region Constructor

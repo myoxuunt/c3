@@ -126,10 +126,6 @@
     <Compile Include="Core\Collection.cs" />
     <Compile Include="Core\Diagnostics.cs" />
     <Compile Include="Core\ExceptionHandler.cs" />
-    <Compile Include="NUnit\InternalTrace.cs" />
-    <Compile Include="NUnit\InternalTraceWriter.cs" />
-    <Compile Include="NUnit\Logger.cs" />
-    <Compile Include="NUnit\NTrace.cs" />
     <Compile Include="Core\ObjectBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\ReflectionHelper.cs" />

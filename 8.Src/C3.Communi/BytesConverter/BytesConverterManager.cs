@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Reflection;
 
 using NUnit.Core;
+using NLog;
 using Xdgk.Common;
 using System.Collections ;
 
@@ -33,19 +34,19 @@ namespace C3.Communi
             }
         } static private BytesConverterManager _default;
 
-        static private Logger log = InternalTrace.GetLogger(typeof(BytesConverterManager));
+        static private Logger log = LogManager.GetCurrentClassLogger();
         static private string BytesConverterAddinDir = "bc";
         private List<Assembly> _assemblyList= new List<Assembly>();
 
-        #region BytesConverters
-        /// <summary>
-        /// 
-        /// </summary>
-        public BytesConverterCollection BytesConverters
-        {
-            get { return _bytesConverterCollection; }
-        } private BytesConverterCollection _bytesConverterCollection = new BytesConverterCollection();
-        #endregion //BytesConverters
+        //#region BytesConverters
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public BytesConverterCollection BytesConverters
+        //{
+        //    get { return _bytesConverterCollection; }
+        //} private BytesConverterCollection _bytesConverterCollection = new BytesConverterCollection();
+        //#endregion //BytesConverters
 
         #region BytesConverterManager
         /// <summary>
@@ -96,28 +97,36 @@ namespace C3.Communi
 
                 foreach (Type type in assembly.GetExportedTypes())
                 {
-                    if (type.IsClass && typeof(IBytesConverter).IsAssignableFrom(type))
+                    if (type.IsClass &&
+                        typeof(IBytesConverter).IsAssignableFrom(type))
                     {
-                        IBytesConverter ibc = (IBytesConverter)Activator.CreateInstance(type);
-                        this._bytesConverterCollection.Add( ibc );
-                        //log.Error("Addin {0} was already registered", addin.Name);
-                        //else
-                        //{
-                        //    addinRegistry.Register(addin);
-                        log.Debug("Registered addin: {0}", ibc.GetType());
-                        //}
+                        if (!type.IsAbstract)
+                        {
+                            this.RegisteredByteConverterDict.Add(type.FullName, type);
+                            log.Info("Registered byte converter addin: {0}", type.FullName);
+                        }
                     }
                 }
             }
             catch (Exception ex)
             {
-                // NOTE: Since the gui isn't loaded at this point, 
-                // the trace output will only show up in Visual Studio
-                log.Error("Failed to load" + path, ex);
+                log.Error("Failed to load bc assembly: {0}\r\n{1}", path, ex);
             }
         }
         #endregion //Register
 
+
+        public Dictionary<string, Type> RegisteredByteConverterDict
+        {
+            get 
+            {
+                if (_registeredByteConverterDict == null)
+                {
+                    _registeredByteConverterDict = new Dictionary<string, Type>();
+                }
+                return _registeredByteConverterDict;
+            }
+        } private Dictionary<string, Type> _registeredByteConverterDict;
 
         #region GetType
         /// <summary>
@@ -148,16 +157,13 @@ namespace C3.Communi
         public IBytesConverter CreateBytesConverter(string typeName, object[] args)
         {
             Type t = this.GetType(typeName);
-            if (t != null)
+            if (t == null)
             {
-                return (IBytesConverter)Activator.CreateInstance(t, args);
-            }
-            else
-            {
-                //return null;
                 string s = string.Format("Cannot create bytes converter by '{0}'", typeName);
                 throw new ArgumentException(s);
             }
+
+            return (IBytesConverter)Activator.CreateInstance(t, args);
         }
 
         /// <summary>

@@ -84,8 +84,9 @@ namespace C3
         {
             if (_bcNode == null)
             {
-                BytesConverterCollection bcs = BytesConverterManager.Default.BytesConverters;
-                UCBytesConverterViewer c1 = new UCBytesConverterViewer(bcs);
+                //BytesConverterCollection bcs = BytesConverterManager.Default.BytesConverters;
+                Dictionary<string, Type> dict = BytesConverterManager.Default.RegisteredByteConverterDict;
+                UCBytesConverterViewer c1 = new UCBytesConverterViewer(dict);
                 _bcNode = new AddinTreeNode(Strings.BytesConverter, c1);
             }
             return _bcNode;
