@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
+using Xdgk.Common;
 
 namespace C3.Communi
 {
@@ -17,6 +18,7 @@ namespace C3.Communi
             this.panelByIPAddress.Location = PanelLocal;
             this.panelByLocalPort.Location = PanelLocal;
             this.panelBylRemotePort.Location = PanelLocal;
+            this.panelByRemoteIPAndPort.Location = PanelLocal;
 
             //
             //
@@ -39,7 +41,13 @@ namespace C3.Communi
         /// <param name="e"></param>
         private void UCNetSetting_Load(object sender, EventArgs e)
         {
+            KeyValueCollection kvs = new KeyValueCollection();
+            kvs.Add(strings.Client, ConnectionType.Client);
+            kvs.Add(strings.Server, ConnectionType.Server);
 
+            this.cmbConnectionType.DisplayMember = "Key";
+            this.cmbConnectionType.ValueMember = "Value";
+            this.cmbConnectionType.DataSource = kvs;
         }
 
         public ICommuniPortConfig CommuniPortConfig
@@ -63,6 +71,17 @@ namespace C3.Communi
                         break;
 
                     case DiscriminateMode.ByPhoneNumber:
+                        // TODO:
+                        //
+                        break;
+
+                    case DiscriminateMode.ByRemoteIPAddressAndPort:
+                        r = new RemoteIPAddressAndPortConfig(
+                            this.RemoteIPAddress2, 
+                            (int)this.numRemotePort2.Value,
+                            this.SelectedConnectedType 
+                            );
+                        
                         break;
 
                     default:
@@ -116,6 +135,13 @@ namespace C3.Communi
                 LocalPortConfig lpCfg = cfg as LocalPortConfig;
                 this.numLocalPort.Value = lpCfg.LocalPort;
             }
+            else if (cfg is RemoteIPAddressAndPortConfig)
+            {
+                RemoteIPAddressAndPortConfig ipPortCfg = cfg as RemoteIPAddressAndPortConfig;
+                this.txtRemoteIPAddress.Text = ipPortCfg.RemoteIPAddress.ToString();
+                this.numRemotePort2.Value = ipPortCfg.RemotePort;
+                this.cmbConnectionType.SelectedValue = ipPortCfg.ConnectionType;
+            }
             else
             {
                 throw new NotSupportedException(cfg.ToString());
@@ -129,6 +155,18 @@ namespace C3.Communi
         {
             get { return IPAddress.Parse(this.txtStationIP.Text); }
         }
+
+        private IPAddress RemoteIPAddress2
+        {
+            get { return IPAddress.Parse(this.txtRemoteIPAddress.Text); }
+        }
+
+        private ConnectionType SelectedConnectedType
+        {
+            get { return (ConnectionType)this.cmbConnectionType.SelectedValue; }
+        }
+
+
 
 
         /// <summary>
@@ -165,6 +203,7 @@ namespace C3.Communi
             panelByIPAddress.Visible = dm == DiscriminateMode.ByIPAddress;
             panelByLocalPort.Visible = dm == DiscriminateMode.ByLocalPort;
             panelBylRemotePort.Visible = dm == DiscriminateMode.ByRemotePort;
+            panelByRemoteIPAndPort.Visible = dm == DiscriminateMode.ByRemoteIPAddressAndPort;
         }
 
         /// <summary>

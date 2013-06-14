@@ -14,6 +14,7 @@ namespace C3.Communi
         ByLocalPort = 1,
         ByRemotePort = 2,
         ByPhoneNumber = 3,
+        ByRemoteIPAddressAndPort = 4,
     }
 
 

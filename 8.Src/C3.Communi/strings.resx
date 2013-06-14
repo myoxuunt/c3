@@ -124,7 +124,7 @@
     <value>地址错误</value>
   </data>
   <data name="ByIP" xml:space="preserve">
-    <value>通过IP地址</value>
+    <value>通过远程IP地址</value>
   </data>
   <data name="ByLocalPort" xml:space="preserve">
     <value>通过本地端口</value>
@@ -242,5 +242,14 @@
   </data>
   <data name="ContentCopied" xml:space="preserve">
     <value>内容已经复制</value>
+  </data>
+  <data name="ByRemoteIPAndPort" xml:space="preserve">
+    <value>通过远程IP地址和端口</value>
+  </data>
+  <data name="Client" xml:space="preserve">
+    <value>客户端</value>
+  </data>
+  <data name="Server" xml:space="preserve">
+    <value>服务器</value>
   </data>
 </root>

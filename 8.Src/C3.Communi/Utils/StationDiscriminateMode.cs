@@ -87,9 +87,25 @@ namespace C3.Communi
         /// </summary>
         static private Item[] s_items = new Item[] 
         {
-            new Item(DiscriminateMode.ByIPAddress, strings.ByIP, typeof(RemoteIPAddressConfig ) ),
-                new Item(DiscriminateMode.ByLocalPort, strings.ByLocalPort,typeof (LocalPortConfig ) ),
-                new Item (DiscriminateMode.ByRemotePort, strings.ByRemotePort,typeof(RemotePortConfig ))
+            new Item (
+                DiscriminateMode.ByIPAddress,  
+                strings.ByIP,           
+                typeof(RemoteIPAddressConfig)),
+
+            new Item (
+                DiscriminateMode.ByLocalPort,  
+                strings.ByLocalPort,    
+                typeof(LocalPortConfig)),
+
+            new Item (
+                DiscriminateMode.ByRemotePort, 
+                strings.ByRemotePort,   
+                typeof(RemotePortConfig)),
+
+            new Item (
+                DiscriminateMode.ByRemoteIPAddressAndPort, 
+                strings.ByRemoteIPAndPort, 
+                typeof (RemoteIPAddressAndPortConfig )),
         };
     }
 

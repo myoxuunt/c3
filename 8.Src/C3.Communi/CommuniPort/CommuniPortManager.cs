@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Diagnostics;
 using NLog;
 
@@ -259,8 +260,211 @@ namespace C3.Communi
         }
         #endregion //ProcessDetermined
 
+        #region GetCommuniPort
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="cpCfg"></param>
+        /// <returns></returns>
+        public ICommuniPort GetOrCreateCommuniPort(ICommuniPortConfig cpCfg)
+        {
+            if (cpCfg == null)
+            {
+                throw new ArgumentNullException("cpCfg");
+            }
 
+            ICommuniPort r = null;
+
+            foreach (ICommuniPort cp in this.CommuniPorts)
+            {
+                if (cpCfg.IsMatch(cp))
+                {
+                    r = cp;
+                    break;
+                }
+            }
+
+            if (r == null)
+            {
+                if (cpCfg.CanCreate)
+                {
+                    //CommuniPortFactory.Create ( cpCfg )
+                    ICommuniPort cp = null;
+                    //try
+                    //{
+                    //    cp = cpCfg.Create();
+                    //}
+                    //catch (Exception ex)
+                    //{
+
+                    //}
+                    CreateWithThread(cpCfg);
+                    r = cp;
+                }
+            }
+
+            return r;
+        }
+        #endregion //GetCommuniPort
         #endregion //Methods
+
+        #region CreateCommuniPortResults
+        /// <summary>
+        /// 
+        /// </summary>
+        public CreateCommuniPortResultCollection CreateCommuniPortResults
+        {
+            get
+            {
+                if (_createCommuniPortResults == null)
+                {
+                    _createCommuniPortResults = new CreateCommuniPortResultCollection();
+                }
+                return _createCommuniPortResults;
+            }
+        } private CreateCommuniPortResultCollection _createCommuniPortResults;
+        #endregion //CreateCommuniPortResults
+
+        private void CreateWithThread(ICommuniPortConfig cpCfg)
+        {
+            CreateCommuniPortResult createResult = null;
+            CommuniPortFactory f = new CommuniPortFactory(cpCfg);
+            f.Doit ();
+            if (f.Success)
+            {
+                this.Add(f.ResultCommuniPort);
+                createResult = new CreateCommuniPortResult(true, cpCfg,
+                    "create success", null);
+            }
+            else
+            {
+                createResult = new CreateCommuniPortResult(true, cpCfg,
+                    "create fail", f.Exception);
+            }
+                this.CreateCommuniPortResults.Add(createResult);
+            //Thread t = new Thread(f.Doit());
+            //try
+            //{
+            //    t.Start();
+            //}
+            //catch 
+
+        }
     }
+
+    //public class 
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class CreateCommuniPortResultCollection : Xdgk.Common.LimitationCollection<CreateCommuniPortResult>
+    {
+        public CreateCommuniPortResultCollection()
+        {
+            this.MaxCount = 50;
+        }
+    }
+
+    public class CreateCommuniPortResult
+    {
+        public CreateCommuniPortResult (bool success, ICommuniPortConfig communiPortConfig, string message, Exception exception)
+        {
+            this.Success = success;
+            this.CommuniPortConfig = communiPortConfig;
+            this.Message = message;
+            this.Exception = exception;
+        }
+
+        #region Success
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool Success
+        {
+            get
+            {
+                return _success;
+            }
+            set
+            {
+                _success = value;
+            }
+        } private bool _success;
+        #endregion //Success
+
+        #region DT
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime DT
+        {
+            get
+            {
+                return _dT;
+            }
+            set
+            {
+                _dT = value;
+            }
+        } private DateTime _dT;
+        #endregion //DT
+
+        #region Message
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Message
+        {
+            get
+            {
+                if (_message == null)
+                {
+                    _message = string.Empty;
+                }
+                return _message;
+            }
+            set
+            {
+                _message = value;
+            }
+        } private string _message;
+        #endregion //Message
+
+        #region Exception
+        /// <summary>
+        /// 
+        /// </summary>
+        public Exception Exception
+        {
+            get
+            {
+                return _exception;
+            }
+            set
+            {
+                _exception = value;
+            }
+        } private Exception _exception;
+        #endregion //Exception
+
+        #region CommuniPortConfig
+        /// <summary>
+        /// 
+        /// </summary>
+        public ICommuniPortConfig CommuniPortConfig
+        {
+            get
+            {
+                return _communiPortConfig;
+            }
+            set
+            {
+                _communiPortConfig = value;
+            }
+        } private ICommuniPortConfig _communiPortConfig;
+        #endregion //CommuniPortConfig
+
+    }
+
 
 }

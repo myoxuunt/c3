@@ -88,7 +88,7 @@ namespace C3.Communi {
         }
         
         /// <summary>
-        ///   查找类似 通过IP地址 的本地化字符串。
+        ///   查找类似 通过远程IP地址 的本地化字符串。
         /// </summary>
         internal static string ByIP {
             get {
@@ -106,11 +106,29 @@ namespace C3.Communi {
         }
         
         /// <summary>
+        ///   查找类似 通过远程IP地址和端口 的本地化字符串。
+        /// </summary>
+        internal static string ByRemoteIPAndPort {
+            get {
+                return ResourceManager.GetString("ByRemoteIPAndPort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 通过远程端口 的本地化字符串。
         /// </summary>
         internal static string ByRemotePort {
             get {
                 return ResourceManager.GetString("ByRemotePort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 客户端 的本地化字符串。
+        /// </summary>
+        internal static string Client {
+            get {
+                return ResourceManager.GetString("Client", resourceCulture);
             }
         }
         
@@ -372,6 +390,15 @@ namespace C3.Communi {
         internal static string Send {
             get {
                 return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 服务器 的本地化字符串。
+        /// </summary>
+        internal static string Server {
+            get {
+                return ResourceManager.GetString("Server", resourceCulture);
             }
         }
         

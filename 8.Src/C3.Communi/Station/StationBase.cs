@@ -148,8 +148,9 @@ namespace C3.Communi
                         Soft soft = SoftManager.GetSoft();
                         CommuniPortManager cpManager = soft.CommuniPortManager;
                         //ICommuniPort cp = cpManager.CreateCommuniPort(this.CommuniPortConfig);
+                        //ICommuniPort cp = CommuniPortFactory.Create(this.CommuniPortConfig);
 
-                        ICommuniPort cp = CommuniPortFactory.Create(this.CommuniPortConfig);
+                        ICommuniPort cp = cpManager.GetOrCreateCommuniPort(this.CommuniPortConfig);
                         if (cp != null)
                         {
                             this.CommuniPort = cp;

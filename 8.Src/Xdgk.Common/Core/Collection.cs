@@ -8,6 +8,52 @@ namespace Xdgk.Common
     /// <summary>
     /// 
     /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class LimitationCollection<T> : Collection<T>
+    {
+        public int MaxCount
+        {
+            get { return _maxCount; }
+            set 
+            { 
+                _maxCount = value;
+                ModifyCount();
+            }
+        } private int _maxCount = 1000;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="item"></param>
+        protected override void InsertItem(int index, T item)
+        {        
+            base.InsertItem(index, item);
+            ModifyCount();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ModifyCount()
+        {
+            if (this.MaxCount <= 0)
+            {
+                return;
+            }
+            else
+            {
+                while (this.Count > this.MaxCount)
+                {
+                    this.RemoveAt(0);
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     [Serializable]
     public class Collection<T> : System.Collections.ObjectModel.Collection<T>
     {

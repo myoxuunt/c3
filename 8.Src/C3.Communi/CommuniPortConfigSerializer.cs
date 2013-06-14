@@ -26,6 +26,7 @@ namespace C3.Communi
         [XmlInclude(typeof(NullCommuniPortConfig))]
         [XmlInclude(typeof(SerialCommuniPortConfig))]
         [XmlInclude(typeof(RemoteIPAddressConfig))]
+        [XmlInclude(typeof(RemoteIPAddressAndPortConfig))]
         [XmlInclude(typeof(RemotePortConfig))]
         [XmlInclude(typeof(LocalPortConfig))]
         public class Wrapper

@@ -34,11 +34,19 @@ namespace C3.Communi
         }
 
         public RemoteIPAddressAndPortConfig(IPAddress remoteIPAddress, int remotePort)
+            : this(remoteIPAddress, remotePort, ConnectionType.Client)
         {
 
         }
 
-#region ICommuniPortConfig 成员
+        public RemoteIPAddressAndPortConfig(IPAddress remoteIPAddress, int remotePort, ConnectionType connType)
+        {
+            this.RemoteIPAddress = remoteIPAddress;
+            this.RemotePort = remotePort;
+            this.ConnectionType = connType;
+        }
+
+        #region ICommuniPortConfig 成员
 
         /// <summary>
         /// 
@@ -47,8 +55,15 @@ namespace C3.Communi
         {
             get
             {
-                return this._connectionType == ConnectionType.Client;
+                return this._connectionType == ConnectionType.Client &&
+                    InCreateDateTime();
             }
+        }
+
+        private bool InCreateDateTime()
+        {
+            TimeSpan ts = DateTime.Now - this.LastCreateDateTime;
+            return ts < TimeSpan.Zero || ts >= this.CreateInterval;
         }
 
         /// <summary>
@@ -57,36 +72,37 @@ namespace C3.Communi
         /// <returns></returns>
         public ICommuniPort Create()
         {
-            if (this.ConnectionType == ConnectionType.Server)
+            if (!CanCreate)
             {
-
-                string msg = string.Format(
-                        "cannot create communiPort with ConnectionType '{0}'",
-                        this.ConnectionType);
-                throw new InvalidOperationException(msg);
+                throw new InvalidOperationException(string.Format("Cannot create communi port with '{0}'", this));
             }
 
-            Socket socket = new Socket(AddressFamily.InterNetwork,
-                    SocketType.Stream, ProtocolType.Tcp);
+            this.LastCreateDateTime = DateTime.Now;
 
             SocketCommuniPort sckCP = null;
 
-            try
-            {
-                socket.Connect(this.RemoteIPAddress, this.RemotePort);
-                sckCP = new SocketCommuniPort(socket);
-            }
-            catch (SocketException sckEx)
-            {
-                log.Error("Create socket fail.\r\n" + sckEx);
-            }
-            catch (Exception ex)
-            {
-                log.Error("Create socket fail.\r\n" + ex);
-                throw;
-            }
-
+            Socket socket = new Socket(AddressFamily.InterNetwork,
+                    SocketType.Stream, ProtocolType.Tcp);
+            socket.Connect(this.RemoteIPAddress, this.RemotePort);
+            sckCP = new SocketCommuniPort(socket);
             return sckCP;
+
+
+            //try
+            //{
+            //    socket.Connect(this.RemoteIPAddress, this.RemotePort);
+            //    sckCP = new SocketCommuniPort(socket);
+            //}
+            //catch (SocketException sckEx)
+            //{
+            //    log.Error("Create socket fail.\r\n" + sckEx);
+            //}
+            //catch (Exception ex)
+            //{
+            //    log.Error("Create socket fail.\r\n" + ex);
+            //    throw;
+            //}
+
         }
 
         public bool IsMatch(ICommuniPort cp)
@@ -127,21 +143,21 @@ namespace C3.Communi
             }
         } private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
 
-#endregion
+        #endregion
 
         /// <summary>
         /// 
         /// </summary>
         [System.Xml.Serialization.XmlIgnore]
-            public IPAddress RemoteIPAddress
+        public IPAddress RemoteIPAddress
+        {
+            get
             {
-                get
-                {
-                    IPAddress remoteIPAddress = IPAddress.Parse(this.RemoteIPAddressString);
-                    return remoteIPAddress;
-                }
-                set { this._remoteIPAddressString = value.ToString(); }
+                IPAddress remoteIPAddress = IPAddress.Parse(this.RemoteIPAddressString);
+                return remoteIPAddress;
             }
+            set { this._remoteIPAddressString = value.ToString(); }
+        }
 
         /// <summary>
         /// for serialize
@@ -153,7 +169,7 @@ namespace C3.Communi
         } private string _remoteIPAddressString;
 
 
-#region RemotePort
+        #region RemotePort
         /// <summary>
         /// 
         /// </summary>
@@ -168,7 +184,35 @@ namespace C3.Communi
                 _remotePort = value;
             }
         } private int _remotePort;
-#endregion //RemotePort
+        #endregion //RemotePort
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime LastCreateDateTime
+        {
+            get { return _lastCreateDateTime; }
+            set { _lastCreateDateTime = value; }
+        } private DateTime _lastCreateDateTime = DateTime.MinValue;
+
+
+        public TimeSpan CreateInterval
+        {
+            get { return _createIntervalSecond; }
+            set 
+            {
+                if (value < MinCreateInterval)
+                {
+                    string msg = string.Format(
+                        "CreateIntervalSecond must <= '{0}'", 
+                        MinCreateInterval);
+                    throw new ArgumentOutOfRangeException(msg);
+                }
+                _createIntervalSecond = value; 
+            }
+        } private TimeSpan  _createIntervalSecond = MinCreateInterval;
+
+        static private readonly TimeSpan MinCreateInterval = TimeSpan.FromSeconds(1);
     }
 
 }
