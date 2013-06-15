@@ -33,8 +33,23 @@ namespace C3.Communi
         /// </summary>
         public CommuniPortManager()
         {
+            CommuniPortFactory.Default.CommuniPortCreated += new CommuniPortCreatedEventHandler(Default_CommuniPortCreated);
         }
         #endregion //CommuniPortManager
+
+        private void Default_CommuniPortCreated(object sender, CommuniPortCreatedEventArgs e)
+        {
+            if (e.Success)
+            {
+                ICommuniPort cp = e.CommuniPort;
+                this.Add(cp);
+            }
+
+            this.CreateCommuniPortResults.Add(new CreateCommuniPortResult(
+                e.Success, e.CommuniPortConfig, "", e.Exception));
+
+            _log.Info(string.Format("CreateCommuniPort '{0}' is '{1}'", e.CommuniPortConfig, e.Success));
+        }
 
         #region Properties
         #region CommuniPorts
@@ -288,18 +303,9 @@ namespace C3.Communi
             {
                 if (cpCfg.CanCreate)
                 {
-                    //CommuniPortFactory.Create ( cpCfg )
-                    ICommuniPort cp = null;
-                    //try
-                    //{
-                    //    cp = cpCfg.Create();
-                    //}
-                    //catch (Exception ex)
-                    //{
-
-                    //}
-                    CreateWithThread(cpCfg);
-                    r = cp;
+                    CommuniPortFactory f = CommuniPortFactory.Default;
+                    bool added = f.Add(cpCfg);
+                    _log.Info("add " + cpCfg + " to communiport factory: " + added);
                 }
             }
 
@@ -325,31 +331,31 @@ namespace C3.Communi
         } private CreateCommuniPortResultCollection _createCommuniPortResults;
         #endregion //CreateCommuniPortResults
 
-        private void CreateWithThread(ICommuniPortConfig cpCfg)
-        {
-            CreateCommuniPortResult createResult = null;
-            CommuniPortFactory f = new CommuniPortFactory(cpCfg);
-            f.Doit ();
-            if (f.Success)
-            {
-                this.Add(f.ResultCommuniPort);
-                createResult = new CreateCommuniPortResult(true, cpCfg,
-                    "create success", null);
-            }
-            else
-            {
-                createResult = new CreateCommuniPortResult(true, cpCfg,
-                    "create fail", f.Exception);
-            }
-                this.CreateCommuniPortResults.Add(createResult);
-            //Thread t = new Thread(f.Doit());
-            //try
-            //{
-            //    t.Start();
-            //}
-            //catch 
+        //private void CreateWithThread(ICommuniPortConfig cpCfg)
+        //{
+        //    CreateCommuniPortResult createResult = null;
+        //    CommuniPortFactory f = CommuniPortFactory.Default;
+        //    f.Start ();
+        //    if (f.Success)
+        //    {
+        //        this.Add(f.ResultCommuniPort);
+        //        createResult = new CreateCommuniPortResult(true, cpCfg,
+        //            "create success", null);
+        //    }
+        //    else
+        //    {
+        //        createResult = new CreateCommuniPortResult(true, cpCfg,
+        //            "create fail", f.Exception);
+        //    }
+        //        this.CreateCommuniPortResults.Add(createResult);
+        //    //Thread t = new Thread(f.Start());
+        //    //try
+        //    //{
+        //    //    t.Start();
+        //    //}
+        //    //catch 
 
-        }
+        //}
     }
 
     //public class 

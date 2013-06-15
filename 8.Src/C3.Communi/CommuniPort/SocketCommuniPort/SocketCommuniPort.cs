@@ -128,7 +128,7 @@ namespace C3.Communi
 
         void OnException(Exception ex)
         {
-
+            log.Error(ex);
         }
 
         /// <summary>

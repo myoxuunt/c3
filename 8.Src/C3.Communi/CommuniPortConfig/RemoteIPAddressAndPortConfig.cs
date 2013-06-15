@@ -212,7 +212,7 @@ namespace C3.Communi
             }
         } private TimeSpan  _createIntervalSecond = MinCreateInterval;
 
-        static private readonly TimeSpan MinCreateInterval = TimeSpan.FromSeconds(1);
+        static private readonly TimeSpan MinCreateInterval = TimeSpan.FromSeconds(5);
     }
 
 }

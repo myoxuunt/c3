@@ -46,7 +46,7 @@ namespace C3.Communi
         }
         #endregion //Hardware
 
-        #region Doit
+        #region Start
         /// <summary>
         /// 
         /// </summary>
@@ -57,7 +57,7 @@ namespace C3.Communi
                 DoStation(station);
             }
         }
-        #endregion //Doit
+        #endregion //Start
 
         #region DoStation station
         /// <summary>
