@@ -41,7 +41,7 @@ namespace C3.Communi
             {
                 return _current;
             }
-            set
+            private set
             {
                 if (_current != value)
                 {
@@ -107,8 +107,8 @@ namespace C3.Communi
         void _current_StatusChanged(object sender, EventArgs e)
         {
 
-                //OnCurrentStatusChanged(EventArgs.Empty);
-                //return;
+            //OnCurrentStatusChanged(EventArgs.Empty);
+            //return;
 
             if (Soft.IsUseUISynchronizationContext)
             {
@@ -165,7 +165,7 @@ namespace C3.Communi
         {
             get
             {
-                if (_currentChangedCallback==null)
+                if (_currentChangedCallback == null)
                 {
                     _currentChangedCallback = new SendOrPostCallback(this.OnCurrentChanged);
                 }
@@ -231,6 +231,28 @@ namespace C3.Communi
         /// </summary>
         public event EventHandler CurrentStatusChanged;
         #endregion //events
-    }
 
+        internal void ReleaseCurrent()
+        {
+            if (this._current == null)
+            {
+                throw new InvalidOperationException("current cannot null when release current");
+            }
+
+            if (_current.Status == TaskStatus.Wating)
+            {
+                this.Tasks.Enqueue(_current);
+            }
+            else if (_current.Status == TaskStatus.Completed)
+            {
+            }
+
+            this.Current = null;
+        }
+
+        internal void CaptureCurrent(ITask current)
+        {
+            this.Current = current;
+        }
+    }
 }

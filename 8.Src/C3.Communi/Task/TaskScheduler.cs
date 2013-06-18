@@ -142,10 +142,13 @@ namespace C3.Communi
 
                 case TaskStatus.Wating:
                     {
-                        ClearDeviceCurrentTask(current);
+                        //ClearDeviceCurrentTask(current);
 
-                        IDevice device = current.Device;
-                        device.TaskManager.Tasks.Enqueue(current);
+                        //IDevice device = current.Device;
+                        //device.TaskManager.Tasks.Enqueue(current);
+
+                        TaskManager taskMan = current.Device.TaskManager;
+                        taskMan.ReleaseCurrent();
                     }
                     break;
 
@@ -156,7 +159,10 @@ namespace C3.Communi
                         // current may not equal to current.Device.TaskManager.Current
                         // so an other executing task will be remove
                         // 
-                        ClearDeviceCurrentTask(current);
+                        //ClearDeviceCurrentTask(current);
+
+                        TaskManager taskMan = current.Device.TaskManager;
+                        taskMan.ReleaseCurrent();
                     }
                     break;
 
@@ -183,18 +189,18 @@ namespace C3.Communi
         }
         #endregion //DoCurrentTask task
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="current"></param>
-        private void ClearDeviceCurrentTask( ITask current )
-        {
-            IDevice device = current.Device;
-            if (current == device.TaskManager.Current)
-            {
-                device.TaskManager.Current = null;
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="current"></param>
+        //private void ClearDeviceCurrentTask( ITask current )
+        //{
+        //    IDevice device = current.Device;
+        //    if (current == device.TaskManager.Current)
+        //    {
+        //        device.TaskManager.Current = null;
+        //    }
+        //}
         #region DoTasks queue
         /// <summary>
         /// 
@@ -207,15 +213,18 @@ namespace C3.Communi
                 return;
             }
 
+            bool find = false ;
+            ITask forExecutingTask = null;
             TaskCollection tempTasks = new TaskCollection();
 
             while (tasks.Count > 0)
             {
                 ITask headTask = tasks.Dequeue();
 
-                bool b = DoNotExecutingTask(headTask);
-                if (b)
+                find = CanExecutingTask(headTask);
+                if (find)
                 {
+                    forExecutingTask = headTask;
                     break;
                 }
                 else
@@ -227,6 +236,23 @@ namespace C3.Communi
             //
             //
             tasks.Enqueue(tempTasks);
+
+            //
+            //
+            if (find)
+            {
+                ExecutingTask(forExecutingTask);
+            }
+        }
+
+        private void ExecutingTask(ITask headTask)
+        {
+            ICommuniPort cp = GetCommuniPort(headTask);
+            IDevice device = headTask.Device;
+            headTask.Begin(cp);
+
+            //device.TaskManager.Current = headTask;
+            device.TaskManager.CaptureCurrent(headTask);
         }
 
         /// <summary>
@@ -234,7 +260,8 @@ namespace C3.Communi
         /// </summary>
         /// <param name="headTask"></param>
         /// <returns></returns>
-        private bool DoNotExecutingTask(ITask headTask)
+        //private bool DoNotExecutingTask(ITask headTask)
+        private bool CanExecutingTask(ITask headTask)
         {
             TaskStatus status = headTask.Check();
 
@@ -246,10 +273,11 @@ namespace C3.Communi
                     IsHighestLevel(headTask, cp))
                 {
 
-                    IDevice device = headTask.Device;
-                    headTask.Begin(cp);
+                    //IDevice device = headTask.Device;
+                    //headTask.Begin(cp);
 
-                    device.TaskManager.Current = headTask;
+                    ////device.TaskManager.Current = headTask;
+                    //device.TaskManager.CaptureCurrent(headTask);
                     return true;
                 }
             }

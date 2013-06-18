@@ -112,6 +112,10 @@ namespace C3.Communi
             }
             set
             {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("LastParseResult");
+                }
                 _lastParseResult = value;
             }
         } private IParseResult _lastParseResult = null;
