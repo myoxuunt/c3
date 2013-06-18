@@ -56,17 +56,30 @@ namespace C3.Communi
         /// </summary>
         public void Start()
         {
-            if (_thread == null)
+            if (_startFlag == true)
             {
-                this._startFlag = true;
+                if (_thread == null)
+                {
+                    this._startFlag = true;
 
-                _thread = new Thread(new ThreadStart(Target));
-                _thread.Start();
+                    _thread = new Thread(new ThreadStart(Target));
+                    _thread.Start();
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException(
+                    "cannot start communiport factory while start flag is false");
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public void Stop()
         {
-            if (this._thread != null && this._thread.ThreadState == ThreadState.Running )
+            if (this._thread != null && 
+                this._thread.ThreadState == ThreadState.Running )
             {
                 this._startFlag = false;
             }

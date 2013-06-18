@@ -296,7 +296,7 @@ namespace Xdgk.Common
         {
             this._isSuredToQuit = true;
 
-            OnApplicationExit();
+            //OnApplicationExit();
             DisposeMainFormOrNot();
             NotifyIconManager.Stop();
             //Environment.Exit(exitCode);

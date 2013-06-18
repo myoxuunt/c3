@@ -62,6 +62,15 @@ namespace C3
         } private System.Windows.Forms.Form _mainForm;
         #endregion //MainForm
 
+        /// <summary>
+        /// 
+        /// </summary>
+        protected override void OnApplicationExit()
+        {
+            CommuniPortFactory.Default.Stop();
+            base.OnApplicationExit();
+        }
+
         #region Soft
         /// <summary>
         /// 
