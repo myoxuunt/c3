@@ -165,7 +165,7 @@ namespace Xdgk.Common
 
             // exit app
             //
-            this.Exit(0xFF);
+            Environment.Exit(0xFF);
         }
         #endregion //ProcessUnhandleException
 

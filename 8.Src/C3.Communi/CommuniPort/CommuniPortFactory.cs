@@ -78,11 +78,12 @@ namespace C3.Communi
         /// </summary>
         public void Stop()
         {
-            if (this._thread != null && 
-                this._thread.ThreadState == ThreadState.Running )
-            {
-                this._startFlag = false;
-            }
+            // TODO: b == false ?? when exit app by notify icon exit menu
+            //
+            //bool b = (this._thread != null &&
+            //       this._thread.ThreadState == ThreadState.Running);
+
+            this._startFlag = false;
         }
 
         /// <summary>
