@@ -13,13 +13,15 @@ namespace S
     public class GateDataResponse : BaseOpera
     {
         private VGate100Data [] _datas;
+        private byte _datasCount = 0;
 
-        public GateDataResponse(string gateName, byte status, VGate100Data[]  datas)
+        public GateDataResponse(string gateName, byte status, VGate100Data[]  datas, int datasCount)
             : base(0, 0x85)
         {
             this.GateName = gateName;
             this.Status = status;
             this._datas = datas;
+            this._datasCount = (byte)datasCount;
         }
 
         /// <summary>
@@ -52,6 +54,10 @@ namespace S
 
             MemoryStream ms = new MemoryStream();
             ms.Write(bs, 0, bs.Length);
+
+            //
+            //
+            ms.WriteByte(_datasCount);
 
             byte[] bs2 = GetGateDataBytes(this._datas);
             ms.Write(bs2, 0, bs2.Length);

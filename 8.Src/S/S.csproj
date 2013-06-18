@@ -128,6 +128,7 @@
     </None>
     <Content Include="..\VGATE100DPU\DeviceDefine\DeviceDefine.xml">
       <Link>Config\DeviceDefine.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\ListenPort.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -90,7 +90,8 @@ namespace S
             DataTable tbl = DB.GetGateDataTable(name, dt);
 
             int createdCount;
-            GateDataResponse rep = new GateDataResponse(name, status, ConvertToVGate100Datas(tbl, out createdCount));
+            VGate100Data[] vgate100Datas = ConvertToVGate100Datas(tbl, out createdCount);
+            GateDataResponse rep = new GateDataResponse(name, status, vgate100Datas, createdCount);
             byte[] bs = rep.ToBytes();
             logContentBuilder.AppendLine(string.Format("获取'{0}'条记录", createdCount));
             return bs;

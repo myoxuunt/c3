@@ -53,7 +53,7 @@ namespace VGATE100DPU
         /// <param name="data"></param>
         public void InsertVGate100Data(int deviceID, VGate100Data data)
         {
-            string s = " insert into tblGateData(deviceid, DT, BeforeWL, BehindWL, Height, instantFlux, TotalAmount, RemianAmount) " +
+            string s = " insert into tblGateData(deviceid, DT, BeforeWL, BehindWL, Height, instantFlux, TotalAmount, RemainAmount) " +
                        " values(@deviceID, @dt, @beforeWL, @behindWL, @height, @instantFlux, @totalAmount, @remainAmount)";
 
             ListDictionary list = new ListDictionary();
