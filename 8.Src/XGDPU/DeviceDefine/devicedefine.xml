@@ -305,12 +305,14 @@
         <datafield name="df1"
             begin="0"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="21 58 44"
             matchcheck="true" />
 
         <datafield name="df2"
             begin="4"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="B0 0A 10"
             matchcheck="true"/>
 
@@ -327,6 +329,7 @@
         <datafield name="crc"
             begin="23"
             length="2"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
         <crcer name="Xdgk.Communi.CRC16"/>
       </receivepart>
@@ -339,6 +342,7 @@
         <datafield name="df1"
             begin="0"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="21 58 44"/>
 
         <datafield name="address"
@@ -349,6 +353,7 @@
         <datafield name="df2"
             begin="4"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="B0 07 01"/>
 
         <datafield name="recordidx"
@@ -359,6 +364,7 @@
         <datafield name="crc"
             begin="8"
             length="2"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
         <crcer name="Xdgk.Communi.CRC16"/>
       </sendpart>
@@ -367,12 +373,14 @@
         <datafield name="df1"
             begin="0"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="21 58 44"
             matchcheck="true" />
 
         <datafield name="df2"
             begin="4"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="B0 07 10"
             matchcheck="true"/>
 
@@ -389,6 +397,7 @@
         <datafield name="crc"
             begin="23"
             length="2"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
         <crcer name="Xdgk.Communi.CRC16"/>
       </receivepart>
@@ -400,6 +409,7 @@
         <datafield name="df1"
             begin="0"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="21 58 44"/>
         <datafield name="address"
             begin="3"
@@ -408,10 +418,12 @@
         <datafield name="df2"
             begin="4"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="B0 08 00"/>
         <datafield name="crc"
             begin="7"
             length="2"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
 
         <crcer name="Xdgk.Communi.CRC16"/>
@@ -422,18 +434,21 @@
         <datafield name="df1"
             begin="0"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="21 58 44"
             matchcheck="true" />
 
         <datafield name="df2"
             begin="4"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="B0 08 00"
             matchcheck="true"/>
 
         <datafield name="crc"
             begin="7"
             length="2"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
         <crcer name="Xdgk.Communi.CRC16"/>
       </receivepart>
@@ -445,6 +460,7 @@
         <datafield name="df1"
             begin="0"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="21 58 44"/>
         <datafield name="address"
             begin="3"
@@ -453,10 +469,12 @@
         <datafield name="df2"
             begin="4"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="B0 0A 00"/>
         <datafield name="crc"
             begin="7"
             length="2"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
 
         <crcer name="Xdgk.Communi.CRC16"/>
@@ -470,6 +488,7 @@
         <datafield name="df1"
             begin="0"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="21 58 44"/>
 
         <datafield name="address"
@@ -480,16 +499,19 @@
         <datafield name="df2"
             begin="4"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="B0 0B 01"/>
 
         <datafield name="mode"
             begin="7"
             length="1"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="02"/>
 
         <datafield name="crc"
             begin="8"
             length="2"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
         <crcer name="Xdgk.Communi.CRC16"/>
       </sendpart>
@@ -498,18 +520,21 @@
         <datafield name="df1"
             begin="0"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="21 58 44"
             matchcheck="true" />
 
         <datafield name="df2"
             begin="4"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="B0 0B 00"
             matchcheck="true"/>
 
         <datafield name="crc"
             begin="7"
             length="2"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
         <crcer name="Xdgk.Communi.CRC16"/>
       </receivepart>
@@ -520,12 +545,14 @@
         <datafield name="df1"
             begin="0"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="21 58 44"
             matchcheck="true" />
 
         <datafield name="df2"
             begin="4"
             length="3"
+            converter="Xdgk.Communi.OriginalConverter"
             bytes="B0 0A 10"
             matchcheck="true"/>
 
@@ -542,6 +569,7 @@
         <datafield name="crc"
             begin="23"
             length="2"
+            converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
         <crcer name="Xdgk.Communi.CRC16"/>
       </receivepart>
