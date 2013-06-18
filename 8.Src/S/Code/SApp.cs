@@ -219,5 +219,11 @@ namespace S
             UISynchronizationContext.Send(sendOrPostCallback, state);
         }
         #endregion //
+
+        protected override void OnApplicationExit()
+        {
+            CommuniPortFactory.Default.Stop();
+            base.OnApplicationExit();
+        }
     }
 }

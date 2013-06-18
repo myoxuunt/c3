@@ -50,7 +50,7 @@ namespace VGATE100DPU
         /// 
         /// </summary>
         /// <param name="deviceID"></param>
-        /// <param name="data"></param>
+        /// <param name="d"></param>
         public void InsertVGate100Data(int deviceID, VGate100Data data)
         {
             string s = " insert into tblGateData(deviceid, DT, BeforeWL, BehindWL, Height, instantFlux, TotalAmount, RemainAmount) " +
@@ -139,21 +139,19 @@ namespace VGATE100DPU
                     
                     if (status == 0)
                     {
-                        ProcessRecord(recordsBytes, recordCount);
+                        VGate100Data[] datas = ProcessRecord(recordsBytes, recordCount);
+                        foreach (VGate100Data d in datas)
+                        {
+                            task.Device.DeviceDataManager.Last = d;
+
+                            int id = GuidHelper.ConvertToInt32(task.Device.Guid);
+                            DBI.Instance.InsertVGate100Data(id, d);
+                        }
                     }
                     else
                     {
 
                     }
-
-                    VGate100Data data = new VGate100Data();
-                    //data.InstantFlux = Convert.ToDouble(pr.Results["if"]);
-                    //data.Sum = Convert.ToDouble(pr.Results["sum"]);
-
-                    task.Device.DeviceDataManager.Last = data;
-
-                    int id = GuidHelper.ConvertToInt32(task.Device.Guid);
-                    DBI.Instance.InsertVGate100Data(id, data);
                 }
             }
         }

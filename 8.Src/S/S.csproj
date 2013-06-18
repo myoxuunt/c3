@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\VGATE100DPU\Class1.cs">
-      <Link>Code\Class1.cs</Link>
+    <Compile Include="..\VGATE100DPU\VGate100Data.cs">
+      <Link>Code\VGate100Data.cs</Link>
     </Compile>
     <Compile Include="Code\BaseOpera.cs" />
     <Compile Include="Code\Client.cs" />
