@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Diagnostics;
 using System.Windows.Forms;
 using C3.Communi;
@@ -82,8 +83,21 @@ namespace C3
         /// <param name="key"></param>
         private void SetImageKey(string key)
         {
-            this.ImageKey = key;
-            this.SelectedImageKey = key;
+            Console.WriteLine("set icon");
+
+            if (this.TreeView != null &&
+                this.TreeView.InvokeRequired)
+            {
+                Delegate d = Delegate.CreateDelegate(
+                    typeof(NoArgsDelegate), 
+                    new SetImageClass(this, key), 
+                    "Target");
+                this.TreeView.Invoke(d);
+            }
+            else
+            {
+                new SetImageClass(this, key).Target();
+            }
         }
 
         #region Station
@@ -106,7 +120,26 @@ namespace C3
             }
         } private IStation _station;
         #endregion //Station
-
     }
+
+    public class SetImageClass 
+    {
+        TreeNode _treeNode;
+        string _key;
+
+        public SetImageClass(TreeNode treeNode, string key)
+        {
+            _treeNode = treeNode;
+            _key = key;
+        }
+
+        public void Target()
+        {
+            _treeNode.ImageKey = _key;
+            _treeNode.SelectedImageKey = _key;
+        }
+    }
+
+    public delegate void NoArgsDelegate();
 
 }

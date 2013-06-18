@@ -397,7 +397,7 @@ namespace C3.Communi
             {
                 _isUseUISynchronizationContext = value;
             }
-        } static private bool _isUseUISynchronizationContext=true;
+        } static private bool _isUseUISynchronizationContext = !true;
         #endregion //IsUseUISynchronizationContext
 
         #region UISynchronizationContext
@@ -448,7 +448,8 @@ namespace C3.Communi
                 throw new ArgumentNullException("sendOrPostCallback");
             }
 
-            UISynchronizationContext.Post(sendOrPostCallback, state);
+            //UISynchronizationContext.Post(sendOrPostCallback, state);
+            UISynchronizationContext.Send(sendOrPostCallback, state);
         }
         #endregion //Post
 
@@ -461,6 +462,7 @@ namespace C3.Communi
         internal static void Send(SendOrPostCallback sendOrPostCallback, object state)
         {
             UISynchronizationContext.Send(sendOrPostCallback, state);
+            //UISynchronizationContext.Post(sendOrPostCallback, state);
         }
         #endregion //
 

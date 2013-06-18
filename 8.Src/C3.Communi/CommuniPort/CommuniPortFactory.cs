@@ -3,45 +3,18 @@ using System.Threading;
 
 namespace C3.Communi
 {
-    public delegate void CommuniPortCreatedEventHandler(object sender, CommuniPortCreatedEventArgs e);
-
-
-    public class CommuniPortCreatedEventArgs : EventArgs
-    {
-        public CommuniPortCreatedEventArgs(ICommuniPortConfig cfg, bool success, ICommuniPort cp, Exception ex)
-        {
-            this._communiPortConfig = cfg;
-            this._success = success;
-            this._communiPort = cp;
-            this._exception = ex;
-        }
-
-        public ICommuniPortConfig CommuniPortConfig
-        {
-            get { return _communiPortConfig; }
-        } private ICommuniPortConfig _communiPortConfig;
-
-        public bool Success
-        {
-            get { return _success; }
-        } private bool _success;
-
-        public ICommuniPort CommuniPort
-        {
-            get { return _communiPort; }
-        } private ICommuniPort _communiPort;
-
-        public Exception Exception
-        {
-            get { return _exception; }
-        } private Exception _exception;
-    }
 
     /// <summary>
     /// 
     /// </summary>
     public class CommuniPortFactory
     {
+
+        private const int SLEEP_TIME = 500;
+
+        /// <summary>
+        /// 
+        /// </summary>
         static public CommuniPortFactory Default
         {
             get
@@ -58,6 +31,7 @@ namespace C3.Communi
 
         private CommuniPortConfigCollection _cpCfgs = new CommuniPortConfigCollection();
         private Thread _thread = null;
+        private bool _startFlag = true;
 
         private CommuniPortFactory()
         {
@@ -84,11 +58,23 @@ namespace C3.Communi
         {
             if (_thread == null)
             {
+                this._startFlag = true;
+
                 _thread = new Thread(new ThreadStart(Target));
                 _thread.Start();
             }
         }
+        public void Stop()
+        {
+            if (this._thread != null && this._thread.ThreadState == ThreadState.Running )
+            {
+                this._startFlag = false;
+            }
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsStarted
         {
             get
@@ -97,12 +83,13 @@ namespace C3.Communi
                 _thread.ThreadState == ThreadState.Running;
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
         void Target()
         {
-            while (true)
+            while (this._startFlag)
             {
                 for (int i = _cpCfgs.Count - 1; i >= 0; i--)
                 {
@@ -125,6 +112,10 @@ namespace C3.Communi
                             ex= e;
                             success = false;
                         }
+                        if (success)
+                        {
+                            this._cpCfgs.Remove(cfg);
+                        }
 
                         if (CommuniPortCreated != null)
                         {
@@ -137,33 +128,5 @@ namespace C3.Communi
                 Thread.Sleep(SLEEP_TIME);
             }
         }
-
-        private const int SLEEP_TIME = 100;
-
-
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="cpConfig"></param>
-        ///// <returns></returns>
-        //public ICommuniPort Create(ICommuniPortConfig cpConfig)
-        //{
-        //    if (cpConfig == null)
-        //    {
-        //        throw new ArgumentNullException("cpConfig");
-        //    }
-
-        //    if (!cpConfig.CanCreate)
-        //    {
-        //        string s = string.Format(
-        //            "cannot create form communiPortConfig: '{0}'",
-        //            cpConfig.ToString());
-        //        throw new InvalidOperationException(s);
-        //    }
-
-        //    ICommuniPort cp = cpConfig.Create();
-        //    return cp;
-
-        //}
     }
 }

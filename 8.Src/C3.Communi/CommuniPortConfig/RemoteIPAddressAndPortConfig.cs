@@ -189,13 +189,14 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
+        [XmlIgnore]
         public DateTime LastCreateDateTime
         {
             get { return _lastCreateDateTime; }
             set { _lastCreateDateTime = value; }
         } private DateTime _lastCreateDateTime = DateTime.MinValue;
 
-
+        [XmlIgnore]
         public TimeSpan CreateInterval
         {
             get { return _createIntervalSecond; }
@@ -212,7 +213,13 @@ namespace C3.Communi
             }
         } private TimeSpan  _createIntervalSecond = MinCreateInterval;
 
-        static private readonly TimeSpan MinCreateInterval = TimeSpan.FromSeconds(5);
+        public string CreateIntervalString
+        {
+            get { return this.CreateInterval.ToString(); }
+            set { this.CreateInterval = TimeSpan.Parse(value); }
+        }
+
+        static private readonly TimeSpan MinCreateInterval = TimeSpan.FromSeconds(20);
     }
 
 }

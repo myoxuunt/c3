@@ -106,6 +106,10 @@ namespace C3.Communi
         /// <param name="e"></param>
         void _current_StatusChanged(object sender, EventArgs e)
         {
+
+                //OnCurrentStatusChanged(EventArgs.Empty);
+                //return;
+
             if (Soft.IsUseUISynchronizationContext)
             {
                 Soft.Send(CurrentStatusChangedCallback, EventArgs.Empty);
