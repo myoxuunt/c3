@@ -78,23 +78,36 @@ namespace S
         /// <returns></returns>
         private static byte[] CreateReplyBytes(string name, DateTime dt, StringBuilder logContentBuilder)
         {
-            byte status = 0;
+            byte[] r = null;
+            ResponseStatusEnum status = ResponseStatusEnum.Success;
+            DataTable tbl = null;
 
             bool existGate = DB.ExistGate(name);
-            if (!existGate)
+            if (existGate)
             {
-                status = 1;
-                logContentBuilder.AppendLine(string.Format("名称不存在: '{0}'", name));
+                int createdCount = 0;
+                tbl = DB.GetGateDataTable(name, dt);
+                if (tbl.Rows.Count > 0)
+                {
+                    VGate100Data[] vgate100Datas = ConvertToVGate100Datas(tbl, out createdCount);
+                    GateDataResponse rep = new GateDataResponse(name, status, vgate100Datas, createdCount);
+                    byte[] bs = rep.ToBytes();
+                    r = bs;
+                }
+                else
+                {
+                    status = ResponseStatusEnum.NotNewDatas;
+                    r = new GateDataResponse(status).ToBytes();
+                }
+                logContentBuilder.AppendLine(string.Format("获取'{0}'条记录", createdCount));
             }
-
-            DataTable tbl = DB.GetGateDataTable(name, dt);
-
-            int createdCount;
-            VGate100Data[] vgate100Datas = ConvertToVGate100Datas(tbl, out createdCount);
-            GateDataResponse rep = new GateDataResponse(name, status, vgate100Datas, createdCount);
-            byte[] bs = rep.ToBytes();
-            logContentBuilder.AppendLine(string.Format("获取'{0}'条记录", createdCount));
-            return bs;
+            else
+            {
+                status = ResponseStatusEnum.NotExistName;
+                logContentBuilder.AppendLine(string.Format("名称不存在: '{0}'", name));
+                r = new GateDataResponse(status).ToBytes();
+            }
+            return r;
         }
 
         /// <summary>

@@ -15,7 +15,13 @@ namespace S
         private VGate100Data [] _datas;
         private byte _datasCount = 0;
 
-        public GateDataResponse(string gateName, byte status, VGate100Data[]  datas, int datasCount)
+        public GateDataResponse(ResponseStatusEnum status)
+            : this(string.Empty, status, null, 0)
+        {
+
+        }
+
+        public GateDataResponse(string gateName, ResponseStatusEnum status, VGate100Data[] datas, int datasCount)
             : base(0, 0x85)
         {
             this.GateName = gateName;
@@ -25,13 +31,12 @@ namespace S
         }
 
         /// <summary>
-        /// 0 - success
-        /// 1 - not find gate name
+        /// 
         /// </summary>
-        public byte Status
+        public ResponseStatusEnum Status
         {
-            get { return base.CommandNO; }
-            set { base.CommandNO = value; }
+            get { return (ResponseStatusEnum)base.CommandNO; }
+            set { base.CommandNO = (byte)value; }
         }
 
         public string GateName
@@ -44,25 +49,32 @@ namespace S
         public override byte[] OnToBytes()
         {
 
-            byte[] bs = ASCIIEncoding.ASCII.GetBytes(new string(' ', 30));
-            Debug.Assert(bs.Length == 30);
+            if (Status == 0)
+            {
+                byte[] bs = ASCIIEncoding.ASCII.GetBytes(new string(' ', 30));
+                Debug.Assert(bs.Length == 30);
 
-            byte[] bsName = UTF8Encoding.UTF8.GetBytes(this.GateName);
-            Debug.Assert(bsName.Length <= 30);
+                byte[] bsName = UTF8Encoding.UTF8.GetBytes(this.GateName);
+                Debug.Assert(bsName.Length <= 30);
 
-            Array.Copy(bsName, bs, bsName.Length);
+                Array.Copy(bsName, bs, bsName.Length);
 
-            MemoryStream ms = new MemoryStream();
-            ms.Write(bs, 0, bs.Length);
+                MemoryStream ms = new MemoryStream();
+                ms.Write(bs, 0, bs.Length);
 
-            //
-            //
-            ms.WriteByte(_datasCount);
+                //
+                //
+                ms.WriteByte(_datasCount);
 
-            byte[] bs2 = GetGateDataBytes(this._datas);
-            ms.Write(bs2, 0, bs2.Length);
+                byte[] bs2 = GetGateDataBytes(this._datas);
+                ms.Write(bs2, 0, bs2.Length);
 
-            return ms.ToArray();
+                return ms.ToArray();
+            }
+            else
+            {
+                return new byte[0];
+            }
         }
 
         const int max = 5;

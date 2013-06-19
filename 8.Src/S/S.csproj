@@ -53,6 +53,7 @@
     <Compile Include="Code\CommuniPortEventProcessor.cs" />
     <Compile Include="Code\Config.cs" />
     <Compile Include="Code\GateDataResponse.cs" />
+    <Compile Include="Code\ResponseStatusEnum.cs" />
     <Compile Include="Code\RPProcessor.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="Forms\frmMain.cs">

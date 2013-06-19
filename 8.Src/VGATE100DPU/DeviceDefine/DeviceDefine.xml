@@ -132,6 +132,39 @@
             bytes="5D 5D"
             matchcheck="true"/>
       </receivepart>
+
+      <receivepart name="noNameOrDatas" length="7">
+        <datafield name="f1"
+            begin="0"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="5B 5B"
+            matchcheck="true"/>
+
+        <datafield name="address"
+            begin="2"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+        <datafield name="f2"
+            begin="3"
+            length="1"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="85"
+            matchcheck="true" />
+
+        <datafield name="status"
+            begin="4"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"/>
+
+         <datafield name="end"
+            begin="5"
+            length="2"
+            converter="Xdgk.Communi.OriginalConverter"
+            bytes="5D 5D"
+            matchcheck="true"/>
+      </receivepart>
     </operadefine>
   </devicedefine>
 </devicedefines>

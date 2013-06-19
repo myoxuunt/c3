@@ -130,27 +130,34 @@ namespace VGATE100DPU
                 if (StringHelper.Equal(opera, "read"))
                 {
 
-                    string name = Convert.ToString(pr.Results["name"]);
-                    byte status = Convert.ToByte(pr.Results["status"]);
-                    byte recordCount = Convert.ToByte(pr.Results["count"]);
-                    byte[] recordsBytes = (byte[])pr.Results["datas"];
-
-                    Debug.Assert(recordCount <= 5);
-                    
-                    if (status == 0)
+                    if (StringHelper.Equal(pr.Name, string.Empty))
                     {
-                        VGate100Data[] datas = ProcessRecord(recordsBytes, recordCount);
-                        foreach (VGate100Data d in datas)
-                        {
-                            task.Device.DeviceDataManager.Last = d;
+                        string name = Convert.ToString(pr.Results["name"]);
+                        byte status = Convert.ToByte(pr.Results["status"]);
+                        byte recordCount = Convert.ToByte(pr.Results["count"]);
+                        byte[] recordsBytes = (byte[])pr.Results["datas"];
 
-                            int id = GuidHelper.ConvertToInt32(task.Device.Guid);
-                            DBI.Instance.InsertVGate100Data(id, d);
+                        Debug.Assert(recordCount <= 5);
+
+                        if (status == 0)
+                        {
+                            VGate100Data[] datas = ProcessRecord(recordsBytes, recordCount);
+                            foreach (VGate100Data d in datas)
+                            {
+                                task.Device.DeviceDataManager.Last = d;
+
+                                int id = GuidHelper.ConvertToInt32(task.Device.Guid);
+                                DBI.Instance.InsertVGate100Data(id, d);
+                            }
+                        }
+                        else
+                        {
+
                         }
                     }
-                    else
+                    else if (StringHelper.Equal(pr.Name, "noNameOrDatas"))
                     {
-
+                        byte status = Convert.ToByte(pr.Results["status"]);
                     }
                 }
             }

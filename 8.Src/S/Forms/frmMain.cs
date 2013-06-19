@@ -57,10 +57,18 @@ namespace S
         private void RemoveClientNode(object obj)
         {
             Client c = obj as Client;
+            c.LogItems.Added -= new EventHandler(LogItems_Added);
+
             TreeNode node = c.Tag as TreeNode;
             if (node != null)
             {
                 this.treeView1.Nodes.Remove(node);
+            }
+
+            if (c == _selectedClient)
+            {
+                this.txtClientInfo.Clear();
+                this.richTextBox1.Clear();
             }
         }
 
