@@ -17,7 +17,7 @@ namespace S
         //
         //public event 
 
-#region Clients
+        #region Clients
         /// <summary>
         /// 
         /// </summary>
@@ -32,7 +32,7 @@ namespace S
                 return _clients;
             }
         } private ClientCollection _clients;
-#endregion //Clients
+        #endregion //Clients
 
 
         /// <summary>
@@ -51,10 +51,10 @@ namespace S
 
         internal void RemoveByCommuniPort(ICommuniPort cp)
         {
-            for( int i = this.Clients.Count -1 ; i>=0 ; i-- )
+            for (int i = this.Clients.Count - 1; i >= 0; i--)
             {
                 Client c = this.Clients[i];
-                if ( c .CommuniPort == cp )
+                if (c.CommuniPort == cp)
                 {
                     this.Remove(c);
                 }

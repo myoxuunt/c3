@@ -13,6 +13,8 @@ namespace S
     {
 
         #region Members
+        private Client _selectedClient = null;
+
         #endregion //Members
 
         #region FrmMain
@@ -93,7 +95,8 @@ namespace S
         /// <param name="e"></param>
         private void mnuExit_Click(object sender, EventArgs e)
         {
-            this.Close();
+            //this.Close();
+            App.Exit(0);
         }
 
         private SApp App
@@ -133,11 +136,64 @@ namespace S
         /// <param name="e"></param>
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            if (_selectedClient != null)
+            {
+                _selectedClient.LogItems.Added -= new EventHandler(LogItems_Added);
+            }
+
             TreeNode node = e.Node;
             Client c = node.Tag as Client;
 
             RefreshClient(c);
 
+
+            c.LogItems.Added += new EventHandler(LogItems_Added);
+            _selectedClient = c;
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void LogItems_Added(object sender, EventArgs e)
+        {
+            LogItemCollection logItems = sender as LogItemCollection;
+            if (logItems.Count > 0)
+            {
+                LogItem li = logItems[logItems.Count - 1];
+                string s = li.ToString() + Environment.NewLine;
+                SApp.UISynchronizationContext.Post(this.UpdateTextCallback, s);
+            }
+        }
+
+        private SendOrPostCallback UpdateTextCallback
+        {
+            get
+            {
+                if (_updateTextCallback == null)
+                {
+                    _updateTextCallback = new SendOrPostCallback(UpdateTarget);
+                }
+                return _updateTextCallback;
+            }
+        } private SendOrPostCallback _updateTextCallback;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="state"></param>
+        private void UpdateTarget(object state)
+        {
+            if (this.richTextBox1.Text.Length > 65535)
+            {
+                this.richTextBox1.Clear();
+            }
+
+            this.richTextBox1.AppendText((string)state);
+            this.richTextBox1.Select(this.richTextBox1.Text.Length, 0);
+            this.richTextBox1.ScrollToCaret();
         }
 
         /// <summary>
@@ -184,6 +240,20 @@ namespace S
             this.richTextBox1.Text = c.LogItems.ToString();
             this.richTextBox1.Select(this.richTextBox1.Text.Length, 0);
             this.richTextBox1.ScrollToCaret();
+        }
+
+        private void mnuClearLogs_Click(object sender, EventArgs e)
+        {
+            if (this._selectedClient != null)
+            {
+                this._selectedClient.LogItems.Clear();
+                RefreshClient(_selectedClient);
+            }
+        }
+
+        private void mnuTest_Click(object sender, EventArgs e)
+        {
+            //throw new Exception("test exception");
         }
     }
 }

@@ -58,19 +58,32 @@ namespace S
 
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class LogItemCollection : Collection<LogItem>
     {
-
         /// <summary>
         /// 
         /// </summary>
         private static int MAXCOUNT = 1000;
+
+        public event EventHandler Added;
 
         /// <summary>
         /// 
         /// </summary>
         internal LogItemCollection ()
         {
+        }
+
+        new public void Add(LogItem li)
+        {
+            base.Add(li);
+            if (Added != null)
+            {
+                Added(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>

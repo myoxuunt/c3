@@ -22,7 +22,15 @@ namespace C3.Communi
 
             //
             //
-            FillDiscriminateMode();
+            FillDiscriminateMode();  
+            
+            KeyValueCollection kvs = new KeyValueCollection();
+            kvs.Add(strings.Client, ConnectionType.Client);
+            kvs.Add(strings.Server, ConnectionType.Server);
+
+            this.cmbConnectionType.DisplayMember = "Key";
+            this.cmbConnectionType.ValueMember = "Value";
+            this.cmbConnectionType.DataSource = kvs;
         }
 
         private Point PanelLocal
@@ -41,13 +49,7 @@ namespace C3.Communi
         /// <param name="e"></param>
         private void UCNetSetting_Load(object sender, EventArgs e)
         {
-            KeyValueCollection kvs = new KeyValueCollection();
-            kvs.Add(strings.Client, ConnectionType.Client);
-            kvs.Add(strings.Server, ConnectionType.Server);
-
-            this.cmbConnectionType.DisplayMember = "Key";
-            this.cmbConnectionType.ValueMember = "Value";
-            this.cmbConnectionType.DataSource = kvs;
+          
         }
 
         public ICommuniPortConfig CommuniPortConfig

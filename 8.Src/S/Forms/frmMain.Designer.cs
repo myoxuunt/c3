@@ -47,6 +47,7 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.txtClientInfo = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.mnuClearLogs = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sc1.Panel1.SuspendLayout();
@@ -71,6 +72,7 @@
             // mnuFile
             // 
             this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuClearLogs,
             this.mnuRefresh,
             this.toolStripSeparator1,
             this.mnuExit});
@@ -83,6 +85,7 @@
             this.mnuRefresh.Name = "mnuRefresh";
             this.mnuRefresh.Size = new System.Drawing.Size(152, 22);
             this.mnuRefresh.Text = "刷新(&R)";
+            this.mnuRefresh.Visible = false;
             this.mnuRefresh.Click += new System.EventHandler(this.mnuRefresh_Click);
             // 
             // toolStripSeparator1
@@ -143,9 +146,10 @@
             // mnuTest
             // 
             this.mnuTest.Name = "mnuTest";
-            this.mnuTest.Size = new System.Drawing.Size(112, 22);
+            this.mnuTest.Size = new System.Drawing.Size(152, 22);
             this.mnuTest.Text = "Test";
             this.mnuTest.Visible = false;
+            this.mnuTest.Click += new System.EventHandler(this.mnuTest_Click);
             // 
             // statusStrip1
             // 
@@ -226,6 +230,13 @@
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
             // 
+            // mnuClearLogs
+            // 
+            this.mnuClearLogs.Name = "mnuClearLogs";
+            this.mnuClearLogs.Size = new System.Drawing.Size(152, 22);
+            this.mnuClearLogs.Text = "清除记录(&C)";
+            this.mnuClearLogs.Click += new System.EventHandler(this.mnuClearLogs_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -272,6 +283,7 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TextBox txtClientInfo;
         private System.Windows.Forms.ToolStripMenuItem mnuRefresh;
+        private System.Windows.Forms.ToolStripMenuItem mnuClearLogs;
     }
 }
 
