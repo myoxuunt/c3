@@ -23,7 +23,7 @@ namespace XD100EDPU
         /// 
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         public override void OnProcess(ITask task, IParseResult pr)
         {
             if (pr.IsSuccess)
@@ -550,7 +550,7 @@ namespace XD100EDPU
         /// 
         /// </summary>
         /// <param name="device"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         public override void OnProcessUpload(IDevice device, IParseResult pr)
         {
             //throw new NotImplementedException();

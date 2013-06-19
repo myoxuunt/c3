@@ -199,8 +199,8 @@
 //        /// 
 //        /// </summary>
 //        /// <param name="fromCommuniPort"></param>
-//        /// <param name="pr"></param>
-//        public FDEventArgs(CommuniPort fromCommuniPort, string deviceType, string operaName, ParseResult pr)
+//        /// <param name="parseResult"></param>
+//        public FDEventArgs(CommuniPort fromCommuniPort, string deviceType, string operaName, ParseResult parseResult)
 //        {
 //            if (fromCommuniPort == null)
 //                throw new ArgumentNullException("fromCommuniPort");
@@ -208,12 +208,12 @@
 //            //if (opera == null)
 //                //throw new ArgumentNullException("opera");
 
-//            if (pr == null)
-//                throw new ArgumentNullException("pr");
+//            if (parseResult == null)
+//                throw new ArgumentNullException("parseResult");
 
 
 //            this._from = fromCommuniPort;
-//            this._pr = pr;
+//            this._parseResult = parseResult;
 //            this._deviceType = deviceType;
 //            this._operaName = operaName;
 //        }
@@ -258,8 +258,8 @@
 //        /// </summary>
 //        public ParseResult ParseResult
 //        {
-//            get { return _pr; }
-//        } private ParseResult _pr;
+//            get { return _parseResult; }
+//        } private ParseResult _parseResult;
 //        #endregion //ParseResult
 //    }
 //    #endregion //FDEventArgs

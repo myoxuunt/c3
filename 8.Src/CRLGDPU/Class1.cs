@@ -135,7 +135,7 @@ namespace CRLGDPU
         /// 
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         public override void OnProcess(ITask task, IParseResult pr)
         {
             if (pr.IsSuccess)

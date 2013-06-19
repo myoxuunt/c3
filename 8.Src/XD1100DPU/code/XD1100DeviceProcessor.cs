@@ -59,7 +59,7 @@ namespace XD1100DPU
         /// 
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         public override void OnProcess(ITask task, IParseResult pr)
         {
             if (pr.IsSuccess)
@@ -96,7 +96,7 @@ namespace XD1100DPU
         /// 
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         private void ProcessReadStatus(ITask task, IParseResult pr)
         {
             XD1100Device d = (XD1100Device ) task.Device;
@@ -169,7 +169,7 @@ namespace XD1100DPU
         /// 
         /// </summary>
         /// <param name="d"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         private void ProcessReadReal(ITask task, IParseResult pr)
         {
             XD1100Data data = new XD1100Data();
@@ -194,8 +194,8 @@ namespace XD1100DPU
             data.S1 = Convert.ToInt32(pr.Results["S1"]);
             data.SR = Convert.ToInt32(pr.Results["SR"]);
             data.OD = Convert.ToInt32(pr.Results["OD"]);
-            //data.IH1 = Convert.ToDouble (pr.Results ["IH1"]);
-            //data.SH1 = Convert.ToDouble (pr.Results ["SH1"]);
+            //data.IH1 = Convert.ToDouble (parseResult.Results ["IH1"]);
+            //data.SH1 = Convert.ToDouble (parseResult.Results ["SH1"]);
             data.IH1 = 0d;
             data.SH1 = 0d;
 
@@ -424,7 +424,7 @@ namespace XD1100DPU
         /// 
         /// </summary>
         /// <param name="device"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         public override void OnProcessUpload(IDevice device, IParseResult pr)
         {
             throw new NotImplementedException();

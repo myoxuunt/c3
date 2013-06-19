@@ -485,8 +485,9 @@ namespace C3.Communi
                     LastExecute,
                     LastReceivedBytes,
                     LastReceivedDateTime,
-                    pr.ToString(),
-                    pr.IsSuccess
+                    //parseResult.ToString(),
+                    //parseResult.IsSuccess
+                    pr
                 );
                 this.Device.CommuniDetails.Add(cd);
 

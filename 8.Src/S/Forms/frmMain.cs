@@ -235,6 +235,11 @@ namespace S
                 );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mnuRefresh_Click(object sender, EventArgs e)
         {
             if (this.treeView1.SelectedNode != null)

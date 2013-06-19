@@ -140,5 +140,14 @@ namespace C3.Communi.Resources {
                 return ResourceManager.GetString("SplitString", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   查找类似 备注 的本地化字符串。
+        /// </summary>
+        internal static string Tag {
+            get {
+                return ResourceManager.GetString("Tag", resourceCulture);
+            }
+        }
     }
 }

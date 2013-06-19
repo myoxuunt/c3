@@ -10,7 +10,7 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public interface IParseResult
+    public interface IParseResult : ITag 
     {
         bool IsSuccess { get; set; }
 
@@ -19,6 +19,7 @@ namespace C3.Communi
         KeyValueCollection Results { get; set; }
 
         byte[] ParseBytes { get; set; }
+
     }
 
     /// <summary>

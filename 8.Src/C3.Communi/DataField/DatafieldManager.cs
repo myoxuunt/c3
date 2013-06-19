@@ -374,7 +374,7 @@ namespace C3.Communi
                     try
                     {
                         df.Bytes = bs;
-                        //pr.NameObjects.Add(df.Name, df.Value);
+                        //parseResult.NameObjects.Add(df.Name, df.Value);
                         KeyValue kv = new KeyValue(df.Name, df.Value);
                         pr.Results.Add(kv);
                     }
@@ -394,7 +394,7 @@ namespace C3.Communi
                 int n = bytesLength - this.Length;
                 byte[] remain = new byte[n];
                 Array.Copy(bytes, this.Length, remain, 0, n);
-                //pr.Remain = remain;
+                //parseResult.Remain = remain;
             }
             return pr;
         }

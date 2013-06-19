@@ -10,7 +10,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         public void Process(ITask task, IParseResult pr)
         {
             OnProcess(task, pr);
@@ -20,7 +20,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         abstract public void OnProcess(ITask task, IParseResult pr);
 
         //#region ProcessUpload
@@ -50,7 +50,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="device"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         public void ProcessUpload(IDevice device, IParseResult pr)
         {
             OnProcessUpload(device, pr);

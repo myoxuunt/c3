@@ -47,7 +47,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         /// <param name="remain"></param>
         /// <returns></returns>
         static public PickResult CreateSuccessPickResult(string name, IParseResult pr, byte[] remain)

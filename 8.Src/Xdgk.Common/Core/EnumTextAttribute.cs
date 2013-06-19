@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Text;
 
@@ -40,5 +42,41 @@ namespace Xdgk.Common
             }
         } private string _text;
         #endregion //Text
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="enumValue"></param>
+        /// <returns></returns>
+        static public string GetEnumTextAttributeValue(object enumValue)
+        {
+            if ( enumValue == null )
+            {
+                throw new ArgumentNullException ("enumValue");
+            }
+            //Console.WriteLine(enumValue);
+
+            Type type = enumValue.GetType();
+
+            if (!type.IsEnum)
+            {
+                throw new ArgumentException(
+                    string.Format("Type '{0}' is not enum", 
+                    enumValue.GetType().Name));
+            }
+            FieldInfo fi = type.GetField(enumValue.ToString());
+
+            if (fi != null)
+            {
+                object[] atts = fi.GetCustomAttributes(typeof(EnumTextAttribute), false);
+                if (atts.Length > 0)
+                {
+                    EnumTextAttribute etAtt = (EnumTextAttribute)atts[0];
+                    return etAtt.Text;
+                }
+            }
+
+            return enumValue.ToString();
+        }
     }
 }

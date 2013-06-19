@@ -38,7 +38,7 @@ namespace XGDPU
         /// 
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         public override void OnProcess(ITask task, IParseResult pr)
         {
             if (pr.IsSuccess)
@@ -99,7 +99,7 @@ namespace XGDPU
         /// 
         /// </summary>
         /// <param name="xgdevice"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         private void ProcessXGReadTimeResult(XGDevice xgdevice, IParseResult pr)
         {
         }

@@ -30,4 +30,30 @@ namespace Xdgk.Common.Test
             Console.WriteLine(output);
         }
     }
+
+    public enum EnumForTest
+    {
+        [EnumText ("A-Text")]
+        A = 0,
+        [EnumText ("B-Text")]
+        B = 1,
+        [EnumText ("C-Text")]
+        C = 2,
+
+    }
+    [TestFixture]
+    public class EnumTextAttributeTest
+    {
+        [Test]
+        public void t1()
+        {
+            EnumForTest a = EnumForTest.A;
+            EnumForTest b = EnumForTest.B;
+            EnumForTest c = EnumForTest.C;
+
+            string text = EnumTextAttribute.GetEnumTextAttributeValue(a);
+            Console.WriteLine(text);
+            Assert.AreEqual("A-Text", text);
+        }
+    }
 }

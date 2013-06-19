@@ -10,6 +10,12 @@ namespace C3.Communi
     /// </summary>
     public class CommuniDetail
     {
+        public IParseResult ParseResult
+        {
+            get { return _parseResult; }
+        }
+        private IParseResult _parseResult;
+
         #region CommuniDetail
         /// <summary>
         /// 
@@ -19,15 +25,22 @@ namespace C3.Communi
         /// <param name="send"></param>
         /// <param name="received"></param>
         public CommuniDetail(string operaText,
-            byte[] send, DateTime sendDateTime, byte[] received, DateTime receivedDateTime, string parseResult, bool isSuccess)
+            byte[] send, DateTime sendDateTime, 
+            byte[] received, DateTime receivedDateTime, 
+            IParseResult parseResult)
         {
+            if (parseResult == null)
+            {
+                throw new ArgumentNullException("parseResult");
+            }
+
             this._sendDateTime = sendDateTime;
             this._receivedDateTime = receivedDateTime;
             this._operaText = operaText;
-            this._parseResult = parseResult;
             this._send = send;
             this._received = received;
-            this._isSuccess = isSuccess;
+
+            this._parseResult = parseResult;
         }
         #endregion //CommuniDetail
 
@@ -72,17 +85,13 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public string ParseResult
+        public string ParseResultText
         {
             get
             {
-                if (_parseResult == null)
-                {
-                    _parseResult = string.Empty;
-                }
-                return _parseResult;
+                return _parseResult.ToString();
             }
-        } private string _parseResult;
+        } 
         #endregion //ParseResult
 
         #region Send
@@ -125,9 +134,22 @@ namespace C3.Communi
         /// </summary>
         public bool IsSuccess
         {
-            get { return _isSuccess; }
-        } private bool _isSuccess;
+            get
+            {
+                return _parseResult.IsSuccess;
+            }
+        } 
         #endregion //IsSuccess
+
+        #region Tag
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Tag
+        {
+            get { return _parseResult.Tag; }
+        }
+        #endregion //Tag
 
         #region GetReport
         /// <summary>
@@ -144,6 +166,11 @@ namespace C3.Communi
             sb.AppendLine(CommuniDetailResource.Result + _splitString + this.ParseResult);
             sb.AppendLine(CommuniDetailResource.Sended + _splitString + GetBytesString(this.Send));
             sb.AppendLine(CommuniDetailResource.Received + _splitString + GetBytesString(this.Received));
+
+            if (this._parseResult.Tag != null)
+            {
+                sb.AppendLine(CommuniDetailResource.Tag + _splitString + this._parseResult.Tag);
+            }
             return sb.ToString();
         }
         #endregion //GetReport

@@ -121,7 +121,7 @@ namespace VGATE100DPU
         /// 
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="pr"></param>
+        /// <param name="parseResult"></param>
         public override void OnProcess(ITask task, IParseResult pr)
         {
             if (pr.IsSuccess)
@@ -158,6 +158,9 @@ namespace VGATE100DPU
                     else if (StringHelper.Equal(pr.Name, "noNameOrDatas"))
                     {
                         byte status = Convert.ToByte(pr.Results["status"]);
+                        S.ResponseStatusEnum repStatus = (S.ResponseStatusEnum)status;
+                        string text = EnumTextAttribute.GetEnumTextAttributeValue(repStatus);
+                        pr.Tag = text;
                     }
                 }
             }

@@ -36,6 +36,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\S\Code\ResponseStatusEnum.cs">
+      <Link>ResponseStatusEnum.cs</Link>
+    </Compile>
     <Compile Include="VGate100Data.cs" />
     <Compile Include="Class2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

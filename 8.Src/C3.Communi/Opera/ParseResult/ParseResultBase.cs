@@ -83,5 +83,19 @@ namespace C3.Communi
         } private byte[] _parseBytes;
         #endregion //ParseBytes
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Tag
+        {
+            get
+            {
+                return _tag;
+            }
+            set
+            {
+                _tag = value;
+            }
+        } private object _tag = null;
     }
 }
