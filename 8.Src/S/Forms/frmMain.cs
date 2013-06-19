@@ -176,6 +176,9 @@ namespace S
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private SendOrPostCallback UpdateTextCallback
         {
             get
