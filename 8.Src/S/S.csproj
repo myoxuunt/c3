@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\BaseOpera.cs" />
     <Compile Include="Code\Client.cs" />
     <Compile Include="Code\ClientCollection.cs" />
     <Compile Include="Code\ClientEventArgs.cs" />
@@ -49,7 +48,10 @@
     <Compile Include="Code\ColumnNames.cs" />
     <Compile Include="Code\CommuniPortEventProcessor.cs" />
     <Compile Include="Code\Config.cs" />
-    <Compile Include="Code\GateDataResponse.cs" />
+    <Compile Include="Code\Response\FailResponse.cs" />
+    <Compile Include="Code\Response\GateDataResponse.cs" />
+    <Compile Include="Code\Response\NameCountResponseBase.cs" />
+    <Compile Include="Code\Response\PumpDataResponse.cs" />
     <Compile Include="Code\RPProcessor.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="Forms\frmMain.cs">
@@ -138,6 +140,7 @@
     </Content>
     <Content Include="..\VPUMP100DPU\DeviceDefine\DeviceDefine.xml">
       <Link>Config\PumpDeviceDefine\DeviceDefine.xml</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Config\ListenPort.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

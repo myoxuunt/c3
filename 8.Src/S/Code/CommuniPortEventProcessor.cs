@@ -1,11 +1,9 @@
-
 using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Xdgk.Common;
 using C3.Communi;
-
 
 namespace S
 {
