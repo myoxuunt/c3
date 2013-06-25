@@ -68,5 +68,47 @@ namespace S
                 return false;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pumpName"></param>
+        /// <returns></returns>
+        static internal bool ExistPump(string pumpName)
+        {
+            string s = string.Format(
+                "select count(*) from v_pump where Address = '{0}'",
+                pumpName);
+
+            object obj = GetDB().ExecuteScalar(s);
+            if (obj != null && obj != DBNull.Value)
+            {
+                int count = Convert.ToInt32(obj);
+                return count > 0;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pumpName"></param>
+        /// <param name="fromDT"></param>
+        /// <returns></returns>
+        static internal DataTable GetPumpDataTable(string pumpName, DateTime fromDT)
+        {
+            string s = string.Format(
+                "select * from v_PumpDatas where Address='{0}' and StrTime > '{1}' order by strTime",
+                pumpName , fromDT
+                );
+
+            DataTable t = GetDB().ExecuteDataTable(s);
+            return t;
+
+        }
     }
 }

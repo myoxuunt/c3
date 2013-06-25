@@ -78,6 +78,7 @@
     <Compile Include="Calc\CalcType.cs" />
     <Compile Include="DateTime\DateTimeHelper.cs" />
     <Compile Include="KeyValueCollection\StringStringDictionaryConverter.cs" />
+    <Compile Include="Protocol\Class1.cs" />
     <Compile Include="Remote\DefineExecuteNames.cs" />
     <Compile Include="Resources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using VGATE100DPU;
+using VGate100Common;
 
 namespace VGate100DPUTest
 {

@@ -41,9 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\VGATE100DPU\VGate100Data.cs">
-      <Link>Code\VGate100Data.cs</Link>
-    </Compile>
     <Compile Include="Code\BaseOpera.cs" />
     <Compile Include="Code\Client.cs" />
     <Compile Include="Code\ClientCollection.cs" />
@@ -53,7 +50,6 @@
     <Compile Include="Code\CommuniPortEventProcessor.cs" />
     <Compile Include="Code\Config.cs" />
     <Compile Include="Code\GateDataResponse.cs" />
-    <Compile Include="Code\ResponseStatusEnum.cs" />
     <Compile Include="Code\RPProcessor.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="Forms\frmMain.cs">
@@ -119,6 +115,14 @@
       <Project>{9D6EB61F-A762-425A-856B-93197DEC9F48}</Project>
       <Name>DbNetLink</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VGate100Common\VGate100Common.csproj">
+      <Project>{77E5ED40-CEC2-4420-A8E0-A62BE5098509}</Project>
+      <Name>VGate100Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VPump100Common\VPump100Common.csproj">
+      <Project>{E472C6DA-0CA5-48E0-A0D0-91E5A335586C}</Project>
+      <Name>VPump100Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Xdgk.Common\Xdgk.Common.csproj">
       <Project>{34919A7B-E237-4412-90B0-6BB2D4DCBF8E}</Project>
       <Name>Xdgk.Common</Name>
@@ -129,8 +133,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="..\VGATE100DPU\DeviceDefine\DeviceDefine.xml">
-      <Link>Config\DeviceDefine.xml</Link>
+      <Link>Config\GateDeviceDefine\DeviceDefine.xml</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\VPUMP100DPU\DeviceDefine\DeviceDefine.xml">
+      <Link>Config\PumpDeviceDefine\DeviceDefine.xml</Link>
     </Content>
     <Content Include="Config\ListenPort.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

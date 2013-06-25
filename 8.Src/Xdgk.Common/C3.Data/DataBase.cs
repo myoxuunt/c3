@@ -6,6 +6,15 @@ namespace Xdgk.Common
     /// <summary>
     /// 
     /// </summary>
+    public interface IToBytes
+    {
+        byte[] ToBytes();
+        int BytesCountOfEmpty { get; }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
     abstract public class DataBase : IData
     {
 

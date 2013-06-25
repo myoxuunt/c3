@@ -6,88 +6,168 @@ using System.Data;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Xdgk.Common;
+using Xdgk.Common.Protocol;
 using C3.Communi;
-using VGATE100DPU;
+using VGate100Common;
+using VPump100Common;
+
 namespace S
 {
-    public class GateDataResponse : BaseOpera
+    public class PumpDataResponse : NameCountResponseBase 
     {
-        private VGate100Data [] _datas;
-        private byte _datasCount = 0;
-
-        public GateDataResponse(ResponseStatusEnum status)
-            : this(string.Empty, status, null, 0)
+        public PumpDataResponse(string pumpName, VPump100Data [] datas, byte datasCount)
+            : base(0, 0x86, pumpName, datas, datasCount)
         {
-
         }
+    }
 
-        public GateDataResponse(string gateName, ResponseStatusEnum status, VGate100Data[] datas, int datasCount)
-            : base(0, 0x85)
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    public class FailResponse : BaseOpera
+    {
+        public FailResponse(byte address, byte cmdType, ResponseStatusEnum status)
+            : base(address, cmdType)
         {
-            this.GateName = gateName;
             this.Status = status;
-            this._datas = datas;
-            this._datasCount = (byte)datasCount;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public ResponseStatusEnum Status
         {
             get { return (ResponseStatusEnum)base.CommandNO; }
             set { base.CommandNO = (byte)value; }
         }
 
-        public string GateName
+        public override byte[] OnToBytes()
         {
-            get { return _gateName; }
-            set { _gateName = value; }
-        } private string _gateName;
+            return new byte[0];
+        }
+    }
 
+    public class NameCountResponseBase : BaseOpera
+    {
+        private string _name;
+        private byte _count;
+        private IToBytes[] _toBytesList;
+
+        public NameCountResponseBase(byte address, byte commandType, string name,  IToBytes[] toBytesList,byte count)
+            : base(address, commandType)
+        {
+            this._name = name;
+            this._count = count;
+            this._toBytesList = toBytesList;
+        }
 
         public override byte[] OnToBytes()
         {
+            // name
+            //
+            byte[] bs = ASCIIEncoding.ASCII.GetBytes(new string(' ', 30));
+            Debug.Assert(bs.Length == 30);
 
-            if (Status == 0)
-            {
-                byte[] bs = ASCIIEncoding.ASCII.GetBytes(new string(' ', 30));
-                Debug.Assert(bs.Length == 30);
+            byte[] bsName = UTF8Encoding.UTF8.GetBytes(this._name);
+            Debug.Assert(bsName.Length <= 30);
 
-                byte[] bsName = UTF8Encoding.UTF8.GetBytes(this.GateName);
-                Debug.Assert(bsName.Length <= 30);
+            Array.Copy(bsName, bs, bsName.Length);
 
-                Array.Copy(bsName, bs, bsName.Length);
+            MemoryStream ms = new MemoryStream();
+            ms.Write(bs, 0, bs.Length);
 
-                MemoryStream ms = new MemoryStream();
-                ms.Write(bs, 0, bs.Length);
+            // count
+            //
+            ms.WriteByte(this._count);
 
-                //
-                //
-                ms.WriteByte(_datasCount);
+            // data
+            //
+            byte[] bs2 = GetGateDataBytes(this._toBytesList);
+            ms.Write(bs2, 0, bs2.Length);
 
-                byte[] bs2 = GetGateDataBytes(this._datas);
-                ms.Write(bs2, 0, bs2.Length);
-
-                return ms.ToArray();
-            }
-            else
-            {
-                return new byte[0];
-            }
+            return ms.ToArray();
         }
 
-        const int max = 5;
-
-        private byte[] GetGateDataBytes(VGate100Data[] datas)
+        private byte[] GetGateDataBytes(IToBytes[] datas)
         {
             MemoryStream ms = new MemoryStream();
-            foreach (VGate100Data data in datas)
+            foreach (IToBytes item in datas)
             {
-                byte[] bs = data.ToBytes();
+                byte[] bs = item.ToBytes();
                 ms.Write(bs, 0, bs.Length);
             }
             return ms.ToArray();
         }
+    }
+
+    public class GateDataResponse : NameCountResponseBase 
+    {
+        public GateDataResponse(string gateName,  VGate100Data[] datas, byte datasCount)
+            //: base(0, 0x85)
+            : base(0, 0x85, gateName, datas, datasCount)
+        {
+            //this.GateName = gateName;
+            //this.Status = status;
+            //this._datas = datas;
+            //this._datasCount = (byte)datasCount;
+        }
+
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public ResponseStatusEnum Status
+        //{
+        //    get { return (ResponseStatusEnum)base.CommandNO; }
+        //    set { base.CommandNO = (byte)value; }
+        //}
+
+        //public string GateName
+        //{
+        //    get { return _gateName; }
+        //    set { _gateName = value; }
+        //} private string _gateName;
+
+
+        //public override byte[] OnToBytes()
+        //{
+
+        //    if (Status == 0)
+        //    {
+        //        byte[] bs = ASCIIEncoding.ASCII.GetBytes(new string(' ', 30));
+        //        Debug.Assert(bs.Length == 30);
+
+        //        byte[] bsName = UTF8Encoding.UTF8.GetBytes(this.GateName);
+        //        Debug.Assert(bsName.Length <= 30);
+
+        //        Array.Copy(bsName, bs, bsName.Length);
+
+        //        MemoryStream ms = new MemoryStream();
+        //        ms.Write(bs, 0, bs.Length);
+
+        //        //
+        //        //
+        //        ms.WriteByte(_datasCount);
+
+        //        byte[] bs2 = GetGateDataBytes(this._datas);
+        //        ms.Write(bs2, 0, bs2.Length);
+
+        //        return ms.ToArray();
+        //    }
+        //    else
+        //    {
+        //        return new byte[0];
+        //    }
+        //}
+
+        //const int max = 5;
+
+        //private byte[] GetGateDataBytes(VGate100Data[] datas)
+        //{
+        //    MemoryStream ms = new MemoryStream();
+        //    foreach (VGate100Data data in datas)
+        //    {
+        //        byte[] bs = data.ToBytes();
+        //        ms.Write(bs, 0, bs.Length);
+        //    }
+        //    return ms.ToArray();
+        //}
     }
 }

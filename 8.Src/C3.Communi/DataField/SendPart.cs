@@ -6,7 +6,7 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public class PartBase
+    public class PartBase : ITag 
     {
         #region IsNeedAddress
         /// <summary>
@@ -51,6 +51,20 @@ namespace C3.Communi
         }
         #endregion //Remove
 
+
+        #region ITag ≥…‘±
+        public object Tag
+        {
+            get
+            {
+                return _tag;
+            }
+            set
+            {
+                _tag = value;
+            }
+        } private object _tag;
+        #endregion
     }
 
     /// <summary>

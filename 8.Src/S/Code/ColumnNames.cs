@@ -23,4 +23,17 @@ namespace S
         public const string TuWater = "TuWater";
     }
 
+    class ColumnNamesForPump
+    {
+        public const string StrTime = "StrTime";
+        public const string Efficiency = "Efficiency";
+        public const string ForceRun = "ForceRun";
+        public const string Vibrate = "Vibrate";
+        public const string Flux = "Flux";
+        public const string ReWater = "ReWater";
+        public const string TuWater = "TuWater";
+        public const string Power= "Power";
+        public const string PumpStatus= "Run";
+    }
+
 }

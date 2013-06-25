@@ -8,9 +8,9 @@ using C3.Communi;
 using Xdgk.Common;
 using Xdgk.Common.Protocol;
 using C3.Communi.SimpleDPU;
-using VGate100Common;
+using VPump100Common;
 
-namespace VGATE100DPU
+namespace VPUMP100DPU
 {
 
     internal class DBI : DBIBase
@@ -53,27 +53,29 @@ namespace VGATE100DPU
         /// </summary>
         /// <param name="deviceID"></param>
         /// <param name="d"></param>
-        public void InsertVGate100Data(int deviceID, VGate100Data data)
+        public void InsertVPump100Data(int deviceID, VPump100Data data)
         {
-            string s = " insert into tblGateData(deviceid, DT, BeforeWL, BehindWL, Height, instantFlux, TotalAmount, RemainAmount) " +
-                       " values(@deviceID, @dt, @beforeWL, @behindWL, @height, @instantFlux, @totalAmount, @remainAmount)";
+            string s = " insert into tblGateData(deviceid, DT, instantFlux, efficiency, TotalAmount, RemainAmount, pumpStatus, forceStatus, vibrateStatus, powerStatus) " +
+                       " values(@deviceID, @dt, @instantFlux, @efficiency, @totalAmount, @remainAmount, @pumpStatus, @forceStatus, @vibrateStatus, @powerStatus)";
 
             ListDictionary list = new ListDictionary();
             list.Add("DeviceID", deviceID);
             list.Add("Dt", data.DT);
-            list.Add("BeforeWL", data.BeforeWL);
-            list.Add("BehindWL", data.BehindWL);
-            list.Add("Height", data.Height);
             list.Add("InstantFlux", data.InstantFlux);
+            list.Add("Efficiency", data.Efficiency);
             list.Add("TotalAmount", data.TotalAmount);
             list.Add("RemainAmount", data.RemainAmount);
+            list.Add("pumpStatus", data.PumpStatus);
+            list.Add("forceStatus", data.ForceStartStatus);
+            list.Add("vibrateStatus", data.VibrateStatus);
+            list.Add("powerStatus", data.PowerStatus);
 
             ExecuteScalar(s, list);
         }
 
-        public DateTime GetVGateLastDateTime(int deviceID)
+        public DateTime GetVPumpLastDateTime(int deviceID)
         {
-            string s = "select Max(DT) from tblGateData where DeviceID = @deviceID";
+            string s = "select Max(DT) from tblPumpData where DeviceID = @deviceID";
             ListDictionary list = new ListDictionary();
             list.Add("deviceID", deviceID);
 
@@ -92,22 +94,22 @@ namespace VGATE100DPU
     /// <summary>
     /// 
     /// </summary>
-    public class VGate100Dpu : DPUBase
+    public class VPump100Dpu : DPUBase
     {
-        public VGate100Dpu()
+        public VPump100Dpu()
         {
-            this.Name = "VGate100Dpu";
-            this.DeviceFactory = new VGate100Factory(this);
-            this.DevicePersister = new VGate100Persister(DBI.Instance);
-            this.DeviceSourceProvider = //new VGate100SourceProvider();
-                new SimpleDeviceSourceProvider(DBI.Instance, typeof(VGate100));
+            this.Name = "VPump100Dpu";
+            this.DeviceFactory = new VPump100Factory(this);
+            this.DevicePersister = new VPump100Persister(DBI.Instance);
+            this.DeviceSourceProvider = //new VPump100SourceProvider();
+                new SimpleDeviceSourceProvider(DBI.Instance, typeof(VPump100));
             this.DeviceType = DeviceTypeManager.AddDeviceType(
-                "VGate100",
-                typeof(VGate100));
+                "VPump100",
+                typeof(VPump100));
             this.DeviceUI = new DeviceUI(this);
-            this.Processor = new VGate100Processor();
+            this.Processor = new VPump100Processor();
 
-            string path = PathUtils.GetAssemblyDirectory(typeof(VGate100).Assembly);
+            string path = PathUtils.GetAssemblyDirectory(typeof(VPump100).Assembly);
             this.TaskFactory = new XmlTaskFactory(this, path);
             this.OperaFactory = new XmlOperaFactory(path);
         }
@@ -117,7 +119,7 @@ namespace VGATE100DPU
     /// <summary>
     /// 
     /// </summary>
-    public class VGate100Processor : TaskProcessorBase
+    public class VPump100Processor : TaskProcessorBase
     {
         /// <summary>
         /// 
@@ -143,13 +145,13 @@ namespace VGATE100DPU
 
                         if (status == 0)
                         {
-                            VGate100Data[] datas = ProcessRecord(recordsBytes, recordCount);
-                            foreach (VGate100Data d in datas)
+                            VPump100Data[] datas = ProcessRecord(recordsBytes, recordCount);
+                            foreach (VPump100Data d in datas)
                             {
                                 task.Device.DeviceDataManager.Last = d;
 
                                 int id = GuidHelper.ConvertToInt32(task.Device.Guid);
-                                DBI.Instance.InsertVGate100Data(id, d);
+                                DBI.Instance.InsertVPump100Data(id, d);
                             }
                         }
                         else
@@ -173,14 +175,14 @@ namespace VGATE100DPU
         /// </summary>
         /// <param name="recordsBytes"></param>
         /// <param name="recordCount"></param>
-        private VGate100Data[] ProcessRecord(byte[] recordsBytes, byte recordCount)
+        private VPump100Data[] ProcessRecord(byte[] recordsBytes, byte recordCount)
         {
-            List<VGate100Data > list = new List<VGate100Data> ();
+            List<VPump100Data > list = new List<VPump100Data> ();
             for (int i = 0; i < recordCount; i++)
             {
-                VGate100Data data = VGate100Data.ToVGate100Data(
+                VPump100Data data = VPump100Data.ToVPump100Data(
                     recordsBytes, 
-                    i * VGate100Data.BytesCountOfVGateData);
+                    i * VPump100Data.BytesCountOfVPumpData);
                 list.Add(data);
             }
             return list.ToArray();
@@ -197,21 +199,21 @@ namespace VGATE100DPU
     /// <summary>
     /// 
     /// </summary>
-    public class VGate100Persister : SimpleDevicePersister
+    public class VPump100Persister : SimpleDevicePersister
     {
-        public VGate100Persister(DBIBase dbi)
+        public VPump100Persister(DBIBase dbi)
             : base(dbi)
         {
         }
     }
 
-    public class VGate100Factory : DeviceFactoryBase
+    public class VPump100Factory : DeviceFactoryBase
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="dpu"></param>
-        public VGate100Factory(IDPU dpu)
+        public VPump100Factory(IDPU dpu)
             : base(dpu)
         {
         }
@@ -223,7 +225,7 @@ namespace VGATE100DPU
         /// <returns></returns>
         public override IDevice OnCreate(IDeviceSource deviceSource)
         {
-            VGate100 d = new VGate100();
+            VPump100 d = new VPump100();
             //d.DeviceSource = deviceSource;
             //SetDeviceProperties(d, deviceSource);
             base.SetDeviceProperties(d, deviceSource);
@@ -234,8 +236,8 @@ namespace VGATE100DPU
     /// <summary>
     /// 
     /// </summary>
-    [DeviceKind("FluxDevice")]
-    internal class VGate100 : DeviceBase
+    [DeviceKind("PumpDevice")]
+    internal class VPump100 : DeviceBase
     {
         public override object GetLazyDataFieldValue(string name)
         {
@@ -247,7 +249,7 @@ namespace VGATE100DPU
             {
                 //return DateTime.Now;
                 int deviceID = GuidHelper.ConvertToInt32(this.Guid);
-                return DBI.Instance.GetVGateLastDateTime(deviceID);
+                return DBI.Instance.GetVPumpLastDateTime(deviceID);
             }
             else
             {

@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VGate100Common\VGate100Common.csproj">
+      <Project>{77E5ED40-CEC2-4420-A8E0-A62BE5098509}</Project>
+      <Name>VGate100Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VGATE100DPU\VGATE100DPU.csproj">
       <Project>{0FFAD961-7A13-41E3-B3BF-BFF55244FA77}</Project>
       <Name>VGATE100DPU</Name>
