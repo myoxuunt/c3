@@ -54,7 +54,6 @@
     <Compile Include="Code\Response\GateDataResponse.cs" />
     <Compile Include="Code\Response\NameCountResponseBase.cs" />
     <Compile Include="Code\Response\PumpDataResponse.cs" />
-    <Compile Include="Code\RPProcessor.cs" />
     <Compile Include="Code\VGate100RequestProcess.cs" />
     <Compile Include="Code\VPump100RequestProcess.cs" />
     <Compile Include="Code\VPumpStatusParser.cs" />

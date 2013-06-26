@@ -10,7 +10,6 @@ using Xdgk.Common;
 using Xdgk.Common.Protocol;
 using C3.Communi;
 using VGate100Common;
-using VPump100Common;
 
 
 namespace S
@@ -76,7 +75,7 @@ namespace S
                 return new GateFailResponse(ResponseStatusEnum.NotExistName).ToBytes();
             }
 
-            DataTable tbl = DB.GetPumpDataTable(name, dt);
+            DataTable tbl = DB.GetGateDataTable(name, dt);
             if (tbl.Rows.Count == 0)
             {
                 logContentBuilder.Append(

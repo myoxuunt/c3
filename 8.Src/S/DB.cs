@@ -102,7 +102,7 @@ namespace S
         static internal DataTable GetPumpDataTable(string pumpName, DateTime fromDT)
         {
             string s = string.Format(
-                "select * from v_PumpDatas where Address='{0}' and StrTime > '{1}' order by strTime",
+                "select * from v_PumpDatasHis where Address='{0}' and StrTime > '{1}' order by strTime",
                 pumpName , fromDT
                 );
 
