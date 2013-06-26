@@ -28,7 +28,12 @@ namespace S
         } private ReceivePart _rp = null;
 
         #region IRequestProcess ≥…‘±
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="received"></param>
+        /// <returns></returns>
         public bool Process(Client client, byte[] received)
         {
             StringBuilder sb = new StringBuilder();
@@ -42,16 +47,16 @@ namespace S
                 DateTime dt = (DateTime)pr.Results["dt"];
 
                 sb.AppendLine(string.Format(
-                    Strings.DataRequest,
+                    Strings.GateDataRequest,
                     name, dt));
 
                 byte[] bsReply = CreateGateReplyBytes(name, dt, sb);
                 bool r = client.CommuniPort.Write(bsReply);
 
+                LogItem log = new LogItem(DateTime.Now, sb.ToString());
+                client.LogItems.Add(log);
             }
 
-            LogItem log = new LogItem(DateTime.Now, sb.ToString());
-            client.LogItems.Add(log);
 
             return pr.IsSuccess;
         }

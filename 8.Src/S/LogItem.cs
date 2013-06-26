@@ -9,8 +9,8 @@ namespace S
     {
         public LogItem(DateTime dt , string content)
         {
-            DT = dt;
-            Content = content;
+            this.DT = dt;
+            this.Content = content;
         }
 
         #region DT
@@ -53,9 +53,9 @@ namespace S
 
         public override string ToString()
         {
+            Console.WriteLine("LogItem is: " + DT.ToString() + Environment.NewLine + Content);
             return DT.ToString() + Environment.NewLine + Content;
         }
-
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ namespace S
         /// <summary>
         /// 
         /// </summary>
-        private static int MAXCOUNT = 1000;
+        private static int MAXCOUNT = 500;
 
         public event EventHandler Added;
 

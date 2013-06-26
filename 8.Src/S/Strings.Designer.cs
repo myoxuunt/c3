@@ -61,11 +61,11 @@ namespace S {
         }
         
         /// <summary>
-        ///   查找类似 数据请求: &apos;{0}&apos;, &apos;{1}&apos; 的本地化字符串。
+        ///   查找类似 口门数据请求: &apos;{0}&apos;, &apos;{1}&apos; 的本地化字符串。
         /// </summary>
-        internal static string DataRequest {
+        internal static string GateDataRequest {
             get {
-                return ResourceManager.GetString("DataRequest", resourceCulture);
+                return ResourceManager.GetString("GateDataRequest", resourceCulture);
             }
         }
         
@@ -111,6 +111,15 @@ namespace S {
         internal static string NameNotExist {
             get {
                 return ResourceManager.GetString("NameNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 泵站数据请求: &apos;{0}&apos;, &apos;{1}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string PumpDataRequest {
+            get {
+                return ResourceManager.GetString("PumpDataRequest", resourceCulture);
             }
         }
     }

@@ -54,7 +54,7 @@ namespace S
                 DateTime dt = (DateTime)pr.Results["dt"];
 
                 sb.AppendLine(string.Format(
-                    Strings.DataRequest,
+                    Strings.PumpDataRequest,
                     name, dt));
 
                 byte[] bsReply = null;
