@@ -33,10 +33,7 @@ namespace S
             ICommuniPort cp = (ICommuniPort)sender;
             byte[] bs = cp.Read();
 
-            // TODO: 
-            //
-
-            RPProcessor.Process(this, bs);
+            RequestProcessManager.Default.Process(this, bs);
         }
 
         /// <summary>

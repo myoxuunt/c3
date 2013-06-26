@@ -61,6 +61,15 @@ namespace S {
         }
         
         /// <summary>
+        ///   查找类似 无效请求: &apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string InvalidRequest {
+            get {
+                return ResourceManager.GetString("InvalidRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 监听 的本地化字符串。
         /// </summary>
         internal static string Listening {

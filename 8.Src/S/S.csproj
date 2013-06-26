@@ -48,11 +48,16 @@
     <Compile Include="Code\ColumnNames.cs" />
     <Compile Include="Code\CommuniPortEventProcessor.cs" />
     <Compile Include="Code\Config.cs" />
+    <Compile Include="Code\IRequestProcess.cs" />
+    <Compile Include="Code\RequestProcessManager.cs" />
     <Compile Include="Code\Response\FailResponse.cs" />
     <Compile Include="Code\Response\GateDataResponse.cs" />
     <Compile Include="Code\Response\NameCountResponseBase.cs" />
     <Compile Include="Code\Response\PumpDataResponse.cs" />
     <Compile Include="Code\RPProcessor.cs" />
+    <Compile Include="Code\VGate100RequestProcess.cs" />
+    <Compile Include="Code\VPump100RequestProcess.cs" />
+    <Compile Include="Code\VPumpStatusParser.cs" />
     <Compile Include="DB.cs" />
     <Compile Include="Forms\frmMain.cs">
       <SubType>Form</SubType>

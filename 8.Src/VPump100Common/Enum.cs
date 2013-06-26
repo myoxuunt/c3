@@ -5,7 +5,7 @@ using Xdgk.Common;
 
 namespace VPump100Common
 {
-    public enum PowerStatus
+    public enum PumpPowerStatus
     {
         CityPower,
         Battery,

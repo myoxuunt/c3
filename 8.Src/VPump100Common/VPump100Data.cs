@@ -85,7 +85,7 @@ namespace VPump100Common
         /// 
         /// </summary>
         [DataItem("供电状态", 50, Unit.None)]
-        public PowerStatus PowerStatus
+        public PumpPowerStatus PowerStatus
         {
             get
             {
@@ -95,7 +95,7 @@ namespace VPump100Common
             {
                 _powerStatus = value;
             }
-        } private PowerStatus _powerStatus;
+        } private PumpPowerStatus _powerStatus;
         #endregion //PowerStatus
 
         #region PumpStatus
@@ -181,7 +181,7 @@ namespace VPump100Common
             PumpStatus pumpStatus = (PumpStatus)bs[start++];
             ForceStartStatus forceStartStatus = (ForceStartStatus)bs[start++];
             VibrateStatus vibrateStatus = (VibrateStatus)bs[start++];
-            PowerStatus powerStatus = (PowerStatus)bs[start++];
+            PumpPowerStatus powerStatus = (PumpPowerStatus)bs[start++];
 
             VPump100Data data = new VPump100Data();
             data.DT = new DateTime(ticks);
