@@ -46,8 +46,6 @@ namespace S
         {
             StringBuilder sb = new StringBuilder();
 
-            bool success = false;
-
             IParseResult pr = this.GetReceivePart().ToValues(bs);
             if (pr.IsSuccess)
             {
@@ -56,28 +54,21 @@ namespace S
 
                 DateTime dt = (DateTime)pr.Results["dt"];
 
-                Console.WriteLine(name + " : " + dt);
-                sb.AppendLine(string.Format("数据请求: '{0}', '{1}'", name, dt));
+                sb.AppendLine(string.Format(
+                    Strings.DataRequest,
+                    name, dt));
 
                 byte[] bsReply = null;
                 bsReply = CreatePumpReplyBytes(name, dt, sb);
 
                 bool r = client.CommuniPort.Write(bsReply);
 
-                success = true;
-            }
-
-            if (!success)
-            {
-                sb.AppendLine(string.Format("无效请求: '{0}'", BitConverter.ToString(bs)));
             }
 
             LogItem log = new LogItem(DateTime.Now, sb.ToString());
             client.LogItems.Add(log);
 
-            Console.WriteLine(BitConverter.ToString(bs));
-
-            return success;
+            return pr.IsSuccess;
         }
 
         /// <summary>
@@ -92,17 +83,26 @@ namespace S
             bool existPump = DB.ExistPump(name);
             if (!existPump)
             {
-                return new FailResponse(0, 0x86, ResponseStatusEnum.NotExistName).ToBytes();
+                logContentBuilder.AppendLine(string.Format(
+                    Strings.NameNotExist,
+                    name));
+                return new PumpFailResponse(ResponseStatusEnum.NotExistName).ToBytes();
             }
 
             DataTable tbl = DB.GetPumpDataTable(name, dt);
             if (tbl.Rows.Count == 0)
             {
-                return new FailResponse(0, 0x86, ResponseStatusEnum.NotNewDatas).ToBytes();
+                logContentBuilder.Append(
+                    string.Format (
+                    Strings.HasNotNewDatas,
+                    name));
+                return new PumpFailResponse(ResponseStatusEnum.NotNewDatas).ToBytes();
             }
 
             int createdCount = 0;
             VPump100Data[] datas = ConvertToVPump100Datas(tbl, out createdCount);
+
+            logContentBuilder.AppendLine(string.Format(Strings.GetNewDataWithCount, createdCount));
             return new PumpDataResponse(name, datas, (byte)createdCount).ToBytes();
         }
 

@@ -61,6 +61,33 @@ namespace S {
         }
         
         /// <summary>
+        ///   查找类似 数据请求: &apos;{0}&apos;, &apos;{1}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string DataRequest {
+            get {
+                return ResourceManager.GetString("DataRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 获取 &apos;{0}&apos; 条记录 的本地化字符串。
+        /// </summary>
+        internal static string GetNewDataWithCount {
+            get {
+                return ResourceManager.GetString("GetNewDataWithCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 没有新纪录: &apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string HasNotNewDatas {
+            get {
+                return ResourceManager.GetString("HasNotNewDatas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 无效请求: &apos;{0}&apos; 的本地化字符串。
         /// </summary>
         internal static string InvalidRequest {
@@ -75,6 +102,15 @@ namespace S {
         internal static string Listening {
             get {
                 return ResourceManager.GetString("Listening", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 名称不存在: &apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string NameNotExist {
+            get {
+                return ResourceManager.GetString("NameNotExist", resourceCulture);
             }
         }
     }

@@ -28,15 +28,12 @@ namespace S
             return _rp;
         } private ReceivePart _rp = null;
 
-#region IRequestProcess 成员
+        #region IRequestProcess 成员
 
         public bool Process(Client client, byte[] received)
         {
             StringBuilder sb = new StringBuilder();
 
-            bool success = false;
-            //foreach (ReceivePart RP in RPs)
-            //{
             IParseResult pr = this.GetReceivePart().ToValues(received);
             if (pr.IsSuccess)
             {
@@ -45,37 +42,21 @@ namespace S
 
                 DateTime dt = (DateTime)pr.Results["dt"];
 
-                Console.WriteLine(name + " : " + dt);
-                sb.AppendLine(string.Format("数据请求: '{0}', '{1}'", name, dt));
+                sb.AppendLine(string.Format(
+                    Strings.DataRequest,
+                    name, dt));
 
-                //RequestType reqType = (RequestType)RP.Tag;
-                byte[] bsReply = null;
-                //if (reqType == RequestType.Gate)
-                //{
-                bsReply = CreateGateReplyBytes(name, dt, sb);
-                //}
-                //else if (reqType == RequestType.Pump)
-                //{
-                //bsReply = CreatePumpReplyBytes(name, dt, sb);
-                //}
-
+                byte[] bsReply = CreateGateReplyBytes(name, dt, sb);
                 bool r = client.CommuniPort.Write(bsReply);
 
-                success = true;
-            }
-            //}
-
-            if (!success)
-            {
             }
 
             LogItem log = new LogItem(DateTime.Now, sb.ToString());
             client.LogItems.Add(log);
 
-            Console.WriteLine(BitConverter.ToString(received));
-            return success;
+            return pr.IsSuccess;
         }
-#endregion
+        #endregion
 
         /// <summary>
         /// 
@@ -89,23 +70,35 @@ namespace S
             bool existGate = DB.ExistGate(name);
             if (!existGate)
             {
-                logContentBuilder.AppendLine(string.Format("名称不存在: '{0}'", name));
-                return new FailResponse(0, 0x85, ResponseStatusEnum.NotExistName).ToBytes();
+                logContentBuilder.AppendLine(string.Format(
+                    Strings.NameNotExist,
+                    name));
+                return new GateFailResponse(ResponseStatusEnum.NotExistName).ToBytes();
             }
 
             DataTable tbl = DB.GetPumpDataTable(name, dt);
             if (tbl.Rows.Count == 0)
             {
-                return new FailResponse(0, 0x85, ResponseStatusEnum.NotNewDatas).ToBytes();
+                logContentBuilder.Append(
+                    string.Format (
+                    Strings.HasNotNewDatas,
+                    name));
+                return new GateFailResponse(ResponseStatusEnum.NotNewDatas).ToBytes();
             }
 
             int createdCount = 0;
             VGate100Data[] vgate100Datas = ConvertToVGate100Datas(tbl, out createdCount);
-            logContentBuilder.AppendLine(string.Format("获取'{0}'条记录", createdCount));
+            logContentBuilder.AppendLine(string.Format(Strings.GetNewDataWithCount, createdCount));
 
             return new GateDataResponse(name, vgate100Datas, (byte)createdCount).ToBytes();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <param name="createdCount"></param>
+        /// <returns></returns>
         static private VGate100Data[] ConvertToVGate100Datas(DataTable dataTable, out int createdCount)
         {
             createdCount = 0;

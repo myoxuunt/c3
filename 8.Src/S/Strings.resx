@@ -117,10 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DataRequest" xml:space="preserve">
+    <value>数据请求: '{0}', '{1}'</value>
+  </data>
+  <data name="GetNewDataWithCount" xml:space="preserve">
+    <value>获取 '{0}' 条记录</value>
+  </data>
+  <data name="HasNotNewDatas" xml:space="preserve">
+    <value>没有新纪录: '{0}'</value>
+  </data>
   <data name="InvalidRequest" xml:space="preserve">
     <value>无效请求: '{0}'</value>
   </data>
   <data name="Listening" xml:space="preserve">
     <value>监听</value>
+  </data>
+  <data name="NameNotExist" xml:space="preserve">
+    <value>名称不存在: '{0}'</value>
   </data>
 </root>

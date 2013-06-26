@@ -31,4 +31,22 @@ namespace S
         }
     }
 
+    public class GateFailResponse : FailResponse
+    {
+        public GateFailResponse(ResponseStatusEnum status)
+            : base(0, 0x85, status)
+        {
+
+        }
+    }
+
+    public class PumpFailResponse : FailResponse
+    {
+        public PumpFailResponse(ResponseStatusEnum status)
+            : base(0, 0x86, status)
+        {
+
+        }
+    }
+
 }
