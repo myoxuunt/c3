@@ -121,7 +121,7 @@ namespace S
                 PumpStatus pumpStatus = VPumpStatusParser.ParsePumpStatus(row[ColumnNamesForPump.PumpStatus].ToString());
                 ForceStartStatus forceStatus = VPumpStatusParser.ParseForceStartStatus(row[ColumnNamesForPump.ForceRun].ToString());
                 VibrateStatus vibrateStatus = VPumpStatusParser.ParseVibrateStatus(row[ColumnNamesForPump.Vibrate].ToString());
-                PowerStatus powerStatus = VPumpStatusParser.ParsePowerStatus(row[ColumnNamesForPump.Power].ToString());
+                PumpPowerStatus powerStatus = VPumpStatusParser.ParsePowerStatus(row[ColumnNamesForPump.Power].ToString());
 
 
                 VPump100Data data = new VPump100Data();

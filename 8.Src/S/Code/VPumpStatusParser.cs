@@ -30,8 +30,8 @@ namespace S
                 new object[] {typeof(VibrateStatus ), VibrateStatus .None , "ÎÞÕñ×´Ì¬" },
                 new object[] {typeof(VibrateStatus ), VibrateStatus .Vibrate , "Õñ¶¯×´Ì¬" },
 
-                new object[] {typeof ( PowerStatus ), PowerStatus.CityPower , "ÊÐµç×´Ì¬"},
-                new object[] {typeof ( PowerStatus ), PowerStatus.Battery , "µç³Ø×´Ì¬"},
+                new object[] {typeof ( PowerStatus ), PumpPowerStatus.CityPower , "ÊÐµç×´Ì¬"},
+                new object[] {typeof ( PowerStatus ), PumpPowerStatus.Battery , "µç³Ø×´Ì¬"},
         };
 
         /// <summary>
@@ -66,9 +66,9 @@ namespace S
             throw new ArgumentException("not find enum type: " + enumType.Name);
         }
 
-        static public PowerStatus ParsePowerStatus(string statusText)
+        static public PumpPowerStatus ParsePowerStatus(string statusText)
         {
-            return (PowerStatus)Parse(statusText, typeof(PowerStatus));
+            return (PumpPowerStatus)Parse(statusText, typeof(PowerStatus));
         }
 
         static public PumpStatus ParsePumpStatus(string statusText)
