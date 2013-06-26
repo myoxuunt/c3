@@ -55,7 +55,7 @@ namespace VPUMP100DPU
         /// <param name="d"></param>
         public void InsertVPump100Data(int deviceID, VPump100Data data)
         {
-            string s = " insert into tblGateData(deviceid, DT, instantFlux, efficiency, TotalAmount, RemainAmount, pumpStatus, forceStatus, vibrateStatus, powerStatus) " +
+            string s = " insert into tblPumpData(deviceid, DT, instantFlux, efficiency, TotalAmount, RemainAmount, pumpStatus, forceStatus, vibrateStatus, powerStatus) " +
                        " values(@deviceID, @dt, @instantFlux, @efficiency, @totalAmount, @remainAmount, @pumpStatus, @forceStatus, @vibrateStatus, @powerStatus)";
 
             ListDictionary list = new ListDictionary();

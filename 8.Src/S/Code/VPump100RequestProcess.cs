@@ -91,7 +91,7 @@ namespace S
             DataTable tbl = DB.GetPumpDataTable(name, dt);
             if (tbl.Rows.Count == 0)
             {
-                logContentBuilder.Append(
+                logContentBuilder.AppendLine(
                     string.Format (
                     Strings.HasNotNewDatas,
                     name));
