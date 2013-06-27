@@ -124,8 +124,20 @@ namespace Xdgk.Common
         {
             get 
             {
+
+                object v = this.Value;
                 string format = string.Format("{{0:{0}}}", this.Format);
-                string s = string.Format(format, this.Value);
+                if (this.Value is Enum)
+                {
+                    EnumTextAttribute etAtt = EnumTextAttributeHelper.GetEnumTextAttribute(this.Value);
+                    if (etAtt != null)
+                    {
+                        v = etAtt.Text;
+                    }
+                }
+
+
+                string s = string.Format(format, v);
                 return s;
             }
         }

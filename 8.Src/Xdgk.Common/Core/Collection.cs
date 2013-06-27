@@ -11,6 +11,21 @@ namespace Xdgk.Common
     /// <typeparam name="T"></typeparam>
     public class LimitationCollection<T> : Collection<T>
     {
+        private const int DEFAULT_MAX_COUNT = 1000;
+
+        public LimitationCollection()
+            : this(DEFAULT_MAX_COUNT)
+        {
+        }
+
+        public LimitationCollection(int maxCount)
+        {
+            if (maxCount > 0)
+            {
+                this._maxCount = maxCount;
+            }
+        }
+
         public int MaxCount
         {
             get { return _maxCount; }
@@ -19,7 +34,7 @@ namespace Xdgk.Common
                 _maxCount = value;
                 ModifyCount();
             }
-        } private int _maxCount = 1000;
+        } private int _maxCount = DEFAULT_MAX_COUNT;
 
         /// <summary>
         /// 

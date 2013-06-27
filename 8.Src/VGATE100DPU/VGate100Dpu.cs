@@ -8,31 +8,31 @@ using C3.Communi;
 using Xdgk.Common;
 using Xdgk.Common.Protocol;
 using C3.Communi.SimpleDPU;
-using VPump100Common;
+using VGate100Common;
 
-namespace VPUMP100DPU
+namespace VGATE100DPU
 {
 
 
     /// <summary>
     /// 
     /// </summary>
-    public class VPump100Dpu : DPUBase
+    public class VGate100Dpu : DPUBase
     {
-        public VPump100Dpu()
+        public VGate100Dpu()
         {
-            this.Name = "VPump100Dpu";
-            this.DeviceFactory = new VPump100Factory(this);
-            this.DevicePersister = new VPump100Persister(DBI.Instance);
-            this.DeviceSourceProvider = //new VPump100SourceProvider();
-                new SimpleDeviceSourceProvider(DBI.Instance, typeof(VPump100));
+            this.Name = "VGate100Dpu";
+            this.DeviceFactory = new VGate100Factory(this);
+            this.DevicePersister = new VGate100Persister(DBI.Instance);
+            this.DeviceSourceProvider = //new VGate100SourceProvider();
+                new SimpleDeviceSourceProvider(DBI.Instance, typeof(VGate100));
             this.DeviceType = DeviceTypeManager.AddDeviceType(
-                "VPump100",
-                typeof(VPump100));
+                "VGate100",
+                typeof(VGate100));
             this.DeviceUI = new DeviceUI(this);
-            this.Processor = new VPump100Processor();
+            this.Processor = new VGate100Processor();
 
-            string path = PathUtils.GetAssemblyDirectory(typeof(VPump100).Assembly);
+            string path = PathUtils.GetAssemblyDirectory(typeof(VGate100).Assembly);
             this.TaskFactory = new XmlTaskFactory(this, path);
             this.OperaFactory = new XmlOperaFactory(path);
         }
@@ -42,7 +42,7 @@ namespace VPUMP100DPU
     /// <summary>
     /// 
     /// </summary>
-    public class VPump100Processor : TaskProcessorBase
+    public class VGate100Processor : TaskProcessorBase
     {
         /// <summary>
         /// 
@@ -68,13 +68,13 @@ namespace VPUMP100DPU
 
                         if (status == 0)
                         {
-                            VPump100Data[] datas = ProcessRecord(recordsBytes, recordCount);
-                            foreach (VPump100Data d in datas)
+                            VGate100Data[] datas = ProcessRecord(recordsBytes, recordCount);
+                            foreach (VGate100Data d in datas)
                             {
                                 task.Device.DeviceDataManager.Last = d;
 
                                 int id = GuidHelper.ConvertToInt32(task.Device.Guid);
-                                DBI.Instance.InsertVPump100Data(id, d);
+                                DBI.Instance.InsertVGate100Data(id, d);
                             }
                         }
                         else
@@ -98,14 +98,14 @@ namespace VPUMP100DPU
         /// </summary>
         /// <param name="recordsBytes"></param>
         /// <param name="recordCount"></param>
-        private VPump100Data[] ProcessRecord(byte[] recordsBytes, byte recordCount)
+        private VGate100Data[] ProcessRecord(byte[] recordsBytes, byte recordCount)
         {
-            List<VPump100Data > list = new List<VPump100Data> ();
+            List<VGate100Data > list = new List<VGate100Data> ();
             for (int i = 0; i < recordCount; i++)
             {
-                VPump100Data data = VPump100Data.ToVPump100Data(
+                VGate100Data data = VGate100Data.ToVGate100Data(
                     recordsBytes, 
-                    i * VPump100Data.BytesCountOfVPumpData);
+                    i * VGate100Data.BytesCountOfVGateData);
                 list.Add(data);
             }
             return list.ToArray();
@@ -122,21 +122,21 @@ namespace VPUMP100DPU
     /// <summary>
     /// 
     /// </summary>
-    public class VPump100Persister : SimpleDevicePersister
+    public class VGate100Persister : SimpleDevicePersister
     {
-        public VPump100Persister(DBIBase dbi)
+        public VGate100Persister(DBIBase dbi)
             : base(dbi)
         {
         }
     }
 
-    public class VPump100Factory : DeviceFactoryBase
+    public class VGate100Factory : DeviceFactoryBase
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="dpu"></param>
-        public VPump100Factory(IDPU dpu)
+        public VGate100Factory(IDPU dpu)
             : base(dpu)
         {
         }
@@ -148,7 +148,7 @@ namespace VPUMP100DPU
         /// <returns></returns>
         public override IDevice OnCreate(IDeviceSource deviceSource)
         {
-            VPump100 d = new VPump100();
+            VGate100 d = new VGate100();
             //d.DeviceSource = deviceSource;
             //SetDeviceProperties(d, deviceSource);
             base.SetDeviceProperties(d, deviceSource);
@@ -159,8 +159,8 @@ namespace VPUMP100DPU
     /// <summary>
     /// 
     /// </summary>
-    [DeviceKind("PumpDevice")]
-    internal class VPump100 : DeviceBase
+    [DeviceKind("FluxDevice")]
+    internal class VGate100 : DeviceBase
     {
         public override object GetLazyDataFieldValue(string name)
         {
@@ -172,7 +172,7 @@ namespace VPUMP100DPU
             {
                 //return DateTime.Now;
                 int deviceID = GuidHelper.ConvertToInt32(this.Guid);
-                return DBI.Instance.GetVPumpLastDateTime(deviceID);
+                return DBI.Instance.GetVGateLastDateTime(deviceID);
             }
             else
             {

@@ -36,7 +36,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class2.cs" />
+    <Compile Include="DBI.cs" />
+    <Compile Include="VGate100Dpu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

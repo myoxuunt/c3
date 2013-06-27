@@ -17,7 +17,7 @@ namespace Xdgk.Common.Test
         public void T1()
         {
             DataCollection datas = new DataCollection();
-            int n = datas.Capability + 1;
+            int n = datas.MaxCount  + 1;
 
             string output = string.Empty;
             for (int i = 0; i < n + 100; i++)
@@ -51,7 +51,7 @@ namespace Xdgk.Common.Test
             EnumForTest b = EnumForTest.B;
             EnumForTest c = EnumForTest.C;
 
-            string text = EnumTextAttribute.GetEnumTextAttributeValue(a);
+            string text = EnumTextAttributeHelper.GetEnumTextAttributeValue(a);
             Console.WriteLine(text);
             Assert.AreEqual("A-Text", text);
         }

@@ -43,18 +43,31 @@ namespace Xdgk.Common
         } private string _text;
         #endregion //Text
 
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class EnumTextAttributeHelper
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        private EnumTextAttributeHelper()
+        {
+
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="enumValue"></param>
         /// <returns></returns>
-        static public string GetEnumTextAttributeValue(object enumValue)
+        static public EnumTextAttribute GetEnumTextAttribute(object enumValue)
         {
             if ( enumValue == null )
             {
                 throw new ArgumentNullException ("enumValue");
             }
-            //Console.WriteLine(enumValue);
 
             Type type = enumValue.GetType();
 
@@ -64,19 +77,39 @@ namespace Xdgk.Common
                     string.Format("Type '{0}' is not enum", 
                     enumValue.GetType().Name));
             }
-            FieldInfo fi = type.GetField(enumValue.ToString());
 
-            if (fi != null)
+            FieldInfo fi = type.GetField(enumValue.ToString());
+            if (fi == null)
             {
-                object[] atts = fi.GetCustomAttributes(typeof(EnumTextAttribute), false);
-                if (atts.Length > 0)
-                {
-                    EnumTextAttribute etAtt = (EnumTextAttribute)atts[0];
-                    return etAtt.Text;
-                }
+                return null;
             }
 
-            return enumValue.ToString();
+            object[] atts = fi.GetCustomAttributes(typeof(EnumTextAttribute), false);
+            if (atts.Length == 0)
+            {
+                return null;
+            }
+
+            EnumTextAttribute etAtt = (EnumTextAttribute)atts[0];
+            return etAtt;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="enumValue"></param>
+        /// <returns></returns>
+        static public string GetEnumTextAttributeValue(object enumValue)
+        {
+            EnumTextAttribute etAtt = GetEnumTextAttribute(enumValue);
+            if (etAtt == null)
+            {
+                string s = string.Format("{0}.{1} has not EnumTextAttribute",
+                    enumValue.GetType().Name,
+                    enumValue.ToString());
+                throw new ArgumentException(s);
+            }
+            return etAtt.Text;
         }
     }
 }

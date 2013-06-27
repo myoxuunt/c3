@@ -53,7 +53,7 @@ namespace S
             Console.WriteLine(
                     string.Format(
                         "not find '{0}' type status text '{1}'",
-                        enumType.GetType().Name, statusText));
+                        enumType.Name, statusText));
 
             foreach (object[] array in _map)
             {

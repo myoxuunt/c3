@@ -47,6 +47,19 @@ namespace Xdgk.Common
         /// 
         /// </summary>
         /// <returns></returns>
+        public bool IsAccessDataBase()
+        {
+            using (DbNetData db = CreateDbNetData())
+            {
+                return db.Database == DatabaseType.Access ||
+                    db.Database == DatabaseType.Access2007;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         private DbNetData CreateDbNetData()
         {
             DbNetData db = new DbNetData(_connString);
