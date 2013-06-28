@@ -2,7 +2,7 @@
 ; 有关创建 Inno Setup 脚本文件的详细资料请查阅帮助文档！
 
 #define MyAppName               "数据采集"
-#define MyAppVersion            "1.0.0.0"
+#define MyAppVersion            "1.1.0.0"
 #define MyAppPublisher          "LY-TECH"
 #define MyAppURL                ""
 #define MyAppExeName            "C3.exe"
@@ -64,6 +64,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "{#C3Dir}\C3.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#C3Dir}\C3.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#C3Dir}\C3.Communi.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#C3Dir}\DbNetLink.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#C3Dir}\Xdgk.Common.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#C3Dir}\Nlog.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#C3Dir}\Nlog.Config"; DestDir: "{app}"; Flags: ignoreversion
