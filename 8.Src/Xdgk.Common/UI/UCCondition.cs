@@ -23,8 +23,6 @@ namespace Xdgk.UI.Forms
         {
             InitializeComponent();
 
-            this.Begin = DateTime.Now.Date;
-            this.End = DateTime.Now.Date + TimeSpan.FromDays(1d);
         }
 
         /// <summary>
@@ -105,6 +103,12 @@ namespace Xdgk.UI.Forms
             {
                 QueryEvent(this, EventArgs.Empty);
             }
+        }
+
+        private void UCCondition_Load(object sender, EventArgs e)
+        {
+            this.Begin = DateTime.Now.Date;
+            this.End = DateTime.Now.Date + TimeSpan.FromDays(1d);
         }
     }
 }

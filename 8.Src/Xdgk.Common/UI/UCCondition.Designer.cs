@@ -148,6 +148,7 @@
             this.Controls.Add(this.btnQuery);
             this.Name = "UCCondition";
             this.Size = new System.Drawing.Size(220, 197);
+            this.Load += new System.EventHandler(this.UCCondition_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
