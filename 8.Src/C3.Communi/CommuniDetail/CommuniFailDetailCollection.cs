@@ -9,7 +9,7 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public class CommuniDetailCollection : Xdgk.Common.LimitationCollection<CommuniDetail>
+    public class CommuniDetailCollection : Xdgk.Common.LimitationCollection<ICommuniDetail>
     {
     }
 }

@@ -48,6 +48,9 @@
     <Compile Include="BytesConverter\BytesConverterConfig.cs" />
     <Compile Include="BytesConverter\BytesConverterManager.cs" />
     <Compile Include="Class1.cs" />
+    <Compile Include="CommuniDetail\CommuniDetailBase.cs" />
+    <Compile Include="CommuniDetail\ICommuniDetail.cs" />
+    <Compile Include="CommuniDetail\SendFailCommuniDetail.cs" />
     <Compile Include="CommuniPortConfig\ConnectionType.cs" />
     <Compile Include="CommuniPortConfig\RemoteIPAddressAndPortConfig.cs" />
     <Compile Include="CommuniPort\CommuniPortCreatedEventArgs.cs" />

@@ -8,7 +8,7 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public class CommuniDetail
+    public class CommuniDetail : CommuniDetailBase
     {
         public IParseResult ParseResult
         {
@@ -28,6 +28,7 @@ namespace C3.Communi
             byte[] send, DateTime sendDateTime, 
             byte[] received, DateTime receivedDateTime, 
             IParseResult parseResult)
+            : base(operaText)
         {
             if (parseResult == null)
             {
@@ -36,7 +37,6 @@ namespace C3.Communi
 
             this._sendDateTime = sendDateTime;
             this._receivedDateTime = receivedDateTime;
-            this._operaText = operaText;
             this._send = send;
             this._received = received;
 
@@ -64,22 +64,6 @@ namespace C3.Communi
         } private DateTime _receivedDateTime;
         #endregion //ReceivedDateTime
 
-        #region OperaText
-        /// <summary>
-        /// 
-        /// </summary>
-        public string OperaText
-        {
-            get
-            {
-                if (_operaText == null)
-                {
-                    _operaText = string.Empty;
-                }
-                return _operaText;
-            }
-        } private string _operaText;
-        #endregion //OperaText
 
         #region ParseResult
         /// <summary>
@@ -132,7 +116,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public bool IsSuccess
+        override public bool IsSuccess
         {
             get
             {
@@ -161,7 +145,7 @@ namespace C3.Communi
             StringBuilder sb = new StringBuilder();
             string _splitString = C3.Communi.Resources.CommuniDetailResource.SplitString;
 
-            sb.AppendLine(CommuniDetailResource.SendDateTime + _splitString + this.SendDateTime.ToString());
+            sb.AppendLine(CommuniDetailResource.SendDateTime + _splitString + this.SendDateTime.ToString() + " => " + this.ReceivedDateTime.ToString());
             sb.AppendLine(CommuniDetailResource.Opera + _splitString + this.OperaText);
             sb.AppendLine(CommuniDetailResource.Result + _splitString + this.ParseResult);
             sb.AppendLine(CommuniDetailResource.Sended + _splitString + GetBytesString(this.Send));
@@ -175,23 +159,7 @@ namespace C3.Communi
         }
         #endregion //GetReport
 
-        #region GetBytesString
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="bs"></param>
-        /// <returns></returns>
-        private string GetBytesString(byte[] bs)
-        {
-            if (bs == null || bs.Length == 0)
-            {
-                return null;
-            }
-
-            string s = string.Format("[{0:000}] ", bs.Length) + BitConverter.ToString(bs);
-            return s;
-        }
-        #endregion //GetBytesString
+  
 
         #region ToString
         /// <summary>

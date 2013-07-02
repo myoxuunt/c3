@@ -22,6 +22,20 @@ namespace C3.Communi
 
     }
 
+    public class NoneParseResult : ParseResultBase
+    {
+        public NoneParseResult() 
+        {
+            this.Name = "NoneParseResult";
+        }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
+        
+    }
+
     /// <summary>
     /// 
     /// </summary>

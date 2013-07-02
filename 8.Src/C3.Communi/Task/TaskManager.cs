@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Diagnostics;
 using Xdgk.Common;
@@ -45,9 +46,10 @@ namespace C3.Communi
             {
                 if (_current != value)
                 {
+
                     if (value != null)
                     {
-                        VerifyTaskStatus(value, TaskStatus.Executing);
+                        VerifyTaskStatus(value, TaskStatus.Executing, TaskStatus.Executed);
                     }
 
                     // UnregisterEvents
@@ -205,15 +207,43 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <param name="value"></param>
-        private static void VerifyTaskStatus(ITask value, TaskStatus status)
+        private static void VerifyTaskStatus(ITask value, params TaskStatus[] statusArray)
         {
+            if (statusArray == null)
+            {
+                throw new ArgumentNullException("statusArray");
+            }
+
+            if (statusArray.Length == 0)
+            {
+                throw new ArgumentException("statusArray length == 0");
+            }
+
+            bool find = false;
             // check task status
             //
-            if (value.Status != status)
+            foreach (TaskStatus item in statusArray)
             {
+                if (value.Status == item)
+                {
+                    find = true;
+                    break;
+                }
+            }
+
+            if (!find)
+            {
+                List<string> list = new List<string>();   
+                foreach (TaskStatus item in statusArray)
+                {
+                    list.Add(item.ToString());
+                }
+                string s = "(" + string.Join(",", list.ToArray()) + ")";
+                
+
                 string msg = string.Format(
-                        "task status must is {0}, but is '{1}'",
-                        status, value.Status);
+                        "task status must in {0}, but is '{1}'",
+                        s, value.Status);
 
                 throw new ArgumentException(msg);
             }

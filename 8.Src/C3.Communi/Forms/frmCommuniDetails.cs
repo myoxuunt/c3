@@ -185,7 +185,7 @@ namespace C3
             this.richTextBox1.Clear();
 
             StringBuilder sb = new StringBuilder();
-            foreach (CommuniDetail item in this._communiDetailQueue)
+            foreach (ICommuniDetail item in this._communiDetailQueue)
             {
                 if (this.SelectedViewOption.IsPass(item.IsSuccess))
                 {

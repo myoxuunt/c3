@@ -108,6 +108,10 @@ namespace C3.Communi
         {
             get
             {
+                if (_lastParseResult == null)
+                {
+                    _lastParseResult = new NoneParseResult();
+                }
                 return _lastParseResult;
             }
             set
@@ -407,6 +411,7 @@ namespace C3.Communi
                 byte[] bytes = this.Opera.CreateSendBytes(this.Device);
 
                 this.LastSendBytes = bytes;
+                this.LastSendDateTime = DateTime.Now;
                 this.LastExecute = DateTime.Now;
 
                 bool success = cp.Write(bytes);
@@ -417,6 +422,10 @@ namespace C3.Communi
                 }
                 else
                 {
+                    ICommuniDetail sendFailCommuniDetail = new SendFailCommuniDetail(
+                        this.Opera.Text, this.LastSendDateTime, this.LastSendBytes);
+
+                    this.Device.CommuniDetails.Add(sendFailCommuniDetail);
                     this.SetStatus(TaskStatus.Executed);
                 }
 

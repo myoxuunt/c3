@@ -141,6 +141,9 @@
   <data name="Sended" xml:space="preserve">
     <value>发送</value>
   </data>
+  <data name="SendFail" xml:space="preserve">
+    <value>发送失败</value>
+  </data>
   <data name="SplitString" xml:space="preserve">
     <value>: </value>
   </data>
