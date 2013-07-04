@@ -115,8 +115,15 @@ namespace S
             }
         }
 
+        private void TestDB()
+        {
+            DB.Test();    
+        }
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
+            TestDB();
+
             this.Text = Config.Default.AppName;
 
             this.toolStrip1.Visible = false;

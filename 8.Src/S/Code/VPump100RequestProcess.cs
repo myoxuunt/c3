@@ -107,15 +107,17 @@ namespace S
 
         static private VPump100Data[] ConvertToVPump100Datas(DataTable datatable, out int createCount)
         {
+            NullOrDBNullConverter nc = new NullOrDBNullConverter(0f);
+
             createCount = 0;
             List<VPump100Data> list = new List<VPump100Data>();
             foreach (DataRow row in datatable.Rows)
             {
                 DateTime dt = Convert.ToDateTime(row[ColumnNamesForPump.StrTime]);
-                float instantFlux = Convert.ToSingle(row[ColumnNamesForPump.Flux]);
-                float efficienty = Convert.ToSingle(row[ColumnNamesForPump.Efficiency]);
-                float sum = Convert.ToSingle(row[ColumnNames.TuWater]);
-                float remain = Convert.ToSingle(row[ColumnNames.ReWater]);
+                float instantFlux = Convert.ToSingle(nc.Convert(row[ColumnNamesForPump.Flux]));
+                float efficienty = Convert.ToSingle(nc.Convert(row[ColumnNamesForPump.Efficiency]));
+                float sum = Convert.ToSingle(nc.Convert(row[ColumnNames.TuWater]));
+                float remain = Convert.ToSingle(nc.Convert(row[ColumnNames.ReWater]));
 
                 PumpStatus pumpStatus = VPumpStatusParser.ParsePumpStatus(row[ColumnNamesForPump.PumpStatus].ToString());
                 ForceStartStatus forceStatus = VPumpStatusParser.ParseForceStartStatus(row[ColumnNamesForPump.ForceRun].ToString());

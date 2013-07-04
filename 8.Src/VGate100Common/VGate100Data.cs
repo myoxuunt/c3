@@ -15,7 +15,7 @@ namespace VGate100Common
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("闸前水位", 20, "m")]
+        [DataItem("闸前水位", 20, "cm")]
         public double BeforeWL
         {
             get
@@ -33,7 +33,7 @@ namespace VGate100Common
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("闸后水位", 30, "m")]
+        [DataItem("闸后水位", 30, "cm")]
         public double BehindWL
         {
             get
@@ -51,7 +51,7 @@ namespace VGate100Common
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("闸高", 40, "m")]
+        [DataItem("闸高", 40, "cm")]
         public double Height
         {
             get

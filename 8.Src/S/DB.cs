@@ -110,5 +110,14 @@ namespace S
             return t;
 
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        internal static void Test()
+        {
+            string s = "select top 1 * from v_gate";
+            GetDB().ExecuteDataTable(s);
+        }
     }
 }

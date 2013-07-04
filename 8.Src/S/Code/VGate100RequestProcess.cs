@@ -14,6 +14,43 @@ using VGate100Common;
 
 namespace S
 {
+
+    public class NullOrDBNullConverter
+    {
+        public NullOrDBNullConverter(object defaultDestValue)
+        {
+            if (defaultDestValue == null ||
+                defaultDestValue == DBNull.Value)
+            {
+                throw new ArgumentException("defaultDestValue is null or DBNull");
+            }
+
+            _defaultDestValue = defaultDestValue;
+        }
+
+        public object DefautDestValue
+        {
+            get { return _defaultDestValue; }
+        } private object _defaultDestValue;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public object Convert(object value)
+        {
+            if (value == null || value == DBNull.Value)
+            {
+                return _defaultDestValue;
+            }
+            else
+            {
+                return value;
+            }
+        }
+    }
+
     internal class VGate100RequestProcess : IRequestProcess
     {
         private ReceivePart GetReceivePart()
@@ -84,7 +121,7 @@ namespace S
             if (tbl.Rows.Count == 0)
             {
                 logContentBuilder.AppendLine(
-                    string.Format (
+                    string.Format(
                     Strings.HasNotNewDatas,
                     name));
                 return new GateFailResponse(ResponseStatusEnum.NotNewDatas).ToBytes();
@@ -105,6 +142,7 @@ namespace S
         /// <returns></returns>
         static private VGate100Data[] ConvertToVGate100Datas(DataTable dataTable, out int createdCount)
         {
+            NullOrDBNullConverter nc = new NullOrDBNullConverter(0f);
             createdCount = 0;
 
             List<VGate100Data> list = new List<VGate100Data>();
@@ -112,12 +150,12 @@ namespace S
             foreach (DataRow row in dataTable.Rows)
             {
                 DateTime dt = Convert.ToDateTime(row[ColumnNames.StrTime]);
-                float lwBefore = Convert.ToSingle(row[ColumnNames.BeforeLevel]);
-                float lwBehind = Convert.ToSingle(row[ColumnNames.BehindLevel]);
-                float height = Convert.ToSingle(row[ColumnNames.Height]);
-                float flux = Convert.ToSingle(row[ColumnNames.Flux]);
-                float sum = Convert.ToSingle(row[ColumnNames.TuWater]);
-                float remain = Convert.ToSingle(row[ColumnNames.ReWater]);
+                float lwBefore = Convert.ToSingle(nc.Convert(row[ColumnNames.BeforeLevel]));
+                float lwBehind = Convert.ToSingle(nc.Convert(row[ColumnNames.BehindLevel]));
+                float height = Convert.ToSingle(nc.Convert(row[ColumnNames.Height]));
+                float flux = Convert.ToSingle(nc.Convert(row[ColumnNames.Flux]));
+                float sum = Convert.ToSingle(nc.Convert(row[ColumnNames.TuWater]));
+                float remain = Convert.ToSingle(nc.Convert(row[ColumnNames.ReWater]));
 
                 VGate100Data data = new VGate100Data();
                 data.DT = dt;
