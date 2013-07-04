@@ -89,6 +89,19 @@
     <Compile Include="Length\LengthType.cs" />
     <Compile Include="SourceConfig\SourceConfig.cs" />
     <Compile Include="SourceConfig\SourceConfigCollection.cs" />
+    <Compile Include="UI\FormHelper.cs" />
+    <Compile Include="UI\UCCondition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UCCondition.Designer.cs">
+      <DependentUpon>UCCondition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UCDataGridView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UCDataGridView.Designer.cs">
+      <DependentUpon>UCDataGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="_others\DisplayValue.cs" />
     <Compile Include="_others\DisplayValueCollection.cs" />
     <Compile Include="Core\ExceptionLogger.cs" />
@@ -155,6 +168,14 @@
     <EmbeddedResource Include="Resources\Resource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UCCondition.resx">
+      <DependentUpon>UCCondition.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UCDataGridView.resx">
+      <DependentUpon>UCDataGridView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="_others\FixedDialogBase.resx">

@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <assemblyInfoCollection>
-  <assemblyInfo path=".\d\Xd202\XD202DPU.dll"> </assemblyInfo>
+  <assemblyInfo path=".\d\VGate\VGateDPU.dll"> </assemblyInfo>
+  <assemblyInfo path=".\d\VPump\VPumpDPU.dll"> </assemblyInfo>
 </assemblyInfoCollection>

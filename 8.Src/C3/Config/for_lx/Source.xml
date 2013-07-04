@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sources>
+  <source>
+    <key>connection</key>
+    <value>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\DB\lx.mdb</value>
+  </source>
+</sources>
