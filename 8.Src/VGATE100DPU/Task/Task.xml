@@ -5,7 +5,7 @@
     <operaname>read</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:01:00</value>
+      <value>00:05:00</value>
     </cyclestrategy>
   </task>
 </tasks>

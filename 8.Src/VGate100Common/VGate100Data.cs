@@ -69,7 +69,7 @@ namespace VGate100Common
         /// <summary>
         /// 
         /// </summary>
-        [DataItem("瞬时流量", 50, "m3/s")]
+        [DataItem("瞬时流量", 50, "m3/s", "f2")]
         public double InstantFlux
         {
             get
