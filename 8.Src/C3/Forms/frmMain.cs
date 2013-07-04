@@ -750,5 +750,11 @@ namespace C3
                 f.ShowDialog();
             }
         }
+
+        private void 连接记录LToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //MessageBox.Show(CommuniPortFactory.Default.CPCreateLogs.Count.ToString ());
+            new frmCPCreateLog().ShowDialog();
+        }
     }
 }

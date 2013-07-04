@@ -220,6 +220,38 @@ namespace C3.Communi
         }
 
         static private readonly TimeSpan MinCreateInterval = TimeSpan.FromSeconds(20);
+
+        public override bool Equals(object obj)
+        {
+            //return base.Equals(obj);
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj is RemoteIPAddressAndPortConfig)
+            {
+                RemoteIPAddressAndPortConfig v2 = obj as RemoteIPAddressAndPortConfig;
+                return v2.ConnectionType == this.ConnectionType &&
+                    v2.RemoteIPAddress.Equals(this.RemoteIPAddress) &&
+                    v2.RemotePort == this.RemotePort;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+
+        public override string ToString()
+        {
+            return string.Format("{0}:{1}", this.RemoteIPAddress , this.RemotePort );
+        }
     }
 
 }

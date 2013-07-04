@@ -18,7 +18,7 @@ namespace C3.Communi
                 byte[] sendBytes)
             : base(operaText)
         {
-            this._operaText = operaText;
+            //this._operaText = operaText;
             this._sendDateTime = sendDateTime;
             this._send = sendBytes;
         }
@@ -40,22 +40,22 @@ namespace C3.Communi
         } private byte[] _send;
 #endregion //Send
 
-#region OperaText
-        /// <summary>
-        /// 
-        /// </summary>
-        public string OperaText
-        {
-            get
-            {
-                if (_operaText == null)
-                {
-                    _operaText = string.Empty;
-                }
-                return _operaText;
-            }
-        } private string _operaText;
-#endregion //OperaText
+//#region OperaText
+//        /// <summary>
+//        /// 
+//        /// </summary>
+//        public string OperaText
+//        {
+//            get
+//            {
+//                if (_operaText == null)
+//                {
+//                    _operaText = string.Empty;
+//                }
+//                return _operaText;
+//            }
+//        } private string _operaText;
+//#endregion //OperaText
 
 #region SendDateTime
         /// <summary>

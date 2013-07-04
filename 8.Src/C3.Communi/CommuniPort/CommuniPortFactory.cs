@@ -120,11 +120,19 @@ namespace C3.Communi
                         {
                             cp = cfg.Create();
                             success = true;
+
+                            CPCreateLog cpclog = new CPCreateLog(DateTime.Now,
+                                string.Format("创建 '{0}' 成功", cfg));
+                            this.CPCreateLogs.Add(cpclog);
                         }
                         catch (Exception e)
                         {
-                            ex= e;
+                            ex = e;
                             success = false;
+
+                            CPCreateLog cpclog = new CPCreateLog(DateTime.Now,
+                                string.Format("创建 '{0}' 失败, {1}", cfg, ex.Message));
+                            this.CPCreateLogs.Add(cpclog);
                         }
                         if (success)
                         {
@@ -133,14 +141,51 @@ namespace C3.Communi
 
                         if (CommuniPortCreated != null)
                         {
-                            CommuniPortCreated ( this, 
-                                new CommuniPortCreatedEventArgs (
+                            CommuniPortCreated(this,
+                                new CommuniPortCreatedEventArgs(
                                     cfg, success, cp, ex));
                         }
                     }
                 }
                 Thread.Sleep(SLEEP_TIME);
             }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CPCreateLogCollection CPCreateLogs
+        {
+            get
+            {
+                if (_cpCreateLogs == null)
+                {
+                    _cpCreateLogs = new CPCreateLogCollection();
+                }
+                return _cpCreateLogs;
+            }
+        } private CPCreateLogCollection _cpCreateLogs;
+    }
+
+    public class CPCreateLog
+    {
+        public CPCreateLog(DateTime dt, string log)
+        {
+            this.DT = dt;
+            this.Log = log;
+        }
+
+        public DateTime DT;
+        public string Log;
+    }
+
+    public class CPCreateLogCollection : Xdgk.Common.LimitationCollection < CPCreateLog >
+    {
+        public CPCreateLogCollection()
+            : base(100)
+        {
+
         }
     }
 }
