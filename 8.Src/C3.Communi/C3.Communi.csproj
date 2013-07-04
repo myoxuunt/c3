@@ -55,6 +55,8 @@
     <Compile Include="CommuniPortConfig\RemoteIPAddressAndPortConfig.cs" />
     <Compile Include="CommuniPort\CommuniPortCreatedEventArgs.cs" />
     <Compile Include="CommuniPort\CommuniPortEventProcessor.cs" />
+    <Compile Include="CommuniPort\CPCreateLog.cs" />
+    <Compile Include="CommuniPort\CPCreateLogCollection.cs" />
     <Compile Include="Device\DeviceCommuniLogger.cs" />
     <Compile Include="Device\Device\FluxDeviceBase.cs" />
     <Compile Include="Filter\FilterFactory.cs" />

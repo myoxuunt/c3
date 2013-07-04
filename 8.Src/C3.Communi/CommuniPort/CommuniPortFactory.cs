@@ -167,25 +167,4 @@ namespace C3.Communi
             }
         } private CPCreateLogCollection _cpCreateLogs;
     }
-
-    public class CPCreateLog
-    {
-        public CPCreateLog(DateTime dt, string log)
-        {
-            this.DT = dt;
-            this.Log = log;
-        }
-
-        public DateTime DT;
-        public string Log;
-    }
-
-    public class CPCreateLogCollection : Xdgk.Common.LimitationCollection < CPCreateLog >
-    {
-        public CPCreateLogCollection()
-            : base(100)
-        {
-
-        }
-    }
 }
