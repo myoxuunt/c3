@@ -64,6 +64,8 @@ namespace C3
         {
             this.Text = C3App.App.Config.AppName;
 
+            this.mnuAddin.Visible = C3App.App.Config.ShowAddinMenu;
+
             this.sc1.Panel1.Controls.Add(this.HardwareTreeView);
             //this.sc2.Panel2.Controls.Add(this.UCTaskViewer);
 
@@ -259,7 +261,7 @@ namespace C3
             string s = string.Format(
                 "{0} v{1}",
                 C3App.App.Config.AppName,
-                ProductVersion);
+                C3App.App.Config.Version);
 
             NUnit.UiKit.UserMessage.DisplayInfo(s);
         }
@@ -284,7 +286,7 @@ namespace C3
         #endregion //mnuCommuniDetail_Click
 
         #region mnuM_Click
-        private void mnuM_Click(object sender, EventArgs e)
+        private void mnuAddin_Click(object sender, EventArgs e)
         {
             frmAddin f = new frmAddin();
             DialogResult dr = f.ShowDialog(this);

@@ -100,7 +100,7 @@
             this.mnuAddin.Name = "mnuAddin";
             this.mnuAddin.Size = new System.Drawing.Size(152, 22);
             this.mnuAddin.Text = "插件(&A)...";
-            this.mnuAddin.Click += new System.EventHandler(this.mnuM_Click);
+            this.mnuAddin.Click += new System.EventHandler(this.mnuAddin_Click);
             // 
             // toolStripSeparator1
             // 

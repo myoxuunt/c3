@@ -95,7 +95,7 @@ namespace C3
                 if (_config == null)
                 {
                     _config = new Config();
-                    _config.AppName = System.Configuration.ConfigurationManager.AppSettings["AppName"];
+                    //_config.AppName = System.Configuration.ConfigurationManager.AppSettings["AppName"];
                 }
                 return _config;
             }
