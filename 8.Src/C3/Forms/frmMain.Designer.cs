@@ -30,6 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCPCreateLog = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAddin = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +56,6 @@
             this.tssListenPort = new System.Windows.Forms.ToolStripStatusLabel();
             this.sc1 = new System.Windows.Forms.SplitContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.连接记录LToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.sc1.SuspendLayout();
@@ -80,13 +80,20 @@
             // mnuFile
             // 
             this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.连接记录LToolStripMenuItem,
+            this.mnuCPCreateLog,
             this.mnuAddin,
             this.toolStripSeparator1,
             this.mnuExit});
             this.mnuFile.Name = "mnuFile";
             this.mnuFile.Size = new System.Drawing.Size(59, 20);
             this.mnuFile.Text = "文件(&F)";
+            // 
+            // mnuCPCreateLog
+            // 
+            this.mnuCPCreateLog.Name = "mnuCPCreateLog";
+            this.mnuCPCreateLog.Size = new System.Drawing.Size(152, 22);
+            this.mnuCPCreateLog.Text = "连接记录(&L)";
+            this.mnuCPCreateLog.Click += new System.EventHandler(this.mnuCPCreateLog_Click);
             // 
             // mnuAddin
             // 
@@ -286,13 +293,6 @@
             this.toolStrip1.TabIndex = 11;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // 连接记录LToolStripMenuItem
-            // 
-            this.连接记录LToolStripMenuItem.Name = "连接记录LToolStripMenuItem";
-            this.连接记录LToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.连接记录LToolStripMenuItem.Text = "连接记录(&L)";
-            this.连接记录LToolStripMenuItem.Click += new System.EventHandler(this.连接记录LToolStripMenuItem_Click);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -344,7 +344,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuSetting;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnuDeviceHistoryData;
-        private System.Windows.Forms.ToolStripMenuItem 连接记录LToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuCPCreateLog;
     }
 }
 

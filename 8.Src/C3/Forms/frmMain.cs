@@ -751,7 +751,7 @@ namespace C3
             }
         }
 
-        private void 连接记录LToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mnuCPCreateLog_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(CommuniPortFactory.Default.CPCreateLogs.Count.ToString ());
             new frmCPCreateLog().ShowDialog();

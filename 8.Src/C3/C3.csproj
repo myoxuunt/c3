@@ -85,10 +85,10 @@
     <Compile Include="Forms\frmDeviceHistoryData.Designer.cs">
       <DependentUpon>frmDeviceHistoryData.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmCPCreateLog.cs">
+    <Compile Include="Forms\frmCPCreateLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmCPCreateLog.Designer.cs">
+    <Compile Include="Forms\frmCPCreateLog.Designer.cs">
       <DependentUpon>frmCPCreateLog.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources\DeviceDataResource.Designer.cs">
@@ -183,7 +183,7 @@
       <DependentUpon>frmDeviceHistoryData.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmCPCreateLog.resx">
+    <EmbeddedResource Include="Forms\frmCPCreateLog.resx">
       <DependentUpon>frmCPCreateLog.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
