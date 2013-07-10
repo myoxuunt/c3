@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Data;
 using System.Collections.Generic;
 using System.Text;
@@ -51,12 +52,14 @@ namespace HDDPU
         /// <param name="data"></param>
         public void InsertHDData(int deviceID, HDDeviceData data)
         {
-            string s = string.Format(
-                "insert into tblHDData(deviceID, DT, Value) values({0}, '{1}', {2})", 
-                deviceID,
-                data.DT.ToString(),
-                data.Value ? 1 : 0);
-            ExecuteScalar(s);
+            string s = "insert into tblHDData(deviceID, DT, Value) values(@deviceID, @dt, @value)";
+
+            ListDictionary list = new ListDictionary();
+            list.Add("deviceID", deviceID);
+            list.Add("dt", data.DT);
+            list.Add("value", data.Value ? 1 : 0);
+
+            ExecuteScalar(s, list);
         }
 
         /// <summary>
@@ -227,14 +230,16 @@ namespace HDDPU
         {
             HDDevice d = (HDDevice)device;
 
-            string s = string.Format(
-                    "insert into tblDevice(DeviceAddress, deviceType, stationID, DeviceName) values({0}, '{1}', {2}, '{3}')",
-                    d.Address,
-                    d.DeviceType.Type.Name,
-                    GuidHelper.ConvertToInt32(d.Station.Guid),
-                    d.Name 
-                    );
-            DBI.Instance.ExecuteScalar(s);
+            string s = @"insert into tblDevice(DeviceAddress, deviceType, stationID, DeviceName) 
+                values(@DeviceAddress, @DeviceType, @StationID, @DeviceName)";
+
+            ListDictionary list = new ListDictionary();
+            list.Add("DeviceAddress", d.Address);
+            list.Add("DeviceType", d.DeviceType.Type.Name);
+            list.Add("StationID", GuidHelper.ConvertToInt32(d.Station.Guid));
+            list.Add("DeviceName", d.Name);
+
+            DBI.Instance.ExecuteScalar(s, list);
             d.Guid = GuidHelper.Create(GetMaxDeviceID(DBI.Instance));
         }
 
@@ -248,14 +253,16 @@ namespace HDDPU
 
         protected override void OnUpdate(IDevice device)
         {
-            string s = string.Format(
-                    "update tblDevice set DeviceAddress = {0}, DeviceName = '{1}' where DeviceID = {2}",
-                    device.Address,
-                    device.Name,
-                    GuidHelper.ConvertToInt32(device.Guid)
-                    );
+            string s = @"update tblDevice set DeviceAddress = @DeviceAddress, DeviceName = @DeviceName 
+                    where DeviceID = @DeviceID";
 
-            DBI.Instance.ExecuteScalar(s);
+            ListDictionary list = new ListDictionary();
+
+            list.Add("DeviceAddress", device.Address);
+            list.Add("DeviceName", device.Name);
+            list.Add("DeviceID", GuidHelper.ConvertToInt32(device.Guid));
+
+            DBI.Instance.ExecuteScalar(s, list);
         }
     }
 }

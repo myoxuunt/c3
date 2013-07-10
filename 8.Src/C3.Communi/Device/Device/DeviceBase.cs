@@ -555,5 +555,26 @@ namespace C3.Communi
 
         #endregion //Filters
 
+
+        #region IDevice ≥…‘±
+
+
+        public string Remark
+        {
+            get
+            {
+                if (_remark == null)
+                {
+                    _remark = string.Empty;
+                }
+                return _remark;
+            }
+            set
+            {
+                _remark = value;
+            }
+        } private string _remark;
+
+        #endregion
     }
 }

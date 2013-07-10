@@ -50,6 +50,7 @@ namespace C3.Communi
         string GetStringParameters();
 
         FilterCollection Filters { get; set; }
+        string Remark { get; set; }
     }
 
 }

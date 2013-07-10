@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
@@ -101,7 +102,7 @@ namespace DBSPU
             //throw new NotImplementedException();
             Station st = (Station)station;
             string xml = CommuniPortConfigSerializer.Serialize(st.CommuniPortConfig);
-            int id = DBI.Instance.InsertStation(st.Name, xml, st.Ordinal, st.Street);
+            int id = DBI.Instance.InsertStation(st.Name, xml, st.Ordinal, st.Street, st.Remark);
             st.Guid = GuidHelper.Create((uint)id);
         }
 
@@ -111,7 +112,7 @@ namespace DBSPU
             //st.Name;
             string xml = CommuniPortConfigSerializer.Serialize(st.CommuniPortConfig);
             int id = (int)GuidHelper.ConvertToUInt32 ( st.Guid );
-            DBI.Instance.UpdateStation(id, st.Name, xml, st.Ordinal, st.Street);
+            DBI.Instance.UpdateStation(id, st.Name, xml, st.Ordinal, st.Street, st.Remark);
         }
 
         public override void OnDelete(IStation station)
@@ -189,13 +190,21 @@ namespace DBSPU
 
         ///
 
-        internal void UpdateStation(int id, string name, string xml, int ordinal, string street)
+        internal void UpdateStation(int id, string name, string xml, int ordinal, string street, string remark)
         {
-            string s = string.Format(
-                "update tblStation set StationName='{1}',  " +
-                "StationCPConfig= '{2}', StationOrdinal = {3}, Street = '{4}' where stationid = {0}",
-                id, name, xml, ordinal, street);
-            Instance.ExecuteScalar(s);
+            string s = @"update tblStation set StationName = @StationName, StationCPConfig = @StationCPConfig, 
+                    StationOrdinal = @StationOrdinal, Street = @street, StationRemark = @stationRemark 
+                    where stationid = @stationID";
+
+            ListDictionary list = new ListDictionary();
+            list.Add("stationID", id);
+            list.Add("stationName", name);
+            list.Add("stationCPConfig", xml);
+            list.Add("stationOrdinal", ordinal);
+            list.Add("street", street);
+            list.Add("stationRemark", remark);
+
+            Instance.ExecuteScalar(s, list);
         }
 
         /// <summary>
@@ -204,17 +213,19 @@ namespace DBSPU
         /// <param name="p"></param>
         /// <param name="xml"></param>
         /// <returns></returns>
-        internal int InsertStation(string name, string xml, int ordinal, string street)
+        internal int InsertStation(string name, string xml, int ordinal, string street, string remark)
         {
-            string s = string.Format (
-            "insert into tblStation(StationName, StationCPConfig, StationOrdinal, Street) values('{0}','{1}', {2}, '{3}')",
-            name, 
-            xml,
-            ordinal,
-            street
-            );
+            string s = @"insert into tblStation(StationName, StationCPConfig, StationOrdinal, Street, StationRemark) 
+                         values(@stationName, @stationCPConfig, @stationOrdinal, @street, @stationRemark)";
 
-            ExecuteScalar(s);
+            ListDictionary list = new ListDictionary();
+            list.Add("stationName", name);
+            list.Add("stationCPConfig", xml);
+            list.Add("stationOrdinal", ordinal);
+            list.Add("street", street);
+            list.Add("stationRemark", remark);
+
+            ExecuteScalar(s, list);
             return GetMaxStationID();
 
         }

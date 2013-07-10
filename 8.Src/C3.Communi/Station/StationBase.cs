@@ -512,5 +512,24 @@ namespace C3.Communi
             }
             return p;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Remark
+        {
+            get
+            {
+                if (_remark == null)
+                {
+                    _remark = string.Empty;
+                }
+                return _remark;
+            }
+            set
+            {
+                _remark = value;
+            }
+        } private string _remark;
     }
 }

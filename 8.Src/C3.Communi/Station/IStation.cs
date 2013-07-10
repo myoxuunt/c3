@@ -23,6 +23,7 @@ namespace C3.Communi
         GroupCollection Groups { get; }
         int Ordinal { get; set; }
         string Street { get; set; }
+        string Remark { get; set; }
     }
 
 }

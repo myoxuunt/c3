@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Data;
 using System.Collections.Generic;
 using System.Text;
@@ -34,17 +35,19 @@ namespace C3.Communi.SimpleDPU
         /// <param name="device"></param>
         protected override void OnAdd(IDevice device)
         {
-            string s = string.Format(
-                "insert into tblDevice(DeviceAddress, DeviceName, deviceType, deviceExtend, stationID) " +
-                "values({0}, '{1}', '{2}', '{3}', {4})",
-                device.Address,
-                device.Name ,
-                device.DeviceType.Type.Name,
-                device.GetStringParameters (),
-                GuidHelper.ConvertToInt32(device.Station.Guid)
-                );
+            string s = @"insert into tblDevice(DeviceAddress, DeviceName, deviceType, deviceExtend, DeviceRemark, stationID) 
+                values(@DeviceAddress, @DeviceName, @DeviceType, @DeviceExtend, @DeviceRemark, @StationID)";
 
-            _dbi.ExecuteScalar(s);
+            ListDictionary list = new ListDictionary();
+            list.Add("DeviceAddress", device.Address);
+            list.Add("DeviceName", device.Name);
+            list.Add("DeviceType", device.DeviceType.Type.Name);
+            list.Add("DeviceExtend", device.GetStringParameters());
+            list.Add("DeviceRemark", device.Remark);
+            list.Add("StationID", GuidHelper.ConvertToInt32(device.Station.Guid));
+
+            _dbi.ExecuteScalar(s, list);
+
             object obj = GetMaxDeviceID(_dbi);
             device.Guid = GuidHelper.Create(Convert.ToInt32(obj));
         }
@@ -55,14 +58,18 @@ namespace C3.Communi.SimpleDPU
         /// <param name="device"></param>
         protected override void OnUpdate(IDevice device)
         {
-            string s = string.Format(
-                "update tblDevice set DeviceAddress = {0}, DeviceName = '{1}', DeviceExtend='{2}' where DeviceID = {3}",
-                device.Address,
-                device.Name,
-                device.GetStringParameters (),
-                GuidHelper.ConvertToInt32(device.Guid));
+            string s = @"update tblDevice 
+                    set DeviceAddress = @DeviceAddress, DeviceName = @DeviceName, DeviceExtend=@DeviceExtend, DeviceRemark = @deviceRemark
+                    where DeviceID = @DeviceID";
 
-            _dbi.ExecuteScalar(s);
+            ListDictionary list = new ListDictionary();
+            list.Add("DeviceAddress", device.Address);
+            list.Add("DeviceName", device.Name);
+            list.Add("DeviceExtend", device.GetStringParameters());
+            list.Add("DeviceRemark", device.Remark);
+            list.Add("DeviceID", GuidHelper.ConvertToInt32(device.Guid));
+
+            _dbi.ExecuteScalar(s, list);
         }
 
         /// <summary>

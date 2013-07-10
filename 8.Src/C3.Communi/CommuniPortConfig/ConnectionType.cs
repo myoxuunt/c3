@@ -13,7 +13,7 @@ namespace C3.Communi
     public enum ConnectionType
     {
         Client,
-            Server,
+        Server,
     }
 
 }

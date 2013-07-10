@@ -229,7 +229,8 @@ namespace C3.Communi
                 return false;
             }
 
-            if (obj is RemoteIPAddressAndPortConfig)
+            //if (obj is RemoteIPAddressAndPortConfig)
+            if ( this.GetType() == obj.GetType() )
             {
                 RemoteIPAddressAndPortConfig v2 = obj as RemoteIPAddressAndPortConfig;
                 return v2.ConnectionType == this.ConnectionType &&
