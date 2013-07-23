@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过下列属性集
 // 控制。更改这些属性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Xdgk.Common")]
+[assembly: AssemblyTitle("Xdgk.Common.Export")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("xd")]
-[assembly: AssemblyProduct("Xdgk.Common")]
-[assembly: AssemblyCopyright("Copyright xd 2009")]
+[assembly: AssemblyCompany("XDGK")]
+[assembly: AssemblyProduct("Xdgk.Common.Export")]
+[assembly: AssemblyCopyright("Copyright © XDGK 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("e08e7a7a-dd9c-490c-b09c-87b61833123a")]
+[assembly: Guid("c69a64f2-64d6-468d-88e8-3f4626c1d082")]
 
 // 程序集的版本信息由下面四个值组成:
 //
@@ -31,9 +31,6 @@ using System.Runtime.InteropServices;
 //
 // 可以指定所有这些值，也可以使用“内部版本号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”:
-[assembly: AssemblyVersion("0.17.0.1")]
-[assembly: AssemblyFileVersion("0.17.0.1")]
-
-
-// 0.17.0.1 13-07-23 uc condition add extend button
-// 
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.4.0")]
+[assembly: AssemblyFileVersion("1.0.4.0")]

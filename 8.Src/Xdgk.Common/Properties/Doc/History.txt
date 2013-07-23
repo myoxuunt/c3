@@ -1,4 +1,10 @@
-﻿v0.15.0.0		2013-07-03
+﻿v0.17.0.0		2013-07-15
+	add ui.forms.ucstationDT1Condition
+	
+v0.16.0.0		2013-07-12
+	add dgv column config factory create from xml string, xml doc
+	
+v0.15.0.0		2013-07-03
 	add ui
 	
 v0.13.0.0		2013-05-28

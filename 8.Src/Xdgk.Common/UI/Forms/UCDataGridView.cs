@@ -15,19 +15,30 @@ namespace Xdgk.UI.Forms
     /// </summary>
     public partial class UCDataGridView : UserControl
     {
+
+        #region UCDataGridView
+        /// <summary>
+        /// 
+        /// </summary>
         public UCDataGridView()
         {
             InitializeComponent();
             InitDataGridView();
         }
+        #endregion //UCDataGridView
 
+        #region DataSource
+        /// <summary>
+        /// 
+        /// </summary>
         public object DataSource
         {
             get { return this.dataGridView1.DataSource; }
             set { this.dataGridView1.DataSource = value; }
         }
+        #endregion //DataSource
 
-
+        #region DgvColumnConfigs
         /// <summary>
         /// 
         /// </summary>
@@ -50,7 +61,9 @@ namespace Xdgk.UI.Forms
                 }
             }
         } private DGVColumnConfigCollection _dgvColumnConfigs;
+        #endregion //DgvColumnConfigs
 
+        #region SetDataGridViewColumns
         /// <summary>
         /// 
         /// </summary>
@@ -82,8 +95,9 @@ namespace Xdgk.UI.Forms
                 this.dataGridView1.Columns.Add(col);
             }
         }
+        #endregion //SetDataGridViewColumns
 
-
+        #region InitDataGridView
         /// <summary>
         /// 
         /// </summary>
@@ -93,12 +107,10 @@ namespace Xdgk.UI.Forms
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToAddRows = false;
-
-
         }
+        #endregion //InitDataGridView
 
-
-
+        #region DataGridView
         /// <summary>
         /// 
         /// </summary>
@@ -106,16 +118,25 @@ namespace Xdgk.UI.Forms
         {
             get { return this.dataGridView1; }
         }
+        #endregion //DataGridView
 
+        #region ColumnConfigFile
+        /// <summary>
+        /// 
+        /// </summary>
         public string ColumnConfigFile
         {
             get { return _columnConfigFile; }
             set 
-            { 
-                _columnConfigFile = value;
-                DGVColumnConfigCollection cfg = DGVColumnConfigCollectionFactory.CreateFromXml(value);
-                this.DgvColumnConfigs = cfg;
+            {
+                if (value != null)
+                {
+                    _columnConfigFile = value;
+                    DGVColumnConfigCollection cfg = DGVColumnConfigCollectionFactory.CreateFromXml(value);
+                    this.DgvColumnConfigs = cfg;
+                }
             }
         } private string _columnConfigFile;
+        #endregion //ColumnConfigFile
     }
 }
