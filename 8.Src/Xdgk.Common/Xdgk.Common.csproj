@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppConfigReaderForDll.cs" />
     <Compile Include="App\NotifyIconManager.cs" />
     <Compile Include="C3.Data\FlowmeterData.cs" />
     <Compile Include="C3.Data\HeatData.cs" />

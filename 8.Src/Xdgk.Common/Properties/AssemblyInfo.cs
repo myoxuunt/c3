@@ -31,9 +31,10 @@ using System.Runtime.InteropServices;
 //
 // 可以指定所有这些值，也可以使用“内部版本号”和“修订号”的默认值，
 // 方法是按如下所示使用“*”:
-[assembly: AssemblyVersion("0.17.0.1")]
-[assembly: AssemblyFileVersion("0.17.0.1")]
+[assembly: AssemblyVersion("0.18.0.0")]
+[assembly: AssemblyFileVersion("0.18.0.0")]
 
 
+// 0.18.0.0
+// 0.17.0.2 13-07-24 add AppConfigReaderForDll class
 // 0.17.0.1 13-07-23 uc condition add extend button
-// 
