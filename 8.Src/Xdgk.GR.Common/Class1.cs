@@ -1,9 +1,213 @@
 ﻿using System;
 using Xdgk.Common;
 using Xdgk.GR.Common;
+using C3.Communi;
 
 namespace Xdgk.GR.Common
 {
+
+    public interface IOutsideTemperatureProvider
+    {
+        float GetStandardOutsideTemperature(IDevice device);
+    }
+    
+    public class FixedOTProvider : IOutsideTemperatureProvider 
+    {
+        public float Value
+        {
+            get { return _value; }
+            set { _value = value; }
+        } private float _value;
+
+        #region IOutsideTemperatureProvider 成员
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        public float GetStandardOutsideTemperature(IDevice device)
+        {
+            return Value;
+        }
+
+        #endregion
+    }
+    public class DeviceOTProvider : IOutsideTemperatureProvider
+    {
+
+        public DeviceOTProvider (IOutside outside)
+        {
+            this.Outside = outside;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IOutside Outside
+        {
+            get { return _outside; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Outside");
+                }
+                _outside = value;
+            }
+        } private IOutside _outside;
+
+        #region IOutsideTemperatureProvider 成员
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        public float GetStandardOutsideTemperature(IDevice device)
+        {
+            return this.Outside.OutsideTemperature;
+        }
+        #endregion
+    }
+
+    public class OutsideTemperatureProviderManager
+    {
+        private OutsideTemperatureProviderManager()
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static public IOutsideTemperatureProvider Provider
+        {
+            get
+            {
+                if (_p == null)
+                {
+                    _p = new FixedOTProvider();
+                }
+                return _p; 
+            }
+            set
+            {
+                _p = value;
+            }
+        } static private IOutsideTemperatureProvider _p;
+
+        #region IOutsideTemperatureProvider 成员
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="device"></param>
+        /// <returns></returns>
+        static public float GetStandardOutsideTemperature(IDevice device)
+        {
+            return Provider.GetStandardOutsideTemperature(device);
+        }
+
+        #endregion
+    }
+
+    public enum ModeValue
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        [EnumText("直供")]
+        Direct,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [EnumText("间供")]
+        Indirect,
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [EnumText("混水")]
+        Mixed,
+    }
+
+    abstract public class HeatTransferMode
+    {
+        static private HeatTransferMode
+            _direct = new HtmDirect(),
+                    _indirect = new HtmIndirect(),
+                    _mixed = new HtmMixed();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static private HeatTransferMode[] a = new HeatTransferMode[]
+        {
+            _direct, _indirect , _mixed 
+        };
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        static public HeatTransferMode Parse(int value)
+        {
+            ModeValue mv = (ModeValue)value;
+            return Parse(mv);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modeValue"></param>
+        /// <returns></returns>
+        static public HeatTransferMode Parse(ModeValue modeValue)
+        {
+            HeatTransferMode r = null;
+            foreach (HeatTransferMode item in a)
+            {
+                if (modeValue == item.ModeValue)
+                {
+                    r = item;
+                }
+            }
+            return r;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        abstract public ModeValue ModeValue{get;}
+
+
+    }
+    internal class HtmDirect : HeatTransferMode 
+    {
+        public override ModeValue ModeValue
+        {
+            get { return ModeValue.Direct; }
+        }
+
+    }
+    internal class HtmIndirect: HeatTransferMode
+    {
+        public override ModeValue ModeValue
+        {
+            get { return ModeValue.Indirect ; }
+        }
+    }
+    internal class HtmMixed: HeatTransferMode
+    {
+        public override ModeValue ModeValue
+        {
+            get { return ModeValue.Mixed; }
+        }
+    }
+    public interface IOutside
+    {
+        float OutsideTemperature { get; }
+    }
+
     /// <summary>
     /// 
     /// </summary>

@@ -1,7 +1,7 @@
 using System;
 using C3.Communi;
 using NLog;
-
+using Xdgk.GR.Common;
 
 namespace XD1100DPU
 {

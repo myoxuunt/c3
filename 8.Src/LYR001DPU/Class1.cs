@@ -1,12 +1,13 @@
-using System;
+Ôªøusing System;
 using System.Collections.Generic;
+using System.Text;
 using C3.Communi;
-using Xdgk.Common;
 using Xdgk.GR.Common;
+using Xdgk.Common;
 
-namespace XD1100DPU
+namespace LYR001DPU
 {
-    internal class XD1100Device : DeviceBase , IOutside
+    internal class LYR001Device : DeviceBase , IOutside
     {
         internal enum StatusAndAlarmEnum
         {
@@ -16,18 +17,18 @@ namespace XD1100DPU
         private const string PN_HEATTRANSFERMODE = "heatTransferMode";
         private const int PO_HEATTRANSFERMODE = 1;
 
-        #region XD1100Device
+        #region LYR001Device
         /// <summary>
         /// 
         /// </summary>
-        public XD1100Device()
+        public LYR001Device()
         {
             // init 
             //
             IParameter p = null;
             p = GetHeatTransferModeParameter();
         }
-        #endregion //XD1100Device
+        #endregion //LYR001Device
 
         ///// <summary>
         ///// 
@@ -88,7 +89,7 @@ namespace XD1100DPU
                         ModeValue.Mixed,
                         PO_HEATTRANSFERMODE);
 
-                p.Text = "ªª»»∑Ω Ω";
+                p.Text = "Êç¢ÁÉ≠ÊñπÂºè";
                 this.GeneralGroup.Parameters.Add(p);
             }
             return p;
