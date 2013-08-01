@@ -47,25 +47,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="code\DBI.cs" />
-    <Compile Include="code\DeviceOTProvider.cs" />
-    <Compile Include="code\FixedOTProvider.cs" />
+    <Compile Include="code\_\WarnWrapper.cs" />
+    <Compile Include="code\_\DeviceOTProvider.cs" />
+    <Compile Include="code\_\FixedOTProvider.cs" />
     <Compile Include="Forms\frmOutsideStandard.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\frmOutsideStandard.Designer.cs">
       <DependentUpon>frmOutsideStandard.cs</DependentUpon>
     </Compile>
-    <Compile Include="code\HeatTransferMode.cs" />
-    <Compile Include="code\HtmDirect.cs" />
-    <Compile Include="code\HtmIndirect.cs" />
-    <Compile Include="code\HtmMixed.cs" />
-    <Compile Include="code\IOutside.cs" />
-    <Compile Include="code\IOutsideTemperatureProvider.cs" />
-    <Compile Include="code\ModeValue.cs" />
-    <Compile Include="code\OutsideTemperatureProviderManager.cs" />
+    <Compile Include="code\_\HeatTransferMode.cs" />
+    <Compile Include="code\_\HtmDirect.cs" />
+    <Compile Include="code\_\HtmIndirect.cs" />
+    <Compile Include="code\_\HtmMixed.cs" />
+    <Compile Include="code\_\IOutside.cs" />
+    <Compile Include="code\_\IOutsideTemperatureProvider.cs" />
+    <Compile Include="code\_\ModeValue.cs" />
+    <Compile Include="code\_\OutsideTemperatureProviderManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="code\UIEntry.cs" />
-    <Compile Include="code\XD1100Data.cs" />
+    <Compile Include="code\_\XD1100Data.cs" />
     <Compile Include="code\XD1100Device.cs" />
     <Compile Include="code\XD1100DeviceFactory.cs" />
     <Compile Include="code\XD1100DevicePersister.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="code\XD1100DeviceSource.cs" />
     <Compile Include="code\XD1100DeviceSourceProvider.cs" />
     <Compile Include="code\XD1100Dpu.cs" />
-    <Compile Include="code\XD1100OperaNames.cs" />
+    <Compile Include="code\_\XD1100OperaNames.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\C3.Communi\C3.Communi.csproj">

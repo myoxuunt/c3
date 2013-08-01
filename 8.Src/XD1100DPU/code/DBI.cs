@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using C3.Communi;
 using Xdgk.Common;
+using Xdgk.GR.Common;
 
 namespace XD1100DPU
 {
