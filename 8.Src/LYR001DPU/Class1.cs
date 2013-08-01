@@ -172,5 +172,16 @@ namespace LYR001DPU
             }
         }
         private Dictionary<StatusAndAlarmEnum, bool> _statusAndAlaramDictionary;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        internal LYR001DataCacheManager DataCacheManager
+        {
+            get
+            {
+                return _dataCacheManager;
+            }
+        } private LYR001DataCacheManager _dataCacheManager = new LYR001DataCacheManager();
     }
 }

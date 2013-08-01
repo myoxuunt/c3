@@ -184,10 +184,10 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public IUIEntry UIEntry
+        public IUIEntryFactory UIEntry
         {
             get { return _uiEntry; }
             set { _uiEntry = value; }
-        } private IUIEntry _uiEntry;
+        } private IUIEntryFactory _uiEntry;
     }
 }

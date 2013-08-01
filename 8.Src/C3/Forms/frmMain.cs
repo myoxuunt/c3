@@ -227,7 +227,7 @@ namespace C3
             {
                 if (dpu.UIEntry != null)
                 {
-                    dpu.UIEntry.Set(this, this.mnuSetting);
+                    dpu.UIEntry.Create(this, this.mnuSetting);
                 }
             }
         }

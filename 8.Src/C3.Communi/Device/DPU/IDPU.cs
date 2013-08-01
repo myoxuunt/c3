@@ -4,14 +4,10 @@ using System.Windows.Forms;
 
 namespace C3.Communi
 {
+
     /// <summary>
     /// 
     /// </summary>
-    public interface IUIEntry
-    {
-        void Set(ISelectedHardwareItem sel, ToolStripMenuItem parentMenuItem);
-    }
-
     public interface IDPU
     {
         string Name { get; set; }
@@ -23,7 +19,7 @@ namespace C3.Communi
         ITaskFactory TaskFactory { get; set; }
         ITaskProcessor Processor { get; set; }
         IDeviceUI DeviceUI { get; set; }
-        IUIEntry UIEntry { get; set; }
+        IUIEntryFactory UIEntry { get; set; }
     }
 
 }

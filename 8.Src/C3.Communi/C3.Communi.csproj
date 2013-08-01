@@ -60,6 +60,7 @@
     <Compile Include="CommuniPort\CPCreateLogCollection.cs" />
     <Compile Include="Device\DeviceCommuniLogger.cs" />
     <Compile Include="Device\Device\FluxDeviceBase.cs" />
+    <Compile Include="Device\DPU\IUIEntry.cs" />
     <Compile Include="Filter\FilterFactory.cs" />
     <Compile Include="Filter\RegexFilter.cs" />
     <Compile Include="Forms\frmCommuniDetails.cs">

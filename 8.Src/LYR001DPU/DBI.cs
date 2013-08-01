@@ -52,7 +52,7 @@ namespace LYR001DPU
         /// <returns></returns>
         public DataTable ExecuteLYR001DeviceDataTable()
         {
-            string s = "select * from tblDevice where DeviceType = 'xd1100device'";
+            string s = "select * from tblDevice where DeviceType = 'LYR001Device'";
             return ExecuteDataTable(s);
         }
 

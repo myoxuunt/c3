@@ -7,7 +7,7 @@ using Xdgk.GR.Common;
 
 namespace LYR001DPU
 {
-    public class UIEntry : IUIEntry
+    public class UIEntry : IUIEntryFactory
     {
         private ToolStripMenuItem _otProviderSetting;
         private ToolStripMenuItem _mnuTemperatureLine;
@@ -18,18 +18,26 @@ namespace LYR001DPU
             MENU_OT = "室外温度(&T)...",
             MENU_GRSETTING = "供温设置(&S)...";
 
+        private const string
+            MENU_OT_NAME = "mnuOtStandardSetting",
+            MENU_GRSETTING_NAME = "mnuGRSetting";
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="parentMenuItem"></param>
-        public void Set(ISelectedHardwareItem sel, ToolStripMenuItem parentMenuItem)
+        public void Create(ISelectedHardwareItem sel, ToolStripMenuItem parentMenuItem)
         {
             _selectedHardwareItem = sel;
             parentMenuItem.DropDownOpening += new EventHandler(parentMenuItem_DropDownOpening);
 
-            _otProviderSetting = new ToolStripMenuItem(MENU_OT);
-            _otProviderSetting.Click += new EventHandler(_otProviderSetting_Click);
-            parentMenuItem.DropDownItems.Add(_otProviderSetting);
+            if (!parentMenuItem.DropDownItems.ContainsKey(MENU_OT_NAME))
+            {
+                _otProviderSetting = new ToolStripMenuItem(MENU_OT);
+                _otProviderSetting.Name = MENU_OT_NAME;
+                _otProviderSetting.Click += new EventHandler(_otProviderSetting_Click);
+                parentMenuItem.DropDownItems.Add(_otProviderSetting);
+            }
 
 
             _mnuTemperatureLine = new ToolStripMenuItem(MENU_GRSETTING);
@@ -45,8 +53,8 @@ namespace LYR001DPU
         /// <param name="e"></param>
         void _otProviderSetting_Click(object sender, EventArgs e)
         {
-            frmOutsideStandard f = new frmOutsideStandard();
-            f.ShowDialog();
+            //frmOutsideStandard f = new frmOutsideStandard();
+            //f.ShowDialog();
         }
 
         /// <summary>

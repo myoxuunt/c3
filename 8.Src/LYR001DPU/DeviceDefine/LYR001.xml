@@ -45,57 +45,57 @@
         <datafield name="OD"
             begin="3"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="OT"
             begin="7"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="GT1"
             begin="11"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="BT1"
             begin="15"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="GT2"
             begin="19"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="BT2"
             begin="23"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="GP1"
             begin="27"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="BP1"
             begin="31"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="GP2"
             begin="35"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="BP2"
             begin="39"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="WL"
             begin="43"
             length="4"
-            converter="Xdgk.Communi.Int16FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="IR"
             begin="47"
@@ -105,17 +105,17 @@
         <datafield name="SR"
             begin="51"
             length="4"
-            converter="Xdgk.Communi.Int32Converter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="I1"
             begin="55"
             length="4"
-            converter="Xdgk.Communi.FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="S1"
             begin="59"
             length="4"
-            converter="Xdgk.Communi.Int32FloatConverter"/>
+            converter="Xdgk.Communi.FloatModbusConverter"/>
 
         <datafield name="crc"
             begin="63"
@@ -332,7 +332,7 @@
             begin="2"
             length="4"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="00 31 00 16" />
+            bytes="00 31 00 10" />
 
         <datafield name="crc"
             begin="6"

@@ -18,6 +18,148 @@ namespace LYR001DPU
                ReadStatus = "ReadStatus";
     }
 
+    internal class LYR001AnalogData
+    {
+        internal float GT1 = 0f;
+        internal float BT1 = 0f;
+        internal float GT2 = 0f;
+        internal float BT2 = 0f;
+        internal float OT = 0f;
+        internal float GP1 = 0f;
+        internal float BP1 = 0f;
+        internal float WL = 0f;
+        internal float GP2 = 0f;
+        internal float BP2 = 0f;
+        internal float I1 = 0f;
+        internal float IR = 0f;
+        internal float S1 = 0f;
+        internal float SR = 0f;
+        internal float OD = 0f;
+    }
+
+    internal class LYR001PumpStatusData
+    {
+
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class LYR001DataCache
+    {
+        private DateTime _createDT = DateTime.Now;
+
+        #region AnalogData
+        /// <summary>
+        /// 
+        /// </summary>
+        internal LYR001AnalogData AnalogData
+        {
+            get
+            {
+                return _analogData;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("AnalogData");
+                }
+
+                _analogData = value;
+                this._isSetAnalog = true;
+            }
+        } private LYR001AnalogData _analogData;
+        #endregion //AnalogData
+
+        #region PumpStatusData
+        /// <summary>
+        /// 
+        /// </summary>
+        internal LYR001PumpStatusData PumpStatusData
+        {
+            get
+            {
+                return _pumpStatusData;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("PumpStatusData");
+                }
+
+                _pumpStatusData = value;
+                this._isSetPumpStatus = true;
+            }
+        } private LYR001PumpStatusData _pumpStatusData;
+        #endregion //PumpStatusData
+
+        #region IsSetAnalog
+        /// <summary>
+        /// 
+        /// </summary>
+        internal bool IsSetAnalog
+        {
+            get
+            {
+                return _isSetAnalog;
+            }
+        } private bool _isSetAnalog;
+        #endregion //IsSetAnalog
+
+        #region IsSetPumpStatus
+        /// <summary>
+        /// 
+        /// </summary>
+        internal bool IsSetPumpStatus
+        {
+            get
+            {
+                return _isSetPumpStatus;
+            }
+        } private bool _isSetPumpStatus;
+        #endregion //IsSetPumpStatus
+
+        internal bool IsComplete()
+        {
+            return IsSetAnalog && IsSetPumpStatus;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        internal bool IsTimeout()
+        {
+            TimeSpan ts = DateTime.Now - this._createDT;
+            bool b = (ts > TimeSpan.Zero) &&
+                    (ts < TimeSpan.FromMinutes(5d));
+
+            return !b;
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal class LYR001DataCacheManager
+    {
+        private LYR001DataCache _dataCache = null;
+
+        internal LYR001DataCache GetDataCache()
+        {
+            if (_dataCache == null ||
+                _dataCache.IsComplete () ||
+                _dataCache.IsTimeout())
+            {
+                _dataCache = new LYR001DataCache();
+            }
+            return _dataCache;
+        }
+    }
+
+
     /// <summary>
     /// 
     /// </summary>
@@ -182,16 +324,17 @@ namespace LYR001DPU
         /// <param name="parseResult"></param>
         private void ProcessReadReal(ITask task, IParseResult pr)
         {
-            GRData data = new GRData();
+            //GRData data = new GRData();
+            LYR001AnalogData data = new LYR001AnalogData();
 
-            data.DT = DateTime.Now;
+            //data.DT = DateTime.Now;
 
             data.GT1 = Convert.ToSingle(pr.Results["GT1"]);
             data.BT1 = Convert.ToSingle(pr.Results["BT1"]);
             data.GT2 = Convert.ToSingle(pr.Results["GT2"]);
             data.BT2 = Convert.ToSingle(pr.Results["BT2"]);
             data.OT = Convert.ToSingle(pr.Results["OT"]);
-            data.GTBase2 = Convert.ToSingle(pr.Results["GTBase2"]);
+            //data.GTBase2 = Convert.ToSingle(pr.Results["GTBase2"]);
             data.GP1 = Convert.ToSingle(pr.Results["GP1"]);
             data.BP1 = Convert.ToSingle(pr.Results["BP1"]);
             data.WL = Convert.ToSingle(pr.Results["WL"]);
@@ -199,18 +342,19 @@ namespace LYR001DPU
             data.BP2 = Convert.ToSingle(pr.Results["BP2"]);
             data.I1 = Convert.ToSingle(pr.Results["I1"]);
             data.IR = Convert.ToSingle(pr.Results["IR"]);
-            data.I2 = Convert.ToSingle(pr.Results["I2"]);
-            data.S2 = Convert.ToInt32(pr.Results["S2"]);
+            //data.I2 = Convert.ToSingle(pr.Results["I2"]);
+            //data.S2 = Convert.ToInt32(pr.Results["S2"]);
             data.S1 = Convert.ToInt32(pr.Results["S1"]);
             data.SR = Convert.ToInt32(pr.Results["SR"]);
             data.OD = Convert.ToInt32(pr.Results["OD"]);
             //data.IH1 = Convert.ToDouble (parseResult.Results ["IH1"]);
             //data.SH1 = Convert.ToDouble (parseResult.Results ["SH1"]);
-            data.IH1 = 0d;
-            data.SH1 = 0d;
+            //data.IH1 = 0d;
+            //data.SH1 = 0d;
 
-            // 2012-10-09 LYR001 pump status
-            //
+            
+
+            /*
             bool[] pumpStatusArray = (bool[])pr.Results["pumpstate"];
 
             data.CM1 = IsPumpRun(pumpStatusArray[0]);
@@ -349,15 +493,37 @@ namespace LYR001DPU
 
                     break;
             }
-            d.DeviceDataManager.Last = data;
+            */
+            LYR001Device d = (LYR001Device)task.Device;
+            LYR001DataCache dataCache = d.DataCacheManager.GetDataCache();
+            dataCache.AnalogData = data;
+            // TODO: process lyr001 data cache
+            // 
+            //d.DeviceDataManager.Last = data;
 
 
-            // save
-            //
-            int id = GuidHelper.ConvertToInt32(d.Guid);
-            DBI.Instance.InsertGRData(id, data);
+            //// save
+            ////
+            //int id = GuidHelper.ConvertToInt32(d.Guid);
+            //DBI.Instance.InsertGRData(id, data);
+
+            ProcessDataCache(d, dataCache);
         }
         #endregion //ProcessReadReal
+
+        private void ProcessDataCache(LYR001Device d, LYR001DataCache dataCache)
+        {
+            if (dataCache.IsComplete())
+            {
+                GRData grdata = null; // dataCache.ToGRData ();
+                d.DeviceDataManager.Last = grdata;
+
+                // save
+                //
+                int id = GuidHelper.ConvertToInt32(d.Guid);
+                DBI.Instance.InsertGRData(id, grdata);
+            }
+        }
 
         #region HasPowerAlaramInStatus
         /// <summary>
