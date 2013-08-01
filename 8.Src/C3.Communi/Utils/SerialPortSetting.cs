@@ -187,6 +187,41 @@ namespace C3.Communi
                         "not find stopBits '{0}'",
                         stopBits));
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            //return base.Equals(obj);
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (obj.GetType() !=this.GetType ())
+            {
+                return false;
+            }
+
+            SerialPortSetting sps = (SerialPortSetting)obj;
+            return this.PortName == sps.PortName &&
+                this.BaudRate == sps.BaudRate &&
+                this.Parity == sps.Parity &&
+                this.DataBits == sps.DataBits &&
+                this.StopBits == sps.StopBits;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 
 }

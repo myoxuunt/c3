@@ -40,6 +40,7 @@ namespace Xdgk.GR.Common
         /// </summary>
         private void Fill()
         {
+            int no = 1;
 
             StationCollection stations = SoftManager.GetSoft().Hardware.Stations;
             foreach (IStation st in stations)
@@ -48,7 +49,9 @@ namespace Xdgk.GR.Common
                 {
                     if (d is IOutside)
                     {
-                        kvs.Add(new KeyValue(d.Station.Name, d));
+                        string keyName = string.Format("{0}: {1}({2})", no++, d.Station.Name, d.DeviceType.Text);
+                        KeyValue kv = new KeyValue(keyName, d);
+                        kvs.Add(kv);
                     }
                 }
             }

@@ -50,10 +50,10 @@ namespace Xdgk.Common
         {
             get
             {
-                if (_value == null)
-                {
-                    _value = new object();
-                }
+                //if (_value == null)
+                //{
+                    //_value = new object();
+                //}
                 return _value;
             }
             set
