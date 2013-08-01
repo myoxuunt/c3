@@ -50,6 +50,12 @@
     <Compile Include="frmOTGT2Value.Designer.cs">
       <DependentUpon>frmOTGT2Value.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmOutsideStandard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmOutsideStandard.Designer.cs">
+      <DependentUpon>frmOutsideStandard.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTimeValue.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,10 @@
   <ItemGroup>
     <EmbeddedResource Include="frmOTGT2Value.resx">
       <DependentUpon>frmOTGT2Value.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmOutsideStandard.resx">
+      <DependentUpon>frmOutsideStandard.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTimeValue.resx">

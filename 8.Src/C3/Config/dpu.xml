@@ -8,9 +8,10 @@
 
   <assemblyInfo path="f:\C3\8.Src\XGDPU\bin\Debug\XGDPU.dll"> </assemblyInfo>
 
-  <!--<assemblyInfo path="f:\C3\8.Src\XD1100DPU\bin\Debug\XD1100DPU.dll"> </assemblyInfo>-->
+  <assemblyInfo path="f:\C3\8.Src\XD1100DPU\bin\Debug\XD1100DPU.dll"> </assemblyInfo>
+  <assemblyInfo path="f:\C3\8.Src\LYR001DPU\bin\Debug\LYR001DPU.dll"> </assemblyInfo>
 
-  <assemblyInfo path="f:\c3\8.Src\SCL6DPU\bin\Debug\SCL6DPU.dll"> </assemblyInfo>
+  <!--<assemblyInfo path="f:\c3\8.Src\SCL6DPU\bin\Debug\SCL6DPU.dll"> </assemblyInfo>-->
   <!--<assemblyInfo path="f:\c3\8.Src\SCL9DPU\bin\Debug\SCL9DPU.dll"> </assemblyInfo>
   <assemblyInfo path="f:\C3\8.Src\SCL61DDPU\bin\Debug\SCL61DDPU.dll"></assemblyInfo>
 
@@ -18,9 +19,9 @@
   <assemblyInfo path="f:\C3\8.Src\CRLGDDPU\bin\Debug\CRLGDDPU.dll"></assemblyInfo>
   <assemblyInfo path="f:\C3\8.Src\CRLGDPU\bin\Debug\CRLGDPU.dll"></assemblyInfo>
   <assemblyInfo path="f:\C3\8.Src\xd100edpu\bin\Debug\xd100eDPU.dll"></assemblyInfo>-->
-  <assemblyInfo path="f:\C3\8.Src\HDDpu\bin\Debug\HDDPU.dll"></assemblyInfo>
+  <!--<assemblyInfo path="f:\C3\8.Src\HDDpu\bin\Debug\HDDPU.dll"></assemblyInfo>
   <assemblyInfo path="f:\C3\8.Src\XD202Dpu\bin\Debug\XD202DPU.dll"></assemblyInfo>
   <assemblyInfo path="f:\C3\8.Src\PS.DATA7203DPU\bin\Debug\ps.data7203dpu.dll"></assemblyInfo>
   <assemblyInfo path="f:\C3\8.Src\VGATE100DPU\bin\Debug\VGATE100DPU.dll"></assemblyInfo>
-  <assemblyInfo path="f:\C3\8.Src\VPUMP100DPU\bin\Debug\VPUMP100DPU.dll"></assemblyInfo>
+  <assemblyInfo path="f:\C3\8.Src\VPUMP100DPU\bin\Debug\VPUMP100DPU.dll"></assemblyInfo>-->
 </assemblyInfoCollection>

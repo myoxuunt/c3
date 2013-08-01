@@ -5,7 +5,7 @@ using Xdgk.Common;
 using Xdgk.GR.Common;
 
 
-namespace XD1100DPU
+namespace LYR001DPU
 {
     public class UIEntry : IUIEntry
     {
@@ -46,22 +46,7 @@ namespace XD1100DPU
         void _otProviderSetting_Click(object sender, EventArgs e)
         {
             frmOutsideStandard f = new frmOutsideStandard();
-            if (f.ShowDialog() == DialogResult.OK)
-            {
-                IOutside outSide = f.SelectedOutSide;
-                if (outSide != null)
-                {
-                    OutsideTemperatureProviderManager.Provider = new DeviceOTProvider(outSide);
-
-                    int deviceID = GuidHelper.ConvertToInt32(((IDevice)outSide).Guid);
-                    DBI.Instance.SetOutsideTemperatureProviderDevice(deviceID);
-                }
-                else
-                {
-                    OutsideTemperatureProviderManager.Provider = null;
-                    DBI.Instance.ClearOutsideTemperatureProviderDevice();
-                }
-            }
+            f.ShowDialog();
         }
 
         /// <summary>
@@ -71,9 +56,9 @@ namespace XD1100DPU
         /// <param name="e"></param>
         void _mnuTemperatureLine_Click(object sender, EventArgs e)
         {
-            if (this._selectedHardwareItem.SelectedHardwareItem is XD1100Device)
+            if (this._selectedHardwareItem.SelectedHardwareItem is LYR001Device)
             {
-                XD1100Device d = this._selectedHardwareItem.SelectedHardwareItem as XD1100Device;
+                LYR001Device d = this._selectedHardwareItem.SelectedHardwareItem as LYR001Device;
                 string stationName = d.Station.Name;
 
                 int deviceID = GuidHelper.ConvertToInt32(d.Guid);
@@ -84,7 +69,7 @@ namespace XD1100DPU
             }
             else
             {
-                NUnit.UiKit.UserMessage.Display("selecte xd1100 device first");
+                NUnit.UiKit.UserMessage.Display("selecte LYR001 device first");
             }
         }
 
@@ -95,7 +80,7 @@ namespace XD1100DPU
         /// <param name="e"></param>
         void parentMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            XD1100Device d = _selectedHardwareItem.SelectedHardwareItem as XD1100Device;
+            LYR001Device d = _selectedHardwareItem.SelectedHardwareItem as LYR001Device;
             this._mnuTemperatureLine.Visible = d != null;
         }
     }

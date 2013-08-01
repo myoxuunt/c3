@@ -149,7 +149,7 @@ namespace LYR001DPU
                 IData last = this.DeviceDataManager.Last;
                 if (last != null)
                 {
-                    XD1100Data data = (XD1100Data)last;
+                    GRData data = (GRData)last;
                     r = data.OT;
                 }
                 return r;

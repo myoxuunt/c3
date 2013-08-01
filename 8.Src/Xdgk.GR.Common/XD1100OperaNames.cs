@@ -15,7 +15,6 @@ namespace Xdgk.GR.Common
                WriteOT = "WriteOT",
                WriteOTMode = "WriteOTMode",
                ReadStatus = "ReadStatus";
-
     }
 
 }

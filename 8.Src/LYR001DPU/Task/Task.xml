@@ -2,7 +2,7 @@
 <tasks>
   
   <task>
-    <devicetype>LYR001</devicetype>
+    <devicetype>LYR001Device</devicetype>
     <operaname>ReadReal</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
@@ -11,7 +11,7 @@
   </task>
   
   <task>
-    <devicetype>LYR001</devicetype>
+    <devicetype>LYR001Device</devicetype>
     <operaname>ReadPumpState</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
@@ -20,7 +20,7 @@
   </task>
   
   <!--<task>
-    <devicetype>LYR001</devicetype>
+    <devicetype>LYR001Device</devicetype>
     <operaname>ReadStatus</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
@@ -29,7 +29,7 @@
   </task>
 
   <task>
-    <devicetype>LYR001</devicetype>
+    <devicetype>LYR001Device</devicetype>
     <operaname>WriteOT</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
@@ -38,7 +38,7 @@
   </task>
 
   <task>
-    <devicetype>LYR001</devicetype>
+    <devicetype>LYR001Device</devicetype>
     <operaname>WriteOTMode</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>

@@ -256,7 +256,7 @@ namespace Xdgk.GR.Common
         }
     }
 
-    public class XD1100Data : DataBase
+    public class GRData : DataBase
     {
         private const string FloatFormat = "f2",
             IntFormat = "G";
@@ -290,16 +290,16 @@ namespace Xdgk.GR.Common
         private WarnWrapper _warnWrapper;
         #endregion //Members
 
-        #region XD1100Data
+        #region GRData
         /// <summary>
         /// 
         /// </summary>
         /// <param name="dt"></param>
         /// <param name="cardSn"></param>
-        public XD1100Data()
+        public GRData()
         {
         }
-        #endregion //XD1100Data
+        #endregion //GRData
 
         #region GT1
         /// <summary>

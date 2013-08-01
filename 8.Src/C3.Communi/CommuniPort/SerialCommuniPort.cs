@@ -15,7 +15,11 @@ namespace C3.Communi
         /// <param name="sp"></param>
         public SerialCommuniPort(SerialPort sp)
         {
-            if (sp == null) throw new ArgumentNullException("sp");
+            if (sp == null)
+            {
+                throw new ArgumentNullException("sp");
+            }
+
             this.SerialPort = sp;
         }
         #region SerialPort

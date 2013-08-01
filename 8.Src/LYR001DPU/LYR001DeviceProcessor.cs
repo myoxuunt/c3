@@ -6,12 +6,22 @@ using C3.Communi;
 using Xdgk.Common;
 using Xdgk.GR.Common;
 
-namespace XD1100DPU
+namespace LYR001DPU
 {
+    public class LYR001OperaNames
+    {
+        public const string ReadReal = "readreal",
+               OPERA_READ = "ReadModbusControl",
+               OPERA_WRITE = "WriteModbusControl",
+               WriteOT = "WriteOT",
+               WriteOTMode = "WriteOTMode",
+               ReadStatus = "ReadStatus";
+    }
+
     /// <summary>
     /// 
     /// </summary>
-    public class XD1100DeviceProcessor : TaskProcessorBase
+    public class LYR001DeviceProcessor : TaskProcessorBase
     {
         #region Members
         /// <summary>
@@ -65,26 +75,26 @@ namespace XD1100DPU
             if (pr.IsSuccess)
             {
                 string opera = task.Opera.Name;
-                if (StringHelper.Equal(opera, XD1100OperaNames.ReadReal))
+                if (StringHelper.Equal(opera, LYR001OperaNames.ReadReal))
                 {
                     ProcessReadReal(task, pr);
                 }
-                else if( StringHelper.Equal ( opera, XD1100OperaNames.ReadStatus ))
+                else if( StringHelper.Equal ( opera, LYR001OperaNames.ReadStatus ))
                 {
                     ProcessReadStatus(task, pr);
                 }
                 else if (
-                    (StringHelper.Equal(opera, XD1100OperaNames.WriteOT)) ||
-                    (StringHelper.Equal(opera, XD1100OperaNames.WriteOTMode)) ||
-                    (StringHelper.Equal(opera, XD1100OperaNames.OPERA_READ)) ||
-                    (StringHelper.Equal(opera, XD1100OperaNames.OPERA_WRITE))
+                    (StringHelper.Equal(opera, LYR001OperaNames.WriteOT)) ||
+                    (StringHelper.Equal(opera, LYR001OperaNames.WriteOTMode)) ||
+                    (StringHelper.Equal(opera, LYR001OperaNames.OPERA_READ)) ||
+                    (StringHelper.Equal(opera, LYR001OperaNames.OPERA_WRITE))
                     )
                 {
 
                 }
                 else
                 {
-                    string s = string.Format("not process xd1100 opera '{0}'", opera);
+                    string s = string.Format("not process LYR001 opera '{0}'", opera);
                     throw new NotImplementedException(s);
                 }
             }
@@ -99,13 +109,13 @@ namespace XD1100DPU
         /// <param name="parseResult"></param>
         private void ProcessReadStatus(ITask task, IParseResult pr)
         {
-            XD1100Device d = (XD1100Device ) task.Device;
+            LYR001Device d = (LYR001Device ) task.Device;
 
             byte[] bsStatus = (byte[])pr.Results["data"];
             Debug.Assert(bsStatus.Length == 4);
             byte b = bsStatus[3];
             bool hasPowerAlarm = (b & (byte)Math.Pow(2, 7)) > 0;
-            d.StatusAndAlarmDictionary[XD1100Device.StatusAndAlarmEnum.AlaramPower] = hasPowerAlarm;
+            d.StatusAndAlarmDictionary[LYR001Device.StatusAndAlarmEnum.AlaramPower] = hasPowerAlarm;
         }
         #endregion //ProcessReadStatus
 
@@ -199,7 +209,7 @@ namespace XD1100DPU
             data.IH1 = 0d;
             data.SH1 = 0d;
 
-            // 2012-10-09 xd1100 pump status
+            // 2012-10-09 LYR001 pump status
             //
             bool[] pumpStatusArray = (bool[])pr.Results["pumpstate"];
 
@@ -215,7 +225,7 @@ namespace XD1100DPU
             bool isContainsPowerAlaram = listWarn.Contains(POWER_ALARM);
             if (!isContainsPowerAlaram)
             {
-                if (HasPowerAlaramInStatus(task.Device as XD1100Device))
+                if (HasPowerAlaramInStatus(task.Device as LYR001Device))
                 {
                     listWarn.Add(POWER_ALARM);
                 }
@@ -225,7 +235,7 @@ namespace XD1100DPU
             data.Warn = ww;
 
 
-            XD1100Device d = (XD1100Device)task.Device;
+            LYR001Device d = (LYR001Device)task.Device;
             //List<IFluxProvider> fluxProviderList = GetFluxProviderList(d);
             DeviceCollection fluxDevices = d.Station.Devices.GetDevices(this.KIND_FLUX);
             fluxDevices = RemoveUnkonwnPlaceDevice(fluxDevices);
@@ -345,7 +355,7 @@ namespace XD1100DPU
             // save
             //
             int id = GuidHelper.ConvertToInt32(d.Guid);
-            DBI.Instance.InsertXD1100Data(id, data);
+            DBI.Instance.InsertGRData(id, data);
         }
         #endregion //ProcessReadReal
 
@@ -354,12 +364,12 @@ namespace XD1100DPU
         /// 
         /// </summary>
         /// <returns></returns>
-        private bool HasPowerAlaramInStatus(XD1100Device xd1100)
+        private bool HasPowerAlaramInStatus(LYR001Device LYR001)
         {
-            bool b = xd1100.StatusAndAlarmDictionary.ContainsKey(XD1100Device.StatusAndAlarmEnum.AlaramPower);
+            bool b = LYR001.StatusAndAlarmDictionary.ContainsKey(LYR001Device.StatusAndAlarmEnum.AlaramPower);
             if (b)
             {
-                return xd1100.StatusAndAlarmDictionary[XD1100Device.StatusAndAlarmEnum.AlaramPower];
+                return LYR001.StatusAndAlarmDictionary[LYR001Device.StatusAndAlarmEnum.AlaramPower];
             }
             return false;
         }

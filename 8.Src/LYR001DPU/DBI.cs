@@ -7,7 +7,7 @@ using C3.Communi;
 using Xdgk.Common;
 using Xdgk.GR.Common;
 
-namespace XD1100DPU
+namespace LYR001DPU
 {
     internal class DBI : DBIBase
     {
@@ -50,7 +50,7 @@ namespace XD1100DPU
         /// 
         /// </summary>
         /// <returns></returns>
-        public DataTable ExecuteXD1100DeviceDataTable()
+        public DataTable ExecuteLYR001DeviceDataTable()
         {
             string s = "select * from tblDevice where DeviceType = 'xd1100device'";
             return ExecuteDataTable(s);
@@ -95,7 +95,7 @@ namespace XD1100DPU
         /// </summary>
         /// <param name="id"></param>
         /// <param name="data"></param>
-        internal void InsertXD1100Data(int id, GRData data)
+        internal void InsertGRData(int id, GRData data)
         {
             string s = " INSERT INTO tblGRData(DT, GT1, BT1, GT2, BT2, OT, GTBase2, GP1, BP1, WL, GP2, BP2, I1, I2, IR, S1, S2, SR, OD, PA2, IH1, SH1, CM1, CM2, CM3, RM1, RM2, DeviceID)" +
                 " VALUES(@dt, @gt1, @BT1, @GT2, @BT2, @OT, @GTBase2, @GP1, @BP1, @WL, @GP2, @BP2, @I1, @I2, @IR, @S1, @S2, @SR, @OD, @PA2, @IH1, @SH1, @CM1, @CM2, @CM3, @RM1, @RM2, @DeviceID)";
