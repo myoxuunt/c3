@@ -12,7 +12,7 @@
   
   <task>
     <devicetype>LYR001Device</devicetype>
-    <operaname>ReadPumpState</operaname>
+    <operaname>ReadStatus</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
       <value>00:01:00</value>

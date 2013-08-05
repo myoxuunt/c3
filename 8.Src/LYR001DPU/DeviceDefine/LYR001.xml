@@ -360,7 +360,7 @@
             begin="2"
             length="1"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="02"
+            bytes="03"
             matchcheck="true"/>
 
         <datafield name="Status"

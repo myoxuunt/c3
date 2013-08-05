@@ -118,7 +118,7 @@ namespace LYR001DPU
             r.BT1 = this.AnalogData.BT1;
             r.BT2 = this.AnalogData.BT2;
             r.GP1 = this.AnalogData.GP1;
-            r.BP2 = this.AnalogData.GP2;
+            r.GP2 = this.AnalogData.GP2;
             r.GT1 = this.AnalogData.GT1;
             r.GT2 = this.AnalogData.GT2;
             r.I1 = this.AnalogData.I1;
