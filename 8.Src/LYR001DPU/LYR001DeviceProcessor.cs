@@ -8,178 +8,12 @@ using Xdgk.GR.Common;
 
 namespace LYR001DPU
 {
-    public class LYR001OperaNames
-    {
-        public const string ReadReal = "readreal",
-               OPERA_READ = "ReadModbusControl",
-               OPERA_WRITE = "WriteModbusControl",
-               WriteOT = "WriteOT",
-               WriteOTMode = "WriteOTMode",
-               ReadStatus = "ReadStatus";
-    }
-
-    internal class LYR001AnalogData
-    {
-        internal float GT1 = 0f;
-        internal float BT1 = 0f;
-        internal float GT2 = 0f;
-        internal float BT2 = 0f;
-        internal float OT = 0f;
-        internal float GP1 = 0f;
-        internal float BP1 = 0f;
-        internal float WL = 0f;
-        internal float GP2 = 0f;
-        internal float BP2 = 0f;
-        internal float I1 = 0f;
-        internal float IR = 0f;
-        internal float S1 = 0f;
-        internal float SR = 0f;
-        internal float OD = 0f;
-    }
-
-    internal class LYR001PumpStatusData
-    {
-
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    internal class LYR001DataCache
-    {
-        private DateTime _createDT = DateTime.Now;
-
-        #region AnalogData
-        /// <summary>
-        /// 
-        /// </summary>
-        internal LYR001AnalogData AnalogData
-        {
-            get
-            {
-                return _analogData;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("AnalogData");
-                }
-
-                _analogData = value;
-                this._isSetAnalog = true;
-            }
-        } private LYR001AnalogData _analogData;
-        #endregion //AnalogData
-
-        #region PumpStatusData
-        /// <summary>
-        /// 
-        /// </summary>
-        internal LYR001PumpStatusData PumpStatusData
-        {
-            get
-            {
-                return _pumpStatusData;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    throw new ArgumentNullException("PumpStatusData");
-                }
-
-                _pumpStatusData = value;
-                this._isSetPumpStatus = true;
-            }
-        } private LYR001PumpStatusData _pumpStatusData;
-        #endregion //PumpStatusData
-
-        #region IsSetAnalog
-        /// <summary>
-        /// 
-        /// </summary>
-        internal bool IsSetAnalog
-        {
-            get
-            {
-                return _isSetAnalog;
-            }
-        } private bool _isSetAnalog;
-        #endregion //IsSetAnalog
-
-        #region IsSetPumpStatus
-        /// <summary>
-        /// 
-        /// </summary>
-        internal bool IsSetPumpStatus
-        {
-            get
-            {
-                return _isSetPumpStatus;
-            }
-        } private bool _isSetPumpStatus;
-        #endregion //IsSetPumpStatus
-
-        internal bool IsComplete()
-        {
-            return IsSetAnalog && IsSetPumpStatus;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        internal bool IsTimeout()
-        {
-            TimeSpan ts = DateTime.Now - this._createDT;
-            bool b = (ts > TimeSpan.Zero) &&
-                    (ts < TimeSpan.FromMinutes(5d));
-
-            return !b;
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    internal class LYR001DataCacheManager
-    {
-        private LYR001DataCache _dataCache = null;
-
-        internal LYR001DataCache GetDataCache()
-        {
-            if (_dataCache == null ||
-                _dataCache.IsComplete () ||
-                _dataCache.IsTimeout())
-            {
-                _dataCache = new LYR001DataCache();
-            }
-            return _dataCache;
-        }
-    }
-
-
     /// <summary>
     /// 
     /// </summary>
     public class LYR001DeviceProcessor : TaskProcessorBase
     {
         #region Members
-        /// <summary>
-        /// 
-        /// </summary>
-        private string KIND_FLUX = "FluxDevice";
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private string KIND_HEAT = "HeatDevice";
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private const string POWER_ALARM = "µÁ‘¥π ’œ";
         #endregion //Members
 
         #region RemoveUnkonwnPlaceDevice
@@ -221,7 +55,7 @@ namespace LYR001DPU
                 {
                     ProcessReadReal(task, pr);
                 }
-                else if( StringHelper.Equal ( opera, LYR001OperaNames.ReadStatus ))
+                else if (StringHelper.Equal(opera, LYR001OperaNames.ReadStatus))
                 {
                     ProcessReadStatus(task, pr);
                 }
@@ -243,78 +77,41 @@ namespace LYR001DPU
         }
         #endregion //OnProcess
 
-        #region ProcessReadStatus
         /// <summary>
         /// 
         /// </summary>
         /// <param name="task"></param>
-        /// <param name="parseResult"></param>
+        /// <param name="pr"></param>
         private void ProcessReadStatus(ITask task, IParseResult pr)
         {
-            LYR001Device d = (LYR001Device ) task.Device;
+            byte[] bs = (byte[])pr.Results["Status"];
+            LYR001StatusData statusData = LYR001StatusDataParser.Parse(bs);
 
-            byte[] bsStatus = (byte[])pr.Results["data"];
-            Debug.Assert(bsStatus.Length == 4);
-            byte b = bsStatus[3];
-            bool hasPowerAlarm = (b & (byte)Math.Pow(2, 7)) > 0;
-            d.StatusAndAlarmDictionary[LYR001Device.StatusAndAlarmEnum.AlaramPower] = hasPowerAlarm;
+
+            LYR001Device d = (LYR001Device)task.Device;
+            LYR001DataCache cache = d.DataCacheManager.GetDataCache();
+            cache.StatusData = statusData;
+
+            ProcessDataCache(d, cache);
         }
-        #endregion //ProcessReadStatus
 
-        #region GetFluxDatas
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fluxDevices"></param>
-        /// <returns>
-        /// hashtable
-        /// key:place   - value:list
-        /// place - instantflux , sum
-        /// </returns>
-        private Hashtable GetFluxDatas(DeviceCollection fluxDevices)
-        {
-            Hashtable hs = new Hashtable();
-            foreach (IDevice d in fluxDevices)
-            {
-                PlaceDeviceBase pd = d as PlaceDeviceBase;
+        //#region ProcessReadStatus
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        ///// <param name="task"></param>
+        ///// <param name="parseResult"></param>
+        //private void ProcessReadStatus(ITask task, IParseResult pr)
+        //{
+        //    LYR001Device d = (LYR001Device ) task.Device;
 
-                List<double> list = GetHashValue(hs, pd.Place);
-                IData last = pd.DeviceDataManager.Last;
-                list[0] += Convert.ToDouble(last.GetValue("InstantFlux"));
-                list[1] += Convert.ToDouble(last.GetValue("Sum"));
-            }
-
-            return hs;
-        }
-        #endregion //GetFluxDatas
-
-        #region GetHashValue
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="hs"></param>
-        /// <param name="fluxPlace"></param>
-        /// <returns></returns>
-        private List<double> GetHashValue(Hashtable hs, FluxPlace fluxPlace)
-        {
-            object obj =  hs[fluxPlace];
-            if (obj != null)
-            {
-                return (List<double>)obj;
-            }
-            else
-            {
-                List<double> list = new List<double>();
-                // add instantFlux, sum
-                //
-                list.Add(0);
-                list.Add(0);
-
-                hs[fluxPlace] = list;
-                return list;
-            }
-        }
-        #endregion //GetHashValue
+        //    byte[] bsStatus = (byte[])pr.Results["data"];
+        //    Debug.Assert(bsStatus.Length == 4);
+        //    byte b = bsStatus[3];
+        //    bool hasPowerAlarm = (b & (byte)Math.Pow(2, 7)) > 0;
+        //    d.StatusAndAlarmDictionary[LYR001Device.StatusAndAlarmEnum.AlaramPower] = hasPowerAlarm;
+        //}
+        //#endregion //ProcessReadStatus
 
         #region ProcessReadReal
         /// <summary>
@@ -352,148 +149,7 @@ namespace LYR001DPU
             //data.IH1 = 0d;
             //data.SH1 = 0d;
 
-            
 
-            /*
-            bool[] pumpStatusArray = (bool[])pr.Results["pumpstate"];
-
-            data.CM1 = IsPumpRun(pumpStatusArray[0]);
-            data.CM2 = IsPumpRun(pumpStatusArray[1]);
-            data.CM3 = IsPumpRun(pumpStatusArray[2]);
-            data.RM1 = IsPumpRun(pumpStatusArray[3]);
-            data.RM2 = IsPumpRun(pumpStatusArray[4]);
-
-            object objWarn = pr.Results["Warn"];
-            IList listWarn = (IList)objWarn;
-
-            bool isContainsPowerAlaram = listWarn.Contains(POWER_ALARM);
-            if (!isContainsPowerAlaram)
-            {
-                if (HasPowerAlaramInStatus(task.Device as LYR001Device))
-                {
-                    listWarn.Add(POWER_ALARM);
-                }
-            }
-
-            WarnWrapper ww = new WarnWrapper(listWarn);
-            data.Warn = ww;
-
-
-            LYR001Device d = (LYR001Device)task.Device;
-            //List<IFluxProvider> fluxProviderList = GetFluxProviderList(d);
-            DeviceCollection fluxDevices = d.Station.Devices.GetDevices(this.KIND_FLUX);
-            fluxDevices = RemoveUnkonwnPlaceDevice(fluxDevices);
-            bool hasFluxDevices = fluxDevices.Count > 0;
-            bool hasFluxData = fluxDevices.HasData(HasDataOption.All);
-
-            bool success = true;
-            if (hasFluxDevices)
-            {
-                if (hasFluxData)
-                {
-                    Hashtable fluxResultHashTable = GetFluxDatas(fluxDevices);
-                    foreach (object obj in fluxResultHashTable.Keys)
-                    {
-                        FluxPlace place = (FluxPlace)obj;
-                        List<double> list = (List<double>)fluxResultHashTable[obj];
-
-                        switch (place)
-                        {
-                            case FluxPlace.FirstSide:
-                                data.I1 = Convert.ToSingle(list[0]);
-                                data.S1 = Convert.ToInt32(list[1]);
-                                break;
-
-                            case FluxPlace.SecondSide:
-                                data.I2 = Convert.ToSingle(list[0]);
-                                data.S2 = Convert.ToInt32(list[1]);
-                                break;
-
-                            case FluxPlace.RecruitSide:
-                                data.IR = Convert.ToSingle(list[0]);
-                                data.SR = Convert.ToInt32(list[1]);
-                                break;
-
-                            default:
-                                break;
-
-                        }
-                    }
-                }
-                else
-                {
-                    success = false;
-                }
-            }
-
-            if (!success)
-            {
-                return;
-            }
-
-
-            DeviceCollection heatDevices = d.Station.Devices.GetDevices(KIND_HEAT);
-            //heatDevices = RemoveUnkonwnPlaceDevice(heatDevices);
-
-            heatDevices = this.Filter(heatDevices, FluxPlace.FirstSide);
-
-            bool hasHeatDevices = heatDevices.Count > 0;
-            bool hasHeatData = heatDevices.HasData(HasDataOption.All);
-            if (hasHeatDevices)
-            {
-                if (hasHeatData)
-                {
-                    double instantFlux = 0d;
-                    double sumFlux = 0d;
-                    double ih = 0d;
-                    double sh = 0d;
-                    foreach (IDevice hd in heatDevices)
-                    {
-                        IData last = hd.DeviceDataManager.Last;
-                        ih += Convert.ToDouble(last.GetValue("InstantHeat"));
-                        sh += Convert.ToDouble(last.GetValue("SumHeat"));
-                        instantFlux += Convert.ToDouble(last.GetValue("InstantFlux"));
-                        sumFlux += Convert.ToDouble(last.GetValue("Sum"));
-                    }
-
-                    data.I1 = Convert.ToSingle(instantFlux);
-                    data.S1 = Convert.ToInt32(sumFlux);
-                    data.IH1 = ih;
-                    data.SH1 = sh;
-                }
-                else
-                {
-                    success = false;
-                }
-
-            }
-            if (!success)
-            {
-                return;
-            }
-
-            switch (d.HtmMode.ModeValue)
-            {
-                case ModeValue.Indirect:
-                    data.CyclePumpDatas.Add(new PumpData("1#", Convert.ToInt32(pr.Results["cyclefrequency"])));
-                    data.RecruitPumpDatas.Add(new PumpData("1#", Convert.ToInt32(pr.Results["recruitfrequency"])));
-                    break;
-
-                case ModeValue.Direct:
-                    data.GT1 = data.GT2;
-                    data.BT1 = data.BT2;
-                    break;
-
-                case ModeValue.Mixed:
-                    data.BT1 = data.BT2;
-                    data.CyclePumpDatas.AddRange(
-                        new PumpData("1#", Convert.ToInt32(pr.Results["cyclefrequency"])),
-                        new PumpData("2#", Convert.ToInt32(pr.Results["recruitfrequency"])),
-                        new PumpData("3#", Convert.ToInt32(pr.Results["I2"])));
-
-                    break;
-            }
-            */
             LYR001Device d = (LYR001Device)task.Device;
             LYR001DataCache dataCache = d.DataCacheManager.GetDataCache();
             dataCache.AnalogData = data;
@@ -515,7 +171,7 @@ namespace LYR001DPU
         {
             if (dataCache.IsComplete())
             {
-                GRData grdata = null; // dataCache.ToGRData ();
+                GRData grdata = dataCache.ToGRData();
                 d.DeviceDataManager.Last = grdata;
 
                 // save

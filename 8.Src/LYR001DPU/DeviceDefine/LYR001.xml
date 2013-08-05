@@ -315,7 +315,7 @@
 
     -->
     <!-- start stop pump -->
-    <operadefine name="ReadPumpState">
+    <operadefine name="ReadStatus">
       <sendpart>
         <datafield name="address"
             begin="0"
@@ -332,7 +332,7 @@
             begin="2"
             length="4"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="00 31 00 10" />
+            bytes="00 50 00 11" />
 
         <datafield name="crc"
             begin="6"
@@ -343,7 +343,7 @@
         <crcer name="Xdgk.Communi.CRC16" />
       </sendpart>
 
-      <receivepart length="7">
+      <receivepart length="8">
         <datafield name="address"
             begin="0"
             length="1"
@@ -363,13 +363,13 @@
             bytes="02"
             matchcheck="true"/>
 
-        <datafield name="PumpState"
+        <datafield name="Status"
             begin="3"
-            length="2"
+            length="3"
             converter="Xdgk.Communi.OriginalConverter" />
 
         <datafield name="crc"
-            begin="5"
+            begin="6"
             length="2"
             converter="Xdgk.Communi.OriginalConverter"
             crc="true" />

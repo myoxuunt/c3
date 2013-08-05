@@ -7,6 +7,7 @@ namespace Xdgk.GR.Common
     {
         Stop = 0,
         Run = 1,
+        Fault = 2,      // only for lyr001
     }
 
     /// <summary>

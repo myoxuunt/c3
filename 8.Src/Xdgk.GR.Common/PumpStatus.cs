@@ -1,7 +1,57 @@
 using System;
+using Xdgk .Common ;
 
 namespace Xdgk.GR.Common
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    public enum ManualAutomaticEnum
+    {
+        [EnumText("手动")]
+        Manual = 0,
+
+        [EnumText("自动")]
+        Automatic = 1,
+    }
+
+    public class ManualAutomatic
+    {
+
+        static public ManualAutomatic Manual = new ManualAutomatic(ManualAutomaticEnum.Manual,
+            EnumTextAttributeHelper.GetEnumTextAttributeValue(ManualAutomaticEnum.Manual));
+
+        static public ManualAutomatic Automatic = new ManualAutomatic(ManualAutomaticEnum.Automatic,
+            EnumTextAttributeHelper.GetEnumTextAttributeValue(ManualAutomaticEnum.Automatic));
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ma"></param>
+        /// <param name="text"></param>
+        private ManualAutomatic( ManualAutomaticEnum ma, string text)
+        {
+            _manualAutomaticEnum = ma;
+            _text = text;
+        }
+
+        public ManualAutomaticEnum ManualAutoMaticEnum
+        {
+            get { return _manualAutomaticEnum; }
+        } private ManualAutomaticEnum _manualAutomaticEnum;
+
+        public string Text
+        {
+            get { return _text; }
+        } private string _text;
+
+        public override string ToString()
+        {
+            return this.Text;
+        }
+    }
+
+
     public class PumpStatus
     {
 
@@ -14,6 +64,11 @@ namespace Xdgk.GR.Common
         /// 
         /// </summary>
         static public PumpStatus Stop = new PumpStatus(PumpStatusEnum.Stop, "停止");
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static public PumpStatus Fault = new PumpStatus(PumpStatusEnum.Fault, "故障");
         #endregion //Members
 
         #region Find
