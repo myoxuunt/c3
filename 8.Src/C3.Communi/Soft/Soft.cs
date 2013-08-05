@@ -485,5 +485,22 @@ namespace C3.Communi
             }
         } private RemoteServer _remoteServer;
         #endregion //RemoteServer
+
+        #region SelectedHardwareItem
+        /// <summary>
+        /// 
+        /// </summary>
+        public object SelectedHardwareItem
+        {
+            get { return _selectedHardwareItem; }
+            set
+            {
+                if (_selectedHardwareItem != value)
+                {
+                    _selectedHardwareItem = value;
+                }
+            }
+        } private object _selectedHardwareItem;
+        #endregion //SelectedHardwareItem
     }
 }

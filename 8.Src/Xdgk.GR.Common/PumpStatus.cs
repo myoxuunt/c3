@@ -15,6 +15,9 @@ namespace Xdgk.GR.Common
         Automatic = 1,
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class ManualAutomatic
     {
 

@@ -6,7 +6,7 @@ namespace C3.Communi
 {
     public interface IUIEntryFactory
     {
-        void Create(ISelectedHardwareItem selectedHardwareItemProvider, ToolStripMenuItem parentMenuItem);
+        void Create(ToolStripMenuItem parentMenuItem);
     }
 
 }

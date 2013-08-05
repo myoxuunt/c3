@@ -12,8 +12,6 @@ namespace XD1100DPU
         private ToolStripMenuItem _otProviderSetting;
         private ToolStripMenuItem _mnuTemperatureLine;
 
-        private ISelectedHardwareItem _selectedHardwareItem;
-
         private const string 
             MENU_OT = "室外温度(&T)...",
             MENU_GRSETTING = "供温设置(&S)...";
@@ -26,9 +24,8 @@ namespace XD1100DPU
         /// 
         /// </summary>
         /// <param name="parentMenuItem"></param>
-        public void Create(ISelectedHardwareItem sel, ToolStripMenuItem parentMenuItem)
+        public void Create(/*ISelectedHardwareItem sel,*/ ToolStripMenuItem parentMenuItem)
         {
-            _selectedHardwareItem = sel;
             parentMenuItem.DropDownOpening += new EventHandler(parentMenuItem_DropDownOpening);
 
             if (!parentMenuItem.DropDownItems.ContainsKey(MENU_OT_NAME))
@@ -79,12 +76,12 @@ namespace XD1100DPU
         /// <param name="e"></param>
         void _mnuTemperatureLine_Click(object sender, EventArgs e)
         {
-            if (this._selectedHardwareItem.SelectedHardwareItem is XD1100Device)
+            XD1100Device selectedXd1100 = SoftManager.GetSoft().SelectedHardwareItem as XD1100Device;
+            if (selectedXd1100 != null)
             {
-                XD1100Device d = this._selectedHardwareItem.SelectedHardwareItem as XD1100Device;
-                string stationName = d.Station.Name;
+                string stationName = selectedXd1100.Station.Name;
 
-                int deviceID = GuidHelper.ConvertToInt32(d.Guid);
+                int deviceID = GuidHelper.ConvertToInt32(selectedXd1100.Guid);
                 LocalController c = new LocalController();
                 frmXD100ModbusTemperatureControl f =
                     new frmXD100ModbusTemperatureControl(stationName, deviceID, c);
@@ -103,7 +100,7 @@ namespace XD1100DPU
         /// <param name="e"></param>
         void parentMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            XD1100Device d = _selectedHardwareItem.SelectedHardwareItem as XD1100Device;
+            XD1100Device d = SoftManager.GetSoft().SelectedHardwareItem as XD1100Device;
             this._mnuTemperatureLine.Visible = d != null;
         }
     }

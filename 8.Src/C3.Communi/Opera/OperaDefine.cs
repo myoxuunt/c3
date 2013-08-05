@@ -82,7 +82,7 @@ namespace C3.Communi
         {
             IOpera opera = MyOperaFactory.Create(
                 this.DeviceType,
-                    operaName, 
+                    operaName,
                     this.OperaDefineNode
                     );
 
@@ -90,7 +90,7 @@ namespace C3.Communi
             {
                 string s = string.Format(
                     "can not create opera with '{0} {1}'",
-                    this.DeviceType , operaName);
+                    this.DeviceType, operaName);
 
                 throw new InvalidOperationException(s);
             }

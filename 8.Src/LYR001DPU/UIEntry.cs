@@ -12,8 +12,6 @@ namespace LYR001DPU
         private ToolStripMenuItem _otProviderSetting;
         private ToolStripMenuItem _mnuTemperatureLine;
 
-        private ISelectedHardwareItem _selectedHardwareItem;
-
         private const string 
             MENU_OT = "室外温度(&T)...",
             MENU_GRSETTING = "供温设置(&S)...";
@@ -26,9 +24,8 @@ namespace LYR001DPU
         /// 
         /// </summary>
         /// <param name="parentMenuItem"></param>
-        public void Create(ISelectedHardwareItem sel, ToolStripMenuItem parentMenuItem)
+        public void Create(ToolStripMenuItem parentMenuItem)
         {
-            _selectedHardwareItem = sel;
             parentMenuItem.DropDownOpening += new EventHandler(parentMenuItem_DropDownOpening);
 
             if (!parentMenuItem.DropDownItems.ContainsKey(MENU_OT_NAME))
@@ -64,9 +61,10 @@ namespace LYR001DPU
         /// <param name="e"></param>
         void _mnuTemperatureLine_Click(object sender, EventArgs e)
         {
-            if (this._selectedHardwareItem.SelectedHardwareItem is LYR001Device)
+            LYR001Device d = SoftManager.GetSoft().SelectedHardwareItem as LYR001Device;
+
+            if (d != null)
             {
-                LYR001Device d = this._selectedHardwareItem.SelectedHardwareItem as LYR001Device;
                 string stationName = d.Station.Name;
 
                 int deviceID = GuidHelper.ConvertToInt32(d.Guid);
@@ -88,7 +86,7 @@ namespace LYR001DPU
         /// <param name="e"></param>
         void parentMenuItem_DropDownOpening(object sender, EventArgs e)
         {
-            LYR001Device d = _selectedHardwareItem.SelectedHardwareItem as LYR001Device;
+            LYR001Device d = SoftManager.GetSoft().SelectedHardwareItem as LYR001Device;
             this._mnuTemperatureLine.Visible = d != null;
         }
     }

@@ -24,8 +24,11 @@ namespace C3
             ml.Images.Add(IconNames.Device, Icons.Device);
 
             this.ImageList = ml;
+
+            this.AfterSelect += new TreeViewEventHandler(HardwareTreeView_AfterSelect); 
         }
         #endregion //Constructor
+
 
         private System.ComponentModel.IContainer components;
         private ContextMenuStrip cmsTreeView;
@@ -121,7 +124,6 @@ namespace C3
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.HardwareTreeView_MouseUp);
             this.cmsTreeView.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
         #endregion //InitializeComponent
 
@@ -204,5 +206,24 @@ namespace C3
             }
         }
         #endregion //AddMenu
+
+        #region HardwareTreeView_AfterSelect
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void HardwareTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node is StationTreeNode)
+            {
+                SoftManager.GetSoft().SelectedHardwareItem = ((StationTreeNode)e.Node).Station;
+            }
+            else if (e.Node is DeviceTreeNode)
+            {
+                SoftManager.GetSoft().SelectedHardwareItem = ((DeviceTreeNode)e.Node).Device;
+            }
+        }
+        #endregion //HardwareTreeView_AfterSelect
     }
 }
