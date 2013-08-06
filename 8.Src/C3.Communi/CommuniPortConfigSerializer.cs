@@ -7,13 +7,13 @@ using System.Xml.Serialization;
 namespace C3.Communi
 {
 
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface ISelectedHardwareItem
-    {
-        object SelectedHardwareItem { get; }
-    }
+    ///// <summary>
+    ///// 
+    ///// </summary>
+    //public interface ISelectedHardwareItem
+    //{
+    //    object SelectedHardwareItem { get; }
+    //}
 
     /// <summary>
     /// 

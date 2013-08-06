@@ -110,7 +110,6 @@ namespace LYR001DPU
         /// <returns></returns>
         internal GRData ToGRData()
         {
-            //throw new NotImplementedException();
             GRData r = new GRData();
             r.DT = this.AnalogData.DT;
             r.BP1 = this.AnalogData.BP1;
@@ -136,7 +135,6 @@ namespace LYR001DPU
 
             r.RM1 = this.StatusData.RM1;
             r.RM2 = this.StatusData.RM2;
-            //this.StatusData.AlarmList = 
             r.Warn = new WarnWrapper(this.StatusData.AlarmList);
 
             return r;

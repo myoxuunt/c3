@@ -376,6 +376,9 @@
     <Content Include="Config\Source_for_hdc.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\HideData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Doc\History.txt" />
     <Content Include="Res\Connect.ico" />
     <Content Include="Res\Device.ico" />

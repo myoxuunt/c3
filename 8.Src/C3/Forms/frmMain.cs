@@ -7,7 +7,7 @@ using Xdgk.Common;
 
 namespace C3
 {
-    public partial class FrmMain : Form, ISelectedHardwareItem
+    public partial class FrmMain : Form
     {
 
         #region Members

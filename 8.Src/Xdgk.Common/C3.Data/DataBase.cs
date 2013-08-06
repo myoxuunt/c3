@@ -1,15 +1,126 @@
 using System;
+using System.IO;
+using System.Xml;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Xdgk.Common
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public interface IToBytes
+    internal class HideDataAttributeNameManager
     {
-        byte[] ToBytes();
-        int BytesCountOfEmpty { get; }
+        internal class TypeNames
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            internal TypeNames(string type)
+            {
+                _type = type;
+            }
+
+            /// <summary>
+            /// 
+            /// </summary>
+            internal string Type
+            {
+                get { return _type; }
+            } private string _type;
+
+            /// <summary>
+            /// 
+            /// </summary>
+            internal List<string> Names
+            {
+                get
+                {
+                    if (_names == null)
+                    {
+                        _names = new List<string>();
+                    }
+                    return _names;
+                }
+            } private List<string> _names;
+        }
+
+
+        private List<TypeNames> _list = new List<TypeNames>();
+
+        static internal HideDataAttributeNameManager Default
+        {
+            get
+            {
+                if (_default == null)
+                {
+                    _default = new HideDataAttributeNameManager();
+
+                    // create 
+                    //
+                    string fileName = System.Windows.Forms.Application.StartupPath + "\\Config\\HideData.xml";
+                    if (!File.Exists(fileName))
+                    {
+                        goto EXIT;
+                    }
+
+                    XmlDocument doc = new XmlDocument();
+                    doc.Load(fileName);
+                    XmlNodeList typeNodes = doc.SelectNodes("hideData/type");
+                    if (typeNodes == null)
+                    {
+                        goto EXIT; 
+                    }
+
+                    foreach (XmlNode typeNode in typeNodes)
+                    {
+                        XmlAttribute typeNameAtt = typeNode.Attributes["name"];
+                        if (typeNameAtt != null)
+                        {
+                            string typeName = typeNameAtt.Value;
+                            TypeNames type_names = new TypeNames(typeName);
+
+                            XmlNodeList attributeNodes = typeNode.SelectNodes("attribute");
+                            foreach (XmlNode attNode in attributeNodes)
+                            {
+                                XmlAttribute xmlAttName = attNode.Attributes["name"];
+                                if (xmlAttName != null)
+                                {
+                                    string name = xmlAttName.Value;
+                                    type_names.Names.Add(name);
+                                }
+                            }
+                            _default._list.Add(type_names);
+                        }
+                    }
+                }
+
+            EXIT:
+                return _default;
+            }
+        } static private HideDataAttributeNameManager _default;
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="typeName"></param>
+        /// <param name="attributeNameForHide"></param>
+        /// <returns></returns>
+        internal bool Contains(string type, string name)
+        {
+            type = type.Trim();
+
+            foreach (TypeNames item in _list)
+            {
+                if (item.Type == type)
+                {
+                    bool r = item.Names.Contains(name);
+                    if (r)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 
     /// <summary>
@@ -93,15 +204,20 @@ namespace Xdgk.Common
                 DataItemAttribute att = item.Attribute;
                 PropertyInfo pi = item.PropertyInfo;
                 object value = pi.GetValue(this, null);
-                ReportItem reportItem = new ReportItem(att.Name, value, att.Unit, att.Format);
-                reportItems.Add(reportItem);
+
+                //if (!this.HideDataAttributeNames.Contains(att.Name))
+                if (!HideDataAttributeNameManager.Default.Contains(this.GetType().Name, att.Name))
+                {
+                    ReportItem reportItem = new ReportItem(att.Name, value, att.Unit, att.Format);
+                    reportItems.Add(reportItem);
+                }
             }
 
             return reportItems;
         }
         #endregion //GetReportItems
 
-        #region IData ≥…‘±
+        #region IsValid
         /// <summary>
         /// 
         /// </summary>
@@ -109,17 +225,47 @@ namespace Xdgk.Common
         {
             get { return true; }
         }
+        #endregion //IsValid
 
+        #region GetValue
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         public object GetValue(string propertyName)
         {
             return ReflectionHelper.GetPropertyValue(this, propertyName);
         }
+        #endregion //GetValue
 
+        #region HasPropertyName
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         public bool HasPropertyName(string propertyName)
         {
             return ReflectionHelper.HasProperty(this, propertyName);
         }
+        #endregion //HasPropertyName
 
-        #endregion
+        //#region HideDataAttributeNames
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public List<string> HideDataAttributeNames
+        //{
+        //    get
+        //    {
+        //        if (_hideDataAttributeNames == null)
+        //        {
+        //            _hideDataAttributeNames = new List<string>();
+        //        }
+        //        return _hideDataAttributeNames;
+        //    }
+        //} private List<string> _hideDataAttributeNames;
+        //#endregion //HideDataAttributeNames
     }
 }
