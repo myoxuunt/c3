@@ -12,7 +12,7 @@
             begin="1"
             length="5"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="03 02 57 00 1E"/>
+            bytes="03 01 53 00 1E"/>
 
         <datafield name="crc"
             begin="6"
@@ -497,6 +497,7 @@
         <crcer name="Xdgk.Communi.CRC16" />
       </receivepart>
     </operadefine>
+    -->
 
     <operadefine name="WriteOTMode">
       <sendpart>
@@ -548,6 +549,7 @@
       </receivepart>
     </operadefine>
 
+    <!--
     <operadefine name="ReadOTMode">
       <sendpart>
         <datafield name="address"
@@ -610,6 +612,7 @@
         <crcer name="Xdgk.Communi.CRC16" />
       </receivepart>
     </operadefine>
+
 
     <operadefine name="ReadStatus" text="读取状态" >
       <sendpart>

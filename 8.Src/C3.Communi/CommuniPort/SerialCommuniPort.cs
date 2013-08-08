@@ -1,5 +1,6 @@
 using System;
 using System.IO.Ports;
+using System.Diagnostics;
 
 namespace C3.Communi
 {
@@ -22,6 +23,7 @@ namespace C3.Communi
 
             this.SerialPort = sp;
         }
+
         #region SerialPort
         /// <summary>
         /// 
@@ -42,6 +44,10 @@ namespace C3.Communi
             }
         } private SerialPort _serialPort;
         #endregion //SerialPort
+
+        /// <summary>
+        /// 
+        /// </summary>
         protected override void OnClose()
         {
             if (this.SerialPort.IsOpen)
@@ -79,6 +85,23 @@ namespace C3.Communi
         protected override bool OnGetIsOpened()
         {
             return this.SerialPort.IsOpen;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            SerialPortSetting sps = new SerialPortSetting(
+                SerialPort.PortName,
+                SerialPort.BaudRate,
+                SerialPort.Parity,
+                SerialPort.DataBits,
+                SerialPort.StopBits);
+
+            return sps.ToString();
+
         }
     }
 }

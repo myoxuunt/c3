@@ -85,11 +85,11 @@
     <Compile Include="Forms\frmDeviceHistoryData.Designer.cs">
       <DependentUpon>frmDeviceHistoryData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmCPCreateLog.cs">
+    <Compile Include="Forms\frmCPInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmCPCreateLog.Designer.cs">
-      <DependentUpon>frmCPCreateLog.cs</DependentUpon>
+    <Compile Include="Forms\frmCPInfo.Designer.cs">
+      <DependentUpon>frmCPInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Resources\DeviceDataResource.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -183,8 +183,8 @@
       <DependentUpon>frmDeviceHistoryData.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmCPCreateLog.resx">
-      <DependentUpon>frmCPCreateLog.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmCPInfo.resx">
+      <DependentUpon>frmCPInfo.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="HardwareTreeView\HardwareTreeView.resx">

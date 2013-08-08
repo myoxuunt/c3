@@ -58,6 +58,8 @@
     <Compile Include="CommuniPort\CommuniPortEventProcessor.cs" />
     <Compile Include="CommuniPort\CPCreateLog.cs" />
     <Compile Include="CommuniPort\CPCreateLogCollection.cs" />
+    <Compile Include="CommuniPort\CreateCommuniPortResult.cs" />
+    <Compile Include="CommuniPort\CreateCommuniPortResultCollection.cs" />
     <Compile Include="Device\DeviceCommuniLogger.cs" />
     <Compile Include="Device\Device\FluxDeviceBase.cs" />
     <Compile Include="Device\DPU\IUIEntry.cs" />

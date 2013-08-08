@@ -753,10 +753,12 @@ namespace C3
             }
         }
 
+        #region mnuCPCreateLog_Click
         private void mnuCPCreateLog_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(CommuniPortFactory.Default.CPCreateLogs.Count.ToString ());
             new frmCPCreateLog().ShowDialog();
         }
+        #endregion //mnuCPCreateLog_Click
     }
 }

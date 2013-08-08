@@ -30,7 +30,7 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuCPCreateLog = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCPInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAddin = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,7 +80,7 @@
             // mnuFile
             // 
             this.mnuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuCPCreateLog,
+            this.mnuCPInfo,
             this.mnuAddin,
             this.toolStripSeparator1,
             this.mnuExit});
@@ -88,12 +88,12 @@
             this.mnuFile.Size = new System.Drawing.Size(59, 20);
             this.mnuFile.Text = "文件(&F)";
             // 
-            // mnuCPCreateLog
+            // mnuCPInfo
             // 
-            this.mnuCPCreateLog.Name = "mnuCPCreateLog";
-            this.mnuCPCreateLog.Size = new System.Drawing.Size(152, 22);
-            this.mnuCPCreateLog.Text = "连接记录(&L)";
-            this.mnuCPCreateLog.Click += new System.EventHandler(this.mnuCPCreateLog_Click);
+            this.mnuCPInfo.Name = "mnuCPInfo";
+            this.mnuCPInfo.Size = new System.Drawing.Size(152, 22);
+            this.mnuCPInfo.Text = "连接信息(&L)";
+            this.mnuCPInfo.Click += new System.EventHandler(this.mnuCPCreateLog_Click);
             // 
             // mnuAddin
             // 
@@ -344,7 +344,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuSetting;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem mnuDeviceHistoryData;
-        private System.Windows.Forms.ToolStripMenuItem mnuCPCreateLog;
+        private System.Windows.Forms.ToolStripMenuItem mnuCPInfo;
     }
 }
 
