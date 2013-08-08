@@ -1,6 +1,6 @@
 ﻿namespace C3
 {
-    partial class frmCPCreateLog
+    partial class frmCPInfo
     {
         /// <summary>
         /// Required designer variable.

@@ -9,9 +9,9 @@ using C3.Communi;
 
 namespace C3
 {
-    public partial class frmCPCreateLog : Form
+    public partial class frmCPInfo : Form
     {
-        public frmCPCreateLog()
+        public frmCPInfo()
         {
             InitializeComponent();
             this.txtCPCreateLog.ReadOnly = true;

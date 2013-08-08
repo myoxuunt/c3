@@ -757,7 +757,7 @@ namespace C3
         private void mnuCPCreateLog_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(CommuniPortFactory.Default.CPCreateLogs.Count.ToString ());
-            new frmCPCreateLog().ShowDialog();
+            new frmCPInfo().ShowDialog();
         }
         #endregion //mnuCPCreateLog_Click
     }
