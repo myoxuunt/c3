@@ -59,27 +59,35 @@ namespace VPUMP100DPU
 
                     if (StringHelper.Equal(pr.Name, string.Empty))
                     {
-                        string name = Convert.ToString(pr.Results["name"]);
-                        byte status = Convert.ToByte(pr.Results["status"]);
-                        byte recordCount = Convert.ToByte(pr.Results["count"]);
-                        byte[] recordsBytes = (byte[])pr.Results["datas"];
-
-                        Debug.Assert(recordCount <= 5);
-
-                        if (status == 0)
+                        string stationName = Convert.ToString(pr.Results["name"]);
+                        if (StringHelper.Equal(task.Device.Station.Name, stationName))
                         {
-                            VPump100Data[] datas = ProcessRecord(recordsBytes, recordCount);
-                            foreach (VPump100Data d in datas)
-                            {
-                                task.Device.DeviceDataManager.Last = d;
+                            byte status = Convert.ToByte(pr.Results["status"]);
+                            byte recordCount = Convert.ToByte(pr.Results["count"]);
+                            byte[] recordsBytes = (byte[])pr.Results["datas"];
 
-                                int id = GuidHelper.ConvertToInt32(task.Device.Guid);
-                                DBI.Instance.InsertVPump100Data(id, d);
+                            Debug.Assert(recordCount <= 5);
+
+                            if (status == 0)
+                            {
+                                VPump100Data[] datas = ProcessRecord(recordsBytes, recordCount);
+                                foreach (VPump100Data d in datas)
+                                {
+                                    task.Device.DeviceDataManager.Last = d;
+
+                                    int id = GuidHelper.ConvertToInt32(task.Device.Guid);
+                                    DBI.Instance.InsertVPump100Data(id, d);
+                                }
+                            }
+                            else
+                            {
+
                             }
                         }
                         else
                         {
-
+                            pr.Tag = string.Format("名称不匹配, 期望'{0}', 实际'{1}'",
+                                task.Device.Station.Name, stationName);
                         }
                     }
                     else if (StringHelper.Equal(pr.Name, "noNameOrDatas"))
