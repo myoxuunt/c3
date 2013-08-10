@@ -633,10 +633,15 @@ namespace DbNetLink.Data
         /// Controls the level of detail shown in any exceptions
         /// </summary>
         public bool SummaryExceptionMessage = false;
+
         /// <summary>
         /// Converts empty string to null values in update statements when set to true
         /// </summary>
-        public bool ConvertEmptyToNull = true;
+        /// <remarks>
+        /// 2013-08-09 change to false because access db
+        /// </remarks>
+        public bool ConvertEmptyToNull = false;
+
         /// <summary>
         /// Controls the display of the connection string when reporting an error condition
         /// </summary>
@@ -4448,7 +4453,7 @@ namespace DbNetLink.Data
                     {
                         DbParam.Value = System.DBNull.Value;
                     }
-                    else if (Params[Key].ToString() == "" && this.ConvertEmptyToNull)
+                    else if (this.ConvertEmptyToNull && Params[Key].ToString() == string.Empty)
                     {
                         DbParam.Value = System.DBNull.Value;
                     }
