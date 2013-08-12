@@ -17,7 +17,7 @@ namespace C3.Communi
         byte[] LastSendBytes { get; set; }
         byte[] LastReceivedBytes { get; set; }
 
-        TimeSpan Timeout { get; set; }
+        TimeSpan Timeout { get; /*set; */}
         IOpera Opera { get; set; }
 
         Retry Retry { get; set; }

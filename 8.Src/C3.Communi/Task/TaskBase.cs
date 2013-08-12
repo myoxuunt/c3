@@ -43,23 +43,6 @@ namespace C3.Communi
         } private Retry _retry;
         #endregion //Retry
 
-        #region TimeoutValues
-        /// <summary>
-        /// 
-        /// </summary>
-        static readonly public TimeSpan DefaultTimeout = TimeSpan.FromMilliseconds(10 * 1000);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        static readonly public TimeSpan MaxTimeout = TimeSpan.FromMilliseconds(60 * 1000);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        static readonly public TimeSpan MinTimeout = TimeSpan.FromMilliseconds(50);
-
-        #endregion //
 
         #region Stragegy
         /// <summary>
@@ -133,25 +116,11 @@ namespace C3.Communi
         {
             get
             {
-                return _timeout;
+                uint ms = this._device.Station.CommuniPortConfig.TimeoutMilliSecond;
+                TimeSpan ts = TimeSpan.FromMilliseconds(ms);
+                return ts;
             }
-            set
-            {
-
-                if (value > MaxTimeout)
-                {
-                    _timeout = MaxTimeout;
-                }
-                else if (value < MinTimeout)
-                {
-                    _timeout = MinTimeout;
-                }
-                else
-                {
-                    _timeout = value;
-                }
-            }
-        } private TimeSpan _timeout = DefaultTimeout;
+        }
         #endregion //Timeout
 
         #region Opera

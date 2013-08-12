@@ -9,7 +9,7 @@ using NLog;
 namespace C3.Communi
 {
 
-    public class RemoteIPAddressConfig : INetCommuniPortConfig
+    public class RemoteIPAddressConfig : CommuniPortConfigBase, INetCommuniPortConfig
     {
         /// <summary>
         /// 
@@ -31,7 +31,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public bool CanCreate
+        override public bool CanCreate
         {
             get { return false; }
         }
@@ -40,7 +40,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <returns></returns>
-        public ICommuniPort Create()
+        override public ICommuniPort Create()
         {
             string s = string.Format(
                 "can not create ICommuniPort from '{0}'",
@@ -54,7 +54,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="cp"></param>
         /// <returns></returns>
-        public bool IsMatch(ICommuniPort cp)
+        override public bool IsMatch(ICommuniPort cp)
         {
             if (cp == null)
             {
@@ -98,22 +98,5 @@ namespace C3.Communi
             get { return _remoteIPAddressString; }
             set { _remoteIPAddressString = value; }
         } private string _remoteIPAddressString;
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public uint TimeoutMilliSecond
-        {
-            get
-            {
-                return _timeoutMillsSecond;
-            }
-            set
-            {
-                TimeoutDefauleValues.Verify(value);
-                this._timeoutMillsSecond = value;
-            }
-        } private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
     }
 }

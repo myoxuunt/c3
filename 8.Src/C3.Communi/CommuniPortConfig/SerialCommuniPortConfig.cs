@@ -9,7 +9,7 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public class SerialCommuniPortConfig : ICommuniPortConfig
+    public class SerialCommuniPortConfig : CommuniPortConfigBase, ICommuniPortConfig
     {
         /// <summary>
         /// 
@@ -29,7 +29,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public bool CanCreate
+        override public bool CanCreate
         {
             get { return true; }
         }
@@ -38,7 +38,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <returns></returns>
-        public ICommuniPort Create()
+        override public ICommuniPort Create()
         {
             SerialPort sp = new SerialPort(
                     this.SerialPortSetting.PortName,
@@ -58,7 +58,7 @@ namespace C3.Communi
         /// </summary>
         /// <param name="cp"></param>
         /// <returns></returns>
-        public bool IsMatch(ICommuniPort cp)
+        override public bool IsMatch(ICommuniPort cp)
         {
             bool r = false;
             SerialCommuniPort scp = cp as SerialCommuniPort;
@@ -99,24 +99,6 @@ namespace C3.Communi
                 _serialPortSetting = value;
             }
         } private SerialPortSetting _serialPortSetting;
-
-
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public uint TimeoutMilliSecond
-        {
-            get
-            {
-                return _timeoutMillsSecond;
-            }
-            set
-            {
-                TimeoutDefauleValues.Verify(value);
-                this._timeoutMillsSecond = value;
-            }
-        } private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
 
         /// <summary>
         /// 

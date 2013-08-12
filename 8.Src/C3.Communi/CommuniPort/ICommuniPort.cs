@@ -26,10 +26,6 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <returns></returns>
-        //string ToXml();
-
-        //CommuniPortStatus Status { get; }
-
         void Close();
 
 
@@ -46,6 +42,9 @@ namespace C3.Communi
         /// <returns></returns>
         byte[] Read();
 
+        /// <summary>
+        /// 
+        /// </summary>
         bool IsOccupy { get; }
 
         /// <summary>
@@ -54,6 +53,9 @@ namespace C3.Communi
         /// <param name="ts"></param>
         void Occupy(TimeSpan ts);
 
+        /// <summary>
+        /// 
+        /// </summary>
         FilterCollection Filters { get; set; }
 
         /// <summary>

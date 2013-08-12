@@ -9,18 +9,17 @@ namespace C3.Communi
     /// </summary>
     public class Task : TaskBase
     {
-        public Task(IDevice device, IOpera opera, Strategy strategy, TimeSpan timeout)
-            : this(device, opera, strategy, timeout, 1)
+        public Task(IDevice device, IOpera opera, Strategy strategy)
+            : this(device, opera, strategy, 1)
         {
 
         }
 
-        public Task(IDevice device, IOpera opera, Strategy strategy, TimeSpan timeout, int retryTimes)
+        public Task(IDevice device, IOpera opera, Strategy strategy, int retryTimes)
         {
             this.Device = device;
             this.Opera = opera;
             this.Strategy = strategy;
-            this.Timeout = timeout;
             this.Retry = new Retry(retryTimes);
         }
     }

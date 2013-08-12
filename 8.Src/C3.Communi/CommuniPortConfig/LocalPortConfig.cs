@@ -3,7 +3,7 @@ using System.Net;
 
 namespace C3.Communi
 {
-    public class LocalPortConfig : INetCommuniPortConfig
+    public class LocalPortConfig : CommuniPortConfigBase, INetCommuniPortConfig
     {
         public LocalPortConfig()
             : this(0)
@@ -34,18 +34,18 @@ namespace C3.Communi
 
         #region ICommuniPortConfig ≥…‘±
 
-        public bool CanCreate
+        override public bool CanCreate
         {
             get { return false; }
         }
 
-        public ICommuniPort Create()
+        override public ICommuniPort Create()
         {
             string s = "Cannot create from LocalPortConfig";
             throw new NotSupportedException(s);
         }
 
-        public bool IsMatch(ICommuniPort cp)
+        override public bool IsMatch(ICommuniPort cp)
         {
             bool r = false;
             SocketCommuniPort scp = cp as SocketCommuniPort;
@@ -58,21 +58,21 @@ namespace C3.Communi
 
         #endregion
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public uint TimeoutMilliSecond
-        {
-            get
-            {
-                return _timeoutMillsSecond;
-            }
-            set
-            {
-                TimeoutDefauleValues.Verify(value);
-                this._timeoutMillsSecond = value;
-            }
-        } private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public uint TimeoutMilliSecond
+        //{
+        //    get
+        //    {
+        //        return _timeoutMillsSecond;
+        //    }
+        //    set
+        //    {
+        //        TimeoutDefauleValues.Verify(value);
+        //        this._timeoutMillsSecond = value;
+        //    }
+        //} private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
     }
 
 }

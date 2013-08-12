@@ -192,17 +192,21 @@ namespace DBSPU
 
         internal void UpdateStation(int id, string name, string xml, int ordinal, string street, string remark)
         {
-            string s = @"update tblStation set StationName = @StationName, StationCPConfig = @StationCPConfig, 
-                    StationOrdinal = @StationOrdinal, Street = @street, StationRemark = @stationRemark 
+            string s = @"update tblStation 
+                set StationName = @StationName, 
+                    StationCPConfig = @StationCPConfig, 
+                    StationOrdinal = @StationOrdinal, 
+                    Street = @street, 
+                    StationRemark = @stationRemark 
                     where stationid = @stationID";
 
             ListDictionary list = new ListDictionary();
-            list.Add("stationID", id);
             list.Add("stationName", name);
             list.Add("stationCPConfig", xml);
             list.Add("stationOrdinal", ordinal);
             list.Add("street", street);
             list.Add("stationRemark", remark);
+            list.Add("stationID", id);
 
             Instance.ExecuteScalar(s, list);
         }

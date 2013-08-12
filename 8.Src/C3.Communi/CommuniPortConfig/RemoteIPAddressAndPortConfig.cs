@@ -10,7 +10,8 @@ using NLog;
 
 namespace C3.Communi
 {
-    public class RemoteIPAddressAndPortConfig : INetCommuniPortConfig
+    public class RemoteIPAddressAndPortConfig : CommuniPortConfigBase, INetCommuniPortConfig
+
     {
 
         static Logger log = LogManager.GetCurrentClassLogger();
@@ -51,7 +52,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public bool CanCreate
+        override public bool CanCreate
         {
             get
             {
@@ -70,7 +71,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <returns></returns>
-        public ICommuniPort Create()
+        override public ICommuniPort Create()
         {
             if (!CanCreate)
             {
@@ -105,7 +106,7 @@ namespace C3.Communi
 
         }
 
-        public bool IsMatch(ICommuniPort cp)
+        override public bool IsMatch(ICommuniPort cp)
         {
             if (cp == null)
             {
@@ -127,21 +128,21 @@ namespace C3.Communi
             return r;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public uint TimeoutMilliSecond
-        {
-            get
-            {
-                return _timeoutMillsSecond;
-            }
-            set
-            {
-                TimeoutDefauleValues.Verify(value);
-                this._timeoutMillsSecond = value;
-            }
-        } private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
+        ///// <summary>
+        ///// 
+        ///// </summary>
+        //public uint TimeoutMilliSecond
+        //{
+        //    get
+        //    {
+        //        return _timeoutMillsSecond;
+        //    }
+        //    set
+        //    {
+        //        TimeoutDefauleValues.Verify(value);
+        //        this._timeoutMillsSecond = value;
+        //    }
+        //} private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
 
         #endregion
 

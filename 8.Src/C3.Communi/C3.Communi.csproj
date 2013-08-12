@@ -51,6 +51,8 @@
     <Compile Include="CommuniDetail\CommuniDetailBase.cs" />
     <Compile Include="CommuniDetail\ICommuniDetail.cs" />
     <Compile Include="CommuniDetail\SendFailCommuniDetail.cs" />
+    <Compile Include="CommuniPortConfig\CommuniPortConfigBase.cs" />
+    <Compile Include="CommuniPortConfig\CommuniPortConfigCollection.cs" />
     <Compile Include="CommuniPortConfig\ConnectionType.cs" />
     <Compile Include="CommuniPortConfig\RemoteIPAddressAndPortConfig.cs" />
     <Compile Include="CommuniPortConfig\TimeoutDefauleValues.cs" />

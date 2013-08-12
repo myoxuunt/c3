@@ -83,8 +83,7 @@ namespace C3.Communi
                 opera.SendPart[kv.Key] = kv.Value;
             }
 
-            TimeSpan timeout = TimeSpan.FromMilliseconds(device.Station.CommuniPortConfig.TimeoutMilliSecond );
-            this.Task = new Task(device, opera, Strategy.CreateImmediateStrategy(), timeout, 1);
+            this.Task = new Task(device, opera, Strategy.CreateImmediateStrategy(), 1);
 
             device.TaskManager.Tasks.Enqueue(this.Task);
 

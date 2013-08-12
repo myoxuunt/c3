@@ -45,6 +45,7 @@ namespace C3
                 string text = i.DT.ToString() + " " + i.Log + Environment.NewLine;
                 this.txtCPCreateLog.AppendText(text);
             }
+            this.txtCPCreateLog.ScrollToCaret();
 
 
             this.listView1.Items.Clear();

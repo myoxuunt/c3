@@ -185,14 +185,11 @@ namespace C3
         /// </summary>
         private ITask CreateTask()
         {
-            TimeSpan timeout = TimeSpan.FromMilliseconds(
-                this._device.Station.CommuniPortConfig.TimeoutMilliSecond);
-
             ITask task = new Task(
                 this._device,
                 this.CreateOpera(),
                 Strategy.CreateImmediateStrategy(),
-                timeout, 1);
+                 1);
 
             return task;
         }

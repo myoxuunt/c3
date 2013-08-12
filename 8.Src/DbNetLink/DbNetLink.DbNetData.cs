@@ -4453,7 +4453,7 @@ namespace DbNetLink.Data
                     {
                         DbParam.Value = System.DBNull.Value;
                     }
-                    else if (this.ConvertEmptyToNull && Params[Key].ToString() == string.Empty)
+                    else if (Params[Key].ToString() == string.Empty && this.ConvertEmptyToNull)
                     {
                         DbParam.Value = System.DBNull.Value;
                     }

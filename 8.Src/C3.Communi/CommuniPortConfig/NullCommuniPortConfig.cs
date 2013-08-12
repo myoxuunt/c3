@@ -7,7 +7,7 @@ namespace C3.Communi
     /// <summary>
     /// 
     /// </summary>
-    public class NullCommuniPortConfig : ICommuniPortConfig
+    public class NullCommuniPortConfig : CommuniPortConfigBase
     {
         /// <summary>
         /// 
@@ -24,7 +24,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public bool CanCreate
+        override public bool CanCreate
         {
             get { return false; }
         }
@@ -33,7 +33,7 @@ namespace C3.Communi
         /// 
         /// </summary>
         /// <returns></returns>
-        public ICommuniPort Create()
+        override public ICommuniPort Create()
         {
             string s = string.Format(
                 "can not create ICommuniPort from '{0}'",
@@ -48,26 +48,9 @@ namespace C3.Communi
         /// </summary>
         /// <param name="cp"></param>
         /// <returns></returns>
-        public bool IsMatch(ICommuniPort cp)
+        override public bool IsMatch(ICommuniPort cp)
         {
             return false;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public uint TimeoutMilliSecond
-        {
-            get
-            {
-                return _timeoutMillsSecond;
-            }
-            set
-            {
-                TimeoutDefauleValues.Verify(value);
-                this._timeoutMillsSecond = value;
-            }
-        } private uint _timeoutMillsSecond = TimeoutDefauleValues.DefaultTimeoutMillsSecond;
-
     }
 }

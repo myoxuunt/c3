@@ -21,13 +21,4 @@ namespace C3.Communi
         /// </summary>
         UInt32 TimeoutMilliSecond { get; set; }
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class CommuniPortConfigCollection : Collection<ICommuniPortConfig>
-    {
-
-    }
-
 }
