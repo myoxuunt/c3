@@ -126,6 +126,25 @@ namespace C3.Communi
         } private SendPart _sendPart;
         #endregion //
 
+
+        #region IOpera ≥…‘±
+
+
+        abstract public IOpera Current
+        {
+            get;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        abstract public bool NextChildOpera();
+
+        abstract public void ResetChildOpera();
+
+        abstract public bool HasChildOpera();
+        #endregion
     }
 
 }

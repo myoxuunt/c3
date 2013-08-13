@@ -5,6 +5,102 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
+    public class OperaWithChild : OperaBase
+    {
+        private int _currentIndex = 0;
+
+        public OperaWithChild(string deviceType, string name, OperaCollection childOperas)
+        {
+            if (string.IsNullOrEmpty(deviceType))
+            {
+                throw new ArgumentException("deviceType is null or empty");
+            }
+
+            if (childOperas == null || childOperas.Count == 0)
+            {
+                throw new ArgumentException("childOperas is null or empty");
+            }
+
+            this._deviceType = deviceType;
+            this.Name = name;
+            this._childOperas = childOperas;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public OperaCollection ChildOperas
+        {
+            get
+            {
+                if (_childOperas == null)
+                {
+                    _childOperas = new OperaCollection();
+                }
+                return _childOperas;
+            }
+        }
+        private OperaCollection _childOperas = null;
+
+        #region DeviceType
+        /// <summary>
+        /// 
+        /// </summary>
+        public string DeviceType
+        {
+            get { return _deviceType; }
+            set { _deviceType = value; }
+        } private string _deviceType;
+        #endregion //DeviceType
+
+        public override IOpera Current
+        {
+            get
+            {
+                if (_currentIndex >= 0 && _currentIndex < _childOperas.Count)
+                {
+                    return _childOperas[_currentIndex];
+                }
+                else
+                {
+                    throw new InvalidOperationException("current index out of range");
+                }
+            }
+        }
+
+        public override bool HasChildOpera()
+        {
+            return true;
+        }
+
+        public override bool NextChildOpera()
+        {
+            _currentIndex++;
+            return _currentIndex < _childOperas.Count;
+        }
+
+        public override void ResetChildOpera()
+        {
+            _currentIndex = 0;
+        }
+
+        public override byte[] OnCreateSendBytes(IDevice device)
+        {
+            return this.Current.CreateSendBytes(device);
+        }
+
+        public override IParseResult OnParseReceivedBytes(IDevice device, byte[] received)
+        {
+            return this.Current.ParseReceivedBytes(device, received);
+        }
+    }
+
+
+
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class Opera : OperaBase
     {
         #region Constructor
@@ -188,5 +284,24 @@ namespace C3.Communi
         //        return _dataFieldValueProvider;
         //    }
         //} private DataFieldValueProvider _dataFieldValueProvider;
+
+        public override IOpera Current
+        {
+            get { return this; }
+        }
+
+        public override bool HasChildOpera()
+        {
+            return false;
+        }
+
+        public override bool NextChildOpera()
+        {
+            return false;
+        }
+
+        public override void ResetChildOpera()
+        {
+        }
     }
 }

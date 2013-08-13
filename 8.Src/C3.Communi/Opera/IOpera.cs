@@ -15,5 +15,21 @@ namespace C3.Communi
         ReceivePartCollection ReceiveParts { get; set; }
 
         IParseResult ParseReceivedBytes(IDevice device, byte[] received);
+
+
+        IOpera Current { get; }
+
+        bool NextChildOpera();
+        void ResetChildOpera();
+        //OperaCollection ChildOperas { get; }
+        bool HasChildOpera();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public class OperaCollection : Xdgk.Common.Collection<IOpera>
+    {
+
     }
 }
