@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <tasks>
   
-  <task>
+  <!--<task>
     <devicetype>LYR001Device</devicetype>
     <operaname>ReadReal</operaname>
     <strategytype>cyclestrategy</strategytype>
@@ -27,7 +27,7 @@
     <cyclestrategy>
       <value>00:01:00</value>
     </cyclestrategy>
-  </task>
+  </task>-->
   
   <!--<task>
     <devicetype>LYR001Device</devicetype>
@@ -36,14 +36,14 @@
     <cyclestrategy>
       <value>00:01:00</value>
     </cyclestrategy>
-  </task>
+  </task> -->
 
   <task>
     <devicetype>LYR001Device</devicetype>
     <operaname>WriteOT</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:30:00</value>
+      <value>00:01:00</value>
     </cyclestrategy>
   </task>
 
@@ -52,7 +52,7 @@
     <operaname>WriteOTMode</operaname>
     <strategytype>cyclestrategy</strategytype>
     <cyclestrategy>
-      <value>00:30:00</value>
+      <value>00:01:00</value>
     </cyclestrategy>
-  </task>-->
+  </task>
 </tasks>

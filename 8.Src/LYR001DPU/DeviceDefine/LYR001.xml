@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <devicedefines>
   <devicedefine devicetype="LYR001Device" devicetext="LYR001">
-    <operadefine name="readreal" processfd="true">
+    <operadefine name="ReadReal" processfd="true">
       <sendpart>
         <datafield name="address"
             begin="0"
@@ -433,6 +433,7 @@
         <crcer name="Xdgk.Communi.CRC16" />
       </receivepart>
     </operadefine>
+    -->
 
     <operadefine name="WriteOT">
       <sendpart>
@@ -445,18 +446,16 @@
             begin="1"
             length="6"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="10 00 CE 00 01 02"/>
+            bytes="10 01 4F 00 02 04"/>
 
         <datafield name="OT"
             begin="7"
-            length="2"
-            converter="Xdgk.Communi.Int16FloatConverter"
-            factor="0.1"
-            littleendian="false"
+            length="4"
+            converter="Xdgk.Communi.FloatModbusConverter"
             lazy="true"/>
 
         <datafield name="crc"
-            begin="9"
+            begin="11"
             length="2"
             converter="Xdgk.Communi.OriginalConverter"
             crc="true" />
@@ -480,24 +479,22 @@
             begin="2"
             length="2"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="00 CE" />
+            bytes="01 4F" />
 
         <datafield name="datalength"
             begin="4"
             length="2"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="00 01" />
+            bytes="00 02" />
 
         <datafield name="crc"
             begin="6"
             length="2"
             converter="Xdgk.Communi.OriginalConverter"
             crc="true"/>
-
         <crcer name="Xdgk.Communi.CRC16" />
       </receivepart>
     </operadefine>
-    -->
 
     <operadefine name="WriteOTMode">
       <sendpart>
@@ -510,16 +507,16 @@
             begin="1"
             length="6"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="10 00 CD 00 01 02"/>
+            bytes="0F 00 18 00 01 01"/>
 
         <datafield name="Mode"
             begin="7"
-            length="2"
-            converter="Xdgk.Communi.Int16ModbusConverter"
+            length="1"
+            converter="Xdgk.Communi.Int8Converter"
             lazy="true"/>
 
         <datafield name="crc"
-            begin="9"
+            begin="8"
             length="2"
             converter="Xdgk.Communi.OriginalConverter"
             crc="true" />
@@ -536,7 +533,7 @@
             begin="1"
             length="5"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="10 00 CD 00 01"
+            bytes="0F 00 18 00 01"
             matchcheck="true" />
 
         <datafield name="crc"
@@ -551,7 +548,7 @@
 
 
     <operadefine name="ReadM" isComplex="true">
-      <opera name="readreal"/>
+      <opera name="ReadReal"/>
       <opera name="ReadStatus"/>
     </operadefine>
 

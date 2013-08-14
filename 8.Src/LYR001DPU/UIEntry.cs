@@ -12,7 +12,7 @@ namespace LYR001DPU
         private ToolStripMenuItem _otProviderSetting;
         private ToolStripMenuItem _mnuTemperatureLine;
 
-        private const string 
+        private const string
             MENU_OT = "室外温度(&T)...",
             MENU_GRSETTING = "供温设置(&S)...";
 
@@ -50,8 +50,23 @@ namespace LYR001DPU
         /// <param name="e"></param>
         void _otProviderSetting_Click(object sender, EventArgs e)
         {
-            //frmOutsideStandard f = new frmOutsideStandard();
-            //f.ShowDialog();
+            frmOutsideStandard f = new frmOutsideStandard();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                IOutside outSide = f.SelectedOutSide;
+                if (outSide != null)
+                {
+                    OutsideTemperatureProviderManager.Provider = new DeviceOTProvider(outSide);
+
+                    int deviceID = GuidHelper.ConvertToInt32(((IDevice)outSide).Guid);
+                    DBI.Instance.SetOutsideTemperatureProviderDevice(deviceID);
+                }
+                else
+                {
+                    OutsideTemperatureProviderManager.Provider = null;
+                    DBI.Instance.ClearOutsideTemperatureProviderDevice();
+                }
+            }
         }
 
         /// <summary>

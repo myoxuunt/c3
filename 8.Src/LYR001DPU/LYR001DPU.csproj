@@ -51,6 +51,7 @@
     <Compile Include="LYR001AnalogData.cs" />
     <Compile Include="LYR001DataCache.cs" />
     <Compile Include="LYR001DataCacheManager.cs" />
+    <Compile Include="LYR001Device.cs" />
     <Compile Include="LYR001OperaNames.cs" />
     <Compile Include="LYR001StatusData.cs" />
     <Compile Include="LYR001StatusDataParser.cs" />
