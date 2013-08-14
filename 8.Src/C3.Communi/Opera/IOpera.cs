@@ -19,10 +19,11 @@ namespace C3.Communi
 
         IOpera Current { get; }
 
+        bool HasNextChildOpera();
         bool NextChildOpera();
         void ResetChildOpera();
         //OperaCollection ChildOperas { get; }
-        bool HasChildOpera();
+        bool IsComplex();
     }
 
     /// <summary>

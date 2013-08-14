@@ -63,10 +63,11 @@ namespace LYR001DPU
                     (StringHelper.Equal(opera, LYR001OperaNames.WriteOT)) ||
                     (StringHelper.Equal(opera, LYR001OperaNames.WriteOTMode)) ||
                     (StringHelper.Equal(opera, LYR001OperaNames.OPERA_READ)) ||
-                    (StringHelper.Equal(opera, LYR001OperaNames.OPERA_WRITE))
+                    (StringHelper.Equal(opera, LYR001OperaNames.OPERA_WRITE)) ||
+                    (StringHelper.Equal(opera, "ReadM"))
                     )
                 {
-
+//task.Opera.next
                 }
                 else
                 {

@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="IFluxProvider.cs" />
     <Compile Include="ITag.cs" />
+    <Compile Include="Opera\ComplexOpera.cs" />
     <Compile Include="Opera\ReceivePartFacotry.cs" />
     <Compile Include="Opera\UploadDefine.cs" />
     <Compile Include="Opera\UploadDefineCollection.cs" />

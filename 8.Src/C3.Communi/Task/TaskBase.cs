@@ -256,7 +256,14 @@ namespace C3.Communi
                 case TaskStatus.Executed:
                     if (this.LastParseResult.IsSuccess)
                     {
-                        ExecutedOrRetryMaxed();
+                        if (this._opera.NextChildOpera())
+                        {
+                            this.SetStatus(TaskStatus.Ready);
+                        }
+                        else
+                        {
+                            ExecutedOrRetryMaxed();
+                        }
                     }
                     else
                     {

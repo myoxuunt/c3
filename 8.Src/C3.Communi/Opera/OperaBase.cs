@@ -143,7 +143,10 @@ namespace C3.Communi
 
         abstract public void ResetChildOpera();
 
-        abstract public bool HasChildOpera();
+        abstract public bool IsComplex();
+
+        abstract public bool HasNextChildOpera();
+
         #endregion
     }
 
