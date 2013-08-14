@@ -47,7 +47,7 @@ namespace C3
         {
             this.txtStation.Text = this.Task.Device.Station.Name;
             this.txtDevice.Text = this.Task.Device.Text;
-            this.txtTask.Text = this.Task.Opera.Name;
+            this.txtTask.Text = this.Task.Opera.Text;
             this.txtLastExecute.Text = this.Task.LastExecute.ToString();
             if (this.Task.Strategy is CycleStrategy)
             {

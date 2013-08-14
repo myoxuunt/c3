@@ -65,7 +65,7 @@ namespace C3
             this._device.TaskManager.Tasks.Add(task);
             _task = task;
 
-            string status = string.Format("执行 '{0}' ...", task.Opera.Name);
+            string status = string.Format("执行 '{0}' ...", task.Opera.Text);
             SetStatusText(status);
             
         }

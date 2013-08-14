@@ -57,7 +57,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public string Name
+        virtual public string Name
         {
             get
             {
@@ -78,7 +78,7 @@ namespace C3.Communi
         /// <summary>
         /// 
         /// </summary>
-        public string Text
+        virtual public string Text
         {
             get
             {

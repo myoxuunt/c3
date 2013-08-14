@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <devicedefines>
   <devicedefine devicetype="LYR001Device" devicetext="LYR001">
-    <operadefine name="readreal" text="读取实时数据" processfd="true">
+    <operadefine name="readreal" processfd="true">
       <sendpart>
         <datafield name="address"
             begin="0"

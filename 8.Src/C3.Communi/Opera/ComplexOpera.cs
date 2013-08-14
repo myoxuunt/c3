@@ -44,7 +44,7 @@ namespace C3.Communi
         }
         private OperaCollection _childOperas = null;
 
-#region DeviceType
+        #region DeviceType
         /// <summary>
         /// 
         /// </summary>
@@ -53,7 +53,7 @@ namespace C3.Communi
             get { return _deviceType; }
             set { _deviceType = value; }
         } private string _deviceType;
-#endregion //DeviceType
+        #endregion //DeviceType
 
         public override IOpera Current
         {
@@ -66,6 +66,7 @@ namespace C3.Communi
                 else
                 {
                     throw new InvalidOperationException("current index out of range");
+                    //return null;
                 }
             }
         }
@@ -77,8 +78,18 @@ namespace C3.Communi
 
         public override bool NextChildOpera()
         {
-            _currentIndex++;
-            return _currentIndex < _childOperas.Count;
+            //_currentIndex++;
+            //return _currentIndex < _childOperas.Count;
+
+            if (_currentIndex < _childOperas.Count - 1)
+            {
+                _currentIndex++;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void ResetChildOpera()
@@ -99,6 +110,18 @@ namespace C3.Communi
         public override bool HasNextChildOpera()
         {
             return this._currentIndex < this.ChildOperas.Count - 1;
+        }
+
+        public override string Text
+        {
+            get
+            {
+                return string.Format("{0}.{1}", base.Text, this.Current.Text);
+            }
+            set
+            {
+                base.Text = value;
+            }
         }
     }
 

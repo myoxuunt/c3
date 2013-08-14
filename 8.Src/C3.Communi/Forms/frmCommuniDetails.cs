@@ -208,8 +208,15 @@ namespace C3
         {
             if (this.richTextBox1.Text != string.Empty)
             {
-                Clipboard.SetText(this.richTextBox1.Text);
-                NUnit.UiKit.UserMessage.DisplayInfo(strings.ContentCopied);
+                try
+                {
+                    Clipboard.SetText(this.richTextBox1.Text);
+                    NUnit.UiKit.UserMessage.DisplayInfo(strings.ContentCopied);
+                }
+                catch (Exception ex)
+                {
+                    NUnit.UiKit.UserMessage.DisplayFailure(ex.Message);
+                }
             }
         }
         #endregion //btnCopyContext_Click

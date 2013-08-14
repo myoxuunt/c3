@@ -287,7 +287,7 @@ namespace C3
         /// <returns></returns>
         private ListViewItem CreateTaskListViewItem(ITask task)
         {
-            string[] items = new string[] { task.Opera.Name, task.LastExecute.ToString (), 
+            string[] items = new string[] { task.Opera.Text, task.LastExecute.ToString (), 
                 "-",
                 task.Status.ToString() };
             ListViewItem lvi = new ListViewItem(items);

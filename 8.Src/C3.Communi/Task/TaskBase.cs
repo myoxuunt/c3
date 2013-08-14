@@ -235,6 +235,7 @@ namespace C3.Communi
                 case TaskStatus.Wating:
                     if (NeedExecute())
                     {
+                        this._opera.ResetChildOpera();
                         this.SetStatus(TaskStatus.Ready);
                     }
                     break;
