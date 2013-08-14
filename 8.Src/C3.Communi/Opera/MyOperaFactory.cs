@@ -8,55 +8,6 @@ using NLog;
 namespace C3.Communi
 {
 
-    public class ReceivePartFacotry
-    {
-        private ReceivePartFacotry()
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="xmlPath"></param>
-        /// <param name="operaName"></param>
-        /// <returns></returns>
-        static public ReceivePart Create(string xmlPath, string deviceType, string operaName)
-        {
-
-            // "/devicedefines/devicedefine[attribute::devicetype='vGate100']/operadefine[attribute::name='read']/receivepart"
-            //
-            string format = "/{0}/{1}[attribute::{2}='{{0}}']/{3}[attribute::{4}='{{1}}']/{5}";
-            string xpath = string.Format(format, 
-                DeviceDefineNodeNames.DeviceDefineCollection,
-                DeviceDefineNodeNames.DeviceDefine,
-                DeviceDefineNodeNames.DeviceType,
-                DeviceDefineNodeNames.OperaDefine,
-                DeviceDefineNodeNames.OperaName,
-                DeviceDefineNodeNames.ReceivePart);
-
-            xpath = string.Format(xpath, deviceType, operaName);
-
-            XmlDocument doc = new XmlDocument();
-            doc.Load(xmlPath);
-
-            XmlNodeList list = doc.SelectNodes(xpath);
-            Debug.Assert(list.Count > 0);
-
-            XmlNode node = list[0];
-            return Create(node);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="receivePartNode"></param>
-        /// <returns></returns>
-        static public ReceivePart Create(XmlNode receivePartNode)
-        {
-            return MyOperaFactory.CreateReceivePart(receivePartNode);
-        }
-    }
 
     public class MyOperaFactory
     {
@@ -75,7 +26,7 @@ namespace C3.Communi
         /// <param name="deviceType"></param>
         /// <param name="operaname"></param>
         /// <returns></returns>
-        static public Opera Create(string devicetype, string operaname, XmlNode deviceDefineNode)
+        static public IOpera Create(string devicetype, string operaname, XmlNode deviceDefineNode)
         {
             XmlNodeList opnodelist = deviceDefineNode.SelectNodes(DeviceDefineNodeNames.OperaDefine);
             foreach (XmlNode opnode in opnodelist)
@@ -96,7 +47,26 @@ namespace C3.Communi
         /// </summary>
         /// <param name="operanode"></param>
         /// <returns></returns>
-        static private Opera CreateFromOperaNode(string deviceType, XmlNode operaNode)
+        static private IOpera CreateFromOperaNode(string deviceType, XmlNode operaNode)
+        {
+            if (IsComplexOpera(operaNode))
+            {
+                return CreateComplexOpera(deviceType, operaNode);
+            }
+            else
+            {
+                return CreateSimpleOpera(deviceType, operaNode);
+            }
+        }
+        #endregion //Create
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceType"></param>
+        /// <param name="operaNode"></param>
+        /// <returns></returns>
+        private static Opera CreateSimpleOpera(string deviceType, XmlNode operaNode)
         {
             XmlElement e = operaNode as XmlElement;
             Opera opera = null;
@@ -129,7 +99,64 @@ namespace C3.Communi
             log.Info("Create opera '{0}', receivepart count '{1}'", name, rps.Count);
             return opera;
         }
-        #endregion //Create
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="deviceType"></param>
+        /// <param name="operaNode"></param>
+        /// <returns></returns>
+        private static IOpera CreateComplexOpera(string deviceType, XmlNode operaNode)
+        {
+            OperaCollection operas = new OperaCollection();
+            foreach (XmlNode childOperaNode in operaNode.ChildNodes)
+            {
+                switch (childOperaNode.Name)
+                {
+                    case DeviceDefineNodeNames.Opera:
+                        string childOperaName = GetAttribute((XmlElement)childOperaNode, DeviceDefineNodeNames.OperaName);
+                        IOpera childOpera = Create(deviceType, childOperaName, operaNode.ParentNode);
+                        if (childOpera == null)
+                        {
+                            string msg = string.Format("cannot create opera '{0}.{1}' from '{2}'",
+                                deviceType, childOperaName, operaNode.ParentNode.InnerXml);
+                            throw new ConfigException(msg);
+                        }
+                        operas.Add(childOpera);
+                        break;
+
+                    default:
+                        throw new ConfigException(
+                            string.Format("unexpectd node '{0}' in '{1}'", childOperaNode.Name,
+                            operaNode.InnerXml));
+                }
+            }
+
+            string operaName = GetAttribute((XmlElement)operaNode, DeviceDefineNodeNames.Name);
+            return new OperaWithChild(deviceType, operaName, operas);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operaNode"></param>
+        /// <returns></returns>
+        static private bool IsComplexOpera(XmlNode operaNode)
+        {
+            bool r = false;
+            XmlAttribute isComplexAtt = operaNode.Attributes[DeviceDefineNodeNames.IsComplexOpera];
+            if (isComplexAtt != null)
+            {
+                bool result;
+                bool b = bool.TryParse(isComplexAtt.Value, out result);
+                if (b)
+                {
+                    r = result;
+                }
+            }
+
+            return r;
+        }
 
         /// <summary>
         /// 

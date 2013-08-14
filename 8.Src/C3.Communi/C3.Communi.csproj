@@ -75,6 +75,9 @@
     </Compile>
     <Compile Include="IFluxProvider.cs" />
     <Compile Include="ITag.cs" />
+    <Compile Include="Opera\ReceivePartFacotry.cs" />
+    <Compile Include="Opera\UploadDefine.cs" />
+    <Compile Include="Opera\UploadDefineCollection.cs" />
     <Compile Include="Resources\CommuniDetailResource.Designer.cs">
       <DependentUpon>CommuniDetailResource.resx</DependentUpon>
       <AutoGen>True</AutoGen>

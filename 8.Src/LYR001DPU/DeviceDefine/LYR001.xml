@@ -549,6 +549,12 @@
       </receivepart>
     </operadefine>
 
+
+    <operadefine name="ReadM" isComplex="true">
+      <opera name="readreal"/>
+      <opera name="ReadStatus"/>
+    </operadefine>
+
     <!--
     <operadefine name="ReadOTMode">
       <sendpart>

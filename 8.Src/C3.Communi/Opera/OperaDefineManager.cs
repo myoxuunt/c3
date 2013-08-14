@@ -30,7 +30,10 @@ namespace C3.Communi
         } private OperaDefineCollection _deviceDefineCollection;
         #endregion //DeviceDefineCollection
 
-
+        #region UploadDefines
+        /// <summary>
+        /// 
+        /// </summary>
         public UploadDefineCollection UploadDefines
         {
             get
@@ -42,6 +45,8 @@ namespace C3.Communi
                 return _uploadDefines;
             }
         } private UploadDefineCollection _uploadDefines;
+        #endregion //UploadDefines
+
         #region LoadFromFile
         /// <summary>
         /// 
@@ -108,7 +113,6 @@ namespace C3.Communi
         }
         #endregion //LoadFromFile
 
-
         #region LoadFromPath
         /// <summary>
         /// 
@@ -125,7 +129,6 @@ namespace C3.Communi
             }
         }
         #endregion //LoadFromPath
-
 
     }
 

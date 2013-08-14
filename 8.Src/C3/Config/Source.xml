@@ -2,7 +2,7 @@
 <sources>
   <source>
     <key>connection</key>
-    <value>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\program files\ly-tech\lx\db\lx.mdb</value>
-    <!--<value>server=(local);uid=sa;pwd=sa;database=btgrdb2013;</value>-->
+    <!--<value>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\program files\ly-tech\lx\db\lx.mdb</value>-->
+    <value>server=(local);uid=sa;pwd=sa;database=btgrdb2013;</value>
   </source>
 </sources>

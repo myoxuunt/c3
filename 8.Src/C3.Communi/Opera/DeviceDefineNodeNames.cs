@@ -43,7 +43,10 @@ namespace C3.Communi
             Name = "name",
             HasInner = "hasInner",
             Property = "property",
-            Value = "value";
+            Value = "value",
+            IsComplexOpera= "isComplex",
+            Opera = "opera"
+            ;
 
 
     }

@@ -19,6 +19,16 @@
     </cyclestrategy>
   </task>
   
+  
+  <task>
+    <devicetype>LYR001Device</devicetype>
+    <operaname>ReadM</operaname>
+    <strategytype>cyclestrategy</strategytype>
+    <cyclestrategy>
+      <value>00:01:00</value>
+    </cyclestrategy>
+  </task>
+  
   <!--<task>
     <devicetype>LYR001Device</devicetype>
     <operaname>ReadStatus</operaname>
