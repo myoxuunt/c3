@@ -5,11 +5,11 @@ using Xdgk.Common;
 
 namespace C3.Communi
 {
-    public class OperaWithChild : OperaBase
+    public class ComplexOpera : OperaBase
     {
         private int _currentIndex = 0;
 
-        public OperaWithChild(string deviceType, string name, OperaCollection childOperas)
+        public ComplexOpera(string deviceType, string name, OperaCollection childOperas)
         {
             if (string.IsNullOrEmpty(deviceType))
             {

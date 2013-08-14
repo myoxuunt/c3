@@ -133,7 +133,7 @@ namespace C3.Communi
             }
 
             string operaName = GetAttribute((XmlElement)operaNode, DeviceDefineNodeNames.Name);
-            return new OperaWithChild(deviceType, operaName, operas);
+            return new ComplexOpera(deviceType, operaName, operas);
         }
 
         /// <summary>
