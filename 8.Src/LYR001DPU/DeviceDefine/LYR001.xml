@@ -7,7 +7,7 @@
             begin="0"
             length="1"
             converter="Xdgk.Communi.Int8Converter"/>
-        
+
         <datafield name="df1"
             begin="1"
             length="5"
@@ -128,8 +128,8 @@
     </operadefine>
 
 
-    <!--read modbus control line--><!--
-    <operadefine name="ReadModbusControl">
+    <!--read modbus control line-->
+    <operadefine name="ReadAdjustControl">
       <sendpart>
         <datafield name="address"
             begin="0"
@@ -142,12 +142,12 @@
             converter="Xdgk.Communi.OriginalConverter"
             bytes="03" />
 
-        --><!-- 114 ~ 144 --><!--
+        <!-- 263 ~ 338 -->
         <datafield name="datas"
             begin="2"
             length="4"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="00 71 00 1F" />
+            bytes="01 05 00 4C" />
 
         <datafield name="crc"
             begin="6"
@@ -156,10 +156,9 @@
             crc="true" />
 
         <crcer name="Xdgk.Communi.CRC16" />
-
       </sendpart>
 
-      <receivepart length="62">
+      <receivepart length="157">
         <datafield name="address"
             begin="0"
             length="1"
@@ -176,39 +175,50 @@
             begin="2"
             length="1"
             converter="Xdgk.Communi.OriginalConverter"
-            bytes="3E"
+            bytes="98"
             matchcheck="true" />
 
-        <datafield name="ControlMode"
-            begin="3"
-            length="2"
-            converter="Xdgk.Communi.Int16Converter"
-            littleendian="false"/>
-
-        <datafield name="ValveType"
-            begin="5"
-            length="2"
-            converter="Xdgk.Communi.Int16Converter"
-            littleendian="false" />
-
-        <datafield name="SettingValue"
-            begin="7"
-            length="2"
-            converter="Xdgk.Communi.Int16Converter"
-            littleendian="false" />
-
-        <datafield name="OTControlLine"
-            begin="9"
-            length="32"
-            converter="Xdgk.Communi.XD100ModbusOTControlLineConverter" />
-
-        <datafield name="TimeControlLine"
-            begin="41"
-            length="24"
-            converter="Xdgk.Communi.XD100ModbusTimeControlLineConverter" />
-
+        <datafield name="ControlMode" begin="3" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="ODSet" begin="7" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="GT2Set" begin="11" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="BT1Set" begin="15" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="BT2Set" begin="19" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="P" begin="23" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="I" begin="27" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="ODMax" begin="31" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="ODMin" begin="35" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SW1" begin="39" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SW2" begin="43" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SW3" begin="47" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SW4" begin="51" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SW5" begin="55" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SW6" begin="59" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SW7" begin="63" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SW8" begin="67" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SD1" begin="71" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SD2" begin="75" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SD3" begin="79" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SD4" begin="83" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SD5" begin="87" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SD6" begin="91" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SD7" begin="95" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="SD8" begin="99" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue1" begin="103" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue2" begin="107" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue3" begin="111" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue4" begin="115" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue5" begin="119" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue6" begin="123" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue7" begin="127" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue8" begin="131" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue9" begin="135" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue10" begin="139" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue11" begin="143" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="TimeValue12" begin="147" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        <datafield name="OTSet" begin="151" length="4" converter="Xdgk.Communi.FloatModbusConverter"/>
+        
         <datafield name="crc"
-            begin="65"
+            begin="155"
             length="2"
             converter="Xdgk.Communi.OriginalConverter"
             crc="true" />
@@ -217,7 +227,8 @@
       </receivepart>
     </operadefine>
 
-    --><!--write modbus control line--><!--
+    <!--write modbus control line-->
+    <!--
     <operadefine name="WriteModbusControl">
       <sendpart>
         <datafield name="address"
@@ -560,7 +571,9 @@
             length="1"
             converter="Xdgk.Communi.Int8Converter"/>
 
-        --><!--高位在前，低位在后--><!--
+        -->
+    <!--高位在前，低位在后-->
+    <!--
         <datafield name="df1"
             begin="1"
             length="5"
